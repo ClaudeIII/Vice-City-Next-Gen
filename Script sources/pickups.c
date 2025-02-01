@@ -67,7 +67,7 @@ void pickups(void)
 	CREATE_PICKUP_ROTATE(w_cleaver, 2, 1, 840.599, 633.892, 6.385, 0.0, 25.0, 0.0, &weap_26);
 	CREATE_PICKUP_ROTATE(w_grenade, 2, 5, 988.576, 738.757, 8.435, 95.0, 0.0, 0.0, &weap_27);
 	CREATE_PICKUP_ROTATE(w_ak47, 2, 30, 851.9, 1126.31, 12.8296, -90.0, -75.0, 90.0, &weap_28);
-	CREATE_PICKUP_ROTATE(w_nitestick, 2, 1, 657.01, -674.5, 4.955, 83.125, -19.948, 4.012, &weap_29);
+	CREATE_PICKUP_ROTATE(w_nstick, 2, 1, 657.01, -674.5, 4.955, 83.125, -19.948, 4.012, &weap_29);
 	CREATE_PICKUP_ROTATE(w_bat, 2, 1, 640.164, -721.401, 6.145, 0.0, 15.0, 0.0, &weap_30);
 	CREATE_PICKUP_ROTATE(w_shotgun, 2, 8, 1001.90, 83.701, 5.069, -85.076, 0.037, 74.133, &weap_31);
 	CREATE_PICKUP_ROTATE(w_shotgun, 2, 8, 476.542, -426.2, 16.357, 63.697, -78.831, 26.74, &weap_32);
@@ -76,7 +76,7 @@ void pickups(void)
 	CREATE_PICKUP_ROTATE(w_uzi, 2, 30, 437.384, -743.407, 4.464, -90.0, 0.0, 35.0, &weap_35);
 	CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, 461.98, -797.197, 7.721, 0.0, 0.0, -100.0, &weap_36);
 	CREATE_PICKUP_ROTATE(w_knife, 2, 1, 905.926, 1546.61, 14.277, 178.29, 27.943, 43.136, &weap_37);
-	CREATE_PICKUP_ROTATE(w_nitestick, 2, 1, 836.924, 46.756, 6.889, -95.0, 15.0, 85.0, &weap_38);
+	CREATE_PICKUP_ROTATE(w_nstick, 2, 1, 836.924, 46.756, 6.889, -95.0, 15.0, 85.0, &weap_38);
 	ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(weap_37, "mall_int");
 	ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(weap_38, "cop_int");
 

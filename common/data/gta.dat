@@ -1,0 +1,87 @@
+#
+# Load IDEs first, then the models and after that the IPLs
+#
+
+IMGLIST common:/data/images.txt
+
+WATER common:/DATA/WATER.DAT common:/DATA/WATERLOW.DAT
+
+#IDE platform:/DATA/MAPS/parking/parking.IDE
+#IPL platform:/data/maps/parking/parking.IPL
+#IPL platform:/data/maps/vc_night/bassein_beach.IPL
+#IPL platform:/data/maps/vc_night/bassein_mainla.IPL
+#IPL platform:/data/maps/vc_night/neon_beachN.IPL
+#IPL platform:/data/maps/vc_night/neon_mainlaN.IPL
+
+IDE common:/DATA/gtxd.IDE
+IDE platform:/DATA/MAPS/GENERIC/procobj.IDE
+IDE platform:/DATA/MAPS/PROPS/commercial/clothes.IDE
+IDE platform:/DATA/MAPS/PROPS/commercial/Office.IDE
+IDE platform:/DATA/MAPS/PROPS/DOORS/EXT_DOOR.IDE
+IDE platform:/DATA/MAPS/PROPS/DOORS/INT_DOOR.IDE
+IDE platform:/DATA/MAPS/PROPS/LEV_DES/ICONS.IDE
+IDE platform:/DATA/MAPS/PROPS/LEV_DES/MINIGAME.IDE
+IDE platform:/DATA/MAPS/vc_airport/vc_airport.IDE
+IDE platform:/DATA/MAPS/vc_airportn/vc_airportn.IDE
+IDE platform:/DATA/MAPS/vc_bridge/vc_bridge.IDE
+IDE platform:/DATA/MAPS/vc_cisland/vc_cisland.IDE
+IDE platform:/DATA/MAPS/vc_docks/vc_docks.IDE
+IDE platform:/DATA/MAPS/vc_downtown/vc_downtown.IDE
+IDE platform:/DATA/MAPS/vc_downtows/vc_downtows.IDE
+IDE platform:/DATA/MAPS/vc_generic/mission_props.IDE
+IDE platform:/DATA/MAPS/vc_generic/vc_generic.IDE
+IDE platform:/DATA/MAPS/vc_generic/vcDE_generic.IDE
+IDE platform:/DATA/MAPS/vc_golf/vc_golf.IDE
+IDE platform:/DATA/MAPS/vc_haiti/vc_haiti.IDE
+IDE platform:/DATA/MAPS/vc_haitin/vc_haitin.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_bank.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_club.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_cop.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_cut_int.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_hotel.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_mall_int.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_mansion.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_save_int.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_stadint.IDE
+IDE platform:/DATA/MAPS/vc_int/vc_stripclb.IDE
+IDE platform:/DATA/MAPS/vc_islandsf/vc_islandsf.IDE
+IDE platform:/DATA/MAPS/vc_littleha/vc_littleha.IDE
+IDE platform:/DATA/MAPS/vc_mall/vc_mall.IDE
+IDE platform:/DATA/MAPS/vc_nbeach/vc_nbeach.IDE
+IDE platform:/DATA/MAPS/vc_nbeachbt/vc_nbeachbt.IDE
+IDE platform:/DATA/MAPS/vc_nbeachw/vc_nbeachw.IDE
+IDE platform:/DATA/MAPS/vc_night/neon_beach.IDE
+IDE platform:/DATA/MAPS/vc_night/neon_mainla.IDE
+IDE platform:/DATA/MAPS/vc_oceandn/vc_oceandn.IDE
+IDE platform:/DATA/MAPS/vc_oceandrv/vc_oceandrv.IDE
+IDE platform:/DATA/MAPS/vc_starfish/vc_starfish.IDE
+IDE platform:/DATA/MAPS/vc_washintn/vc_washintn.IDE
+IDE platform:/DATA/MAPS/vc_washints/vc_washints.IDE
+IPL common:/DATA/INFO.ZON
+IPL common:/DATA/MAP.ZON
+IPL common:/DATA/MAPS/occlu_vcNE.IPL
+IPL common:/DATA/MAPS/SCENARIOS_vc.IPL
+IPL platform:/data/maps/vc_airport/vc_airport.IPL
+IPL platform:/data/maps/vc_airportn/vc_airportn.IPL
+IPL platform:/data/maps/vc_bridge/vc_bridge.IPL
+IPL platform:/data/maps/vc_cisland/vc_cisland.IPL
+IPL platform:/data/maps/vc_docks/vc_docks.IPL
+IPL platform:/data/maps/vc_downtown/vc_downtown.IPL
+IPL platform:/data/maps/vc_downtows/vc_downtows.IPL
+IPL platform:/data/maps/vc_golf/vc_golf.IPL
+IPL platform:/data/maps/vc_haiti/vc_haiti.IPL
+IPL platform:/data/maps/vc_haitin/vc_haitin.IPL
+IPL platform:/data/maps/vc_int/vc_cut_int.IPL
+IPL platform:/data/maps/vc_islandsf/vc_islandsf.IPL
+IPL platform:/data/maps/vc_littleha/vc_littleha.IPL
+IPL platform:/data/maps/vc_mall/vc_mall.IPL
+IPL platform:/data/maps/vc_nbeach/vc_nbeach.IPL
+IPL platform:/data/maps/vc_nbeachbt/vc_nbeachbt.IPL
+IPL platform:/data/maps/vc_nbeachw/vc_nbeachw.IPL
+IPL platform:/data/maps/vc_night/neon_beach.IPL
+IPL platform:/data/maps/vc_night/neon_mainla.IPL
+IPL platform:/data/maps/vc_oceandn/vc_oceandn.IPL
+IPL platform:/data/maps/vc_oceandrv/vc_oceandrv.IPL
+IPL platform:/data/maps/vc_starfish/vc_starfish.IPL
+IPL platform:/data/maps/vc_washintn/vc_washintn.IPL
+IPL platform:/data/maps/vc_washints/vc_washints.IPL
