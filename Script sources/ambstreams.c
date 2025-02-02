@@ -100,15 +100,6 @@ void zombiecord(void)
 		}
 	}
 }
-void CheckModelLoad(uint model)
-{
-	if ( !HAS_MODEL_LOADED(model) )
-	{
-		REQUEST_MODEL(model);
-		while (!HAS_MODEL_LOADED(model)) WAIT(0);
-	}
-}
-
 
 void main(void)
 {

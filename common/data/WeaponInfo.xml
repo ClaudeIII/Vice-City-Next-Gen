@@ -703,23 +703,23 @@
 		</assets>
 	</weapon>
 
-	<!-- P90 -->
+	<!-- MP5K -->
 	<weapon type="EPISODIC_12">
-		<data slot="SMG" firetype="INSTANT_HIT" damagetype="BULLET" group="SMG" targetrange="45.0" weaponrange="50.0" clipsize="50" ammomax="1200" timebetweenshots="66">
-			<damage base="25" networkplayermod="2.0" networkpedmod="1.0"/>
+		<data slot="SMG" firetype="INSTANT_HIT" damagetype="BULLET" group="SMG" targetrange="55.0" weaponrange="60.0" clipsize="30" ammomax="1200" timebetweenshots="66">
+			<damage base="20" networkplayermod="2.5" networkpedmod="1.25"/>
 			<physics force="50.0"/>
-			<reload time="2266" fasttime="2266" crouchtime="2000"/>
+			<reload time="1666" fasttime="1666" crouchtime="2533"/>
 
-			<aiming accuracy="0.7">
-				<offset 				x="0.1" y="0.8" z="0.55"/>
-				<crouchedoffset x="0.1"  y="0.8" z="0.1"/>
+			<aiming accuracy="0.55">
+				<offset         x="0.13" y="1.0" z="0.45"/>
+				<crouchedoffset x="0.11" y="1.0" z="-0.02"/>
 				<reticule standing="0.75" ducked="0.6" scale="0.3"/>
 			</aiming>
 
-			<pickup regentime="240000" ammoonstreet="60"/>
+			<pickup regentime="360000" ammoonstreet="60"/>
 
 			<controller>
-				<rumble duration="100" intensity="0.04"/>
+        <rumble duration="100" intensity="0.02"/>
 			</controller>
 
 			<flags>
@@ -728,23 +728,23 @@
 				<flag>CAN_FREE_AIM</flag>
 				<flag>ANIM_RELOAD</flag>
 				<flag>ANIM_CROUCH_FIRE</flag>
-				<flag>2HANDED</flag>
+				<flag>TREAT_AS_2HANDED_IN_COVER</flag>
 			</flags>
 		</data>
 
-		<assets model="w_e2_p90">
-			<anim group="gun@p90">
-				<rates firerate="1.0" blindfirerate="1.7"/>
-			</anim>
+		<assets model="w_mp5k">
+			<anim group="gun@mp5k" meleegroup1="firearm_core">
+       <rates firerate="1.0" blindfirerate="1.4"/>
+      </anim>
 
-			<effects>
-				<muzzle fx="muz_P90"/>
-				<shell fx="weap_ejected_p90"/>
+      <effects>
+				<muzzle fx="muz_smg"/>
+				<shell fx="weap_ejected_smg"/>
 			</effects>
 		</assets>
 	</weapon>
 
-	<!-- SOLID GOLD UZI -->
+	<!-- UZI -->
 	<weapon type="EPISODIC_13">
 		<data slot="SMG" firetype="INSTANT_HIT" damagetype="BULLET" group="SMG" targetrange="45.0" weaponrange="50.0" clipsize="30" ammomax="1200" timebetweenshots="66">
 			<damage base="25" networkplayermod="2.0" networkpedmod="1.0"/>
@@ -905,6 +905,47 @@
 		</assets>
 	</weapon>
 
+	<!-- STEYR AUG -->
+	<weapon type="EPISODIC_15">
+		<data slot="RIFLE" firetype="INSTANT_HIT" damagetype="BULLET" group="RIFLE_ASSAULT" targetrange="65.0" weaponrange="70.0" clipsize="30" ammomax="600" timebetweenshots="133">
+			<damage base="30" networkplayermod="2.5" networkpedmod="1.25"/>
+			<physics force="75.0"/>
+			<reload time="2066" fasttime="1166" crouchtime="2066"/>
+
+			<aiming accuracy="0.5">
+				<offset         x="0.14" y="1.0" z="0.55"/>
+				<crouchedoffset x="0.08"  y="1.0" z="0.12"/>
+				<reticule standing="0.6" ducked="0.5" scale="0.3"/>
+			</aiming>
+
+			<pickup regentime="600000" ammoonstreet="80"/>
+
+			<controller>
+        <rumble duration="90" intensity="0.1"/>
+			</controller>
+
+			<flags>
+				<flag>GUN</flag>
+				<flag>CAN_AIM</flag>
+				<flag>CAN_FREE_AIM</flag>
+				<flag>ANIM_RELOAD</flag>
+				<flag>ANIM_CROUCH_FIRE</flag>
+				<flag>2HANDED</flag>
+			</flags>
+		</data>
+
+		<assets model="w_aug">
+			<anim group="gun@ak47">
+				<rates firerate="1.2" blindfirerate="1.2"/>
+			</anim>
+
+			<effects>
+				<muzzle fx="muz_machine"/>
+				<shell fx="weap_ejected_rifle"/>
+			</effects>
+		</assets>
+	</weapon>
+
 	<weapon type="SNIPERRIFLE">
 		<data slot="SNIPER" firetype="DELAYED_HIT" damagetype="BULLET" group="RIFLE_SNIPER" targetrange="50.0" weaponrange="1500.0" clipsize="10" ammomax="50" timebetweenshots="400">
 			<damage base="20" fps="75" networkplayermod="2.0" networkpedmod="1.0"/>
@@ -970,42 +1011,6 @@
 			<anim group="gun@m40a1"/>
 		</assets>
 	</weapon>
-
-	<!-- DSR-1 SNIPER RIFLE -->
-	<weapon type="EPISODIC_15">
-		<data slot="SNIPER" firetype="DELAYED_HIT" damagetype="BULLET" group="RIFLE_SNIPER" targetrange="50.0" weaponrange="1500.0" clipsize="10" ammomax="50" timebetweenshots="333">
-			<damage base="20" fps="75" networkplayermod="2.0" networkpedmod="1.0"/>
-			<physics force="150.0"/>
-			<reload time="1300" fasttime="2066" crouchtime="2066"/>
-
-			<aiming accuracy="10.0" accuracyfps="0.0">
-				<offset 				x="0.16" y="1.0" z="0.55"/>
-				<crouchedoffset x="0.16" y="1.0" z="0.12"/>
-				<reticule standing="0.6" ducked="0.5" scale="0.05"/>
-			</aiming>
-
-			<pickup regentime="360000" ammoonstreet="10"/>
-
-			<controller>
-				<rumble duration="120" intensity="0.3"/>
-			</controller>
-
-			<flags>
-				<flag>GUN</flag>
-				<flag>CAN_FREE_AIM</flag>
-				<flag>FIRST_PERSON</flag>
-				<flag>ANIM_RELOAD</flag>
-				<flag>ANIM_CROUCH_FIRE</flag>
-				<flag>2HANDED</flag>
-			</flags>
-		</data>
-
-		<assets model="w_e2_dsr1">
-			<anim group="gun@DSR1">
-        <rates firerate="1.3" blindfirerate="1.0"/>
-      </anim>
-    </assets>
-  </weapon>
 
 	<weapon type="RLAUNCHER">
 		<data slot="HEAVY" firetype="PROJECTILE" damagetype="EXPLOSIVE" group="ROCKET" targetrange="50.0" weaponrange="100.0" clipsize="1" ammomax="8" timebetweenshots="800">

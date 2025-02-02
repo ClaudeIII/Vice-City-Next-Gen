@@ -276,14 +276,6 @@ void Superman(void)
 	}
 }
 
-void CreateScript(char * name)
-{
-	REQUEST_SCRIPT(name);
-	while ( !HAS_SCRIPT_LOADED(name) ) WAIT(0);
-	uint script = START_NEW_SCRIPT(name, 1024);
-	MARK_SCRIPT_AS_NO_LONGER_NEEDED(name);	
-}
-
 void InitThisScript(void)
 {
 	int randint;

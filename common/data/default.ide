@@ -37,18 +37,19 @@ w_e2_aa12_exp,		w_e2_aa12,		gun@aa12,		1,	50,	0
 # sub-machineguns
 w_uzi,			w_uzi,			gun@uzi,		1,	30,	0
 w_mp5,			w_mp5,			gun@mp5k,		1,	30,	0
-w_e2_p90,		w_e2_p90,		gun@p90,		1,	50,	0
+w_mp5k,			w_mp5k,			gun@mp5k,		1,	50,	0
 w_e2_uzi,		w_e2_uzi,		gun@GOLD_UZI,		1,	50,	0
 
 # machineguns
 w_ak47,			w_ak47,			gun@ak47,		1,	50,	0
 w_m4,			w_m4,			gun@ak47,		1,	50,	0
+w_aug,			w_aug,			gun@ak47,		1,	50,	0
+w_ruger,		w_ruger,		gun@ak47,		1,	50,	0
 w_e2_m249,		w_e2_m249,		gun@m249,		1,	50,	0
 
 # rifles
 w_psg1,			w_psg1,			gun@rifle,		1,	50,	0
 w_rifle,		w_rifle,		gun@rifle,		1,	50,	0
-w_e2_dsr1,		w_e2_dsr1,		gun@DSR1,		1,	50,	0
 
 # heavy
 rpg,			rpg,			gun@rocket,		1,	100,	0
