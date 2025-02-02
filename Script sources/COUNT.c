@@ -3020,7 +3020,6 @@ void typography(void)
 				SET_CHAR_HEADING(GetPlayerPed(), 0.0);
 				SET_MAX_WANTED_LEVEL(0);
 				ADD_ARMOUR_TO_CHAR(GetPlayerPed(), 100);
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 1, 0);
 
 				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
 

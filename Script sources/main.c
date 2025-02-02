@@ -23,18 +23,6 @@ uint Weap9, Weap9_2, get_Weap9, Ammo9_1, Ammo9_2;
 uint Weap0, Weap0_2, get_Weap0, Ammo0_1, Ammo0_2;
 float cop_X, cop_Y, cop_Z, cop_R;
 
-
-void res_skin(void)
-{
-	CHANGE_PLAYER_MODEL(GetPlayerIndex(), 1862763509);
-	SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
-	SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 2, 0, 0);
-	SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 3, 0, 0);
-	SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 4, 0, 0);
-	SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 5, 0, 0);
-	SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 6, 0, 0);
-	SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 8, 0, 0);
-}
 void SetTime(uint time)
 {
 	SETTIMERA( 0 );
@@ -188,7 +176,6 @@ void hospital(void)
 			break;
 		}
 	}
-	res_skin();
 
 	WAIT(100);
 	if ((IS_CHAR_IN_AREA_2D( GetPlayerPed(), 166.465, -2264.458, -2886.127, 552.054, 0 )) && (G_DIAZ >= 3)) // игрок в зоне Гаваны
@@ -223,7 +210,6 @@ void lawyer(void)
 			break;
 		}
 	}
-	res_skin();
 	SET_CHAR_COORDINATES(GetPlayerPed(), cop_X, cop_Y, cop_Z);//Дебаг: Вашинктон Драйв
 	SET_CHAR_HEADING(GetPlayerPed(), cop_R);
 	SetTime(2000);

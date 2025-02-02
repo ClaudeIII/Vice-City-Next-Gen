@@ -2282,7 +2282,6 @@ void versetty(void)
 				}
 				SET_CHAR_COORDINATES(GetPlayerPed(), 78.808, 6.345, 6.907);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 0.0);
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
 				ALTER_WANTED_LEVEL(GetPlayerIndex(), 0);
 				APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);

@@ -99,9 +99,6 @@ void LAWYER_1(void)
 						break;
 					}
 				}
-				// переодивание тут
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
-
 				SET_CHAR_COORDINATES(GetPlayerPed(), 552.036, -293.714, 4.766);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 52.894);
 
@@ -843,7 +840,6 @@ void LAWYER_1(void)
 
 				SET_CHAR_COORDINATES(GetPlayerPed(), 552.036, -293.714, 4.766);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 52.894);
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 1, 0);
 
 				GET_TIME_OF_DAY(&hour, &minute);
 				GET_CURRENT_WEATHER(&weather);
@@ -1874,7 +1870,6 @@ void LAWYER_1(void)
 
 				SET_CHAR_COORDINATES(GetPlayerPed(), 552.036, -293.714, 4.766);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 52.894);
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 1, 0);
 				
 				Car car1, car2, car3, car4;
 				Ped ped1, ped2, ped3, ped4, ped5, ped6;
@@ -2868,7 +2863,6 @@ void LAWYER_1(void)
 
 				SET_CHAR_COORDINATES(GetPlayerPed(), 552.036, -293.714, 4.766);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 52.894);
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 1, 0);
 				SET_MAX_WANTED_LEVEL(0);
 
 				GET_TIME_OF_DAY(&hour, &minute);

@@ -111,7 +111,6 @@ void boyarsky(void)
 
 				SET_CHAR_COORDINATES(GetPlayerPed(), 691.139, 300.702, 4.845);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 65.0);
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
 				
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
 				FORWARD_TO_TIME_OF_DAY(18, 55);//устанавливаем время
@@ -757,7 +756,6 @@ void boyarsky(void)
 				
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
 				FORWARD_TO_TIME_OF_DAY(18, 55);//устанавливаем время
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
 				
 				//------------ катсцена ----------------
 				LOAD_ADDITIONAL_TEXT( "TEX_3", 6 ); // загружаем субтитры из *.GTX
@@ -2198,7 +2196,6 @@ void boyarsky(void)
 				
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
 				FORWARD_TO_TIME_OF_DAY(18, 55);//устанавливаем время
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
 				
 				//------------ катсцена ----------------
 				LOAD_ADDITIONAL_TEXT( "TEX_2", 6 ); // загружаем субтитры из *.GTX

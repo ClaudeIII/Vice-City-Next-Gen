@@ -94,7 +94,6 @@ void voodoo(void)
 				}
 				SET_CHAR_COORDINATES(GetPlayerPed(), -529.452, 675.58, 3.45918 );// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 180.0 );
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
 
 				Cam camera;
 				Ped ped1, ped2, ped3, ped4, ped5, ped6, ped7, ped8, ped9;

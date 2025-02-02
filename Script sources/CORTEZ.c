@@ -95,7 +95,6 @@ void cortez(void)
 
 				SET_CHAR_COORDINATES(GetPlayerPed(), 189.427, -827.564, 2.028);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), -85.0);
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
 				FORCE_WEATHER_NOW(WEATHER_SUNNY);
 				RELEASE_WEATHER();
 				
@@ -658,7 +657,6 @@ void cortez(void)
 
 				SET_CHAR_COORDINATES(GetPlayerPed(), 189.427, -827.564, 2.028);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), -85.0);
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
 				FORCE_WEATHER_NOW(WEATHER_SUNNY);
 				RELEASE_WEATHER();
 				
@@ -1192,7 +1190,6 @@ void cortez(void)
 
 				SET_CHAR_COORDINATES(GetPlayerPed(), 189.427, -827.564, 2.028);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), -85.0);
-				SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
 				FORCE_WEATHER_NOW(WEATHER_SUNNY);
 				RELEASE_WEATHER();
 				
