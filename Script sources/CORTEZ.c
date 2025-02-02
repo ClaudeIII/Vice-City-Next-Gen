@@ -3957,7 +3957,7 @@ void cortez(void)
 								PRINT_STRING_IN_STRING("string", "COL4_B8", 5000, 1);//~g~Get out of the tank and walk out of the garage.
 								in_garage = 1;
 							}
-							if (!IS_CHAR_IN_AREA_3D( GetPlayerPed(), -603.975, 49.006, 4.186, -623.065, 62.218, 10.299, 0 ))
+							if (!IS_CHAR_IN_AREA_3D( GetPlayerPed(), -600.939, 30.766, 4.186, -645.592, 78.711, 15.632, 0 ))
 							{
 								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 								//SetTime(1000);
@@ -4103,6 +4103,7 @@ void cortez(void)
 				}
 				else if (skip == 2)
 				{
+					CLEAR_WANTED_LEVEL(GetPlayerIndex());
 					SETTIMERA(0); //сбрасываем таймер 
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
@@ -5521,7 +5522,7 @@ void cortez(void)
 				REMOVE_BLIP(vert_ico);//Удаляем иконку на радаре
 				REMOVE_PICKUP(sweap_1);
 				REMOVE_PICKUP(aid_1);
-				G_CORTEZ = 5;
+				G_CORTEZ = 7;
 
 				if (skip == 1)
 				{
