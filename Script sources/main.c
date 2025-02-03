@@ -250,31 +250,6 @@ void lawyer(void)
 		START_SCRIPT_CONVERSATION(1, 1);
 	}
 }
-void Superman(void)
-{
-	uint pid = GET_PLAYER_ID();
-	if (pid >= 0)
-	{
-		if (IS_PLAYER_PLAYING(pid))
-		{
-			if (PLAYER_HAS_CHAR(pid))
-			{
-				Ped ped;
-				GET_PLAYER_CHAR(pid, &ped);
-				if (ped > 0)
-				{
-
-					UpdateWeaponOfPed(ped, WEAPON_KNIFE);
-					UpdateWeaponOfPed(ped, WEAPON_MOLOTOV);
-					UpdateWeaponOfPed(ped, WEAPON_DEAGLE);
-					UpdateWeaponOfPed(ped, WEAPON_SHOTGUN);
-					UpdateWeaponOfPed(ped, WEAPON_MP5);
-					UpdateWeaponOfPed(ped, WEAPON_AK47);	
-				}
-			}
-		}
-	}
-}
 
 void InitThisScript(void)
 {
@@ -287,7 +262,10 @@ void InitThisScript(void)
 }
 void InitScriptLauncher(void)
 {
-	CreateScript("loader_script");
+	REQUEST_SCRIPT("loader_script");
+	while (!HAS_SCRIPT_LOADED("loader_script")) WAIT(0);
+	uint script = START_NEW_SCRIPT("loader_script", 1024);
+	MARK_SCRIPT_AS_NO_LONGER_NEEDED("loader_script");
 }
 
 void HideLoadingScreen(int time)
@@ -388,7 +366,6 @@ void main(void)
 
 	//WAIT(2000);
 	//HideLoadingScreen(4000);
-	//Superman();
 	while (TRUE) 
 	{
 		WAIT(0);
