@@ -578,4 +578,5 @@ void main(void)
 			}
 		}
 	}
+	SET_PLAYER_KEEPS_WEAPONS_WHEN_RESPAWNED(true);
 }
