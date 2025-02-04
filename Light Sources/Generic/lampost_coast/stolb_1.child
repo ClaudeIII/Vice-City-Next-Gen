@@ -1,0 +1,789 @@
+Version 112 2
+drawable
+{
+	lodgroup
+	{
+		high 1 stolb_1\stolb_1_high.mesh 1 9999.00000000
+		med none 9999.00000000
+		low none 9999.00000000
+		vlow none 9999.00000000
+		center 0.00787768 -0.00156507 0.01046370
+		AABBMin -0.56032600 -0.32819300 -2.59434000
+		AABBMax 0.57608100 0.32506300 2.61527000
+		radius 2.68599000
+	}
+}
+boundTransform
+{
+	1.00000000 0.00000000 0.00000000
+	0.00000000 1.00000000 0.00000000
+	0.00000000 0.00000000 1.00000000
+	0.00000000 0.00000000 0.00000000
+}
+bound
+{
+	Type BoundGeometry
+	CentroidPresent 1
+	CGPresent 0
+	Radius 2.68599000
+	WorldRadius 2.69762000
+	AABBMax 0.67608100 0.42506300 2.71527000
+	AABBMin -0.66032600 -0.42819300 -2.69434000
+	Centroid 0.00787768 -0.00156507 0.01046370
+	Margin 0.05000000 0.05000000 0.05000000
+	Shrunk 121
+	{
+		-31456 -13332 -31456
+		-15955 -13332 -31456
+		-31456 13633 -31456
+		-15955 13633 -31456
+		-31456 -13332 -17694
+		-15955 -13332 -17694
+		-31456 13633 -17694
+		-15955 13633 -17694
+		-27581 -6590 -17694
+		-19830 -6590 -17694
+		-19830 6892 -17694
+		-27581 6892 -17694
+		-27581 -6590 27340
+		-19830 -6590 26762
+		-19830 6892 26762
+		-27581 6892 27340
+		-20944 -6590 30095
+		-15242 -6590 28725
+		-15242 6892 28725
+		-20944 6892 30095
+		-7616 -6590 31456
+		-7055 -6590 29594
+		-7055 6892 29594
+		-7616 6892 31456
+		5405 -6590 30808
+		2374 -6590 29200
+		2374 6892 29200
+		5405 6892 30808
+		14591 -6590 28875
+		8119 -6590 28007
+		8119 6892 28007
+		14591 6892 28875
+		16239 -6590 26848
+		10655 -6590 26765
+		10655 6892 26765
+		16239 6892 26848
+		31456 0 23199
+		29370 14726 23199
+		23588 26078 23199
+		15436 31456 23199
+		6781 29628 23199
+		-393 21012 23199
+		-4444 7583 23199
+		-4444 -7583 23199
+		-393 -21012 23199
+		6781 -29628 23199
+		15436 -31456 23199
+		23588 -26078 23199
+		29370 -14726 23199
+		30683 0 24053
+		28685 14100 24053
+		23149 24971 24053
+		15343 30121 24053
+		7056 28370 24053
+		185 20120 24053
+		-3694 7261 24053
+		-3694 -7261 24053
+		185 -20120 24053
+		7056 -28370 24053
+		15343 -30121 24053
+		23149 -24971 24053
+		28685 -14100 24053
+		27265 0 25381
+		25659 11337 25381
+		21207 20078 25381
+		14931 24218 25381
+		8268 22811 25381
+		2743 16177 25381
+		-375 5838 25381
+		-375 -5838 25381
+		2743 -16177 25381
+		8268 -22811 25381
+		14931 -24218 25381
+		21207 -20078 25381
+		25659 -11337 25381
+		18394 0 26883
+		17804 4449 26883
+		16168 7879 26883
+		13862 9504 26883
+		11413 8952 26883
+		9383 6348 26883
+		8237 2291 26883
+		8237 -2291 26883
+		9383 -6348 26883
+		11413 -8952 26883
+		13862 -9504 26883
+		16168 -7879 26883
+		17804 -4449 26883
+		31456 0 23199
+		29370 14726 23199
+		23588 26078 23199
+		15436 31456 23199
+		6781 29628 23199
+		-393 21012 23199
+		-4444 7583 23199
+		-4444 -7583 23199
+		-393 -21012 23199
+		6781 -29628 23199
+		15436 -31456 23199
+		23588 -26078 23199
+		29370 -14726 23199
+		29370 14726 23199
+		31456 0 23199
+		23588 -26078 23199
+		15436 31456 23199
+		29370 14726 23199
+		23588 -26078 23199
+		23588 -26078 23199
+		6781 -29628 23199
+		23588 -26078 23199
+		6781 -29628 23199
+		-4444 -7583 23199
+		15436 31456 23199
+		23588 -26078 23199
+		-4444 -7583 23199
+		-4444 -7583 23199
+		15436 31456 23199
+		-4444 -7583 23199
+		-393 21012 23199
+		15436 31456 23199
+		-393 21012 23199
+	}
+	Polygons 83
+	{
+		Polygon 0
+		{
+			Material 0
+			Vertices 0 2 3 1
+			Siblings 4 3 2 1
+		}
+		Polygon 1
+		{
+			Material 0
+			Vertices 0 1 5 4
+			Siblings 0 2 5 4
+		}
+		Polygon 2
+		{
+			Material 0
+			Vertices 1 3 7 5
+			Siblings 0 3 6 1
+		}
+		Polygon 3
+		{
+			Material 0
+			Vertices 3 2 6 7
+			Siblings 0 4 7 2
+		}
+		Polygon 4
+		{
+			Material 0
+			Vertices 2 0 4 6
+			Siblings 0 1 8 3
+		}
+		Polygon 5
+		{
+			Material 0
+			Vertices 4 5 9 8
+			Siblings 1 6 9 8
+		}
+		Polygon 6
+		{
+			Material 0
+			Vertices 5 7 10 9
+			Siblings 2 7 10 5
+		}
+		Polygon 7
+		{
+			Material 0
+			Vertices 7 6 11 10
+			Siblings 3 8 11 6
+		}
+		Polygon 8
+		{
+			Material 0
+			Vertices 6 4 8 11
+			Siblings 4 5 12 7
+		}
+		Polygon 9
+		{
+			Material 0
+			Vertices 8 9 13 12
+			Siblings 5 10 13 12
+		}
+		Polygon 10
+		{
+			Material 0
+			Vertices 9 10 14 13
+			Siblings 6 11 14 9
+		}
+		Polygon 11
+		{
+			Material 0
+			Vertices 10 11 15 14
+			Siblings 7 12 15 10
+		}
+		Polygon 12
+		{
+			Material 0
+			Vertices 11 8 12 15
+			Siblings 8 9 16 11
+		}
+		Polygon 13
+		{
+			Material 0
+			Vertices 12 13 17 16
+			Siblings 9 14 17 16
+		}
+		Polygon 14
+		{
+			Material 0
+			Vertices 13 14 18 17
+			Siblings 10 15 18 13
+		}
+		Polygon 15
+		{
+			Material 0
+			Vertices 14 15 19 18
+			Siblings 11 16 19 14
+		}
+		Polygon 16
+		{
+			Material 0
+			Vertices 15 12 16 19
+			Siblings 12 13 20 15
+		}
+		Polygon 17
+		{
+			Material 0
+			Vertices 16 17 21 20
+			Siblings 13 18 21 20
+		}
+		Polygon 18
+		{
+			Material 0
+			Vertices 17 18 22 21
+			Siblings 14 19 22 17
+		}
+		Polygon 19
+		{
+			Material 0
+			Vertices 18 19 23 22
+			Siblings 15 20 23 18
+		}
+		Polygon 20
+		{
+			Material 0
+			Vertices 19 16 20 23
+			Siblings 16 17 24 19
+		}
+		Polygon 21
+		{
+			Material 0
+			Vertices 20 21 25 24
+			Siblings 17 22 25 24
+		}
+		Polygon 22
+		{
+			Material 0
+			Vertices 21 22 26 25
+			Siblings 18 23 26 21
+		}
+		Polygon 23
+		{
+			Material 0
+			Vertices 22 23 27 26
+			Siblings 19 24 27 22
+		}
+		Polygon 24
+		{
+			Material 0
+			Vertices 23 20 24 27
+			Siblings 20 21 28 23
+		}
+		Polygon 25
+		{
+			Material 0
+			Vertices 24 25 29 28
+			Siblings 21 26 29 28
+		}
+		Polygon 26
+		{
+			Material 0
+			Vertices 25 26 30 29
+			Siblings 22 27 30 25
+		}
+		Polygon 27
+		{
+			Material 0
+			Vertices 26 27 31 30
+			Siblings 23 28 31 26
+		}
+		Polygon 28
+		{
+			Material 0
+			Vertices 27 24 28 31
+			Siblings 24 25 32 27
+		}
+		Polygon 29
+		{
+			Material 0
+			Vertices 28 29 33 32
+			Siblings 25 30 -1 32
+		}
+		Polygon 30
+		{
+			Material 0
+			Vertices 29 30 34 33
+			Siblings 26 31 -1 29
+		}
+		Polygon 31
+		{
+			Material 0
+			Vertices 30 31 35 34
+			Siblings 27 32 -1 30
+		}
+		Polygon 32
+		{
+			Material 0
+			Vertices 31 28 32 35
+			Siblings 28 29 -1 31
+		}
+		Polygon 33
+		{
+			Material 0
+			Vertices 36 37 50 49
+			Siblings -1 34 46 45
+		}
+		Polygon 34
+		{
+			Material 0
+			Vertices 37 38 51 50
+			Siblings -1 35 47 33
+		}
+		Polygon 35
+		{
+			Material 0
+			Vertices 38 39 52 51
+			Siblings -1 36 48 34
+		}
+		Polygon 36
+		{
+			Material 0
+			Vertices 39 40 53 52
+			Siblings -1 37 49 35
+		}
+		Polygon 37
+		{
+			Material 0
+			Vertices 40 41 54 53
+			Siblings -1 38 50 36
+		}
+		Polygon 38
+		{
+			Material 0
+			Vertices 41 42 55 54
+			Siblings -1 39 51 37
+		}
+		Polygon 39
+		{
+			Material 0
+			Vertices 42 43 56 55
+			Siblings -1 40 52 38
+		}
+		Polygon 40
+		{
+			Material 0
+			Vertices 43 44 57 56
+			Siblings -1 41 53 39
+		}
+		Polygon 41
+		{
+			Material 0
+			Vertices 44 45 58 57
+			Siblings -1 42 54 40
+		}
+		Polygon 42
+		{
+			Material 0
+			Vertices 45 46 59 58
+			Siblings -1 43 55 41
+		}
+		Polygon 43
+		{
+			Material 0
+			Vertices 46 47 60 59
+			Siblings -1 44 56 42
+		}
+		Polygon 44
+		{
+			Material 0
+			Vertices 47 48 61 60
+			Siblings -1 45 57 43
+		}
+		Polygon 45
+		{
+			Material 0
+			Vertices 48 36 49 61
+			Siblings -1 33 58 44
+		}
+		Polygon 46
+		{
+			Material 0
+			Vertices 49 50 63 62
+			Siblings 33 47 59 58
+		}
+		Polygon 47
+		{
+			Material 0
+			Vertices 50 51 64 63
+			Siblings 34 48 60 46
+		}
+		Polygon 48
+		{
+			Material 0
+			Vertices 51 52 65 64
+			Siblings 35 49 61 47
+		}
+		Polygon 49
+		{
+			Material 0
+			Vertices 52 53 66 65
+			Siblings 36 50 62 48
+		}
+		Polygon 50
+		{
+			Material 0
+			Vertices 53 54 67 66
+			Siblings 37 51 63 49
+		}
+		Polygon 51
+		{
+			Material 0
+			Vertices 54 55 68 67
+			Siblings 38 52 64 50
+		}
+		Polygon 52
+		{
+			Material 0
+			Vertices 55 56 69 68
+			Siblings 39 53 65 51
+		}
+		Polygon 53
+		{
+			Material 0
+			Vertices 56 57 70 69
+			Siblings 40 54 66 52
+		}
+		Polygon 54
+		{
+			Material 0
+			Vertices 57 58 71 70
+			Siblings 41 55 67 53
+		}
+		Polygon 55
+		{
+			Material 0
+			Vertices 58 59 72 71
+			Siblings 42 56 68 54
+		}
+		Polygon 56
+		{
+			Material 0
+			Vertices 59 60 73 72
+			Siblings 43 57 69 55
+		}
+		Polygon 57
+		{
+			Material 0
+			Vertices 60 61 74 73
+			Siblings 44 58 70 56
+		}
+		Polygon 58
+		{
+			Material 0
+			Vertices 61 49 62 74
+			Siblings 45 46 71 57
+		}
+		Polygon 59
+		{
+			Material 0
+			Vertices 62 63 76 75
+			Siblings 46 60 -1 71
+		}
+		Polygon 60
+		{
+			Material 0
+			Vertices 63 64 77 76
+			Siblings 47 61 -1 59
+		}
+		Polygon 61
+		{
+			Material 0
+			Vertices 64 65 78 77
+			Siblings 48 62 -1 60
+		}
+		Polygon 62
+		{
+			Material 0
+			Vertices 65 66 79 78
+			Siblings 49 63 -1 61
+		}
+		Polygon 63
+		{
+			Material 0
+			Vertices 66 67 80 79
+			Siblings 50 64 -1 62
+		}
+		Polygon 64
+		{
+			Material 0
+			Vertices 67 68 81 80
+			Siblings 51 65 -1 63
+		}
+		Polygon 65
+		{
+			Material 0
+			Vertices 68 69 82 81
+			Siblings 52 66 -1 64
+		}
+		Polygon 66
+		{
+			Material 0
+			Vertices 69 70 83 82
+			Siblings 53 67 -1 65
+		}
+		Polygon 67
+		{
+			Material 0
+			Vertices 70 71 84 83
+			Siblings 54 68 -1 66
+		}
+		Polygon 68
+		{
+			Material 0
+			Vertices 71 72 85 84
+			Siblings 55 69 -1 67
+		}
+		Polygon 69
+		{
+			Material 0
+			Vertices 72 73 86 85
+			Siblings 56 70 -1 68
+		}
+		Polygon 70
+		{
+			Material 0
+			Vertices 73 74 87 86
+			Siblings 57 71 -1 69
+		}
+		Polygon 71
+		{
+			Material 0
+			Vertices 74 62 75 87
+			Siblings 58 59 -1 70
+		}
+		Polygon 72
+		{
+			Material 0
+			Vertices 91 90 89 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 73
+		{
+			Material 0
+			Vertices 88 100 99 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 74
+		{
+			Material 0
+			Vertices 101 102 103 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 75
+		{
+			Material 0
+			Vertices 104 105 106 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 76
+		{
+			Material 0
+			Vertices 107 98 97 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 77
+		{
+			Material 0
+			Vertices 108 96 95 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 78
+		{
+			Material 0
+			Vertices 109 110 111 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 79
+		{
+			Material 0
+			Vertices 112 113 114 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 80
+		{
+			Material 0
+			Vertices 115 94 93 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 81
+		{
+			Material 0
+			Vertices 116 117 118 0
+			Siblings -1 -1 -1 -1
+		}
+		Polygon 82
+		{
+			Material 0
+			Vertices 119 120 92 0
+			Siblings -1 -1 -1 -1
+		}
+	}
+	VertexScale 0.00001734 0.00000997 0.00007949
+	VertexOffset 0.00787768 -0.00156507 0.01046370
+	Vertices 121
+	{
+		-32767 -13887 -32767
+		-16620 -13887 -32767
+		-32767 14201 -32767
+		-16620 14201 -32767
+		-32767 -13887 -18431
+		-16620 -13887 -18431
+		-32767 14201 -18431
+		-16620 14201 -18431
+		-28730 -6865 -18431
+		-20657 -6865 -18431
+		-20657 7179 -18431
+		-28730 7179 -18431
+		-28730 -6865 28479
+		-20657 -6865 27877
+		-20657 7179 27877
+		-28730 7179 28479
+		-21817 -6865 31349
+		-15877 -6865 29922
+		-15877 7179 29922
+		-21817 7179 31349
+		-7933 -6865 32767
+		-7349 -6865 30827
+		-7349 7179 30827
+		-7933 7179 32767
+		5630 -6865 32091
+		2473 -6865 30417
+		2473 7179 30417
+		5630 7179 32091
+		15199 -6865 30078
+		8457 -6865 29174
+		8457 7179 29174
+		15199 7179 30078
+		16916 -6865 27967
+		11099 -6865 27880
+		11099 7179 27880
+		16916 7179 27967
+		32767 0 24166
+		30594 15339 24166
+		24571 27165 24166
+		16080 32767 24166
+		7064 30863 24166
+		-409 21888 24166
+		-4630 7899 24166
+		-4630 -7899 24166
+		-409 -21888 24166
+		7064 -30863 24166
+		16080 -32767 24166
+		24571 -27165 24166
+		30594 -15339 24166
+		31961 0 25055
+		29880 14688 25055
+		24114 26011 25055
+		15983 31376 25055
+		7350 29552 25055
+		193 20959 25055
+		-3848 7564 25055
+		-3848 -7564 25055
+		193 -20959 25055
+		7350 -29552 25055
+		15983 -31376 25055
+		24114 -26011 25055
+		29880 -14688 25055
+		28401 0 26439
+		26728 11810 26439
+		22091 20914 26439
+		15553 25227 26439
+		8612 23761 26439
+		2858 16852 26439
+		-391 6081 26439
+		-391 -6081 26439
+		2858 -16852 26439
+		8612 -23761 26439
+		15553 -25227 26439
+		22091 -20914 26439
+		26728 -11810 26439
+		19161 0 28003
+		18546 4634 28003
+		16842 8207 28003
+		14440 9900 28003
+		11889 9325 28003
+		9774 6613 28003
+		8580 2386 28003
+		8580 -2386 28003
+		9774 -6613 28003
+		11889 -9325 28003
+		14440 -9900 28003
+		16842 -8207 28003
+		18546 -4634 28003
+		32767 0 24166
+		30594 15339 24166
+		24571 27165 24166
+		16080 32767 24166
+		7064 30863 24166
+		-409 21888 24166
+		-4630 7899 24166
+		-4630 -7899 24166
+		-409 -21888 24166
+		7064 -30863 24166
+		16080 -32767 24166
+		24571 -27165 24166
+		30594 -15339 24166
+		30594 15339 24166
+		32767 0 24166
+		24571 -27165 24166
+		16080 32767 24166
+		30594 15339 24166
+		24571 -27165 24166
+		24571 -27165 24166
+		7064 -30863 24166
+		24571 -27165 24166
+		7064 -30863 24166
+		-4630 -7899 24166
+		16080 32767 24166
+		24571 -27165 24166
+		-4630 -7899 24166
+		-4630 -7899 24166
+		16080 32767 24166
+		-4630 -7899 24166
+		-409 21888 24166
+		16080 32767 24166
+		-409 21888 24166
+	}
+	Materials 1
+	{
+		71 0 0
+	}
+}
