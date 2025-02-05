@@ -452,6 +452,7 @@ void main(void)
 			WAIT(0);
 			SET_CHAR_COORDINATES_NO_OFFSET(GetPlayerPed(), X, Y, Z);
 			SET_CHAR_HEADING(GetPlayerPed(), R);
+			SET_CHAR_HEALTH(GetPlayerPed(), 200);
 			if (DID_SAVE_COMPLETE_SUCCESSFULLY())
 			{
 				DO_SCREEN_FADE_OUT_UNHACKED(0);

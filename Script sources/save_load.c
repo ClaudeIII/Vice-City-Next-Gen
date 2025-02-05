@@ -149,10 +149,9 @@ void main(void)
 		SET_CHAR_HEADING(GetPlayerPed(), R);
 
 		WAIT(500);
-		//получить скин
+
 		Torso = GET_CHAR_DRAWABLE_VARIATION(GetPlayerPed(), 1);
 
-		//получить оружие
 		uint Weap1, Ammo1_1, Ammo1_2;
 		uint Weap2, Ammo2_1, Ammo2_2;
 		uint Weap3, Ammo3_1, Ammo3_2;
@@ -173,10 +172,13 @@ void main(void)
 		GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 8, &Weap8, &Ammo8_1, &Ammo8_2);
 		GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 9, &Weap9, &Ammo9_1, &Ammo9_2);
 		GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 0, &Weap0, &Ammo0_1, &Ammo0_2);
+
+		uint Armour;
+		GET_CHAR_ARMOUR(GetPlayerPed(), &Armour);
    
 		CHANGE_PLAYER_MODEL(GetPlayerIndex(), 1862763509);
 		WAIT(100);
-		//задать оружие
+
 		UpdateWeaponOfPed(GetPlayerPed(), Weap1);
 		UpdateWeaponOfPed(GetPlayerPed(), Weap2);
 		UpdateWeaponOfPed(GetPlayerPed(), Weap3);
@@ -206,6 +208,8 @@ void main(void)
 		SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 5, 0, 0);
 		SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 6, 0, 0);
 		SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 8, 0, 0);
+
+		ADD_ARMOUR_TO_CHAR(GetPlayerPed(), Armour);
 
 		uint h, m;
 		GET_TIME_OF_DAY(&h, &m);
