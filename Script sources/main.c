@@ -160,7 +160,7 @@ void get_weap(int ID_scan)
 	while (TRUE) 
 	{
 		WAIT(0);
-		if ((!IS_CHAR_IN_AREA_2D( GetPlayerPed(), 532.444, 799.818, 522.444, 801.818, 0 )) && (!IS_CHAR_IN_AREA_2D( GetPlayerPed(), -969.68, -304.184, -977.749, -295.524, 0 )) && (!IS_CHAR_IN_AREA_2D( GetPlayerPed(), -1027.328, -303.785, -1035.396, -295.124, 0 )))
+		if ((!IS_CHAR_IN_AREA_2D( GetPlayerPed(), 532.444, 800.618, 522.444, 800.962, 0)) && (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -974.18, -299.184, -974.749, -299.524, 0)) && (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -1031.328, -298.285, -1032.396, -298.624, 0)))
 		{
 			break;
 		}
@@ -370,15 +370,15 @@ void main(void)
 	{
 		WAIT(0);
 		//------------------- Металлоискатель -------------------
-		if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), 532.444, 799.818, 14.841, 522.444, 801.818, 20.841, 0 )) //Гольф клуб
+		if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), 532.444, 800.618, 14.841, 522.444, 800.962, 20.841, 0)) //Гольф клуб
 		{
 			get_weap(1);
 		}
-		if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -969.68, -304.184, 8.415, -977.749, -295.524, 13.73, 0 )) //Аэропорт проход 1
+		if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -974.18, -299.184, 8.415, -974.749, -299.524, 13.73, 0)) //Аэропорт проход 1
 		{
 			get_weap(2);
 		}
-		if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -1027.328, -303.785, 8.415, -1035.396, -295.124, 13.73, 0 )) //Аэропорт проход 2
+		if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -1031.328, -298.285, 8.415, -1032.396, -298.624, 13.73, 0)) //Аэропорт проход 2
 		{
 			get_weap(3);
 		}
