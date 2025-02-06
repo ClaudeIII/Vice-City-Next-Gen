@@ -315,6 +315,7 @@ void i_need_tools(void)
 	while (true)
 	{
 		WAIT(0);
+		DISPLAY_CASH(TRUE);
 		if (help == 1)
 		{
 			if (TIMERB() > 1000)
@@ -537,6 +538,7 @@ void i_need_tools(void)
 	DESTROY_CAM( camera2 );
 	CLEAR_HELP(); // удаляем текст подсказки
 	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+	DISPLAY_CASH(FALSE);
 }
 void i_need_hiling(void)
 {
