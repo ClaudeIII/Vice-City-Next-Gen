@@ -801,7 +801,7 @@ void create_shops(void)
 	while(true)
 	{
 		WAIT(0);
-		if (((Pizza == 1) && (set_money == 0)) || ((Tools > 0) && (set_money == 0)))
+		if (((Pizza >= 1) && (set_money == 0)) || ((Tools > 0) && (set_money == 0)))
 		{
 			DRAW_CHECKPOINT( check_X, check_Y, check_Z, 0.8, 160, 116, 209);//создание чекпойнт на координатах и его цвет
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
@@ -811,7 +811,7 @@ void create_shops(void)
 				if (add_check == 0)
 				{
 					add_check = 1;
-					if (Pizza == 1)
+					if (Pizza >= 1)
 					{
 						i_need_hiling();
 					}
@@ -1909,6 +1909,7 @@ void global_world(void)
 		// ----------------------------------- ћј√ј«»Ќџ -----------------------------------
 		if (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -390.224, -135.368, -440.224, -85.368, 0)) //Doughnut Shop (Havana)
 		{
+			Pizza = 2;
 			PedX = -425.312;
 			PedY = -101.683;
 			PedZ = 5.36331;
@@ -1917,6 +1918,7 @@ void global_world(void)
 		}
 		else if (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -716.185, -105.635, -766.185, -55.635, 0)) //Cafe Robina (Havana)
 		{
+			Pizza = 2;
 			PedX = -736.09;
 			PedY = -84.6355;
 			PedZ = 5.78244;
