@@ -68,6 +68,54 @@ void business(void)
 	while ((!HAS_MODEL_LOADED(stendM_off)) || (!HAS_MODEL_LOADED(stendM_no))) WAIT(0);
 
 //************************************************************* МЕТКИ НА КАРТЕ *************************************************************
+	// Doughnut Shop (Havana)
+	ADD_BLIP_FOR_COORD(-425.312, -101.683, 5.36331, &ammun1_ico);
+	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_RESTAURANT);
+	CHANGE_BLIP_SCALE(ammun1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
+
+	// Cafe Robina (Havana)
+	ADD_BLIP_FOR_COORD(-736.09, -84.6355, 5.78244, &ammun1_ico);
+	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_RESTAURANT);
+	CHANGE_BLIP_SCALE(ammun1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
+
+	// Pizza #1 (Vice Point)
+	ADD_BLIP_FOR_COORD(852.456, 620.24, 5.16551, &ammun1_ico);
+	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_RESTAURANT);
+	CHANGE_BLIP_SCALE(ammun1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
+
+	// Pizza #2 (Haiti)
+	ADD_BLIP_FOR_COORD(-608.372, 615.234, 5.5641, &ammun1_ico);
+	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_RESTAURANT);
+	CHANGE_BLIP_SCALE(ammun1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
+	
+	// Pizza #3 (Downtown)
+	ADD_BLIP_FOR_COORD(-469.844, 1331.57, 5.35378, &ammun1_ico);
+	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_RESTAURANT);
+	CHANGE_BLIP_SCALE(ammun1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
+
+	// HotDog #1 (Mall)
+	ADD_BLIP_FOR_COORD(869.753, 1638.69, 13.21, &ammun1_ico);
+	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_RESTAURANT);
+	CHANGE_BLIP_SCALE(ammun1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
+
+	// HotDog #2 (Mall)
+	ADD_BLIP_FOR_COORD(871.064, 1675.66, 13.165, &ammun1_ico);
+	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_RESTAURANT);
+	CHANGE_BLIP_SCALE(ammun1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
+
+	// HotDog #3 (Mall)
+	ADD_BLIP_FOR_COORD(810.264, 1680.68, 13.5298, &ammun1_ico);
+	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_RESTAURANT);
+	CHANGE_BLIP_SCALE(ammun1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
+
 	// Ammu-Nation#1 (Washington Beach)
 	ADD_BLIP_FOR_COORD(369.825, -949.315, 4.43197, &ammun1_ico);//создаем иконку на радаре
 	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_WEAPONS);//текстура иконки на радаре
