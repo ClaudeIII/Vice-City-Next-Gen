@@ -453,12 +453,14 @@ void main(void)
 			SET_CHAR_COORDINATES_NO_OFFSET(GetPlayerPed(), X, Y, Z);
 			SET_CHAR_HEADING(GetPlayerPed(), R);
 			SET_CHAR_HEALTH(GetPlayerPed(), 200);
+			ALTER_WANTED_LEVEL(GetPlayerIndex(), 0);
+			APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
+			uint h, m;
+			GET_TIME_OF_DAY(&h, &m);
+			FORWARD_TO_TIME_OF_DAY(h + 6, m);
 			if (DID_SAVE_COMPLETE_SUCCESSFULLY())
 			{
 				DO_SCREEN_FADE_OUT_UNHACKED(0);
-				uint h, m;
-				GET_TIME_OF_DAY(&h, &m);
-				FORWARD_TO_TIME_OF_DAY(h + 6, m);
 				G_SAVE_OCCURED = FALSE;
 				WAIT(1000);
 			}
