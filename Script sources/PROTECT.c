@@ -2310,6 +2310,7 @@ void versetty(void)
 				uint PedM2 = MODEL_M_Y_COP;// Коп
 				uint PedM3 = MODEL_M_M_GBIK_LO_03;// Вояка
 				uint dynamite_1 = dynamite;// динамит
+				uint Torso;
 
 				REQUEST_MODEL(CarM1);
 				while (!HAS_MODEL_LOADED(CarM1)) WAIT(10);
@@ -2530,6 +2531,7 @@ void versetty(void)
 								REQUEST_MODEL(PedM1);// Ланс
 								while (!HAS_MODEL_LOADED(PedM1)) WAIT(10);////проверка "пед загрузился" если нет то начанаем с начало
 								CREATE_CHAR (26, PedM1, 894.286, 864.587, 6.007, &ped1, TRUE);// Ланс
+								Torso = GET_CHAR_DRAWABLE_VARIATION(GetPlayerPed(), 1);
 								SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 5, 0);
 								SET_CHAR_COMPONENT_VARIATION(ped1, 1, 1, 0);
 								SET_CHAR_DECISION_MAKER(ped1, dm);
@@ -3202,7 +3204,7 @@ void versetty(void)
 							// Томми забегат в особняк
 							TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 54.113, -32.102, 14.306, 3, -2);// Томми идёт в двери
 							SetTime(3000);
-							SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 0, 0);
+							SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, Torso, 0);
 
 							// меняем раурс камеры
 							DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран

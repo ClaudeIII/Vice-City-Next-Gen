@@ -4259,6 +4259,7 @@ void club(void)
 				uint Phil_hp, Cam_hp, Manager_hp;
 				uint AudID1, AudID2, AudID3;
 				uint PTFX, PTFX2, PTFX3, PTFX4;
+				uint Torso;
 
 				uint CarM1 = MODEL_BURRITO;// Фургон
 				uint CarM2 = MODEL_NSTOCKADE;// Фургон SWAT
@@ -4809,6 +4810,7 @@ void club(void)
 								}
 								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 
+								Torso = GET_CHAR_DRAWABLE_VARIATION(GetPlayerPed(), 1);
 								// переодивание	
 								SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 6, 0);
 								SET_CHAR_COMPONENT_VARIATION(ped1, 1, 1, 0);
@@ -6609,7 +6611,7 @@ void club(void)
 									SET_CHAR_COORDINATES(GetPlayerPed(), -400.771, -375.696, 6.59763);//
 									SET_CHAR_HEADING(GetPlayerPed(), 0.0);
 								}
-								SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 1, 0);
+								SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, Torso, 0);
 
 								SET_CHAR_COORDINATES(ped1, -40.771, -35.696, 6.59763);//
 								SET_CHAR_COORDINATES(ped2, -40.771, -35.696, 6.59763);//
