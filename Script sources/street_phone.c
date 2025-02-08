@@ -415,6 +415,7 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +500 );//даём игроку денег
+					REGISTER_MISSION_PASSED("JOB_1");
 					G_ASSASSIN = 2;
 					sutosave = 1;
 				}
@@ -971,6 +972,7 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("JOB_2");
 					G_ASSASSIN = 4;
 					sutosave = 1;
 				}
@@ -1656,6 +1658,7 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("JOB_3");
 					G_ASSASSIN = 6;
 					sutosave = 1;
 				}
@@ -2478,6 +2481,7 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +8000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("JOB_4");
 					G_ASSASSIN = 8;
 					sutosave = 1;
 				}
@@ -3233,6 +3237,7 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +16000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("JOB_5");
 					G_ASSASSIN = 10;
 					sutosave = 1;
 				}

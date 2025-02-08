@@ -1049,6 +1049,7 @@ void versetty(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("BUD_1");
 					G_PROTECT = 2;
 					G_SALE_NO = 1;
 					sutosave = 1;
@@ -2243,6 +2244,7 @@ void versetty(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("BUD_2");
 					G_PROTECT = 3;
 					sutosave = 1;
 				}
@@ -3396,6 +3398,7 @@ void versetty(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +10000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("BUD_3");
 					G_PROTECT = 4;
 					sutosave = 1;
 				}

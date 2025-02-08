@@ -1017,6 +1017,7 @@ void studio(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("PORN_1");
 					G_PRON = 2;
 					sutosave = 1;
 				}
@@ -1672,6 +1673,7 @@ void studio(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("PORN_2");
 					G_PRON = 3;
 					sutosave = 1;
 				}
@@ -2844,6 +2846,7 @@ void studio(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("PORN_3");
 					G_PRON = 4;
 					sutosave = 1;
 				}
@@ -4119,6 +4122,7 @@ void studio(void)
 				}
 				else if (skip == 2)
 				{
+					REGISTER_MISSION_PASSED("PORN_4");
 					G_PRON = 5;
 					sutosave = 1;
 					SETTIMERA(0); //сбрасываем таймер 

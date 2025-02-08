@@ -705,6 +705,7 @@ void voodoo(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("HAT_1");
 					G_HAITI = 2;
 					sutosave = 1;
 				}
@@ -1634,6 +1635,7 @@ void voodoo(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("HAT_2");
 					G_HAITI = 3;
 					sutosave = 1;
 				}
@@ -2463,6 +2465,7 @@ void voodoo(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +5000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("HAT_3");
 					G_HAITI = 4;
 					sutosave = 1;
 				}

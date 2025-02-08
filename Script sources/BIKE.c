@@ -1693,6 +1693,7 @@ void bikers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("BIKE_1");
 					G_BIKE = 2;
 					sutosave = 1;
 				}
@@ -2039,6 +2040,7 @@ void bikers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("BIKE_2");
 					G_BIKE = 3;
 					sutosave = 1;
 				}
@@ -2991,6 +2993,7 @@ void bikers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("BIKE_3");
 					G_BIKE = 4;
 					sutosave = 1;
 				}

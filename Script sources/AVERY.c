@@ -711,6 +711,7 @@ void boyarsky(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +500 );//даём игроку денег
+					REGISTER_MISSION_PASSED("TEX_1");
 					G_AVERY = 2;
 					sutosave = 1;
 				}
@@ -2153,6 +2154,7 @@ void boyarsky(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("TEX_3");
 					G_AVERY = 3;
 					sutosave = 1;
 				}
@@ -2716,6 +2718,7 @@ void boyarsky(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2500 );//даём игроку денег
+					REGISTER_MISSION_PASSED("TEX_2");
 					G_AVERY = 5;
 					sutosave = 1;
 				}

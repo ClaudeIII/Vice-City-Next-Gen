@@ -911,6 +911,7 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("COK_1");
 					G_DIAZ = 2;
 					sutosave = 1;
 				}
@@ -2380,6 +2381,7 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("COK_2");
 					//G_SECOND_ISLAND = 1;
 					G_DIAZ = 3;
 					sutosave = 1;
@@ -3269,6 +3271,7 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("COK_3");
 					G_DIAZ = 4;
 					sutosave = 1;
 				}
@@ -4550,6 +4553,7 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +10000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("COK_4");
 					G_DIAZ = 5;
 					sutosave = 1;
 				}
@@ -5468,6 +5472,7 @@ void baron_diaz(void)
 							break;
 						}
 					}
+					REGISTER_MISSION_PASSED("KENT_1");
 					G_DIAZ = 8;
 					sutosave = 1;
 				}
@@ -6651,6 +6656,7 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +50000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("ASS_1");
 					G_DIAZ = 9;
 					G_PROTECT = 1;
 					sutosave = 1;

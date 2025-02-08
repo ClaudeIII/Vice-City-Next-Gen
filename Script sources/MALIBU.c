@@ -955,6 +955,7 @@ void club(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("BANK_1");
 					G_CLUB = 3;
 					sutosave = 1;
 				}
@@ -3239,6 +3240,7 @@ void club(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("BANK_2");
 					G_CLUB = 4;
 					sutosave = 1;
 				}
@@ -4173,6 +4175,7 @@ void club(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +3000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("BANK_3");
 					G_CLUB = 5;
 					sutosave = 1;
 				}
@@ -6822,6 +6825,7 @@ void club(void)
 				else if (skip == 2)
 				{
 					PRINT_HELP("CLOTH10"); //Bank Job outfit delivered to Malibu Club in Vice Point.
+					REGISTER_MISSION_PASSED("BANK_4");
 					G_CLUB = 6;
 					sutosave = 1;
 					SETTIMERA(0); //сбрасываем таймер 

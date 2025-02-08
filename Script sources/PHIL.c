@@ -877,6 +877,7 @@ void phil(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("PHIL_1");
 					G_PHIL = 2;
 					sutosave = 1;
 				}
@@ -1582,6 +1583,7 @@ void phil(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("PHIL_2");
 					G_PHIL = 4;
 					sutosave = 1;
 				}

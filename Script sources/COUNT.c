@@ -1132,6 +1132,7 @@ void typography(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("CNT_1");
 					G_COUNT = 2;
 					sutosave = 1;
 				}
@@ -2089,6 +2090,7 @@ void typography(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +5000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("CNT_2");
 					G_COUNT = 3;
 					sutosave = 1;
 				}
@@ -2946,6 +2948,7 @@ void typography(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +30000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("CAP_1");
 					G_COUNT = 5;
 					sutosave = 1;
 				}
@@ -4520,6 +4523,7 @@ void typography(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +30000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("FIN_1");
 					G_COUNT = 7;
 					sutosave = 1;
 				}
