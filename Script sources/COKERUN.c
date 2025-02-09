@@ -640,6 +640,7 @@ void boat_race(void)
 							}
 						}
 						ADD_SCORE( GetPlayerIndex(), +5000 );//даём игроку денег
+						REGISTER_MISSION_PASSED("BOAT_N");
 						sutosave = 1;
 					}
 					G_ONMISSION = 0;

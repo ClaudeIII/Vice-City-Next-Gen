@@ -760,6 +760,7 @@ void kaufman(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("TAXI_1");
 					G_CABS = 2;
 					sutosave = 1;
 				}
@@ -1040,6 +1041,7 @@ void kaufman(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("TAXI_2");
 					G_CABS = 3;
 					sutosave = 1;
 				}
@@ -1932,6 +1934,7 @@ void kaufman(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +5000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("TAXI_3");
 					G_CABS = 4;
 					sutosave = 1;
 				}

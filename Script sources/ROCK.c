@@ -852,6 +852,7 @@ void rockers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("ROCK_1");
 					G_ROCK = 2;
 					sutosave = 1;
 				}
@@ -1490,6 +1491,7 @@ void rockers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("ROCK_2");
 					G_ROCK = 3;
 					sutosave = 1;
 				}
@@ -2276,6 +2278,7 @@ void rockers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +8000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("ROCK_3");
 					G_ROCK = 5;
 					sutosave = 1;
 				}

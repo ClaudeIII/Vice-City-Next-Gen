@@ -611,6 +611,7 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +250 );//даём игроку денег
+					REGISTER_MISSION_PASSED("COL_1");
 					G_CORTEZ = 2;
 					sutosave = 1;
 				}
@@ -1147,6 +1148,7 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +500 );//даём игроку денег
+					REGISTER_MISSION_PASSED("COL_2");
 					G_CORTEZ = 3;
 					sutosave = 1;
 				}
@@ -2717,6 +2719,7 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("COL_3");
 					G_CORTEZ = 4;
 					sutosave = 1;
 				}
@@ -4122,6 +4125,7 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("COL_4 ");
 					G_CORTEZ = 6;
 					sutosave = 1;
 				}
@@ -5751,6 +5755,7 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +5000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("COL_5");
 					G_CORTEZ = 8;
 					sutosave = 1;
 				}

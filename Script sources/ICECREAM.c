@@ -503,6 +503,7 @@ void whoopee(void)
 							SET_WIDESCREEN_BORDERS( 0 );
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
 							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							REGISTER_MISSION_PASSED("ICE_1");
 							G_ICECREAM = 2;
 							sutosave = 1;
 

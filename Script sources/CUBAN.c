@@ -1115,6 +1115,7 @@ void umberto(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("CUB_1");
 					G_CUBAN = 2;
 					sutosave = 1;
 				}
@@ -2719,6 +2720,7 @@ void umberto(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("CUB_2");
 					G_CUBAN = 3;
 					sutosave = 1;
 				}
@@ -3621,6 +3623,7 @@ void umberto(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("CUB_3");
 					G_CUBAN = 4;
 					sutosave = 1;
 				}
@@ -5067,6 +5070,7 @@ void umberto(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +10000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("CUB_4");
 					G_CUBAN = 6;
 					sutosave = 1;
 				}

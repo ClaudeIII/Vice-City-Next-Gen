@@ -788,6 +788,7 @@ void LAWYER_1(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +100 );//даём игроку денег
+					REGISTER_MISSION_PASSED("LAW_1");
 					G_LAWYER = 2;
 					sutosave = 1;
 				}
@@ -1821,6 +1822,7 @@ void LAWYER_1(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +200 );//даём игроку денег
+					REGISTER_MISSION_PASSED("LAW_2");
 					G_LAWYER = 3;
 					G_MAIN_CALL = 1;
 					sutosave = 1;
@@ -2818,6 +2820,7 @@ void LAWYER_1(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +400 );//даём игроку денег
+					REGISTER_MISSION_PASSED("LAW_3");
 					G_LAWYER = 4;
 					sutosave = 1;
 				}
@@ -3809,6 +3812,7 @@ void LAWYER_1(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					REGISTER_MISSION_PASSED("LAW_4");
 					G_LAWYER = 5;
 					G_AVERY = 1;
 					sutosave = 1;

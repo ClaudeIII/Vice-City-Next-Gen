@@ -713,6 +713,7 @@ void INTRO(void)
 			DESTROY_CAM( camera );
 			SET_WIDESCREEN_BORDERS( 0 );
 			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+			REGISTER_MISSION_PASSED("INT_B");
 			G_LAWYER = 1;
 			G_ONMISSION = 0;
 			break;
@@ -777,7 +778,7 @@ void load_screen(void)
 
 void main(void)
 {
-	REGISTER_MISSION_PASSED( "NESAVE_GM" );
+	REGISTER_MISSION_PASSED("INT_A");
 	if (G_LAWYER == 0)
 	{
 		INTRO();
