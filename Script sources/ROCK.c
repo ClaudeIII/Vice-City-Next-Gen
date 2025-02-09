@@ -409,7 +409,7 @@ void rockers(void)
 							SetTime(1000);
 							TASK_PLAY_ANIM_SECONDARY_UPPER_BODY( GetPlayerPed(), "cellphone_talk", "cellphone", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
 
-							if ((!IS_CHAR_DEAD(GetPlayerPed())) || (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+							if ((!HAS_DEATHARREST_EXECUTED()))
 							{
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
@@ -417,7 +417,7 @@ void rockers(void)
 								START_SCRIPT_CONVERSATION(1, 1);
 								SetSpeech();
 							}
-							if ((!IS_CHAR_DEAD(GetPlayerPed())) || (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+							if ((!HAS_DEATHARREST_EXECUTED()))
 							{
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
