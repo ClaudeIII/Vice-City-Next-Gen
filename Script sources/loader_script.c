@@ -66,7 +66,7 @@ void main(void)
 	{
 		CheckScript(SAVE, TRUE);
 		CheckScript(LOAD, TRUE);
-		CheckScript(no_save_script, TRUE);
+//		CheckScript(no_save_script, TRUE);
 		CheckScript(traffic, TRUE);
 		CheckScript(mob_phone, TRUE);
 		CheckScript(intro, TRUE);
