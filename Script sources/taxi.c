@@ -4,6 +4,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 int blip1_ct1, blip2_ct1, spray_blip_onscreen;
 int taxi_car1, taxi_countdown_already_started;
 int taxi_ped1, taxi_passed_this_shot, taxi_fucked_flag;
@@ -18,8 +19,6 @@ float x_diff, y_diff, x_diff_sq, y_diff_sq, WMOCAistance_sq, WMOCAistance;
 int fon, textur, max_peds_in_car, spray_taxi, been_in_taxi1_before, intaxi, animpld;
 int first_pas;
 int dm, cdm, wl;
-
-void main(void);
 
 void Start_taxi_mission(void);
 
@@ -52,7 +51,7 @@ void mission_cleanup_taxi1(void) {
 		G_TAXI = 1;
 	}
 
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
@@ -162,7 +161,7 @@ void score(void) {
 	ADD_SCORE(GetPlayerIndex(), score_for_this_fare);
 	//PRINT_WITH_NUMBER_BIG("TSCORE2", score_for_this_fare, 6000, 6);
 
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
@@ -227,7 +226,7 @@ void score(void) {
 	}
 	//PRINT_WITH_2_NUMBERS_BIG("IN_ROW", taxi_passed_this_shot, in_a_row_cash, 5000, 6);
 	if (taxi_passed_this_shot == in_a_row_number) {
-		SETTIMERA(0); //сбрасываем таймер 
+		SETTIMERA(0);
 		while (true)
 		{
 			SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
@@ -532,9 +531,9 @@ void passenger_destination(void) {
 		}
 	}
 	ADD_BLIP_FOR_COORD(WMOCAestx1, WMOCAesty1, WMOCAestz1, &blip2_ct1);
-	CHANGE_BLIP_SPRITE(blip2_ct1, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-	CHANGE_BLIP_COLOUR(blip2_ct1, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-	CHANGE_BLIP_SCALE(blip2_ct1, 0.6); // масштаб иконки на радаре
+	CHANGE_BLIP_SPRITE(blip2_ct1, BLIP_OBJECTIVE);
+	CHANGE_BLIP_COLOUR(blip2_ct1, 5);
+	CHANGE_BLIP_SCALE(blip2_ct1, 0.6);
 	CHANGE_BLIP_DISPLAY(blip2_ct1, 2);
 	
 	if (IS_CAR_DEAD(taxi_car1)) {
@@ -998,7 +997,7 @@ void Start_taxi_mission(void) {
 	}
 	ADD_BLIP_FOR_CHAR(taxi_ped1, &blip1_ct1);
 	CHANGE_BLIP_COLOUR(blip1_ct1, 5);
-	CHANGE_BLIP_SCALE(blip1_ct1, 0.77999990); // масштаб иконки на радаре
+	CHANGE_BLIP_SCALE(blip1_ct1, 0.77999990);
 	CHANGE_BLIP_NAME_FROM_TEXT_FILE(blip1_ct1, "TAXPSG");
 	LOAD_CHAR_DECISION_MAKER(2, &dm);
 	LOAD_COMBAT_DECISION_MAKER(3, &cdm);
@@ -1035,7 +1034,7 @@ void mission_start_taxi1(void) {
 	} else {
 		mission_taxi1_failed();
 	}
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
@@ -1056,30 +1055,8 @@ void mission_start_taxi1(void) {
 	Start_taxi_mission();
 }
 
-void main(void) {
+void main(void)
+{
 	mission_start_taxi1();
 	mission_cleanup_taxi1();
-	//while (true) {
-	//	WAIT(0);
-	//	STORE_WANTED_LEVEL(GetPlayerIndex(), &wl);
-	//	if ((IS_CHAR_IN_TAXI(GetPlayerPed())) && (wl == 0)) {
-	//		if (G_ONMISSION == 0) {
-	//			if (intaxi == 0) {
-	//				PRINT_HELP("TTUTOR");
-	//				intaxi = 1;
-	//			}
-	//			if (((IS_CONTROL_PRESSED(2, 23)) && (!IS_USING_CONTROLLER())) || ((IS_BUTTON_PRESSED(0, 4)) && (IS_USING_CONTROLLER()))) {
-	//				G_ONMISSION = 1;
-	//				PRINT_BIG("TAXI_M", 6000, 5);
-	//				mission_start_taxi1();
-	//				mission_cleanup_taxi1();
-	//				G_ONMISSION = 0;
-	//				WAIT(1000);
-	//			}
-	//		}
-	//	} else {
-	//		CLEAR_HELP();
-	//		intaxi = 0;
-	//	}
-	//}
 }

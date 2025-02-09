@@ -166,8 +166,6 @@ void delete_cones(void) {
 	return;
 }
 
-void main(void);
-
 void mission_cleanup_carpark1(void) {
 	SET_INSTANT_WIDESCREEN_BORDERS(0);
 	SET_PLAYER_CONTROL(GetPlayerIndex(), 1);

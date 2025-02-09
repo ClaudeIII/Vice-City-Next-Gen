@@ -52,8 +52,6 @@ int game_timer, frame_counter, gosub_stuck_car, car_stuck_flag, stuck_timer_star
 int gosub_car_to_slow, random_int, max_passengers, game_time;
 int incopcar, temp_group, fon, textur, car;
 
-void main(void);
-
 void next_criminal_to_kill(void);
 
 void setup_draw_text(void) {
@@ -183,7 +181,7 @@ void mission_copcar_passed(void) {
 	vigilante_score *= 50;
 
 	//PRINT_WITH_NUMBER_BIG("C_PASS", vigilante_score, 5000, 5);
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
@@ -573,7 +571,7 @@ void setup_ped_threats_etc(void) {
 		UpdateWeaponOfPed(ped, WEAPON_MP5);
 	}
 	if (random_int == 3) {
-		UpdateWeaponOfPed(ped, WEAPON_AK47);
+		UpdateWeaponOfPed(ped, WEAPON_EPISODIC_9);
 	}
 	if ((random_int == 4) || (random_int == 5)) {
 		UpdateWeaponOfPed(ped, WEAPON_SHOTGUN);
@@ -1720,7 +1718,7 @@ void get_random_car_coords(void) {
 	cop_time_limit_int /= 1000;
 	
 	if (timer_on_screen_flag == 1) {
-		SETTIMERA(0); //сбрасываем таймер 
+		SETTIMERA(0);
 		while (true)
 		{
 			SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
@@ -1972,7 +1970,7 @@ void mission_start_copcar(void) {
 		SWITCH_CAR_SIREN(players_cop_car, 1);
 	}
 
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		WAIT( 0 );
@@ -1999,34 +1997,8 @@ void mission_start_copcar(void) {
 	next_criminal_to_kill();
 }
 
-void main(void) {
-
+void main(void)
+{
 	mission_start_copcar();
 	copcar_failed();
-
-	/*while (true) {
-		WAIT(0);
-		if ((IS_CHAR_IN_ANY_POLICE_VEHICLE(GetPlayerPed())) || (IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("annihilator"))) || (IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("fbi")))) {
-			if (G_ONMISSION == 0) {
-				if (incopcar == 0) {
-					PRINT_HELP("CTUTOR");
-					incopcar = 1;
-				}
-				if (((IS_CONTROL_PRESSED(2, 23)) && (!IS_USING_CONTROLLER())) || ((IS_BUTTON_PRESSED(0, 4)) && (IS_USING_CONTROLLER()))) {
-					G_ONMISSION = 1;
-					mission_start_copcar();
-					if (HAS_DEATHARREST_EXECUTED()) {
-						copcar_failed();
-					}
-					mission_cleanup_copcar();
-					copcar_failed();
-					G_ONMISSION = 0;
-					WAIT(1000);
-				}
-			}
-		} else {
-			CLEAR_HELP();
-			incopcar = 0;
-		}
-	}*/
 }

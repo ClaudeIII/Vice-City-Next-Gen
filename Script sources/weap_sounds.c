@@ -14,7 +14,7 @@ void main(void) {
 		GET_CURRENT_CHAR_WEAPON(GetPlayerPed(), &plWeap);
 		if (sState == 0)
 		{
-			if (plWeap == WEAPON_FTHROWER)
+			if (plWeap == WEAPON_EPISODIC_22)
 			{
 				WAIT(1000);
 				sState = 1;
@@ -29,7 +29,7 @@ void main(void) {
 			while (TIMERC() < 1416)
 			{
 				WAIT(0);
-				if (plWeap != WEAPON_FTHROWER)
+				if (plWeap != WEAPON_EPISODIC_22)
 				{
 					sState = 99;
 				}
@@ -41,7 +41,7 @@ void main(void) {
 		}
 		else if (sState == 2)
 		{
-			if (plWeap != WEAPON_FTHROWER) {
+			if (plWeap != WEAPON_EPISODIC_22) {
 				sState = 99;
 			}
 			if (TIMERA() > 15000)
@@ -63,7 +63,7 @@ void main(void) {
 			while (TIMERC() < 344)
 			{
 				WAIT(0);
-				if (plWeap != WEAPON_FTHROWER)
+				if (plWeap != WEAPON_EPISODIC_22)
 				{
 					sState = 99;
 				}
@@ -75,7 +75,7 @@ void main(void) {
 		}
 		else if (sState == 4)
 		{
-			if (plWeap != WEAPON_FTHROWER)
+			if (plWeap != WEAPON_EPISODIC_22)
 			{
 				sState = 99;
 			}
@@ -94,12 +94,12 @@ void main(void) {
 		}
 		else if (sState == 5)
 		{
-			SET_CHAR_AMMO(GetPlayerPed(), WEAPON_FTHROWER, AMMO_MAX);
+			SET_CHAR_AMMO(GetPlayerPed(), WEAPON_EPISODIC_22, AMMO_MAX);
 			SETTIMERC(0);
 			while (TIMERC() < 231)
 			{
 				WAIT(0);
-				if (plWeap != WEAPON_FTHROWER)
+				if (plWeap != WEAPON_EPISODIC_22)
 				{
 					sState = 99;
 				}

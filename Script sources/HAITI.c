@@ -1,16 +1,12 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, textur, time_m, time_s, sound, text, text2, volna_1, volna_2, sutosave;
 float attach_1, deton, PedX, PedY, PedZ, ico_1, ico_2, ico_3, ico_4, ico_5, ico_6, ico_7, ico_8, ico_9, ico_10, in_car, path_on, hel_set;
-
 
 void SetSpeech(void)
 {
@@ -66,9 +62,9 @@ void voodoo(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-529.349, 677.904, 3.32976, &haiti_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_RANSOM);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(haiti_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-529.349, 677.904, 3.32976, &haiti_ico);
+				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_RANSOM);
+				CHANGE_BLIP_SCALE(haiti_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "LG_14");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -183,7 +179,7 @@ void voodoo(void)
 				ADD_BLIP_FOR_PICKUP(keys_1, &haiti_ico);
 				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 				CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=белая)
-				CHANGE_BLIP_SCALE(haiti_ico, 0.6); // масштаб иконки на радаре
+				CHANGE_BLIP_SCALE(haiti_ico, 0.6);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "MO_TARGET");//иконка на радаре "Товар"
 
 				CLEAR_PRINTS();
@@ -214,8 +210,8 @@ void voodoo(void)
 
 						// ставим камеру
 						CREATE_CAM( 14, &camera );
-						POINT_CAM_AT_COORD	( camera, -731.279, 514.042, 10.2528); // куда смотрит камера
-						SET_CAM_POS			( camera, -726.811, 499.881, 17.7508 );//расположение камеры
+						POINT_CAM_AT_COORD	( camera, -731.279, 514.042, 10.2528);
+						SET_CAM_POS			( camera, -726.811, 499.881, 17.7508 );
 						SET_CAM_ACTIVE( camera, 1 );
 						SET_CAM_PROPAGATE( camera, 1 );
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -283,7 +279,7 @@ void voodoo(void)
 						ADD_BLIP_FOR_PICKUP(keys_1, &haiti_ico);
 						CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 						CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=белая)
-						CHANGE_BLIP_SCALE(haiti_ico, 0.6); // масштаб иконки на радаре
+						CHANGE_BLIP_SCALE(haiti_ico, 0.6);
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "MO_TARGET");//иконка на радаре "Товар"
 
 						ALTER_WANTED_LEVEL(GetPlayerIndex(), 2);
@@ -402,7 +398,7 @@ void voodoo(void)
 							ADD_BLIP_FOR_PICKUP(keys_1, &haiti_ico);
 							CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(haiti_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(haiti_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "MO_TARGET");//иконка на радаре "Товар"
 
 							ALTER_WANTED_LEVEL(GetPlayerIndex(), 4);
@@ -611,11 +607,11 @@ void voodoo(void)
 						{
 							if (text == 1)
 							{
-								ADD_BLIP_FOR_COORD(-529.537, 675.639, 3.15269, &haiti_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(haiti_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+								ADD_BLIP_FOR_COORD(-529.537, 675.639, 3.15269, &haiti_ico);
+								CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(haiti_ico, 5);
+								CHANGE_BLIP_SCALE(haiti_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "NE_POINT");
 
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "HAM1_3", 5000, 1);//~g~Get this stuff back to the hideout!
@@ -646,22 +642,22 @@ void voodoo(void)
 
 				REMOVE_PICKUP(keys_1);// выгружаем биту
 
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 
 				// выгружаем из памяти педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -680,7 +676,7 @@ void voodoo(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -718,9 +714,9 @@ void voodoo(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-529.349, 677.904, 3.32976, &haiti_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_RANSOM);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(haiti_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-529.349, 677.904, 3.32976, &haiti_ico);
+				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_RANSOM);
+				CHANGE_BLIP_SCALE(haiti_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "LG_14");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -874,9 +870,9 @@ void voodoo(void)
 
 				// маркер на автомобиле
 				ADD_BLIP_FOR_CAR(car1, &haiti_ico);
-				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(haiti_ico, 0.6); // масштаб иконки на радаре
+				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(haiti_ico, 5);
+				CHANGE_BLIP_SCALE(haiti_ico, 0.6);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "NE_CAR");//иконка на радаре называние в истории карты "Фургон ТОПФАН"
 
 				CLEAR_PRINTS();
@@ -990,8 +986,8 @@ void voodoo(void)
 
 						// ставим камеру
 						CREATE_CAM( 14, &camera );
-						POINT_CAM_AT_COORD	( camera, -86.0409, 295.163, -1.7832 ); // куда смотрит камера
-						SET_CAM_POS			( camera, -114.335, 310.239, 11.8853 );//расположение камеры
+						POINT_CAM_AT_COORD	( camera, -86.0409, 295.163, -1.7832 );
+						SET_CAM_POS			( camera, -114.335, 310.239, 11.8853 );
 						SET_CAM_ACTIVE( camera, 1 );
 						SET_CAM_PROPAGATE( camera, 1 );
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1003,8 +999,8 @@ void voodoo(void)
 						SetTime(4000);
 
 						// Меняем ракурс
-						POINT_CAM_AT_COORD	( camera, -100.478 ,299.158, 2.4526 ); // куда смотрит камера
-						SET_CAM_POS			( camera, -108.127, 294.953, 5.6447 );//расположение камеры
+						POINT_CAM_AT_COORD	( camera, -100.478 ,299.158, 2.4526 );
+						SET_CAM_POS			( camera, -108.127, 294.953, 5.6447 );
 
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "HAT2_B4", 5000, 1);//...and destroy their boats!
@@ -1032,10 +1028,10 @@ void voodoo(void)
 						SET_FOLLOW_VEHICLE_CAM_SUBMODE(2);
 						ATTACH_OBJECT_TO_CAR(tnt_1, car2, 0, 0, 0, -0.5, 0, 0, 0);
 
-						ADD_BLIP_FOR_COORD(-95.0721, 296.614, 2.4526, &haiti_ico);//создаем иконку на радаре
-						CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-						CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-						CHANGE_BLIP_SCALE(haiti_ico, 0.6); // масштаб иконки на радаре
+						ADD_BLIP_FOR_COORD(-95.0721, 296.614, 2.4526, &haiti_ico);
+						CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);
+						CHANGE_BLIP_COLOUR(haiti_ico, 5);
+						CHANGE_BLIP_SCALE(haiti_ico, 0.6);
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "NE_POINT");//иконка на радаре называние в истории карты "Фургон ТОПФАН"
 						break;
 					}
@@ -1109,58 +1105,58 @@ void voodoo(void)
 							REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
 
 							ADD_BLIP_FOR_CHAR(ped1, &ped1_ico);
-							CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped1_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped1_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped1_ico, 19);
+							CHANGE_BLIP_SCALE(ped1_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped2, &ped2_ico);
-							CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped2_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped2_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped2_ico, 19);
+							CHANGE_BLIP_SCALE(ped2_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped3, &ped3_ico);
-							CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped3_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped3_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped3_ico, 19);
+							CHANGE_BLIP_SCALE(ped3_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped4, &ped4_ico);
-							CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped4_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped4_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped4_ico, 19);
+							CHANGE_BLIP_SCALE(ped4_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped5, &ped5_ico);
-							CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped5_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped5_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped5_ico, 19);
+							CHANGE_BLIP_SCALE(ped5_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped6, &ped6_ico);
-							CHANGE_BLIP_SPRITE(ped6_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped6_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped6_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped6_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped6_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped6_ico, 19);
+							CHANGE_BLIP_SCALE(ped6_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped6_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped7, &ped7_ico);
-							CHANGE_BLIP_SPRITE(ped7_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped7_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped7_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped7_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped7_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped7_ico, 19);
+							CHANGE_BLIP_SCALE(ped7_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped7_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped8, &ped8_ico);
-							CHANGE_BLIP_SPRITE(ped8_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped8_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped8_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped8_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped8_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped8_ico, 19);
+							CHANGE_BLIP_SCALE(ped8_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped8_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped9, &ped9_ico);
-							CHANGE_BLIP_SPRITE(ped9_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped9_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped9_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped9_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped9_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped9_ico, 19);
+							CHANGE_BLIP_SCALE(ped9_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped9_ico, "MO_TARGET");
 
 							TASK_GO_STRAIGHT_TO_COORD(ped2, -82.4629, 300.063, 2.18294, 3, -2);// пед бежит
 							TASK_GO_STRAIGHT_TO_COORD(ped9, -82.4629, 300.063, 2.18294, 3, -2);// пед бежит
@@ -1194,7 +1190,7 @@ void voodoo(void)
 									}
 								}
 								SET_CAR_COORDINATES(car2, 0.01, 0.01, -10.01);
-								MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
+								MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 
 								CREATE_CAR(CarM2, -375.769, 369.225, 5.65768, &car2, TRUE);
 								SET_CAR_HEADING(car2, 180.0);
@@ -1292,7 +1288,7 @@ void voodoo(void)
 								}
 
 								SET_CAR_COORDINATES(car2, 0.01, 0.01, -10.01);
-								MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
+								MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 
 								CREATE_CAR(CarM2, -375.769, 369.225, 5.65768, &car2, TRUE);
 								SET_CAR_HEADING(car2, 180.0);
@@ -1553,33 +1549,33 @@ void voodoo(void)
 				REMOVE_BLIP(ped9_ico);//Удаляем иконку на радаре
 
 				// выгружвем модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM4);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM5);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM6);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(dynamite_1);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM4);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM5);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM6);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(dynamite_1);
 
 				// выгружвем машину
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car5);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car6);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car6);
 
 				// выгружвем педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
 
 
 				// удаляем объекты
@@ -1590,7 +1586,7 @@ void voodoo(void)
 
 				if ((skip == 1) || (skip == 3))
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -1609,7 +1605,7 @@ void voodoo(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -1646,9 +1642,9 @@ void voodoo(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-529.349, 677.904, 3.32976, &haiti_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_RANSOM);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(haiti_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-529.349, 677.904, 3.32976, &haiti_ico);
+				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_RANSOM);
+				CHANGE_BLIP_SCALE(haiti_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "LG_14");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -1904,70 +1900,70 @@ void voodoo(void)
 				SET_COMBAT_DECISION_MAKER(ped20, cdm);
 
 				ADD_BLIP_FOR_CHAR(ped11, &ped1_ico);
-				CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped1_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped1_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped1_ico, 19);
+				CHANGE_BLIP_SCALE(ped1_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CHAR(ped12, &ped2_ico);
-				CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped2_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped2_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped2_ico, 19);
+				CHANGE_BLIP_SCALE(ped2_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CHAR(ped13, &ped3_ico);
-				CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped3_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped3_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped3_ico, 19);
+				CHANGE_BLIP_SCALE(ped3_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CHAR(ped14, &ped4_ico);
-				CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped4_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped4_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped4_ico, 19);
+				CHANGE_BLIP_SCALE(ped4_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CHAR(ped15, &ped5_ico);
-				CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped5_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped5_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped5_ico, 19);
+				CHANGE_BLIP_SCALE(ped5_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CHAR(ped16, &ped6_ico);
-				CHANGE_BLIP_SPRITE(ped6_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped6_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped6_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped6_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped6_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped6_ico, 19);
+				CHANGE_BLIP_SCALE(ped6_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped6_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CHAR(ped17, &ped7_ico);
-				CHANGE_BLIP_SPRITE(ped7_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped7_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped7_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped7_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped7_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped7_ico, 19);
+				CHANGE_BLIP_SCALE(ped7_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped7_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CHAR(ped18, &ped8_ico);
-				CHANGE_BLIP_SPRITE(ped8_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped8_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped8_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped8_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped8_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped8_ico, 19);
+				CHANGE_BLIP_SCALE(ped8_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped8_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CHAR(ped19, &ped9_ico);
-				CHANGE_BLIP_SPRITE(ped9_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped9_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped9_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped9_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped9_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped9_ico, 19);
+				CHANGE_BLIP_SCALE(ped9_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped9_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CHAR(ped20, &ped10_ico);
-				CHANGE_BLIP_SPRITE(ped10_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(ped10_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(ped10_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped10_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(ped10_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(ped10_ico, 19);
+				CHANGE_BLIP_SCALE(ped10_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped10_ico, "MO_TARGET");
 
-				ADD_BLIP_FOR_COORD(-462.814, 610.598, 9.89533, &haiti_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(haiti_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+				ADD_BLIP_FOR_COORD(-462.814, 610.598, 9.89533, &haiti_ico);
+				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(haiti_ico, 5);
+				CHANGE_BLIP_SCALE(haiti_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "NE_POINT");
 
 				GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_SNIPERRIFLE, 35, FALSE);
 				SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_SNIPERRIFLE, TRUE);
@@ -2115,10 +2111,10 @@ void voodoo(void)
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "HAM3_7", 5000, 1);//~g~Look Out! The Cubans have brought reinforcements. Kill them all!!
 
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
 							WAIT(100);
 							CLEAR_AREA(-452.428, 572.987, 1.64151, 45.0, 1);//очещаем зону загрузки
 
@@ -2135,28 +2131,28 @@ void voodoo(void)
 							SETTIMERA( 0 );
 
 							ADD_BLIP_FOR_CHAR(ped11, &ped1_ico);
-							CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped1_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped1_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped1_ico, 19);
+							CHANGE_BLIP_SCALE(ped1_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped12, &ped2_ico);
-							CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped2_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped2_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped2_ico, 19);
+							CHANGE_BLIP_SCALE(ped2_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped13, &ped3_ico);
-							CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped3_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped3_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped3_ico, 19);
+							CHANGE_BLIP_SCALE(ped3_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped14, &ped4_ico);
-							CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped4_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped4_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped4_ico, 19);
+							CHANGE_BLIP_SCALE(ped4_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");
 
 							ico_1 = 1;
 							ico_2 = 1;
@@ -2219,12 +2215,12 @@ void voodoo(void)
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "HAM3_7", 5000, 1);//~g~Look Out! The Cubans have brought reinforcements. Kill them all!!
 
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);//выгружаем модель педа(в последствии пед изчезнет
-							//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);//выгружаем модель педа(в последствии пед изчезнет
-							//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);//выгружаем модель педа(в последствии пед изчезнет
-							//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);//выгружаем модель педа(в последствии пед изчезнет
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);
+							//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);
+							//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
+							//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 							WAIT(250);
 							CLEAR_AREA(-452.428, 572.987, 1.64151, 45.0, 1);//очещаем зону загрузки
 
@@ -2285,40 +2281,40 @@ void voodoo(void)
 							//SET_COMBAT_DECISION_MAKER(ped20, cdm);
 
 							ADD_BLIP_FOR_CHAR(ped15, &ped5_ico);
-							CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped5_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped5_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped5_ico, 19);
+							CHANGE_BLIP_SCALE(ped5_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped16, &ped6_ico);
-							CHANGE_BLIP_SPRITE(ped6_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped6_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped6_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped6_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped6_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped6_ico, 19);
+							CHANGE_BLIP_SCALE(ped6_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped6_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_CHAR(ped17, &ped7_ico);
-							CHANGE_BLIP_SPRITE(ped7_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(ped7_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(ped7_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped7_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(ped7_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(ped7_ico, 19);
+							CHANGE_BLIP_SCALE(ped7_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped7_ico, "MO_TARGET");
 
 							//ADD_BLIP_FOR_CHAR(ped18, &ped8_ico);
-							//CHANGE_BLIP_SPRITE(ped8_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							//CHANGE_BLIP_COLOUR(ped8_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							//CHANGE_BLIP_SCALE(ped8_ico, 0.6); // масштаб иконки на радаре
-							//CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped8_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							//CHANGE_BLIP_SPRITE(ped8_ico, BLIP_OBJECTIVE);
+							//CHANGE_BLIP_COLOUR(ped8_ico, 19);
+							//CHANGE_BLIP_SCALE(ped8_ico, 0.6);
+							//CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped8_ico, "MO_TARGET");
 
 							//ADD_BLIP_FOR_CHAR(ped19, &ped9_ico);
-							//CHANGE_BLIP_SPRITE(ped9_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							//CHANGE_BLIP_COLOUR(ped9_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							//CHANGE_BLIP_SCALE(ped9_ico, 0.6); // масштаб иконки на радаре
-							//CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped9_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							//CHANGE_BLIP_SPRITE(ped9_ico, BLIP_OBJECTIVE);
+							//CHANGE_BLIP_COLOUR(ped9_ico, 19);
+							//CHANGE_BLIP_SCALE(ped9_ico, 0.6);
+							//CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped9_ico, "MO_TARGET");
 
 							//ADD_BLIP_FOR_CHAR(ped20, &ped10_ico);
-							//CHANGE_BLIP_SPRITE(ped10_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							//CHANGE_BLIP_COLOUR(ped10_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							//CHANGE_BLIP_SCALE(ped10_ico, 0.6); // масштаб иконки на радаре
-							//CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped10_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							//CHANGE_BLIP_SPRITE(ped10_ico, BLIP_OBJECTIVE);
+							//CHANGE_BLIP_COLOUR(ped10_ico, 19);
+							//CHANGE_BLIP_SCALE(ped10_ico, 0.6);
+							//CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped10_ico, "MO_TARGET");
 
 							UpdateWeaponOfPed(ped15, WEAPON_EPISODIC_3);
 							SET_CURRENT_CHAR_WEAPON(ped15, WEAPON_EPISODIC_3, TRUE);
@@ -2388,38 +2384,38 @@ void voodoo(void)
 				}
 
 				// выгружвем модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
 				// выгружвем педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
 				// выгружвем машину
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -2438,7 +2434,7 @@ void voodoo(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -2490,12 +2486,10 @@ void voodoo(void)
 }
 void main(void)
 {
-	//THIS_SCRIPT_SHOULD_BE_SAVED();
 	if (G_HAITI < 5)
 	{
 		voodoo();
 	}
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

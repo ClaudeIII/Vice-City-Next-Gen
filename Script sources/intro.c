@@ -1,7 +1,3 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
@@ -9,7 +5,6 @@
 #include <consts.h>
 #include "globals.h"
 float PlayX, PlayY, PlayZ, PlayR, help_1, set_txd, language, textur, alpha, set_in;
-
 
 void SetCut(uint time)
 {
@@ -67,8 +62,6 @@ void SetSpeech(void)
 
 void INTRO(void)
 {
-	WAIT(500);
-
 	//============================== Intro ======================================
 	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 	SET_CAR_DENSITY_MULTIPLIER(0);// отключаем пути
@@ -108,21 +101,21 @@ void INTRO(void)
 
 //------------ создание автомобиля ----------------
 	REQUEST_MODEL(CarM1);
-	while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+	while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 	REQUEST_MODEL(CarM2);
-	while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
+	while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 	REQUEST_MODEL(CarM3);
-	while (!HAS_MODEL_LOADED(CarM3)) WAIT(100);
+	while (!HAS_MODEL_LOADED(CarM3)) WAIT(0);
 	REQUEST_MODEL(CarM4);
-	while (!HAS_MODEL_LOADED(CarM4)) WAIT(100);
+	while (!HAS_MODEL_LOADED(CarM4)) WAIT(0);
 	REQUEST_MODEL(CarM5);
-	while (!HAS_MODEL_LOADED(CarM5)) WAIT(100);
+	while (!HAS_MODEL_LOADED(CarM5)) WAIT(0);
 
     //CREATE_CAR(CarM1, 555.13, -304.68, 5.41, &car1, TRUE);
 	//SET_CAR_HEADING(car1, 15.31);
 	CREATE_CAR(CarM1, -1154.64,-13.088,9.37876, &car1, TRUE);
-	CHANGE_CAR_COLOUR( car1, 112, 112 );//цвет машины
-	SET_EXTRA_CAR_COLOURS( car1, 112, 112 );//цвет отрожений машины
+	CHANGE_CAR_COLOUR( car1, 112, 112 );//цвет
+	SET_EXTRA_CAR_COLOURS( car1, 112, 112 );//цвет отрожений
 
 	SET_CHAR_COORDINATES(GetPlayerPed(), -253.936, -1031.04, 6.83345);// перемещаем игрока
 	CREATE_CAR(CarM2, -1095.01,-40.467,8.37876, &car2, TRUE);
@@ -140,14 +133,14 @@ void INTRO(void)
 //------------ создание водителя ----------------
 	REQUEST_MODEL(PedM1);//
 	while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
-	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём педа за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём педа за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём педа за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);//создаём педа за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped5);//создаём педа за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped6);//создаём педа за рулём автомобиля
-	CHANGE_CAR_COLOUR( car1, 112, 66 );//цвет машины
-	SET_EXTRA_CAR_COLOURS( car1, 0, 0 );//цвет машины
+	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);//создаём за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped5);//создаём за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped6);//создаём за рулём автомобиля
+	CHANGE_CAR_COLOUR( car1, 112, 66 );//цвет
+	SET_EXTRA_CAR_COLOURS( car1, 0, 0 );//цвет
 
 //------------ загрузка путей ----------------
 	REQUEST_CAR_RECORDING( 2992 );
@@ -336,8 +329,8 @@ void INTRO(void)
 
 //------------ камера 1 ----------------
 	CREATE_CAM( 14, &camera );
-	POINT_CAM_AT_COORD	( camera, 116.573+433, -797.821+533, 11.414-6 ); // куда смотрит камера
-	SET_CAM_POS			( camera, 116.583+433, -796.821+533, 11.423-6 );//расположение камеры
+	POINT_CAM_AT_COORD	( camera, 116.573+433, -797.821+533, 11.414-6 );
+	SET_CAM_POS			( camera, 116.583+433, -796.821+533, 11.423-6 );
 	SET_CAM_ACTIVE( camera, 1 );
 	SET_CAM_PROPAGATE( camera, 1 );
 	ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -355,8 +348,8 @@ void INTRO(void)
 		if ((TIMERA() > 2000) && (set_txd == 1))
 		{
 			//------------ камера 2 ----------------
-			POINT_CAM_AT_COORD	( camera, 105.771+433, -808.888+533, 12.091-6 ); // куда смотрит камера
-			SET_CAM_POS			( camera, 104.88+433, -808.433+533, 12.108-6 );//расположение камеры
+			POINT_CAM_AT_COORD	( camera, 105.771+433, -808.888+533, 12.091-6 );
+			SET_CAM_POS			( camera, 104.88+433, -808.433+533, 12.108-6 );
 			SETTIMERA( 0 );
 			set_txd = 2;
 		}
@@ -408,10 +401,10 @@ void INTRO(void)
 	WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 568.261, -284.221, 5.156);//телепартируем из катера
 	SET_CHAR_HEADING(GetPlayerPed(), 210.0);
 
-	POINT_CAM_AT_COORD	( camera, 114.307+433, -816.57+533, 11.083-6 ); // куда смотрит камера
-	SET_CAM_POS			( camera, 113.655+433, -815.814+533, 11.029-6 );//расположение камеры
+	POINT_CAM_AT_COORD	( camera, 114.307+433, -816.57+533, 11.083-6 );
+	SET_CAM_POS			( camera, 113.655+433, -815.814+533, 11.029-6 );
 	STOP_PLAYBACK_RECORDED_CAR(car1);
-	SET_CHAR_COORDINATES(ped1, 562.961, -278.867, 4.567);// перемещаем педа
+	SET_CHAR_COORDINATES(ped1, 562.961, -278.867, 4.567);// перемещаем
 	SET_CHAR_HEADING(ped1, 133.0);
 	TASK_GO_STRAIGHT_TO_COORD(ped1, 548.288, -290.367, 5.398, 4, -2);
 	CLOSE_ALL_CAR_DOORS(car1);
@@ -424,15 +417,15 @@ void INTRO(void)
 	SET_WIDESCREEN_BORDERS( 0 );
 	REMOVE_CAR_RECORDING( 2992 );
 
-	SET_CHAR_COORDINATES(ped1, 5.13, -3.68, 10.41);// перемещаем педа
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
+	SET_CHAR_COORDINATES(ped1, 5.13, -3.68, 10.41);// перемещаем
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет)
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
 	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
@@ -450,10 +443,10 @@ void INTRO(void)
 	SetTime(3000);
 	PRINT_HELP_FOREVER("HELP42"); // Follow the ~p~pink blip~w~ to find the hotel.
 
-	ADD_BLIP_FOR_COORD(671.029, -747.042, 4.934, &hotel);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+	ADD_BLIP_FOR_COORD(671.029, -747.042, 4.934, &hotel);
+	CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);
 	CHANGE_BLIP_COLOUR(hotel, 5);   //цвет иконка на радаре (0=белая)
-	CHANGE_BLIP_SCALE(hotel, 0.6); // масштаб иконки на радаре
+	CHANGE_BLIP_SCALE(hotel, 0.6);
 	CHANGE_BLIP_NAME_FROM_TEXT_FILE(hotel, "NE_POINT");//иконка на радаре называние в истории карты "Цель"
 
 	// мигиние радара
@@ -565,8 +558,8 @@ void INTRO(void)
 			REMOVE_BLIP(hotel);//Удаляем иконку на радаре
 			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 			CREATE_CAM( 14, &camera );
-			POINT_CAM_AT_COORD	( camera, 263.577+433, -1310.574+533, 10.589-5  ); // куда смотрит камера
-			SET_CAM_POS			( camera, 264.334+433, -1311.161+533, 10.297-5 );//расположение камеры
+			POINT_CAM_AT_COORD	( camera, 263.577+433, -1310.574+533, 10.589-5  );
+			SET_CAM_POS			( camera, 264.334+433, -1311.161+533, 10.297-5 );
 			SET_CAM_ACTIVE( camera, 1 );
 			SET_CAM_PROPAGATE( camera, 1 );
 			ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -583,10 +576,10 @@ void INTRO(void)
 			SET_WIDESCREEN_BORDERS( 0 );
 			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
 
-			ADD_BLIP_FOR_COORD(642.789, -755.855, 5.974, &hotel);//создаем иконку на радаре
-			CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+			ADD_BLIP_FOR_COORD(642.789, -755.855, 5.974, &hotel);
+			CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);
 			CHANGE_BLIP_COLOUR(hotel, 5);   //цвет иконка на радаре (0=белая)
-			CHANGE_BLIP_SCALE(hotel, 0.6); // масштаб иконки на радаре
+			CHANGE_BLIP_SCALE(hotel, 0.6);
 			CHANGE_BLIP_NAME_FROM_TEXT_FILE(hotel, "NE_POINT");//иконка на радаре называние в истории карты "Цель"
 			break;
 		}
@@ -594,10 +587,10 @@ void INTRO(void)
 		{
 			// маркер в отеле
 			REMOVE_BLIP(hotel);//Удаляем иконку на радаре
-			ADD_BLIP_FOR_COORD(642.789, -755.855, 5.974, &hotel);//создаем иконку на радаре
-			CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+			ADD_BLIP_FOR_COORD(642.789, -755.855, 5.974, &hotel);
+			CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);
 			CHANGE_BLIP_COLOUR(hotel, 5);   //цвет иконка на радаре (0=белая)
-			CHANGE_BLIP_SCALE(hotel, 0.6); // масштаб иконки на радаре
+			CHANGE_BLIP_SCALE(hotel, 0.6);
 			CHANGE_BLIP_NAME_FROM_TEXT_FILE(hotel, "NE_POINT");//иконка на радаре называние в истории карты "Цель"
 			break;
 		}
@@ -611,8 +604,8 @@ void INTRO(void)
 			// камера тут
 			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 			CREATE_CAM( 14, &camera );
-			POINT_CAM_AT_COORD	( camera, 642.625, -755.805, 6.653  ); // куда смотрит камера
-			SET_CAM_POS			( camera, 657.751, -739.661, 8.751 );//расположение камеры
+			POINT_CAM_AT_COORD	( camera, 642.625, -755.805, 6.653  );
+			SET_CAM_POS			( camera, 657.751, -739.661, 8.751 );
 			SET_CAM_ACTIVE( camera, 1 );
 			SET_CAM_PROPAGATE( camera, 1 );
 			ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -656,8 +649,8 @@ void INTRO(void)
 			APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
 			// камера тут
 			CREATE_CAM( 14, &camera );
-			POINT_CAM_AT_COORD	( camera, 641.511, -756.154, 6.713  ); // куда смотрит камера
-			SET_CAM_POS			( camera, 647.924, -752.37, 6.9967 );//расположение камеры
+			POINT_CAM_AT_COORD	( camera, 641.511, -756.154, 6.713  );
+			SET_CAM_POS			( camera, 647.924, -752.37, 6.9967 );
 			SET_CAM_ACTIVE( camera, 1 );
 			SET_CAM_PROPAGATE( camera, 1 );
 			ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -709,8 +702,8 @@ void INTRO(void)
 			DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
 			MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 0 );
 
-			POINT_CAM_AT_COORD	( camera, 660.537, -729.304, 14.183  ); // куда смотрит камера
-			SET_CAM_POS			( camera, 663.181, -734.941, 16.065 );//расположение камеры
+			POINT_CAM_AT_COORD	( camera, 660.537, -729.304, 14.183  );
+			SET_CAM_POS			( camera, 663.181, -734.941, 16.065 );
 			PRINT_HELP_FOREVER("NEHELP1");  // Sleeping on the bed will save the game and advance time by six hours.
 			SetTime(5000);
 			CLEAR_HELP(); // удаляем текст подсказки
@@ -733,8 +726,8 @@ void INTRO(void)
 		{
 			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 			CREATE_CAM( 14, &camera );
-			POINT_CAM_AT_COORD	( camera, 679.021, -723.314, 5.507  ); // куда смотрит камера
-			SET_CAM_POS			( camera, 690.751, -711.325, 9.127 );//расположение камеры
+			POINT_CAM_AT_COORD	( camera, 679.021, -723.314, 5.507  );
+			SET_CAM_POS			( camera, 690.751, -711.325, 9.127 );
 			SET_CAM_ACTIVE( camera, 1 );
 			SET_CAM_PROPAGATE( camera, 1 );
 			ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -781,20 +774,13 @@ void load_screen(void)
 	DO_SCREEN_FADE_IN_UNHACKED(4000);
 	DO_SCREEN_FADE_IN(0);
 }
+
 void main(void)
 {
-	WAIT(2000);
-	//G_LAWYER = 1; // временная херня	
-	//load_screen(); // временная херня
 	REGISTER_MISSION_PASSED( "NESAVE_GM" );
 	if (G_LAWYER == 0)
 	{
 		INTRO();
-	}
-	WAIT(2000);
-	while (TRUE)
-	{
-		WAIT(0);
 	}
 	return;
 }

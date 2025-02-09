@@ -1,13 +1,10 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 float temp, prodano, speed, klient, zon_on, textur, help_text, PlayX, PlayY, PlayZ, PlayX2, PlayY2, PlayZ2, PlayR, sutosave;
 float x, x2, y, y2, PedX, PedY, PedZ, BortLX, BortLY, BortRX, BortRY, PedR1, PedR2, PedR3, skip, blip_on;
 int income, load_mashin, help;
@@ -56,11 +53,11 @@ void whoopee(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-443.132, -37.314, 5.065, &ice_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(ice_ico, BLIP_BAR);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(ice_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(ice_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ice_ico, "LG_17");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(-443.132, -37.314, 5.065, &ice_ico);
+				CHANGE_BLIP_SPRITE(ice_ico, BLIP_BAR);
+				CHANGE_BLIP_SCALE(ice_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(ice_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ice_ico, "LG_17");
 				blip_on = 1;
 			}
 			if (IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_MRTASTY))//проверка игрок в определённой машине (MR TASTY)
@@ -70,8 +67,8 @@ void whoopee(void)
 				{
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, -429.169, -37.004, 6.227 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -420.103, -41.6, 10.022 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -429.169, -37.004, 6.227 );
+					SET_CAM_POS			( camera, -420.103, -41.6, 10.022 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -80,8 +77,8 @@ void whoopee(void)
 					PRINT_HELP_FOREVER("ICC1_7"); //~g~You receive money for each transaction you make, but the more transactions you make the more police attention you get.
 					SetTime(3500);
 					
-					POINT_CAM_AT_COORD	( camera, -429.169, -37.004, 6.227 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -420.103, -41.6, 10.022 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -429.169, -37.004, 6.227 );
+					SET_CAM_POS			( camera, -420.103, -41.6, 10.022 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP_FOREVER("ICC1_9"); //~g~Local gangs will not appreciate you doing business on their turf so expect hostility if you do so.
 					SetTime(3500);
@@ -215,7 +212,7 @@ void whoopee(void)
 												CHANGE_BLIP_SPRITE(ice_ico, BLIP_DESTINATION);//иконка на радаре
 												CHANGE_BLIP_COLOUR(ice_ico, 5);   //цвет иконкb на радаре
 												CHANGE_BLIP_NAME_FROM_TEXT_FILE(ice_ico, "NE_ICE1");//иконка на радаре называние в истории карты
-												CHANGE_BLIP_SCALE(ice_ico, 0.77999990); // масштаб иконки на радаре
+												CHANGE_BLIP_SCALE(ice_ico, 0.77999990);
 
 												GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX2, &PlayY2, &PlayZ2);//вписываем координаты игрока в переменную
 												GET_CHAR_HEADING(GetPlayerPed(), &PlayR);
@@ -226,18 +223,18 @@ void whoopee(void)
 												BortRX = ((x2*COS(PlayR+45))+y2*SIN(PlayR+45))+PlayX2; // x- координата r- угол поворота
 												BortRY = (y2*SIN(PlayR+45)-(x2*COS(PlayR+45)))+PlayY2; // y- координата r- угол поворота
 
-												GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);//вписываем координаты педа в переменную
+												GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 												GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, BortLX, BortLY, PlayZ2, &PedR1);//проверка "игрок на координатах"
 												GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, BortRX, BortRY, PlayZ2, &PedR2);//проверка "игрок на координатах"
 
 												if (PedR1 < PedR2)
 												{
-													TASK_GO_STRAIGHT_TO_COORD(ped1, BortLX, BortLY, PlayZ2, 4, -1);//заставляем педа идти к машине
+													TASK_GO_STRAIGHT_TO_COORD(ped1, BortLX, BortLY, PlayZ2, 4, -1);//заставляем идти к машине
 													PedR3 = 1;
 												}
 												else
 												{
-													TASK_GO_STRAIGHT_TO_COORD(ped1, BortRX, BortRY, PlayZ2, 4, -1);//заставляем педа идти к машине
+													TASK_GO_STRAIGHT_TO_COORD(ped1, BortRX, BortRY, PlayZ2, 4, -1);//заставляем идти к машине
 													PedR3 = 2;
 												}
 
@@ -296,7 +293,7 @@ void whoopee(void)
 													}
 													else if ((IS_CHAR_IN_AREA_3D( ped1, (BortLX+0.8), (BortLY+0.8), (PlayZ2+2), (BortLX-0.8), (BortLY-0.8), (PlayZ2-3), 0 )) || (IS_CHAR_IN_AREA_3D( ped1, (BortRX+0.8), (BortRY+0.8), (PlayZ2+2), (BortRX-0.8), (BortRY-0.8), (PlayZ2-3), 0 )))
 													{
-														//поворачиваем педа на автомобиль
+														//поворачиваем на автомобиль
 														if (PedR3 == 1)
 														{
 															SET_CHAR_HEADING(ped1, PlayR+90);
@@ -426,8 +423,8 @@ void whoopee(void)
 							}
 							// камера
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -504.002, -10.755, 6.353 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -399.236, -60.687, 18.444 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -504.002, -10.755, 6.353 );
+							SET_CAM_POS			( camera, -399.236, -60.687, 18.444 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -436,7 +433,7 @@ void whoopee(void)
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							while (true)
 							{
 								SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -453,12 +450,12 @@ void whoopee(void)
 							}
 
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, -450.462, -41.6111, 6.268 ); // куда смотрит камера
+							POINT_CAM_AT_COORD	( camera, -450.462, -41.6111, 6.268 );
 							SET_CAM_POS			( camera, -448.533, -43.4632, 7.208 ); // расположение камеры
 							PRINT_STRING_IN_STRING("string", "ICE_AT2", 5000, 1);//~g~The Cherry Popper factory will now generate revenue up to a maximum of $3000. Make sure you collect it regularly.
 
 							//МАШИНКА СЧЁТКА ДЕНЕГ
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							SETTIMERB(0); //сбрасываем таймер
 							
 							uint rId9;
@@ -480,7 +477,7 @@ void whoopee(void)
 								if ( TIMERA() > 500)
 								{
 									temp +=3;
-									SETTIMERA(0); //сбрасываем таймер 
+									SETTIMERA(0);
 								}
 								if ( TIMERB() > 6000)
 								{
@@ -509,7 +506,7 @@ void whoopee(void)
 							G_ICECREAM = 2;
 							sutosave = 1;
 
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 							while (true)
 							{
@@ -536,7 +533,7 @@ void whoopee(void)
 						}
 						else
 						{
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							while (true)
 							{
 								SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
@@ -556,7 +553,7 @@ void whoopee(void)
 					}
 					else if (skip == 3)
 					{
-						SETTIMERA(0); //сбрасываем таймер 
+						SETTIMERA(0);
 						while (true)
 						{
 							SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
@@ -599,7 +596,7 @@ void whoopee(void)
 				{
 					income +=1;
 				}
-				SETTIMERC(0); //сбрасываем таймер 
+				SETTIMERC(0);
 			}
 			if (G_COLLECTOR == 4)// ID Бизнеса
 			{
@@ -654,7 +651,6 @@ void main(void)
 {
 	THIS_SCRIPT_SHOULD_BE_SAVED();
 	whoopee();
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

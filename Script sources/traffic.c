@@ -1,19 +1,12 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
-float part;
 
-void trafic_script(void)
+void traffic_script(void)
 {
-
-	WAIT(2000);
-	uint CarM1, CarM2, CarM3, CarM4, CarM5;
+	uint CarM1, CarM2, CarM3, CarM4, CarM5, part;
 	part = 1;
 	while (TRUE)
 	{
@@ -120,31 +113,26 @@ void trafic_script(void)
 
 		// загрузчик
 		REQUEST_MODEL(CarM1);
-		while (!HAS_MODEL_LOADED(CarM1)) WAIT(10);
+		while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 		REQUEST_MODEL(CarM2);
-		while (!HAS_MODEL_LOADED(CarM2)) WAIT(10);
+		while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 		REQUEST_MODEL(CarM3);
-		while (!HAS_MODEL_LOADED(CarM3)) WAIT(10);
+		while (!HAS_MODEL_LOADED(CarM3)) WAIT(0);
 		REQUEST_MODEL(CarM4);
-		while (!HAS_MODEL_LOADED(CarM4)) WAIT(10);
+		while (!HAS_MODEL_LOADED(CarM4)) WAIT(0);
 		REQUEST_MODEL(CarM5);
-		while (!HAS_MODEL_LOADED(CarM5)) WAIT(10);
+		while (!HAS_MODEL_LOADED(CarM5)) WAIT(0);
 
-
-		WAIT(500);
-		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель машины
-		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);//выгружаем модель машины
-		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM4);//выгружаем модель машины
-		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM5);//выгружаем модель машины
-		WAIT(500);
-		
+		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
+		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
+		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM4);
+		MARK_MODEL_AS_NO_LONGER_NEEDED(CarM5);
 	}
 }
 void main(void)
 {
-	trafic_script();
-	WAIT(2000);
+	traffic_script();
 	while (TRUE)
 	{
 		WAIT(0);

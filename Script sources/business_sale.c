@@ -1,8 +1,3 @@
-/***********************************************************************
-					Fully stripped main script
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
@@ -13,7 +8,6 @@
 int model1_on, model2_on, model3_on, model4_on, model5_on, model6_on, model7_on, model8_on, model9_on, model10_on, model11_on, model12_on, model13_on, model14_on, model15_on;
 int help, help2, money_ped, cam_res;
 int blip1_on, blip2_on, blip3_on, blip4_on, blip5_on, blip6_on, blip7_on, blip8_on;
-
 
 void SetTime(uint time)
 {
@@ -58,8 +52,8 @@ void business(void)
 	blip7_on = 0;
 
 	uint stendM;
-	uint stendM_off = stend_prodano2; // скоро в продаже
-	uint stendM_no = stend_prodano; // можно покупать
+	uint stendM_off = stend_prodano2;
+	uint stendM_no = stend_prodano;
 	Object stend;
 	Cam camera;
 
@@ -67,7 +61,6 @@ void business(void)
 	REQUEST_MODEL(stendM_no);
 	while ((!HAS_MODEL_LOADED(stendM_off)) || (!HAS_MODEL_LOADED(stendM_no))) WAIT(0);
 
-//************************************************************* МЕТКИ НА КАРТЕ *************************************************************
 	// Doughnut Shop (Havana)
 	ADD_BLIP_FOR_COORD(-425.312, -101.683, 5.36331, &ammun1_ico);
 	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_RESTAURANT);
@@ -117,86 +110,85 @@ void business(void)
 	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
 
 	// Ammu-Nation#1 (Washington Beach)
-	ADD_BLIP_FOR_COORD(369.825, -949.315, 4.43197, &ammun1_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_WEAPONS);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(ammun1_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(ammun1_ico, "LG_13");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(369.825, -949.315, 4.43197, &ammun1_ico);
+	CHANGE_BLIP_SPRITE(ammun1_ico, BLIP_WEAPONS);
+	CHANGE_BLIP_SCALE(ammun1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun1_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(ammun1_ico, "LG_13");
 
 	// Ammu-Nation#2 (Downtown)
-	ADD_BLIP_FOR_COORD(-244.787, 1737.22, 5.01206, &ammun2_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(ammun2_ico, BLIP_WEAPONS);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(ammun2_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(ammun2_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(ammun2_ico, "LG_13");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(-244.787, 1737.22, 5.01206, &ammun2_ico);
+	CHANGE_BLIP_SPRITE(ammun2_ico, BLIP_WEAPONS);
+	CHANGE_BLIP_SCALE(ammun2_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun2_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(ammun2_ico, "LG_13");
 
 	// Ammu-Nation#3 (Mall)
-	ADD_BLIP_FOR_COORD(798.101, 1588.29, 13.1281, &ammun3_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(ammun3_ico, BLIP_WEAPONS);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(ammun3_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(ammun3_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(ammun3_ico, "LG_13");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(798.101, 1588.29, 13.1281, &ammun3_ico);
+	CHANGE_BLIP_SPRITE(ammun3_ico, BLIP_WEAPONS);
+	CHANGE_BLIP_SCALE(ammun3_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(ammun3_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(ammun3_ico, "LG_13");
 
 	// Screw This (Havana)
-	ADD_BLIP_FOR_COORD(-533.581, -160.29, 5.26489, &tools1_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(tools1_ico, BLIP_REVENGE);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(tools1_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(tools1_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(tools1_ico, "LG_15");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(-533.581, -160.29, 5.26489, &tools1_ico);
+	CHANGE_BLIP_SPRITE(tools1_ico, BLIP_REVENGE);
+	CHANGE_BLIP_SCALE(tools1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(tools1_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(tools1_ico, "LG_15");
 
 	// Bunch of Tools (Washington Beach)
-	ADD_BLIP_FOR_COORD(636.332, 59.2133, 4.97102, &tools2_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(tools2_ico, BLIP_REVENGE);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(tools2_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(tools2_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(tools2_ico, "LG_15");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(636.332, 59.2133, 4.97102, &tools2_ico);
+	CHANGE_BLIP_SPRITE(tools2_ico, BLIP_REVENGE);
+	CHANGE_BLIP_SCALE(tools2_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(tools2_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(tools2_ico, "LG_15");
 
 	// Hardware Store (Mall)
-	ADD_BLIP_FOR_COORD(796.299, 1610.4, 13.0615, &tools3_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(tools3_ico, BLIP_REVENGE);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(tools3_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(tools3_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(tools3_ico, "LG_15");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(796.299, 1610.4, 13.0615, &tools3_ico);
+	CHANGE_BLIP_SPRITE(tools3_ico, BLIP_REVENGE);
+	CHANGE_BLIP_SCALE(tools3_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(tools3_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(tools3_ico, "LG_15");
 
 	// Pay 'n' Spray (Docks)
-	ADD_BLIP_FOR_COORD(-473.14, -722.05, 6.68, &paint1_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(paint1_ico, BLIP_PAY_N_SPRAY);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(paint1_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(paint1_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(paint1_ico, "LG_22");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(-473.14, -722.05, 6.68, &paint1_ico);
+	CHANGE_BLIP_SPRITE(paint1_ico, BLIP_PAY_N_SPRAY);
+	CHANGE_BLIP_SCALE(paint1_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(paint1_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(paint1_ico, "LG_22");
 
 	// Pay 'n' Spray (Haiti)
-	ADD_BLIP_FOR_COORD(-447.7, 419.3, 6.07, &paint2_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(paint2_ico, BLIP_PAY_N_SPRAY);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(paint2_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(paint2_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(paint2_ico, "LG_22");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(-447.7, 419.3, 6.07, &paint2_ico);
+	CHANGE_BLIP_SPRITE(paint2_ico, BLIP_PAY_N_SPRAY);
+	CHANGE_BLIP_SCALE(paint2_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(paint2_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(paint2_ico, "LG_22");
 
 	// Pay 'n' Spray (Washington Beach)
-	ADD_BLIP_FOR_COORD(426.69, -725.55, 5.43, &paint3_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(paint3_ico, BLIP_PAY_N_SPRAY);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(paint3_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(paint3_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(paint3_ico, "LG_22");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(426.69, -725.55, 5.43, &paint3_ico);
+	CHANGE_BLIP_SPRITE(paint3_ico, BLIP_PAY_N_SPRAY);
+	CHANGE_BLIP_SCALE(paint3_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(paint3_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(paint3_ico, "LG_22");
 
 	// Pay 'n' Spray (Vice Point)
-	ADD_BLIP_FOR_COORD(752.2, 965.8, 6.21, &paint4_ico);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(paint4_ico, BLIP_PAY_N_SPRAY);//текстура иконки на радаре
-	CHANGE_BLIP_SCALE(paint4_ico, 1.1); // масштаб иконки на радаре
-	SET_BLIP_AS_SHORT_RANGE(paint4_ico, 1); // иконка пропадает если не в зоне радардиска
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(paint4_ico, "LG_22");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(752.2, 965.8, 6.21, &paint4_ico);
+	CHANGE_BLIP_SPRITE(paint4_ico, BLIP_PAY_N_SPRAY);
+	CHANGE_BLIP_SCALE(paint4_ico, 1.1);
+	SET_BLIP_AS_SHORT_RANGE(paint4_ico, 1);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(paint4_ico, "LG_22");
 
 	while (TRUE) 
 	{
 		WAIT(0);
-//************************************************************* Fix камеры покрасочной  *************************************************************
 		if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -568.004, -324.765, 1.159, -581.655, -308.657, 6.149, 0 )))
 		{
 			if (cam_res == 0)
 			{
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, -574.829, -316.711, 1.15926 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -574.936, -292.296, 8.12582 );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -574.829, -316.711, 1.15926 );
+				SET_CAM_POS			( camera, -574.936, -292.296, 8.12582 );
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -215,9 +207,8 @@ void business(void)
 				cam_res = 0;
 			}
 		}
-//************************************************************* СТЕНДЫ ПОКУПКИ *************************************************************
 
-		// -----------------------------------  Стенд покупки "Printworks" -----------------------------------
+		// ----------------------------------- "Printworks" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -553.505, 189.527, -642.972, 291.936, 0)) && (G_COUNT == 0))//
 		{
 			if (model1_on == 0)
@@ -244,7 +235,7 @@ void business(void)
 				model1_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Sunshine Autos" -----------------------------------
+		// ----------------------------------- "Sunshine Autos" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -511.774, -421.269, -661.774, -271.269, 0)) && (G_BUSINES_SA == 0))//
 		{
 			if (model2_on == 0)
@@ -270,7 +261,7 @@ void business(void)
 				model2_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Interglobal Films" -----------------------------------
+		// ----------------------------------- "Interglobal Films" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), 524.207, 1425.438, 374.207, 1575.438, 0)) && (G_PRON == 0))//
 		{
 			if (model3_on == 0)
@@ -297,7 +288,7 @@ void business(void)
 				model3_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Cherry Popper Icecreams" -----------------------------------
+		// ----------------------------------- "Cherry Popper Icecreams" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -355.017, -109.166, -505.017, 40.834, 0)) && (G_ICECREAM == 0))//
 		{
 			if (model4_on == 0)
@@ -324,7 +315,7 @@ void business(void)
 				model4_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Kaufman Cabs" -----------------------------------
+		// ----------------------------------- "Kaufman Cabs" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -506.749, 652.2, -656.749, 802.2, 0)) && (G_CABS == 0))//
 		{
 			if (model5_on == 0)
@@ -351,7 +342,7 @@ void business(void)
 				model5_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Malibu Club" -----------------------------------
+		// ----------------------------------- "Malibu Club" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), 1015.69, 351.669, 865.69, 501.669, 0)) && (G_CLUB == 0))//
 		{
 			if (model6_on == 0)
@@ -378,7 +369,7 @@ void business(void)
 				model6_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "The Boatyard" -----------------------------------
+		// ----------------------------------- "The Boatyard" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -213.936, -999.331, -363.936, -849.331, 0)) && (G_COKERUN == 0))//
 		{
 			if (model7_on == 0)
@@ -405,7 +396,7 @@ void business(void)
 				model7_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Pole Position Club" -----------------------------------
+		// ----------------------------------- "Pole Position Club" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), 609.163, -1011.184, 490.722, -861.184, 0)) && (G_STRIP == 0))//
 		{
 			if (model8_on == 0)
@@ -432,7 +423,7 @@ void business(void)
 				model8_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "El Swanko Casa" -----------------------------------
+		// ----------------------------------- "El Swanko Casa" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), 938.646, 1109.436, 788.646, 1259.436, 0)) && (G_SWANKO == 0))//
 		{
 			if (model9_on == 0)
@@ -452,7 +443,7 @@ void business(void)
 			}
 		}
 
-		// -----------------------------------  Стенд покупки "Links View Apartment" -----------------------------------
+		// ----------------------------------- "Links View Apartment" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), 818.354, 848.015, 655.851, 984.37, 0)) && (G_LINKS == 0))//
 		{
 			if (model10_on == 0)
@@ -471,7 +462,7 @@ void business(void)
 				model10_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Hyman Condo" -----------------------------------
+		// ----------------------------------- "Hyman Condo" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -329.521, 1762.531, -479.521, 1912.531, 0)) && (G_CONDO == 0))//
 		{
 			if (model11_on == 0)
@@ -490,7 +481,7 @@ void business(void)
 				model11_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Ocean Heighs Aprt." -----------------------------------
+		// ----------------------------------- "Ocean Heighs Aprt." -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), 490.16, -1011.184, 371.718, -861.184, 0)) && (G_HEIGHS == 0))//
 		{
 			if (model12_on == 0)
@@ -509,7 +500,7 @@ void business(void)
 				model12_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "1102 Washington Street" -----------------------------------
+		// ----------------------------------- "1102 Washington Street" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), 606.06, -341.152, 456.06, -191.152, 0)) && (G_WS_1102 == 0))//
 		{
 			if (model13_on == 0)
@@ -528,7 +519,7 @@ void business(void)
 				model13_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Vice Point" -----------------------------------
+		// ----------------------------------- "Vice Point" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), 1040.874, 1722.849, 890.874, 1872.849, 0)) && (G_VP_3321 == 0))//
 		{
 			if (model14_on == 0)
@@ -547,7 +538,7 @@ void business(void)
 				model14_on = 0;
 			}
 		}
-		// -----------------------------------  Стенд покупки "Skumole Shack" -----------------------------------
+		// ----------------------------------- "Skumole Shack" -----------------------------------
 		if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -30.384, 1156.068, -180.384, 1306.068, 0)) && (G_SHACK == 0))//
 		{
 			if (model15_on == 0)
@@ -630,8 +621,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, -644.978, 264.365, 8.10603 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -593.396, 234.504, 16.1353 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -644.978, 264.365, 8.10603 );
+					SET_CAM_POS			( camera, -593.396, 234.504, 16.1353 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -640,7 +631,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -656,8 +647,8 @@ void business(void)
 						}
 					}
 					//Камера на диван
-					POINT_CAM_AT_COORD	( camera, -645.223, 244.068, 6.51072 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -643.529, 249.673, 8.48956 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -645.223, 244.068, 6.51072 );
+					SET_CAM_POS			( camera, -643.529, 249.673, 8.48956 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
@@ -760,8 +751,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, -583.188, -334.591, 12.646); // куда смотрит камера
-					SET_CAM_POS			( camera, -587.596, -389.758, 14.336); //расположение камеры	
+					POINT_CAM_AT_COORD	( camera, -583.188, -334.591, 12.646);
+					SET_CAM_POS			( camera, -587.596, -389.758, 14.336); 	
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -770,7 +761,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -786,8 +777,8 @@ void business(void)
 						}
 					}
 					//Камера на диван
-					POINT_CAM_AT_COORD	( camera, -596.941, -315.536, 7.53233 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -596.425, -319.508, 9.06065 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -596.941, -315.536, 7.53233 );
+					SET_CAM_POS			( camera, -596.425, -319.508, 9.06065 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
@@ -877,8 +868,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, 428.048, 1500.59, 9.42667 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 476.677, 1475.27, 15.8669 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 428.048, 1500.59, 9.42667 );
+					SET_CAM_POS			( camera, 476.677, 1475.27, 15.8669 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -887,7 +878,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -903,8 +894,8 @@ void business(void)
 						}
 					}
 					//Камера на диван
-					POINT_CAM_AT_COORD	( camera, 348.119, 1466.341, 5.10739 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 347.723, 1461.501, 6.42478 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 348.119, 1466.341, 5.10739 );
+					SET_CAM_POS			( camera, 347.723, 1461.501, 6.42478 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
@@ -1014,8 +1005,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, -504.002, -10.755, 6.353 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -399.236, -60.687, 18.444 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -504.002, -10.755, 6.353 );
+					SET_CAM_POS			( camera, -399.236, -60.687, 18.444 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1024,7 +1015,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -1040,8 +1031,8 @@ void business(void)
 						}
 					}
 					//Камера на диван
-					POINT_CAM_AT_COORD	( camera, -446.558, -45.5251, 5.69816 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -443.155, -48.0858, 6.07822 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -446.558, -45.5251, 5.69816 );
+					SET_CAM_POS			( camera, -443.155, -48.0858, 6.07822 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
@@ -1158,8 +1149,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, -572.881, 723.549, 9.168 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -588.599, 753.044, 9.441 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -572.881, 723.549, 9.168 );
+					SET_CAM_POS			( camera, -588.599, 753.044, 9.441 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1168,7 +1159,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -1184,8 +1175,8 @@ void business(void)
 						}
 					}
 					//Камера на диван
-					POINT_CAM_AT_COORD	( camera, -565.577, 720.491, 5.86685 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -567.029, 724.304, 6.30875 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -565.577, 720.491, 5.86685 );
+					SET_CAM_POS			( camera, -567.029, 724.304, 6.30875 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
@@ -1274,8 +1265,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, 914.084, 464.584, 5.83583 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 946.271, 430.582, 11.1684 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 914.084, 464.584, 5.83583 );
+					SET_CAM_POS			( camera, 946.271, 430.582, 11.1684 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1284,7 +1275,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -1300,8 +1291,8 @@ void business(void)
 						}
 					}
 					//Камера на диван
-					POINT_CAM_AT_COORD	( camera, 896.968, 481.86, 10.0952 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 896.723, 478.72, 11.6229 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 896.968, 481.86, 10.0952 );
+					SET_CAM_POS			( camera, 896.723, 478.72, 11.6229 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
@@ -1413,8 +1404,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, -132.401, -966.641, 14.598 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -117.879, -968.923, 16.259 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -132.401, -966.641, 14.598 );
+					SET_CAM_POS			( camera, -117.879, -968.923, 16.259 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1423,7 +1414,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -1439,8 +1430,8 @@ void business(void)
 						}
 					}
 					//Камера на диван
-					POINT_CAM_AT_COORD	( camera, -235.751, -951.261, 8.20742 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -231.451, -950.318, 9.67795 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -235.751, -951.261, 8.20742 );
+					SET_CAM_POS			( camera, -231.451, -950.318, 9.67795 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
@@ -1529,8 +1520,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, 530.951, -939.898, 10.2194 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 538.559, -954.132, 13.486 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 530.951, -939.898, 10.2194 );
+					SET_CAM_POS			( camera, 538.559, -954.132, 13.486 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1539,7 +1530,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -1555,11 +1546,11 @@ void business(void)
 						}
 					}
 					//Камера на диван
-					POINT_CAM_AT_COORD	( camera, 499.998, -921.742, 5.56992 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 500.307, -919.739, 4.72875 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 499.998, -921.742, 5.56992 );
+					SET_CAM_POS			( camera, 500.307, -919.739, 4.72875 );
 					SetTime(10);
-					POINT_CAM_AT_COORD	( camera, 506.755, -916.366, 4.9338 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 509.832, -918.184, 6.3462 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 506.755, -916.366, 4.9338 );
+					SET_CAM_POS			( camera, 509.832, -918.184, 6.3462 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
@@ -1640,8 +1631,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, 861.472, 1137.301, 13.1984 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 862.098, 1169.891, 6.12214 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 861.472, 1137.301, 13.1984 );
+					SET_CAM_POS			( camera, 862.098, 1169.891, 6.12214 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1650,7 +1641,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -1667,16 +1658,16 @@ void business(void)
 					}
 					//Камера на двери
 					//NEHELP1
-					POINT_CAM_AT_COORD	( camera, 859.646, 1136.19, 6.70153 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 870.455, 1148.84, 13.3133 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 859.646, 1136.19, 6.70153 );
+					SET_CAM_POS			( camera, 870.455, 1148.84, 13.3133 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
 					//камера на гараж
 					OPEN_GARAGE("gdoor10");
-					POINT_CAM_AT_COORD	( camera, 886.138, 1171.57, 6.75008 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 871.395, 1179.61, 11.849 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 886.138, 1171.57, 6.75008 );
+					SET_CAM_POS			( camera, 871.395, 1179.61, 11.849 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("BUYGARG"); //You can also store vehicles in this garage.
 					SetTime(5000);
@@ -1757,8 +1748,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, 729.957, 901.667, 23.3689 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 785.507, 955.337, 22.0341 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 729.957, 901.667, 23.3689 );
+					SET_CAM_POS			( camera, 785.507, 955.337, 22.0341 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1767,7 +1758,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -1783,16 +1774,16 @@ void business(void)
 						}
 					}
 					//Камера на двери
-					POINT_CAM_AT_COORD	( camera, 735.808, 908.971, 8.72206 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 745.684, 912.931, 13.9169 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 735.808, 908.971, 8.72206 );
+					SET_CAM_POS			( camera, 745.684, 912.931, 13.9169 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
 					//камера на гараж
 					OPEN_GARAGE("gdoor11");
-					POINT_CAM_AT_COORD	( camera, 735.575, 938.531, 6.27094 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 749.416, 919.618, 16.9161 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 735.575, 938.531, 6.27094 );
+					SET_CAM_POS			( camera, 749.416, 919.618, 16.9161 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("BUYGARG"); //You can also store vehicles in this garage.
 					SetTime(5000);
@@ -1872,8 +1863,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, -392.419, 1867.27, 48.0627 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -488.811, 1900.47, 33.3734 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -392.419, 1867.27, 48.0627 );
+					SET_CAM_POS			( camera, -488.811, 1900.47, 33.3734 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1882,7 +1873,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -1898,15 +1889,15 @@ void business(void)
 						}
 					}
 					//Камера на двери
-					POINT_CAM_AT_COORD	( camera, -402.008, 1841.04, 6.70257 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -404.554, 1834.86, 8.30057 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -402.008, 1841.04, 6.70257 );
+					SET_CAM_POS			( camera, -404.554, 1834.86, 8.30057 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
 					/*/камера на гараж
-					POINT_CAM_AT_COORD	( camera, -398.571, 1844.99, 8.5453 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -417.093, 1828.67, 7.1639 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -398.571, 1844.99, 8.5453 );
+					SET_CAM_POS			( camera, -417.093, 1828.67, 7.1639 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("BUYGARG"); //You can also store vehicles in this garage.
 					OPEN_GARAGE("gdoor5");
@@ -1994,8 +1985,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, 453.427, -987.233, 20.8432 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 424.561, -940.881, 6.93499 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 453.427, -987.233, 20.8432 );
+					SET_CAM_POS			( camera, 424.561, -940.881, 6.93499 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -2004,7 +1995,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -2020,16 +2011,16 @@ void business(void)
 						}
 					}
 					//Камера на двери
-					POINT_CAM_AT_COORD	( camera, 450.069, -969.381, 8.00377 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 452.951, -962.111, 9.85656 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 450.069, -969.381, 8.00377 );
+					SET_CAM_POS			( camera, 452.951, -962.111, 9.85656 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
 					//камера на гараж
 					OPEN_GARAGE("gdoor9");
-					POINT_CAM_AT_COORD	( camera, 457.097, -954.075, 4.37774 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 449.727, -939.958, 11.2557 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 457.097, -954.075, 4.37774 );
+					SET_CAM_POS			( camera, 449.727, -939.958, 11.2557 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("BUYGARG"); //You can also store vehicles in this garage.
 					SetTime(5000);
@@ -2109,8 +2100,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, 514.368, -262.556, 31.1287 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 511.906, -342.815, 10.1779 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 514.368, -262.556, 31.1287 );
+					SET_CAM_POS			( camera, 511.906, -342.815, 10.1779 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -2119,7 +2110,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -2135,8 +2126,8 @@ void business(void)
 						}
 					}
 					//Камера на двери
-					POINT_CAM_AT_COORD	( camera, 520.104, -269.722, 5.70883 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 522.505, -280.804, 9.75918 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 520.104, -269.722, 5.70883 );
+					SET_CAM_POS			( camera, 522.505, -280.804, 9.75918 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
@@ -2216,8 +2207,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, 982.386, 1819.441, 23.2439 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 963.204, 1763.401, 17.104 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 982.386, 1819.441, 23.2439 );
+					SET_CAM_POS			( camera, 963.204, 1763.401, 17.104 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -2226,7 +2217,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -2242,8 +2233,8 @@ void business(void)
 						}
 					}
 					//Камера на двери
-					POINT_CAM_AT_COORD	( camera, 966.469, 1807.381, 13.9696 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 963.064, 1799.901, 16.8672 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 966.469, 1807.381, 13.9696 );
+					SET_CAM_POS			( camera, 963.064, 1799.901, 16.8672 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
@@ -2323,8 +2314,8 @@ void business(void)
 
 					// камера
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, -128.662, 1232.28, 14.7873 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -146.885, 1240.61, 21.0725 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -128.662, 1232.28, 14.7873 );
+					SET_CAM_POS			( camera, -146.885, 1240.61, 21.0725 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -2333,7 +2324,7 @@ void business(void)
 
 					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -2349,8 +2340,8 @@ void business(void)
 						}
 					}
 					//Камера на двери
-					POINT_CAM_AT_COORD	( camera, -127.331, 1234.95, 15.8352 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -128.922, 1240.21, 18.1244 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -127.331, 1234.95, 15.8352 );
+					SET_CAM_POS			( camera, -128.922, 1240.21, 18.1244 );
 					CLEAR_HELP(); // удаляем текст подсказки
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
@@ -2393,11 +2384,11 @@ void business(void)
 		{
 			if (blip1_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(860.838, 1140.87, 6.71937, &property1_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(property1_ico, BLIP_SAFEHOUSE);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(property1_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(property1_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property1_ico, "LG_16");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(860.838, 1140.87, 6.71937, &property1_ico);
+				CHANGE_BLIP_SPRITE(property1_ico, BLIP_SAFEHOUSE);
+				CHANGE_BLIP_SCALE(property1_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property1_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property1_ico, "LG_16");
 				blip1_on = 1;
 			}
 		}
@@ -2414,11 +2405,11 @@ void business(void)
 		{
 			if (blip2_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(737.099, 909.333, 7.20204, &property2_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(property2_ico, BLIP_SAFEHOUSE);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(property2_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(property2_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property2_ico, "LG_16");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(737.099, 909.333, 7.20204, &property2_ico);
+				CHANGE_BLIP_SPRITE(property2_ico, BLIP_SAFEHOUSE);
+				CHANGE_BLIP_SCALE(property2_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property2_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property2_ico, "LG_16");
 				blip2_on = 1;
 			}
 		}
@@ -2435,11 +2426,11 @@ void business(void)
 		{
 			if (blip3_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-401.992, 1840.67, 5.63224, &property3_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(property3_ico, BLIP_SAFEHOUSE);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(property3_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(property3_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property3_ico, "LG_16");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(-401.992, 1840.67, 5.63224, &property3_ico);
+				CHANGE_BLIP_SPRITE(property3_ico, BLIP_SAFEHOUSE);
+				CHANGE_BLIP_SCALE(property3_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property3_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property3_ico, "LG_16");
 				blip3_on = 1;
 			}
 		}
@@ -2456,11 +2447,11 @@ void business(void)
 		{
 			if (blip4_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(451.062, -968.568, 7.27016, &property4_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(property4_ico, BLIP_SAFEHOUSE);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(property4_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(property4_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property4_ico, "LG_16");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(451.062, -968.568, 7.27016, &property4_ico);
+				CHANGE_BLIP_SPRITE(property4_ico, BLIP_SAFEHOUSE);
+				CHANGE_BLIP_SCALE(property4_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property4_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property4_ico, "LG_16");
 				blip4_on = 1;
 			}
 		}
@@ -2477,11 +2468,11 @@ void business(void)
 		{
 			if (blip5_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(520.688, -271.45, 5.74085, &property5_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(property5_ico, BLIP_SAFEHOUSE);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(property5_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(property5_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property5_ico, "LG_16");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(520.688, -271.45, 5.74085, &property5_ico);
+				CHANGE_BLIP_SPRITE(property5_ico, BLIP_SAFEHOUSE);
+				CHANGE_BLIP_SCALE(property5_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property5_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property5_ico, "LG_16");
 				blip5_on = 1;
 			}
 		}
@@ -2498,11 +2489,11 @@ void business(void)
 		{
 			if (blip6_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(964.902, 1807.76, 12.1611, &property6_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(property6_ico, BLIP_SAFEHOUSE);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(property6_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(property6_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property6_ico, "LG_16");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(964.902, 1807.76, 12.1611, &property6_ico);
+				CHANGE_BLIP_SPRITE(property6_ico, BLIP_SAFEHOUSE);
+				CHANGE_BLIP_SCALE(property6_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property6_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property6_ico, "LG_16");
 				blip6_on = 1;
 			}
 		}
@@ -2519,11 +2510,11 @@ void business(void)
 		{
 			if (blip7_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-127.205, 1235.3, 14.451, &property7_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(property7_ico, BLIP_SAFEHOUSE);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(property7_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(property7_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property7_ico, "LG_16");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(-127.205, 1235.3, 14.451, &property7_ico);
+				CHANGE_BLIP_SPRITE(property7_ico, BLIP_SAFEHOUSE);
+				CHANGE_BLIP_SCALE(property7_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property7_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property7_ico, "LG_16");
 				blip7_on = 1;
 			}
 		}
@@ -2540,10 +2531,10 @@ void business(void)
 		{
 			if (blip8_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(661.2, -730.39, 15.59, &property8_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(property8_ico, BLIP_SAFEHOUSE);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(property8_ico, 1.1); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property8_ico, "LG_16");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(661.2, -730.39, 15.59, &property8_ico);
+				CHANGE_BLIP_SPRITE(property8_ico, BLIP_SAFEHOUSE);
+				CHANGE_BLIP_SCALE(property8_ico, 1.1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property8_ico, "LG_16");
 				blip8_on = 1;
 			}
 		}
@@ -2696,5 +2687,4 @@ void main(void)
 	{
 		WAIT(0);
 	}
-
 }

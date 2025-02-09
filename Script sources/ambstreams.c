@@ -18,7 +18,6 @@ float flowerbed1,flowerbed2,flowerbed3,flowerbed4;
 Ped zombies[ZOMB_MAX];
 uint ZOMB_MODEL, pHealth, del_ped, wait_fix, rancord;
 
-
 void zombiecord(void)
 {
 	float x, y, z, xdif, ydif;
@@ -27,7 +26,7 @@ void zombiecord(void)
 	{ 
 		WAIT(0);
 		GET_INTERIOR_FROM_CHAR(GetPlayerPed(), &intHash);
-		if ( intHash != 258 ) // интрерьер Молл
+		if ( intHash != 258 )
 		{
 			break;
 		}
@@ -104,6 +103,7 @@ void zombiecord(void)
 void main(void)
 {
 	uint PedM1, PedM2, PedM3, PedM4, PedM5, PedM6, PedM7, PedM8, PedM9, PedM10, PedM11, PedM12, PedM13, PedM14, PedM15;
+	uint ranmodel;
 	Ped ped1, ped2, ped3, ped4, ped5, ped6, ped7, ped8, ped9, ped10, ped11, ped12, ped13, ped14, ped15;
 	Ped ped16, ped17, ped18, ped19, ped20, ped21, ped22, ped23, ped24, ped25, ped26, ped27, ped28, ped29, ped30;
 	in_int = 0;
@@ -113,9 +113,9 @@ void main(void)
 	SETTIMERA( 0 );
 	ZOMBIE_DEL = 0;
 	ZOMBIE_ON_OFF = 1;
-		while (true) {
+	while (true)
+	{
 		WAIT(0);
-		//------------------- педы в интерьерах -------------------
 		if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 565.987, -962.529, 3.104, 490.988, -906.258, 11.197, 0 )) && (in_int == 0))// интрерьер Стрип клуба
 		{
 			PedM1 = MODEL_F_M_PLATIN_01;// strip 1
@@ -134,21 +134,21 @@ void main(void)
 			PedM14 = MODEL_M_Y_GAFR_HI_02;//   guest 6
 			PedM15 = MODEL_M_Y_GAFR_LO_02;//   guest 7
 
-			REQUEST_MODEL(PedM1);// 
-			REQUEST_MODEL(PedM2);// 
-			REQUEST_MODEL(PedM3);// 
-			REQUEST_MODEL(PedM4);// 
-			REQUEST_MODEL(PedM5);// 
-			REQUEST_MODEL(PedM6);// 
-			REQUEST_MODEL(PedM7);// 
-			REQUEST_MODEL(PedM8);// 
-			REQUEST_MODEL(PedM9);// 
-			REQUEST_MODEL(PedM10);// 
-			REQUEST_MODEL(PedM11);// 
-			REQUEST_MODEL(PedM12);// 
-			REQUEST_MODEL(PedM13);// 
-			REQUEST_MODEL(PedM14);// 
-			REQUEST_MODEL(PedM15);// 
+			REQUEST_MODEL(PedM1);
+			REQUEST_MODEL(PedM2);
+			REQUEST_MODEL(PedM3);
+			REQUEST_MODEL(PedM4);
+			REQUEST_MODEL(PedM5);
+			REQUEST_MODEL(PedM6);
+			REQUEST_MODEL(PedM7);
+			REQUEST_MODEL(PedM8);
+			REQUEST_MODEL(PedM9);
+			REQUEST_MODEL(PedM10);
+			REQUEST_MODEL(PedM11);
+			REQUEST_MODEL(PedM12);
+			REQUEST_MODEL(PedM13);
+			REQUEST_MODEL(PedM14);
+			REQUEST_MODEL(PedM15);
 
 			while ((!HAS_MODEL_LOADED(PedM1)) || (!HAS_MODEL_LOADED(PedM2)) || (!HAS_MODEL_LOADED(PedM3)) || (!HAS_MODEL_LOADED(PedM4)) || (!HAS_MODEL_LOADED(PedM5)))
 			{
@@ -163,9 +163,9 @@ void main(void)
 				WAIT(0);
 			}
 
-			REQUEST_ANIMS( "missstripclub" );//загружаем файл с анимацией
+			REQUEST_ANIMS( "missstripclub" );
 			while (!HAVE_ANIMS_LOADED( "missstripclub" )) WAIT(0);
-			REQUEST_ANIMS( "amb@strip_rail_idl" );//загружаем файл с анимацией
+			REQUEST_ANIMS( "amb@strip_rail_idl" );
 			while (!HAVE_ANIMS_LOADED( "amb@strip_rail_idl" )) WAIT(0);
 
 			CREATE_CHAR (26, PedM1, 527.002, -870.002, 4.64608, &ped1, TRUE);// stripa 1
@@ -280,37 +280,37 @@ void main(void)
 		else if ((!IS_CHAR_IN_AREA_3D( GetPlayerPed(), 565.987, -962.529, 3.104, 490.988, -906.258, 11.197, 0 )) && (in_int == 1))// интрерьер Стрип клуба
 		{
 			// выгружвем модели
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM6);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM7);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM8);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM9);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM10);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM11);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM12);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM13);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM14);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM15);//выгружаем модель
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM6);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM7);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM8);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM9);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM10);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM11);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM12);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM13);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM14);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM15);
 			// выгружвем педов
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
 			CLEAR_AREA(515.231, -914.803, 4.32348, 25.0, 1);//очещаем зону загрузки
 			in_int = 0;
 		}
@@ -616,76 +616,76 @@ void main(void)
 			SET_CHAR_COORDINATES(ped30, 17.215, 22.371, 4.76645);
 			//*/
 			// выгружвем модели
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM6);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM7);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM8);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM9);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM10);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM11);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM12);//выгружаем модель
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM13);//выгружаем модель
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM6);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM7);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM8);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM9);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM10);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM11);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM12);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM13);
 			// выгружвем педов
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped21);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped22);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped23);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped24);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped25);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped26);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped27);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped28);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped29);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped30);//выгружаем модель педа(в последствии пед изчезнет
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped21);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped22);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped23);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped24);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped25);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped26);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped27);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped28);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped29);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped30);
 			CLEAR_AREA(910.625, 467.498, 4.35257, 18.0, 1);//очещаем зону загрузки
 			in_int2 = 0;
 		}
 
 		GET_INTERIOR_FROM_CHAR(GetPlayerPed(), &intHash);
-		//DISPLAY_TEXT_WITH_NUMBER(0.9083334, 0.72787074, "CP_TIME_NOZERO", intHash);// 
-		if ((intHash == 770 ) && (in_int3 == 0))// интрерьер полицейский участок
+		//DISPLAY_TEXT_WITH_NUMBER(0.9083334, 0.72787074, "CP_TIME_NOZERO", intHash);
+		if ((intHash == 770 ) && (in_int3 == 0))
 		{
-			PedM1 = MODEL_M_Y_COP;// Коп
-			REQUEST_MODEL(PedM1);// Коп
-			while (!HAS_MODEL_LOADED(PedM1)) WAIT(10);////проверка "пед загрузился" если нет то начанаем с начало
+			PedM1 = MODEL_M_Y_COP;
+			REQUEST_MODEL(PedM1);
+			while (!HAS_MODEL_LOADED(PedM1)) WAIT(0);
 
-			CREATE_CHAR (26, PedM1, 527.002, -876.002, 4.64608, &ped1, TRUE);// коп
-			CREATE_CHAR (26, PedM1, 533.002, -874.002, 4.64608, &ped2, TRUE);// коп
-			CREATE_CHAR (26, PedM1, 536.002, -874.002, 4.64608, &ped3, TRUE);// коп
-			CREATE_CHAR (26, PedM1, 539.002, -874.002, 4.64608, &ped4, TRUE);// коп
+			CREATE_CHAR (26, PedM1, 527.002, -876.002, 4.64608, &ped1, TRUE);
+			CREATE_CHAR (26, PedM1, 533.002, -874.002, 4.64608, &ped2, TRUE);
+			CREATE_CHAR (26, PedM1, 536.002, -874.002, 4.64608, &ped3, TRUE);
+			CREATE_CHAR (26, PedM1, 539.002, -874.002, 4.64608, &ped4, TRUE);
 
 			SET_CHAR_RELATIONSHIP_GROUP(ped1, 3);
 			SET_CHAR_RELATIONSHIP_GROUP(ped2, 3);
 			SET_CHAR_RELATIONSHIP_GROUP(ped3, 3);
 			SET_CHAR_RELATIONSHIP_GROUP(ped4, 3);
 
-			SET_CHAR_COORDINATES(ped1, 808.124, 48.3821, 8.2391);// уходит
-			SET_CHAR_COORDINATES(ped2, 808.714, 46.4646, 8.2391);// уходит
-			SET_CHAR_COORDINATES(ped3, 813.005, 40.2273, 6.57517);// уходит
-			SET_CHAR_COORDINATES(ped4, 820.292, 45.2293, 6.68949);// уходит
+			SET_CHAR_COORDINATES(ped1, 808.124, 48.3821, 8.2391);
+			SET_CHAR_COORDINATES(ped2, 808.714, 46.4646, 8.2391);
+			SET_CHAR_COORDINATES(ped3, 813.005, 40.2273, 6.57517);
+			SET_CHAR_COORDINATES(ped4, 820.292, 45.2293, 6.68949);
 
 			SET_CHAR_HEADING(ped1, -129.0);
 			SET_CHAR_HEADING(ped2, -129.0);
@@ -702,20 +702,20 @@ void main(void)
 			UpdateWeaponOfPed(ped3, WEAPON_PISTOL);
 			UpdateWeaponOfPed(ped4, WEAPON_PISTOL);
 
-			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
+			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
 
 			in_int3 = 1;
 		}
-		else if (( intHash != 770 ) && (in_int3 == 1))// интрерьер полицейский участок
+		else if (( intHash != 770 ) && (in_int3 == 1))
 		{
 			in_int3 = 0;
 		}
 
-		if ( intHash == 258 ) // интрерьер Молл
+		if ( intHash == 258 )
 		{
 			if (TIMERA() > 400)
 			{
@@ -759,11 +759,11 @@ void main(void)
 				int i;
 				for (i = 0; i < ZOMB_MAX; i++)
 				{
-					//WAIT(10);
+					//WAIT(0);
 					GENERATE_RANDOM_INT_IN_RANGE(0, 25, &wait_fix);
 					if ((wait_fix == 5) ||(wait_fix == 10) ||(wait_fix == 15))
 					{
-						WAIT(10);
+						WAIT(0);
 					}
 					// delete unneeded zombie and make player drunk if he is near zombie
 					if ( DOES_CHAR_EXIST(zombies[i]) )
@@ -805,7 +805,6 @@ void main(void)
 						continue;
 					}
 
-					uint ranmodel;
 					GENERATE_RANDOM_INT_IN_RANGE(0, 21, &ranmodel);
 					if ((ranmodel == 0) || (ranmodel == 11))
 					{
@@ -872,11 +871,6 @@ void main(void)
 					GENERATE_RANDOM_INT_IN_RANGE(0, 100, &randint);
 					SET_CHAR_MONEY(zombies[i], randint);
 					CANCEL_CURRENTLY_PLAYING_AMBIENT_SPEECH(zombies[i]);
-
-			#ifdef DEBUG
-					WAIT(0);
-					//PRINT_STRING_WITH_LITERAL_STRING_NOW("string", "new zombie created", 1000, 1);
-			#endif
 				}
 				SETTIMERA( 0 );
 			}

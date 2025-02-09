@@ -66,9 +66,9 @@ void umberto(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-737.043, -74.3556, 5.6213, &cuban_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_COMEDY_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(cuban_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-737.043, -74.3556, 5.6213, &cuban_ico);
+				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_COMEDY_CLUB);
+				CHANGE_BLIP_SCALE(cuban_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "LG_11");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -212,8 +212,8 @@ void umberto(void)
 
 				//камера
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, 357.058, 620.139, 4.45775 ); // куда смотрит камера
-				SET_CAM_POS			( camera, 364.422, 616.007, 7.23219);//расположение камеры
+				POINT_CAM_AT_COORD	( camera, 357.058, 620.139, 4.45775 );
+				SET_CAM_POS			( camera, 364.422, 616.007, 7.23219);
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -268,11 +268,11 @@ void umberto(void)
 				tovarY = 704.7835;
 				tovarZ = 0.6726999;
 
-				ADD_BLIP_FOR_COORD(tovarX, tovarY, tovarZ, &cuban_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+				ADD_BLIP_FOR_COORD(tovarX, tovarY, tovarZ, &cuban_ico);
+				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(cuban_ico, 19);
+				CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 
 				CLEAR_PRINTS();
 				PRINT_STRING_IN_STRING("string", "CUB1_13", 5000, 1);//~COL_NET_12~You have five minutes to get round the course.
@@ -328,7 +328,7 @@ void umberto(void)
 					}
 					WAIT(0);
 				}
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 				SETTIMERA(0);
 				SETTIMERB(0);
 
@@ -358,7 +358,7 @@ void umberto(void)
 					//============================ HUD ============================
 					// счётчик бомб 
 					DRAW_SPRITE( fon, 0.8765625, 0.74213, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
-					//DRAW_SPRITE( tar, 0.8765625, 0.74213, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+					//DRAW_SPRITE( tar, 0.8765625, 0.74213, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 					SET_TEXT_COLOUR(95, 195, 247, 255);
 					SET_TEXT_SCALE(0.156, 0.267);
 					SET_TEXT_DROPSHADOW(1, 26, 90, 128, 255);
@@ -395,8 +395,8 @@ void umberto(void)
 					}
 
 					// таймер
-					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-					//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+					//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 					if ((time_m == 0) && (time_s < 16))
 					{
 						SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -490,15 +490,15 @@ void umberto(void)
 
 							//камера
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
-							SET_CAM_POS			( camera, cameraX, cameraY, cameraZ);//расположение камеры
+							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
+							SET_CAM_POS			( camera, cameraX, cameraY, cameraZ);
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
 							SET_TIME_SCALE( 0.35 );
-							SETTIMERC(0); //сбрасываем таймер 
+							SETTIMERC(0);
 							camer = 1;
 						}
 					}
@@ -508,11 +508,11 @@ void umberto(void)
 						if (start == 1)
 						{
 							REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-							ADD_BLIP_FOR_COORD(tovarX, tovarY, tovarZ, &cuban_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+							ADD_BLIP_FOR_COORD(tovarX, tovarY, tovarZ, &cuban_ico);
+							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(cuban_ico, 19);
+							CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 							CLEAR_PRINTS();
 							start = 0;
 						}
@@ -523,10 +523,10 @@ void umberto(void)
 						{
 							REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
 							ADD_BLIP_FOR_CAR(car1, &cuban_ico);
-							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(cuban_ico, 5);
+							CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "MO_TARGET");
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "NECOK3_R", 5000, 1);//~COL_NET_12~Return to the boat.
 							start = 1;
@@ -564,7 +564,7 @@ void umberto(void)
 					{
 						if (TIMERB() < 3000)
 						{
-							SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+							SET_TEXT_COLOUR(255, 159, 255, 255);
 							SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
 							SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
@@ -596,8 +596,8 @@ void umberto(void)
 						else
 						{
 							SETTIMERA( TIMERA() );
-							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
-							SET_CAM_POS			( camera, cameraX, cameraY, cameraZ);//расположение камеры
+							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
+							SET_CAM_POS			( camera, cameraX, cameraY, cameraZ);
 						}
 					}
 
@@ -888,11 +888,11 @@ void umberto(void)
 							checkpoint = CREATE_CHECKPOINT( 4, 6.6888, 8.7909, 0.6, 6.6, 8.7, 0.6, 1.20000000 );
 						}
 						REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-						ADD_BLIP_FOR_COORD(tovarX, tovarY, tovarZ, &cuban_ico);//создаем иконку на радаре
-						CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-						CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-						CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-						CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+						ADD_BLIP_FOR_COORD(tovarX, tovarY, tovarZ, &cuban_ico);
+						CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+						CHANGE_BLIP_COLOUR(cuban_ico, 19);
+						CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+						CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 					}
 
 					GET_CHAR_COORDINATES(ped1,  &ricoX, &ricoY, &ricoZ);//вписываем координаты игрока в переменную
@@ -922,8 +922,8 @@ void umberto(void)
 
 						//камера
 						CREATE_CAM( 14, &camera );
-						POINT_CAM_AT_COORD	( camera, 348.052, 612.513, 0.6436 ); // куда смотрит камера
-						SET_CAM_POS			( camera, 355.866, 617.851, 8.51077);//расположение камеры
+						POINT_CAM_AT_COORD	( camera, 348.052, 612.513, 0.6436 );
+						SET_CAM_POS			( camera, 355.866, 617.851, 8.51077);
 						SET_CAM_ACTIVE( camera, 1 );
 						SET_CAM_PROPAGATE( camera, 1 );
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1000,8 +1000,8 @@ void umberto(void)
 
 						//камера
 						CREATE_CAM( 14, &camera );
-						POINT_CAM_AT_COORD	( camera, 348.052, 612.513, 0.6436 ); // куда смотрит камера
-						SET_CAM_POS			( camera, 355.866, 617.851, 8.51077);//расположение камеры
+						POINT_CAM_AT_COORD	( camera, 348.052, 612.513, 0.6436 );
+						SET_CAM_POS			( camera, 355.866, 617.851, 8.51077);
 						SET_CAM_ACTIVE( camera, 1 );
 						SET_CAM_PROPAGATE( camera, 1 );
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1046,20 +1046,20 @@ void umberto(void)
 				REMOVE_TXD( textur );
 
 				// выгружаем из памяти модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(ramp);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель машины
+				MARK_MODEL_AS_NO_LONGER_NEEDED(ramp);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 
 				DELETE_OBJECT(&rampa_1);
 				DELETE_OBJECT(&rampa_2);
@@ -1071,10 +1071,10 @@ void umberto(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
@@ -1090,18 +1090,18 @@ void umberto(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 						SET_TEXT_CENTRE(1); // задаём центр текста
 						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
@@ -1127,9 +1127,9 @@ void umberto(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-737.043, -74.3556, 5.6213, &cuban_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_COMEDY_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(cuban_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-737.043, -74.3556, 5.6213, &cuban_ico);
+				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_COMEDY_CLUB);
+				CHANGE_BLIP_SCALE(cuban_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "LG_11");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -1285,13 +1285,13 @@ void umberto(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
-				ADD_BLIP_FOR_COORD(-734.82, -69.1976, 5.6909, &cuban_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+				ADD_BLIP_FOR_COORD(-734.82, -69.1976, 5.6909, &cuban_ico);
+				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(cuban_ico, 5);
+				CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 				PRINT_STRING_IN_STRING("string", "CUB2_03", 5000, 1);//~g~Get a car and pick up the Cubans from outside Robina's Cafe.
 
 				// вооружаем
@@ -1345,7 +1345,7 @@ void umberto(void)
 				SET_CHAR_RELATIONSHIP_GROUP(ped9, 0);
 				SET_CHAR_RELATIONSHIP(ped9, 5, 24);
 
-				CREATE_PICKUP_ROTATE(w_ak47, 3, 60, -646.834,606.579,5.61127, -87.532, -108.556, -1.476, &sweap_1);// даём винтовку
+				CREATE_PICKUP_ROTATE(w_ruger, 3, 60, -646.834,606.579,5.61127, -87.532, -108.556, -1.476, &sweap_1);// даём винтовку
 
 				// пригнать машину
 				while (TRUE)
@@ -1402,15 +1402,15 @@ void umberto(void)
 										}
 									}
 
-									SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+									SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 									SET_CAMERA_CONTROLS_DISABLED_WITH_PLAYER_CONTROLS( 1 );
 
 									REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-									ADD_BLIP_FOR_COORD(-641.682, 607.685, 5.0648, &cuban_ico);//создаем иконку на радаре
-									CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-									CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-									CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+									ADD_BLIP_FOR_COORD(-641.682, 607.685, 5.0648, &cuban_ico);
+									CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+									CHANGE_BLIP_COLOUR(cuban_ico, 5);
+									CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 
 									NEW_SCRIPTED_CONVERSATION();
 									ADD_NEW_CONVERSATION_SPEAKER(0, ped2, "ROMAN");
@@ -1491,8 +1491,8 @@ void umberto(void)
 
 								//ставим камеру
 								CREATE_CAM( 14, &camera );
-								POINT_CAM_AT_COORD	( camera, -641.682, 607.685, 6.50455 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -636.011, 617.043, 10.2113 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -641.682, 607.685, 6.50455 );
+								SET_CAM_POS			( camera, -636.011, 617.043, 10.2113 );
 								SET_CAM_ACTIVE( camera, 1 );
 								SET_CAM_PROPAGATE( camera, 1 );
 								ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1508,8 +1508,8 @@ void umberto(void)
 								SetTime(2000);
 
 								// меняем ракурс
-								POINT_CAM_AT_COORD	( camera, -646.671, 606.254, 5.85833 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -642.401, 611.122, 7.7852 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -646.671, 606.254, 5.85833 );
+								SET_CAM_POS			( camera, -642.401, 611.122, 7.7852 );
 								CLEAR_AREA(-641.682, 607.685, 5.0648, 55.0, 1);//очещаем зону загрузки
 								SetTime(3000);
 
@@ -1531,7 +1531,7 @@ void umberto(void)
 								ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 								END_CAM_COMMANDS( &camera );
 								SET_WIDESCREEN_BORDERS( 0 );
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "NIKO");
@@ -1570,34 +1570,34 @@ void umberto(void)
 								SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped15, FALSE);
 								
 								ADD_BLIP_FOR_CHAR(ped11, &ped1_ico);
-								CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped1_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped1_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped1_ico, 19);
+								CHANGE_BLIP_SCALE(ped1_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");
 
 								ADD_BLIP_FOR_CHAR(ped12, &ped2_ico);
-								CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped2_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped2_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped2_ico, 19);
+								CHANGE_BLIP_SCALE(ped2_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");
 
 								ADD_BLIP_FOR_CHAR(ped13, &ped3_ico);
-								CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped3_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped3_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped3_ico, 19);
+								CHANGE_BLIP_SCALE(ped3_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");
 
 								ADD_BLIP_FOR_CHAR(ped14, &ped4_ico);
-								CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped4_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped4_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped4_ico, 19);
+								CHANGE_BLIP_SCALE(ped4_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");
 
 								ADD_BLIP_FOR_CHAR(ped15, &ped5_ico);
-								CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped5_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped5_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped5_ico, 19);
+								CHANGE_BLIP_SCALE(ped5_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");
 								SetSpeech();
 
 								CLEAR_PRINTS();
@@ -1607,11 +1607,11 @@ void umberto(void)
 							if (text == 1)
 							{
 								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-								ADD_BLIP_FOR_COORD(-641.682, 607.685, 5.0648, &cuban_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+								ADD_BLIP_FOR_COORD(-641.682, 607.685, 5.0648, &cuban_ico);
+								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(cuban_ico, 5);
+								CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "CUB2_04", 5000, 1);//~g~Go and drop the Cubans off at the fight.
@@ -1624,10 +1624,10 @@ void umberto(void)
 							{
 								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_CAR(car4, &cuban_ico);
-								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(cuban_ico, 19);
+								CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");
 								
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "IN_VEH", 5000, 1);//~g~Hey! Get back in the vehicle!
@@ -1675,17 +1675,17 @@ void umberto(void)
 							if (ped1_hp < 200)
 							{
 								EXPLODE_CHAR_HEAD(ped11);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -681.772, 597.074, 5.60114, &ped11, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped11, -681.713, 603.338, 5.60114, 3, -2, 1.5);// пед убегает
 
 								REMOVE_BLIP(ped1_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_CHAR(ped11, &ped1_ico);
-								CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped1_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped1_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped1_ico, 19);
+								CHANGE_BLIP_SCALE(ped1_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");
 
 								UpdateWeaponOfPed(ped11, WEAPON_MP5);
 								SET_CURRENT_CHAR_WEAPON(ped11, WEAPON_MP5, TRUE);
@@ -1698,17 +1698,17 @@ void umberto(void)
 							if (ped2_hp < 200)
 							{
 								EXPLODE_CHAR_HEAD(ped12);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -681.772, 597.074, 5.60114, &ped12, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped12, -681.861, 600.719, 5.60114, 3, -2, 1.5);// пед убегает
 
 								REMOVE_BLIP(ped2_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_CHAR(ped12, &ped2_ico);
-								CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped2_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped2_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped2_ico, 19);
+								CHANGE_BLIP_SCALE(ped2_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");
 
 								UpdateWeaponOfPed(ped12, WEAPON_MICRO_UZI);
 								SET_CURRENT_CHAR_WEAPON(ped12, WEAPON_MICRO_UZI, TRUE);
@@ -1721,17 +1721,17 @@ void umberto(void)
 							if (ped3_hp < 200)
 							{
 								EXPLODE_CHAR_HEAD(ped13);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -682.067, 609.499, 5.60114, &ped13, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped13, -682.079, 605.765, 5.60114, 3, -2, 1.5);// пед убегает
 
 								REMOVE_BLIP(ped3_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_CHAR(ped13, &ped3_ico);
-								CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped3_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped3_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped3_ico, 19);
+								CHANGE_BLIP_SCALE(ped3_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");
 
 								UpdateWeaponOfPed(ped13, WEAPON_MP5);
 								SET_CURRENT_CHAR_WEAPON(ped13, WEAPON_MP5, TRUE);
@@ -1744,17 +1744,17 @@ void umberto(void)
 							if (ped4_hp < 200)
 							{
 								EXPLODE_CHAR_HEAD(ped14);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -705.939, 608.939, 5.60114, &ped14, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped14, -697.868, 600.982, 5.60114, 3, -2, 1.5);// пед убегает
 
 								REMOVE_BLIP(ped4_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_CHAR(ped14, &ped4_ico);
-								CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped4_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped4_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped4_ico, 19);
+								CHANGE_BLIP_SCALE(ped4_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");
 
 								UpdateWeaponOfPed(ped14, WEAPON_MICRO_UZI);
 								SET_CURRENT_CHAR_WEAPON(ped14, WEAPON_MICRO_UZI, TRUE);
@@ -1768,17 +1768,17 @@ void umberto(void)
 							{
 
 								EXPLODE_CHAR_HEAD(ped15);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -705.166, 599.978, 5.60114, &ped15, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped15, -697.884, 608.74, 5.60114, 3, -2, 1.5);// пед убегает
 
 								REMOVE_BLIP(ped5_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_CHAR(ped15, &ped5_ico);
-								CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped5_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped5_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped5_ico, 19);
+								CHANGE_BLIP_SCALE(ped5_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");
 
 								UpdateWeaponOfPed(ped15, WEAPON_MICRO_UZI);
 								SET_CURRENT_CHAR_WEAPON(ped15, WEAPON_MICRO_UZI, TRUE);
@@ -1848,8 +1848,8 @@ void umberto(void)
 							
 							//ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -677.608, 603.093, 5.84792 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -635.969, 603.055, 7.74445 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -677.608, 603.093, 5.84792 );
+							SET_CAM_POS			( camera, -635.969, 603.055, 7.74445 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1876,8 +1876,8 @@ void umberto(void)
 							SetTime(3000);
 
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, -698.407, 603.883, 4.36404 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -670.697, 603.593, 8.11014 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -698.407, 603.883, 4.36404 );
+							SET_CAM_POS			( camera, -670.697, 603.593, 8.11014 );
 
 							SET_CHAR_COORDINATES(ped4, -678.069, 604.916, 5.0073);
 							SET_CHAR_COORDINATES(ped5, -677.524, 603.151, 5.0073);
@@ -1909,8 +1909,8 @@ void umberto(void)
 							SetTime(1500);
 
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, -734.29, 604.285, 16.3152 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -743.52, 604.092, 20.9147 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -734.29, 604.285, 16.3152 );
+							SET_CAM_POS			( camera, -743.52, 604.092, 20.9147 );
 
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "NIKO");
@@ -1935,8 +1935,8 @@ void umberto(void)
 							SetTime(1000);
 
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, -679.671, 602.763, 6.11582 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -677.624, 596.133, 7.30864 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -679.671, 602.763, 6.11582 );
+							SET_CAM_POS			( camera, -677.624, 596.133, 7.30864 );
 
 							// анимация телефонного звонка
 							ATTACH_OBJECT_TO_PED( trubka_1, ped1, 1232, 0.070, 0.052, 0.003, 3.30000000, 0.30000000, -0.45000000, 0 );
@@ -1968,8 +1968,8 @@ void umberto(void)
 								GET_CHAR_COORDINATES(ped10,  &rampaX, &rampaY, &rampaZ);//вписываем координаты игрока в переменную
 
 								// меняем ракурс
-								POINT_CAM_AT_COORD	( camera, rampaX, rampaY, rampaZ ); // куда смотрит камера
-								SET_CAM_POS			( camera, -645.401, 606.3, 8.98409 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, rampaX, rampaY, rampaZ );
+								SET_CAM_POS			( camera, -645.401, 606.3, 8.98409 );
 								if (TIMERA() > 4500)
 								{
 									break;
@@ -1988,13 +1988,13 @@ void umberto(void)
 							SetTime(1000);
 
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, -677.608, 603.093, 5.84792 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -635.969, 603.055, 7.74445 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -677.608, 603.093, 5.84792 );
+							SET_CAM_POS			( camera, -635.969, 603.055, 7.74445 );
 							SetTime(3000);
 
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, -679.671, 602.763, 6.11582 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -677.624, 596.133, 7.30864 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -679.671, 602.763, 6.11582 );
+							SET_CAM_POS			( camera, -677.624, 596.133, 7.30864 );
 
 							SET_CHAR_COORDINATES(ped7, -678.535, 598.593, 5.3873);
 							SET_CHAR_COORDINATES(ped8, -679.538, 607.747, 5.3873);
@@ -2021,16 +2021,16 @@ void umberto(void)
 							blip_off5 = 1;
 
 							ADD_BLIP_FOR_CHAR(ped16, &cuban_ico);
-							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(cuban_ico, 5);
+							CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "MO_TARGET");
 
 							//убираем камеру
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 							FREEZE_CHAR_POSITION(ped16, 1);
 
 							NEW_SCRIPTED_CONVERSATION();
@@ -2083,8 +2083,8 @@ void umberto(void)
 							if (ped1_hp < 200)
 							{
 								EXPLODE_CHAR_HEAD(ped11);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -726.207, 609.126, 5.60114, &ped11, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped11, -725.889, 604.384, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2099,8 +2099,8 @@ void umberto(void)
 							if (ped2_hp < 200)
 							{
 								EXPLODE_CHAR_HEAD(ped12);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -725.91, 598.524, 5.60114, &ped12, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped12, -725.362, 602.294, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2115,8 +2115,8 @@ void umberto(void)
 							if (ped3_hp < 200)
 							{
 								EXPLODE_CHAR_HEAD(ped13);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -726.207, 609.126, 5.60114, &ped13, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped13, -725.144, 606.652, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2131,8 +2131,8 @@ void umberto(void)
 							if (ped4_hp < 200)
 							{
 								EXPLODE_CHAR_HEAD(ped14);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -707.027, 595.88, 5.60114, &ped14, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped14,  -708.11, 602.17, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2147,8 +2147,8 @@ void umberto(void)
 							if (ped5_hp < 200)
 							{
 								EXPLODE_CHAR_HEAD(ped15);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -707.345, 613.941, 5.60114, &ped15, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped15, -708.471, 607.007, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2200,42 +2200,42 @@ void umberto(void)
 							if (!IS_CHAR_DEAD(ped11))
 							{
 								ADD_BLIP_FOR_CHAR(ped11, &ped1_ico);
-								CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped1_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped1_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped1_ico, 19);
+								CHANGE_BLIP_SCALE(ped1_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped1_ico, "MO_TARGET");
 							}
 							if (!IS_CHAR_DEAD(ped12))
 							{
 								ADD_BLIP_FOR_CHAR(ped12, &ped2_ico);
-								CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped2_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped2_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped2_ico, 19);
+								CHANGE_BLIP_SCALE(ped2_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped2_ico, "MO_TARGET");
 							}
 							if (!IS_CHAR_DEAD(ped13))
 							{
 								ADD_BLIP_FOR_CHAR(ped13, &ped3_ico);
-								CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped3_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped3_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped3_ico, 19);
+								CHANGE_BLIP_SCALE(ped3_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped3_ico, "MO_TARGET");
 							}
 							if (!IS_CHAR_DEAD(ped14))
 							{
 								ADD_BLIP_FOR_CHAR(ped14, &ped4_ico);
-								CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped4_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped4_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped4_ico, 19);
+								CHANGE_BLIP_SCALE(ped4_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped4_ico, "MO_TARGET");
 							}
 							if (!IS_CHAR_DEAD(ped15))
 							{
 								ADD_BLIP_FOR_CHAR(ped15, &ped5_ico);
-								CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped5_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped5_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(ped5_ico, 19);
+								CHANGE_BLIP_SCALE(ped5_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped5_ico, "MO_TARGET");
 							}
 
 							CLEAR_PRINTS();
@@ -2253,8 +2253,8 @@ void umberto(void)
 
 							//ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -719.979, 604.141, 5.79146 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -731.635, 604.463, 8.32183 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -719.979, 604.141, 5.79146 );
+							SET_CAM_POS			( camera, -731.635, 604.463, 8.32183 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -2270,8 +2270,8 @@ void umberto(void)
 							SetTime(2000);
 
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, -727.795, 604.124, 5.72238 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -716.811, 603.968, 7.70427 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -727.795, 604.124, 5.72238 );
+							SET_CAM_POS			( camera, -716.811, 603.968, 7.70427 );
 
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "NIKO");
@@ -2288,11 +2288,11 @@ void umberto(void)
 							SetTime(2000);
 							SetSpeech();
 
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-							WAIT(10);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+							WAIT(0);
 
 							CREATE_CHAR (26, PedM2, -727.614, 619.995, 5.60114, &ped4, TRUE);//
 							CREATE_CHAR (26, PedM2, -739.468, 634.276, 5.60114, &ped5, TRUE);//
@@ -2339,7 +2339,7 @@ void umberto(void)
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 							explo_car = 0;
 							SetTime(1000);
@@ -2373,10 +2373,10 @@ void umberto(void)
 							}
 
 							ADD_BLIP_FOR_CAR(car1, &cuban_ico);
-							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(cuban_ico, 19);
+							CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");
 							text = 1;
 							break;
 						}
@@ -2422,8 +2422,8 @@ void umberto(void)
 								if (TIMERC() > 2000)
 								{
 									EXPLODE_CHAR_HEAD(ped11);
-									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-									WAIT(10);
+									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+									WAIT(0);
 									CREATE_CHAR (26, PedM2, -753.97, 635.859, 5.1848, &ped11, TRUE);//
 									TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped11, -731.76, 619.604, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2442,8 +2442,8 @@ void umberto(void)
 								if (TIMERC() > 2000)
 								{
 									EXPLODE_CHAR_HEAD(ped12);
-									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-									WAIT(10);
+									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+									WAIT(0);
 									CREATE_CHAR (26, PedM2, -753.893, 625.645, 5.1848, &ped12, TRUE);//
 									TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped12, -739.244, 613.635, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2462,8 +2462,8 @@ void umberto(void)
 								if (TIMERC() > 2000)
 								{
 									EXPLODE_CHAR_HEAD(ped13);
-									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-									WAIT(10);
+									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+									WAIT(0);
 									CREATE_CHAR (26, PedM2, -753.97, 635.859, 5.1848, &ped13, TRUE);//
 									TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped13, -737.934, 622.338, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2482,8 +2482,8 @@ void umberto(void)
 								if (TIMERC() > 2000)
 								{
 									EXPLODE_CHAR_HEAD(ped14);
-									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-									WAIT(10);
+									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+									WAIT(0);
 									CREATE_CHAR (26, PedM2, -753.893, 625.645, 5.1848, &ped14, TRUE);//
 									TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped14,  -736.178, 617.103, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2502,8 +2502,8 @@ void umberto(void)
 								if (TIMERC() > 2000)
 								{
 									EXPLODE_CHAR_HEAD(ped15);
-									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-									WAIT(10);
+									MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+									WAIT(0);
 									CREATE_CHAR (26, PedM2, -753.97, 635.859, 5.1848, &ped15, TRUE);//
 									TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped15, -734.338, 621.63, 5.60114, 3, -2, 1.5);// пед убегает
 
@@ -2524,10 +2524,10 @@ void umberto(void)
 							{
 								// баррикада тут
 								SET_MAX_WANTED_LEVEL(6);
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-								WAIT(10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+								WAIT(0);
 								CREATE_CHAR (26, PedM2, -682.079,605.765,5.60114, &ped4, TRUE);//
 								CREATE_CHAR (26, PedM2, -681.713,603.338,5.60114, &ped5, TRUE);//
 								CREATE_CHAR (26, PedM2, -681.861,600.719,5.60114, &ped6, TRUE);//
@@ -2578,11 +2578,11 @@ void umberto(void)
 							if (text == 1)
 							{
 								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-								ADD_BLIP_FOR_COORD(-729.157, -71.6485, 5.6909, &cuban_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+								ADD_BLIP_FOR_COORD(-729.157, -71.6485, 5.6909, &cuban_ico);
+								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(cuban_ico, 5);
+								CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "CUB2_24", 5000, 1);//~g~Return to Robina's Cafe with the Van and park it round the back.
@@ -2595,10 +2595,10 @@ void umberto(void)
 							{
 								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_CAR(car1, &cuban_ico);
-								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(cuban_ico, 19);
+								CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");
 
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "IN_VEH", 5000, 1);//~g~Hey! Get back in the vehicle!
@@ -2634,39 +2634,39 @@ void umberto(void)
 				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
 
 				// выгружвем модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(trubka);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(gunboxM);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(trubka);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(gunboxM);
 
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
 
 				// выгружвем педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
 
 				// выгружвем машину
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
 
 				DELETE_OBJECT(&gunbox1);
 				DELETE_OBJECT( &trubka_1 );
@@ -2675,10 +2675,10 @@ void umberto(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
@@ -2694,18 +2694,18 @@ void umberto(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 						SET_TEXT_CENTRE(1); // задаём центр текста
 						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
@@ -2732,9 +2732,9 @@ void umberto(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-737.043, -74.3556, 5.6213, &cuban_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_COMEDY_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(cuban_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-737.043, -74.3556, 5.6213, &cuban_ico);
+				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_COMEDY_CLUB);
+				CHANGE_BLIP_SCALE(cuban_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "LG_11");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -2812,8 +2812,8 @@ void umberto(void)
 				SET_CAR_HEADING(car3, 130.0);
 				CREATE_CAR(CarM3, -318.118, -603.255, 0.58805, &car4, TRUE);// Лодка Гаитян 
 
-				CHANGE_CAR_COLOUR( car1, 39, 89 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car1, 127, 127 );//цвет отрожений машины
+				CHANGE_CAR_COLOUR( car1, 39, 89 );//цвет
+				SET_EXTRA_CAR_COLOURS( car1, 127, 127 );//цвет отрожений
 
 				// педы
 				CREATE_CHAR (26, PedM1, -292.071, -634.141, 4.96902, &ped1, TRUE);// Рико
@@ -2898,13 +2898,13 @@ void umberto(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
-				ADD_BLIP_FOR_COORD(-293.338, -634.651, 4.64145, &cuban_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+				ADD_BLIP_FOR_COORD(-293.338, -634.651, 4.64145, &cuban_ico);
+				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(cuban_ico, 5);
+				CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 				PRINT_STRING_IN_STRING("string", "CUB3_07", 5000, 1);//~g~ Go meet Rico. He'll drive you to the meet location.
 
 				// вооружаем
@@ -2926,10 +2926,10 @@ void umberto(void)
 				UpdateWeaponOfPed(ped13, WEAPON_PISTOL);
 
 				UpdateWeaponOfPed(ped14, WEAPON_SHOTGUN);
-				UpdateWeaponOfPed(ped15, WEAPON_AK47);
+				UpdateWeaponOfPed(ped15, WEAPON_EPISODIC_9);
 				UpdateWeaponOfPed(ped16, WEAPON_MP5);
 				UpdateWeaponOfPed(ped17, WEAPON_MP5);
-				UpdateWeaponOfPed(ped18, WEAPON_AK47);
+				UpdateWeaponOfPed(ped18, WEAPON_EPISODIC_9);
 				UpdateWeaponOfPed(ped19, WEAPON_SHOTGUN);
 				UpdateWeaponOfPed(ped20, WEAPON_SNIPERRIFLE);
 
@@ -2941,10 +2941,10 @@ void umberto(void)
 				SET_CURRENT_CHAR_WEAPON(ped10, WEAPON_PISTOL, TRUE);
 
 				SET_CURRENT_CHAR_WEAPON(ped14, WEAPON_SHOTGUN, TRUE);
-				SET_CURRENT_CHAR_WEAPON(ped15, WEAPON_AK47, TRUE);
+				SET_CURRENT_CHAR_WEAPON(ped15, WEAPON_EPISODIC_9, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped16, WEAPON_MP5, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped17, WEAPON_MP5, TRUE);
-				SET_CURRENT_CHAR_WEAPON(ped18, WEAPON_AK47, TRUE);
+				SET_CURRENT_CHAR_WEAPON(ped18, WEAPON_EPISODIC_9, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped19, WEAPON_SHOTGUN, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped20, WEAPON_SNIPERRIFLE, TRUE);
 
@@ -2977,8 +2977,8 @@ void umberto(void)
 
 						// ставим камеру
 						CREATE_CAM( 14, &camera );
-						POINT_CAM_AT_COORD	( camera, -292.829, -634.263, 5.68324 ); // куда смотрит камера
-						SET_CAM_POS			( camera, -290.056, -637.498, 6.78833 );//расположение камеры
+						POINT_CAM_AT_COORD	( camera, -292.829, -634.263, 5.68324 );
+						SET_CAM_POS			( camera, -290.056, -637.498, 6.78833 );
 						SET_CAM_ACTIVE( camera, 1 );
 						SET_CAM_PROPAGATE( camera, 1 );
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -3001,8 +3001,8 @@ void umberto(void)
 						SetSpeech();
 
 						// меняем ракурс
-						POINT_CAM_AT_COORD	( camera, -289.281, -630.785, 1.41952 ); // куда смотрит камера
-						SET_CAM_POS			( camera, -271.799, -635.171, 6.94475 );//расположение камеры
+						POINT_CAM_AT_COORD	( camera, -289.281, -630.785, 1.41952 );
+						SET_CAM_POS			( camera, -271.799, -635.171, 6.94475 );
 
 						NEW_SCRIPTED_CONVERSATION();
 						ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
@@ -3031,8 +3031,8 @@ void umberto(void)
 						SET_PLAYBACK_SPEED(car1, 0.65);
 
 						SET_CURRENT_CHAR_WEAPON(ped1, WEAPON_MP5, TRUE);
-						UpdateWeaponOfPed(GetPlayerPed(), WEAPON_AK47);
-						SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_AK47, TRUE);
+						UpdateWeaponOfPed(GetPlayerPed(), WEAPON_EPISODIC_9);
+						SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_EPISODIC_9, TRUE);
 
 						DETACH_PED(ped5, 1);
 						DETACH_PED(ped6, 1);
@@ -3049,8 +3049,8 @@ void umberto(void)
 						{
 							WAIT(0);
 							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
-							SET_CAM_POS			( camera, -230.966, 305.548, 4.91723 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
+							SET_CAM_POS			( camera, -230.966, 305.548, 4.91723 );
 
 							if (TIMERA() > 6000)
 							{
@@ -3062,8 +3062,8 @@ void umberto(void)
 						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped11, "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 5000 );//Воиспроизвидение анимации на педе
 
 						// меняем ракурс
-						POINT_CAM_AT_COORD	( camera, -217.696, 262.518, 4.36645 ); // куда смотрит камера
-						SET_CAM_POS			( camera, -210.674, 264.025, 5.87273 );//расположение камеры
+						POINT_CAM_AT_COORD	( camera, -217.696, 262.518, 4.36645 );
+						SET_CAM_POS			( camera, -210.674, 264.025, 5.87273 );
 						SetTime(3000);
 
 						STOP_PLAYBACK_RECORDED_CAR(car1);
@@ -3074,7 +3074,7 @@ void umberto(void)
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 						//свой-чужой
 						SET_CHAR_RELATIONSHIP_GROUP(ped2, 5);
@@ -3272,8 +3272,8 @@ void umberto(void)
 							{
 								WAIT(0);
 								GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
-								SET_CAM_POS			( camera, -201.132, 270.474, 7.81752 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
+								SET_CAM_POS			( camera, -201.132, 270.474, 7.81752 );
 
 								if (TIMERA() > 5000)
 								{
@@ -3299,9 +3299,9 @@ void umberto(void)
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
-							GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_AK47, 30, FALSE);	
+							GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_EPISODIC_9, 30, FALSE);	
 							WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), -184.541, 273.884, 4.69363);//телепартируем из катера
 							SET_CHAR_HEADING(GetPlayerPed(), 130.0);
 							FREEZE_CAR_POSITION(car1, 1);
@@ -3313,19 +3313,19 @@ void umberto(void)
 							ADD_BLIP_FOR_PICKUP(keys_1, &keys1_ico);
 							CHANGE_BLIP_SPRITE(keys1_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(keys1_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(keys1_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(keys1_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(keys1_ico, "MO_TARGET");//иконка на радаре "Товар"
 
 							ADD_BLIP_FOR_PICKUP(keys_2, &keys2_ico);
 							CHANGE_BLIP_SPRITE(keys2_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(keys2_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(keys2_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(keys2_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(keys2_ico, "MO_TARGET");//иконка на радаре "Товар"
 
 							ADD_BLIP_FOR_PICKUP(keys_3, &keys3_ico);
 							CHANGE_BLIP_SPRITE(keys3_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(keys3_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(keys3_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(keys3_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(keys3_ico, "MO_TARGET");//иконка на радаре "Товар"
 
 
@@ -3379,8 +3379,8 @@ void umberto(void)
 
 						if (( keys_UP1 == 1) && ( keys_UP2 == 1) && ( keys_UP3 == 1))
 						{
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
 							CREATE_CHAR_INSIDE_CAR(car4, 1, PedM2, &ped2);// Гаитянин
 							CREATE_CHAR (26, PedM2, -216.913, 264.901, 3.83098, &ped3, TRUE);// Гаитянин
 							ATTACH_PED_TO_CAR( ped3, car4, 0, -0.112316, -0.66938, 0.945863, 0.0, 0, 1, 0 );
@@ -3404,8 +3404,8 @@ void umberto(void)
 
 							// ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -178.24, 286.227, 1.19084 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -199.606, 282.394, 7.87958 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -178.24, 286.227, 1.19084 );
+							SET_CAM_POS			( camera, -199.606, 282.394, 7.87958 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -3448,15 +3448,15 @@ void umberto(void)
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 							SET_CURRENT_CHAR_WEAPON(ped3, WEAPON_MICRO_UZI, TRUE);
 
-							ADD_BLIP_FOR_COORD(-737.034, -74.3699, 5.56987, &cuban_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+							ADD_BLIP_FOR_COORD(-737.034, -74.3699, 5.56987, &cuban_ico);
+							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(cuban_ico, 5);
+							CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 
 							ALTER_WANTED_LEVEL(GetPlayerIndex(), 3);
 							APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
@@ -3489,8 +3489,8 @@ void umberto(void)
 
 							// ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -736.916, -74.6126, 7.60915 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -737.669, -62.7373, 10.9415 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -736.916, -74.6126, 7.60915 );
+							SET_CAM_POS			( camera, -737.669, -62.7373, 10.9415 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -3511,7 +3511,7 @@ void umberto(void)
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 							skip = 2;
 							break;
@@ -3537,50 +3537,50 @@ void umberto(void)
 				REMOVE_PICKUP(aid_1);
 
 				// выгружвем модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);
 
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
 
 				// выгружвем педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
 				// выгружвем машину
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
@@ -3596,18 +3596,18 @@ void umberto(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 						SET_TEXT_CENTRE(1); // задаём центр текста
 						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
@@ -3633,9 +3633,9 @@ void umberto(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-737.043, -74.3556, 5.6213, &cuban_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_COMEDY_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(cuban_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-737.043, -74.3556, 5.6213, &cuban_ico);
+				CHANGE_BLIP_SPRITE(cuban_ico, BLIP_COMEDY_CLUB);
+				CHANGE_BLIP_SCALE(cuban_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "LG_11");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -3817,7 +3817,7 @@ void umberto(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				// вооружаем
 				UpdateWeaponOfPed(ped1, WEAPON_MICRO_UZI);
@@ -3834,12 +3834,12 @@ void umberto(void)
 				UpdateWeaponOfPed(ped12, WEAPON_PISTOL);
 				UpdateWeaponOfPed(ped13, WEAPON_PISTOL);
 				UpdateWeaponOfPed(ped14, WEAPON_SHOTGUN);
-				UpdateWeaponOfPed(ped15, WEAPON_AK47);
+				UpdateWeaponOfPed(ped15, WEAPON_EPISODIC_9);
 				UpdateWeaponOfPed(ped16, WEAPON_MP5);
 				UpdateWeaponOfPed(ped17, WEAPON_MP5);
-				UpdateWeaponOfPed(ped18, WEAPON_AK47);
+				UpdateWeaponOfPed(ped18, WEAPON_EPISODIC_9);
 				UpdateWeaponOfPed(ped19, WEAPON_SHOTGUN);
-				UpdateWeaponOfPed(ped20, WEAPON_AK47);
+				UpdateWeaponOfPed(ped20, WEAPON_EPISODIC_9);
 
 
 				SET_CURRENT_CHAR_WEAPON(ped1, WEAPON_MICRO_UZI, TRUE);
@@ -3853,12 +3853,12 @@ void umberto(void)
 				SET_CURRENT_CHAR_WEAPON(ped9, WEAPON_PISTOL, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped10, WEAPON_PISTOL, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped14, WEAPON_SHOTGUN, TRUE);
-				SET_CURRENT_CHAR_WEAPON(ped15, WEAPON_AK47, TRUE);
+				SET_CURRENT_CHAR_WEAPON(ped15, WEAPON_EPISODIC_9, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped16, WEAPON_MP5, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped17, WEAPON_MP5, TRUE);
-				SET_CURRENT_CHAR_WEAPON(ped18, WEAPON_AK47, TRUE);
+				SET_CURRENT_CHAR_WEAPON(ped18, WEAPON_EPISODIC_9, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped19, WEAPON_SHOTGUN, TRUE);
-				SET_CURRENT_CHAR_WEAPON(ped20, WEAPON_AK47, TRUE);
+				SET_CURRENT_CHAR_WEAPON(ped20, WEAPON_EPISODIC_9, TRUE);
 
 				// лояльность игроку
 				SET_CHAR_RELATIONSHIP_GROUP(ped1, 0);
@@ -4124,8 +4124,8 @@ void umberto(void)
 
 							// ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -610.569, 709.178, 5.85356 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -600.314, 700.914, 9.42846 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -610.569, 709.178, 5.85356 );
+							SET_CAM_POS			( camera, -600.314, 700.914, 9.42846 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -4178,14 +4178,14 @@ void umberto(void)
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 							REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
 							ADD_BLIP_FOR_CAR(car2, &cuban_ico);
-							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(cuban_ico, 19);
+							CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");
 
 							start = 1;
 							break;
@@ -4196,10 +4196,10 @@ void umberto(void)
 							if (start == 1)
 							{
 								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-								ADD_BLIP_FOR_COORD(-605.383, 710.026, 5.17858, &cuban_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+								ADD_BLIP_FOR_COORD(-605.383, 710.026, 5.17858, &cuban_ico);
+								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
+								CHANGE_BLIP_SCALE(cuban_ico, 0.6);
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 
 								CLEAR_PRINTS();
@@ -4213,10 +4213,10 @@ void umberto(void)
 							{
 								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_CAR(car3, &cuban_ico);
-								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(cuban_ico, 19);
+								CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");
 
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "IN_VEH", 5000, 1);//~COL_NET_12~Hey! Get back in the vehicle!
@@ -4326,10 +4326,10 @@ void umberto(void)
 								SetTime(2000);
 
 								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-								ADD_BLIP_FOR_COORD(-739.801, 615.565, 5.05374, &cuban_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+								ADD_BLIP_FOR_COORD(-739.801, 615.565, 5.05374, &cuban_ico);
+								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
+								CHANGE_BLIP_SCALE(cuban_ico, 0.6);
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 
 								CLEAR_PRINTS();
@@ -4346,10 +4346,10 @@ void umberto(void)
 								if (start == 1)
 								{
 									REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-									ADD_BLIP_FOR_COORD(-655.833, 603.265, 5.17858, &cuban_ico);//создаем иконку на радаре
-									CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+									ADD_BLIP_FOR_COORD(-655.833, 603.265, 5.17858, &cuban_ico);
+									CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 									CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая)
-									CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
+									CHANGE_BLIP_SCALE(cuban_ico, 0.6);
 									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 
 									CLEAR_PRINTS();
@@ -4363,10 +4363,10 @@ void umberto(void)
 								{
 									REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
 									ADD_BLIP_FOR_CAR(car2, &cuban_ico);
-									CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-									CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-									CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+									CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+									CHANGE_BLIP_COLOUR(cuban_ico, 19);
+									CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");
 
 									CLEAR_PRINTS();
 									PRINT_STRING_IN_STRING("string", "CUB4_14", 5000, 1);//Follow my compadres.
@@ -4380,10 +4380,10 @@ void umberto(void)
 							{
 								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_CAR(car3, &cuban_ico);
-								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(cuban_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(cuban_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(cuban_ico, 19);
+								CHANGE_BLIP_SCALE(cuban_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_CAR");
 
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "IN_VEH", 5000, 1);//~COL_NET_12~Hey! Get back in the vehicle!
@@ -4459,22 +4459,22 @@ void umberto(void)
 							SET_CHAR_COORDINATES(ped20, -682.169, 599.709, 5.92349);// перемещаем игрока
 							SET_CHAR_HEADING(ped20, 90.0);
 
-							ADD_BLIP_FOR_COORD(-754.194, 636.405, 5.12495, &tnt1_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(tnt1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+							ADD_BLIP_FOR_COORD(-754.194, 636.405, 5.12495, &tnt1_ico);
+							CHANGE_BLIP_SPRITE(tnt1_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(tnt1_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(tnt1_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(tnt1_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(tnt1_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 
-							ADD_BLIP_FOR_COORD(-748.368, 614.555, 5.12495, &tnt2_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(tnt2_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+							ADD_BLIP_FOR_COORD(-748.368, 614.555, 5.12495, &tnt2_ico);
+							CHANGE_BLIP_SPRITE(tnt2_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(tnt2_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(tnt2_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(tnt2_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(tnt2_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 
-							ADD_BLIP_FOR_COORD(-740.792, 603.311, 11.8548, &tnt3_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(tnt3_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+							ADD_BLIP_FOR_COORD(-740.792, 603.311, 11.8548, &tnt3_ico);
+							CHANGE_BLIP_SPRITE(tnt3_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(tnt3_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(tnt3_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(tnt3_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(tnt3_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 							SetTime(2000);
 
@@ -4617,8 +4617,8 @@ void umberto(void)
 							}
 
 							// таймер
-							DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-							//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+							DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+							//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 							if ((time_m == 0) && (time_s < 16))
 							{
 								SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -4823,8 +4823,8 @@ void umberto(void)
 						}
 
 						// таймер
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 						if ((time_m == 0) && (time_s < 16))
 						{
 							SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -4931,7 +4931,7 @@ void umberto(void)
 
 							G_CUBAN = 5;
 
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 							skip = 2;
 							break;
 						}
@@ -4970,38 +4970,38 @@ void umberto(void)
 				REMOVE_TXD( textur );
 
 				// выгружвем модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(dynamite_1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(vorotaM);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(dynamite_1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(vorotaM);
 
 				// выгружвем педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
 				// выгружвем машину
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
 
 				// удаляем объекты
 				DELETE_OBJECT(&tnt_1);
@@ -5023,10 +5023,10 @@ void umberto(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
@@ -5042,18 +5042,18 @@ void umberto(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 						SET_TEXT_CENTRE(1); // задаём центр текста
 						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
 						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
 						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
@@ -5090,12 +5090,10 @@ void umberto(void)
 }
 void main(void)
 {
-	//THIS_SCRIPT_SHOULD_BE_SAVED();
 	if (G_CUBAN < 6)
 	{
 		umberto();
 	}
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

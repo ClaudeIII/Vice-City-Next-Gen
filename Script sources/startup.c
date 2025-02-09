@@ -1,16 +1,8 @@
-/***********************************************************************
-			Fully stripped startup script
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
-
-#define MAINSCRIPT "main"
-
 
 void InitZones(void)
 {
@@ -435,16 +427,14 @@ void main(void)
 {
 	// create player
 	Player plind;
-	CREATE_PLAYER(0, -1213.0, 38.0, 4.23, &plind);
-	SET_CHAR_COORDINATES(GetPlayerPed(), -1213.0, 38.0, 4.23);
-	SET_CHAR_HEADING(GetPlayerPed(), 90.0);
+	CREATE_PLAYER(0, 556.13, -309.68, 5.41, &plind);
 	// set zones data
 	InitZones();
     // load main script
-	REQUEST_SCRIPT(MAINSCRIPT);
-	while (!HAS_SCRIPT_LOADED(MAINSCRIPT)) WAIT(0);
-	uint script = START_NEW_SCRIPT(MAINSCRIPT, 1024);
-	MARK_SCRIPT_AS_NO_LONGER_NEEDED(MAINSCRIPT);
+	REQUEST_SCRIPT("main");
+	while (!HAS_SCRIPT_LOADED("main")) WAIT(0);
+	uint script = START_NEW_SCRIPT("main", 1024);
+	MARK_SCRIPT_AS_NO_LONGER_NEEDED("main");
 	// return to the loading process
 	return;
 }

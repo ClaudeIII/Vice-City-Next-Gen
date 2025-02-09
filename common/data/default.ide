@@ -8,6 +8,10 @@ w_hammer,		w_hammer,		null,			1, 	50, 	0
 w_chnsaw,		w_chnsaw,		chnsaw,			1,	50,	0
 w_knife,		w_knife,		null,			1,	50,	0
 w_cleaver,		w_cleaver,		null,			1,	50,	0
+w_katana, 		w_katana, 		null,			1, 	50, 	0
+w_machete, 		w_machete, 		null,			1, 	50, 	0
+w_knuckle, 		w_knuckle, 		null,			1, 	50, 	0
+w_screwdriver, 		w_screwdriver, 		null,			1, 	50, 	0
 
 # projectiles
 w_grenade,		w_grenade,		throw_grenade,		1,	100,	0
@@ -16,26 +20,21 @@ cj_rpg_rocket,		cj_rpg_rocket,		throw_grenade,		1,	100,	0
 w_e1_grenade,		w_e1_glauncher,		throw_grenade,		1,	100,	0
 w_e1_pipebomb,		w_e1_pipebomb,		throw_grenade,		1,	100,	0
 w_e2_stickybomb,	w_e2_stickybomb,	throw_grenade,		1,	100,	0
-w_e2_rocket,		w_e2_rocket,		throw_grenade,		1,	100,	0
 
 # handguns
 w_glock,		w_glock,		gun@handgun,		1,	30,	0
 w_silenced,		w_silenced,		gun@handgun,		1,	30,	0
 w_eagle,		w_eagle,		gun@deagle,		1,	30,	0
-w_e1_cz75,		w_e1_cz75,		gun@cz75,		1,	30,	0
-w_e2_44amag,		w_e2_44amag,		gun@44A,		1,	30,	0
+reserved,		reserved,		gun@deagle,		1,	30,	0
 
 # shotguns
 w_pumpshot,		w_pumpshot,		gun@baretta,		1,	50,	0
 w_shotgun,		w_shotgun,		gun@shotgun,		1,	50,	0
-w_e1_sawnoff,		w_e1_sawnoff,		gun@sawnoff,		1,	30,	0
-w_e1_sweeper,		w_e1_sweeper,		gun@test_gun,		1,	30,	0
-w_e1_pumpshot,		w_e1_pumpshot,		gun@baretta,		1,	50,	0
-w_e2_aa12,		w_e2_aa12,		gun@aa12,		1,	50,	0
-w_e2_aa12_exp,		w_e2_aa12,		gun@aa12,		1,	50,	0
+w_buddyshot,		w_buddyshot,		gun@baretta,		1,	50,	0
 
 # sub-machineguns
 w_uzi,			w_uzi,			gun@uzi,		1,	30,	0
+w_tec9,			w_tec9,			gun@cz75,		1,	30,	0
 w_mp5,			w_mp5,			gun@mp5k,		1,	30,	0
 w_mp5k,			w_mp5k,			gun@mp5k,		1,	50,	0
 w_e2_uzi,		w_e2_uzi,		gun@GOLD_UZI,		1,	50,	0
@@ -56,9 +55,6 @@ rpg,			rpg,			gun@rocket,		1,	100,	0
 flame,			flame,			gun@minigun,		1,	30,	0
 minigun,		minigun,		gun@minigun,		1,	30,	0
 w_e1_glauncher,		w_e1_glauncher,		gun@grnde_launch,	1,	100,	0
-
-# specials
-#bomb,			bomb,			throw_grenade,		1,	50,	0
 
 AMB_COFFEE,		AMB_COFFEE,		AMB@COFFEE_HOLD,	1,	50,	0
 CJ_CAMERA,		CJ_CAMERA,		AMB@TOURIST_HOLD,	1,	50,	0
@@ -136,6 +132,10 @@ w_bat,			0,	CM_WEAPONS_BASEBALL_BAT
 w_cue,			0,	CM_WEAPONS_POOLCUE
 w_knife,		0,	CM_WEAPONS_KNIFE
 w_cleaver,		0,	CM_WEAPONS_KNIFE
+w_katana,		0,	CM_WEAPONS_KNIFE
+w_machete,		0,	CM_WEAPONS_KNIFE
+w_knuckle,		0,	CM_WEAPONS_KNIFE
+w_screwdriver,		0,	CM_WEAPONS_KNIFE
 w_grenade,		0,	CM_WEAPONS_GRENADE
 w_molotov,		0,	CM_WEAPONS_MOLOTOV
 cj_rpg_rocket,		0,	CM_WEAPONS_GRENADE
@@ -145,25 +145,20 @@ w_e2_stickybomb,	0,	CM_WEAPONS_STICKY_BOMB
 w_glock,		0,	CM_WEAPONS_PISTOL
 w_silenced,		0,	CM_WEAPONS_PISTOL
 w_eagle,		0,	CM_WEAPONS_PISTOL
-w_e1_cz75,		0,	CM_WEAPONS_PISTOL
-w_e2_44amag,		0,	CM_WEAPONS_44A
 w_pumpshot,		0,	CM_WEAPONS_SHOTGUN
 w_shotgun,		0,	CM_WEAPONS_SHOTGUN
-w_e1_sawnoff,		0,	CM_WEAPONS_SAWN_OFF
-w_e1_sweeper,		0,	CM_WEAPONS_ASS_SHOT
-w_e1_pumpshot,		0,	CM_WEAPONS_SHOTGUN
-w_e2_aa12,		0,	CM_WEAPONS_ASS_SHOT
-w_e2_aa12_exp,		0,	CM_WEAPONS_ASS_SHOT
 w_uzi,			0,	CM_WEAPONS_SMG
+w_tec9,			0,	CM_WEAPONS_SMG
 w_mp5,			0,	CM_WEAPONS_SMG
-w_e2_p90,		0,	CM_WEAPONS_P90
+w_mp5k,			0,	CM_WEAPONS_SMG
 w_e2_uzi,		0,	CM_WEAPONS_GOLD_UZI
 w_ak47,			0,	CM_WEAPONS_AK47
 w_m4,			0,	CM_WEAPONS_M4
+w_aug,			0,	CM_WEAPONS_M4
+w_ruger,		0,	CM_WEAPONS_AK47
 w_e2_m249,		0,	CM_WEAPONS_M249
 w_psg1,			0,	CM_WEAPONS_SNIPER_RIFLE
 w_rifle,		0,	CM_WEAPONS_SNIPER_RIFLE
-w_e2_dsr1,		0,	CM_WEAPONS_DSR1
 rpg,			0,	CM_WEAPONS_ROCKET_LAUNCHER
 flame,			0,	CM_WEAPONS_FLAME_THROWER
 minigun,		0,	CM_WEAPONS_MINIGUN

@@ -1,7 +1,3 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
@@ -74,7 +70,6 @@ void telephone(void)
 	uint AudID;
 	Blip phone, phone2;
 
-	WAIT(3000);
 	while(true)
 	{
 		WAIT(0);
@@ -95,9 +90,9 @@ void telephone(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(470.635, -490.757, 5.01, &phone);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(phone, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(470.635, -490.757, 5.01, &phone);
+				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);
+				CHANGE_BLIP_SCALE(phone, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "LG_25");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -144,7 +139,7 @@ void telephone(void)
 
 				// катсцена разговора по телефону
 				uint PedM1 = MODEL_M_Y_FF_WSPIZZA_R;// развозчик пиццы
-				uint CarM1 = MODEL_HELLFURY;//Переменная "Car2" = модели машины
+				uint CarM1 = MODEL_HELLFURY;//Переменная "Car2" = модели
 				uint ObjM1 = pizza_box_1; // коробка пиццы
 				uint trubka = cj_handset_one;
 				uint time_r;
@@ -162,7 +157,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 					{
 						break;
 					}
@@ -174,8 +169,8 @@ void telephone(void)
 				SET_CHAR_COORDINATES(GetPlayerPed(), 470.635, -490.757, 5.422);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 0.1);
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, 470.667, -490.582, 5.321 ); // куда смотрит камера
-				SET_CAM_POS			( camera, 467.434, -493.182, 7.424);//расположение камеры
+				POINT_CAM_AT_COORD	( camera, 470.667, -490.582, 5.321 );
+				SET_CAM_POS			( camera, 467.434, -493.182, 7.424);
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -227,12 +222,12 @@ void telephone(void)
 				CLEAR_PRINTS();
 				PRINT_STRING_IN_STRING("string", "ASM1_7", 5000, 1);//~g~Carl Pearson, Pizza Delivery Man. Kill him before he completes his deliveries.
 
-				// загружаем модель педа
-				REQUEST_MODEL(PedM1);//загрузка модели любого педа из переменной
+				// загружаем модель
+				REQUEST_MODEL(PedM1);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
 
 				// загружаем модель транспорта
-				REQUEST_MODEL(CarM1);//загрузка модели машины из переменной
+				REQUEST_MODEL(CarM1);//загрузка модели из переменной
 				while (!HAS_MODEL_LOADED(CarM1));//проверка "машина загрузилась" если нет то начанаем с начало
 
 				// загружаем модель пиццы
@@ -240,14 +235,14 @@ void telephone(void)
 				while (!HAS_MODEL_LOADED(ObjM1)) WAIT(0);
 
 				// создаём транспорт 
-				CREATE_CAR(CarM1, 462.71, -942.87, 5.27, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				SET_CAR_HEADING(car1, 267.0);//градус поворота машины
-				CHANGE_CAR_COLOUR( car1, 28, 127 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car1, 127, 127 );//цвет отрожений машины
+				CREATE_CAR(CarM1, 462.71, -942.87, 5.27, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				SET_CAR_HEADING(car1, 267.0);//градус поворота
+				CHANGE_CAR_COLOUR( car1, 28, 127 );//цвет
+				SET_EXTRA_CAR_COLOURS( car1, 127, 127 );//цвет отрожений
 				//TURN_OFF_VEHICLE_EXTRA( car1, 9, 0 );//активируем внешний вид "PIZZABOY"
 
-				// создаём педа в транспорте
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём педа за рулём автомобиля
+				// создаём в транспорте
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
 				TASK_CAR_DRIVE_WANDER(ped1, car1, 20.0, 2);// пед едит куда-то
 
 				// создаём модель пиццы
@@ -258,7 +253,7 @@ void telephone(void)
 				CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 				CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
-				CHANGE_BLIP_SCALE(phone, 0.77999990); // масштаб иконки на радаре
+				CHANGE_BLIP_SCALE(phone, 0.77999990);
 				Pizza_N = 25;
 				skip = 0;
 				Text = 0;
@@ -355,15 +350,15 @@ void telephone(void)
 				REMOVE_TXD( textur );
 
 				// выгружвем модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(ObjM1);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(ObjM1);
 
-				// выгружвем педа
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
+				// выгружвем
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 
 				// выгружвем машину
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 
 				// удаляем пиццу
 				DELETE_OBJECT(&PIZZA_1);
@@ -371,7 +366,7 @@ void telephone(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -390,7 +385,7 @@ void telephone(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -427,9 +422,9 @@ void telephone(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(915.516, 777.734, 5.019, &phone);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(phone, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(915.516, 777.734, 5.019, &phone);
+				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);
+				CHANGE_BLIP_SCALE(phone, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "LG_25");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -480,7 +475,7 @@ void telephone(void)
 
 				// катсцена разговора по телефону
 				uint PedM1 = MODEL_F_Y_PVILLBO_02;// пед
-				uint CarM1 = MODEL_COMET;//Переменная "Car2" = модели машины
+				uint CarM1 = MODEL_COMET;//Переменная "Car2" = модели
 				uint trubka = cj_handset_one;
 				uint car_HP, cry_ped, PTFX, PTFX2;
 
@@ -496,7 +491,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 					{
 						break;
 					}
@@ -508,8 +503,8 @@ void telephone(void)
 				SET_CHAR_COORDINATES(GetPlayerPed(), 915.516, 777.734, 6.05);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 0.1);
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, 915.481, 778.163, 6.069 ); // куда смотрит камера
-				SET_CAM_POS			( camera, 916.806, 776.096, 7.036);//расположение камеры
+				POINT_CAM_AT_COORD	( camera, 915.481, 778.163, 6.069 );
+				SET_CAM_POS			( camera, 916.806, 776.096, 7.036);
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -562,26 +557,26 @@ void telephone(void)
 				CLEAR_PRINTS();
 				PRINT_STRING_IN_STRING("string", "ASM2_1", 5000, 1);//~g~Mrs. Dawson will be leaving the Jewelry shop in Vice Point soon. Kill her. It must look like a car accident.
 
-				// загружаем модель педа
-				REQUEST_MODEL(PedM1);//загрузка модели любого педа из переменной
+				// загружаем модель
+				REQUEST_MODEL(PedM1);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
 
 				// загружаем модель транспорта
-				REQUEST_MODEL(CarM1);//загрузка модели машины из переменной
+				REQUEST_MODEL(CarM1);//загрузка модели из переменной
 				while (!HAS_MODEL_LOADED(CarM1));//проверка "машина загрузилась" если нет то начанаем с начало
 
 				// создаём транспорт 
-				CREATE_CAR(CarM1, 299.905, -791.79, 5.445, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				CHANGE_CAR_COLOUR( car1, 132, 132 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car1, 29, 29 );//цвет отрожений машины
+				CREATE_CAR(CarM1, 299.905, -791.79, 5.445, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				CHANGE_CAR_COLOUR( car1, 132, 132 );//цвет
+				SET_EXTRA_CAR_COLOURS( car1, 29, 29 );//цвет отрожений
 
-				// создаём педа
-				CREATE_CHAR (26, PedM1, 299.976, -785.672, 5.06, &ped1, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
+				// создаём
+				CREATE_CHAR (26, PedM1, 299.976, -785.672, 5.06, &ped1, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
 
-				ADD_BLIP_FOR_COORD(836.844, 756.51, 4.62, &phone);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(phone, 0.6); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(836.844, 756.51, 4.62, &phone);
+				CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(phone, 5);
+				CHANGE_BLIP_SCALE(phone, 0.6);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "NE_POINT");//иконка на радаре называние в истории карты "Фургон ТОПФАН"
 
 				while(true)
@@ -598,9 +593,9 @@ void telephone(void)
 
 							// перемещаем транспорт
 							SET_CAR_COORDINATES(car1, 826.905, 735.995, 5.582);
-							SET_CAR_HEADING(car1, 180.0);//градус поворота машины
+							SET_CAR_HEADING(car1, 180.0);//градус поворота
 
-							// перемещаем педа
+							// перемещаем
 							SET_CHAR_COORDINATES(ped1, 820.497, 735.714, 6.039);// перемещаем игрока
 							SET_CHAR_HEADING(ped1, -95.0);
 							
@@ -610,8 +605,8 @@ void telephone(void)
 							SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 1);// Игрок бессмертный	
 							SET_WIDESCREEN_BORDERS( 1 );
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, 836.844, 756.511, 5.244 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 830.751, 748.454, 9.852);//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 836.844, 756.511, 5.244 );
+							SET_CAM_POS			( camera, 830.751, 748.454, 9.852);
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -624,8 +619,8 @@ void telephone(void)
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM2_8", 5000, 1);//~g~You must make Mrs. Dawson's death look like an accident. Do not use any weapons.
 
-							POINT_CAM_AT_COORD	( camera, 820.785, 735.709, 6.24 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 812.698, 736.287, 5.794);//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 820.785, 735.709, 6.24 );
+							SET_CAM_POS			( camera, 812.698, 736.287, 5.794);
 							SETTIMERA(0);
 							
 							while (TRUE)
@@ -642,8 +637,8 @@ void telephone(void)
 								{
 									//Тут камера 3
 									set_cam = 1;
-									POINT_CAM_AT_COORD	( camera, 824.363, 733.846, 5.657 ); // куда смотрит камера
-									SET_CAM_POS			( camera, 825.713, 743.068, 7.798);//расположение камеры
+									POINT_CAM_AT_COORD	( camera, 824.363, 733.846, 5.657 );
+									SET_CAM_POS			( camera, 825.713, 743.068, 7.798);
 								}
 								else if ((TIMERA() > 7000) || (HAS_DEATHARREST_EXECUTED()))
 								{
@@ -653,13 +648,13 @@ void telephone(void)
 							}
 
 							SetTime(3500);
-							WARP_CHAR_INTO_CAR(ped1, car1);// переносим педа за руль
+							WARP_CHAR_INTO_CAR(ped1, car1);// переносим за руль
 							TASK_CAR_DRIVE_WANDER(ped1, car1, 20.0, 2);// пед едит куда-то
 							LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
 
 							//Тут камера 4
-							POINT_CAM_AT_COORD	( camera, 826.621, 732.738, 6.511 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 828.651, 749.299, 7.186);//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 826.621, 732.738, 6.511 );
+							SET_CAM_POS			( camera, 828.651, 749.299, 7.186);
 
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM2_10", 5000, 1);//~g~When her car bursts into flames make your self scarce!
@@ -677,7 +672,7 @@ void telephone(void)
 							CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(phone, 19);   //цвет иконка на радаре (0=белая)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
-							CHANGE_BLIP_SCALE(phone, 0.77999990); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(phone, 0.77999990);
 							Text = 0;
 							break;
 						}
@@ -821,7 +816,7 @@ void telephone(void)
 						}
 
 						// ------------------------- провел миссии -------------------------
-						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты педа в переменную
+						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
 						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);//проверка "игрок на координатах"
 						if (PlayR > 200)
@@ -855,7 +850,7 @@ void telephone(void)
 							PRINT_STRING_IN_STRING("string", "ASM2_3", 5000, 1);//~g~She's gonna blow! Get out of there!
 							break;
 						}
-						else if (!IS_CHAR_SITTING_IN_ANY_CAR(ped1))//дебаг с выходом из машины
+						else if (!IS_CHAR_SITTING_IN_ANY_CAR(ped1))//дебаг с выходом из
 						{
 							EXPLODE_CHAR_HEAD(ped1);
 							skip = 2;// переменная пропуска
@@ -884,7 +879,7 @@ void telephone(void)
 					{
 						WAIT(0);
 						ABORT_SCRIPTED_CONVERSATION( 0 );
-						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты педа в переменную
+						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
 						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);//проверка "игрок на координатах"
 						if (PlayR > 80)
@@ -903,7 +898,7 @@ void telephone(void)
 						}
 					}
 				}
-				WAIT(10);
+				WAIT(0);
 				REMOVE_BLIP(phone);//Удаляем иконку на радаре
 				ABORT_SCRIPTED_CONVERSATION( 0 );
 
@@ -916,18 +911,18 @@ void telephone(void)
 				REMOVE_PTFX(PTFX2);
 
 				// выгружвем модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
-				// выгружвем педа
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
+				// выгружвем
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 
 				// выгружвем машину
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -946,7 +941,7 @@ void telephone(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -982,9 +977,9 @@ void telephone(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(470.635, -490.757, 5.01, &phone);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(phone, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(470.635, -490.757, 5.01, &phone);
+				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);
+				CHANGE_BLIP_SCALE(phone, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "LG_25");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -1037,7 +1032,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 					{
 						break;
 					}
@@ -1049,8 +1044,8 @@ void telephone(void)
 				SET_CHAR_COORDINATES(GetPlayerPed(), 470.635, -490.757, 5.422);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 0.1);
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, 470.667, -490.582, 5.321 ); // куда смотрит камера
-				SET_CAM_POS			( camera, 467.434, -493.182, 7.424);//расположение камеры
+				POINT_CAM_AT_COORD	( camera, 470.667, -490.582, 5.321 );
+				SET_CAM_POS			( camera, 467.434, -493.182, 7.424);
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1120,10 +1115,10 @@ void telephone(void)
 				uint PedM4 = MODEL_M_M_CHINATOWN_01;// пед в костюме 2
 				uint PedM5 = MODEL_IG_DARKO;// пед в костюме 2
 
-				uint CarM1 = MODEL_PCJ;//Переменная "Car2" = модели машины
-				uint CarM2 = MODEL_STOCKADE;//Переменная "Car2" = модели машины
-				uint CarM3 = MODEL_BOBCAT;//Переменная "Car2" = модели машины
-				uint CarM4 = MODEL_TROPIC;//Переменная "Car2" = модели машины
+				uint CarM1 = MODEL_PCJ;//Переменная "Car2" = модели
+				uint CarM2 = MODEL_STOCKADE;//Переменная "Car2" = модели
+				uint CarM3 = MODEL_BOBCAT;//Переменная "Car2" = модели
+				uint CarM4 = MODEL_TROPIC;//Переменная "Car2" = модели
 
 				//загружаем модели педов
 				REQUEST_MODEL(PedM1);// 
@@ -1159,10 +1154,10 @@ void telephone(void)
 				WAIT(100);
 
 				// красим транспорт
-				CHANGE_CAR_COLOUR( car1, 133, 133 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений машины
-				CHANGE_CAR_COLOUR( car3, 0, 29 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );//цвет отрожений машины
+				CHANGE_CAR_COLOUR( car1, 133, 133 );//цвет
+				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car3, 0, 29 );//цвет
+				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );//цвет отрожений
 
 				// создаём моделей педов
 				CREATE_CHAR (26, PedM1, 286.386, -785.672, 5.56, &ped1, TRUE);// строитель
@@ -1177,11 +1172,11 @@ void telephone(void)
 				CREATE_PICKUP_ROTATE(w_uzi, 3, 300, 390.041, -523.375, 4.736, 90.0, 0.0, -40.0, &sweap_2);// UZI
 
 				// иконка над оружием
-				ADD_BLIP_FOR_COORD(390.616, -521.159, 5.01, &phone);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(phone, 3);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(phone, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(390.616, -521.159, 5.01, &phone);
+				CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(phone, 3);
+				CHANGE_BLIP_SCALE(phone, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");
 
 				SETTIMERB( 0 );
 				SETTIMERA( 0 );
@@ -1206,8 +1201,8 @@ void telephone(void)
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "ASM3_13", 5000, 1);//~g~Mike Griffin is working on an advertising board in Washington.
 						
-						// переносим педа
-						SET_CHAR_COORDINATES(ped1, 380.96, -352.06, 21.45);// перемещаем педа
+						// переносим
+						SET_CHAR_COORDINATES(ped1, 380.96, -352.06, 21.45);// перемещаем
 						SET_CHAR_HEADING(ped1, 278.5);
 
 						//анимация на педе
@@ -1219,7 +1214,7 @@ void telephone(void)
 						CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 						CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
-						CHANGE_BLIP_SCALE(phone, 0.6); // масштаб иконки на радаре
+						CHANGE_BLIP_SCALE(phone, 0.6);
 						PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 						stage = 1;
 					}
@@ -1239,7 +1234,7 @@ void telephone(void)
 							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
-							CHANGE_BLIP_SCALE(phone, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(phone, 0.6);
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							stage = 2;
 						}
@@ -1292,13 +1287,13 @@ void telephone(void)
 							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
-							CHANGE_BLIP_SCALE(phone, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(phone, 0.6);
 
 							ADD_BLIP_FOR_CHAR(ped4, &phone2);
 							CHANGE_BLIP_SPRITE(phone2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(phone2, 5);   //цвет иконка на радаре (0=белая)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone2, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
-							CHANGE_BLIP_SCALE(phone2, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(phone2, 0.6);
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							Text = 0;
 							Text2 = 0;
@@ -1338,7 +1333,7 @@ void telephone(void)
 							TASK_CAR_DRIVE_WANDER(ped3, car3, 40.0, 2);// пед едит куда-то
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM3_20", 5000, 1);//~g~They have seen you! Make sure you waste them both!
-							// вооружаем педа
+							// вооружаем
 							TASK_LEAVE_CAR(ped4, car3);
 							UpdateWeaponOfPed(ped4, WEAPON_SHOTGUN);
 							SET_CURRENT_CHAR_WEAPON(ped4, WEAPON_SHOTGUN, TRUE);
@@ -1357,7 +1352,7 @@ void telephone(void)
 
 							SET_CAR_COORDINATES(car4, 469.2, -135.4, 0.79);// перемещаем яхту
 							SET_CAR_HEADING(car4, 131.2);
-							// крепим к яхте педа
+							// крепим к яхте
 							ATTACH_PED_TO_CAR( ped5, car4, 0, 0, -3.7, 2.0, 3.0, 90, 1, 1 );
 							//ATTACH_PED_TO_CAR(ped5, car4, 0, 0, -3.7, 2.0, 0, 0);
 							FREEZE_CHAR_POSITION(ped5, 1);
@@ -1368,7 +1363,7 @@ void telephone(void)
 							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
-							CHANGE_BLIP_SCALE(phone, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(phone, 0.6);
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							Text = 0;
 							Text2 = 0;
@@ -1412,7 +1407,7 @@ void telephone(void)
 							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
-							CHANGE_BLIP_SCALE(phone, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(phone, 0.6);
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							Text = 0;
 							Text2 = 0;
@@ -1584,35 +1579,35 @@ void telephone(void)
 				REMOVE_PICKUP(sweap_2);// выгружаем оружие
 
 				// выгружаем из памяти модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);//выгружаем модель педа
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);
 
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель машины
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);//выгружаем модель машины
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM4);//выгружаем модель машины
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM4);
 
 				// выгружаем из памяти педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
 
 				// выгружаем из памяти транспорт
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car5);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -1631,7 +1626,7 @@ void telephone(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -1668,9 +1663,9 @@ void telephone(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-1050.36, -291.03, 8.83, &phone);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(phone, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-1050.36, -291.03, 8.83, &phone);
+				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);
+				CHANGE_BLIP_SCALE(phone, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "LG_25");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -1729,7 +1724,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 					{
 						break;
 					}
@@ -1740,8 +1735,8 @@ void telephone(void)
 				SET_CHAR_COORDINATES(GetPlayerPed(), -1050.36, -291.03, 9.374);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), 175.0);
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, -1051.469, -292.323, 10.164 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -1051.447, -289.012, 11.326);//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -1051.469, -292.323, 10.164 );
+				SET_CAM_POS			( camera, -1051.447, -289.012, 11.326);
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1761,8 +1756,8 @@ void telephone(void)
 				START_SCRIPT_CONVERSATION(1, 1);
 				SetSpeech();
 
-				POINT_CAM_AT_COORD	( camera, -1064.856, -280.408, 9.474 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -1045.159, -293.486, 10.223);//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -1064.856, -280.408, 9.474 );
+				SET_CAM_POS			( camera, -1045.159, -293.486, 10.223);
 
 				NEW_SCRIPTED_CONVERSATION();
 				ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "NIKO");
@@ -1770,8 +1765,8 @@ void telephone(void)
 				START_SCRIPT_CONVERSATION(1, 1);
 				SetSpeech();
 
-				POINT_CAM_AT_COORD	( camera, -1051.48, -290.806, 9.85 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -1051.455, -294.347, 11.756);//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -1051.48, -290.806, 9.85 );
+				SET_CAM_POS			( camera, -1051.455, -294.347, 11.756);
 
 				NEW_SCRIPTED_CONVERSATION();
 				ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
@@ -1828,62 +1823,62 @@ void telephone(void)
 				uint PedM3 = MODEL_M_M_BUSINESS_02;// телохранитель
 				uint PedM4 = MODEL_M_M_BUSINESS_03;// пед в костюме 2
 
-				uint CarM1 = MODEL_ADMIRAL;//Переменная "Car2" = модели машины
-				uint CarM2 = MODEL_WASHINGTON;//Переменная "Car2" = модели машины
+				uint CarM1 = MODEL_ADMIRAL;//Переменная "Car2" = модели
+				uint CarM2 = MODEL_WASHINGTON;//Переменная "Car2" = модели
 
 				textur = LOAD_TXD( "sunshine_race" );
 				fon = GET_TEXTURE( textur, "fon_hud" );
 
-				REQUEST_MODEL(PedM1);//загрузка модели любого педа из переменной
+				REQUEST_MODEL(PedM1);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
 
-				REQUEST_MODEL(PedM2);//загрузка модели любого педа из переменной
+				REQUEST_MODEL(PedM2);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
 
-				REQUEST_MODEL(PedM3);//загрузка модели любого педа из переменной
+				REQUEST_MODEL(PedM3);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
 
-				REQUEST_MODEL(PedM4);//загрузка модели любого педа из переменной
+				REQUEST_MODEL(PedM4);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM4));////проверка "пед загрузился" если нет то начанаем с начало
 
-				CREATE_CHAR (26, PedM1, 290.008, -783.209, 5.06, &ped1, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, 286.386, -785.672, 5.06, &ped2, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM3, 289.619, -785.672, 5.06, &ped3, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM4, 292.961, -785.672, 5.06, &ped14, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM3, 296.473, -785.672, 5.06, &ped15, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM3, 299.976, -785.672, 5.06, &ped16, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM4, 286.386, -783.209, 5.06, &ped17, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
+				CREATE_CHAR (26, PedM1, 290.008, -783.209, 5.06, &ped1, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, 286.386, -785.672, 5.06, &ped2, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM3, 289.619, -785.672, 5.06, &ped3, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM4, 292.961, -785.672, 5.06, &ped14, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM3, 296.473, -785.672, 5.06, &ped15, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM3, 299.976, -785.672, 5.06, &ped16, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM4, 286.386, -783.209, 5.06, &ped17, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
 
-				REQUEST_MODEL(CarM1);//загрузка модели машины из переменной
+				REQUEST_MODEL(CarM1);//загрузка модели из переменной
 				while (!HAS_MODEL_LOADED(CarM1));//проверка "машина загрузилась" если нет то начанаем с начало
 
-				REQUEST_MODEL(CarM2);//загрузка модели машины из переменной
+				REQUEST_MODEL(CarM2);//загрузка модели из переменной
 				while (!HAS_MODEL_LOADED(CarM2));//проверка "машина загрузилась" если нет то начанаем с начало
 
-				CREATE_CAR(CarM1, 286.232, -791.79, 5.445, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				CREATE_CAR(CarM1, 289.629, -791.79, 5.445, &car2, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				CREATE_CAR(CarM1, 293.025, -791.79, 5.445, &car3, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				CREATE_CAR(CarM2, 296.422, -791.79, 5.445, &car4, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
+				CREATE_CAR(CarM1, 286.232, -791.79, 5.445, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CAR(CarM1, 289.629, -791.79, 5.445, &car2, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CAR(CarM1, 293.025, -791.79, 5.445, &car3, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CAR(CarM2, 296.422, -791.79, 5.445, &car4, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
 
 				// цвет машин
-				CHANGE_CAR_COLOUR( car1, 0, 0 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений машины
-				CHANGE_CAR_COLOUR( car2, 0, 0 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car2, 133, 133 );//цвет отрожений машины
-				CHANGE_CAR_COLOUR( car3, 0, 0 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );//цвет отрожений машины
-				CHANGE_CAR_COLOUR( car4, 0, 0 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car4, 133, 133 );//цвет отрожений машины
+				CHANGE_CAR_COLOUR( car1, 0, 0 );//цвет
+				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car2, 0, 0 );//цвет
+				SET_EXTRA_CAR_COLOURS( car2, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car3, 0, 0 );//цвет
+				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car4, 0, 0 );//цвет
+				SET_EXTRA_CAR_COLOURS( car4, 133, 133 );//цвет отрожений
 
 				REQUEST_ANIMS( "amb@hang_str_f_idls" );//загружаем файл с анимацией
 				while (!HAVE_ANIMS_LOADED( "amb@hang_str_f_idls" )) WAIT(0);
 				REQUEST_ANIMS( "amb@book" );//загружаем файл с анимацией
 				while (!HAVE_ANIMS_LOADED( "amb@book" )) WAIT(0);
 
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM3, &ped4);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM4, &ped5);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM4, &ped6);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM3, &ped13);//создаём педа за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM3, &ped4);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM4, &ped5);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM4, &ped6);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM3, &ped13);//создаём за рулём автомобиля
 
 				CREATE_CHAR_AS_PASSENGER(car1, 1, PedM4, 0, &ped7);
 				CREATE_CHAR_AS_PASSENGER(car2, 1, PedM3, 0, &ped8);
@@ -1962,8 +1957,8 @@ void telephone(void)
 
 						SET_WIDESCREEN_BORDERS( 1 );
 						CREATE_CAM( 14, &camera );
-						POINT_CAM_AT_COORD	( camera, -987.341, -341.461, 15.845 ); // куда смотрит камера
-						SET_CAM_POS			( camera, -1053.5, -289.078, 11.48);//расположение камеры
+						POINT_CAM_AT_COORD	( camera, -987.341, -341.461, 15.845 );
+						SET_CAM_POS			( camera, -1053.5, -289.078, 11.48);
 						SET_CAM_ACTIVE( camera, 1 );
 						SET_CAM_PROPAGATE( camera, 1 );
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1974,23 +1969,23 @@ void telephone(void)
 
 						if (Text == 0)
 						{
-							POINT_CAM_AT_COORD	( camera, -987.341, -341.461, 16.187 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -984.484, -340.774, 16.786);//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -987.341, -341.461, 16.187 );
+							SET_CAM_POS			( camera, -984.484, -340.774, 16.786);
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM4_17", 5000, 1);//~g~Once the conversation has finished kill the person she spoke to, but do not kill her.
 							SetTime2(6000);
 						}
 						if (Text == 0)
 						{
-							POINT_CAM_AT_COORD	( camera, -987.341, -341.461, 16.084 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -959.011, -295.461, 10.037);//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -987.341, -341.461, 16.084 );
+							SET_CAM_POS			( camera, -959.011, -295.461, 10.037);
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM4_18", 5000, 1);//~g~Once the target is dead retrieve his briefcase and take it to Ammu-Nation in Downtown.
 							SetTime2(6000);
 						}
 						if (Text == 0)
 						{
-							POINT_CAM_AT_COORD	( camera, -987.341, -341.461, 15.845 ); // куда смотрит камера
+							POINT_CAM_AT_COORD	( camera, -987.341, -341.461, 15.845 );
 							SET_CAM_POS			( camera, -1018.073, -318.076, 15.348);// расположение камеры
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM4_19", 5000, 1);//~g~Keep your distance from the target! Use the distance bar in the upper right corner of the screen.
@@ -2016,7 +2011,7 @@ void telephone(void)
 						CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 						CHANGE_BLIP_COLOUR(phone, 19);   //цвет иконка на радаре (0=белая)
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Связной"
-						CHANGE_BLIP_SCALE(phone, 0.77999990); // масштаб иконки на радаре
+						CHANGE_BLIP_SCALE(phone, 0.77999990);
 						SETTIMERB( 0 );
 						Text = 0;
 						break;
@@ -2151,7 +2146,7 @@ void telephone(void)
 						WAIT(0);
 						if (IS_CHAR_DEAD(ped2))
 						{
-							// из педа выпадает кейс
+							// из выпадает кейс
 							GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
 							GET_GROUND_Z_FOR_3D_COORD(PedX, PedY, PedZ, &PedZ);
 
@@ -2214,13 +2209,13 @@ void telephone(void)
 							ALTER_WANTED_LEVEL(GetPlayerIndex(), 3);
 							APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
 
-							ADD_BLIP_FOR_COORD(-234.027, 1728.927, 4.98, &phone);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+							ADD_BLIP_FOR_COORD(-234.027, 1728.927, 4.98, &phone);
+							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(phone, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(phone, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "NE_POINT");//иконка на радаре называние в истории карты "Телефонный звонок"
 							
-							// ставим машины охраны
+							// ставим охраны
 							SET_CAR_COORDINATES(car1, -749.967, -403.764, 9.373);// перемещаем игрока
 							SET_CAR_HEADING(car1, 90.0);
 							SET_CAR_COORDINATES(car2, -749.808, -412.417, 9.373);// перемещаем игрока
@@ -2312,7 +2307,7 @@ void telephone(void)
 							DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 							while (true)
 							{
-								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 								{
 									break;
 								}
@@ -2323,18 +2318,18 @@ void telephone(void)
 							GET_CHAR_COORDINATES(ped13,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
 							SET_WIDESCREEN_BORDERS( 1 );
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
-							SET_CAM_POS			( camera, -248.134, 1729.556, 6.535);//расположение камеры
+							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
+							SET_CAM_POS			( camera, -248.134, 1729.556, 6.535);
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
 							DO_SCREEN_FADE_IN( 1500 );// убирается затемнение экрана
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 
 							while (true)
 							{
 								GET_CHAR_COORDINATES(ped13,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
+								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
 								WAIT( 0 );
 								if ( TIMERA() > 4000 )
 								{
@@ -2345,8 +2340,8 @@ void telephone(void)
 							while (true)
 							{
 								GET_CHAR_COORDINATES(ped13,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
-								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
+								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 								{
 									break;
 								}
@@ -2400,41 +2395,41 @@ void telephone(void)
 				REMOVE_PICKUP(bag);// выгружаем оружие
 
 				// выгружаем из памяти модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель машины
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 
 				// выгружаем из памяти педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);
 
 				// выгружаем из памяти транспорт
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -2453,7 +2448,7 @@ void telephone(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -2489,9 +2484,9 @@ void telephone(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-544.91, 2.23, 4.81, &phone);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(phone, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-544.91, 2.23, 4.81, &phone);
+				CHANGE_BLIP_SPRITE(phone, BLIP_UNKNOWN_CONTACT);
+				CHANGE_BLIP_SCALE(phone, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "LG_25");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -2548,7 +2543,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 					{
 						break;
 					}
@@ -2559,8 +2554,8 @@ void telephone(void)
 				SET_CHAR_COORDINATES(GetPlayerPed(), -544.91, 2.23, 4.81);// перемещаем игрока
 				SET_CHAR_HEADING(GetPlayerPed(), -81.5);
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, -543.903, 2.267, 6.001 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -547.687, 1.584, 7.848);//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -543.903, 2.267, 6.001 );
+				SET_CAM_POS			( camera, -547.687, 1.584, 7.848);
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -2595,9 +2590,9 @@ void telephone(void)
 				CREATE_PICKUP( mission_keis, 22, -457.989, 15.962, 23.214, &bag, 0 );// сумка
 				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, -488.812, -83.308, 7.516, 0.0, 0.0, 7.2, &aid_1);//Аптека
 
-				uint CarM1 = MODEL_ADMIRAL;//Переменная "Car2" = модели машины
-				uint CarM2 = MODEL_PONY;//Переменная "Car2" = модели машины
-				uint CarM3 = MODEL_MAVERICK;//Переменная "Car2" = модели машины
+				uint CarM1 = MODEL_ADMIRAL;//Переменная "Car2" = модели
+				uint CarM2 = MODEL_PONY;//Переменная "Car2" = модели
+				uint CarM3 = MODEL_MAVERICK;//Переменная "Car2" = модели
 				uint barrel = barrel4;
 
 				uint PedM1 = MODEL_M_M_BUSINESS_02;// пед в костюме 1
@@ -2605,35 +2600,35 @@ void telephone(void)
 				uint PedM3 = MODEL_M_M_PHARBRON_01;// пед в костюме 3
 				uint PedM4 = MODEL_M_Y_GIRI_LO_01;// член банды Акул
 
-				REQUEST_MODEL(CarM1);//загрузка модели машины из переменной
+				REQUEST_MODEL(CarM1);//загрузка модели из переменной
 				while (!HAS_MODEL_LOADED(CarM1));//проверка "машина загрузилась" если нет то начанаем с начало
-				CREATE_CAR(CarM1, -505.284, 20.37, 5.356, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				SET_CAR_HEADING(car1, 5.0);//градус поворота машины
-				CHANGE_CAR_COLOUR( car1, 0, 0 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений машины
+				CREATE_CAR(CarM1, -505.284, 20.37, 5.356, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				SET_CAR_HEADING(car1, 5.0);//градус поворота
+				CHANGE_CAR_COLOUR( car1, 0, 0 );//цвет
+				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений
 
-				REQUEST_MODEL(CarM2);//загрузка модели машины из переменной
+				REQUEST_MODEL(CarM2);//загрузка модели из переменной
 				while (!HAS_MODEL_LOADED(CarM2));//проверка "машина загрузилась" если нет то начанаем с начало
-				CREATE_CAR(CarM2, -492.686, 5.85, 6.267, &car2, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				SET_CAR_HEADING(car2, 95.0);//градус поворота машины
+				CREATE_CAR(CarM2, -492.686, 5.85, 6.267, &car2, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				SET_CAR_HEADING(car2, 95.0);//градус поворота
 
-				REQUEST_MODEL(CarM3);//загрузка модели машины из переменной
+				REQUEST_MODEL(CarM3);//загрузка модели из переменной
 				while (!HAS_MODEL_LOADED(CarM3));//проверка "машина загрузилась" если нет то начанаем с начало
-				CREATE_CAR(CarM3, -439.053, 18.085, 23.481, &car3, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				SET_CAR_HEADING(car3, 5.0);//градус поворота машины
+				CREATE_CAR(CarM3, -439.053, 18.085, 23.481, &car3, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				SET_CAR_HEADING(car3, 5.0);//градус поворота
 
-				CREATE_CAR(CarM1, -937.7, -756.65, 9.53, &car4, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				SET_CAR_HEADING(car4, 76.0);//градус поворота машины
-				CHANGE_CAR_COLOUR( car4, 0, 0 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car4, 133, 133 );//цвет отрожений машины
+				CREATE_CAR(CarM1, -937.7, -756.65, 9.53, &car4, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				SET_CAR_HEADING(car4, 76.0);//градус поворота
+				CHANGE_CAR_COLOUR( car4, 0, 0 );//цвет
+				SET_EXTRA_CAR_COLOURS( car4, 133, 133 );//цвет отрожений
 
-				CREATE_CAR(CarM1, -492.283, 0.701, 6.266, &car5, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				SET_CAR_HEADING(car5, 95.0);//градус поворота машины
-				CHANGE_CAR_COLOUR( car5, 0, 0 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car5, 133, 133 );//цвет отрожений машины
+				CREATE_CAR(CarM1, -492.283, 0.701, 6.266, &car5, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				SET_CAR_HEADING(car5, 95.0);//градус поворота
+				CHANGE_CAR_COLOUR( car5, 0, 0 );//цвет
+				SET_EXTRA_CAR_COLOURS( car5, 133, 133 );//цвет отрожений
 
-				CREATE_CAR(CarM3, -935.69, -723.65, 13.03, &car6, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				SET_CAR_HEADING(car6, 302.0);//градус поворота машины
+				CREATE_CAR(CarM3, -935.69, -723.65, 13.03, &car6, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				SET_CAR_HEADING(car6, 302.0);//градус поворота
 				LOCK_CAR_DOORS(car6, 3); //блокируем двери автомобиля для игрока
 
 				REQUEST_MODEL(barrel);
@@ -2643,52 +2638,52 @@ void telephone(void)
 				CREATE_OBJECT_NO_OFFSET(barrel, -474.276, -28.857, 5.088, &barrel_3, TRUE);
 				CREATE_OBJECT_NO_OFFSET(barrel, -491.316, -39.302, 5.09, &barrel_4, TRUE);
 
-				REQUEST_MODEL(PedM1);//загрузка модели любого педа из переменной
+				REQUEST_MODEL(PedM1);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
-				CREATE_CHAR (26, PedM1, -504.208, 22.287, 5.197, &ped1, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
+				CREATE_CHAR (26, PedM1, -504.208, 22.287, 5.197, &ped1, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
 				SET_CHAR_HEADING(ped1, 98.5);
 
-				REQUEST_MODEL(PedM2);//загрузка модели любого педа из переменной
+				REQUEST_MODEL(PedM2);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
-				CREATE_CHAR (26, PedM2, -503.577, 18.338, 5.161, &ped2, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
+				CREATE_CHAR (26, PedM2, -503.577, 18.338, 5.161, &ped2, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
 				SET_CHAR_HEADING(ped2, 98.5);
 
-				REQUEST_MODEL(PedM3);//загрузка модели любого педа из переменной
+				REQUEST_MODEL(PedM3);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
-				CREATE_CHAR (26, PedM3, -455.159, 14.935, 23.907, &ped3, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
+				CREATE_CHAR (26, PedM3, -455.159, 14.935, 23.907, &ped3, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
 				SET_CHAR_HEADING(ped3, 68.5);
 
-				REQUEST_MODEL(PedM4);//загрузка модели любого педа из переменной
+				REQUEST_MODEL(PedM4);//загрузка модели любого из переменной
 				while (!HAS_MODEL_LOADED(PedM4));////проверка "пед загрузился" если нет то начанаем с начало
-				CREATE_CHAR (26, PedM4, -461.066, 14.043, 23.907, &ped4, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
+				CREATE_CHAR (26, PedM4, -461.066, 14.043, 23.907, &ped4, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
 				SET_CHAR_HEADING(ped4, -106.5);
 
-				CREATE_CHAR (26, PedM1, -492.001, -1.29, 6.108, &ped5, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, -492.665, 4.217, 6.186, &ped6, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM3, -476.242, -17.131, 6.267, &ped7, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM1, -487.712, -11.489, 6.262, &ped8, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, -493.399, -23.607, 5.496, &ped9, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM3, -495.069, -43.556, 5.243, &ped10, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM1, -491.706, -51.346, 5.481, &ped11, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, -502.987, -58.548, 4.928, &ped12, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM3, -499.182, -71.402, 6.993, &ped13, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM1, -494.798, -71.694, 6.981, &ped14, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, -489.305, -94.309, 10.624, &ped15, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM3, -476.489, -91.927, 11.093, &ped16, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM1, -444.421, -95.484, 10.468, &ped17, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, -441.473, -72.128, 10.377, &ped18, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM3, -449.371, -58.777, 14.305, &ped19, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM1, -445.028, -37.545, 14.305, &ped20, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, -451.341, -15.893, 23.867, &ped21, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM3, -446.177, -10.209, 23.867, &ped22, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM1, -458.958, -19.921, 19.459, &ped23, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, -465.429, -16.929, 17.32, &ped24, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах !!!!!!!!!
-				CREATE_CHAR (26, PedM3, -472.366, 20.89, 12.764, &ped25, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах !!!!!!!!!
-				CREATE_CHAR (26, PedM1, -483.657, -28.911, 7.022, &ped26, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, -473.936, -31.972, 5.475, &ped27, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR_INSIDE_CAR(car6, 1, PedM3, &ped28);//создаём педа за рулём автомобиля
-				CREATE_CHAR (26, PedM4, -461.393, 15.693, 23.907, &ped29, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-				CREATE_CHAR (26, PedM2, -455.371, 16.719, 23.907, &ped30, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
+				CREATE_CHAR (26, PedM1, -492.001, -1.29, 6.108, &ped5, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, -492.665, 4.217, 6.186, &ped6, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM3, -476.242, -17.131, 6.267, &ped7, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM1, -487.712, -11.489, 6.262, &ped8, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, -493.399, -23.607, 5.496, &ped9, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM3, -495.069, -43.556, 5.243, &ped10, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM1, -491.706, -51.346, 5.481, &ped11, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, -502.987, -58.548, 4.928, &ped12, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM3, -499.182, -71.402, 6.993, &ped13, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM1, -494.798, -71.694, 6.981, &ped14, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, -489.305, -94.309, 10.624, &ped15, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM3, -476.489, -91.927, 11.093, &ped16, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM1, -444.421, -95.484, 10.468, &ped17, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, -441.473, -72.128, 10.377, &ped18, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM3, -449.371, -58.777, 14.305, &ped19, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM1, -445.028, -37.545, 14.305, &ped20, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, -451.341, -15.893, 23.867, &ped21, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM3, -446.177, -10.209, 23.867, &ped22, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM1, -458.958, -19.921, 19.459, &ped23, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, -465.429, -16.929, 17.32, &ped24, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах !!!!!!!!!
+				CREATE_CHAR (26, PedM3, -472.366, 20.89, 12.764, &ped25, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах !!!!!!!!!
+				CREATE_CHAR (26, PedM1, -483.657, -28.911, 7.022, &ped26, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, -473.936, -31.972, 5.475, &ped27, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR_INSIDE_CAR(car6, 1, PedM3, &ped28);//создаём за рулём автомобиля
+				CREATE_CHAR (26, PedM4, -461.393, 15.693, 23.907, &ped29, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CHAR (26, PedM2, -455.371, 16.719, 23.907, &ped30, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
 
 				SET_CHAR_HEADING(ped5, -1.5);
 				SET_CHAR_HEADING(ped6, -1.5);
@@ -2719,8 +2714,8 @@ void telephone(void)
 
 				// камера демонстрации ворот
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, -539.988, 18.069, 5.86 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -555.857, 5.303, 10.604 );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -539.988, 18.069, 5.86 );
+				SET_CAM_POS			( camera, -555.857, 5.303, 10.604 );
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -2773,7 +2768,7 @@ void telephone(void)
 				UpdateWeaponOfPed(ped22, WEAPON_MP5);
 				UpdateWeaponOfPed(ped23, WEAPON_MICRO_UZI);
 				UpdateWeaponOfPed(ped24, WEAPON_M4);
-				UpdateWeaponOfPed(ped25, WEAPON_AK47);
+				UpdateWeaponOfPed(ped25, WEAPON_EPISODIC_9);
 				UpdateWeaponOfPed(ped26, WEAPON_MP5);
 				UpdateWeaponOfPed(ped27, WEAPON_MICRO_UZI);
 				UpdateWeaponOfPed(ped29, WEAPON_MP5);
@@ -2803,7 +2798,7 @@ void telephone(void)
 				SET_CURRENT_CHAR_WEAPON(ped22, WEAPON_MP5, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped23, WEAPON_MICRO_UZI, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped24, WEAPON_M4, TRUE);
-				SET_CURRENT_CHAR_WEAPON(ped25, WEAPON_AK47, TRUE);
+				SET_CURRENT_CHAR_WEAPON(ped25, WEAPON_EPISODIC_9, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped26, WEAPON_MP5, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped27, WEAPON_MICRO_UZI, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped29, WEAPON_MP5, TRUE);
@@ -2993,10 +2988,10 @@ void telephone(void)
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "ASM5_3", 5000, 1);//~g~Take the merchandise to the helipad at the airport!
 
-						ADD_BLIP_FOR_COORD(-932.99, -726.01, 10.01, &phone);//создаем иконку на радаре
-						CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+						ADD_BLIP_FOR_COORD(-932.99, -726.01, 10.01, &phone);
+						CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
 						CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
-						CHANGE_BLIP_SCALE(phone, 0.6); // масштаб иконки на радаре
+						CHANGE_BLIP_SCALE(phone, 0.6);
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "NE_POINT");//иконка на радаре называние в истории карты "Телефонный звонок"
 
 						// мигиние радара
@@ -3048,7 +3043,7 @@ void telephone(void)
 								DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 								while (true)
 								{
-									if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+									if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 									{
 										break;
 									}
@@ -3062,19 +3057,19 @@ void telephone(void)
 								SetTime(800);
 								SET_WIDESCREEN_BORDERS( 1 );
 								CREATE_CAM( 14, &camera );
-								POINT_CAM_AT_COORD	( camera, -935.69, -723.65, 13.03 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -942.569, -746.697, 13.687);//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -935.69, -723.65, 13.03 );
+								SET_CAM_POS			( camera, -942.569, -746.697, 13.687);
 								SET_CAM_ACTIVE( camera, 1 );
 								SET_CAM_PROPAGATE( camera, 1 );
 								ACTIVATE_SCRIPTED_CAMS(1, 1);
 
 								DO_SCREEN_FADE_IN( 1500 );// убирается затемнение экрана
-								SETTIMERA(0); //сбрасываем таймер 
+								SETTIMERA(0);
 
 								while (true)
 								{
 									GET_CHAR_COORDINATES(ped28,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-									POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
+									POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
 									WAIT( 0 );
 									if ( TIMERA() > 4000 )
 									{
@@ -3085,8 +3080,8 @@ void telephone(void)
 								while (true)
 								{
 									GET_CHAR_COORDINATES(ped28,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-									POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
-									if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+									POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
+									if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 									{
 										break;
 									}
@@ -3128,54 +3123,54 @@ void telephone(void)
 				REMOVE_PICKUP(aid_1);
 
 				// выгружвем модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(barrel);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(barrel);
 
 				// выгружвем педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped21);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped22);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped23);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped24);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped25);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped26);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped27);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped28);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped29);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped30);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped21);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped22);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped23);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped24);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped25);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped26);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped27);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped28);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped29);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped30);
 
 				// выгружвем машину
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car5);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car6);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car6);
 
 				// удаляем объекты
 				DELETE_OBJECT(&barrel_1);
@@ -3189,7 +3184,7 @@ void telephone(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -3208,7 +3203,7 @@ void telephone(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -3257,12 +3252,10 @@ void telephone(void)
 }
 void main(void)
 {
-	//THIS_SCRIPT_SHOULD_BE_SAVED();
 	if (G_ASSASSIN < 10)
 	{
 		telephone();
 	}
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

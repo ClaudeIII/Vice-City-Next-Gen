@@ -4,7 +4,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
-// в оригинале эти переменные являются глобалками
+
 int flag_4x4_mission1_passed, flag_4x4one_trigger, flag_intro1_before, flag_launch_4x4_1_ok, record_4x4_one;
 
 int pcj_seconds, pcj_minutes, pcj_reward, checkpoint_time_limit;
@@ -64,8 +64,6 @@ float x_21, y_21, z_21;
 float x_22, y_22, z_22;
 float x_23, y_23, z_23;
 float x_24, y_24, z_24;
-
-void main(void);
 
 void setup_draw_text(void) {
 	SET_TEXT_COLOUR(95, 195, 247, 255);
@@ -955,31 +953,7 @@ void mission_start_4x4one(void) {
 	}
 }
 
-void main(void) {
-
+void main(void)
+{
 	mission_start_4x4one();
-	//while (true) {
-	//	WAIT(0);
-	//	if (flag_4x4_mission1_passed == 0) {
-	//		record_4x4_one = 300;
-	//	}
-	//	if (IS_PLAYER_PLAYING(GetPlayerIndex())) {
-	//		if (G_ONMISSION == 0) {
-	//			if ((IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("pcj"))) && (!IS_CHAR_IN_AREA_3D(GetPlayerPed(), 937.4, 222.8, 7.0, 943.4, 228.8, 9.0, 0))) {
-	//				flag_4x4one_trigger = 1;
-	//			}
-	//			if (!IS_CHAR_IN_ANY_CAR(GetPlayerPed())) {
-	//				flag_4x4one_trigger = 0;
-	//			}
-	//			if ((IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("pcj"))) && (flag_4x4one_trigger == 0)) {
-	//				flag_launch_4x4_1_ok = 1;
-	//			}
-	//			if (flag_launch_4x4_1_ok == 1) {
-	//				PRINT_BIG("T4X4_1", 15000, 2);
-	//				WAIT(0);
-	//				mission_start_4x4one();
-	//			}
-	//		}
-	//	}
-	//}
 }

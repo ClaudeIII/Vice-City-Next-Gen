@@ -1,13 +1,10 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 int money_ped, income, load_mashin, help, sutosave;
 float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, cash, cam_set;
 
@@ -52,11 +49,11 @@ void stripclub(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(526.212, -932.28, 4.34719, &strip_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(strip_ico, BLIP_STRIP_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(strip_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(strip_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(strip_ico, "LG_37");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(526.212, -932.28, 4.34719, &strip_ico);
+				CHANGE_BLIP_SPRITE(strip_ico, BLIP_STRIP_CLUB);
+				CHANGE_BLIP_SCALE(strip_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(strip_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(strip_ico, "LG_37");
 				blip_on = 1;
 			}
 			if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), 502.818, -925.957, 4.029, 498.818, -921.957, 9.029, 0 )))
@@ -127,8 +124,8 @@ void stripclub(void)
 
 				// камера ракурс 1
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, 499.844, -922.458, 5.91986 ); // куда смотрит камера
-				SET_CAM_POS			( camera, 499.497, -926.378, 8.06714 );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, 499.844, -922.458, 5.91986 );
+				SET_CAM_POS			( camera, 499.497, -926.378, 8.06714 );
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -147,32 +144,32 @@ void stripclub(void)
 					{
 						if (cam_set == 1) // ракурс 1
 						{
-							POINT_CAM_AT_COORD	( camera, 499.844, -922.458, 5.91986 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 499.497, -926.378, 8.06714 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 499.844, -922.458, 5.91986 );
+							SET_CAM_POS			( camera, 499.497, -926.378, 8.06714 );
 							cam_set = 2;
 						}
 						else if (cam_set == 2) // ракурс 2
 						{
-							POINT_CAM_AT_COORD	( camera, 499.549, -921.961, 5.73907 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 497.191, -921.178, 5.56758 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 499.549, -921.961, 5.73907 );
+							SET_CAM_POS			( camera, 497.191, -921.178, 5.56758 );
 							cam_set = 3;
 						}
 						else if (cam_set == 3) // ракурс 3
 						{
-							POINT_CAM_AT_COORD	( camera, 500.221, -922.671, 5.48178 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 501.433, -921.274, 4.80086 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 500.221, -922.671, 5.48178 );
+							SET_CAM_POS			( camera, 501.433, -921.274, 4.80086 );
 							cam_set = 4;
 						}
 						else if (cam_set == 4) // ракурс 4
 						{
-							POINT_CAM_AT_COORD	( camera, 499.751, -921.807, 5.90821 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 498.881, -920.334, 7.61358 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 499.751, -921.807, 5.90821 );
+							SET_CAM_POS			( camera, 498.881, -920.334, 7.61358 );
 							cam_set = 5;
 						}
 						else if (cam_set == 5) // ракурс 5
 						{
-							POINT_CAM_AT_COORD	( camera, 499.998, -921.742, 5.56992 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 500.307, -919.739, 4.72875 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 499.998, -921.742, 5.56992 );
+							SET_CAM_POS			( camera, 500.307, -919.739, 4.72875 );
 							cam_set = 1;
 						}
 						SETTIMERB( 0 );
@@ -204,13 +201,13 @@ void stripclub(void)
 								}
 							}
 							// камера
-							POINT_CAM_AT_COORD	( camera, 530.951, -939.898, 10.2194 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 538.559, -954.132, 13.486 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 530.951, -939.898, 10.2194 );
+							SET_CAM_POS			( camera, 538.559, -954.132, 13.486 );
 							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 							MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 1 );
 
 							TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							while (true)
 							{
 								SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -233,17 +230,17 @@ void stripclub(void)
 							MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 0 );
 
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, 499.998, -921.742, 5.56992 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 500.307, -919.739, 4.72875 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 499.998, -921.742, 5.56992 );
+							SET_CAM_POS			( camera, 500.307, -919.739, 4.72875 );
 							SetTime(10);
 
-							POINT_CAM_AT_COORD	( camera, 510.385, -915.861, 5.43983 ); // куда смотрит камера
+							POINT_CAM_AT_COORD	( camera, 510.385, -915.861, 5.43983 );
 							SET_CAM_POS			( camera, 510.517, -917.174, 6.08692 ); // расположение камеры
 
 							PRINT_STRING_IN_STRING("string", "ASSET_D", 5000, 1);//~g~The Pole Position Club will now generate revenue up to a maximum of $4000 per day. Pick up your cash regularly!
 
 							//МАШИНКА СЧЁТКА ДЕНЕГ
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							SETTIMERB(0); //сбрасываем таймер
 							
 							uint rId9;
@@ -265,7 +262,7 @@ void stripclub(void)
 								if ( TIMERA() > 500)
 								{
 									temp +=3;
-									SETTIMERA(0); //сбрасываем таймер 
+									SETTIMERA(0);
 								}
 								if ( TIMERB() > 6000)
 								{
@@ -306,9 +303,9 @@ void stripclub(void)
 				DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 
 				// выгружвем модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				// выгружвем педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 
 				FREEZE_CHAR_POSITION(GetPlayerPed(), 0);
 				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
@@ -373,7 +370,7 @@ void stripclub(void)
 				{
 					income +=1;
 				}
-				SETTIMERC(0); //сбрасываем таймер 
+				SETTIMERC(0);
 			}
 			if (G_COLLECTOR == 8)// ID Бизнеса
 			{
@@ -428,7 +425,6 @@ void main(void)
 {
 	THIS_SCRIPT_SHOULD_BE_SAVED();
 	stripclub();
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

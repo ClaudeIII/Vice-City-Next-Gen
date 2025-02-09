@@ -4,6 +4,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 int heli, heli_blip, heli_2nd_blip, heli_cpcounter, heli_timer;
 float heli_cp_x, heli_cp_y, heli_cp_z, heli_cp_2nd_x, heli_cp_2nd_y, heli_cp_2nd_z;
 int heli_mission, heli_count;
@@ -47,8 +48,6 @@ float cp30_x, cp30_y, cp30_z;
 float cp31_x, cp31_y, cp31_z;
 float cp32_x, cp32_y, cp32_z;
 int heli_checkpoint1, heli_checkpoint2, fon, textur, best;
-
-void main(void);
 
 void setup_draw_text(void) {
 	SET_TEXT_COLOUR(95, 195, 247, 255);
@@ -120,7 +119,7 @@ void mission_heli1_passed(void) {
 		}
 	}
 
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
@@ -880,9 +879,10 @@ void mission_start_heli1(void) {
 	mission_heli1_passed();
 }
 
-void main(void) {
+void main(void)
+{
 
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	if ((IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("sparrow"))) && (LOCATE_CHAR_IN_CAR_3D(GetPlayerPed(), -136.1451, 1384.0923, 17.8402, 2.0, 2.0, 2.0, 0)))
 	{
 		heli_mission = 1;
@@ -901,50 +901,4 @@ void main(void) {
 	}
 	mission_start_heli1();
 	mission_heli1_failed();
-
-	//while (true) {
-	//	WAIT(0);
-	//	if (IS_PLAYER_PLAYING(GetPlayerIndex())) {
-	//		if ((IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("sparrow"))) && (LOCATE_CHAR_IN_CAR_3D(GetPlayerPed(), -136.1451, 1384.0923, 17.8402, 2.0, 2.0, 2.0, 0))) {
-	//			if (G_ONMISSION == 0) {
-	//				heli_mission = 1;
-	//				mission_start_heli1();
-	//				if (HAS_DEATHARREST_EXECUTED()) {
-	//					mission_heli1_failed();
-	//				}
-	//				mission_cleanup_heli1();
-	//			}
-	//		}
-	//		if ((IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("sparrow"))) && (LOCATE_CHAR_IN_CAR_3D(GetPlayerPed(), 461.4463, -778.7614, 11.4712, 2.0, 2.0, 2.0, 0))) {
-	//			if (G_ONMISSION == 0) {
-	//				heli_mission = 2;
-	//				mission_start_heli1();
-	//				if (HAS_DEATHARREST_EXECUTED()) {
-	//					mission_heli1_failed();
-	//				}
-	//				mission_cleanup_heli1();
-	//			}
-	//		}
-	//		if ((IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("sparrow"))) && (LOCATE_CHAR_IN_CAR_3D(GetPlayerPed(), 808.8450, 865.9194, 6.5155, 2.0, 2.0, 2.0, 0))) {
-	//			if (G_ONMISSION == 0) {
-	//				heli_mission = 3;
-	//				mission_start_heli1();
-	//				if (HAS_DEATHARREST_EXECUTED()) {
-	//					mission_heli1_failed();
-	//				}
-	//				mission_cleanup_heli1();
-	//			}
-	//		}
-	//		if ((IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("sparrow"))) && (LOCATE_CHAR_IN_CAR_3D(GetPlayerPed(), -453.5938, 769.5693, 8.9773, 2.0, 2.0, 2.0, 0))) {
-	//			if (G_ONMISSION == 0) {
-	//				heli_mission = 4;
-	//				mission_start_heli1();
-	//				if (HAS_DEATHARREST_EXECUTED()) {
-	//					mission_heli1_failed();
-	//				}
-	//				mission_cleanup_heli1();
-	//			}
-	//		}
-	//	}
-	//}
 }

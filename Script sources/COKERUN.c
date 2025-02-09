@@ -1,13 +1,10 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 float PlayX, PlayY, PlayZ, PlayR, blip_on, tovarX, tovarY, tovarZ, help_text1, all_tovar, go, sound, time_m, time_s, textur, skip, sutosave;
 int income, load_mashin, help, message;
 
@@ -89,11 +86,11 @@ void boat_race(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-224.504, -946.921, 7.458, &boat_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(boat_ico, BLIP_BOAT_TOUR);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(boat_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(boat_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(boat_ico, "LG_09");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(-224.504, -946.921, 7.458, &boat_ico);
+				CHANGE_BLIP_SPRITE(boat_ico, BLIP_BOAT_TOUR);
+				CHANGE_BLIP_SCALE(boat_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(boat_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(boat_ico, "LG_09");
 				blip_on = 1;
 			}
 			if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -151.874, -972.239, -0.789, -141.374, -966.239, 1.711, 0 ) && (!HAS_DEATHARREST_EXECUTED())) || (IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -156.289, -983.831, -0.789, -145.789, -977.831, 1.711, 0 )) && (!HAS_DEATHARREST_EXECUTED()))
@@ -137,7 +134,7 @@ void boat_race(void)
 					CHANGE_BLIP_SPRITE(boat_ico, BLIP_OBJECTIVE);//иконка на радаре
 					CHANGE_BLIP_COLOUR(boat_ico, 5);   //цвет иконкb на радаре
 					CHANGE_BLIP_NAME_FROM_TEXT_FILE(boat_ico, "MO_TARGET");//иконка на радаре называние в истории карты
-					CHANGE_BLIP_SCALE(boat_ico, 0.6); // масштаб иконки на радаре
+					CHANGE_BLIP_SCALE(boat_ico, 0.6);
 
 					//создаём рампы
 					REQUEST_MODEL(ramp);
@@ -157,8 +154,8 @@ void boat_race(void)
 
 					//камера на груз
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, -103.378, -989.718, 1.207 ); // куда смотрит камера
-					SET_CAM_POS			( camera, -143.117, -977.164, 3.736);//расположение камеры
+					POINT_CAM_AT_COORD	( camera, -103.378, -989.718, 1.207 );
+					SET_CAM_POS			( camera, -143.117, -977.164, 3.736);
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -484,8 +481,8 @@ void boat_race(void)
 					RELEASE_TEXTURE( timer );
 					REMOVE_TXD( textur );
 
-					MARK_MODEL_AS_NO_LONGER_NEEDED(gruz);//выгружаем модель
-					MARK_MODEL_AS_NO_LONGER_NEEDED(ramp);//выгружаем модель
+					MARK_MODEL_AS_NO_LONGER_NEEDED(gruz);
+					MARK_MODEL_AS_NO_LONGER_NEEDED(ramp);
 
 					DELETE_OBJECT(&tovar);
 					DELETE_OBJECT(&rampa_1);
@@ -498,7 +495,7 @@ void boat_race(void)
 
 					if (skip == 1)
 					{
-						SETTIMERA(0); //сбрасываем таймер 
+						SETTIMERA(0);
 						while (true)
 						{
 							SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -530,8 +527,8 @@ void boat_race(void)
 							}
 							// камера
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -132.401, -966.641, 14.598 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -117.879, -968.923, 16.259 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -132.401, -966.641, 14.598 );
+							SET_CAM_POS			( camera, -117.879, -968.923, 16.259 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -540,7 +537,7 @@ void boat_race(void)
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							while (true)
 							{
 								SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -556,12 +553,12 @@ void boat_race(void)
 								}
 							}
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, -231.592, -952.518, 9.05262 ); // куда смотрит камера
+							POINT_CAM_AT_COORD	( camera, -231.592, -952.518, 9.05262 );
 							SET_CAM_POS			( camera, -227.057, -949.979, 11.9171 ); // расположение камеры
 
 							PRINT_STRING_IN_STRING("string", "BOAT_AS", 5000, 1);//~g~The Boatyard will now generate revenue up to a maximum of $2000. Make sure you collect it regularly.
 							//МАШИНКА СЧЁТКА ДЕНЕГ
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							SETTIMERB(0); //сбрасываем таймер
 							
 							uint rId9;
@@ -583,7 +580,7 @@ void boat_race(void)
 								if ( TIMERA() > 500)
 								{
 									temp +=3;
-									SETTIMERA(0); //сбрасываем таймер 
+									SETTIMERA(0);
 								}
 								if ( TIMERB() > 6000)
 								{
@@ -612,7 +609,7 @@ void boat_race(void)
 							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 							G_COKERUN = 2;
 						}
-						SETTIMERA(0); //сбрасываем таймер 
+						SETTIMERA(0);
 						TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 						while (true)
 						{
@@ -659,7 +656,7 @@ void boat_race(void)
 				{
 					income +=1;
 				}
-				SETTIMERC(0); //сбрасываем таймер 
+				SETTIMERC(0);
 			}
 			if (G_COLLECTOR == 7)// ID Бизнеса
 			{
@@ -714,7 +711,6 @@ void main(void)
 {
 	THIS_SCRIPT_SHOULD_BE_SAVED();
 	boat_race();
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

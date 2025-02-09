@@ -455,83 +455,83 @@ void sa_race(void)
 	SWITCH_ROADS_OFF( -715.903, -168.849, -1.286, -775.876, -43.468, 80.0 );// ОТКЛЮЧАЕМ ПУТИ ТРАФИКА
 	//SET_CAR_DENSITY_MULTIPLIER(0.4);// отключаем пути
 
-	ADD_BLIP_FOR_COORD(startX, startY, startZ, &Blip_r);//создаем иконку на радаре
-	CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-	CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-	CHANGE_BLIP_SCALE(Blip_r, 0.6); // масштаб иконки на радаре
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_POINT");//иконка на радаре называние в истории карты ""
+	ADD_BLIP_FOR_COORD(startX, startY, startZ, &Blip_r);
+	CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+	CHANGE_BLIP_COLOUR(Blip_r, 5);
+	CHANGE_BLIP_SCALE(Blip_r, 0.6);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_POINT");
 
 	textur = LOAD_TXD( "sunshine_race" );
 	fon = GET_TEXTURE( textur, "fon_hud" );
 	timer = GET_TEXTURE( textur, "timer_hud" );
 
-	uint CarM1 = MODEL_INFERNUS;//Переменная "Car2" = модели машины
-	uint CarM2 = MODEL_BANSHEE;//Переменная "Car2" = модели машины
-	uint CarM3 = MODEL_SUPERGT;//Переменная "Car2" = модели машины
-	uint PedM1 = MODEL_F_Y_CDRESS_01;////Переменная "Ped1" = модели нужного педа
-	uint PedM2 = MODEL_M_Y_BOHO_01;////Переменная "Ped1" = модели нужного педа
-	uint PedM3 = MODEL_M_Y_GIRI_LO_01;////Переменная "Ped1" = модели нужного педа
+	uint CarM1 = MODEL_INFERNUS;//Переменная "Car2" = модели
+	uint CarM2 = MODEL_BANSHEE;//Переменная "Car2" = модели
+	uint CarM3 = MODEL_SUPERGT;//Переменная "Car2" = модели
+	uint PedM1 = MODEL_F_Y_CDRESS_01;////Переменная "Ped1" = модели нужного
+	uint PedM2 = MODEL_M_Y_BOHO_01;////Переменная "Ped1" = модели нужного
+	uint PedM3 = MODEL_M_Y_GIRI_LO_01;////Переменная "Ped1" = модели нужного
 
-	uint PedM4 = MODEL_F_Y_PMANHAT_02;////Переменная "Ped1" = модели нужного педа
-	uint PedM5 = MODEL_F_Y_PVILLBO_02;////Переменная "Ped1" = модели нужного педа
-	uint PedM6 = MODEL_M_Y_MODO;////Переменная "Ped1" = модели нужного педа
-	uint PedM7 = MODEL_M_Y_PCOOL_02;////Переменная "Ped1" = модели нужного педа
+	uint PedM4 = MODEL_F_Y_PMANHAT_02;////Переменная "Ped1" = модели нужного
+	uint PedM5 = MODEL_F_Y_PVILLBO_02;////Переменная "Ped1" = модели нужного
+	uint PedM6 = MODEL_M_Y_MODO;////Переменная "Ped1" = модели нужного
+	uint PedM7 = MODEL_M_Y_PCOOL_02;////Переменная "Ped1" = модели нужного
 
 	// загружаем анимации
 	REQUEST_ANIMS( "vcNE_race_funs" );//загружаем файл с анимацией
 	while (!HAVE_ANIMS_LOADED( "vcNE_race_funs" )) WAIT(0);
 
-	REQUEST_MODEL(CarM1);//загрузка модели машины из переменной
+	REQUEST_MODEL(CarM1);//загрузка модели из переменной
 	while (!HAS_MODEL_LOADED(CarM1));//проверка "машина загрузилась" если нет то начанаем с начало
-	CREATE_CAR(CarM1, (-4*COS((1-startH))+0*SIN((1-startH)))+startX, (0*COS((1-startH))-(-4*SIN((1-startH))))+startY, startZ, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-	SET_CAR_HEADING(car1, startH);//градус поворота машины
+	CREATE_CAR(CarM1, (-4*COS((1-startH))+0*SIN((1-startH)))+startX, (0*COS((1-startH))-(-4*SIN((1-startH))))+startY, startZ, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+	SET_CAR_HEADING(car1, startH);//градус поворота
 
-	REQUEST_MODEL(CarM2);//загрузка модели машины из переменной
+	REQUEST_MODEL(CarM2);//загрузка модели из переменной
 	while (!HAS_MODEL_LOADED(CarM2));//проверка "машина загрузилась" если нет то начанаем с начало
-	CREATE_CAR(CarM2, (-4*COS((1-startH))+6*SIN((1-startH)))+startX, (6*COS((1-startH))-(-4*SIN((1-startH))))+startY, startZ, &car2, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-	SET_CAR_HEADING(car2, startH);//градус поворота машины
+	CREATE_CAR(CarM2, (-4*COS((1-startH))+6*SIN((1-startH)))+startX, (6*COS((1-startH))-(-4*SIN((1-startH))))+startY, startZ, &car2, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+	SET_CAR_HEADING(car2, startH);//градус поворота
 
-	REQUEST_MODEL(CarM3);//загрузка модели машины из переменной
+	REQUEST_MODEL(CarM3);//загрузка модели из переменной
 	while (!HAS_MODEL_LOADED(CarM3));//проверка "машина загрузилась" если нет то начанаем с начало
-	CREATE_CAR(CarM3, (0*COS((1-startH))+6*SIN((1-startH)))+startX, (6*COS((1-startH))-(0*SIN((1-startH))))+startY, startZ, &car3, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-	SET_CAR_HEADING(car3, startH);//градус поворота машины
+	CREATE_CAR(CarM3, (0*COS((1-startH))+6*SIN((1-startH)))+startX, (6*COS((1-startH))-(0*SIN((1-startH))))+startY, startZ, &car3, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+	SET_CAR_HEADING(car3, startH);//градус поворота
 
-	REQUEST_MODEL(PedM1);//загрузка модели любого педа из переменной
+	REQUEST_MODEL(PedM1);//загрузка модели любого из переменной
 	while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
-	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём педа за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
 
-	REQUEST_MODEL(PedM2);//загрузка модели любого педа из переменной
+	REQUEST_MODEL(PedM2);//загрузка модели любого из переменной
 	while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
-	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM2, &ped2);//создаём педа за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM2, &ped2);//создаём за рулём автомобиля
 
-	REQUEST_MODEL(PedM3);//загрузка модели любого педа из переменной
+	REQUEST_MODEL(PedM3);//загрузка модели любого из переменной
 	while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
-	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM3, &ped3);//создаём педа за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM3, &ped3);//создаём за рулём автомобиля
 
-	REQUEST_MODEL(PedM4);//загрузка модели любого педа из переменной
+	REQUEST_MODEL(PedM4);//загрузка модели любого из переменной
 	while (!HAS_MODEL_LOADED(PedM4));////проверка "пед загрузился" если нет то начанаем с начало
 
-	REQUEST_MODEL(PedM5);//загрузка модели любого педа из переменной
+	REQUEST_MODEL(PedM5);//загрузка модели любого из переменной
 	while (!HAS_MODEL_LOADED(PedM5));////проверка "пед загрузился" если нет то начанаем с начало
 
-	REQUEST_MODEL(PedM6);//загрузка модели любого педа из переменной
+	REQUEST_MODEL(PedM6);//загрузка модели любого из переменной
 	while (!HAS_MODEL_LOADED(PedM6));////проверка "пед загрузился" если нет то начанаем с начало
 
-	REQUEST_MODEL(PedM7);//загрузка модели любого педа из переменной
+	REQUEST_MODEL(PedM7);//загрузка модели любого из переменной
 	while (!HAS_MODEL_LOADED(PedM7));////проверка "пед загрузился" если нет то начанаем с начало
 
-	CREATE_CHAR (26, PedM1, (3.5*COS((1-startH))+5.1*SIN((1-startH)))+startX, (5.1*COS((1-startH))-(3.5*SIN((1-startH))))+startY, startZ, &ped4, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-	CREATE_CHAR (26, PedM2, (3.7*COS((1-startH))+3.7*SIN((1-startH)))+startX, (3.7*COS((1-startH))-(3.7*SIN((1-startH))))+startY, startZ, &ped5, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-	CREATE_CHAR (26, PedM3, (3.4*COS((1-startH))+2.0*SIN((1-startH)))+startX, (2.0*COS((1-startH))-(3.4*SIN((1-startH))))+startY, startZ, &ped6, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-	CREATE_CHAR (26, PedM4, (-7.8*COS((1-startH))+5.8*SIN((1-startH)))+startX, (5.8*COS((1-startH))-(-7.8*SIN((1-startH))))+startY, startZ, &ped7, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-	CREATE_CHAR (26, PedM5, (-8.9*COS((1-startH))+3.8*SIN((1-startH)))+startX, (3.8*COS((1-startH))-(-8.9*SIN((1-startH))))+startY, startZ, &ped8, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-	CREATE_CHAR (26, PedM6, (-7.6*COS((1-startH))+3.4*SIN((1-startH)))+startX, (3.4*COS((1-startH))-(-7.6*SIN((1-startH))))+startY, startZ, &ped9, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-	CREATE_CHAR (26, PedM7, (-8.3*COS((1-startH))+1.8*SIN((1-startH)))+startX, (1.8*COS((1-startH))-(-8.3*SIN((1-startH))))+startY, startZ, &ped10, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
-	CREATE_CHAR (26, PedM1, (-7.7*COS((1-startH))+0.2*SIN((1-startH)))+startX, (0.2*COS((1-startH))-(-7.7*SIN((1-startH))))+startY, startZ, &ped11, TRUE);// создаём педа,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка педа) на нужных координатах
+	CREATE_CHAR (26, PedM1, (3.5*COS((1-startH))+5.1*SIN((1-startH)))+startX, (5.1*COS((1-startH))-(3.5*SIN((1-startH))))+startY, startZ, &ped4, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+	CREATE_CHAR (26, PedM2, (3.7*COS((1-startH))+3.7*SIN((1-startH)))+startX, (3.7*COS((1-startH))-(3.7*SIN((1-startH))))+startY, startZ, &ped5, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+	CREATE_CHAR (26, PedM3, (3.4*COS((1-startH))+2.0*SIN((1-startH)))+startX, (2.0*COS((1-startH))-(3.4*SIN((1-startH))))+startY, startZ, &ped6, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+	CREATE_CHAR (26, PedM4, (-7.8*COS((1-startH))+5.8*SIN((1-startH)))+startX, (5.8*COS((1-startH))-(-7.8*SIN((1-startH))))+startY, startZ, &ped7, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+	CREATE_CHAR (26, PedM5, (-8.9*COS((1-startH))+3.8*SIN((1-startH)))+startX, (3.8*COS((1-startH))-(-8.9*SIN((1-startH))))+startY, startZ, &ped8, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+	CREATE_CHAR (26, PedM6, (-7.6*COS((1-startH))+3.4*SIN((1-startH)))+startX, (3.4*COS((1-startH))-(-7.6*SIN((1-startH))))+startY, startZ, &ped9, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+	CREATE_CHAR (26, PedM7, (-8.3*COS((1-startH))+1.8*SIN((1-startH)))+startX, (1.8*COS((1-startH))-(-8.3*SIN((1-startH))))+startY, startZ, &ped10, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
+	CREATE_CHAR (26, PedM1, (-7.7*COS((1-startH))+0.2*SIN((1-startH)))+startX, (0.2*COS((1-startH))-(-7.7*SIN((1-startH))))+startY, startZ, &ped11, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
 
-	SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);//делает педа бесмертным
-	SET_CHAR_PROOFS(ped2, TRUE, TRUE, TRUE, TRUE, TRUE);//делает педа бесмертным
-	SET_CHAR_PROOFS(ped3, TRUE, TRUE, TRUE, TRUE, TRUE);//делает педа бесмертным
+	SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
+	SET_CHAR_PROOFS(ped2, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
+	SET_CHAR_PROOFS(ped3, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
 	SET_CAR_PROOFS(car1, TRUE, TRUE, TRUE, TRUE, TRUE);//делает машину бесмертной
 	SET_CAR_PROOFS(car2, TRUE, TRUE, TRUE, TRUE, TRUE);//делает машину бесмертной
 	SET_CAR_PROOFS(car3, TRUE, TRUE, TRUE, TRUE, TRUE);//делает машину бесмертной
@@ -684,19 +684,19 @@ void sa_race(void)
 		CHANGE_BLIP_SPRITE(Blip_c1, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 		CHANGE_BLIP_COLOUR(Blip_c1, 12);   //цвет иконка на радаре (0=белая)
 		CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_c1, "NE_RACE1");//иконка на радаре "Blip01" называние в истории карты
-		CHANGE_BLIP_SCALE(Blip_c1, 0.77999990); // масштаб иконки на радаре
+		CHANGE_BLIP_SCALE(Blip_c1, 0.77999990);
 
 		ADD_BLIP_FOR_CHAR(ped2, &Blip_c2);
 		CHANGE_BLIP_SPRITE(Blip_c2, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 		CHANGE_BLIP_COLOUR(Blip_c2, 8);   //цвет иконка на радаре (0=белая)
 		CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_c2, "NE_RACE1");//иконка на радаре "Blip01" называние в истории карты
-		CHANGE_BLIP_SCALE(Blip_c2, 0.77999990); // масштаб иконки на радаре
+		CHANGE_BLIP_SCALE(Blip_c2, 0.77999990);
 
 		ADD_BLIP_FOR_CHAR(ped3, &Blip_c3);
 		CHANGE_BLIP_SPRITE(Blip_c3, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 		CHANGE_BLIP_COLOUR(Blip_c3, 19);   //цвет иконка на радаре (0=белая)
 		CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_c3, "NE_RACE1");//иконка на радаре "Blip01" называние в истории карты
-		CHANGE_BLIP_SCALE(Blip_c3, 0.77999990); // масштаб иконки на радаре
+		CHANGE_BLIP_SCALE(Blip_c3, 0.77999990);
 
 		SETTIMERA( 0 );
 		SETTIMERB( 0 );
@@ -803,18 +803,18 @@ void sa_race(void)
 				TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped2, car2, ped2B_x, ped2B_y, ped2B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 				TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped3, car3, ped3B_x, ped3B_y, ped3B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 
-				ADD_BLIP_FOR_COORD(Blip_x, Blip_y, Blip_z, &Blip_r);//создаем иконку на радаре в переменной "Blip01"
+				ADD_BLIP_FOR_COORD(Blip_x, Blip_y, Blip_z, &Blip_r);
 				CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 				CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
-				CHANGE_BLIP_SCALE(Blip_r, 0.77999990); // масштаб иконки на радаре
+				CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 				checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.60000000 );
 				
-				ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, Blip_z2, &Blip_r2);//создаем иконку на радаре в переменной "Blip01"
+				ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, Blip_z2, &Blip_r2);
 				CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 				CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
-				CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000)); // масштаб иконки на радаре
+				CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 				CHANGE_BLIP_ALPHA(Blip_r2, 125);
 				start_race = 99;
 			}
@@ -823,14 +823,14 @@ void sa_race(void)
 			{
 				if (!IS_CHAR_IN_AREA_2D( GetPlayerPed(), startX-50, startY-50, startX+50, startY+50, 0 ))
 				{
-					SET_CHAR_COORDINATES(ped4, -925, -402, 10.);// убераем педа из кадра
-					SET_CHAR_COORDINATES(ped5, -926, -402, 10.);// убераем педа из кадра
-					SET_CHAR_COORDINATES(ped6, -927, -402, 10.);// убераем педа из кадра
-					SET_CHAR_COORDINATES(ped7, -926, -401, 10.);// убераем педа из кадра
-					SET_CHAR_COORDINATES(ped8, -926, -402, 10.);// убераем педа из кадра
-					SET_CHAR_COORDINATES(ped9, -926, -403, 10.);// убераем педа из кадра
-					SET_CHAR_COORDINATES(ped10, -925, -401, 10.);// убераем педа из кадра
-					SET_CHAR_COORDINATES(ped11, -927, -403, 10.);// убераем педа из кадра
+					SET_CHAR_COORDINATES(ped4, -925, -402, 10.);// убераем из кадра
+					SET_CHAR_COORDINATES(ped5, -926, -402, 10.);// убераем из кадра
+					SET_CHAR_COORDINATES(ped6, -927, -402, 10.);// убераем из кадра
+					SET_CHAR_COORDINATES(ped7, -926, -401, 10.);// убераем из кадра
+					SET_CHAR_COORDINATES(ped8, -926, -402, 10.);// убераем из кадра
+					SET_CHAR_COORDINATES(ped9, -926, -403, 10.);// убераем из кадра
+					SET_CHAR_COORDINATES(ped10, -925, -401, 10.);// убераем из кадра
+					SET_CHAR_COORDINATES(ped11, -927, -403, 10.);// убераем из кадра
 					zone = 0;
 				}
 			}
@@ -1029,28 +1029,28 @@ void sa_race(void)
 					REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
 					REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
 					DELETE_CHECKPOINT(checkpoint);
-					ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);//создаем иконку на радаре в переменной "Blip01"
+					ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 					CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 					CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
 					CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
-					CHANGE_BLIP_SCALE(Blip_r, 0.77999990); // масштаб иконки на радаре
+					CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 					checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.50000000 );
 					if (play_cord < 29)
 					{
-						ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);//создаем иконку на радаре в переменной "Blip01"
+						ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);
 						CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 						CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
-						CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000)); // масштаб иконки на радаре
+						CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 						CHANGE_BLIP_ALPHA(Blip_r2, 125);
 					}
 					else
 					{
-						ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);//создаем иконку на радаре в переменной "Blip01"
+						ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);
 						CHANGE_BLIP_SPRITE(Blip_r2, BLIP_FINISH_LINE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 						CHANGE_BLIP_COLOUR(Blip_r2, 0);   //цвет иконка на радаре (0=белая)
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
-						CHANGE_BLIP_SCALE(Blip_r2, 0.77999990); // масштаб иконки на радаре
+						CHANGE_BLIP_SCALE(Blip_r2, 0.77999990);
 						CHANGE_BLIP_ALPHA(Blip_r2, 125);
 					}
 				}
@@ -1059,7 +1059,7 @@ void sa_race(void)
 					REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
 					REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
 					DELETE_CHECKPOINT(checkpoint);
-					ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);//создаем иконку на радаре в переменной "Blip01"
+					ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 					CHANGE_BLIP_SPRITE(Blip_r, BLIP_FINISH_LINE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 					CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
 					CHANGE_BLIP_COLOUR(Blip_r, 0);   //цвет иконка на радаре (0=белая)
@@ -1973,7 +1973,7 @@ void sa_race(void)
 				GET_CAR_COORDINATES(car1, &Ped1X, &Ped1Y, &Ped1Z);
 				SET_CAR_COORDINATES(car1, Ped1X, Ped1Y, Ped1Z+1);
 				GET_CAR_HEADING(car1, &Ped1R);
-				SET_CAR_HEADING(car1, Ped1R);//градус поворота машины
+				SET_CAR_HEADING(car1, Ped1R);//градус поворота
 				FIX_CAR(car1);
 				WARP_CHAR_INTO_CAR(ped1, car1);
 				TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, ped1B_x, ped1B_y, ped1B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
@@ -1984,7 +1984,7 @@ void sa_race(void)
 				GET_CAR_COORDINATES(car2, &Ped2X, &Ped2Y, &Ped2Z);
 				SET_CAR_COORDINATES(car2, Ped2X, Ped2Y, Ped2Z+1);
 				GET_CAR_HEADING(car2, &Ped2R);
-				SET_CAR_HEADING(car2, Ped2R);//градус поворота машины
+				SET_CAR_HEADING(car2, Ped2R);//градус поворота
 				FIX_CAR(car2);
 				WARP_CHAR_INTO_CAR(ped2, car2);
 				TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped2, car2, ped2B_x, ped2B_y, ped2B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
@@ -1995,7 +1995,7 @@ void sa_race(void)
 				GET_CAR_COORDINATES(car3, &Ped3X, &Ped3Y, &Ped3Z);
 				SET_CAR_COORDINATES(car3, Ped3X, Ped3Y, Ped3Z+1);
 				GET_CAR_HEADING(car3, &Ped3R);
-				SET_CAR_HEADING(car3, Ped3R);//градус поворота машины
+				SET_CAR_HEADING(car3, Ped3R);//градус поворота
 				FIX_CAR(car3);
 				WARP_CHAR_INTO_CAR(ped3, car3);
 				TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped3, car3, ped3B_x, ped3B_y, ped3B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
@@ -2006,7 +2006,7 @@ void sa_race(void)
 				SETTIMERB(0);
 				FIX_CAR(car1);
 				SET_CAR_COORDINATES(car1, water1X, water1Y, water1Z);
-				SET_CAR_HEADING(car1, water1R);//градус поворота машины
+				SET_CAR_HEADING(car1, water1R);//градус поворота
 				TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, ped1B_x, ped1B_y, ped1B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 			}
 			if (IS_CAR_IN_WATER(car2))
@@ -2014,7 +2014,7 @@ void sa_race(void)
 				SETTIMERB(0);
 				FIX_CAR(car2);
 				SET_CAR_COORDINATES(car2, water2X, water2Y, water2Z);
-				SET_CAR_HEADING(car2, water2R);//градус поворота машины
+				SET_CAR_HEADING(car2, water2R);//градус поворота
 				TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped2, car2, ped2B_x, ped2B_y, ped2B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 			}
 			if (IS_CAR_IN_WATER(car3))
@@ -2022,7 +2022,7 @@ void sa_race(void)
 				SETTIMERB(0);
 				FIX_CAR(car3);
 				SET_CAR_COORDINATES(car3, water3X, water3Y, water3Z);
-				SET_CAR_HEADING(car3, water3R);//градус поворота машины
+				SET_CAR_HEADING(car3, water3R);//градус поворота
 				TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped3, car3, ped3B_x, ped3B_y, ped3B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 			}
 			//==================== фиксы соперника в стене ====================
@@ -2036,7 +2036,7 @@ void sa_race(void)
 				{
 					FIX_CAR(car1);
 					SET_CAR_COORDINATES(car1, water1X, water1Y, water1Z);
-					SET_CAR_HEADING(car1, water1R);//градус поворота машины
+					SET_CAR_HEADING(car1, water1R);//градус поворота
 					TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, ped1B_x, ped1B_y, ped1B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 					SETTIMERB(0);
 				}
@@ -2048,7 +2048,7 @@ void sa_race(void)
 				{
 					FIX_CAR(car2);
 					SET_CAR_COORDINATES(car2, water2X, water2Y, water2Z);
-					SET_CAR_HEADING(car2, water2R);//градус поворота машины
+					SET_CAR_HEADING(car2, water2R);//градус поворота
 					TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped2, car2, ped2B_x, ped2B_y, ped2B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 					SETTIMERB(0);
 				}
@@ -2060,7 +2060,7 @@ void sa_race(void)
 				{
 					FIX_CAR(car3);
 					SET_CAR_COORDINATES(car3, water3X, water3Y, water3Z);
-					SET_CAR_HEADING(car3, water3R);//градус поворота машины
+					SET_CAR_HEADING(car3, water3R);//градус поворота
 					TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped3, car3, ped3B_x, ped3B_y, ped3B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 					SETTIMERB(0);
 				}
@@ -2086,34 +2086,34 @@ void sa_race(void)
 	DELETE_CHECKPOINT(checkpoint);
 
 	// выгружаем из памяти модели
-	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель машины
-	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);//выгружаем модель машины
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель педа
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель педа
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);//выгружаем модель педа
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);//выгружаем модель педа
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM6);//выгружаем модель педа
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM7);//выгружаем модель педа
+	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM6);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM7);
 
 	// выгружаем из памяти педов
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет)
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет)
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
 
 	// выгружаем из памяти транспорт
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
 
 	RELEASE_TEXTURE( fon );
 	RELEASE_TEXTURE( timer );
@@ -2121,7 +2121,7 @@ void sa_race(void)
 
 	if (skip == 1)
 	{
-		SETTIMERA(0); //сбрасываем таймер 
+		SETTIMERA(0);
 		while (true)
 		{
 			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -2140,7 +2140,7 @@ void sa_race(void)
 	}
 	else if (skip == 2)
 	{
-		SETTIMERA(0); //сбрасываем таймер 
+		SETTIMERA(0);
 		TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 		while (true)
 		{
@@ -2170,7 +2170,6 @@ void sa_race(void)
 }
 void main(void)
 {
-	WAIT(500);
 	sa_race();
 	TERMINATE_THIS_SCRIPT();
 }

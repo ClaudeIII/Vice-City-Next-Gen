@@ -1,8 +1,3 @@
-/***********************************************************************
-					Fully stripped main script
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
@@ -15,7 +10,6 @@ float textur, race_map, draw_map, help_wait, race_start, lap_all, add_money, bes
 float timer_m_1, timer_s_1, timer_m_2, timer_s_2, timer_m_3, timer_s_3;
 float timer_m_4, timer_s_4, timer_m_5, timer_s_5, timer_m_6, timer_s_6;
 Texture map_fon;
-
 
 void start_race(void)
 {
@@ -148,8 +142,8 @@ void race_launcher(void)
 
 				CREATE_CAM( 14, &camera );
 				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
-				POINT_CAM_AT_COORD	( camera, -532.651, -294.214, 3.63159 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -535.251, -294.214, 3.63159 );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -532.651, -294.214, 3.63159 );
+				SET_CAM_POS			( camera, -535.251, -294.214, 3.63159 );
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 0 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -454,8 +448,8 @@ void race_launcher(void)
 					{
 						//выставляем камеру
 						CREATE_CAM( 14, &camera );
-						SET_CAM_POS			( camera, -542.888, -335.2, 8.443 );//расположение камеры
-						POINT_CAM_AT_COORD	( camera, -580, -489.638, 85.291 ); // куда смотрит камера
+						SET_CAM_POS			( camera, -542.888, -335.2, 8.443 );
+						POINT_CAM_AT_COORD	( camera, -580, -489.638, 85.291 );
 						SET_CAM_FOV( camera, 80.20001000 );
 						SET_CAM_ACTIVE( camera, 1 );
 						SET_CAM_PROPAGATE( camera, 1 );
@@ -481,7 +475,7 @@ void race_launcher(void)
 							{
 								SETTIMERA(0);
 								GET_TIME_OF_DAY(&hour, &min);
-								POINT_CAM_AT_COORD	( camera, cam_x, -489.638, 85.291 ); // куда смотрит камера
+								POINT_CAM_AT_COORD	( camera, cam_x, -489.638, 85.291 );
 								cam_x += 0.8;
 								if (spead_time < 75)
 								{
@@ -520,11 +514,11 @@ void race_launcher(void)
 							DISABLE_PAUSE_MENU(1);// отключаем главное меню
 							if (TIMERA() > 30)
 							{
-								POINT_CAM_AT_COORD	( camera, cam_x, -489.638, 85.291 ); // куда смотрит камера
+								POINT_CAM_AT_COORD	( camera, cam_x, -489.638, 85.291 );
 								cam_x += 0.8;
 								SETTIMERA(0);
 							}
-							if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+							if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 							{
 								break;
 							}

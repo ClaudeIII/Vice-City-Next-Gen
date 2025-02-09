@@ -1,13 +1,10 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, textur, text1, text2, time_m, time_s, sound, play, sutosave;
 float PedX, PedY, PedZ, PedR, taxi_1, taxi_2, taxi_3, touch1, touch2, touch3, engine, res_on, vorotaX, vorotaY;
 int income, load_mashin, help;
@@ -69,10 +66,10 @@ void kaufman(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-569.498, 738.454, 5.354, &cabs_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_TAXI_RANK);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(cabs_ico, 1.1); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "LG_18");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(-569.498, 738.454, 5.354, &cabs_ico);
+				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_TAXI_RANK);
+				CHANGE_BLIP_SCALE(cabs_ico, 1.1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "LG_18");
 				blip_on = 1;
 			}
 			//DRAW_CHECKPOINT( -569.498, 738.454, 5.354, 2.1, 160, 116, 209);//создание чекпойнт на координатах и его цвет
@@ -120,7 +117,7 @@ void kaufman(void)
 
 				CREATE_CAR(CarM1, 286.232, -791.79, 5.445, &car1, TRUE);
 				LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём педа за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
 				SET_CHAR_COMPONENT_VARIATION(ped1, 1, 0, 0);
 				CREATE_CHAR (26, PedM2, 291.032, -785.32, 5.06, &ped2, TRUE);// Пассажир
 				SET_CHAR_DECISION_MAKER(ped2, dm);
@@ -131,8 +128,8 @@ void kaufman(void)
 
 				// камера сверху
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, -570.081, 737.787, 5.891 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -562.707, 743.712, 10.922 );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -570.081, 737.787, 5.891 );
+				SET_CAM_POS			( camera, -562.707, 743.712, 10.922 );
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -163,11 +160,11 @@ void kaufman(void)
 				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
 				SetTime(500);
 
-				ADD_BLIP_FOR_COORD(-143.203, 52.906, 4.974, &cabs_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(cabs_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(cabs_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "NE_POINT");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(-143.203, 52.906, 4.974, &cabs_ico);
+				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(cabs_ico, 5);
+				CHANGE_BLIP_SCALE(cabs_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "NE_POINT");
 				PRINT_STRING_IN_STRING("string", "TAXW1_1", 5000, 1);//~g~Pick up the V.I.P. on Starfish Island.
 
 				SETTIMERA( 0 );
@@ -288,8 +285,8 @@ void kaufman(void)
 
 								// камера сверху
 								CREATE_CAM( 14, &camera );
-								POINT_CAM_AT_COORD	( camera, -133.389, 84.425, 9.72 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -151.251, 67.174, 6.0 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -133.389, 84.425, 9.72 );
+								SET_CAM_POS			( camera, -151.251, 67.174, 6.0 );
 								SET_CAM_ACTIVE( camera, 1 );
 								SET_CAM_PROPAGATE( camera, 1 );
 								ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -304,8 +301,8 @@ void kaufman(void)
 								SetTime(5000);
 
 								// меняем ракурс камеры
-								POINT_CAM_AT_COORD	( camera, -136.855, 52.543, 4.63 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -153.178, 63.934, 8.209 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -136.855, 52.543, 4.63 );
+								SET_CAM_POS			( camera, -153.178, 63.934, 8.209 );
 
 								// идёт пассажир
 								SET_CHAR_COORDINATES(ped2, -142.725, 65.634, 5.365);// перемещаем игрока
@@ -357,16 +354,16 @@ void kaufman(void)
 								REMOVE_BLIP(cabs_ico);//Удаляем иконку на радаре
 								TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, -1021.249, -294.609, 8.418, 4, 20.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 								
-								ADD_BLIP_FOR_COORD(-1021.249, -294.609, 8.418, &cabs_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(cabs_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(cabs_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(cabs_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "NE_POINT");//иконка на радаре называние в истории карты ""
+								ADD_BLIP_FOR_COORD(-1021.249, -294.609, 8.418, &cabs_ico);
+								CHANGE_BLIP_SPRITE(cabs_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(cabs_ico, 5);
+								CHANGE_BLIP_SCALE(cabs_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "NE_POINT");
 
 								ADD_BLIP_FOR_CHAR(ped2, &ped_ico);
-								CHANGE_BLIP_SPRITE(ped_ico, BLIP_DESTINATION);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped_ico, 0.77999990); // масштаб иконки на радаре
+								CHANGE_BLIP_SPRITE(ped_ico, BLIP_DESTINATION);
+								CHANGE_BLIP_COLOUR(ped_ico, 19);
+								CHANGE_BLIP_SCALE(ped_ico, 0.77999990);
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped_ico, "MO_TARGET");//иконка на радаре называние в истории карты
 
 								break;
@@ -607,8 +604,8 @@ void kaufman(void)
 						{
 							// камера сверху
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -1020.61, -296.039, 9.56 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -1039.026, -250.1, 12.843 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -1020.61, -296.039, 9.56 );
+							SET_CAM_POS			( camera, -1039.026, -250.1, 12.843 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -622,8 +619,8 @@ void kaufman(void)
 							SET_CHAR_HEADING(ped2, 125.0);
 							TASK_GO_STRAIGHT_TO_COORD(ped2, -1033.576, -300.022, 9.075, 2, -2);// Пед идёт
 
-							POINT_CAM_AT_COORD	( camera, -1030.517, -297.303, 9.457 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -1038.524, -304.516, 12.678 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -1030.517, -297.303, 9.457 );
+							SET_CAM_POS			( camera, -1038.524, -304.516, 12.678 );
 							SetTime(3000);
 
 							// убираем камеру
@@ -639,9 +636,9 @@ void kaufman(void)
 							if (text2 == 0)
 							{
 								ADD_BLIP_FOR_CAR(car2, &ped_ico);
-								CHANGE_BLIP_SPRITE(ped_ico, BLIP_DESTINATION);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(ped_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(ped_ico, 0.77999990); // масштаб иконки на радаре
+								CHANGE_BLIP_SPRITE(ped_ico, BLIP_DESTINATION);
+								CHANGE_BLIP_COLOUR(ped_ico, 19);
+								CHANGE_BLIP_SCALE(ped_ico, 0.77999990);
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped_ico, "NE_CAR");//иконка на радаре называние в истории карты
 								PRINT_STRING_IN_STRING("string", "IN_VEH", 5000, 1);//~COL_NET_12~Hey! Get back in the vehicle!
 								text2 = 1;
@@ -686,25 +683,25 @@ void kaufman(void)
 					}
 				}
 				// зачещаем скрипт
-				WAIT(10);
+				WAIT(0);
 
 				REMOVE_BLIP(ped_ico);//Удаляем иконку на радаре
 				REMOVE_BLIP(cabs_ico);//Удаляем иконку на радаре
 
 				// выгружаем из памяти модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
 				// выгружаем из памяти педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				
 				// выгружаем из памяти транспорт
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				if (car2 != 0)
 				{
-					MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
+					MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				}
 
 				RELEASE_TEXTURE( fon );
@@ -719,7 +716,7 @@ void kaufman(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -738,7 +735,7 @@ void kaufman(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -776,9 +773,9 @@ void kaufman(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-569.498, 738.454, 5.354, &cabs_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_TAXI_RANK);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(cabs_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-569.498, 738.454, 5.354, &cabs_ico);
+				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_TAXI_RANK);
+				CHANGE_BLIP_SCALE(cabs_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "LG_18");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -828,9 +825,9 @@ void kaufman(void)
 				LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
 				LOCK_CAR_DOORS(car2, 3); //блокируем двери автомобиля для игрока
 				LOCK_CAR_DOORS(car3, 3); //блокируем двери автомобиля для игрока
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём педа за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём за рулём автомобиля
 				SET_CHAR_COMPONENT_VARIATION(ped1, 1, 0, 0);
 				SET_CHAR_COMPONENT_VARIATION(ped2, 1, 0, 0);
 				SET_CHAR_COMPONENT_VARIATION(ped3, 1, 0, 0);
@@ -841,8 +838,8 @@ void kaufman(void)
 
 				// камера сверху
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, -570.081, 737.787, 5.891 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -562.707, 743.712, 10.922 );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -570.081, 737.787, 5.891 );
+				SET_CAM_POS			( camera, -562.707, 743.712, 10.922 );
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -880,22 +877,22 @@ void kaufman(void)
 				SetTime(500);
 
 				ADD_BLIP_FOR_CAR(car1, &car1_ico);
-				CHANGE_BLIP_SPRITE(car1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(car1_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(car1_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(car1_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(car1_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(car1_ico, 19);
+				CHANGE_BLIP_SCALE(car1_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(car1_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CAR(car2, &car2_ico);
-				CHANGE_BLIP_SPRITE(car2_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(car2_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(car2_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(car2_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(car2_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(car2_ico, 19);
+				CHANGE_BLIP_SCALE(car2_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(car2_ico, "MO_TARGET");
 
 				ADD_BLIP_FOR_CAR(car3, &car3_ico);
-				CHANGE_BLIP_SPRITE(car3_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(car3_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(car3_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(car3_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+				CHANGE_BLIP_SPRITE(car3_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(car3_ico, 19);
+				CHANGE_BLIP_SCALE(car3_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(car3_ico, "MO_TARGET");
 
 				TASK_CAR_DRIVE_WANDER(ped1, car1, 20.0, 2);// пед едит куда-то
 				TASK_CAR_DRIVE_WANDER(ped2, car2, 20.0, 2);// пед едит куда-то
@@ -978,28 +975,28 @@ void kaufman(void)
 					}
 				}
 				// зачещаем скрипт
-				WAIT(10);
+				WAIT(0);
 				REMOVE_BLIP(car1_ico);//Удаляем иконку на радаре
 				REMOVE_BLIP(car2_ico);//Удаляем иконку на радаре
 				REMOVE_BLIP(car3_ico);//Удаляем иконку на радаре
 				REMOVE_PICKUP(sweap_1);// выгружаем биту
 
 				// выгружаем из памяти модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
 				// выгружаем из памяти педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
 
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -1018,7 +1015,7 @@ void kaufman(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -1055,9 +1052,9 @@ void kaufman(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-569.498, 738.454, 5.354, &cabs_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_TAXI_RANK);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(cabs_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(-569.498, 738.454, 5.354, &cabs_ico);
+				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_TAXI_RANK);
+				CHANGE_BLIP_SCALE(cabs_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "LG_18");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -1120,13 +1117,13 @@ void kaufman(void)
 				LOCK_CAR_DOORS(car6, 3); //блокируем двери автомобиля для игрока
 				LOCK_CAR_DOORS(car7, 3); //блокируем двери автомобиля для игрока
 
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped5);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped6);//создаём педа за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped7);//создаём педа за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped5);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped6);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped7);//создаём за рулём автомобиля
 
 				SET_CHAR_COMPONENT_VARIATION(ped1, 1, 0, 0);
 				SET_CHAR_COMPONENT_VARIATION(ped2, 1, 0, 0);
@@ -1147,8 +1144,8 @@ void kaufman(void)
 
 				// камера сверху
 				CREATE_CAM( 14, &camera );
-				POINT_CAM_AT_COORD	( camera, -570.081, 737.787, 5.891 ); // куда смотрит камера
-				SET_CAM_POS			( camera, -562.707, 743.712, 10.922 );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, -570.081, 737.787, 5.891 );
+				SET_CAM_POS			( camera, -562.707, 743.712, 10.922 );
 				SET_CAM_ACTIVE( camera, 1 );
 				SET_CAM_PROPAGATE( camera, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1179,11 +1176,11 @@ void kaufman(void)
 				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
 				SetTime(500);
 
-				ADD_BLIP_FOR_COORD(-678.792, -756.889, 5.098, &cabs_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(cabs_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(cabs_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "NE_POINT");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(-678.792, -756.889, 5.098, &cabs_ico);
+				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(cabs_ico, 5);
+				CHANGE_BLIP_SCALE(cabs_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "NE_POINT");
 				PRINT_STRING_IN_STRING("string", "TAXW3_1", 5000, 1);//~g~Go and pick up Mercedes.
 
 				while(true)
@@ -1214,8 +1211,8 @@ void kaufman(void)
 
 								// камера сверху
 								CREATE_CAM( 14, &camera );
-								POINT_CAM_AT_COORD	( camera, -675.899, -804.163, 7.433 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -676.856, -742.078, 7.916 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -675.899, -804.163, 7.433 );
+								SET_CAM_POS			( camera, -676.856, -742.078, 7.916 );
 								SET_CAM_ACTIVE( camera, 1 );
 								SET_CAM_PROPAGATE( camera, 1 );
 								ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1224,8 +1221,8 @@ void kaufman(void)
 								SetTime(2000);
 
 								// меняем ракурс
-								POINT_CAM_AT_COORD	( camera, -650.254, -734.201, 5.541 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -688.891, -763.655, 8.102 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -650.254, -734.201, 5.541 );
+								SET_CAM_POS			( camera, -688.891, -763.655, 8.102 );
 								SetTime(500);
 
 								// аудио
@@ -1264,8 +1261,8 @@ void kaufman(void)
 								START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car6, 3048, 0.0, 0.0, 0.0);
 
 								// меняем ракурс
-								POINT_CAM_AT_COORD	( camera, -555.041, -729.485, 7.753 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -556.249, -700.029, 6.567 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -555.041, -729.485, 7.753 );
+								SET_CAM_POS			( camera, -556.249, -700.029, 6.567 );
 								SetTime(1000);
 								CLEAR_PRINTS();
 								SetTime(2000);
@@ -1278,8 +1275,8 @@ void kaufman(void)
 								SET_PLAYBACK_SPEED(car6, 1.5);
 
 								// меняем ракурс
-								POINT_CAM_AT_COORD	( camera, -613.355, -700.484, 3.418 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -676.901, -750.855, 8.962 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -613.355, -700.484, 3.418 );
+								SET_CAM_POS			( camera, -676.901, -750.855, 8.962 );
 								SetTime(7000);
 
 								STOP_PLAYBACK_RECORDED_CAR(car1);
@@ -1350,40 +1347,40 @@ void kaufman(void)
 								TASK_COMBAT(ped6, GetPlayerPed());
 
 								ADD_BLIP_FOR_CHAR(ped1, &car1_ico);
-								CHANGE_BLIP_SPRITE(car1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(car1_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(car1_ico, 0.5); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car1_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(car1_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(car1_ico, 19);
+								CHANGE_BLIP_SCALE(car1_ico, 0.5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car1_ico, "MO_TARGET");
 
 								ADD_BLIP_FOR_CHAR(ped2, &car2_ico);
-								CHANGE_BLIP_SPRITE(car2_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(car2_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(car2_ico, 0.5); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car2_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(car2_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(car2_ico, 19);
+								CHANGE_BLIP_SCALE(car2_ico, 0.5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car2_ico, "MO_TARGET");
 
 								ADD_BLIP_FOR_CHAR(ped3, &car3_ico);
-								CHANGE_BLIP_SPRITE(car3_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(car3_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(car3_ico, 0.5); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car3_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(car3_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(car3_ico, 19);
+								CHANGE_BLIP_SCALE(car3_ico, 0.5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car3_ico, "MO_TARGET");
 
 								ADD_BLIP_FOR_CHAR(ped4, &car4_ico);
-								CHANGE_BLIP_SPRITE(car4_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(car4_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(car4_ico, 0.5); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car4_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(car4_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(car4_ico, 19);
+								CHANGE_BLIP_SCALE(car4_ico, 0.5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car4_ico, "MO_TARGET");
 
 								ADD_BLIP_FOR_CHAR(ped5, &car5_ico);
-								CHANGE_BLIP_SPRITE(car5_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(car5_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(car5_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car5_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(car5_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(car5_ico, 19);
+								CHANGE_BLIP_SCALE(car5_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car5_ico, "MO_TARGET");
 
 								ADD_BLIP_FOR_CHAR(ped6, &car6_ico);
-								CHANGE_BLIP_SPRITE(car6_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(car6_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(car6_ico, 0.5); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car6_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(car6_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(car6_ico, 19);
+								CHANGE_BLIP_SCALE(car6_ico, 0.5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(car6_ico, "MO_TARGET");
 
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "TAXW3_2", 5000, 1);//~g~Stay alive until the timer runs out.
@@ -1595,8 +1592,8 @@ void kaufman(void)
 
 							// камера
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -555.041, -729.485, 7.753 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -556.249, -700.029, 6.567 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -555.041, -729.485, 7.753 );
+							SET_CAM_POS			( camera, -556.249, -700.029, 6.567 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1661,10 +1658,10 @@ void kaufman(void)
 							EXPLODE_CHAR_HEAD(ped6);
 
 							ADD_BLIP_FOR_CHAR(ped7, &car1_ico);
-							CHANGE_BLIP_SPRITE(car1_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(car1_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(car1_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(car1_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+							CHANGE_BLIP_SPRITE(car1_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(car1_ico, 19);
+							CHANGE_BLIP_SCALE(car1_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(car1_ico, "MO_TARGET");
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "TAXW3_3", 5000, 1);//~g~Take out the leader cab!
 
@@ -1742,8 +1739,8 @@ void kaufman(void)
 							}
 							// камера
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -572.881, 723.549, 9.168 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -588.599, 753.044, 9.441 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -572.881, 723.549, 9.168 );
+							SET_CAM_POS			( camera, -588.599, 753.044, 9.441 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1753,7 +1750,7 @@ void kaufman(void)
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							while (true)
 							{
 								SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -1770,12 +1767,12 @@ void kaufman(void)
 							}
 
 							// меняем ракурс
-							POINT_CAM_AT_COORD	( camera, -565.734, 714.121, 6.778 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -560.881, 716.777, 7.953 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -565.734, 714.121, 6.778 );
+							SET_CAM_POS			( camera, -560.881, 716.777, 7.953 );
 							PRINT_STRING_IN_STRING("string", "TAX_AS2", 5000, 1);//~g~Kaufman Cabs will now generate revenue up to a maximum of $5000. Make sure you collect it regularly.
 
 							//МАШИНКА СЧЁТКА ДЕНЕГ
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							SETTIMERB(0); //сбрасываем таймер
 							
 							uint rId9;
@@ -1797,7 +1794,7 @@ void kaufman(void)
 								if ( TIMERA() > 500)
 								{
 									temp +=3;
-									SETTIMERA(0); //сбрасываем таймер 
+									SETTIMERA(0);
 								}
 								if ( TIMERB() > 6000)
 								{
@@ -1835,7 +1832,7 @@ void kaufman(void)
 					}
 				}
 				// зачещаем скрипт
-				WAIT(10);
+				WAIT(0);
 				REMOVE_BLIP(car1_ico);//Удаляем иконку на радаре
 				REMOVE_BLIP(car2_ico);//Удаляем иконку на радаре
 				REMOVE_BLIP(car3_ico);//Удаляем иконку на радаре
@@ -1845,32 +1842,32 @@ void kaufman(void)
 				LOCK_CAR_DOORS(car7, 1); //разблокируем двери автомобиля для игрока
 
 				// выгружаем из памяти модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель машины
-				MARK_MODEL_AS_NO_LONGER_NEEDED(vorotaM);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(vorotaM);
 
 				// выгружаем из памяти педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
 
 				// выгружаем из памяти транспорт
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car5);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car6);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car7);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car6);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car7);
 				if (car8 != 0)
 				{
 					LOCK_CAR_DOORS(car8, 1); //блокируем двери автомобиля для игрока
-					MARK_CAR_AS_NO_LONGER_NEEDED(&car8);//выгружаем модель машины(в последствии машина изчезнет)
+					MARK_CAR_AS_NO_LONGER_NEEDED(&car8);
 				}
 				DELETE_OBJECT(&vorota);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&vorota);
@@ -1891,7 +1888,7 @@ void kaufman(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -1911,7 +1908,7 @@ void kaufman(void)
 				else if (skip == 2)
 				{
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -1946,10 +1943,10 @@ void kaufman(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-569.498, 738.454, 5.354, &cabs_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_TAXI_RANK);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(cabs_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(cabs_ico, 1); // иконка пропадает если не в зоне радардиска
+				ADD_BLIP_FOR_COORD(-569.498, 738.454, 5.354, &cabs_ico);
+				CHANGE_BLIP_SPRITE(cabs_ico, BLIP_TAXI_RANK);
+				CHANGE_BLIP_SCALE(cabs_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(cabs_ico, 1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "LG_18");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -1970,7 +1967,7 @@ void kaufman(void)
 				{
 					income +=1;
 				}
-				SETTIMERC(0); //сбрасываем таймер 
+				SETTIMERC(0);
 			}
 			if (G_COLLECTOR == 5)// ID Бизнеса
 			{
@@ -2025,7 +2022,6 @@ void main(void)
 {
 	THIS_SCRIPT_SHOULD_BE_SAVED();
 	kaufman();
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

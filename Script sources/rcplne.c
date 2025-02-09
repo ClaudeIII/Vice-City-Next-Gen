@@ -24,7 +24,6 @@ float Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, Ped1R, ped1_cord, ped1_lap
 float Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, Ped2R, ped2_cord, ped2_lap;
 float Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, Ped3R, ped3_cord, ped3_lap;
 
-
 void setup_draw_text(void) {
 	SET_TEXT_COLOUR(95, 195, 247, 255);
 	SET_TEXT_SCALE(0.156, 0.267);
@@ -114,12 +113,12 @@ void rc_baron(void)
 	SET_CAR_LIVERY(car3, 2);
 	SET_CAR_LIVERY(car4, 2);
 
-	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём педа за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём педа за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём педа за рулём автомобиля
-	SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);//делает педа бесмертным
-	SET_CHAR_PROOFS(ped2, TRUE, TRUE, TRUE, TRUE, TRUE);//делает педа бесмертным
-	SET_CHAR_PROOFS(ped3, TRUE, TRUE, TRUE, TRUE, TRUE);//делает педа бесмертным
+	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём за рулём автомобиля
+	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём за рулём автомобиля
+	SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
+	SET_CHAR_PROOFS(ped2, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
+	SET_CHAR_PROOFS(ped3, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
 
 	WAIT(100);
 	SET_CHAR_VISIBLE(ped1, 0); //прозрачный игрок
@@ -144,20 +143,20 @@ void rc_baron(void)
 		}
 	}
 	checkpoint = CREATE_CHECKPOINT( 4, 722.354, 1322.47, 22.426, 634.599, 1222.72, 22.896, 0.60000000 );
-	POINT_CAM_AT_COORD	( camera, 747.992, 1768.75, 22.1365 ); // куда смотрит камера
-	SET_CAM_POS			( camera, 759.072, 1777.28, 23.4156 );//расположение камеры
+	POINT_CAM_AT_COORD	( camera, 747.992, 1768.75, 22.1365 );
+	SET_CAM_POS			( camera, 759.072, 1777.28, 23.4156 );
 	DO_SCREEN_FADE_IN( 250 );// убирается затемнение экрана
 	PRINT_STRING_IN_STRING("string", "NERCPL1_4", 5000, 1);//~g~Compete in a CHECKPOINT RACE with 3 other RC Plane's
 	SetTime(5000);
 
-	POINT_CAM_AT_COORD	( camera, 723.923, 1319.87, 22.426 ); // куда смотрит камера
-	SET_CAM_POS			( camera, 703.739, 1359.13, 27.223 );//расположение камеры
+	POINT_CAM_AT_COORD	( camera, 723.923, 1319.87, 22.426 );
+	SET_CAM_POS			( camera, 703.739, 1359.13, 27.223 );
 	PRINT_STRING_IN_STRING("string", "RCPL1_5", 5000, 1);//~g~Fly through the checkpoints scattered throughout Vice City.
 	SetTime(5000);
 	CLEAR_AREA( 1162.67, 1225.26, 8.77136, 5.0, 1);//очещаем зону загрузки
 
-	POINT_CAM_AT_COORD	( camera, 753.116, 1773.84, 22.1365 ); // куда смотрит камера
-	SET_CAM_POS			( camera, 742.441, 1767.64, 22.6977 );//расположение камеры
+	POINT_CAM_AT_COORD	( camera, 753.116, 1773.84, 22.1365 );
+	SET_CAM_POS			( camera, 742.441, 1767.64, 22.6977 );
 	PRINT_STRING_IN_STRING("string", "RCH1_8", 5000, 1);//~g~If you wish to quit this mission press the ~h~~k~~PED_FIREWEAPON~ ~g~button to detonate your RC Plane.
 	SetTime(5000);
 
@@ -246,19 +245,19 @@ void rc_baron(void)
 	CHANGE_BLIP_SPRITE(Blip_c1, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 	CHANGE_BLIP_COLOUR(Blip_c1, 12);   //цвет иконка на радаре (0=белая)
 	CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_c1, "NE_RACE1");//иконка на радаре "Blip01" называние в истории карты
-	CHANGE_BLIP_SCALE(Blip_c1, 0.77999990); // масштаб иконки на радаре
+	CHANGE_BLIP_SCALE(Blip_c1, 0.77999990);
 
 	ADD_BLIP_FOR_CHAR(ped2, &Blip_c2);
 	CHANGE_BLIP_SPRITE(Blip_c2, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 	CHANGE_BLIP_COLOUR(Blip_c2, 8);   //цвет иконка на радаре (0=белая)
 	CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_c2, "NE_RACE1");//иконка на радаре "Blip01" называние в истории карты
-	CHANGE_BLIP_SCALE(Blip_c2, 0.77999990); // масштаб иконки на радаре
+	CHANGE_BLIP_SCALE(Blip_c2, 0.77999990);
 
 	ADD_BLIP_FOR_CHAR(ped3, &Blip_c3);
 	CHANGE_BLIP_SPRITE(Blip_c3, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 	CHANGE_BLIP_COLOUR(Blip_c3, 19);   //цвет иконка на радаре (0=белая)
 	CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_c3, "NE_RACE1");//иконка на радаре "Blip01" называние в истории карты
-	CHANGE_BLIP_SCALE(Blip_c3, 0.77999990); // масштаб иконки на радаре
+	CHANGE_BLIP_SCALE(Blip_c3, 0.77999990);
 
 	SETTIMERA( 0 );
 	SETTIMERC( 0 );
@@ -301,17 +300,17 @@ void rc_baron(void)
 			//TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped2, car2, ped2B_x, ped2B_y, ped2B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 			//TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped3, car3, ped3B_x, ped3B_y, ped3B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 			
-			ADD_BLIP_FOR_COORD(Blip_x, Blip_y, Blip_z, &Blip_r);//создаем иконку на радаре в переменной "Blip01"
+			ADD_BLIP_FOR_COORD(Blip_x, Blip_y, Blip_z, &Blip_r);
 			CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 			CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
 			CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
-			CHANGE_BLIP_SCALE(Blip_r, 0.77999990); // масштаб иконки на радаре
+			CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 			
-			ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, Blip_z2, &Blip_r2);//создаем иконку на радаре в переменной "Blip01"
+			ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, Blip_z2, &Blip_r2);
 			CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 			CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
 			CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
-			CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000)); // масштаб иконки на радаре
+			CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 			CHANGE_BLIP_ALPHA(Blip_r2, 125);
 			start = 2;
 			pley_rrr = 1;
@@ -527,27 +526,27 @@ void rc_baron(void)
 				REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
 				REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
 				DELETE_CHECKPOINT(checkpoint);
-				ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);//создаем иконку на радаре в переменной "Blip01"
+				ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 				CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 				CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
-				CHANGE_BLIP_SCALE(Blip_r, 0.77999990); // масштаб иконки на радаре
+				CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 				checkpoint = CREATE_CHECKPOINT( 4, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.60000000 );
 				if (play_cord < 28)
 				{
-					ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);//создаем иконку на радаре в переменной "Blip01"
+					ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);
 					CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 					CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
 					CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
-					CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000)); // масштаб иконки на радаре
+					CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 					CHANGE_BLIP_ALPHA(Blip_r2, 125);
 				}
 				else
 				{
-					ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);//создаем иконку на радаре в переменной "Blip01"
+					ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);
 					CHANGE_BLIP_SPRITE(Blip_r2, BLIP_FINISH_LINE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 					CHANGE_BLIP_COLOUR(Blip_r2, 0);   //цвет иконка на радаре (0=белая)
-					CHANGE_BLIP_SCALE(Blip_r2, 0.77999990); // масштаб иконки на радаре
+					CHANGE_BLIP_SCALE(Blip_r2, 0.77999990);
 					CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
 					CHANGE_BLIP_ALPHA(Blip_r2, 125);
 				}
@@ -557,7 +556,7 @@ void rc_baron(void)
 				REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
 				REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
 				DELETE_CHECKPOINT(checkpoint);
-				ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);//создаем иконку на радаре в переменной "Blip01"
+				ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 				CHANGE_BLIP_SPRITE(Blip_r, BLIP_FINISH_LINE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
 				CHANGE_BLIP_COLOUR(Blip_r, 0);   //цвет иконка на радаре (0=белая)
@@ -1571,28 +1570,28 @@ void rc_baron(void)
 	REMOVE_CAR_RECORDING( 3068 ); // выгружаем пути транспорта
 
 	// выгружаем из памяти модели
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
 	// выгружаем из памяти педов
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
 
 	// выгружаем из памяти транспорт
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car4);//выгружаем модель машины(в последствии машина изчезнет)
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
 
 	RELEASE_TEXTURE( fon );
 	RELEASE_TEXTURE( timer );
 	REMOVE_TXD( textur );
 
 }
+
 void main(void)
 {
-	//WAIT(5000);
 	CLEAR_HELP(); // удаляем текст подсказки
 	LOAD_ADDITIONAL_TEXT("RCPLNE1", 6);
 	DO_SCREEN_FADE_OUT( 250 );// Затемняем экран
@@ -1615,8 +1614,8 @@ void main(void)
 
 	//выставляем камеру
 	CREATE_CAM( 14, &camera );
-	POINT_CAM_AT_COORD	( camera, 741.176, 1785.87, 22.1314 ); // куда смотрит камера
-	SET_CAM_POS			( camera, 742.858, 1780.66, 25.0366 );//расположение камеры
+	POINT_CAM_AT_COORD	( camera, 741.176, 1785.87, 22.1314 );
+	SET_CAM_POS			( camera, 742.858, 1780.66, 25.0366 );
 	SET_CAM_ACTIVE( camera, 1 );
 	SET_CAM_PROPAGATE( camera, 1 );
 	ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1651,8 +1650,8 @@ void main(void)
 
 	//выставляем камеру на фургон
 	CREATE_CAM( 14, &camera );
-	POINT_CAM_AT_COORD	( camera, 741.176, 1785.87, 22.1314 ); // куда смотрит камера
-	SET_CAM_POS			( camera, 742.858, 1780.66, 25.0366 );//расположение камеры
+	POINT_CAM_AT_COORD	( camera, 741.176, 1785.87, 22.1314 );
+	SET_CAM_POS			( camera, 742.858, 1780.66, 25.0366 );
 	SET_CAM_ACTIVE( camera, 1 );
 	SET_CAM_PROPAGATE( camera, 1 );
 	ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1667,8 +1666,8 @@ void main(void)
 	SetTime(500);
 	SET_CHAR_VISIBLE(GetPlayerPed(), 1); //прозрачный игрок
 	SetTime(1000);
-	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель машины
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car5);//выгружаем модель машины(в последствии машина изчезнет)
+	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
 
 	SET_POLICE_IGNORE_PLAYER(GetPlayerIndex(), 0);// Игрока игнорируют копы
 	SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// Игрок бессмертный
@@ -1681,7 +1680,7 @@ void main(void)
 	
 	if (skip == 1)
 	{
-		SETTIMERA(0); //сбрасываем таймер 
+		SETTIMERA(0);
 		while (true)
 		{
 			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -1700,7 +1699,7 @@ void main(void)
 	}
 	else if (skip == 2)
 	{
-		SETTIMERA(0); //сбрасываем таймер 
+		SETTIMERA(0);
 		TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 		while (true)
 		{

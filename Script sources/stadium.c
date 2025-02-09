@@ -5,7 +5,8 @@
 #include <consts.h>
 #include "globals.h"
 
-void main(void) {
+void main(void)
+{
 	int stadium_door_1, stadium_door_2, stadium_poster;
 	int hours_s, minutes_s, day_flag, flag_stadium_doors, day_counter;
 	

@@ -1,13 +1,10 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 float PlayX, PlayY, PlayZ, PlayR, blip_on, spisok, spisok_on, s_car_1, s_car_2, s_car_3, s_car_4, s_car_5, s_car_6, in_model, text, text2, cash, sutosave;
 float textur1;
 int income, load_mashin, help, time_income, temp;
@@ -68,11 +65,11 @@ void Sunshine(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(-584.339, -331.17, 6.98854, &sun_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(sun_ico, BLIP_GARAGE);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(sun_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(sun_ico, 1); // иконка пропадает если не в зоне радардиска
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(sun_ico, "LG_36");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(-584.339, -331.17, 6.98854, &sun_ico);
+				CHANGE_BLIP_SPRITE(sun_ico, BLIP_GARAGE);
+				CHANGE_BLIP_SCALE(sun_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(sun_ico, 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(sun_ico, "LG_36");
 				blip_on = 1;
 			}
 		}
@@ -266,7 +263,7 @@ void Sunshine(void)
 										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 										while (true)
 										{
-											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 											{
 												break;
 											}
@@ -288,8 +285,8 @@ void Sunshine(void)
 										sutosave = 1;
 
 										CREATE_CAM( 14, &camera );
-										POINT_CAM_AT_COORD	( camera, -589.355, -333.968, 7.66709 ); // куда смотрит камера
-										SET_CAM_POS			( camera, -583.815, -331.098, 8.7464 );//расположение камеры
+										POINT_CAM_AT_COORD	( camera, -589.355, -333.968, 7.66709 );
+										SET_CAM_POS			( camera, -583.815, -331.098, 8.7464 );
 										SET_CAM_ACTIVE( camera, 1 );
 										SET_CAM_PROPAGATE( camera, 1 );
 										ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -314,15 +311,15 @@ void Sunshine(void)
 											}
 										}
 
-										POINT_CAM_AT_COORD	( camera, -589.355, -333.968, 7.66709); // куда смотрит камера
-										SET_CAM_POS			( camera, -587.284, -340.629, 8.38526); //расположение камеры
+										POINT_CAM_AT_COORD	( camera, -589.355, -333.968, 7.66709);
+										SET_CAM_POS			( camera, -587.284, -340.629, 8.38526); 
 										SetTime(4000);
 
 										DO_SCREEN_FADE_OUT( 1500 );// Затемняем экран
 										while (true)
 										{
 											WAIT( 0 );
-											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 											{
 												break;
 											}
@@ -330,9 +327,9 @@ void Sunshine(void)
 
 										DO_SCREEN_FADE_IN( 1500 );// убирается затемнение экрана
 										TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве) 
-										SETTIMERA(0); //сбрасываем таймер 
-										POINT_CAM_AT_COORD	( camera, -583.188, -334.591, 12.646); // куда смотрит камера
-										SET_CAM_POS			( camera, -587.596, -389.758, 14.336); //расположение камеры	
+										SETTIMERA(0);
+										POINT_CAM_AT_COORD	( camera, -583.188, -334.591, 12.646);
+										SET_CAM_POS			( camera, -587.596, -389.758, 14.336); 	
 										while (true)
 										{
 											WAIT( 0 );
@@ -355,7 +352,7 @@ void Sunshine(void)
 										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 										while (true)
 										{
-											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 											{
 												break;
 											}
@@ -377,8 +374,8 @@ void Sunshine(void)
 										sutosave = 1;
 
 										CREATE_CAM( 14, &camera );
-										POINT_CAM_AT_COORD	( camera, -580.991,-335.121,7.66709 ); // куда смотрит камера
-										SET_CAM_POS			( camera, -585.71,-330.921,8.26704 );//расположение камеры
+										POINT_CAM_AT_COORD	( camera, -580.991,-335.121,7.66709 );
+										SET_CAM_POS			( camera, -585.71,-330.921,8.26704 );
 										SET_CAM_ACTIVE( camera, 1 );
 										SET_CAM_PROPAGATE( camera, 1 );
 										ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -403,15 +400,15 @@ void Sunshine(void)
 											}
 										}
 
-										POINT_CAM_AT_COORD	( camera, -580.991,-335.121,7.66709); // куда смотрит камера
-										SET_CAM_POS			( camera, -584.233,-341.182,8.18265); //расположение камеры
+										POINT_CAM_AT_COORD	( camera, -580.991,-335.121,7.66709);
+										SET_CAM_POS			( camera, -584.233,-341.182,8.18265); 
 										SetTime(4000);
 
 										DO_SCREEN_FADE_OUT( 1500 );// Затемняем экран
 										while (true)
 										{
 											WAIT( 0 );
-											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 											{
 												break;
 											}
@@ -423,7 +420,7 @@ void Sunshine(void)
 										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 										while (true)
 										{
-											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 											{
 												break;
 											}
@@ -445,8 +442,8 @@ void Sunshine(void)
 										sutosave = 1;
 
 										CREATE_CAM( 14, &camera );
-										POINT_CAM_AT_COORD	( camera, -580.991, -335.121, 12.5935 ); // куда смотрит камера
-										SET_CAM_POS			( camera, -584.981,-331.353,13.1934 );//расположение камеры
+										POINT_CAM_AT_COORD	( camera, -580.991, -335.121, 12.5935 );
+										SET_CAM_POS			( camera, -584.981,-331.353,13.1934 );
 										SET_CAM_ACTIVE( camera, 1 );
 										SET_CAM_PROPAGATE( camera, 1 );
 										ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -471,15 +468,15 @@ void Sunshine(void)
 											}
 										}
 
-										POINT_CAM_AT_COORD	( camera, -580.991, -335.121, 12.5935); // куда смотрит камера
-										SET_CAM_POS			( camera, -583.154,-340.068,13.109); //расположение камеры
+										POINT_CAM_AT_COORD	( camera, -580.991, -335.121, 12.5935);
+										SET_CAM_POS			( camera, -583.154,-340.068,13.109); 
 										SetTime(4000);
 
 										DO_SCREEN_FADE_OUT( 1500 );// Затемняем экран
 										while (true)
 										{
 											WAIT( 0 );
-											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 											{
 												break;
 											}
@@ -491,7 +488,7 @@ void Sunshine(void)
 										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 										while (true)
 										{
-											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 											{
 												break;
 											}
@@ -513,8 +510,8 @@ void Sunshine(void)
 										sutosave = 1;
 
 										CREATE_CAM( 14, &camera );
-										POINT_CAM_AT_COORD	( camera, -589.355,-333.968,12.5935 ); // куда смотрит камера
-										SET_CAM_POS			( camera, -583.815,-331.098,13.6728 );//расположение камеры
+										POINT_CAM_AT_COORD	( camera, -589.355,-333.968,12.5935 );
+										SET_CAM_POS			( camera, -583.815,-331.098,13.6728 );
 										SET_CAM_ACTIVE( camera, 1 );
 										SET_CAM_PROPAGATE( camera, 1 );
 										ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -539,15 +536,15 @@ void Sunshine(void)
 											}
 										}
 
-										POINT_CAM_AT_COORD	( camera, -589.355,-333.968,12.5935); // куда смотрит камера
-										SET_CAM_POS			( camera, -587.284,-340.629,13.3116); //расположение камеры
+										POINT_CAM_AT_COORD	( camera, -589.355,-333.968,12.5935);
+										SET_CAM_POS			( camera, -587.284,-340.629,13.3116); 
 										SetTime(4000);
 
 										DO_SCREEN_FADE_OUT( 1500 );// Затемняем экран
 										while (true)
 										{
 											WAIT( 0 );
-											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 											{
 												break;
 											}
@@ -557,12 +554,12 @@ void Sunshine(void)
 
 
 									// камера на счёную машинку
-									POINT_CAM_AT_COORD	( camera, -603.847, -312.336, 8.01287); // куда смотрит камера
-									SET_CAM_POS			( camera, -605.552, -312.669, 9.08054); //расположение камеры
+									POINT_CAM_AT_COORD	( camera, -603.847, -312.336, 8.01287);
+									SET_CAM_POS			( camera, -605.552, -312.669, 9.08054); 
 									PRINT_WITH_NUMBER("CAR_AS2", cash, 5500, 1);//~g~Sunshine Auto's will now generate revenue up to a maximum of $~1~. Make sure you collect it regularly.
 									
 									//МАШИНКА СЧЁТКА ДЕНЕГ
-									SETTIMERA(0); //сбрасываем таймер 
+									SETTIMERA(0);
 									SETTIMERB(0); //сбрасываем таймер
 
 									while(true)
@@ -580,7 +577,7 @@ void Sunshine(void)
 										if ( TIMERA() > 500)
 										{
 											temp +=3;
-											SETTIMERA(0); //сбрасываем таймер 
+											SETTIMERA(0);
 										}
 										if ( TIMERB() > 6000)
 										{
@@ -595,7 +592,7 @@ void Sunshine(void)
 									DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 									while (true)
 									{
-										if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+										if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 										{
 											break;
 										}
@@ -668,7 +665,7 @@ void Sunshine(void)
 				{
 					income +=1;
 				}
-				SETTIMERC(0); //сбрасываем таймер 
+				SETTIMERC(0);
 			}
 			if (G_COLLECTOR == 2)// ID Бизнеса
 			{
@@ -733,7 +730,7 @@ void Sunshine(void)
 
 				if (G_BUSINES_SA >= 1)
 				{
-					// текст "Требуются машины"
+					// текст "Требуются"
 					SET_TEXT_SCALE(1.3, 1.3);
 					SET_TEXT_DROPSHADOW(255, 255, 255, 255, 0);
 					SET_TEXT_CENTRE(1);
@@ -973,7 +970,6 @@ void main(void)
 {
 	THIS_SCRIPT_SHOULD_BE_SAVED();
 	Sunshine();
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

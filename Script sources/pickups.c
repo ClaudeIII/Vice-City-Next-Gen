@@ -1,13 +1,10 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 int pick_skin_1, pick_skin_2, pick_skin_3, pick_skin_4, pick_skin_5, pick_skin_6, pick_skin_7, pick_skin_8, pick_skin_9, pick_skin_10, pick_skin_11, pick_skin_12, pick_skin_13, pick_skin_14, pick_skin_15;
 Pickup weap_1, weap_2, weap_3, weap_4, weap_5, weap_6, weap_7, weap_8, weap_9, weap_10, weap_11, weap_12, weap_13, weap_14, weap_15, weap_16, weap_17, weap_18, weap_19, weap_20, weap_21, weap_22, weap_23, weap_24, weap_25, weap_26, weap_27, weap_28, weap_29, weap_30, weap_31, weap_32, weap_33, weap_34, weap_35, weap_36, weap_37, weap_38;
 Pickup aid_1, aid_2, aid_3, aid_4, aid_5, aid_6, aid_7, aid_8, aid_9, aid_10, aid_11, aid_12, aid_13, aid_14, aid_15, aid_16, aid_17, aid_18, aid_19, aid_20, aid_21, aid_22, aid_23, aid_24, aid_25;
@@ -33,7 +30,6 @@ void swap_skin(int skinID)
 		APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
 	}
 	SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, skinID, 0);
-	WAIT(500);
 	DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 }
 void pickups(void)
@@ -42,11 +38,11 @@ void pickups(void)
 	CREATE_PICKUP_ROTATE(w_knife, 2, 1, 551.7, -1013.1, 4.778, 90.0, 0.0, 0.0, &weap_1);
 	CREATE_PICKUP_ROTATE(w_pumpshot, 2, 14, -926.01, -209.2, 8.848, 90.0, 0.0, 90.0, &weap_2);
 	CREATE_PICKUP_ROTATE(w_rpg, 2, 8, -562.1, -650.57, 8.835, 80.0, 0.0, 0.0, &weap_3);
-	CREATE_PICKUP_ROTATE(w_rifle, 2, 100, -1311.9, 245.871, 24.057, -90.0, -80.0, 90.0, &weap_4);
+	CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, -1311.9, 245.871, 24.057, -90.0, -80.0, 90.0, &weap_4);
 	CREATE_PICKUP_ROTATE(w_uzi, 2, 30, 448.496, 1677.85, 18.737, 78.836, 0.337, -24.595, &weap_5);
 	CREATE_PICKUP_ROTATE(w_m4, 2, 60, 400.2, 1552.2, 6.598, -85.0, 5.0, 0.0, &weap_6);
 	CREATE_PICKUP_ROTATE(w_psg1, 2, 20, -309.1, -416.331, 3.883, -90.0, 0.0, 0.0, &weap_7);
-	CREATE_PICKUP_ROTATE(w_ak47, 2, 30, -582.1, -861.493, 6.027, 75.0, -75.0, -90.0, &weap_8);
+	CREATE_PICKUP_ROTATE(w_ruger, 2, 30, -582.1, -861.493, 6.027, 75.0, -75.0, -90.0, &weap_8);
 	CREATE_PICKUP_ROTATE(w_uzi, 2, 30, -278.017, -934.99, 5.227, 90.0, 0.0, 0.0, &weap_9);
 	CREATE_PICKUP_ROTATE(w_uzi, 2, 30, -112.911, 1227.60, 5.086, -90.0, 0.0, 0.0, &weap_10);
 	CREATE_PICKUP_ROTATE(w_molotov, 2, 5, -320.331, 1881.96, 6.338, -16.406, -24.251, 5.128, &weap_11);
@@ -66,7 +62,7 @@ void pickups(void)
 	CREATE_PICKUP_ROTATE(w_glock, 2, 17, 773.5, 283.5, 6.430, 90.0, 0.0, 0.0, &weap_25);
 	CREATE_PICKUP_ROTATE(w_cleaver, 2, 1, 840.599, 633.892, 6.385, 0.0, 25.0, 0.0, &weap_26);
 	CREATE_PICKUP_ROTATE(w_grenade, 2, 5, 988.576, 738.757, 8.435, 95.0, 0.0, 0.0, &weap_27);
-	CREATE_PICKUP_ROTATE(w_ak47, 2, 30, 851.9, 1126.31, 12.8296, -90.0, -75.0, 90.0, &weap_28);
+	CREATE_PICKUP_ROTATE(w_ruger, 2, 30, 851.9, 1126.31, 12.8296, -90.0, -75.0, 90.0, &weap_28);
 	CREATE_PICKUP_ROTATE(w_nstick, 2, 1, 657.01, -674.5, 4.955, 83.125, -19.948, 4.012, &weap_29);
 	CREATE_PICKUP_ROTATE(w_bat, 2, 1, 640.164, -721.401, 6.145, 0.0, 15.0, 0.0, &weap_30);
 	CREATE_PICKUP_ROTATE(w_shotgun, 2, 8, 1001.90, 83.701, 5.069, -85.076, 0.037, 74.133, &weap_31);
@@ -204,9 +200,9 @@ void pickups(void)
 		}
 		if ((G_PACKET == 6) && (add_weap6 == 0))
 		{
-			CREATE_PICKUP_ROTATE(w_rifle, 2, 100, 658.576, -738.166, 13.6815, 101.696, -64.536, 74.413, &pack_weap_16);// отель
-			CREATE_PICKUP_ROTATE(w_rifle, 2, 100, 95.2652, -36.4558, 6.02537, -90.0, -75.0, -180.0, &pack_weap_17);// особняк
-			CREATE_PICKUP_ROTATE(w_rifle, 2, 100, -403.225, 1894.99, 61.1544, -90.0, -75.0, 90.0, &pack_weap_18);// хюман конго
+			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, 658.576, -738.166, 13.6815, 101.696, -64.536, 74.413, &pack_weap_16);// отель
+			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, 95.2652, -36.4558, 6.02537, -90.0, -75.0, -180.0, &pack_weap_17);// особняк
+			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, -403.225, 1894.99, 61.1544, -90.0, -75.0, 90.0, &pack_weap_18);// хюман конго
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_17, "mansion_int");
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_16, "ocean_view_int");
 			add_weap6 = 1;
@@ -398,7 +394,6 @@ void main(void)
 {
 	THIS_SCRIPT_SHOULD_BE_SAVED();
 	pickups();
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

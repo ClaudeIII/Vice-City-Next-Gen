@@ -1,13 +1,10 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 int inamb = 0;
 int incopcar = 0;
 int inftk = 0;
@@ -27,12 +24,10 @@ void ToggleScript(char * name)
 	MARK_SCRIPT_AS_NO_LONGER_NEEDED(name);
 	while (IS_THREAD_ACTIVE(script)) WAIT(0);
 	G_ONMISSION = 0;
-	WAIT(1000);
 }
 
 void main(void)
 {
-	WAIT(0);
 	while (TRUE) 
 	{
 		WAIT(0);

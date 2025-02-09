@@ -1,13 +1,10 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, text, in_area, cop_on, PedX, PedY, PedZ, PedR, stalking, stalkerR, in_car, del_car, vorotaX, vorotaY, siren, sutosave;
 float Ramka1_y, Ramka2_y, Ramka3_y, mishen1_y, mishen2_y, mishen3_y, mishen4_y, mishen5_y, mishen6_y, fix_1_1, fix_1_2, fix_1_3, fix_1_4, fix_1_5, fix_2_1, fix_2_2, fix_2_3, fix_2_4, fix_2_5, fix_3_1, fix_3_2, fix_3_3, fix_3_4, fix_3_5;
 float Ramka1_LR, Ramka2_LR, Ramka3_LR, Heal_1_1, Heal_1_2, Heal_1_3, Heal_1_4, Heal_1_5, Heal_2_1, Heal_2_2, Heal_2_3, Heal_2_4, Heal_2_5, Heal_3_1, Heal_3_2, Heal_3_3, Heal_3_4, Heal_3_5, score1, score2, score3, score_all;
@@ -74,9 +71,9 @@ void club(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(malibu_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);
+				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);
+				CHANGE_BLIP_SCALE(malibu_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "LG_10");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -151,16 +148,16 @@ void club(void)
 
 				uint CarM1 = MODEL_SENTINEL;// Сентинейл
 				uint PedM1 = MODEL_IG_DARDAN;// Кэм
-				uint PedM2 = MODEL_M_Y_COP;// Коп
+				uint PedM2 = MODEL_M_Y_COP;
 				uint vorotaM = od_celldoor3; //ворота
 				uint AudID1, AudID2, AudID3;
 
 				REQUEST_MODEL(CarM1);// Сентинейл
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(10);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(PedM1);// Кэм
-				while (!HAS_MODEL_LOADED(PedM1)) WAIT(10);////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(PedM2);// Коп
-				while (!HAS_MODEL_LOADED(PedM2)) WAIT(10);////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1)) WAIT(0);////проверка "пед загрузился" если нет то начанаем с начало
+				REQUEST_MODEL(PedM2);
+				while (!HAS_MODEL_LOADED(PedM2)) WAIT(0);////проверка "пед загрузился" если нет то начанаем с начало
 				REQUEST_MODEL(vorotaM);// ворота
 				while (!HAS_MODEL_LOADED(vorotaM)) WAIT(0);
 
@@ -180,22 +177,22 @@ void club(void)
 				REQUEST_ANIMS( "amb@wall_read_idl_f" );
 				while (!HAVE_ANIMS_LOADED( "amb@wall_read_idl_f" )) WAIT(0);
 
-				// создаём машины
+				// создаём
 				CREATE_CAR(CarM1, 299.551, -788.604, 5.44546, &car1, TRUE);// Сентинейл
 
 				// создаём педов
 				CREATE_CHAR (26, PedM1, 302.252, -785.078, 5.05974, &ped1, TRUE);// Джонс
-				CREATE_CHAR (26, PedM2, 300.252, -785.078, 5.05974, &ped2, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 298.252, -785.078, 5.05974, &ped3, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 296.252, -785.078, 5.05974, &ped4, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 294.252, -785.078, 5.05974, &ped5, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 292.252, -785.078, 5.05974, &ped6, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 290.252, -785.078, 5.05974, &ped7, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 288.252, -785.078, 5.05974, &ped8, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 286.252, -785.078, 5.05974, &ped9, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 284.252, -785.078, 5.05974, &ped10, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 282.252, -785.078, 5.05974, &ped11, TRUE);// коп
-				CREATE_CHAR (26, PedM2, 280.252, -785.078, 5.05974, &ped12, TRUE);// коп
+				CREATE_CHAR (26, PedM2, 300.252, -785.078, 5.05974, &ped2, TRUE);
+				CREATE_CHAR (26, PedM2, 298.252, -785.078, 5.05974, &ped3, TRUE);
+				CREATE_CHAR (26, PedM2, 296.252, -785.078, 5.05974, &ped4, TRUE);
+				CREATE_CHAR (26, PedM2, 294.252, -785.078, 5.05974, &ped5, TRUE);
+				CREATE_CHAR (26, PedM2, 292.252, -785.078, 5.05974, &ped6, TRUE);
+				CREATE_CHAR (26, PedM2, 290.252, -785.078, 5.05974, &ped7, TRUE);
+				CREATE_CHAR (26, PedM2, 288.252, -785.078, 5.05974, &ped8, TRUE);
+				CREATE_CHAR (26, PedM2, 286.252, -785.078, 5.05974, &ped9, TRUE);
+				CREATE_CHAR (26, PedM2, 284.252, -785.078, 5.05974, &ped10, TRUE);
+				CREATE_CHAR (26, PedM2, 282.252, -785.078, 5.05974, &ped11, TRUE);
+				CREATE_CHAR (26, PedM2, 280.252, -785.078, 5.05974, &ped12, TRUE);
 				SET_CHAR_RELATIONSHIP_GROUP(ped1, 18);
 				SET_CHAR_RELATIONSHIP(ped1, 5, 24);
 				SET_SENSE_RANGE(ped1, 0.01);
@@ -225,11 +222,11 @@ void club(void)
 				ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(card, "cop_int");
 
 				// создаём блипы
-				ADD_BLIP_FOR_COORD(813.281, 27.6732, 3.54226, &malibu_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(813.281, 27.6732, 3.54226, &malibu_ico);
+				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(malibu_ico, 5);
+				CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "MO_TARGET");
 
 				PRINT_STRING_IN_STRING("string", "BJM1_1", 5000, 1);//~g~Break Cam Jones out of police custody!
 				// часть 1 войти в полицейский участок
@@ -308,10 +305,10 @@ void club(void)
 						// создаём блипы
 						REMOVE_BLIP(malibu_ico);//Удаляем иконку на радаре
 						ADD_BLIP_FOR_CHAR(ped1, &malibu_ico);
-						CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-						CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-						CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-						CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "MO_TARGET");//иконка на радаре называние в истории карты ""
+						CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+						CHANGE_BLIP_COLOUR(malibu_ico, 5);
+						CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+						CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "MO_TARGET");
 
 						break;
 					}
@@ -347,8 +344,8 @@ void club(void)
 
 							// ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, 840.784, 46.407, 6.956 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 831.199, 47.402, 8.655 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 840.784, 46.407, 6.956 );
+							SET_CAM_POS			( camera, 831.199, 47.402, 8.655 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -370,10 +367,10 @@ void club(void)
 
 							// создаём блипы
 							ADD_BLIP_FOR_PICKUP(card, &card_ico);
-							CHANGE_BLIP_SPRITE(card_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(card_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(card_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(card_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+							CHANGE_BLIP_SPRITE(card_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(card_ico, 19);
+							CHANGE_BLIP_SCALE(card_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(card_ico, "MO_TARGET");
 
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "BJM1_21", 5000, 1);//~g~The key card to the cells can be found upstairs in the station.
@@ -461,10 +458,10 @@ void club(void)
 								// создаём блипы
 								REMOVE_BLIP(card_ico);//Удаляем иконку на радаре
 								ADD_BLIP_FOR_PICKUP(card, &card_ico);
-								CHANGE_BLIP_SPRITE(card_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(card_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(card_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(card_ico, "MO_TARGET");//иконка на радаре называние в истории карты "витрина"
+								CHANGE_BLIP_SPRITE(card_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(card_ico, 19);
+								CHANGE_BLIP_SCALE(card_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(card_ico, "MO_TARGET");
 
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "BJM1_23", 5000, 1);//~g~You need to get the key card first!
@@ -540,8 +537,8 @@ void club(void)
 
 							// ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, 818.014, 23.5824, 4.5652); // куда смотрит камера
-							SET_CAM_POS			( camera, 820.505, 28.8662, 4.53316 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 818.014, 23.5824, 4.5652);
+							SET_CAM_POS			( camera, 820.505, 28.8662, 4.53316 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -552,8 +549,8 @@ void club(void)
 							SetTime(2000);
 
 							// смена ракурса камеры
-							POINT_CAM_AT_COORD	( camera, 813.964, 27.564, 4.444 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 820.649, 26.059, 4.002 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 813.964, 27.564, 4.444 );
+							SET_CAM_POS			( camera, 820.649, 26.059, 4.002 );
 
 							// анисация открытия двери
 							while (true)
@@ -604,8 +601,8 @@ void club(void)
 							SetSpeech();
 
 							// смена ракурса камеры
-							POINT_CAM_AT_COORD	( camera, 816.333, 23.334, 4.597 ); // куда смотрит камера
-							SET_CAM_POS			( camera, 821.841, 29.998, 4.056 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, 816.333, 23.334, 4.597 );
+							SET_CAM_POS			( camera, 821.841, 29.998, 4.056 );
 
 							TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 819.207, 27.1564, 3.30849, 2, -2);// Томми идёт в двери
 							TASK_GO_STRAIGHT_TO_COORD(ped1, 818.612, 26.3146, 3.30849, 2, -2);// Кэм идёт в двери
@@ -706,8 +703,8 @@ void club(void)
 								SET_CAR_COORDINATES(car1, 810.219, 83.953, 4.701);// перемещаем игрока
 								SET_CAR_HEADING(car1, 115.0);
 
-								MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-								MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+								MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+								MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "NEWANTED", 5000, 1);//~g~Shake the cops and lose your wanted level!
 								SET_MAX_WANTED_LEVEL(6);
@@ -719,11 +716,11 @@ void club(void)
 						{
 							if (text == 0)
 							{
-								ADD_BLIP_FOR_COORD(-396.853, -366.469, 4.82963, &malibu_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты "витрина"
+								ADD_BLIP_FOR_COORD(-396.853, -366.469, 4.82963, &malibu_ico);
+								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(malibu_ico, 5);
+								CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "BJM1_22", 5000, 1);//~g~Get Cam back to his house!
 								text = 1;
@@ -739,8 +736,8 @@ void club(void)
 
 								// ставим камеру
 								CREATE_CAM( 14, &camera );
-								POINT_CAM_AT_COORD	( camera, -396.281, -365.604, 5.44972 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -400.289, -371.423, 8.03588 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -396.281, -365.604, 5.44972 );
+								SET_CAM_POS			( camera, -400.289, -371.423, 8.03588 );
 								SET_CAM_ACTIVE( camera, 1 );
 								SET_CAM_PROPAGATE( camera, 1 );
 								ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -761,8 +758,8 @@ void club(void)
 								SetSpeech();
 
 								// смена ракурса камеры
-								POINT_CAM_AT_COORD	( camera, -396.955, -362.708, 4.5538 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -400.137, -381.606, 9.4254 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -396.955, -362.708, 4.5538 );
+								SET_CAM_POS			( camera, -400.137, -381.606, 9.4254 );
 								TASK_GO_STRAIGHT_TO_COORD(ped1, -400.245, -372.539, 5.45929, 2, -2);// Кэм идёт в двери
 								SetTime(6000);
 
@@ -876,23 +873,23 @@ void club(void)
 				}
 
 				// выгружаем из памяти модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(vorotaM);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(vorotaM);
 
 				// выгружаем из памяти педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
 
 				DELETE_OBJECT(&vorota);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&vorota);
@@ -900,17 +897,17 @@ void club(void)
 				// выгружаем из памяти транспорт
 				if (del_car == 0)
 				{
-					MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-					MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+					MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+					MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				}
 				if (car2 != 0)
 				{
-					MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
+					MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				}
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -930,7 +927,7 @@ void club(void)
 				else if (skip == 2)
 				{
 					PRINT_HELP("CLOTH6"); //Cop outfit delivered to Police Station on Washington Beach.
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -966,9 +963,9 @@ void club(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(malibu_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);
+				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);
+				CHANGE_BLIP_SCALE(malibu_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "LG_10");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -1096,11 +1093,11 @@ void club(void)
 				time_m = 2;
 				time_s = 0;
 
-				ADD_BLIP_FOR_COORD(-234.946, 1744.91, 4.99193, &malibu_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты ""
+				ADD_BLIP_FOR_COORD(-234.946, 1744.91, 4.99193, &malibu_ico);
+				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(malibu_ico, 5);
+				CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");
 
 				PRINT_STRING_IN_STRING("string", "BJM2_1", 5000, 1);//~g~Go to Ammu-Nation in Downtown and talk to Phil Cassidy.
 
@@ -1931,11 +1928,11 @@ void club(void)
 							SetSpeech();
 							
 
-							ADD_BLIP_FOR_COORD(-236.702, 1803.67, 4.99193, &malibu_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты ""
+							ADD_BLIP_FOR_COORD(-236.702, 1803.67, 4.99193, &malibu_ico);
+							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(malibu_ico, 5);
+							CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");
 
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "BJM2_9", 5000, 1);//~g~Get to round two's starting point.
@@ -1943,7 +1940,7 @@ void club(void)
 							STOP_SOUND(AudID);
 							RELEASE_SOUND_ID(AudID);
 							audio = 0;
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
@@ -2440,11 +2437,11 @@ void club(void)
 							FREEZE_CHAR_POSITION(GetPlayerPed(), 0);
 							REMOVE_ALL_CHAR_WEAPONS(GetPlayerPed());
 
-							ADD_BLIP_FOR_COORD(-245.585, 1808.23, 4.99193, &malibu_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты ""
+							ADD_BLIP_FOR_COORD(-245.585, 1808.23, 4.99193, &malibu_ico);
+							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(malibu_ico, 5);
+							CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");
 
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "BJM2_14", 5000, 1);//~g~Move on to the next area!
@@ -2453,7 +2450,7 @@ void club(void)
 							RELEASE_SOUND_ID(AudID);
 							audio = 0;
 
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
@@ -2917,10 +2914,10 @@ void club(void)
 							REMOVE_ALL_CHAR_WEAPONS(GetPlayerPed());
 
 							ADD_BLIP_FOR_CHAR(ped1, &malibu_ico);
-							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты ""
+							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(malibu_ico, 5);
+							CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");
 
 							SET_OBJECT_COORDINATES( torso_R1, -238.229, 1782.66, 7.31169 );
 							SET_OBJECT_COORDINATES( torso_L1, -238.229, 1782.66, 7.31169 );
@@ -2935,7 +2932,7 @@ void club(void)
 							STOP_SOUND(AudID);
 							RELEASE_SOUND_ID(AudID);
 							audio = 0;
-							SETTIMERA(0); //сбрасываем таймер 
+							SETTIMERA(0);
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
@@ -3009,8 +3006,8 @@ void club(void)
 							SetTime(1000);
 
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -233.724, 1769.41, 6.79401 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -229.302, 1761.84, 5.37918 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -233.724, 1769.41, 6.79401 );
+							SET_CAM_POS			( camera, -229.302, 1761.84, 5.37918 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -3140,20 +3137,20 @@ void club(void)
 				}
 
 				// выгружаем из памяти модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(frameM);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(headM);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(shoulderMR);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(shoulderML);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(torsoMR);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(torsoML);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(targM1);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(targM2);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(targM3);//выгружаем модель
-				MARK_MODEL_AS_NO_LONGER_NEEDED(targM4);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(frameM);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(headM);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(shoulderMR);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(shoulderML);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(torsoMR);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(torsoML);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(targM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(targM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(targM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(targM4);
 
 				// выгружаем из памяти педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 
 				DELETE_OBJECT(&frame1);
 				DELETE_OBJECT(&frame2);
@@ -3195,7 +3192,7 @@ void club(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -3214,7 +3211,7 @@ void club(void)
 				}
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -3250,9 +3247,9 @@ void club(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(malibu_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);
+				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);
+				CHANGE_BLIP_SCALE(malibu_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "LG_10");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -3330,8 +3327,8 @@ void club(void)
 				SET_CAN_BURST_CAR_TYRES(car2, 0); // шины автомобиля нельзя повредить
 				SET_CAR_ENGINE_ON(car2, 1, 1);
 
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём педа за рулём автомобиля
-				//SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);//делает педа бесмертным
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
+				//SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
 				SET_CHAR_COMPONENT_VARIATION(ped1, 1, 0, 0);
 
 				TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), car2, TRUE);//садим игрока в верталёт
@@ -3451,7 +3448,7 @@ void club(void)
 				CHANGE_BLIP_SPRITE(Blip_c1, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 				CHANGE_BLIP_COLOUR(Blip_c1, 12);   //цвет иконка на радаре (0=белая)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_c1, "NE_RACE1");//иконка на радаре "Blip01" называние в истории карты
-				CHANGE_BLIP_SCALE(Blip_c1, 0.77999990); // масштаб иконки на радаре
+				CHANGE_BLIP_SCALE(Blip_c1, 0.77999990);
 
 				while(true)
 				{
@@ -3463,18 +3460,18 @@ void club(void)
 							PLAY_AUDIO_EVENT( "FRONTEND_GAME_PICKUP_CHECKPOINT" );
 							TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, ped1B_x, ped1B_y, ped1B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 							
-							ADD_BLIP_FOR_COORD(Blip_x, Blip_y, Blip_z, &Blip_r);//создаем иконку на радаре в переменной "Blip01"
+							ADD_BLIP_FOR_COORD(Blip_x, Blip_y, Blip_z, &Blip_r);
 							CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
-							CHANGE_BLIP_SCALE(Blip_r, 0.77999990); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 							checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.60000000 );
 							
-							ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, Blip_z2, &Blip_r2);//создаем иконку на радаре в переменной "Blip01"
+							ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, Blip_z2, &Blip_r2);
 							CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
-							CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000)); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 							CHANGE_BLIP_ALPHA(Blip_r2, 125);
 							start = 1;
 						}
@@ -3666,28 +3663,28 @@ void club(void)
 							REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
 							REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
 							DELETE_CHECKPOINT(checkpoint);
-							ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);//создаем иконку на радаре в переменной "Blip01"
+							ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 							CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
-							CHANGE_BLIP_SCALE(Blip_r, 0.77999990); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 							checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.50000000 );
 							if (play_cord < 19)
 							{
-								ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);//создаем иконку на радаре в переменной "Blip01"
+								ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);
 								CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 								CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
-								CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000)); // масштаб иконки на радаре
+								CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 								CHANGE_BLIP_ALPHA(Blip_r2, 125);
 							}
 							else
 							{
-								ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);//создаем иконку на радаре в переменной "Blip01"
+								ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);
 								CHANGE_BLIP_SPRITE(Blip_r2, BLIP_FINISH_LINE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 								CHANGE_BLIP_COLOUR(Blip_r2, 0);   //цвет иконка на радаре (0=белая)
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
-								CHANGE_BLIP_SCALE(Blip_r2, 0.77999990); // масштаб иконки на радаре
+								CHANGE_BLIP_SCALE(Blip_r2, 0.77999990);
 								CHANGE_BLIP_ALPHA(Blip_r2, 125);
 							}
 						}
@@ -3696,7 +3693,7 @@ void club(void)
 							REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
 							REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
 							DELETE_CHECKPOINT(checkpoint);
-							ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);//создаем иконку на радаре в переменной "Blip01"
+							ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 							CHANGE_BLIP_SPRITE(Blip_r, BLIP_FINISH_LINE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
 							CHANGE_BLIP_COLOUR(Blip_r, 0);   //цвет иконка на радаре (0=белая)
@@ -3708,12 +3705,12 @@ void club(void)
 					{
 						if (IS_CHAR_IN_CAR(GetPlayerPed(), car1))
 						{
-							MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+							MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 							GET_CHAR_COORDINATES(ped1,  &Ped1X, &Ped1Y, &Ped1Z);//вписываем координаты соперника в переменную
 							GET_CHAR_HEADING(ped1, &ugol);
 							CREATE_CAR(CarM1, Ped1X, Ped1Y, Ped1Z, &car1, TRUE);
 							SET_CAR_HEADING(car1, ugol);
-							WARP_CHAR_INTO_CAR(ped1, car1);// садим педа в ТС
+							WARP_CHAR_INTO_CAR(ped1, car1);// садим в ТС
 						}
 					}
 
@@ -4000,7 +3997,7 @@ void club(void)
 						GET_CAR_COORDINATES(car1, &Ped1X, &Ped1Y, &Ped1Z);
 						SET_CAR_COORDINATES(car1, Ped1X, Ped1Y, Ped1Z+1);
 						GET_CAR_HEADING(car1, &Ped1R);
-						SET_CAR_HEADING(car1, Ped1R);//градус поворота машины
+						SET_CAR_HEADING(car1, Ped1R);//градус поворота
 						FIX_CAR(car1);
 						WARP_CHAR_INTO_CAR(ped1, car1);
 						TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, ped1B_x, ped1B_y, ped1B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
@@ -4010,7 +4007,7 @@ void club(void)
 						SETTIMERB(0);
 						FIX_CAR(car1);
 						SET_CAR_COORDINATES(car1, water1X, water1Y, water1Z);
-						SET_CAR_HEADING(car1, water1R);//градус поворота машины
+						SET_CAR_HEADING(car1, water1R);//градус поворота
 						TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, ped1B_x, ped1B_y, ped1B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 					}
 					//==================== фиксы соперника в стене ====================
@@ -4021,7 +4018,7 @@ void club(void)
 						{
 							FIX_CAR(car1);
 							SET_CAR_COORDINATES(car1, water1X, water1Y, water1Z);
-							SET_CAR_HEADING(car1, water1R);//градус поворота машины
+							SET_CAR_HEADING(car1, water1R);//градус поворота
 							TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, ped1B_x, ped1B_y, ped1B_z, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 							SETTIMERB(0);
 						}
@@ -4054,7 +4051,7 @@ void club(void)
 					while(true)
 					{
 						WAIT(0);
-						if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+						if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 						{
 							break;
 						}
@@ -4070,8 +4067,8 @@ void club(void)
 					TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, 948.28, 463.634, 5.15046, 4, 120.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 
 					CREATE_CAM( 14, &camera );
-					POINT_CAM_AT_COORD	( camera, 949.899, 463.616, 5.15046 ); // куда смотрит камера
-					SET_CAM_POS			( camera, 950.337, 452.762, 8.39867 );//расположение камеры
+					POINT_CAM_AT_COORD	( camera, 949.899, 463.616, 5.15046 );
+					SET_CAM_POS			( camera, 950.337, 452.762, 8.39867 );
 					SET_CAM_ACTIVE( camera, 1 );
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -4093,7 +4090,7 @@ void club(void)
 					while(true)
 					{
 						WAIT(0);
-						if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+						if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 						{
 							break;
 						}
@@ -4111,16 +4108,16 @@ void club(void)
 				}
 
 				// выгружаем из памяти модели
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель машины
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 
 				// выгружаем из памяти педов
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 
 				// выгружаем из памяти транспорт
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 
 				RELEASE_TEXTURE( fon );
 				RELEASE_TEXTURE( timer );
@@ -4128,7 +4125,7 @@ void club(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -4148,7 +4145,7 @@ void club(void)
 
 				else if (skip == 2)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -4185,9 +4182,9 @@ void club(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(malibu_ico, 1.1); // масштаб иконки на радаре
+				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);
+				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);
+				CHANGE_BLIP_SCALE(malibu_ico, 1.1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "LG_10");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -4301,8 +4298,8 @@ void club(void)
 
 				CREATE_CAR(CarM1, 900.593, 490.086, 4.68925, &car1, TRUE);
 				SET_CAR_HEADING(car1, 0.0);
-				CHANGE_CAR_COLOUR( car1, 106, 106 );//цвет машины
-				SET_EXTRA_CAR_COLOURS( car1, 127, 127 );//цвет машины
+				CHANGE_CAR_COLOUR( car1, 106, 106 );//цвет
+				SET_EXTRA_CAR_COLOURS( car1, 127, 127 );//цвет
 				SET_VEHICLE_DIRT_LEVEL(car1, 0);
 
 				CREATE_CAR(CarM2, 309.359, -762.952, 5.04796, &car2, TRUE);
@@ -4466,10 +4463,10 @@ void club(void)
 				
 				// билип тут
 				ADD_BLIP_FOR_CAR(car1, &malibu_ico);
-				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(malibu_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-				CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(malibu_ico, 19);
+				CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_CAR");
 
 				CLEAR_PRINTS();
 				PRINT_STRING_IN_STRING("string", "GETCAR", 5000, 1);//~g~Get in the getaway car to do the bank job!
@@ -4496,10 +4493,10 @@ void club(void)
 						if (start == 1)
 						{
 							REMOVE_BLIP(malibu_ico);//Удаляем иконку на радаре
-							ADD_BLIP_FOR_COORD(929.599, 448.432, 3.95018, &malibu_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+							ADD_BLIP_FOR_COORD(929.599, 448.432, 3.95018, &malibu_ico);
+							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(malibu_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "NEBNK4_C", 5000, 1);//~g~Drive the car to the entrance of the Malibu club.
@@ -4570,10 +4567,10 @@ void club(void)
 						{
 							REMOVE_BLIP(malibu_ico);//Удаляем иконку на радаре
 							ADD_BLIP_FOR_CAR(car1, &malibu_ico);
-							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(malibu_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-							CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(malibu_ico, 19);
+							CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_CAR");
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "GETCAR", 5000, 1);//~g~Get in the getaway car to do the bank job!
 							start = 1;
@@ -4605,10 +4602,10 @@ void club(void)
 							if (start == 1)
 							{
 								REMOVE_BLIP(malibu_ico);//Удаляем иконку на радаре
-								ADD_BLIP_FOR_COORD(-446.716, 192.29, 5.01873, &malibu_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+								ADD_BLIP_FOR_COORD(-446.716, 192.29, 5.01873, &malibu_ico);
+								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
+								CHANGE_BLIP_SCALE(malibu_ico, 0.6);
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "NEBNK4_P", 5000, 1);//~g~Go to the Vice City Bank.
@@ -4837,8 +4834,8 @@ void club(void)
 
 								//ставим камеру
 								CREATE_CAM( 14, &camera );
-								POINT_CAM_AT_COORD	( camera, -445.908, 192.571, 6.0251 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -455.771, 193.901, 8.0049 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -445.908, 192.571, 6.0251 );
+								SET_CAM_POS			( camera, -455.771, 193.901, 8.0049 );
 								SET_CAM_ACTIVE( camera, 1 );
 								SET_CAM_PROPAGATE( camera, 1 );
 								ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -4880,8 +4877,8 @@ void club(void)
 								START_SCRIPT_CONVERSATION(1, 1);
 
 								//меняем рукурс тут
-								POINT_CAM_AT_COORD	( camera, -453.597, 192.487, 5.9259 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -435.562, 184.875, 9.8366 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -453.597, 192.487, 5.9259 );
+								SET_CAM_POS			( camera, -435.562, 184.875, 9.8366 );
 
 								UpdateWeaponOfPed(ped1, WEAPON_M4);
 								SET_CURRENT_CHAR_WEAPON(ped1, WEAPON_M4, TRUE);
@@ -4916,8 +4913,8 @@ void club(void)
 								SET_CHAR_HEADING(GetPlayerPed(), 85.0);
 
 								//меняем рукурс тут
-								POINT_CAM_AT_COORD	( camera, -473.514, 191.958, 9.04192 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -480.223, 193.948, 7.56871 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -473.514, 191.958, 9.04192 );
+								SET_CAM_POS			( camera, -480.223, 193.948, 7.56871 );
 								DO_SCREEN_FADE_IN( 100 );// убирается затемнение экрана
 
 								// анимации прицеливания тут
@@ -4946,8 +4943,8 @@ void club(void)
 								SET_CAR_HEADING(car1, 0.0);
 
 								//меняем рукурс тут
-								POINT_CAM_AT_COORD	( camera, -481.662, 195.237, 8.33039 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -469.993, 188.801, 9.75076 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -481.662, 195.237, 8.33039 );
+								SET_CAM_POS			( camera, -469.993, 188.801, 9.75076 );
 
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "NIKO");
@@ -4967,8 +4964,8 @@ void club(void)
 								}
 
 								//меняем рукурс тут
-								POINT_CAM_AT_COORD	( camera, -487.231, 195.046, 7.36434 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -472.451, 180.688, 9.56999 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -487.231, 195.046, 7.36434 );
+								SET_CAM_POS			( camera, -472.451, 180.688, 9.56999 );
 
 								// ставим педов в ряд тут
 								SET_CHAR_COORDINATES(ped12, -485.846, 186.601, 7.45208);//
@@ -5024,8 +5021,8 @@ void club(void)
 								SetTime(3000);
 
 								//меняем рукурс тут
-								POINT_CAM_AT_COORD	( camera, -487.419, 194.709, 9.25713 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -482.358, 202.035, 11.3139 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -487.419, 194.709, 9.25713 );
+								SET_CAM_POS			( camera, -482.358, 202.035, 11.3139 );
 
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
@@ -5085,10 +5082,10 @@ void club(void)
 
 								TASK_AIM_GUN_AT_COORD(ped2, -490.706, 195.477, 7.45208, 1);
 
-								ADD_BLIP_FOR_COORD(-505.972 ,181.342, 11.6755, &malibu_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+								ADD_BLIP_FOR_COORD(-505.972 ,181.342, 11.6755, &malibu_ico);
+								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
+								CHANGE_BLIP_SCALE(malibu_ico, 0.6);
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 								break;
 							}
@@ -5107,10 +5104,10 @@ void club(void)
 								SetTime(1000);
 								
 								ADD_BLIP_FOR_CAR(car1, &malibu_ico);
-								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(malibu_ico, 19);   //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
-								CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_CAR");//иконка на радаре называние в истории карты ""
+								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(malibu_ico, 19);
+								CHANGE_BLIP_SCALE(malibu_ico, 0.6);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_CAR");
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "GETCAR", 5000, 1);//~g~Get in the getaway car to do the bank job!
 								start = 1;
@@ -5247,10 +5244,10 @@ void club(void)
 							DO_SCREEN_FADE_IN( 100 );// убирается затемнение экрана
 
 							REMOVE_BLIP(malibu_ico);//Удаляем иконку на радаре
-							ADD_BLIP_FOR_COORD(-511.607, 190.587, 1.1637, &malibu_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+							ADD_BLIP_FOR_COORD(-511.607, 190.587, 1.1637, &malibu_ico);
+							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(malibu_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 
 						}
@@ -5266,8 +5263,8 @@ void club(void)
 
 							//ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -512.911, 189.714, 2.58847 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -509.338, 188.727, 3.05347 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -512.911, 189.714, 2.58847 );
+							SET_CAM_POS			( camera, -509.338, 188.727, 3.05347 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -5434,8 +5431,8 @@ void club(void)
 
 							//ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -531.318, 196.715, 10.8963 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -529.515, 201.811, 11.3144 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -531.318, 196.715, 10.8963 );
+							SET_CAM_POS			( camera, -529.515, 201.811, 11.3144 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -5465,10 +5462,10 @@ void club(void)
 
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
 
-							ADD_BLIP_FOR_COORD(-505.972 ,181.342, 11.6755, &malibu_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+							ADD_BLIP_FOR_COORD(-505.972 ,181.342, 11.6755, &malibu_ico);
+							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(malibu_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 							SET_CHAR_RELATIONSHIP_GROUP(ped20, 0);
 							ofice = 1;
@@ -5623,10 +5620,10 @@ void club(void)
 							TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "stand_focus", "amb@telescope_idles", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
 
 							REMOVE_BLIP(malibu_ico);//Удаляем иконку на радаре
-							ADD_BLIP_FOR_COORD(-511.607, 190.587, 1.1637, &malibu_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+							ADD_BLIP_FOR_COORD(-511.607, 190.587, 1.1637, &malibu_ico);
+							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(malibu_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 						}
 
@@ -5640,8 +5637,8 @@ void club(void)
 
 							//ставим камеру
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -512.911, 189.714, 2.58847 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -509.338, 188.727, 3.05347 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -512.911, 189.714, 2.58847 );
+							SET_CAM_POS			( camera, -509.338, 188.727, 3.05347 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -5675,8 +5672,8 @@ void club(void)
 							SetSpeech();
 
 							// меняем рукурс тут
-							POINT_CAM_AT_COORD	( camera, -512.116, 189.801, 2.58513 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -509.971, 191.126, 2.93867 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -512.116, 189.801, 2.58513 );
+							SET_CAM_POS			( camera, -509.971, 191.126, 2.93867 );
 							SET_CHAR_HEADING(ped2, -110.0);
 
 							TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 4500 );//Воиспроизвидение анимации на педе
@@ -5693,8 +5690,8 @@ void club(void)
 							SetSpeech();
 
 							// меняем рукурс тут
-							POINT_CAM_AT_COORD	( camera, -511.617, 190.426, 2.5707 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -510.123, 188.832, 3.19552 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -511.617, 190.426, 2.5707 );
+							SET_CAM_POS			( camera, -510.123, 188.832, 3.19552 );
 
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "NIKO");
@@ -5841,10 +5838,10 @@ void club(void)
 							SetSpeech();
 
 							REMOVE_BLIP(malibu_ico);//Удаляем иконку на радаре
-							ADD_BLIP_FOR_COORD(-475.711, 186.124, 7.27132, &malibu_ico);//создаем иконку на радаре
-							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+							ADD_BLIP_FOR_COORD(-475.711, 186.124, 7.27132, &malibu_ico);
+							CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
+							CHANGE_BLIP_SCALE(malibu_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 							text = 11;
 						}
@@ -5861,8 +5858,8 @@ void club(void)
 
 								//ставим камеру
 								CREATE_CAM( 14, &camera );
-								POINT_CAM_AT_COORD	( camera, -473.393, 188.707, 8.06266 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -481.303 ,184.286, 9.44313 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -473.393, 188.707, 8.06266 );
+								SET_CAM_POS			( camera, -481.303 ,184.286, 9.44313 );
 								SET_CAM_ACTIVE( camera, 1 );
 								SET_CAM_PROPAGATE( camera, 1 );
 								ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -5885,8 +5882,8 @@ void club(void)
 								SetSpeech();
 
 								//смена ракурса
-								POINT_CAM_AT_COORD	( camera, -486.376, 196.099, 8.27248 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -482.862, 200.307, 8.71806 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -486.376, 196.099, 8.27248 );
+								SET_CAM_POS			( camera, -482.862, 200.307, 8.71806 );
 
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "ROMAN");
@@ -5901,8 +5898,8 @@ void club(void)
 								SetSpeech();
 
 								//смена ракурса
-								POINT_CAM_AT_COORD	( camera, -488.342, 189.787, 12.9145 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -483.745, 193.284, 13.9819 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -488.342, 189.787, 12.9145 );
+								SET_CAM_POS			( camera, -483.745, 193.284, 13.9819 );
 
 								TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 4000 );//Воиспроизвидение анимации на педе
 								NEW_SCRIPTED_CONVERSATION();
@@ -5912,8 +5909,8 @@ void club(void)
 								SetSpeech();
 								
 								//смена ракурса
-								POINT_CAM_AT_COORD	( camera, -475.975, 186.265, 8.92755 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -473.094, 187.357, 8.62006 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -475.975, 186.265, 8.92755 );
+								SET_CAM_POS			( camera, -473.094, 187.357, 8.62006 );
 
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
@@ -5922,8 +5919,8 @@ void club(void)
 								SetSpeech();
 
 								//смена ракурса
-								POINT_CAM_AT_COORD	( camera, -473.393, 188.707, 8.06266 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -481.303 ,184.286, 9.44313 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -473.393, 188.707, 8.06266 );
+								SET_CAM_POS			( camera, -481.303 ,184.286, 9.44313 );
 
 
 								NEW_SCRIPTED_CONVERSATION();
@@ -5933,8 +5930,8 @@ void club(void)
 								SetSpeech();
 
 								//смена ракурса
-								POINT_CAM_AT_COORD	( camera, -486.376, 196.099, 8.27248 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -482.862, 200.307, 8.71806 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -486.376, 196.099, 8.27248 );
+								SET_CAM_POS			( camera, -482.862, 200.307, 8.71806 );
 								
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "NIKO");
@@ -5959,12 +5956,12 @@ void club(void)
 								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
 
 								// перезапись педов тут
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);//выгружаем модель педа(в последствии пед изчезнет
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
 								CREATE_CHAR (26, PedM7, 297.365, -781.535, 5.05974, &ped7, TRUE);// SWAT
 								CREATE_CHAR (26, PedM7, 298.611, -781.535, 5.05974, &ped8, TRUE);// SWAT
@@ -6168,7 +6165,7 @@ void club(void)
 							while(true)
 							{
 								WAIT(0);
-								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
+								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
 								{
 									break;
 								}
@@ -6179,10 +6176,10 @@ void club(void)
 							while (!HAS_CAR_RECORDING_BEEN_LOADED( 3054 )) WAIT(0);
 
 							// перезапись педов тут
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
 
 							CREATE_CHAR (26, PedM7, -443.603, 185.213, 5.78294, &ped7, TRUE);// SWAT
 							CREATE_CHAR (26, PedM7, -442.771, 198.861, 5.77261, &ped8, TRUE);// SWAT
@@ -6226,8 +6223,8 @@ void club(void)
 							SET_CAR_HEADING(car3, 40.0);
 
 							CREATE_CAM( 14, &camera );
-							POINT_CAM_AT_COORD	( camera, -460.648, 184.102, 8.00638 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -456.774, 190.551, 9.63376 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -460.648, 184.102, 8.00638 );
+							SET_CAM_POS			( camera, -456.774, 190.551, 9.63376 );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -6280,8 +6277,8 @@ void club(void)
 							SetSpeech();
 
 							// смена ракурса
-							POINT_CAM_AT_COORD	( camera, -437.441, 192.311, 5.5746 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -458.979, 189.351, 13.2093 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -437.441, 192.311, 5.5746 );
+							SET_CAM_POS			( camera, -458.979, 189.351, 13.2093 );
 
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "ROMAN");
@@ -6290,8 +6287,8 @@ void club(void)
 							SetSpeech();
 
 							// смена ракурса
-							POINT_CAM_AT_COORD	( camera, -453.735, 194.054, 4.56173 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -435.722, 182.469, 10.2316 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -453.735, 194.054, 4.56173 );
+							SET_CAM_POS			( camera, -435.722, 182.469, 10.2316 );
 
 							// заускаем RRR пути тут
 							START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3054, 0.0, 0.0, 0.0);
@@ -6309,8 +6306,8 @@ void club(void)
 							SetTime(1000);
 
 							// смена ракурса
-							POINT_CAM_AT_COORD	( camera, -452.554, 194.579, 6.3003 ); // куда смотрит камера
-							SET_CAM_POS			( camera, -446.359, 188.088, 5.38462 );//расположение камеры
+							POINT_CAM_AT_COORD	( camera, -452.554, 194.579, 6.3003 );
+							SET_CAM_POS			( camera, -446.359, 188.088, 5.38462 );
 							
 							TASK_SHOOT_AT_CHAR(ped3, ped10, 2000, 3);
 							SetTime(1500);
@@ -6358,7 +6355,7 @@ void club(void)
 							SET_CHAR_MOVEMENT_ANIMS_BLOCKED(ped9, 0);
 							SET_CHAR_MOVEMENT_ANIMS_BLOCKED(ped10, 0);
 
-							MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+							MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 							del_car = 1;
 							in_car = 0;
 							stalking = 0;
@@ -6463,10 +6460,10 @@ void club(void)
 						{
 							if (cop_on == 0)
 							{
-								ADD_BLIP_FOR_COORD(-412.747, -368.869, 4.94332, &malibu_ico);//создаем иконку на радаре
-								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);//текстура иконки на радаре "BLIP_FINISH_LINE"
+								ADD_BLIP_FOR_COORD(-412.747, -368.869, 4.94332, &malibu_ico);
+								CHANGE_BLIP_SPRITE(malibu_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(malibu_ico, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_SCALE(malibu_ico, 0.6); // масштаб иконки на радаре
+								CHANGE_BLIP_SCALE(malibu_ico, 0.6);
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "NE_POINT");//иконка на радаре называние в истории карты "Особняк"
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "NEBNK4_H", 5000, 1);//~g~Go to the hideout.
@@ -6499,8 +6496,8 @@ void club(void)
 								}
 
 								CREATE_CAM( 14, &camera );
-								POINT_CAM_AT_COORD	( camera, -411.427, -374.904, 5.49129 ); // куда смотрит камера
-								SET_CAM_POS			( camera, -383.808, -354.336, 15.6692 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, -411.427, -374.904, 5.49129 );
+								SET_CAM_POS			( camera, -383.808, -354.336, 15.6692 );
 								SET_CAM_ACTIVE( camera, 1 );
 								SET_CAM_PROPAGATE( camera, 1 );
 								ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -6578,14 +6575,14 @@ void club(void)
 									}
 								}
 
-								POINT_CAM_AT_COORD	( camera, 914.084, 464.584, 5.83583 ); // куда смотрит камера
-								SET_CAM_POS			( camera, 946.271, 430.582, 11.1684 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, 914.084, 464.584, 5.83583 );
+								SET_CAM_POS			( camera, 946.271, 430.582, 11.1684 );
 
 								SetTime(500);
 								DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 								CLEAR_PRINTS();
 
-								SETTIMERA(0); //сбрасываем таймер 
+								SETTIMERA(0);
 								while (true)
 								{
 									SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
@@ -6616,14 +6613,14 @@ void club(void)
 								SET_CHAR_COORDINATES(ped1, -40.771, -35.696, 6.59763);//
 								SET_CHAR_COORDINATES(ped2, -40.771, -35.696, 6.59763);//
 
-								POINT_CAM_AT_COORD	( camera, 901.547, 480.051, 11.1095 ); // куда смотрит камера
-								SET_CAM_POS			( camera, 899.004, 480.846, 11.7199 );//расположение камеры
+								POINT_CAM_AT_COORD	( camera, 901.547, 480.051, 11.1095 );
+								SET_CAM_POS			( camera, 899.004, 480.846, 11.7199 );
 
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "ASSET_B", 5000, 1);//~g~The Malibu Club will now generate revenue up to a maximum of $10000 per day. Pick up your cash regularly!
 								
 								//МАШИНКА СЧЁТКА ДЕНЕГ
-								SETTIMERA(0); //сбрасываем таймер 
+								SETTIMERA(0);
 								SETTIMERB(0); //сбрасываем таймер
 								
 								uint rId9;
@@ -6645,7 +6642,7 @@ void club(void)
 									if ( TIMERA() > 500)
 									{
 										temp +=3;
-										SETTIMERA(0); //сбрасываем таймер 
+										SETTIMERA(0);
 									}
 									if ( TIMERB() > 6000)
 									{
@@ -6740,51 +6737,51 @@ void club(void)
 					REMOVE_PTFX(PTFX4);
 				}
 
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);//выгружаем модель машины
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);//выгружаем модель машины
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM6);//выгружаем модель педа
-				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM7);//выгружаем модель педа
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM5);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM6);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM7);
 
-				MARK_MODEL_AS_NO_LONGER_NEEDED(wireM);//выгружаем модель
+				MARK_MODEL_AS_NO_LONGER_NEEDED(wireM);
 
 				if (del_car == 0)
 				{
-					MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+					MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				}
 
 				if (car1 != 0)
 				{
-					MARK_CAR_AS_NO_LONGER_NEEDED(&car1);//выгружаем модель машины(в последствии машина изчезнет)
+					MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				}
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);//выгружаем модель машины(в последствии машина изчезнет)
-				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);//выгружаем модель машины(в последствии машина изчезнет)
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
 
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);//выгружаем модель педа(в последствии пед изчезнет
-				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);//выгружаем модель педа(в последствии пед изчезнет
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped8);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped9);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped17);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
+				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
 				DELETE_OBJECT(&wire1);
 				DELETE_OBJECT(&wire2);
@@ -6802,7 +6799,7 @@ void club(void)
 
 				if (skip == 1)
 				{
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
@@ -6824,7 +6821,7 @@ void club(void)
 					PRINT_HELP("CLOTH10"); //Bank Job outfit delivered to Malibu Club in Vice Point.
 					G_CLUB = 6;
 					sutosave = 1;
-					SETTIMERA(0); //сбрасываем таймер 
+					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
@@ -6858,10 +6855,10 @@ void club(void)
 		{
 			if (blip_on == 0)
 			{
-				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);//создаем иконку на радаре
-				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);//текстура иконки на радаре
-				CHANGE_BLIP_SCALE(malibu_ico, 1.1); // масштаб иконки на радаре
-				SET_BLIP_AS_SHORT_RANGE(malibu_ico, 1); // иконка пропадает если не в зоне радардиска
+				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &malibu_ico);
+				CHANGE_BLIP_SPRITE(malibu_ico, BLIP_CLUB);
+				CHANGE_BLIP_SCALE(malibu_ico, 1.1);
+				SET_BLIP_AS_SHORT_RANGE(malibu_ico, 1);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(malibu_ico, "LG_10");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
@@ -6882,7 +6879,7 @@ void club(void)
 				{
 					income +=1;
 				}
-				SETTIMERC(0); //сбрасываем таймер 
+				SETTIMERC(0);
 			}
 			if (G_COLLECTOR == 6)// ID Бизнеса
 			{
@@ -6937,7 +6934,6 @@ void main(void)
 {
 	THIS_SCRIPT_SHOULD_BE_SAVED();
 	club();
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

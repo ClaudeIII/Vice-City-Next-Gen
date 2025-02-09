@@ -1,13 +1,10 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 float swap, swap2, sebal, angle, spawn_car, spawnT, spawnL, spawnS1, spawnS2, spawnS3, spawnS4, spawnS5, spawnH, spawnF, spawnM, spawn_blood, spawn_inf, cop_on, run_on, arm_on, fire_on, heal_on;
 float PlayX, PlayY, PlayZ, PlayR, PedX, PedY, PedZ, PedR, in_taxi, in_voodoo;
 float x, y, set_money, siren, check_X, check_Y, check_Z, James, Pizza, Tools, Ammunition, add_check, trigger, open_D_door, open_D_door2, open_pron, open_star1, open_star2;
@@ -69,7 +66,7 @@ void i_need_tools(void)
 		set_weap_1 = WEAPON_EPISODIC_23;//молоток - w_hammer
 		set_weap_2 = WEAPON_EPISODIC_3;//тисак - w_cleaver
 		set_weap_3 = WEAPON_KNIFE;
-		set_weap_4 = WEAPON_FTHROWER;//бензопила - w_chnsaw
+		set_weap_4 = WEAPON_EPISODIC_22;//бензопила - w_chnsaw
 	}
 	else if (Tools == 2)
 	{
@@ -183,7 +180,7 @@ void i_need_tools(void)
 		set_weap_1 = WEAPON_PISTOL;
 		set_weap_2 = WEAPON_MICRO_UZI;
 		set_weap_3 = WEAPON_SHOTGUN;
-		set_weap_4 = WEAPON_AK47;
+		set_weap_4 = WEAPON_EPISODIC_9;
 		set_weap_5 = 0;
 	}
 	else if (Ammunition == 2)
@@ -298,8 +295,8 @@ void i_need_tools(void)
 	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
 
 	CREATE_CAM( 14, &camera );
-	POINT_CAM_AT_COORD	( camera, cam1_X2, cam1_Y2, cam_Z ); // куда смотрит камера
-	SET_CAM_POS			( camera, cam1_X1, cam1_Y1, cam_Z );//расположение камеры
+	POINT_CAM_AT_COORD	( camera, cam1_X2, cam1_Y2, cam_Z );
+	SET_CAM_POS			( camera, cam1_X1, cam1_Y1, cam_Z );
 	SET_CAM_ACTIVE( camera, 1 );
 	SET_CAM_PROPAGATE( camera, 0 );
 	ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -501,33 +498,33 @@ void i_need_tools(void)
 		{
 			if (set_cam == 1)
 			{
-				POINT_CAM_AT_COORD	( camera, cam1_X2, cam1_Y2, cam_Z ); // куда смотрит камера
-				SET_CAM_POS			( camera, cam1_X1, cam1_Y1, cam_Z );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, cam1_X2, cam1_Y2, cam_Z );
+				SET_CAM_POS			( camera, cam1_X1, cam1_Y1, cam_Z );
 			}
 			else if (set_cam == 2)
 			{
-				POINT_CAM_AT_COORD	( camera, cam2_X2, cam2_Y2, cam_Z ); // куда смотрит камера
-				SET_CAM_POS			( camera, cam2_X1, cam2_Y1, cam_Z );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, cam2_X2, cam2_Y2, cam_Z );
+				SET_CAM_POS			( camera, cam2_X1, cam2_Y1, cam_Z );
 			}
 			else if (set_cam == 3)
 			{
-				POINT_CAM_AT_COORD	( camera, cam3_X2, cam3_Y2, cam_Z ); // куда смотрит камера
-				SET_CAM_POS			( camera, cam3_X1, cam3_Y1, cam_Z );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, cam3_X2, cam3_Y2, cam_Z );
+				SET_CAM_POS			( camera, cam3_X1, cam3_Y1, cam_Z );
 			}
 			else if (set_cam == 4)
 			{
-				POINT_CAM_AT_COORD	( camera, cam4_X2, cam4_Y2, cam_Z ); // куда смотрит камера
-				SET_CAM_POS			( camera, cam4_X1, cam4_Y1, cam_Z );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, cam4_X2, cam4_Y2, cam_Z );
+				SET_CAM_POS			( camera, cam4_X1, cam4_Y1, cam_Z );
 			}
 			else if (set_cam == 5)
 			{
-				POINT_CAM_AT_COORD	( camera, cam5_X2, cam5_Y2, cam_Z ); // куда смотрит камера
-				SET_CAM_POS			( camera, cam5_X1, cam5_Y1, cam_Z );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, cam5_X2, cam5_Y2, cam_Z );
+				SET_CAM_POS			( camera, cam5_X1, cam5_Y1, cam_Z );
 			}
 			else if (set_cam == 6)
 			{
-				POINT_CAM_AT_COORD	( camera, cam6_X2, cam6_Y2, cam_Z ); // куда смотрит камера
-				SET_CAM_POS			( camera, cam6_X1, cam6_Y1, cam_Z );//расположение камеры
+				POINT_CAM_AT_COORD	( camera, cam6_X2, cam6_Y2, cam_Z );
+				SET_CAM_POS			( camera, cam6_X1, cam6_Y1, cam_Z );
 			}
 			SET_CAM_INTERP_STYLE_CORE( camera2, camera2, camera, 500, 0 ); //перемещение камеры от игрока на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
 			cam_on = 0;
@@ -633,11 +630,11 @@ void ammu_nation(void)
 	PedX = (x*COS((y-PedR))+y*SIN((y-PedR)))+PedX;
 	PedY = (y*COS((y-PedR))-(x*SIN((y-PedR))))+PedY;
 
-	CREATE_CHAR (26, PedM1, 527.002, -870.002, 4.64608, &ped1, TRUE);//  создать педа
+	CREATE_CHAR (26, PedM1, 527.002, -870.002, 4.64608, &ped1, TRUE);//  создать
 	SET_CHAR_COORDINATES(ped1, PedX, PedY, PedZ+0.2);
 	SET_CHAR_HEADING(ped1, PedR+180.0);
 
-	if ( intHash == 258 ) // интрерьер Молл
+	if ( intHash == 258 )
 	{
 		SET_ROOM_FOR_CHAR_BY_NAME(ped1, "mall_mloroom");
 	}
@@ -698,7 +695,7 @@ void ammu_nation(void)
 				ALTER_WANTED_LEVEL(GetPlayerIndex(), 3);
 				APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
 				SET_SENSE_RANGE(ped1, 100.0);
-				TASK_COMBAT(ped1, GetPlayerPed());// агрим педа
+				TASK_COMBAT(ped1, GetPlayerPed());// агрим
 				set_money = 1;
 			}
 		}
@@ -717,8 +714,8 @@ void ammu_nation(void)
 		STOP_SOUND(AudID1);
 		RELEASE_SOUND_ID(AudID1);
 	}
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 	trigger = 0;
 	Ammunition = 0;
 }
@@ -767,11 +764,11 @@ void create_shops(void)
 	PedX = (x*COS((y-PedR))+y*SIN((y-PedR)))+PedX;
 	PedY = (y*COS((y-PedR))-(x*SIN((y-PedR))))+PedY;
 
-	CREATE_CHAR (26, PedM1, 527.002, -870.002, 4.64608, &ped1, TRUE);//  создать педа
+	CREATE_CHAR (26, PedM1, 527.002, -870.002, 4.64608, &ped1, TRUE);//  создать
 	SET_CHAR_COORDINATES(ped1, PedX, PedY, PedZ+0.2);
 	SET_CHAR_HEADING(ped1, PedR+180.0);
 
-	if ( intHash == 258 ) // интрерьер Молл
+	if ( intHash == 258 )
 	{
 		SET_ROOM_FOR_CHAR_BY_NAME(ped1, "mall_mloroom");
 	}
@@ -792,7 +789,7 @@ void create_shops(void)
 	CREATE_OBJECT_NO_OFFSET(ObjM1, PedX, PedY, PedZ, &cashbox, TRUE);
 	SET_OBJECT_HEADING(cashbox, PedR);
 
-	if ( intHash == 258 ) // интрерьер Молл
+	if ( intHash == 258 )
 	{
 		ADD_OBJECT_TO_INTERIOR_ROOM_BY_NAME(cashbox, "mall_mloroom");
 	}
@@ -869,7 +866,7 @@ void create_shops(void)
 				if (set_money == 1)
 				{
 					CREATE_MONEY_PICKUP(((x-0.4)*COS((y-PedR))+y*SIN((y-PedR)))+check_X, (y*COS((y-PedR))-((x-0.4)*SIN((y-PedR))))+check_Y, PedZ+0.1, 100, 1, &money1);
-					if ( intHash == 258 ) // интрерьер Молл
+					if ( intHash == 258 )
 					{
 						ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(money1, "mall_mloroom");
 					}
@@ -878,7 +875,7 @@ void create_shops(void)
 				if (set_money == 2)
 				{
 					CREATE_MONEY_PICKUP(((x-0.6)*COS((y-PedR))+y*SIN((y-PedR)))+check_X, (y*COS((y-PedR))-((x-0.6)*SIN((y-PedR))))+check_Y, PedZ+0.1, 100, 1, &money2);
-					if ( intHash == 258 ) // интрерьер Молл
+					if ( intHash == 258 )
 					{
 						ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(money2, "mall_mloroom");
 					}
@@ -889,7 +886,7 @@ void create_shops(void)
 				if (set_money == 3)
 				{
 					CREATE_MONEY_PICKUP(((x-0.8)*COS((y-PedR))+y*SIN((y-PedR)))+check_X, (y*COS((y-PedR))-((x-0.8)*SIN((y-PedR))))+check_Y, PedZ+0.1, 100, 1, &money3);
-					if ( intHash == 258 ) // интрерьер Молл
+					if ( intHash == 258 )
 					{
 						ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(money3, "mall_mloroom");
 					}
@@ -900,7 +897,7 @@ void create_shops(void)
 				if (set_money == 4)
 				{
 					CREATE_MONEY_PICKUP(((x-1.0)*COS((y-PedR))+y*SIN((y-PedR)))+check_X, (y*COS((y-PedR))-((x-1.0)*SIN((y-PedR))))+check_Y, PedZ+0.1, 100, 1, &money4);
-					if ( intHash == 258 ) // интрерьер Молл
+					if ( intHash == 258 )
 					{
 						ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(money4, "mall_mloroom");
 					}
@@ -951,9 +948,9 @@ void create_shops(void)
 	REMOVE_PICKUP(money2);
 	REMOVE_PICKUP(money3);
 	REMOVE_PICKUP(money4);
-	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);//выгружаем модель педа
-	MARK_MODEL_AS_NO_LONGER_NEEDED(ObjM1);//выгружаем модель
-	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);//выгружаем модель педа(в последствии пед изчезнет
+	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
+	MARK_MODEL_AS_NO_LONGER_NEEDED(ObjM1);
+	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 	DELETE_OBJECT(&cashbox);
 	MARK_OBJECT_AS_NO_LONGER_NEEDED(&cashbox);
 	Pizza = 0;
@@ -1561,22 +1558,22 @@ void global_world(void)
 				uint CabM = MODEL_ROM;// такси Зебра
 				REQUEST_MODEL(CabM);
 				while (!HAS_MODEL_LOADED(CabM)) WAIT(0);
-				CREATE_CAR(CabM, -569.498, 738.454, 5.965, &carCab, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				SET_CAR_HEADING(carCab, 175.0);//градус поворота машины
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CabM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&carCab);//выгружаем модель машины(в последствии машина изчезнет)
+				CREATE_CAR(CabM, -569.498, 738.454, 5.965, &carCab, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				SET_CAR_HEADING(carCab, 175.0);//градус поворота
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CabM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&carCab);
 			}
 			else
 			{
 				uint CabM = MODEL_CABBY;// обычное такси
 				REQUEST_MODEL(CabM);
 				while (!HAS_MODEL_LOADED(CabM)) WAIT(0);
-				CREATE_CAR(CabM, -569.498, 738.454, 5.965, &carCab, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка машины) на нужных координатах
-				SET_CAR_HEADING(carCab, 175.0);//градус поворота машины
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(CabM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&carCab);//выгружаем модель машины(в последствии машина изчезнет)
+				CREATE_CAR(CabM, -569.498, 738.454, 5.965, &carCab, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				SET_CAR_HEADING(carCab, 175.0);//градус поворота
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(CabM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&carCab);
 			}
 			spawnT = 1;
 		}
@@ -1594,9 +1591,9 @@ void global_world(void)
 				while (!HAS_MODEL_LOADED(LoveM)) WAIT(0);
 				CREATE_CAR(LoveM, -433.092, 1681.284, 5.453, &love, TRUE);
 				SET_CAR_HEADING(love, 180.0);
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(LoveM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&love);//выгружаем модель машины(в последствии машина изчезнет)
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(LoveM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&love);
 				spawnL = 1;
 			}
 			else if ((!IS_CHAR_IN_AREA_3D( GetPlayerPed(), -382.122, 1618.784, 2.0, -452.122, 1743.784, 22.0, 0 )) && (spawnL == 1))
@@ -1614,9 +1611,9 @@ void global_world(void)
 			SET_CAR_HEADING(love, 90.0);
 			SET_VEHICLE_DIRT_LEVEL(love, 0);
 			SET_ROOM_FOR_CAR_BY_NAME(love, "mall_mloroom");
-			WAIT(10);
-			MARK_MODEL_AS_NO_LONGER_NEEDED(inferM);//выгружаем модель
-			MARK_CAR_AS_NO_LONGER_NEEDED(&love);//выгружаем модель машины(в последствии машина изчезнет)
+			WAIT(0);
+			MARK_MODEL_AS_NO_LONGER_NEEDED(inferM);
+			MARK_CAR_AS_NO_LONGER_NEEDED(&love);
 			spawn_inf = 1;
 		}
 		else if ((!IS_CHAR_IN_AREA_3D( GetPlayerPed(), 868.81, 1706.189, 8.0, 799.201, 1790.643, 35.0, 0 )) && (spawn_inf == 1))
@@ -1663,9 +1660,9 @@ void global_world(void)
 				while (!HAS_MODEL_LOADED(BoatM)) WAIT(0);
 				CREATE_CAR(BoatM, -150.741, -981.361, 1.685, &boat, TRUE);
 				SET_CAR_HEADING(boat, -112.96);
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(BoatM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&boat);//выгружаем модель машины(в последствии машина изчезнет)
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(BoatM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&boat);
 				spawnF = 1;
 			}
 			else if ((!IS_CHAR_IN_AREA_3D( GetPlayerPed(), -88.241, -1031.361, -2.0, -213.241, -931.361, 52.0, 0 )) && (spawnF == 1))
@@ -1683,9 +1680,9 @@ void global_world(void)
 				while (!HAS_MODEL_LOADED(heliM2)) WAIT(0);
 				CREATE_CAR(heliM2, 41.5106, -40.103, 34.6007, &maver, TRUE);
 				SET_CAR_HEADING(maver, 0.0);
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM2);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&maver);//выгружаем модель машины(в последствии машина изчезнет)
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM2);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&maver);
 				spawnM = 1;
 			}
 			else if ((!IS_CHAR_IN_AREA_3D( GetPlayerPed(), 119.484, -90.103, 27.921, -30.516, 9.897, 77.921, 0 )) && (spawnM == 1))
@@ -1703,9 +1700,9 @@ void global_world(void)
 				while (!HAS_MODEL_LOADED(heliM)) WAIT(0);
 				CREATE_CAR(heliM, 461.4463, -778.7614, 11.4712, &Sparrow, TRUE);
 				SET_CAR_HEADING(Sparrow, -95.0);
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);//выгружаем модель машины(в последствии машина изчезнет)
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);
 				spawnS1 = 1;
 			}
 			else if ((!IS_CHAR_IN_AREA_2D( GetPlayerPed(), 494.223, -819.752, 414.223, -739.752, 0 )) && (spawnS1 == 1))
@@ -1720,9 +1717,9 @@ void global_world(void)
 				while (!HAS_MODEL_LOADED(heliM)) WAIT(0);
 				CREATE_CAR(heliM, 808.8450, 865.9194, 6.5155, &Sparrow, TRUE);
 				SET_CAR_HEADING(Sparrow, 0.0);
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);//выгружаем модель машины(в последствии машина изчезнет)
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);
 				spawnS2 = 1;
 			}
 			else if ((!IS_CHAR_IN_AREA_2D( GetPlayerPed(), 836.571, 830.919, 786.571, 900.919, 0 )) && (spawnS2 == 1))
@@ -1737,9 +1734,9 @@ void global_world(void)
 				while (!HAS_MODEL_LOADED(heliM)) WAIT(0);
 				CREATE_CAR(heliM, -453.5938, 769.5693, 8.9773, &Sparrow, TRUE);
 				SET_CAR_HEADING(Sparrow, 180.0);
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);//выгружаем модель машины(в последствии машина изчезнет)
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);
 				spawnS3 = 1;
 			}
 			else if ((!IS_CHAR_IN_AREA_2D( GetPlayerPed(), -408.594, 724.569, -498.594, 814.569, 0 )) && (spawnS3 == 1))
@@ -1756,9 +1753,9 @@ void global_world(void)
 				while (!HAS_MODEL_LOADED(heliM)) WAIT(0);
 				CREATE_CAR(heliM, -136.1451, 1384.0923, 17.8402, &Sparrow, TRUE);
 				SET_CAR_HEADING(Sparrow, 90.0);
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);//выгружаем модель машины(в последствии машина изчезнет)
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);
 				spawnS4 = 1;
 			}
 			else if ((!IS_CHAR_IN_AREA_2D( GetPlayerPed(), -87.92, 1343.047, -157.92, 1403.047, 0 )) && (spawnS4 == 1))
@@ -1777,9 +1774,9 @@ void global_world(void)
 				while (!HAS_MODEL_LOADED(heliM)) WAIT(0);
 				CREATE_CAR(heliM, 54.3835, -99.0029, 4.90576, &Sparrow, TRUE);
 				SET_CAR_HEADING(Sparrow, 0.0);
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);//выгружаем модель машины(в последствии машина изчезнет)
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);
 				spawnS5 = 1;
 			}
 			else if ((!IS_CHAR_IN_AREA_2D( GetPlayerPed(), 114.383, -152.474, -5.617, -62.474, 0 )) && (spawnS5 == 1))
@@ -1796,9 +1793,9 @@ void global_world(void)
 				while (!HAS_MODEL_LOADED(heliM)) WAIT(0);
 				CREATE_CAR(heliM, 362.736, -1074.04, 6.80173, &Sparrow, TRUE);
 				SET_CAR_HEADING(Sparrow, 0.0);
-				WAIT(10);
-				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);//выгружаем модель
-				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);//выгружаем модель машины(в последствии машина изчезнет)
+				WAIT(0);
+				MARK_MODEL_AS_NO_LONGER_NEEDED(heliM);
+				MARK_CAR_AS_NO_LONGER_NEEDED(&Sparrow);
 				spawnH = 1;
 			}
 			else if ((!IS_CHAR_IN_AREA_2D( GetPlayerPed(), 420.336, -1114.135, 320.336, -1014.135, 0 )) && (spawnH == 1))
@@ -2144,9 +2141,9 @@ void global_world(void)
 		}
 	}
 }
+
 void main(void)
 {
-	WAIT(3000);
 	global_world();
 	while (TRUE)
 	{

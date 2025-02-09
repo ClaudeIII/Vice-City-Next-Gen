@@ -4,6 +4,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 int ready_to_shark, shark_obj, state, curAnim, sID;
 float px, py, pz, wh, heading;
 //G_SECOND_ISLAND = 1;
@@ -134,34 +135,45 @@ void engine_event(void) {
 	return;
 }
 
-void main(void) {
+void main(void)
+{
 	WAIT(0);
 	REQUEST_MODEL(GET_HASH_KEY("shark_ocean"));
 	while (!HAS_MODEL_LOADED(GET_HASH_KEY("shark_ocean"))) WAIT(0);	
 	REQUEST_ANIMS("shark_anims");
 	while (!HAVE_ANIMS_LOADED("shark_anims")) WAIT(0);
-	while (!REQUEST_AMBIENT_AUDIO_BANK("SCRIPT_MISSION/SHARK_EVENT")) {
+	while (!REQUEST_AMBIENT_AUDIO_BANK("SCRIPT_MISSION/SHARK_EVENT"))
+	{
 		WAIT(0);
 	}
 	sID = GET_SOUND_ID();
-	while (true) {
+	while (true)
+	{
 		WAIT(0);
 		if (G_DIAZ < 3) {  // флаг, если второй остров закрыт (if (G_SECOND_ISLAND == 0))
-			if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -582.0, -1782.0, -82.0, -157.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -530.0, -163.0, -281.0, 281.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -530.0, 264.0, -61.0, 869.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -402.0, 863.0, 41.0, 1327.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -270.0, 1313.0, 198.0, 2684.0, 0)) ) {
-				if ((IS_CHAR_IN_ANY_HELI(GetPlayerPed())) || (IS_CHAR_IN_ANY_BOAT(GetPlayerPed()))) {
+			if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -582.0, -1782.0, -82.0, -157.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -530.0, -163.0, -281.0, 281.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -530.0, 264.0, -61.0, 869.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -402.0, 863.0, 41.0, 1327.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -270.0, 1313.0, 198.0, 2684.0, 0)) )
+			{
+				if ((IS_CHAR_IN_ANY_HELI(GetPlayerPed())) || (IS_CHAR_IN_ANY_BOAT(GetPlayerPed())))
+				{
 					engine_event();
-				} else {
+				} else
+				{
 					shark_event();	
 					state = 5;
 				}
 			}
 		}
-		if ((IS_CHAR_IN_ANY_CAR(GetPlayerPed())) || (IS_CHAR_IN_ANY_HELI(GetPlayerPed())) || (IS_CHAR_IN_ANY_BOAT(GetPlayerPed()))) {
-			if (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -3000.0, -3000.0, 3000.0, 3000.0, 0)) {
+		if ((IS_CHAR_IN_ANY_CAR(GetPlayerPed())) || (IS_CHAR_IN_ANY_HELI(GetPlayerPed())) || (IS_CHAR_IN_ANY_BOAT(GetPlayerPed())))
+		{
+			if (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -3000.0, -3000.0, 3000.0, 3000.0, 0))
+			{
 				engine_event();
 			}
-		} else {
-			if (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -1939.0, -1782.0, 2227.0, 2684.0, 0)) {
+		}
+		else
+		{
+			if (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -1939.0, -1782.0, 2227.0, 2684.0, 0))
+			{
 				shark_event();	
 			}
 		}

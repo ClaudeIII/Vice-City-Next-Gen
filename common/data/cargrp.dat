@@ -1,0 +1,57 @@
+#
+# file: cargrp.dat
+# description: For each type of ped (worker, clubber etc) we maintain a list of the cars they might drive.
+# This list is used to pick cars in a very similar way we pick peds.
+#
+buccaneer, sanchez, manana, rancher, ruiner, marbella, virgo, bobber, uranus, stalion, moonbeam, merit, solair, vincent, bobcat,  # POPCYCLE_GROUP_HARLEM
+comet, buccaneer, hakumai, sabre2, ingot, manana, fortune, vigero2, esperanto, lokus, minivan, blista, rancher, emperor2, pres, rebla, bobber,   # POPCYCLE_GROUP_BRONX
+stratum, premier, blista, admiral, habanero, stalion, faction, pinnacle, pcj, merit, banshee, perennial, moonbeam, minivan, nrg900,    # POPCYCLE_GROUP_JERSEY 
+banshee, comet, bobcat, emperor, coquette, hakumai, infernus, lokus, ruiner, sentinel, sultanrs, supergt, turismo, admiral,  # POPCYCLE_GROUP_UPTOWN
+comet, hakumai, emperor, ingot, vincent, stratum, esperanto, marbella, lokus, premier, minivan, admiral, bobcat, sabre,  # POPCYCLE_GROUP_QUEENS
+blista, intruder, sultan, washington, marbella, moonbeam, merit, solair, virgo, pcj, nrg900, bobber, stalion, sentinel, coquette, primo, marbella, rebla, pres,  # POPCYCLE_GROUP_BROOKLYN
+fortune, uranus, vigero, primo, admiral, merit, stratum, bobcat, pinnacle, faggio, habanero, sentinel, steed, rebla, pcj, nrg900, pres, schafter, perennial, landstalker,   # POPCYCLE_GROUP_MIDTOWN
+blista, sabre, emperor, washington, bobcat, sanchez, rancher, faggio, marbella, virgo, rebla, faction, stalion, primo, vigero2   # POPCYCLE_GROUP_BLACK_POOR
+banshee, comet, blista, coquette, faggio, hakumai, infernus, lokus, ruiner, sentinel, sultanrs, supergt, turismo, admiral,  # POPCYCLE_GROUP_FASHION 
+ruiner, sultan, premier, steed, vigero, rebla, faction, ingot, intruder, moonbeam, landstalker, vincent, admiral, merit, minivan, emperor, esperanto, stratum,  # POPCYCLE_GROUP_BOHEMIAN
+
+banshee, comet, coquette, hakumai, emperor, infernus, lokus, ruiner, sentinel, sultanrs, supergt, turismo, admiral,  # POPCYCLE_GROUP_TRENDY
+
+minivan, merit, marbella, manana, admiral, faction, comet, ingot, blista, bobber,  # POPCYCLE_GROUP_RUSSIAN
+turismo, rancher, sentinel, schafter, ruiner, oracle, admiral, comet, coquette, banshee,  # POPCYCLE_GROUP_ITALIAN
+bobcat, comet, vigero, bobber, blista, virgo, vincent, stalion, sabre, rancher, sentinel, ruiner, buccaneer, minivan, merit, manana, emperor, admiral, premier,  # POPCYCLE_GROUP_EASTERN_EUROPEAN
+banshee, comet, blista, coquette, hakumai, faggio, infernus, lokus, ruiner, sentinel, sultanrs, supergt, turismo, admiral,  # POPCYCLE_GROUP_SHOPPING_RICH
+
+bobcat, comet, vigero, blista, virgo, vincent, stalion, sabre, sanchez, ruiner, rancher, pres, merit, faction, rebla,    # POPCYCLE_GROUP_CHINESE_JAPANESE 
+vigero, virgo, vincent, stalion, sabre, emperor, esperanto, rancher, merit, marbella, manana, admiral, faction, bobber,   # POPCYCLE_GROUP_SOUTH_AMERICAN
+admiral, virgo, premier, vincent, sultan,  # POPCYCLE_GROUP_SHOPPING_AVERAGE
+forklift, flatbed, packer, phantom, emperor2, mule, boxville, pony, burrito, benson, steed, bobcat, e109, # POPCYCLE_GROUP_DOCKS (Obbe:forklift added back in. Should only be created on nodes with SPECIAL_SMALL_WORKERS set)
+banshee, comet, coquette, bobcat, hakumai, emperor, infernus, lokus, ruiner, sentinel, sultanrs, supergt, turismo, admiral,  # POPCYCLE_GROUP_BUSINESS_HIGH
+sentinel, schafter, ruiner, landstalker, premier, blista, vincent, rancher,  # POPCYCLE_GROUP_BUSINESS_LOW
+
+burrito, stalion, bobcat, blista, faction, mule, stockade, vincent, pony, merit, minivan, esperanto, stratum,    # POPCYCLE_GROUP_FACTORY
+mrtasty,  # POPCYCLE_GROUP_PARK
+mrtasty, # POPCYCLE_GROUP_GOLF
+cabby, taxi, taxi2,  # POPCYCLE_GROUP_TAXI
+flatbed, packer, phantom, mule, benson, # POPCYCLE_GROUP_BUILDING_SITE
+mule, ripley, airtug, bus, perennial2, feroci2, # POPCYCLE_GROUP_AIRPORT_WORKERS
+stockade, # POPCYCLE_GROUP_SECURITY
+pmp600, steed, rancher, bobcat, # POPCYCLE_GROUP_PROSTITUTES_PIMPS
+vigero2, marbella, emperor, esperanto, burrito, blista, sabre2, faggio, fortune, ingot, # POPCYCLE_GROUP_BUMS
+
+zombieb, 		# POPCYCLE_GROUP_GANG_ALBANIAN
+patriot, 		# POPCYCLE_GROUP_GANG_BIKER_1
+patriot, 		# POPCYCLE_GROUP_GANG_BIKER_2
+sentinel, pmp600,   	# POPCYCLE_GROUP_GANG_ITALIAN
+uranus, ingot		# POPCYCLE_GROUP_GANG_RUSSIAN	(maffia/Mob)
+huntley  		# POPCYCLE_GROUP_GANG_RUSSIAN_2	(Gang)
+burrito2 		# POPCYCLE_GROUP_GANG_IRISH
+voodoo 			# POPCYCLE_GROUP_GANG_JAMAICAN
+rancher, landstalker  	# POPCYCLE_GROUP_GANG_AFRICAN_AMERICAN
+sultan, pres 		# POPCYCLE_GROUP_GANG_KOREAN
+intruder, admiral 	# POPCYCLE_GROUP_GANG_CHINESE_JAPANESE
+dukes		 	# POPCYCLE_GROUP_GANG_PUERTO_RICAN
+police, police2, polpatriot, noose, predator, pstockade, nstockade, fbi  # POPCYCLE_GROUP_COPS
+faggio, comet, stalion, ruiner, coquette, sultan, infernus, premier, steed, bobber, vigero, blista, rebla, faction, taxi, ingot, intruder, lokus, sanchez, pres, vincent, admiral, pmp600, banshee, e109, nrg900, taxi2, admiral, turismo, rancher, merit, minivan, stratum, supergt, # POPCYCLE_GROUP_NETWORK
+reefer, squalo, marquis, jetmax, tropic, # POPCYCLE_CAR_GROUP_BOATS
+sentinel, vincent, pres, intruder, admiral, sultan, stratum, hakumai, rebla, schafter, ingot, primo, admiral, oracle, merit, premier, washington, solair, pinnacle, lokus, washington,		# POPCYCLE_CAR_GROUP_BORING_SALOONS
+ripley, airtug, bus, mrtasty, perennial2, feroci2, dukes, voodoo, zombieb, burrito2, huntley,  # POPCYCLE_GROUP_ONLY_IN_NATIVE_ZONE		(These cars will only appear in the zones that they belong in)

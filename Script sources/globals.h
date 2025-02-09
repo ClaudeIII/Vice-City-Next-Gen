@@ -58,35 +58,35 @@ boolean G_JUMP;
 boolean G_PACKET;
 boolean G_SA_RACE;
 
-G_RESET_WORLDPROPS;
-
 #define carmad_neon_1 0x0834648A
 #define carmad_neon_2 0xD594FF50
 #define carmad_neon_3 0xA7DCA3E0
 #define carmad_neon_4 0x41035627
 #define carmad_neon_5 0x52A27965
 #define cj_dart_board_cab 0x01FB9E41
-#define w_rpg 0x5603B9EC
-#define w_ak47 0x1BDD0543
 #define w_bat 0x68D19067
 #define w_cue 0x4E746E14
-#define w_eagle 0x5CAEB064
-#define w_glock 0xF44C839D
-#define w_grenade 0x3B373591
 #define w_knife 0x3DFEBD8B
-#define w_m4 0x35855559
-#define w_molotov 0x88B44609
-#define w_mp5 0x65DADDFD
-#define w_psg1 0x22C755B0
-#define w_pumpshot 0xDDB2B5AD
-#define w_rifle 0x08762932
-#define w_shotgun 0x6E10D6C3
-#define w_silenced 0x862EDBE9
-#define w_uzi 0xAFD2E07B
 #define w_hammer 0x7E74ED2B
 #define w_nstick 0xE0F7420A
 #define w_chnsaw 0xAF0231C8
 #define w_cleaver 0x5CC42346
+#define w_glock 0xF44C839D
+#define w_silenced 0x862EDBE9
+#define w_eagle 0x5CAEB064
+#define w_e2_m249 0x70C10C39
+#define w_shotgun 0x6E10D6C3
+#define w_pumpshot 0xDDB2B5AD
+#define w_uzi 0xAFD2E07B
+#define w_mp5 0x65DADDFD
+#define w_ak47 0x1BDD0543
+#define w_m4 0x35855559
+#define w_ruger 0x0E28B855
+#define w_rifle 0x08762932
+#define w_psg1 0x22C755B0
+#define w_grenade 0x3B373591
+#define w_molotov 0x88B44609
+#define w_rpg 0x5603B9EC
 #define vc2_stend_prodano1 0x1E9CE23B
 #define vc2_stend_prodano2 0xF246898F
 #define vc2_sa_spend_1 0x4800ED09

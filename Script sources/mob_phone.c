@@ -1,7 +1,3 @@
-/***********************************************************************
-	This file is a part of scocl project by Alexander Blade (c) 2011 
-***********************************************************************/
-
 #include <natives.h>
 #include <common.h>
 #include <strings.h>
@@ -2713,13 +2709,11 @@ void launcher(void)
 }
 void main(void)
 {
-	WAIT(2000);
 	uint trubka = vc_mob_phone;
 	REQUEST_MODEL(trubka);
 	while (!HAS_MODEL_LOADED(trubka)) WAIT(0);
 	CREATE_OBJECT_NO_OFFSET(trubka, 1.1, 1.1, -1.1, &trubka_1, TRUE);
 	launcher();
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

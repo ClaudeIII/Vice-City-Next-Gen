@@ -2914,7 +2914,6 @@ void main(void)
 {
 	THIS_SCRIPT_SHOULD_BE_SAVED();
 	packages();
-	WAIT(2000);
 	while (TRUE)
 	{
 		WAIT(0);

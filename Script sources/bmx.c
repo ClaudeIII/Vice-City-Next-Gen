@@ -4,6 +4,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
+
 int mission_set;
 int bmx_1_trigger;
 int print_text = 1;
@@ -54,8 +55,6 @@ float x_23, y_23, z_23;
 int flag_new_bmx_record_set;
 int barrel_1, barrel_2, barrel_3, barrel_4;
 int fon, textur;
-
-void main(void);
 
 void setup_draw_text(void) {
 	SET_TEXT_COLOUR(95, 195, 247, 255);
@@ -167,7 +166,7 @@ void mission_bmx_1_passed(void) {
 	bmx_1_reward = G_BMX_1 * 100;
 	ADD_SCORE(GetPlayerIndex(), bmx_1_reward);
 	TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
@@ -194,7 +193,7 @@ void mission_bmx_2_passed(void) {
 	bmx_1_reward = G_BMX_1 * 100;
 	ADD_SCORE(GetPlayerIndex(), bmx_2_reward);
 	TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
@@ -216,7 +215,7 @@ void mission_bmx_2_passed(void) {
 void mission_bmx_2_failed(void) {
 	//PRINT_BIG("B_FAIL", 5000, 1);
 	PRINT_NOW("BMXFAIL", 5000, 1);
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
@@ -238,7 +237,7 @@ void mission_bmx_2_failed(void) {
 void mission_bmx_1_failed(void) {
 	//PRINT_BIG("B_FAIL", 5000, 1);
 	PRINT_NOW("BMXFAIL", 5000, 1);
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true)
 	{
 		SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
@@ -1237,11 +1236,10 @@ void mission_start_bmx_2(void) {
 
 void main(void) {
 
-	SETTIMERA(0); //сбрасываем таймер 
+	SETTIMERA(0);
 	while (true) {
 		WAIT(0);
 		if (IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("sanchez"))) {
-			//PRINT_BIG("BMX_1", 15000, 2);
 			mission_set = 1;
 			mission_start_bmx_1();
 			if (HAS_DEATHARREST_EXECUTED()) {
@@ -1250,7 +1248,6 @@ void main(void) {
 			mission_cleanup_bmx_1();
 		}
 		if (IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("landstalker"))) {
-			//PRINT_BIG("BMX_2", 15000, 2);
 			mission_set = 2;
 			mission_start_bmx_2();
 			if (HAS_DEATHARREST_EXECUTED()) {
@@ -1259,41 +1256,4 @@ void main(void) {
 			mission_cleanup_bmx_2();
 		}
 	}
-	//while (true) {
-	//	WAIT(0);
-	//	if (IS_PLAYER_PLAYING(GetPlayerIndex())) {
-	//		if (G_ONMISSION == 0){
-	//			if ((IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("sanchez"))) || (IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("landstalker")))) {
-	//				if (!IS_CHAR_IN_AREA_3D(GetPlayerPed(), 3.0, 1938.0, 3.5, 13.0, 1948.0, 7.5, 0)) {
-	//					bmx_1_trigger = 1;
-	//				}
-	//			}
-	//			if (bmx_1_trigger == 0) {
-	//				if (IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("sanchez"))) {
-	//					PRINT_BIG("BMX_1", 15000, 2);
-	//					mission_set = 1;
-	//					mission_start_bmx_1();
-	//					if (HAS_DEATHARREST_EXECUTED()) {
-	//						mission_bmx_1_failed();
-	//					}
-	//					mission_cleanup_bmx_1();
-	//				}
-	//				if (IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("landstalker"))) {
-	//					PRINT_BIG("BMX_2", 15000, 2);
-	//					mission_set = 2;
-	//					mission_start_bmx_2();
-	//					if (HAS_DEATHARREST_EXECUTED()) {
-	//						mission_bmx_2_failed();
-	//					}
-	//					mission_cleanup_bmx_2();
-	//				}
-	//			}
-	//			if (IS_PLAYER_PLAYING(GetPlayerIndex())) {
-	//				if (!IS_CHAR_IN_ANY_CAR(GetPlayerPed())) {
-	//					bmx_1_trigger = 0;
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
 }

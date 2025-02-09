@@ -4,7 +4,6 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
-// начало миссии метод mission_start_mm()
 
 int mm_car1, mm_car2, mm_car3, mm_car4, mm_car5, mm_car6, mm_car7, mm_car8;
 int mm_car9, mm_car10, mm_car11, mm_car12, mm_car13, mm_car14, mm_car15, mm_car16;
@@ -26,9 +25,9 @@ float plyr_rndx, plyr_rndy, plyr_rndz, bonus_on, bonus_time, set_go, skip;
 int plyr_checkpoint_blip, button_pressed;
 int cam, fon, textur, sID;
 uint hour, minute, weather, checkpoint1;
-uint CarM1 = MODEL_PEYOTE;//
-uint CarM2 = MODEL_WILLARD;//
-uint PedM1 = MODEL_M_M_PINDUS_01;//
+uint CarM1 = MODEL_PEYOTE;
+uint CarM2 = MODEL_WILLARD;
+uint PedM1 = MODEL_M_M_PINDUS_01;
 
 void setup_draw_text(void) {
 	SET_TEXT_COLOUR(95, 195, 247, 255);

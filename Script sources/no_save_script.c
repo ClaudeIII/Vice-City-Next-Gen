@@ -1790,9 +1790,9 @@ void temp(void)
 		
 	}
 }
+
 void main(void)
 {
-	WAIT(5000);
 	text = 1;
 	cutscen = 1;
 	while (TRUE)
@@ -1806,7 +1806,7 @@ void main(void)
 			WAIT(1000);
 		}
 	}
-//
+
 	while (TRUE)
 	{
 		WAIT(0);
@@ -1962,10 +1962,8 @@ void main(void)
 			{
 				PRINT_STRING_WITH_LITERAL_STRING_NOW("string", "BUYING A BUSINESS", 5000, 4);
 			}
-			WAIT(600);
 			text = 0;
 		}
 	}
-	//*/
 	return;
 }
