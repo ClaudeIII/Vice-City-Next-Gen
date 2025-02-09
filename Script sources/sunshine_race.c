@@ -468,7 +468,7 @@ void race_launcher(void)
 						{
 							WAIT(0);
 							DISABLE_PAUSE_MENU(1);// отключаем главное меню
-							if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+							if ((HAS_DEATHARREST_EXECUTED()))
 							{
 								break;
 							}
@@ -524,7 +524,7 @@ void race_launcher(void)
 								cam_x += 0.8;
 								SETTIMERA(0);
 							}
-							if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+							if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 							{
 								break;
 							}

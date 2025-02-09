@@ -34,7 +34,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -401,7 +401,7 @@ void kaufman(void)
 						skip = 1;// переменная пропуска
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -437,7 +437,7 @@ void kaufman(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -450,7 +450,7 @@ void kaufman(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))//если игрок мёртв или аврестован
+						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							PRINT_STRING_IN_STRING("string", "TAXW1_3", 5000, 1);//~r~The V.I.P. is dead!
 							skip = 1;// переменная пропуска
@@ -481,7 +481,7 @@ void kaufman(void)
 								text2 = 1;
 							}
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -494,7 +494,7 @@ void kaufman(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))//если игрок мёртв или аврестован
+						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							PRINT_STRING_IN_STRING("string", "TAXW1_3", 5000, 1);//~r~The V.I.P. is dead!
 							skip = 1;// переменная пропуска
@@ -551,7 +551,7 @@ void kaufman(void)
 								break;
 							}
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -564,7 +564,7 @@ void kaufman(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))//если игрок мёртв или аврестован
+						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							PRINT_STRING_IN_STRING("string", "TAXW1_3", 5000, 1);//~r~The V.I.P. is dead!
 							skip = 1;// переменная пропуска
@@ -664,7 +664,7 @@ void kaufman(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -677,7 +677,7 @@ void kaufman(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))//если игрок мёртв или аврестован
+						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							PRINT_STRING_IN_STRING("string", "TAXW1_3", 5000, 1);//~r~The V.I.P. is dead!
 							skip = 1;// переменная пропуска
@@ -966,7 +966,7 @@ void kaufman(void)
 							taxi_3 = 0;
 						}
 					}
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -1415,7 +1415,7 @@ void kaufman(void)
 						}
 					}
 
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -1675,7 +1675,7 @@ void kaufman(void)
 							break;
 						}
 
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1827,7 +1827,7 @@ void kaufman(void)
 							skip = 2;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;

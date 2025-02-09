@@ -35,7 +35,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -212,7 +212,7 @@ void baron_diaz(void)
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(diaz_ico, "NE_POINT");//иконка на радаре называние в истории карты "магазин одежды"
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -332,7 +332,7 @@ void baron_diaz(void)
 							
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -404,7 +404,7 @@ void baron_diaz(void)
 							TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped1, 790.781, 944.749, 13.856, 3, -2, 2.5);// пед убегает
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -521,7 +521,7 @@ void baron_diaz(void)
 							SetTime(1000);
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -598,7 +598,7 @@ void baron_diaz(void)
 							PRINT_STRING_IN_STRING("string", "COK1_8", 5000, 1);//~g~Quick! Grab some wheels and follow him!
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -794,7 +794,7 @@ void baron_diaz(void)
 							while(true)
 							{
 								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())//если игрок мёртв или аврестован, если лодка унечтожена
+								if (IS_SCREEN_FADED_OUT())
 								{
 									break;
 								}
@@ -819,7 +819,7 @@ void baron_diaz(void)
 							while(true)
 							{
 								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())//если игрок мёртв или аврестован, если лодка унечтожена
+								if (IS_SCREEN_FADED_OUT())
 								{
 									break;
 								}
@@ -1153,7 +1153,7 @@ void baron_diaz(void)
 				while(true)
 				{
 					WAIT(0);
-					if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 					{
 						break;
 					}
@@ -1416,7 +1416,7 @@ void baron_diaz(void)
 						skip = 1;
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// игрок мёртв/арестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -2006,7 +2006,7 @@ void baron_diaz(void)
 							skip = 1;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// игрок мёртв/арестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -2097,7 +2097,7 @@ void baron_diaz(void)
 							skip = 1;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// игрок мёртв/арестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -2213,7 +2213,7 @@ void baron_diaz(void)
 							skip = 1;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// игрок мёртв/арестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -3041,7 +3041,7 @@ void baron_diaz(void)
 						break;
 					}
 
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -3101,7 +3101,7 @@ void baron_diaz(void)
 								while(true)
 								{
 									WAIT(0);
-									if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+									if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 									{
 										break;
 									}
@@ -3128,7 +3128,7 @@ void baron_diaz(void)
 								while(true)
 								{
 									WAIT(0);
-									if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+									if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 									{
 										break;
 									}
@@ -3164,7 +3164,7 @@ void baron_diaz(void)
 							}
 						}
 
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -3524,7 +3524,7 @@ void baron_diaz(void)
 						while(true)
 						{
 							WAIT(0);
-							if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+							if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 							{
 								break;
 							}
@@ -3586,7 +3586,7 @@ void baron_diaz(void)
 						while(true)
 						{
 							WAIT(0);
-							if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+							if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 							{
 								break;
 							}
@@ -3603,7 +3603,7 @@ void baron_diaz(void)
 						DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -3822,7 +3822,7 @@ void baron_diaz(void)
 							skip = 1;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -3886,7 +3886,7 @@ void baron_diaz(void)
 					while(true)
 					{
 						WAIT(0);
-						if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 						{
 							break;
 						}
@@ -4336,7 +4336,7 @@ void baron_diaz(void)
 							while(true)
 							{
 								WAIT(0);
-								if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 								{
 									break;
 								}
@@ -4402,7 +4402,7 @@ void baron_diaz(void)
 							while(true)
 							{
 								WAIT(0);
-								if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 								{
 									break;
 								}
@@ -5210,7 +5210,7 @@ void baron_diaz(void)
 						skip = 1;
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// игрок мёртв/арестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -5364,7 +5364,7 @@ void baron_diaz(void)
 							skip = 1;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// игрок мёртв/арестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -6446,7 +6446,7 @@ void baron_diaz(void)
 						skip = 1;
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// игрок мёртв/арестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;

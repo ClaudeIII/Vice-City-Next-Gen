@@ -36,7 +36,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -753,7 +753,7 @@ void phil(void)
 					}
 
 					// провал и выполнение миссии
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -1493,7 +1493,7 @@ void phil(void)
 					}
 
 					// Провал миссии
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// игрок мёртв/арестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;

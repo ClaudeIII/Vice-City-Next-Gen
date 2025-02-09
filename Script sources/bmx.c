@@ -748,7 +748,7 @@ void mission_start_bmx_1(void) {
 			GET_GAME_TIMER(&time_bailed);
 			while (!(time_left_to_find_bike < 0)) {
 				WAIT(0);
-				if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
+				if ((HAS_DEATHARREST_EXECUTED()) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
 					mission_bmx_1_failed();
 				}
 				GET_GAME_TIMER(&time_now);
@@ -766,7 +766,7 @@ void mission_start_bmx_1(void) {
 			}
 		}
 		
-		if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
+		if ((HAS_DEATHARREST_EXECUTED()) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
 			mission_bmx_1_failed();
 		}
 	}
@@ -1209,7 +1209,7 @@ void mission_start_bmx_2(void) {
 		}
 		
 			
-		if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
+		if ((HAS_DEATHARREST_EXECUTED()) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
 			mission_bmx_2_failed();
 		}
 	}

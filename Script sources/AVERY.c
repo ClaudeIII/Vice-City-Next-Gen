@@ -34,7 +34,7 @@ void SetTime2(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мЄртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -51,7 +51,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мЄртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -294,7 +294,7 @@ void boyarsky(void)
 
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменна€ пропуска
 						break;
@@ -407,7 +407,7 @@ void boyarsky(void)
 							CHANGE_BLIP_SCALE(avery_ico, 0.6); // масштаб иконки на радаре
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменна€ пропуска
 							break;
@@ -524,7 +524,7 @@ void boyarsky(void)
 							SetSpeech();
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменна€ пропуска
 							break;
@@ -626,7 +626,7 @@ void boyarsky(void)
 							skip = 1;// переменна€ пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменна€ пропуска
 							break;
@@ -925,7 +925,7 @@ void boyarsky(void)
 						skip = 1;// переменна€ пропуска
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменна€ пропуска
 						break;
@@ -1973,7 +1973,7 @@ void boyarsky(void)
 							skip = 1;// переменна€ пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменна€ пропуска
 							break;
@@ -2030,7 +2030,7 @@ void boyarsky(void)
 				SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0); // смертный
 				SET_CHAR_VISIBLE(GetPlayerPed(), 1); // видимый игрок
 
-				if ((!IS_CHAR_DEAD(GetPlayerPed())) && (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+				if ((!HAS_DEATHARREST_EXECUTED()))
 				{
 					// анимаци€ выхода игрока тут
 					REQUEST_ANIMS( "ne_topfun" );//загружаем файл с анимацией
@@ -2494,7 +2494,7 @@ void boyarsky(void)
 						SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped15, 1);
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменна€ пропуска
 						break;
@@ -2606,7 +2606,7 @@ void boyarsky(void)
 							}
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменна€ пропуска
 							break;
@@ -2623,7 +2623,7 @@ void boyarsky(void)
 							skip = 2;// переменна€ пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменна€ пропуска
 							break;

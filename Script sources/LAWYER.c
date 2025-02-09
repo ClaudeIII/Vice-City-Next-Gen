@@ -323,7 +323,7 @@ void LAWYER_1(void)
 						bike = 0;
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -335,7 +335,7 @@ void LAWYER_1(void)
 					while (TRUE)
 					{
 						WAIT(0);
-						if ((!IS_CHAR_DEAD(ped1)) && (!IS_CHAR_INJURED(ped1)))//если игрок мёртв или аврестован
+						if ((!IS_CHAR_DEAD(ped1)) && (!IS_CHAR_INJURED(ped1)))
 						{
 							if ((IS_CHAR_IN_CAR(GetPlayerPed(), car1)) && (bike == 0))
 							{
@@ -448,7 +448,7 @@ void LAWYER_1(void)
 							textID = 0;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -702,13 +702,13 @@ void LAWYER_1(void)
 							CLEAR_PRINTS();
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							ABORT_SCRIPTED_CONVERSATION( 0 );
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))//если игрок мёртв или аврестован
+						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							ABORT_SCRIPTED_CONVERSATION( 0 );
 							CLEAR_PRINTS();
@@ -1012,7 +1012,7 @@ void LAWYER_1(void)
 						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "cellphone_talk", "amb@payphone", 1.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -1146,7 +1146,7 @@ void LAWYER_1(void)
 									skip = 1;// переменная пропуска
 									break;
 								}
-								else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+								else if ((HAS_DEATHARREST_EXECUTED()))
 								{
 									skip = 1;// переменная пропуска
 									break;
@@ -1154,7 +1154,7 @@ void LAWYER_1(void)
 							}
 							break;
 						}
-						else if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_INJURED(ped1)))//если игрок мёртв или аврестован
+						else if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_INJURED(ped1)))
 						{
 							EXPLODE_CHAR_HEAD(ped1);
 							DETACH_OBJECT( trubka_1, 1 );
@@ -1178,7 +1178,7 @@ void LAWYER_1(void)
 							}
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1335,7 +1335,7 @@ void LAWYER_1(void)
 							SetTime(6000);
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1398,7 +1398,7 @@ void LAWYER_1(void)
 							REMOVE_BLIP(lance_car);//Удаляем иконку на радаре
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1597,7 +1597,7 @@ void LAWYER_1(void)
 							}
 						}
 
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1727,7 +1727,7 @@ void LAWYER_1(void)
 							skip = 2;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							break;
 						}
@@ -2730,7 +2730,7 @@ void LAWYER_1(void)
 						skip = 2;
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -3683,7 +3683,7 @@ void LAWYER_1(void)
 						car2_des2 = 1;
 					}
 
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -3691,7 +3691,7 @@ void LAWYER_1(void)
 					else if ((car1_des == 1) && (car2_des == 1) && (car2_des2 == 1))
 					{
 						WAIT( 500 );
-						if ((!IS_CHAR_DEAD(GetPlayerPed())) && (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((!HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 2;
 							break;

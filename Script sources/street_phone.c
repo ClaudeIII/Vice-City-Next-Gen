@@ -34,7 +34,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -59,7 +59,7 @@ void SetTime2(uint time)
 			Text = 1;
 			break;
 		}
-		else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		else if ((HAS_DEATHARREST_EXECUTED()))
 		{
 			Text = 1;
 			break;
@@ -162,7 +162,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 					{
 						break;
 					}
@@ -324,7 +324,7 @@ void telephone(void)
 					}
 
 					// проверка игрок мертв
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -496,7 +496,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 					{
 						break;
 					}
@@ -645,7 +645,7 @@ void telephone(void)
 									POINT_CAM_AT_COORD	( camera, 824.363, 733.846, 5.657 ); // куда смотрит камера
 									SET_CAM_POS			( camera, 825.713, 743.068, 7.798);//расположение камеры
 								}
-								else if ((TIMERA() > 7000) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+								else if ((TIMERA() > 7000) || (HAS_DEATHARREST_EXECUTED()))
 								{
 									WARP_CHAR_INTO_CAR(ped1, car1);
 									break;
@@ -699,7 +699,7 @@ void telephone(void)
 							Text = 0;
 						}
 					}
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -838,7 +838,7 @@ void telephone(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1037,7 +1037,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 					{
 						break;
 					}
@@ -1559,7 +1559,7 @@ void telephone(void)
 						skip = 1;// переменная пропуска
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -1729,7 +1729,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 					{
 						break;
 					}
@@ -2021,7 +2021,7 @@ void telephone(void)
 						Text = 0;
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -2076,7 +2076,7 @@ void telephone(void)
 						carHUD_y3 = carHUD_x-carHUD_y2;
 						DRAW_SPRITE( 0, carHUD_y3, 0.80925926, carH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
 
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -2185,7 +2185,7 @@ void telephone(void)
 							skip = 1;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -2276,7 +2276,7 @@ void telephone(void)
 							UpdateWeaponOfPed(ped12, WEAPON_MP5);
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -2312,7 +2312,7 @@ void telephone(void)
 							DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 							while (true)
 							{
-								if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 								{
 									break;
 								}
@@ -2346,7 +2346,7 @@ void telephone(void)
 							{
 								GET_CHAR_COORDINATES(ped13,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
 								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
-								if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 								{
 									break;
 								}
@@ -2373,7 +2373,7 @@ void telephone(void)
 							break;
 						}
 
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -2548,7 +2548,7 @@ void telephone(void)
 				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 					{
 						break;
 					}
@@ -3024,7 +3024,7 @@ void telephone(void)
 						skip = 1;
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -3048,7 +3048,7 @@ void telephone(void)
 								DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
 								while (true)
 								{
-									if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+									if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 									{
 										break;
 									}
@@ -3086,7 +3086,7 @@ void telephone(void)
 								{
 									GET_CHAR_COORDINATES(ped28,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
 									POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ ); // куда смотрит камера
-									if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+									if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 									{
 										break;
 									}
@@ -3111,7 +3111,7 @@ void telephone(void)
 							skip = 1;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;

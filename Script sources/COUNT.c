@@ -81,7 +81,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -480,7 +480,7 @@ void typography(void)
 						PRINT_STRING_IN_STRING("string", "CM1_2", 5000, 1);//~COL_NET_12~The Shipping Officer will have the information that is required.
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -968,7 +968,7 @@ void typography(void)
 							}
 							break;
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -989,7 +989,7 @@ void typography(void)
 							skip = 2;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -1570,7 +1570,7 @@ void typography(void)
 						skip = 1;// переменная пропуска
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -1810,7 +1810,7 @@ void typography(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1969,7 +1969,7 @@ void typography(void)
 							skip = 2;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -2869,7 +2869,7 @@ void typography(void)
 					}
 
 					//провал миссии 
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -4058,7 +4058,7 @@ void typography(void)
 					}
 
 					// провал миссии тут
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;

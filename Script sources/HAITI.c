@@ -34,7 +34,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -293,7 +293,7 @@ void voodoo(void)
 						PRINT_STRING_IN_STRING("string", "HAM1_4", 5000, 1);//~g~Good! Now get the next one!
 						break;
 					}
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -422,7 +422,7 @@ void voodoo(void)
 							PRINT_STRING_IN_STRING("string", "HAM1_4", 5000, 1);//~g~Good! Now get the next one!
 							break;
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -565,7 +565,7 @@ void voodoo(void)
 							PRINT_STRING_IN_STRING("string", "NEWANTED", 5000, 1);//~COL_NET_12~Shake the cops and lose your wanted level!
 							break;
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -624,7 +624,7 @@ void voodoo(void)
 						}
 						//*/
 
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1047,7 +1047,7 @@ void voodoo(void)
 						skip = 3;// переменная пропуска
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -1239,7 +1239,7 @@ void voodoo(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1494,7 +1494,7 @@ void voodoo(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1521,7 +1521,7 @@ void voodoo(void)
 					SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0); // смертный
 					SET_CHAR_VISIBLE(GetPlayerPed(), 1); // видимый игрок
 
-					if ((!IS_CHAR_DEAD(GetPlayerPed())) && (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((!HAS_DEATHARREST_EXECUTED()))
 					{
 						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_in", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
 						SetTime(1500);
@@ -1992,7 +1992,7 @@ void voodoo(void)
 						SET_MAX_WANTED_LEVEL(0);
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -2346,7 +2346,7 @@ void voodoo(void)
 							skip = 1;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;

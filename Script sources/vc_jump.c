@@ -39,7 +39,7 @@ void text_jump(void)
 		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
 		SET_TEXT_CENTRE(1);
 		DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "JUMPING_T2", (all_jump*100));// текст "награда $~1~"
-		if ((TIMERA() > 5000) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+		if ((TIMERA() > 5000) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}

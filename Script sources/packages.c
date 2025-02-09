@@ -26,7 +26,7 @@ void text(void)
 		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
 		SET_TEXT_CENTRE(1);
 		DISPLAY_TEXT_WITH_2_NUMBERS(0.5, 0.35, "PAKEGES_T1", all_pick, 100);// текст "поднято пакетов ~1~ из ~1~ "  
-		if ((TIMERA() > 5000) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+		if ((TIMERA() > 5000) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}

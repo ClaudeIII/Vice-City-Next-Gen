@@ -26,7 +26,7 @@ void SetCut(uint time)
 			{
 				WAIT(0);
 				DRAW_MOVIE( 0.50000000, 0.50000000, 1.00000000, 1.00000000, 0.00000000, 0, 0, 0, 255 );
-				if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+				if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 				{
 					break;
 				}

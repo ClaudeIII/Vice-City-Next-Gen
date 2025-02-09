@@ -237,7 +237,7 @@ void mission_copcar_passed(void) {
 		}
 		PRINT_WITH_NUMBER_NOW("COPCART", timer_in_secs, 200, 1);
 		WAIT(0);
-		if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+		if ((HAS_DEATHARREST_EXECUTED()))
 		{
 			copcar_failed();
 		}
@@ -657,7 +657,7 @@ void copcar_oddjob_loop(void) {
 			PRINT_NOW("C_TIME", 3000, 1);
 			copcar_failed();
 		}
-		else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+		else if ((HAS_DEATHARREST_EXECUTED()))
 		{
 			copcar_failed();
 		}
@@ -1378,7 +1378,7 @@ void get_random_car_coords(void) {
 	if (copcar_cancelled_flag == 1) {
 		copcar_failed();
 	}
-	if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+	if ((HAS_DEATHARREST_EXECUTED()))
 	{
 		copcar_failed();
 	}
@@ -1546,7 +1546,7 @@ void get_random_car_coords(void) {
 		if (copcar_cancelled_flag == 1) {
 			copcar_failed();
 		}
-		if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+		if ((HAS_DEATHARREST_EXECUTED()))
 		{
 			copcar_failed();
 		}
@@ -1598,7 +1598,7 @@ void get_random_car_coords(void) {
 			if (IS_CAR_DEAD(criminal2_car)) {
 				copcar_failed();
 			}
-			if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+			if ((HAS_DEATHARREST_EXECUTED()))
 			{
 				copcar_failed();
 			}
@@ -1653,7 +1653,7 @@ void get_random_car_coords(void) {
 			if (IS_CAR_DEAD(criminal3_car)) {
 				copcar_failed();
 			}
-			if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+			if ((HAS_DEATHARREST_EXECUTED()))
 			{
 				copcar_failed();
 			}

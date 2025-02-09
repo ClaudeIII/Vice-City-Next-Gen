@@ -918,7 +918,7 @@ void mission_start_4x4one(void) {
 			if (!IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("pcj"))) {
 				while (!IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("pcj"))) {
 					WAIT(0);
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
+					if ((HAS_DEATHARREST_EXECUTED()) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
 						mission_4x4one_failed();
 					}
 					if (flag_timer == 1) {
@@ -945,7 +945,7 @@ void mission_start_4x4one(void) {
 			}			
 		}
 		
-		if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
+		if ((HAS_DEATHARREST_EXECUTED()) || (!IS_PLAYER_PLAYING(GetPlayerIndex()))) {
 			mission_4x4one_failed();
 		}
 	}

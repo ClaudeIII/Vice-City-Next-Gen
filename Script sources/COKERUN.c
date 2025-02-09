@@ -17,7 +17,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -96,7 +96,7 @@ void boat_race(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(boat_ico, "LG_09");//иконка на радаре называние в истории карты ""
 				blip_on = 1;
 			}
-			if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -151.874, -972.239, -0.789, -141.374, -966.239, 1.711, 0 ) && (!IS_CHAR_DEAD(GetPlayerPed())) && (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) || (IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -156.289, -983.831, -0.789, -145.789, -977.831, 1.711, 0 )) && (!IS_CHAR_DEAD(GetPlayerPed())) && (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+			if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -151.874, -972.239, -0.789, -141.374, -966.239, 1.711, 0 ) && (!HAS_DEATHARREST_EXECUTED())) || (IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -156.289, -983.831, -0.789, -145.789, -977.831, 1.711, 0 )) && (!HAS_DEATHARREST_EXECUTED()))
 			{
 				if (help_text1 == 0)
 				{
@@ -458,7 +458,7 @@ void boat_race(void)
 							skip = 2;// переменная пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;

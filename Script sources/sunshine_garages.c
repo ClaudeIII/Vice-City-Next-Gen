@@ -18,7 +18,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -205,7 +205,7 @@ void Sunshine(void)
 						while (true)
 						{
 							WAIT(0);
-							if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+							if ((HAS_DEATHARREST_EXECUTED()))
 							{
 								MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 								in_model = 0;
@@ -266,7 +266,7 @@ void Sunshine(void)
 										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 										while (true)
 										{
-											if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -308,7 +308,7 @@ void Sunshine(void)
 											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 											SET_TEXT_CENTRE(1); // задаём центр текста
 											DISPLAY_TEXT(0.5, 0.4, "NECAR_SA7");//All the cars. NICE! Here's a little something.
-											if (( TIMERA() > 4000 ) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+											if (( TIMERA() > 4000 ) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -322,7 +322,7 @@ void Sunshine(void)
 										while (true)
 										{
 											WAIT( 0 );
-											if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -344,7 +344,7 @@ void Sunshine(void)
 											SET_TEXT_CENTRE(1); // задаём центр текста
 											DISPLAY_TEXT(0.5, 0.4, "CAR_AS1");//CAR SHOWROOM ASSET COMPLETED
 
-											if (( TIMERA() > 5500 ) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+											if (( TIMERA() > 5500 ) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -355,7 +355,7 @@ void Sunshine(void)
 										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 										while (true)
 										{
-											if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -397,7 +397,7 @@ void Sunshine(void)
 											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 											SET_TEXT_CENTRE(1); // задаём центр текста
 											DISPLAY_TEXT(0.5, 0.4, "NECAR_SA7");//All the cars. NICE! Here's a little something.
-											if (( TIMERA() > 4000 ) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+											if (( TIMERA() > 4000 ) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -411,7 +411,7 @@ void Sunshine(void)
 										while (true)
 										{
 											WAIT( 0 );
-											if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -423,7 +423,7 @@ void Sunshine(void)
 										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 										while (true)
 										{
-											if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -465,7 +465,7 @@ void Sunshine(void)
 											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 											SET_TEXT_CENTRE(1); // задаём центр текста
 											DISPLAY_TEXT(0.5, 0.4, "NECAR_SA7");//All the cars. NICE! Here's a little something.
-											if (( TIMERA() > 4000 ) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+											if (( TIMERA() > 4000 ) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -479,7 +479,7 @@ void Sunshine(void)
 										while (true)
 										{
 											WAIT( 0 );
-											if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -491,7 +491,7 @@ void Sunshine(void)
 										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 										while (true)
 										{
-											if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -533,7 +533,7 @@ void Sunshine(void)
 											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 											SET_TEXT_CENTRE(1); // задаём центр текста
 											DISPLAY_TEXT(0.5, 0.4, "NECAR_SA7");//All the cars. NICE! Here's a little something.
-											if (( TIMERA() > 4000 ) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+											if (( TIMERA() > 4000 ) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -547,7 +547,7 @@ void Sunshine(void)
 										while (true)
 										{
 											WAIT( 0 );
-											if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 											{
 												break;
 											}
@@ -595,7 +595,7 @@ void Sunshine(void)
 									DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
 									while (true)
 									{
-										if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+										if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 										{
 											break;
 										}

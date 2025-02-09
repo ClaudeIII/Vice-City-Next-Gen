@@ -21,7 +21,7 @@ void SetSpeech(void)
 		{
 			break;
 		}
-		else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+		else if ((HAS_DEATHARREST_EXECUTED()))
 		{
 			ABORT_SCRIPTED_CONVERSATION( 0 );
 			break;
@@ -38,7 +38,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мЄртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -314,7 +314,7 @@ void rockers(void)
 							text2 = 0;
 						}
 					}
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменна€ пропуска
 						break;
@@ -344,7 +344,7 @@ void rockers(void)
 								}
 							}
 						}
-						if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))//если игрок мЄртв или аврестован
+						if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							// оформление второй части тут
 							GET_CHAR_COORDINATES(ped2,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
@@ -362,7 +362,7 @@ void rockers(void)
 							PRINT_STRING_IN_STRING("string", "ASM4_21", 5000, 1);//~g~Get the briefcase!
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменна€ пропуска
 							break;
@@ -412,7 +412,7 @@ void rockers(void)
 							SetTime(1000);
 							TASK_PLAY_ANIM_SECONDARY_UPPER_BODY( GetPlayerPed(), "cellphone_talk", "cellphone", 8.0, 1, 0, 0, 0, -1 );//¬оиспроизвидение анимации на педе
 
-							if ((!IS_CHAR_DEAD(GetPlayerPed())) || (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+							if ((!IS_CHAR_DEAD(GetPlayerPed())) || (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
 							{
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
@@ -420,7 +420,7 @@ void rockers(void)
 								START_SCRIPT_CONVERSATION(1, 1);
 								SetSpeech();
 							}
-							if ((!IS_CHAR_DEAD(GetPlayerPed())) || (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+							if ((!IS_CHAR_DEAD(GetPlayerPed())) || (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
 							{
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
@@ -451,7 +451,7 @@ void rockers(void)
 							text2 = 0;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменна€ пропуска
 							break;
@@ -544,14 +544,14 @@ void rockers(void)
 								text2 = 0;
 							}
 						}
-						if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_INJURED(ped1)))//если игрок мЄртв или аврестован
+						if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_INJURED(ped1)))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "RBM1_8", 5000, 1);//~r~Mercedes is dead!
 							skip = 1;// переменна€ пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменна€ пропуска
 							break;
@@ -769,7 +769,7 @@ void rockers(void)
 							skip = 1;// переменна€ пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_INJURED(ped1)))//если игрок мЄртв или аврестован
+						else if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_INJURED(ped1)))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "RBM1_8", 5000, 1);//~r~Mercedes is dead!
@@ -1253,7 +1253,7 @@ void rockers(void)
 						}
 					}
 
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменна€ пропуска
 						break;
@@ -1383,7 +1383,7 @@ void rockers(void)
 							skip = 1;// переменна€ пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_INJURED(ped1)))//если игрок мЄртв или аврестован
+						else if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_INJURED(ped1)))
 						{
 							EXPLODE_CHAR_HEAD(ped1);
 							skip = 2;// переменна€ пропуска
@@ -2006,7 +2006,7 @@ void rockers(void)
 						skip = 1;// переменна€ пропуска
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -2172,7 +2172,7 @@ void rockers(void)
 							skip = 1;// переменна€ пропуска
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мЄртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;

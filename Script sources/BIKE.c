@@ -38,7 +38,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -328,7 +328,7 @@ void bikers(void)
 						start = 2;
 						break;
 					}
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -1125,7 +1125,7 @@ void bikers(void)
 							}
 							TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped3, car3, ped3B_x, ped3B_y, ped3B_z, 4, 60.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -1966,7 +1966,7 @@ void bikers(void)
 						skip = 2;
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -2142,7 +2142,7 @@ void bikers(void)
 				DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 					{
 						break;
 					}
@@ -2171,7 +2171,7 @@ void bikers(void)
 				DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
 				while (true)
 				{
-					if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 					{
 						break;
 					}
@@ -2760,7 +2760,7 @@ void bikers(void)
 						}
 					}
 
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;
 						break;
@@ -2868,7 +2868,7 @@ void bikers(void)
 							}
 						}
 
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;

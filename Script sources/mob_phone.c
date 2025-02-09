@@ -23,7 +23,7 @@ void SetTime(uint time)
 		{
 			break;
 		}
-		else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		else if ((HAS_DEATHARREST_EXECUTED()))
 		{
 			SETTIMERA( 0 );
 		}
@@ -39,7 +39,7 @@ void SetSpeech(void)
 		{
 			break;
 		}
-		else if ((IS_CHAR_IN_WATER(GetPlayerPed())) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+		else if ((IS_CHAR_IN_WATER(GetPlayerPed())) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			call_drop = 1;
 			ABORT_SCRIPTED_CONVERSATION( 0 );
@@ -2005,7 +2005,7 @@ void melodi(void)
 			SetTime(25000);
 			break;
 		}
-		else if ((TIMERA() > 15000) || (IS_CHAR_IN_WATER(GetPlayerPed())) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		else if ((TIMERA() > 15000) || (IS_CHAR_IN_WATER(GetPlayerPed())) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			// останавливаем воспроизведение звонка
 			STOP_MOBILE_PHONE_RINGING();

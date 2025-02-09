@@ -17,7 +17,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -143,7 +143,7 @@ void stripclub(void)
 				while(true)
 				{
 					WAIT(0);
-					if (TIMERB() > 10000)// поверка игрок мёртв/арестован
+					if (TIMERB() > 10000)
 					{
 						if (cam_set == 1) // ракурс 1
 						{
@@ -179,7 +179,7 @@ void stripclub(void)
 					}
 
 					STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
-					if ((TIMERA() > 5000) && (money_ped > 10))// поверка игрок мёртв/арестован
+					if ((TIMERA() > 5000) && (money_ped > 10))
 					{
 						SETTIMERA( 0 );
 						cash += 1;

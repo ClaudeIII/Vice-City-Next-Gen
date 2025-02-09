@@ -404,7 +404,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -642,7 +642,7 @@ void sa_race(void)
 			PANIC_SCREAM(ped11);
 			break;
 		}
-		else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))
+		else if ((HAS_DEATHARREST_EXECUTED()))
 		{
 			skip = 1;
 			break;
@@ -1817,7 +1817,7 @@ void sa_race(void)
 				skip = 1;
 				break;
 			}
-			else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+			else if ((HAS_DEATHARREST_EXECUTED()))
 			{
 				skip = 1;
 				break;

@@ -39,7 +39,7 @@ void SetTime(uint time)
 	while(true)
 	{
 		WAIT(0);
-		if ((TIMERA() > time) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))// поверка игрок мёртв/арестован
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
 		{
 			break;
 		}
@@ -319,7 +319,7 @@ void club(void)
 					{
 						EXPLODE_CHAR_HEAD(ped1);
 					}
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -431,7 +431,7 @@ void club(void)
 						{
 							EXPLODE_CHAR_HEAD(ped1);
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -495,7 +495,7 @@ void club(void)
 						{
 							EXPLODE_CHAR_HEAD(ped1);
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -671,7 +671,7 @@ void club(void)
 						{
 							EXPLODE_CHAR_HEAD(ped1);
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -788,7 +788,7 @@ void club(void)
 						{
 							EXPLODE_CHAR_HEAD(ped1);
 						}
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -1341,7 +1341,7 @@ void club(void)
 						break;
 					}
 
-					if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -1946,7 +1946,7 @@ void club(void)
 							SETTIMERA(0); //сбрасываем таймер 
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -2110,7 +2110,7 @@ void club(void)
 							time_s = 0;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -2456,7 +2456,7 @@ void club(void)
 							SETTIMERA(0); //сбрасываем таймер 
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -2607,7 +2607,7 @@ void club(void)
 							time_s = 0;
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -2938,7 +2938,7 @@ void club(void)
 							SETTIMERA(0); //сбрасываем таймер 
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -3071,7 +3071,7 @@ void club(void)
 							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
 							break;
 						}
-						else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;// переменная пропуска
 							break;
@@ -4054,7 +4054,7 @@ void club(void)
 					while(true)
 					{
 						WAIT(0);
-						if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+						if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 						{
 							break;
 						}
@@ -4093,7 +4093,7 @@ void club(void)
 					while(true)
 					{
 						WAIT(0);
-						if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+						if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 						{
 							break;
 						}
@@ -4586,7 +4586,7 @@ void club(void)
 						skip = 1;
 						break;
 					}
-					else if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован
+					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
 						skip = 1;// переменная пропуска
 						break;
@@ -4803,7 +4803,7 @@ void club(void)
 								while(true)
 								{
 									WAIT(0);
-									if (IS_SCREEN_FADED_OUT())//если игрок мёртв или аврестован, если лодка унечтожена
+									if (IS_SCREEN_FADED_OUT())
 									{
 										break;
 									}
@@ -4899,7 +4899,7 @@ void club(void)
 								while(true)
 								{
 									WAIT(0);
-									if (IS_SCREEN_FADED_OUT())//если игрок мёртв или аврестован, если лодка унечтожена
+									if (IS_SCREEN_FADED_OUT())
 									{
 										break;
 									}
@@ -4960,7 +4960,7 @@ void club(void)
 								while(true)
 								{
 									WAIT(0);
-									if (IS_SCREEN_FADED_OUT())//если игрок мёртв или аврестован, если лодка унечтожена
+									if (IS_SCREEN_FADED_OUT())
 									{
 										break;
 									}
@@ -5120,7 +5120,7 @@ void club(void)
 						GET_CHAR_HEALTH(ped1, &Phil_hp);
 						GET_CHAR_HEALTH(ped2, &Cam_hp);
 						GET_CHAR_HEALTH(ped20, &Manager_hp);
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -5231,7 +5231,7 @@ void club(void)
 							while(true)
 							{
 								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())//если игрок мёртв или аврестован, если лодка унечтожена
+								if (IS_SCREEN_FADED_OUT())
 								{
 									break;
 								}
@@ -5333,7 +5333,7 @@ void club(void)
 						GET_CHAR_HEALTH(ped1, &Phil_hp);
 						GET_CHAR_HEALTH(ped2, &Cam_hp);
 						GET_CHAR_HEALTH(ped20, &Manager_hp);
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -5391,7 +5391,7 @@ void club(void)
 							while(true)
 							{
 								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())//если игрок мёртв или аврестован, если лодка унечтожена
+								if (IS_SCREEN_FADED_OUT())
 								{
 									break;
 								}
@@ -5477,7 +5477,7 @@ void club(void)
 						GET_CHAR_HEALTH(ped1, &Phil_hp);
 						GET_CHAR_HEALTH(ped2, &Cam_hp);
 						GET_CHAR_HEALTH(ped20, &Manager_hp);
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -5599,7 +5599,7 @@ void club(void)
 							while(true)
 							{
 								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())//если игрок мёртв или аврестован, если лодка унечтожена
+								if (IS_SCREEN_FADED_OUT())
 								{
 									break;
 								}
@@ -5728,7 +5728,7 @@ void club(void)
 						GET_CHAR_HEALTH(ped1, &Phil_hp);
 						GET_CHAR_HEALTH(ped2, &Cam_hp);
 						GET_CHAR_HEALTH(ped20, &Manager_hp);
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -5786,7 +5786,7 @@ void club(void)
 							while(true)
 							{
 								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())//если игрок мёртв или аврестован, если лодка унечтожена
+								if (IS_SCREEN_FADED_OUT())
 								{
 									break;
 								}
@@ -6100,7 +6100,7 @@ void club(void)
 						GET_CHAR_HEALTH(ped1, &Phil_hp);
 						GET_CHAR_HEALTH(ped2, &Cam_hp);
 						GET_CHAR_HEALTH(ped20, &Manager_hp);
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -6168,7 +6168,7 @@ void club(void)
 							while(true)
 							{
 								WAIT(0);
-								if ((IS_SCREEN_FADED_OUT()) || (IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))) //если экран затемнился
+								if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED()))
 								{
 									break;
 								}
@@ -6369,7 +6369,7 @@ void club(void)
 						}
 						GET_CHAR_HEALTH(ped1, &Phil_hp);
 						GET_CHAR_HEALTH(ped2, &Cam_hp);
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
@@ -6690,7 +6690,7 @@ void club(void)
 						}
 						GET_CHAR_HEALTH(ped1, &Phil_hp);
 						GET_CHAR_HEALTH(ped2, &Cam_hp);
-						if ((IS_CHAR_DEAD(GetPlayerPed())) || (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())))//если игрок мёртв или аврестован, если лодка унечтожена
+						if ((HAS_DEATHARREST_EXECUTED()))
 						{
 							skip = 1;
 							break;
