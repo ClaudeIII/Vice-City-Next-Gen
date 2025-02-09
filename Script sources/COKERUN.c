@@ -43,6 +43,12 @@ void boat_race(void)
 				SetTime(2000);
 				PRINT_HELP("BRID_OP"); //Storm warning over, all bridges to the mainland are now open.
 				message = 1;
+
+				ADD_POLICE_RESTART(-438.639, -150.309, 5.42567, -50, 0); // Little Havana
+				ADD_POLICE_RESTART(-224.47, 1295.06, 5.851, 135, 0); // Downtown
+
+				ADD_HOSPITAL_RESTART(-440.243, 62.9246, 5.29422, -95, 0); // Little Havana
+				ADD_HOSPITAL_RESTART(-389.428, 1691.1, 5.29302, 0, 0); // Downtown
 			}
 			if (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))
 			{

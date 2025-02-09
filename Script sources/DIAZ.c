@@ -2376,7 +2376,6 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
-					//G_SECOND_ISLAND = 1;
 					G_DIAZ = 3;
 					sutosave = 1;
 				}

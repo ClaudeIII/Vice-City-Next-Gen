@@ -27,7 +27,6 @@ boolean G_STRIP;
 boolean G_COLLECTOR;
 
 boolean G_SALE_NO;
-boolean G_SECOND_ISLAND;
 boolean G_MAIN_CALL;
 boolean G_LANCE_CALL;
 boolean G_MERSEDES_CALL;

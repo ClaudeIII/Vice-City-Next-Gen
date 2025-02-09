@@ -7,12 +7,11 @@
 
 int ready_to_shark, shark_obj, state, curAnim, sID;
 float px, py, pz, wh, heading;
-//G_SECOND_ISLAND = 1;
 
 void shark_event(void) {
 	while (true) {
 		WAIT(0);
-		if (G_DIAZ < 3) {  // флаг, если второй остров закрыт (if (G_SECOND_ISLAND == 0))
+		if (G_DIAZ < 3) {
 			if (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -1939.0, -1782.0, 2227.0, 2684.0, 0)) {
 				if ((!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -582.0, -1782.0, -82.0, -157, 0)) && (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -530.0, -163.0, -281.0, 281.0, 0)) && (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -530.0, 264.0, -61.0, 869.0, 0)) && (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -402.0, 863.0, 41.0, 1327.0, 0)) && (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -270.0, 1313.0, 198.0, 2684.0, 0)) ) {
 					ready_to_shark = 0;
@@ -150,7 +149,7 @@ void main(void)
 	while (true)
 	{
 		WAIT(0);
-		if (G_DIAZ < 3) {  // флаг, если второй остров закрыт (if (G_SECOND_ISLAND == 0))
+		if (G_DIAZ < 3) {
 			if ((IS_CHAR_IN_AREA_2D(GetPlayerPed(), -582.0, -1782.0, -82.0, -157.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -530.0, -163.0, -281.0, 281.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -530.0, 264.0, -61.0, 869.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -402.0, 863.0, 41.0, 1327.0, 0)) || (IS_CHAR_IN_AREA_2D(GetPlayerPed(), -270.0, 1313.0, 198.0, 2684.0, 0)) )
 			{
 				if ((IS_CHAR_IN_ANY_HELI(GetPlayerPed())) || (IS_CHAR_IN_ANY_BOAT(GetPlayerPed())))
