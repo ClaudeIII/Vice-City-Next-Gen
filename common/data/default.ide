@@ -17,7 +17,7 @@ w_screwdriver, 		w_screwdriver, 		null,			1, 	50, 	0
 w_grenade,		w_grenade,		throw_grenade,		1,	100,	0
 w_molotov,		w_molotov,		throw_grenade,		1,	100,	0
 cj_rpg_rocket,		cj_rpg_rocket,		throw_grenade,		1,	100,	0
-w_e1_grenade,		w_e1_glauncher,		throw_grenade,		1,	100,	0
+w_e1_grenade,		w_e1_grenade,		throw_grenade,		1,	100,	0
 w_e1_pipebomb,		w_e1_pipebomb,		throw_grenade,		1,	100,	0
 w_e2_stickybomb,	w_e2_stickybomb,	throw_grenade,		1,	100,	0
 
