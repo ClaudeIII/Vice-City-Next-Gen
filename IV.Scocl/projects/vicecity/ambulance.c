@@ -979,7 +979,12 @@ void ambulance_loop(void) {
 }
 
 void mission_root(void) {
-	PRINT_WITH_NUMBER("ALEVEL", ambulance_level, 5000, 4);
+	if (!IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("ambulance"))) {
+		PRINT_NOW("A_CANC", 3000, 1);
+		ambulance_failed();
+		return;
+	}
+	PRINT_WITH_NUMBER("ALEVEL", ambulance_level, 5000, 4);	
 	STORE_CAR_CHAR_IS_IN_NO_SAVE(GetPlayerPed(), &players_ambulance);
 	SWITCH_CAR_SIREN(players_ambulance, 1);
 	ped_time_limit = 0;

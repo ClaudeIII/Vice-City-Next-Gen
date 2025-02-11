@@ -820,6 +820,11 @@ void next_fire(void) {
 }
 
 void fire_generation_start(void) {
+	if (!IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("firetruk"))) {
+		PRINT_NOW("F_CANC", 3000, 1);
+		failed();
+		return;
+	}
 	fires_needing_extinguishing = 0;
 	fires_extinguished_this_round = 0;
 
