@@ -1,0 +1,20 @@
+Version 110 12
+shadinggroup
+{
+	Shaders 2
+	{
+		gta_default.sps LOD_lighthouse
+		gta_default.sps Grass_64HV
+	}
+}
+lodgroup
+{
+	high 1 lodlightext\lodlightext_high.mesh 0 9999.00000000
+	med none 9999.00000000
+	low none 9999.00000000
+	vlow none 9999.00000000
+	center 0.02972410 -1.31885000 -19.48910000
+	AABBMin -20.30300000 -12.74190000 -47.10470000
+	AABBMax 20.36250000 10.10420000 8.12655000
+	radius 36.14600000
+}

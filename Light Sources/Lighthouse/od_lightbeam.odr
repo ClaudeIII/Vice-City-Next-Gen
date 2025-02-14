@@ -1,0 +1,27 @@
+Version 110 12
+shadinggroup
+{
+	Shaders 1
+	{
+		gta_alpha.sps null
+	}
+}
+skel
+{
+	skel od_lightbeam\od_lightbeam.skel
+}
+lodgroup
+{
+	high 2 od_lightbeam\od_lightbeam_high_0.mesh 1 od_lightbeam\od_lightbeam_high_1.mesh 0 9999.00000000
+	med none 9999.00000000
+	low none 9999.00000000
+	vlow none 9999.00000000
+	center 0.00000000 0.00000000 0.12999700
+	AABBMin -340.72000000 -340.71900000 -26.18820000
+	AABBMax 340.72000000 340.71900000 26.44820000
+	radius 482.56800000
+}
+light
+{
+    light od_lightbeam\od_lightbeam.light
+}
