@@ -505,12 +505,6 @@
     <Size value="794624" />
   </Slot>
   <Slot>
-    <Name content="ascii">STREAM_ENGINE_21</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="794624" />
-  </Slot>
-  <Slot>
     <Name content="ascii">SUBWAY_TRAIN</Name>
     <MaxHeaderSize value="2048" />
     <LoadType content="ascii">BANK</LoadType>
