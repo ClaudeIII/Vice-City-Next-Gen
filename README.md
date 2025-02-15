@@ -7,15 +7,15 @@
 
 ### Notes:
 
-Your saves will be stored in the game's directory into the "Profiles" folder. Note that a new game is required for any of this to work.
-IV.Scocl folder is for advanced users who know how to script and want to contribute.
+- Your saves will be stored in the game's directory into the "Profiles" folder. Note that a new game is required for any of this to work.
+- IV.Scocl folder is for advanced users who know how to script and want to contribute.
 
 ### Included Mods:
 
--Ultimate ASI Loader
--XLivelessAddon
--FusionFix
+- [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader)
+- [XLivelessAddon](https://github.com/GTAmodding/XLivelessAddon)
+- [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix)
 
 ### Credits:
 
-@Lukakion (for the bundled timecycle)
+[@Lukakion](https://gtaforums.com/profile/1201885-lukakion/) (for the bundled timecycle)
