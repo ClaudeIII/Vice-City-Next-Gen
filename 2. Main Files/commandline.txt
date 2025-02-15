@@ -1,0 +1,1 @@
+-availablevidmem 2048
