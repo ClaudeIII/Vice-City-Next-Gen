@@ -1,5 +1,21 @@
-Installation:
-Place common & data folders to your root directory
-Add files from openIV folder manually using openIV
+### Installation:
 
-Script sources folder is for advanced users if you know how to script
+1. Copy/Paste over the .bat file from "1. Debloat Batch" to the game's directory and run it;
+2. Copy/Paste over the files from "2. Main Files" to the game's directory;
+3. Add the files from "3. Add via OpenIV" into the needed .img archives;
+4. You can then launch the game from the .exe.
+
+### Notes:
+
+Your saves will be stored in the game's directory into the "Profiles" folder. Note that a new game is required for any of this to work.
+IV.Scocl folder is for advanced users who know how to script and want to contribute.
+
+### Included Mods:
+
+-Ultimate ASI Loader
+-XLivelessAddon
+-FusionFix
+
+### Credits:
+
+@Lukakion (for the bundled timecycle)
