@@ -5,25 +5,13 @@
 #include <consts.h>
 #include "globals.h"
 
-int money_ped, income, load_mashin, help, sutosave;
+int money_ped, income, load_mashin, help, autosave;
 float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, cash, cam_set;
 
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void stripclub(void)
 {
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	load_mashin = 0;
 	help = 0;
 	Blip strip_ico;
@@ -32,10 +20,10 @@ void stripclub(void)
 	while(true)
 	{
 		WAIT(0);
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -63,13 +51,13 @@ void stripclub(void)
 				Ped ped1;
 				Interior getint;
 				G_ONMISSION = 1;
-				REMOVE_BLIP(strip_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(strip_ico);
 				blip_on = 0;
 				cash = 0;
 				cam_set = 2;
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-				DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 500 );
 				while(true)
 				{
 					WAIT(0);
@@ -79,7 +67,7 @@ void stripclub(void)
 					}
 				}
 
-				// грузим модель тут
+				//им модель
 				GENERATE_RANDOM_INT_IN_RANGE( 1, 9, &pedN);//получаем рендомное число
 				if ((pedN == 1) || (pedN == 4) || (pedN == 7) || (pedN == 3) || (pedN == 9))
 				{
@@ -91,35 +79,35 @@ void stripclub(void)
 				}
 				
 				REQUEST_MODEL(PedM1);// 
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				CREATE_CHAR (26, PedM1, 530.858, -939.535, 4.89498, &ped1, TRUE);// SWAT
 				SET_CHAR_COORDINATES(ped1, 499.141, -921.479, 4.83806);
 				SET_CHAR_HEADING(ped1, 35.0);
 
-				CLEAR_AREA(498.892, -920.29, 4.83806, 5.0, 1);//очещаем зону загрузки
+				CLEAR_AREA(498.892, -920.29, 4.83806, 5.0, 1);
 				SET_CHAR_COORDINATES(GetPlayerPed(), 498.892, -920.29, 4.83806);
 				SET_CHAR_HEADING(GetPlayerPed(), -155.0);
 				FREEZE_CHAR_POSITION(GetPlayerPed(), 1);
 
 				//грузим анимацию
-				REQUEST_ANIMS( "missstripclub" );//загружаем файл с анимацией
+				REQUEST_ANIMS( "missstripclub" );
 				while (!HAVE_ANIMS_LOADED( "missstripclub" )) WAIT(0);
 
 				GENERATE_RANDOM_INT_IN_RANGE( 1, 9, &pedN);//получаем рендомное число
 				if ((pedN == 1) || (pedN == 4) || (pedN == 7))
 				{
-					TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "dance_ragga_2", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+					TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "dance_ragga_2", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
 				}
 				else if ((pedN == 2) || (pedN == 5) || (pedN == 8))
 				{
-					TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "dance_wisper_2", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+					TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "dance_wisper_2", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
 				}
 				if ((pedN == 3) || (pedN == 6) || (pedN == 9))
 				{
-					TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "pole_dance_a", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+					TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "pole_dance_a", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
 				}
 				SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_UNARMED, TRUE);
-				TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+				TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
 				
 
 				// камера ракурс 1
@@ -132,7 +120,7 @@ void stripclub(void)
 				SET_CAM_FOV( camera, 45.0 );
 				SET_WIDESCREEN_BORDERS( 1 );
 
-				DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+				DO_SCREEN_FADE_IN( 500 );
 				SETTIMERA( 0 );
 				SETTIMERB( 0 );
 				PRINT_HELP_FOREVER("EXIT_1"); //Press the ~INPUT_PHONE_CANCEL~ button to exit.
@@ -175,23 +163,23 @@ void stripclub(void)
 						SETTIMERB( 0 );
 					}
 
-					STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+					STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 					if ((TIMERA() > 5000) && (money_ped > 10))
 					{
 						SETTIMERA( 0 );
 						cash += 1;
-						ADD_SCORE( GetPlayerIndex(), -10 );// отнимаем у игрока сумму
+						ADD_SCORE( GetPlayerIndex(), -10 );// отнимаем у сумму
 					}
 					if ((IS_BUTTON_PRESSED( 0, 17 )) || ((IS_CONTROL_PRESSED( 2, 182 )) && (! IS_USING_CONTROLLER())) || (money_ped < 10)) //клавиатура BACKSPACE
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						if ((money_ped < 10) && (cash < 30))
 						{
 							PRINT_STRING_IN_STRING("string", "STRIP_1", 5000, 1);//~r~Not enough cash, you cheap sleazebag.
 						}
 						if ((cash >= 30) && (G_STRIP == 1))
 						{
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -203,18 +191,18 @@ void stripclub(void)
 							// камера
 							POINT_CAM_AT_COORD	( camera, 530.951, -939.898, 10.2194 );
 							SET_CAM_POS			( camera, 538.559, -954.132, 13.486 );
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							DO_SCREEN_FADE_IN( 500 );
 							MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 1 );
 
 							TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 							SETTIMERA(0);
 							while (true)
 							{
-								SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-								SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-								SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-								SET_TEXT_CENTRE(1); // задаём центр текста
+								SET_TEXT_COLOUR(93, 200, 252, 255);
+								SET_TEXT_SCALE(0.5, 0.7);
+								SET_TEXT_EDGE(1, 0, 0, 0, 255);
+								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+								SET_TEXT_CENTRE(1);
 								DISPLAY_TEXT(0.5, 0.45, "ASSET_C");//POLE POSITION ASSET COMPLETED!
 								WAIT( 0 );
 								if ( TIMERA() > 5000 )
@@ -273,15 +261,15 @@ void stripclub(void)
 							SET_TEXT_RENDER_ID(rId9);
 							DRAW_RECT(0.5, 0.5, 1.0, 1.0, 0, 0, 0, 255);
 							G_STRIP = 2;
-							sutosave = 1;
+							autosave = 1;
 						}
 						break;
 					}
 				}
 
 				// чистим скрипт
-				CLEAR_HELP(); // удаляем текст подсказки
-				DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+				CLEAR_HELP();
+				DO_SCREEN_FADE_OUT( 500 );
 				while(true)
 				{
 					WAIT(0);
@@ -290,25 +278,25 @@ void stripclub(void)
 						break;
 					}
 				}
-				TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, 1 );//Воиспроизвидение анимации на педе
+				TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, 1 );
 				SET_CHAR_COORDINATES(ped1, -70.955, 52.881, 8.097);
 				SET_CHAR_COORDINATES(GetPlayerPed(), 503.799, -921.955, 4.83806);
 				SET_CHAR_HEADING(GetPlayerPed(), -65.0);
 				WAIT(500);
 
-				//убираем камеру
+				
 				ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 				DESTROY_CAM( camera );
 				SET_WIDESCREEN_BORDERS( 0 );
-				DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+				DO_SCREEN_FADE_IN( 500 );
 
-				// выгружвем модели
+				
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
-				// выгружвем педов
+				
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 
 				FREEZE_CHAR_POSITION(GetPlayerPed(), 0);
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 				G_ONMISSION = 0;
 			}
 		}
@@ -316,7 +304,7 @@ void stripclub(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(strip_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(strip_ico);
 				blip_on = 0;
 			}
 		}
@@ -325,8 +313,8 @@ void stripclub(void)
 			if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), 508.202, -911.547, 4.029, 501.752, -907.547, 9.029, 0 )))
 			{
 				G_ONMISSION = 1;
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -358,7 +346,7 @@ void stripclub(void)
 				}
 				G_ONMISSION = 0;
 				MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 0 );
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 			}
 		}
 
@@ -399,9 +387,9 @@ void stripclub(void)
 						PRINT_HELP_FOREVER("NEGETMONEY"); // Press the ~INPUT_PHONE_ACCEPT~ button to cash out.
 						help = 1;
 					}
-					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))
 					{
-						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у игрока сумму
+						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у сумму
 						income = 0;
 					}
 				}
@@ -410,7 +398,7 @@ void stripclub(void)
 			{
 				if (load_mashin == 1) 
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					WAIT( 100 );
 					SET_TEXT_RENDER_ID(rId9);
 					DRAW_RECT(0.5, 0.5, 1.0, 1.0, 35, 35, 35, 255);

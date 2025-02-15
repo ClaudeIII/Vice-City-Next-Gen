@@ -169,11 +169,11 @@ void mission_bmx_1_passed(void) {
 	SETTIMERA(0);
 	while (true)
 	{
-		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
+		SET_TEXT_COLOUR(30, 215, 135, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
 		DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "B_PASS", bmx_1_reward);//
 		
 		WAIT( 0 );
@@ -196,11 +196,11 @@ void mission_bmx_2_passed(void) {
 	SETTIMERA(0);
 	while (true)
 	{
-		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
+		SET_TEXT_COLOUR(30, 215, 135, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
 		DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "B_PASS", bmx_2_reward);//
 		
 		WAIT( 0 );
@@ -218,12 +218,12 @@ void mission_bmx_2_failed(void) {
 	SETTIMERA(0);
 	while (true)
 	{
-		SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
-		DISPLAY_TEXT(0.5, 0.45, "B_FAIL");// пишем "Миссия завершина"
+		SET_TEXT_COLOUR(95, 195, 247, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
+		DISPLAY_TEXT(0.5, 0.45, "B_FAIL");
 
 		WAIT( 0 );
 		if ( TIMERA() > 4000 )
@@ -240,12 +240,12 @@ void mission_bmx_1_failed(void) {
 	SETTIMERA(0);
 	while (true)
 	{
-		SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
-		DISPLAY_TEXT(0.5, 0.45, "B_FAIL");// пишем "Миссия завершина"
+		SET_TEXT_COLOUR(95, 195, 247, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
+		DISPLAY_TEXT(0.5, 0.45, "B_FAIL");
 
 		WAIT( 0 );
 		if ( TIMERA() > 4000 )
@@ -438,11 +438,11 @@ void mission_start_bmx_1(void) {
 		WAIT(0);	
 		if (print_text == 1)
 		{
-			SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
-			SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-			SET_TEXT_CENTRE(1); // задаём центр текста
+			SET_TEXT_COLOUR(30, 215, 135, 255);
+			SET_TEXT_SCALE(0.5, 0.6);
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
+			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+			SET_TEXT_CENTRE(1);
 			DISPLAY_TEXT(0.5, 0.45, "BMX_1");//
 
 			if ( TIMERA() > 5000 )
@@ -921,11 +921,11 @@ void mission_start_bmx_2(void) {
 		WAIT(0);
 		if (print_text == 1)
 		{
-			SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
-			SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-			SET_TEXT_CENTRE(1); // задаём центр текста
+			SET_TEXT_COLOUR(30, 215, 135, 255);
+			SET_TEXT_SCALE(0.5, 0.6);
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
+			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+			SET_TEXT_CENTRE(1);
 			DISPLAY_TEXT(0.5, 0.45, "BMX_2");//
 
 			if ( TIMERA() > 5000 )

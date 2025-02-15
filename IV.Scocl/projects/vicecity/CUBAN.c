@@ -10,49 +10,21 @@
 #include "globals.h"
 float PlayX, PlayY, PlayZ, PlayR, blip_on, tovarX, tovarY, tovarZ, help_text1, all_tovar, go, sound, time_m, time_s, textur, skip, vVar4, rampaX, rampaY, rampaZ, rampaR, speed, bonus, camer;
 float cameraX, cameraY, cameraZ, ricoX, ricoY, ricoZ, ricoR, start, text, get_car, explo_car, PedX, PedY, PedZ, stalking, in_car, stalkerR, trigger1, trigger2, trigger3, trigger4, trigger5, trigger6, trigger7;
-float blip_off1, blip_off2, blip_off3, blip_off4, blip_off5, keys_UP1, keys_UP2, keys_UP3, tnt1, tnt2, tnt3, timer_on, in_zon, in_zavod, rrr_on, vorotaY, p_event, sutosave;
+float blip_off1, blip_off2, blip_off3, blip_off4, blip_off5, keys_UP1, keys_UP2, keys_UP3, tnt1, tnt2, tnt3, timer_on, in_zon, in_zavod, rrr_on, vorotaY, p_event, autosave;
 
-void SetSpeech(void)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (!IS_SCRIPTED_CONVERSATION_ONGOING())
-		{
-			break;
-		}
-		else if (TIMERA() > 10000)
-		{
-			break;
-		}
-	}
-}
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void umberto(void)
 {
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	Blip cuban_ico;
 	WAIT(3000);
 	while(true)
 	{
 		WAIT(0);
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -72,18 +44,18 @@ void umberto(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "LG_11");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cuban_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -92,7 +64,7 @@ void umberto(void)
 						break;
 					}
 				}
-				SET_CHAR_COORDINATES(GetPlayerPed(), 360.004, 621.999, 3.87638 );// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), 360.004, 621.999, 3.87638 );
 				SET_CHAR_HEADING(GetPlayerPed(), 115.0 );
 
 				Cam camera;
@@ -121,7 +93,7 @@ void umberto(void)
 				fon = GET_TEXTURE( textur, "fon_hud" );
 				timer = GET_TEXTURE( textur, "timer_hud" );
 
-				uint CarM1 = MODEL_DINGHY;// Катер 
+				uint CarM1 = MODEL_DINGHY;// 
 				uint CarM2 = MODEL_HUNTLEY;// гольфкар 
 				uint PedM1 = MODEL_M_Y_GLAT_HI_01;// Рикко
 				uint PedM2 = MODEL_M_O_GRUS_HI_01;// Гольфмен
@@ -130,16 +102,16 @@ void umberto(void)
 				uint checkpoint;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(CarM2);
-				while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 
 				REQUEST_MODEL(PedM1);// Таксист
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				REQUEST_MODEL(PedM2);// Таксист
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM2));
 				REQUEST_MODEL(PedM3);// Таксист
-				while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM3));
 				REQUEST_MODEL(ramp);
 				while (!HAS_MODEL_LOADED(ramp)) WAIT(0);
 
@@ -162,7 +134,7 @@ void umberto(void)
 				SET_CHAR_HEADING(ped4, 75.0);
 				SET_CHAR_HEADING(ped5, 100.0);
 
-				//создаём рампы
+				
 				CREATE_OBJECT_NO_OFFSET(ramp, 399.407, 990.629, 0.8, &rampa_1, TRUE);
 				CREATE_OBJECT_NO_OFFSET(ramp, 758.003, 627.127, 0.8, &rampa_2, TRUE);
 				CREATE_OBJECT_NO_OFFSET(ramp, 847.501, 453.201, 0.8, &rampa_3, TRUE);
@@ -183,7 +155,7 @@ void umberto(void)
 				FREEZE_OBJECT_POSITION(rampa_2, 1);
 				FREEZE_OBJECT_POSITION(rampa_3, 1);
 
-				// грузим анимации
+				//им анимации
 				REQUEST_ANIMS( "amb@hang_str_idls" );
 				while (!HAVE_ANIMS_LOADED( "amb@hang_str_idls" )) WAIT(0);
 
@@ -191,7 +163,7 @@ void umberto(void)
 				RELEASE_WEATHER();
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "CUB_1", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "CUB_1", 6 );
 				START_CUTSCENE_NOW("cub_1");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -227,24 +199,24 @@ void umberto(void)
 				ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 				ADD_LINE_TO_CONVERSATION(0, "R11_MB", "CUB1_01", 0, 0);//Hey, I'm Rico. You the man with the big cojones?
 				START_SCRIPT_CONVERSATION(1, 1);
-				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 3000 );//Воиспроизвидение анимации на педе
+				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 3000 );
 				SetSpeech();
 
 				NEW_SCRIPTED_CONVERSATION();
 				ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 				ADD_LINE_TO_CONVERSATION(0, "R4_GA", "GEN3_4", 0, 0);//Tommy Vercetti. Let's go...
 				START_SCRIPT_CONVERSATION(1, 1);
-				TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 3000 );//Воиспроизвидение анимации на педе
+				TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 3000 );
 				SetSpeech();
 
 				NEW_SCRIPTED_CONVERSATION();
 				ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "NIKO");
 				ADD_LINE_TO_CONVERSATION(0, "R11_MC", "CUB1_02", 0, 0);//Ok man, treat her like a woman.
 				START_SCRIPT_CONVERSATION(1, 1);
-				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 3000 );//Воиспроизвидение анимации на педе
+				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 3000 );
 				SetSpeech();
 
-				DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 500 );
 				while(true)
 				{
 					WAIT(0);
@@ -254,14 +226,14 @@ void umberto(void)
 					}
 				}
 
-				//убираем камеру
+				
 				ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 				END_CAM_COMMANDS( &camera );
 				SET_WIDESCREEN_BORDERS( 0 );
 
 				WARP_CHAR_INTO_CAR(GetPlayerPed(), car1);
 				WARP_CHAR_INTO_CAR_AS_PASSENGER(ped1, car1, 2);
-				DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+				DO_SCREEN_FADE_IN( 500 );
 
 				checkpoint = CREATE_CHECKPOINT( 4, 330.0625, 704.7835, 0.6726999, 368.2528, 901.7051, 0.5050001, 1.20000000 );
 				tovarX = 330.0625;
@@ -382,7 +354,7 @@ void umberto(void)
 					SET_TEXT_DROPSHADOW(1, 26, 90, 128, 255);
 					DISPLAY_TEXT_WITH_NUMBER(0.9203125, 0.72787074, "OUTOF_NUM", 27);// 
 
-					// таймер тут
+					// таймер
 					if (TIMERA() > 1050)
 					{
 						time_s -= 1;
@@ -470,10 +442,10 @@ void umberto(void)
 					}
 
 					//турбобуст
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 					GET_CHAR_SPEED(GetPlayerPed(), &speed);
 
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, rampaX, rampaY, rampaZ, &rampaR);//проверка "игрок на координатах"
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, rampaX, rampaY, rampaZ, &rampaR);
 					if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && ( rampaR < 6.5 ) && (speed > 10) && (speed < 40))
 					{
 						vVar4 = GET_VEHICLE_ENGINE_REVS( car1 );
@@ -507,7 +479,7 @@ void umberto(void)
 					{
 						if (start == 1)
 						{
-							REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(cuban_ico);
 							ADD_BLIP_FOR_COORD(tovarX, tovarY, tovarZ, &cuban_ico);
 							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(cuban_ico, 19);
@@ -521,7 +493,7 @@ void umberto(void)
 					{
 						if (start == 0)
 						{
-							REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(cuban_ico);
 							ADD_BLIP_FOR_CAR(car1, &cuban_ico);
 							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(cuban_ico, 5);
@@ -565,15 +537,15 @@ void umberto(void)
 						if (TIMERB() < 3000)
 						{
 							SET_TEXT_COLOUR(255, 159, 255, 255);
-							SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-							SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-							SET_TEXT_CENTRE(1); // задаём центр текста
+							SET_TEXT_SCALE(0.5, 0.7);
+							SET_TEXT_EDGE(1, 0, 0, 0, 255);
+							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+							SET_TEXT_CENTRE(1);
 							DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "BONUS", 100);//BONUS $~1~
 						}
 						else
 						{
-							ADD_SCORE( GetPlayerIndex(), +100 );//даём игроку денег
+							ADD_SCORE( GetPlayerIndex(), +100 );
 							bonus = 2;
 						}
 					}
@@ -582,7 +554,7 @@ void umberto(void)
 					{
 						if ((!IS_CAR_IN_AIR_PROPER(car1)) || (TIMERC() > 2000))
 						{
-							//убираем камеру
+							
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
@@ -603,7 +575,7 @@ void umberto(void)
 
 
 					
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, tovarX, tovarY, tovarZ, &PlayR);//проверка "игрок на координатах"
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, tovarX, tovarY, tovarZ, &PlayR);
 					if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && ( PlayR < 6.5 ))
 					{
 						all_tovar += 1;
@@ -618,7 +590,7 @@ void umberto(void)
 						}
 						else if (all_tovar == 3)
 						{
-							//аудио тут
+							//аудио
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 							ADD_LINE_TO_CONVERSATION(0, "R11_MD", "CUB1_05", 0, 0);//Amigo, you a man, man.
@@ -652,7 +624,7 @@ void umberto(void)
 						}
 						else if (all_tovar == 6)
 						{
-							//аудио тут
+							//аудио
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "NIKO");
 							ADD_LINE_TO_CONVERSATION(0, "R11_ME", "CUB1_06", 0, 0);//Call yourself a man, man?
@@ -700,7 +672,7 @@ void umberto(void)
 						}
 						else if (all_tovar == 10)
 						{
-							//аудио тут
+							//аудио
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 							ADD_LINE_TO_CONVERSATION(0, "R11_MF", "CUB1_07", 0, 0);//You a little scaredy kitten, baby boy, go cry to your mommy!
@@ -766,7 +738,7 @@ void umberto(void)
 						}
 						else if (all_tovar == 16)
 						{
-							//аудио тут
+							//аудио
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 							ADD_LINE_TO_CONVERSATION(0, "R11_MG", "CUB1_03", 0, 0);//Not bad, you're a real man.
@@ -832,7 +804,7 @@ void umberto(void)
 						}
 						else if (all_tovar == 23)
 						{
-							//аудио тут
+							//аудио
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 							ADD_LINE_TO_CONVERSATION(0, "R11_MG_QQQ1", "CUB1_09", 0, 0);//Man, you the man, man. I like you, man. I like you a lot.
@@ -846,7 +818,7 @@ void umberto(void)
 						}
 						else if (all_tovar == 24)
 						{
-							//аудио тут
+							//аудио
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 							ADD_LINE_TO_CONVERSATION(0, "R11_MH", "CUB1_10", 0, 0);//Any time, man. 'cause you got cojones. And all my friends have big cojones.
@@ -887,7 +859,7 @@ void umberto(void)
 							DELETE_CHECKPOINT(checkpoint);
 							checkpoint = CREATE_CHECKPOINT( 4, 6.6888, 8.7909, 0.6, 6.6, 8.7, 0.6, 1.20000000 );
 						}
-						REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(cuban_ico);
 						ADD_BLIP_FOR_COORD(tovarX, tovarY, tovarZ, &cuban_ico);
 						CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 						CHANGE_BLIP_COLOUR(cuban_ico, 19);
@@ -895,13 +867,13 @@ void umberto(void)
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "NE_POINT");
 					}
 
-					GET_CHAR_COORDINATES(ped1,  &ricoX, &ricoY, &ricoZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, ricoX, ricoY, ricoZ, &ricoR);//проверка "игрок на координатах"
+					GET_CHAR_COORDINATES(ped1,  &ricoX, &ricoY, &ricoZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, ricoX, ricoY, ricoZ, &ricoR);
 					if (all_tovar > 27)
 					{
-						REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(cuban_ico);
 
-						DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+						DO_SCREEN_FADE_OUT( 500 );
 						while(true)
 						{
 							WAIT(0);
@@ -910,15 +882,15 @@ void umberto(void)
 								break;
 							}
 						}
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-						SET_CAR_COORDINATES(car1, 349.322, 613.089, 0.6436);// телепортируем катер
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+						SET_CAR_COORDINATES(car1, 349.322, 613.089, 0.6436);
 						SET_CAR_HEADING(car1, -170.0);
 
-						WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 353.904, 614.652, 3.88022);//телепартируем из катера
+						WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 353.904, 614.652, 3.88022);//телепартируем иза
 						SET_CHAR_HEADING(GetPlayerPed(), 100.0);
 						WARP_CHAR_INTO_CAR(ped1, car1);// садим Рикко за руль
 
-						DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+						DO_SCREEN_FADE_IN( 500 );
 
 						//камера
 						CREATE_CAM( 14, &camera );
@@ -940,46 +912,46 @@ void umberto(void)
 						TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, -11.77, -190.93, 1.5, 4, 90.0, 2, 5, 10);// пед едит на нужные координаты
 						SetTime(2000);
 
-						//убираем камеру
+						
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить
 
-						skip = 2;// переменная пропуска
+						skip = 2;
 						break;
 					}
 					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if (IS_CHAR_DEAD(ped1))
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "CUB1_11", 5000, 1);//~r~You Killed Rico!
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if (IS_CAR_DEAD(car1))
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "COK3_7", 5000, 1);//~r~You destroyed the boat!
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if (ricoR > 50)
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "T4X4_F", 5000, 1);//~r~You bailed! Too tough for you?!
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((time_m == 0) && (time_s == 0))
 					{
-						REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(cuban_ico);
 
-						DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+						DO_SCREEN_FADE_OUT( 500 );
 						while(true)
 						{
 							WAIT(0);
@@ -988,15 +960,15 @@ void umberto(void)
 								break;
 							}
 						}
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-						SET_CAR_COORDINATES(car1, 349.322, 613.089, 0.6436);// телепортируем катер
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+						SET_CAR_COORDINATES(car1, 349.322, 613.089, 0.6436);
 						SET_CAR_HEADING(car1, -170.0);
 
-						WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 353.904, 614.652, 3.88022);//телепартируем из катера
+						WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 353.904, 614.652, 3.88022);//телепартируем иза
 						SET_CHAR_HEADING(GetPlayerPed(), 100.0);
 						WARP_CHAR_INTO_CAR(ped1, car1);// садим Рикко за руль
 
-						DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+						DO_SCREEN_FADE_IN( 500 );
 
 						//камера
 						CREATE_CAM( 14, &camera );
@@ -1018,34 +990,34 @@ void umberto(void)
 						TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, -11.77, -190.93, 1.5, 4, 90.0, 2, 5, 10);// пед едит на нужные координаты
 						SetTime(2000);
 
-						//убираем камеру
+						
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить
 
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "CUB1_15", 5000, 1);//~r~You are too slow, man.
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
 
-				// чистим скрипт тут
+				
 				if (sound == 1)
 				{
 					STOP_STREAM();
 					ENABLE_FRONTEND_RADIO();
 				}
 
-				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cuban_ico);
 				DELETE_CHECKPOINT(checkpoint);
 
 				RELEASE_TEXTURE( fon );
 				RELEASE_TEXTURE( timer );
 				REMOVE_TXD( textur );
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(ramp);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
@@ -1075,11 +1047,11 @@ void umberto(void)
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -1095,17 +1067,17 @@ void umberto(void)
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 1000);// +5000$
 						
 						WAIT( 0 );
@@ -1114,10 +1086,10 @@ void umberto(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +1000 );
 					REGISTER_MISSION_PASSED("CUB_1");
 					G_CUBAN = 2;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 			}
@@ -1134,18 +1106,18 @@ void umberto(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "LG_11");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cuban_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -1154,7 +1126,7 @@ void umberto(void)
 						break;
 					}
 				}
-				SET_CHAR_COORDINATES(GetPlayerPed(), -737.142, -73.7556, 5.9432 );// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -737.142, -73.7556, 5.9432 );
 				SET_CHAR_HEADING(GetPlayerPed(), 5.0 );
 
 				Cam camera;
@@ -1178,25 +1150,25 @@ void umberto(void)
 				uint CarM2 = MODEL_COQUETTE;// Стингер
 				uint CarM3 = MODEL_PONY;// Пони
 				uint PedM1 = MODEL_M_Y_GLAT_HI_01;// Кубинкц
-				uint PedM2 = MODEL_M_M_GJAM_HI_01;// Гаитянин
+				uint PedM2 = MODEL_M_M_GJAM_HI_01;
 				uint PedM3 = MODEL_M_M_TAXIDRIVER;// Таксист
 				uint trubka = vc_mob_phone;
 				uint gunboxM = ne_wood_gunbox;// GunBox
 				uint pMax, car_HP, snuper_hp, ped1_hp, ped2_hp, ped3_hp, ped4_hp, ped5_hp, rico_hp;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(CarM2);
-				while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 				REQUEST_MODEL(CarM3);
-				while (!HAS_MODEL_LOADED(CarM3)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM3)) WAIT(0);
 
 				REQUEST_MODEL(PedM1);// Таксист
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				REQUEST_MODEL(PedM2);// Таксист
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM2));
 				REQUEST_MODEL(PedM3);// Таксист
-				while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM3));
 
 				REQUEST_MODEL(trubka);
 				while (!HAS_MODEL_LOADED(trubka)) WAIT(0);
@@ -1241,11 +1213,11 @@ void umberto(void)
 				SET_CHAR_COMPONENT_VARIATION(ped9, 1, 0, 0);
 
 				// Гаитяни
-				CREATE_CHAR (26, PedM2, -681.713, 603.338, 5.60114, &ped11, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -681.861, 600.719, 5.60114, &ped12, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -682.079, 605.765, 5.60114, &ped13, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -697.868, 600.982, 5.60114, &ped14, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -697.884, 608.741, 5.60114, &ped15, TRUE);// Гаитянин
+				CREATE_CHAR (26, PedM2, -681.713, 603.338, 5.60114, &ped11, TRUE);
+				CREATE_CHAR (26, PedM2, -681.861, 600.719, 5.60114, &ped12, TRUE);
+				CREATE_CHAR (26, PedM2, -682.079, 605.765, 5.60114, &ped13, TRUE);
+				CREATE_CHAR (26, PedM2, -697.868, 600.982, 5.60114, &ped14, TRUE);
+				CREATE_CHAR (26, PedM2, -697.884, 608.741, 5.60114, &ped15, TRUE);
 				CREATE_CHAR (26, PedM2, 302.672, -785.035, 5.05974, &ped16, TRUE);// Снайпер
 				SET_CHAR_HEADING(ped11, -85.0);
 				SET_CHAR_HEADING(ped12, -85.0);
@@ -1253,7 +1225,7 @@ void umberto(void)
 				SET_CHAR_HEADING(ped14, -85.0);
 				SET_CHAR_HEADING(ped15, -95.0);
 
-				// грузим анимации
+				//им анимации
 				REQUEST_ANIMS( "amb@taxi_hail_m" );
 				while (!HAVE_ANIMS_LOADED( "amb@taxi_hail_m" )) WAIT(0);
 
@@ -1268,7 +1240,7 @@ void umberto(void)
 				RELEASE_WEATHER();
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "CUB_2", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "CUB_2", 6 );
 				START_CUTSCENE_NOW("cub_2");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -1346,15 +1318,15 @@ void umberto(void)
 				SET_CHAR_RELATIONSHIP_GROUP(ped9, 0);
 				SET_CHAR_RELATIONSHIP(ped9, 5, 24);
 
-				CREATE_PICKUP_ROTATE(w_ruger, 3, 60, -646.834,606.579,5.61127, -87.532, -108.556, -1.476, &sweap_1);// даём винтовку
+				CREATE_PICKUP_ROTATE(w_ruger, 3, 60, -646.834,606.579,5.61127, -87.532, -108.556, -1.476, &sweap_1);
 
-				// пригнать машину
+				// пригнать
 				while (TRUE)
 				{
 					WAIT(0);
-					DRAW_CHECKPOINT( -734.82, -69.1976, 5.6909, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -734.82, -69.1976, 5.6909, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( -734.82, -69.1976, 5.6909, 1.5, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -734.82, -69.1976, 5.6909, &PlayR);
 					if ( PlayR < 2.5 )
 					{
 						if (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))
@@ -1377,7 +1349,7 @@ void umberto(void)
 								}
 								else
 								{
-									SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+									SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 									SET_CAMERA_CONTROLS_DISABLED_WITH_PLAYER_CONTROLS( 0 );
 
 									TASK_ENTER_CAR_AS_PASSENGER(ped2, car4, 10000, 0);
@@ -1406,7 +1378,7 @@ void umberto(void)
 									SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 									SET_CAMERA_CONTROLS_DISABLED_WITH_PLAYER_CONTROLS( 1 );
 
-									REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+									REMOVE_BLIP(cuban_ico);
 									ADD_BLIP_FOR_COORD(-641.682, 607.685, 5.0648, &cuban_ico);
 									CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 									CHANGE_BLIP_COLOUR(cuban_ico, 5);
@@ -1449,24 +1421,24 @@ void umberto(void)
 							get_car = 0;
 						}
 					}
-					// провалы тут
+					// провалы
 					if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_DEAD(ped3)) || (IS_CHAR_DEAD(ped4)) || (IS_CHAR_FATALLY_INJURED(ped2)) || (IS_CHAR_FATALLY_INJURED(ped3)) || (IS_CHAR_FATALLY_INJURED(ped4)))//если пед мёртв или фатально ранен. 
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_DEAD(ped5)) || (IS_CHAR_DEAD(ped6)) || (IS_CHAR_FATALLY_INJURED(ped1)) || (IS_CHAR_FATALLY_INJURED(ped5)) || (IS_CHAR_FATALLY_INJURED(ped6)))//если пед мёртв или фатально ранен. 
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
@@ -1477,20 +1449,20 @@ void umberto(void)
 					while (TRUE)
 					{
 						WAIT(0);
-						DRAW_CHECKPOINT( -641.682, 607.685, 5.0648, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -641.682, 607.685, 5.0648, &PlayR);//проверка "игрок на координатах"
+						DRAW_CHECKPOINT( -641.682, 607.685, 5.0648, 1.5, 160, 116, 209);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -641.682, 607.685, 5.0648, &PlayR);
 						if (IS_CHAR_IN_CAR(GetPlayerPed(), car4))
 						{
 							if ( PlayR < 2.0 )
 							{
-								// сценка тут
-								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-								CLEAR_AREA(-641.682, 607.685, 5.0648, 55.0, 1);//очещаем зону загрузки
+								// сценка
+								REMOVE_BLIP(cuban_ico);
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+								CLEAR_AREA(-641.682, 607.685, 5.0648, 55.0, 1);
 								SET_MAX_WANTED_LEVEL(0);
 
-								//ставим камеру
+								//ставим
 								CREATE_CAM( 14, &camera );
 								POINT_CAM_AT_COORD	( camera, -641.682, 607.685, 6.50455 );
 								SET_CAM_POS			( camera, -636.011, 617.043, 10.2113 );
@@ -1500,7 +1472,7 @@ void umberto(void)
 								SET_CAM_FOV( camera, 45.0 );
 								SET_WIDESCREEN_BORDERS( 1 );
 
-								TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "hail_left", "amb@taxi_hail_m", 1.0, 1, 0, 0, 0, 2000 );//Воиспроизвидение анимации на педе
+								TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "hail_left", "amb@taxi_hail_m", 1.0, 1, 0, 0, 0, 2000 );
 
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(GetPlayerPed(), -645.18, 607.195, 5.3873, 3, -2, 1.5);// пед убегает
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped2, -644.576, 605.017, 5.3873, 3, -2, 1.5);// пед убегает
@@ -1511,10 +1483,10 @@ void umberto(void)
 								// меняем ракурс
 								POINT_CAM_AT_COORD	( camera, -646.671, 606.254, 5.85833 );
 								SET_CAM_POS			( camera, -642.401, 611.122, 7.7852 );
-								CLEAR_AREA(-641.682, 607.685, 5.0648, 55.0, 1);//очещаем зону загрузки
+								CLEAR_AREA(-641.682, 607.685, 5.0648, 55.0, 1);
 								SetTime(3000);
 
-								TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 5500 );//Воиспроизвидение анимации на педе
+								TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 5500 );
 
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "ROMAN");
@@ -1528,7 +1500,7 @@ void umberto(void)
 								START_SCRIPT_CONVERSATION(1, 1);
 								SetSpeech();
 
-								//убираем камеру
+								
 								ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 								END_CAM_COMMANDS( &camera );
 								SET_WIDESCREEN_BORDERS( 0 );
@@ -1607,7 +1579,7 @@ void umberto(void)
 							}
 							if (text == 1)
 							{
-								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(cuban_ico);
 								ADD_BLIP_FOR_COORD(-641.682, 607.685, 5.0648, &cuban_ico);
 								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 5);
@@ -1623,7 +1595,7 @@ void umberto(void)
 						{
 							if (text == 0)
 							{
-								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(cuban_ico);
 								ADD_BLIP_FOR_CAR(car4, &cuban_ico);
 								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 19);
@@ -1635,24 +1607,24 @@ void umberto(void)
 								text = 1;
 							}
 						}
-						// провалы тут
+						// провалы
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_DEAD(ped3)) || (IS_CHAR_DEAD(ped4)) || (IS_CHAR_FATALLY_INJURED(ped2)) || (IS_CHAR_FATALLY_INJURED(ped3)) || (IS_CHAR_FATALLY_INJURED(ped4)))//если пед мёртв или фатально ранен. 
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped1)) || (IS_CHAR_DEAD(ped5)) || (IS_CHAR_DEAD(ped6)) || (IS_CHAR_FATALLY_INJURED(ped1)) || (IS_CHAR_FATALLY_INJURED(ped5)) || (IS_CHAR_FATALLY_INJURED(ped6)))//если пед мёртв или фатально ранен. 
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -1670,7 +1642,7 @@ void umberto(void)
 						GET_CHAR_HEALTH(ped14, &ped4_hp);
 						GET_CHAR_HEALTH(ped15, &ped5_hp);
 
-						// респавн педов тут
+						// респавн
 						if (!IS_CAR_DEAD(car2))
 						{
 							if (ped1_hp < 200)
@@ -1681,7 +1653,7 @@ void umberto(void)
 								CREATE_CHAR (26, PedM2, -681.772, 597.074, 5.60114, &ped11, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped11, -681.713, 603.338, 5.60114, 3, -2, 1.5);// пед убегает
 
-								REMOVE_BLIP(ped1_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped1_ico);
 								ADD_BLIP_FOR_CHAR(ped11, &ped1_ico);
 								CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(ped1_ico, 19);
@@ -1704,7 +1676,7 @@ void umberto(void)
 								CREATE_CHAR (26, PedM2, -681.772, 597.074, 5.60114, &ped12, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped12, -681.861, 600.719, 5.60114, 3, -2, 1.5);// пед убегает
 
-								REMOVE_BLIP(ped2_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped2_ico);
 								ADD_BLIP_FOR_CHAR(ped12, &ped2_ico);
 								CHANGE_BLIP_SPRITE(ped2_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(ped2_ico, 19);
@@ -1727,7 +1699,7 @@ void umberto(void)
 								CREATE_CHAR (26, PedM2, -682.067, 609.499, 5.60114, &ped13, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped13, -682.079, 605.765, 5.60114, 3, -2, 1.5);// пед убегает
 
-								REMOVE_BLIP(ped3_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped3_ico);
 								ADD_BLIP_FOR_CHAR(ped13, &ped3_ico);
 								CHANGE_BLIP_SPRITE(ped3_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(ped3_ico, 19);
@@ -1750,7 +1722,7 @@ void umberto(void)
 								CREATE_CHAR (26, PedM2, -705.939, 608.939, 5.60114, &ped14, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped14, -697.868, 600.982, 5.60114, 3, -2, 1.5);// пед убегает
 
-								REMOVE_BLIP(ped4_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped4_ico);
 								ADD_BLIP_FOR_CHAR(ped14, &ped4_ico);
 								CHANGE_BLIP_SPRITE(ped4_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(ped4_ico, 19);
@@ -1774,7 +1746,7 @@ void umberto(void)
 								CREATE_CHAR (26, PedM2, -705.166, 599.978, 5.60114, &ped15, TRUE);//
 								TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped15, -697.884, 608.74, 5.60114, 3, -2, 1.5);// пед убегает
 
-								REMOVE_BLIP(ped5_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped5_ico);
 								ADD_BLIP_FOR_CHAR(ped15, &ped5_ico);
 								CHANGE_BLIP_SPRITE(ped5_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(ped5_ico, 19);
@@ -1795,31 +1767,31 @@ void umberto(void)
 							if ((ped1_hp < 200) && (blip_off1 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped11);
-								REMOVE_BLIP(ped1_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped1_ico);
 								blip_off1 = 0;
 							}
 							if ((ped2_hp < 200) && (blip_off2 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped12);
-								REMOVE_BLIP(ped2_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped2_ico);
 								blip_off2 = 0;
 							}
 							if ((ped3_hp < 200) && (blip_off3 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped13);
-								REMOVE_BLIP(ped3_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped3_ico);
 								blip_off3 = 0;
 							}
 							if ((ped4_hp < 200) && (blip_off4 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped14);
-								REMOVE_BLIP(ped4_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped4_ico);
 								blip_off4 = 0;
 							}
 							if ((ped5_hp < 200) && (blip_off5 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped15);
-								REMOVE_BLIP(ped5_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped5_ico);
 								blip_off5 = 0;
 							}
 						}
@@ -1839,15 +1811,15 @@ void umberto(void)
 							START_SCRIPT_CONVERSATION(1, 1);
 							SetTime(2000);
 
-							REMOVE_PICKUP(sweap_1);// выгружаем оружие
-							CREATE_PICKUP_ROTATE(w_psg1, 3, 60, -698.246, 599.348, 5.61127, -87.532, -108.556, -1.476, &sweap_1);// даём винтовку
+							REMOVE_PICKUP(sweap_1);// выгружаем
+							CREATE_PICKUP_ROTATE(w_psg1, 3, 60, -698.246, 599.348, 5.61127, -87.532, -108.556, -1.476, &sweap_1);
 
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-							CLEAR_AREA(-681.713, 603.338, 5.60114, 55.0, 1);//очещаем зону загрузки
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+							CLEAR_AREA(-681.713, 603.338, 5.60114, 55.0, 1);
 							SET_CAR_COORDINATES(car2, -675.496, 614.336, 5.84792);
 							SET_CAR_HEADING(car2, -170.0);
 							
-							//ставим камеру
+							//ставим
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, -677.608, 603.093, 5.84792 );
 							SET_CAM_POS			( camera, -635.969, 603.055, 7.74445 );
@@ -1941,12 +1913,12 @@ void umberto(void)
 
 							// анимация телефонного звонка
 							ATTACH_OBJECT_TO_PED( trubka_1, ped1, 1232, 0.070, 0.052, 0.003, 3.30000000, 0.30000000, -0.45000000, 0 );
-							REQUEST_ANIMS( "amb@payphone" );//загружаем файл с анимацией
+							REQUEST_ANIMS( "amb@payphone" );
 							while (!HAVE_ANIMS_LOADED( "amb@payphone" )) WAIT(0);
 							SET_CURRENT_CHAR_WEAPON(ped1, WEAPON_UNARMED, TRUE);
-							TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "cellphone_talk", "amb@payphone", 1.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+							TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "cellphone_talk", "amb@payphone", 1.0, 1, 0, 0, 0, -1 );
 
-							// RRR пути тут
+							// RRR пути
 							REQUEST_CAR_RECORDING( 3055 ); // полёт Основной
 							while (!HAS_CAR_RECORDING_BEEN_LOADED( 3055 )) WAIT(0);
 
@@ -1956,17 +1928,17 @@ void umberto(void)
 							START_SCRIPT_CONVERSATION(1, 1);
 							SetSpeech();
 							
-							TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "put_down_phone", "amb@payphone", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+							TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "put_down_phone", "amb@payphone", 1.0, 0, 0, 0, 0, -1 );
 
 							START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car3, 3055, 0.0, 0.0, 0.0);
-							CLEAR_AREA(-678.535, 598.593, 5.3873, 55.0, 1);//очещаем зону загрузки
-							CLEAR_AREA(-635.815, 603.068, 5.7759, 55.0, 1);//очещаем зону загрузки
+							CLEAR_AREA(-678.535, 598.593, 5.3873, 55.0, 1);
+							CLEAR_AREA(-635.815, 603.068, 5.7759, 55.0, 1);
 							SETTIMERA( 0 );
 
 							while(true)
 							{
 								WAIT(0);
-								GET_CHAR_COORDINATES(ped10,  &rampaX, &rampaY, &rampaZ);//вписываем координаты игрока в переменную
+								GET_CHAR_COORDINATES(ped10,  &rampaX, &rampaY, &rampaZ);
 
 								// меняем ракурс
 								POINT_CAM_AT_COORD	( camera, rampaX, rampaY, rampaZ );
@@ -1978,7 +1950,7 @@ void umberto(void)
 							}
 							// стоп RRR пути
 							STOP_PLAYBACK_RECORDED_CAR(car3);
-							REMOVE_CAR_RECORDING( 3055 ); // выгружаем пути транспорта
+							REMOVE_CAR_RECORDING( 3055 );
 
 							DETACH_OBJECT( trubka_1, 1 );
 							SET_OBJECT_COORDINATES(trubka_1, 1.0, 1.0, -1.0);
@@ -2027,7 +1999,7 @@ void umberto(void)
 							CHANGE_BLIP_SCALE(cuban_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "MO_TARGET");
 
-							//убираем камеру
+							
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
@@ -2042,24 +2014,24 @@ void umberto(void)
 
 							break;
 						}
-						// провалы тут
+						// провалы
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (rico_hp < 200)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB1_11", 5000, 1);//~r~You Killed Rico!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (!IS_CHAR_IN_AREA_3D( GetPlayerPed(), -591.529, 514.096, 2.163, -791.529, 714.096, 54.163, 0 ))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "T4X4_F", 5000, 1);//~r~You bailed! Too tough for you?!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -2078,7 +2050,7 @@ void umberto(void)
 						GET_CHAR_HEALTH(ped15, &ped5_hp);
 						GET_CHAR_HEALTH(ped16, &snuper_hp);
 
-						// респавн педов тут
+						// респавн
 						if (!IS_CHAR_DEAD(ped16))
 						{
 							if (ped1_hp < 200)
@@ -2167,31 +2139,31 @@ void umberto(void)
 							if ((ped1_hp < 200) && (blip_off1 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped11);
-								REMOVE_BLIP(ped1_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped1_ico);
 								blip_off1 = 0;
 							}
 							if ((ped2_hp < 200) && (blip_off2 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped12);
-								REMOVE_BLIP(ped2_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped2_ico);
 								blip_off2 = 0;
 							}
 							if ((ped3_hp < 200) && (blip_off3 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped13);
-								REMOVE_BLIP(ped3_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped3_ico);
 								blip_off3 = 0;
 							}
 							if ((ped4_hp < 200) && (blip_off4 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped14);
-								REMOVE_BLIP(ped4_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped4_ico);
 								blip_off4 = 0;
 							}
 							if ((ped5_hp < 200) && (blip_off5 == 1))
 							{
 								EXPLODE_CHAR_HEAD(ped15);
-								REMOVE_BLIP(ped5_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped5_ico);
 								blip_off5 = 0;
 							}
 						}
@@ -2241,18 +2213,18 @@ void umberto(void)
 
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_22", 5000, 1);//~g~ Finish off the rest of the Haitians so the Cubans can move forward.
-							REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(cuban_ico);
 							explo_car = 1;
 							EXPLODE_CHAR_HEAD(ped16);
 							FREEZE_CHAR_POSITION(ped16, 0);
 						}
 						if ((IS_CHAR_DEAD(ped16)) && (ped1_hp < 200) && (ped2_hp < 200) && (ped3_hp < 200) && (ped4_hp < 200) && (ped5_hp < 200))
 						{
-							// сценка тут
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-							CLEAR_AREA(-715.156, 604.681, 5.3873, 55.0, 1);//очещаем зону загрузки
+							// сценка
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+							CLEAR_AREA(-715.156, 604.681, 5.3873, 55.0, 1);
 
-							//ставим камеру
+							//ставим
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, -719.979, 604.141, 5.79146 );
 							SET_CAM_POS			( camera, -731.635, 604.463, 8.32183 );
@@ -2336,7 +2308,7 @@ void umberto(void)
 							SET_CHAR_WILL_USE_COVER(ped10, 1);
 							SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped10, FALSE);
 
-							//убираем камеру
+							
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
@@ -2381,29 +2353,29 @@ void umberto(void)
 							text = 1;
 							break;
 						}
-						// провалы тут
+						// провалы
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (rico_hp < 200)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB1_11", 5000, 1);//~r~You Killed Rico!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (!IS_CHAR_IN_AREA_3D( GetPlayerPed(), -591.529, 514.096, 2.163, -791.529, 714.096, 54.163, 0 ))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "T4X4_F", 5000, 1);//~r~You bailed! Too tough for you?!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
 				}
-				// забрать фургон
+				// забрать
 				if (skip == 0)
 				{
 					while (TRUE)
@@ -2415,7 +2387,7 @@ void umberto(void)
 						GET_CHAR_HEALTH(ped14, &ped4_hp);
 						GET_CHAR_HEALTH(ped15, &ped5_hp);
 
-						// респавн педов тут
+						// респавн
 						if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), -719.0, 594.0, 3.0, -769.0, 644.0, 33.0, 0 )) && (explo_car == 0))
 						{
 							if (ped1_hp < 200)
@@ -2523,7 +2495,7 @@ void umberto(void)
 						{
 							if (explo_car == 0)
 							{
-								// баррикада тут
+								// баррикада
 								SET_MAX_WANTED_LEVEL(6);
 								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
 								MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
@@ -2568,9 +2540,9 @@ void umberto(void)
 
 						if (IS_CHAR_IN_CAR(GetPlayerPed(), car1))
 						{
-							DRAW_CHECKPOINT( -729.157, -71.6485, 5.6909, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -729.157, -71.6485, 5.6909, &PlayR);//проверка "игрок на координатах"
+							DRAW_CHECKPOINT( -729.157, -71.6485, 5.6909, 1.5, 160, 116, 209);
+							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -729.157, -71.6485, 5.6909, &PlayR);
 							if ( PlayR < 2.0 )
 							{
 								skip = 2;
@@ -2578,7 +2550,7 @@ void umberto(void)
 							}
 							if (text == 1)
 							{
-								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(cuban_ico);
 								ADD_BLIP_FOR_COORD(-729.157, -71.6485, 5.6909, &cuban_ico);
 								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 5);
@@ -2594,7 +2566,7 @@ void umberto(void)
 						{
 							if (text == 0)
 							{
-								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(cuban_ico);
 								ADD_BLIP_FOR_CAR(car1, &cuban_ico);
 								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 19);
@@ -2606,17 +2578,17 @@ void umberto(void)
 								text = 1;
 							}
 						}
-						// провалы тут
+						// провалы
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (IS_CAR_DEAD(car1))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_11", 5000, 1);//~r~You fool, we needed that car.
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -2624,17 +2596,17 @@ void umberto(void)
 
 				// чистим скрипт
 				WAIT( 100 );
-				REMOVE_PICKUP(sweap_1);// выгружаем оружие
+				REMOVE_PICKUP(sweap_1);// выгружаем
 				SET_MAX_WANTED_LEVEL(6);
 
-				REMOVE_BLIP(ped1_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped2_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped3_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped4_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped5_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(ped1_ico);
+				REMOVE_BLIP(ped2_ico);
+				REMOVE_BLIP(ped3_ico);
+				REMOVE_BLIP(ped4_ico);
+				REMOVE_BLIP(ped5_ico);
+				REMOVE_BLIP(cuban_ico);
 
-				// выгружвем модели
+				
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
@@ -2645,7 +2617,7 @@ void umberto(void)
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
 
-				// выгружвем педов
+				
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -2663,7 +2635,7 @@ void umberto(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped16);
 
-				// выгружвем машину
+				
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -2680,11 +2652,11 @@ void umberto(void)
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -2700,17 +2672,17 @@ void umberto(void)
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 2000);// +5000$
 						
 						WAIT( 0 );
@@ -2719,10 +2691,10 @@ void umberto(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +2000 );
 					REGISTER_MISSION_PASSED("CUB_2");
 					G_CUBAN = 3;
-					sutosave = 1;
+					autosave = 1;
 				}
 				blip_on = 0;
 				G_ONMISSION = 0;
@@ -2740,18 +2712,18 @@ void umberto(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "LG_11");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cuban_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -2760,7 +2732,7 @@ void umberto(void)
 						break;
 					}
 				}
-				SET_CHAR_COORDINATES(GetPlayerPed(), -737.142, -73.7556, 5.9432 );// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -737.142, -73.7556, 5.9432 );
 				SET_CHAR_HEADING(GetPlayerPed(), 5.0 );
 
 				Cam camera;
@@ -2782,29 +2754,29 @@ void umberto(void)
 				uint CarM3 = MODEL_VC_DINGHY;// Лодка Гаитян
 
 				uint PedM1 = MODEL_M_Y_GLAT_HI_01;// Рико
-				uint PedM2 = MODEL_M_M_GJAM_HI_01;// Гаитянин
+				uint PedM2 = MODEL_M_M_GJAM_HI_01;
 				uint PedM3 = MODEL_M_Y_GIRI_LO_01;// Акула
 				uint PedM4 = MODEL_M_Y_GIRI_LO_02;// Акула
 				uint PedM5 = MODEL_M_Y_GIRI_LO_03;// Акула
 				uint ped1_hp, ped2_hp, ped3_hp, ped4_hp, ped5_hp, ped6_hp, ped7_hp, ped8_hp, ped9_hp, rico_hp;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(CarM2);
-				while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 				REQUEST_MODEL(CarM3);
-				while (!HAS_MODEL_LOADED(CarM3)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM3)) WAIT(0);
 
 				REQUEST_MODEL(PedM1);// 
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				REQUEST_MODEL(PedM2);// 
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM2));
 				REQUEST_MODEL(PedM3);// 
-				while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM3));
 				REQUEST_MODEL(PedM4);// 
-				while (!HAS_MODEL_LOADED(PedM4));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM4));
 				REQUEST_MODEL(PedM5);// 
-				while (!HAS_MODEL_LOADED(PedM5));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM5));
 
 				CREATE_CAR(CarM1, -286.661, -630.995, 0.58805, &car1, TRUE);// Лодка Рико 
 				SET_CAR_HEADING(car1, 20.0);
@@ -2819,15 +2791,15 @@ void umberto(void)
 
 				// педы
 				CREATE_CHAR (26, PedM1, -292.071, -634.141, 4.96902, &ped1, TRUE);// Рико
-				CREATE_CHAR (26, PedM2, -217.111, 263.371, 3.83098, &ped2, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -216.913, 264.901, 3.83098, &ped3, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -218.574, 263.659, 3.83098, &ped4, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -216.945, 271.992, 4.50132, &ped5, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -218.759, 269.886, 2.04082, &ped6, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -219.287, 272.755, 2.74539, &ped7, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -226.085, 263.186, 4.50132, &ped8, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -227.497, 266.211, 2.74539, &ped9, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -224.211, 265.371, 2.04082, &ped10, TRUE);// Гаитянин
+				CREATE_CHAR (26, PedM2, -217.111, 263.371, 3.83098, &ped2, TRUE);
+				CREATE_CHAR (26, PedM2, -216.913, 264.901, 3.83098, &ped3, TRUE);
+				CREATE_CHAR (26, PedM2, -218.574, 263.659, 3.83098, &ped4, TRUE);
+				CREATE_CHAR (26, PedM2, -216.945, 271.992, 4.50132, &ped5, TRUE);
+				CREATE_CHAR (26, PedM2, -218.759, 269.886, 2.04082, &ped6, TRUE);
+				CREATE_CHAR (26, PedM2, -219.287, 272.755, 2.74539, &ped7, TRUE);
+				CREATE_CHAR (26, PedM2, -226.085, 263.186, 4.50132, &ped8, TRUE);
+				CREATE_CHAR (26, PedM2, -227.497, 266.211, 2.74539, &ped9, TRUE);
+				CREATE_CHAR (26, PedM2, -224.211, 265.371, 2.04082, &ped10, TRUE);
 				SET_CHAR_COMPONENT_VARIATION(ped1, 1, 1, 0);
 				SET_CHAR_HEALTH(ped1, 2000);
 
@@ -2859,7 +2831,7 @@ void umberto(void)
 				SET_CHAR_HEADING(ped19, 35.0);
 				SET_CHAR_HEADING(ped20, 35.0);
 
-				//таччим педов к машине
+				//таччим ке
 				ATTACH_PED_TO_CAR( ped5, car3, 0, -0.6836, -1.08221, 3.704, 0.0, 110, 1, 0 );
 				ATTACH_PED_TO_CAR( ped6, car3, 0, -0.2142, -3.92239, 1.159, 0.0, 105, 1, 0 );
 				ATTACH_PED_TO_CAR( ped7, car3, 0, 2.54061, -1.94455, 1.948, 0.0, 85, 1, 0 );
@@ -2871,7 +2843,7 @@ void umberto(void)
 				FREEZE_CAR_POSITION(car3, 1);
 
 
-				// грузим анимации
+				//им анимации
 				REQUEST_ANIMS( "amb@hang_str_idls" );
 				while (!HAVE_ANIMS_LOADED( "amb@hang_str_idls" )) WAIT(0);
 
@@ -2882,7 +2854,7 @@ void umberto(void)
 				RELEASE_WEATHER();
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "CUB_4", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "CUB_4", 6 );
 				START_CUTSCENE_NOW("cub_4");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -2954,7 +2926,7 @@ void umberto(void)
 				SET_CHAR_RELATIONSHIP_GROUP(ped1, 0);
 				SET_CHAR_RELATIONSHIP(ped1, 5, 24);
 
-				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, -205.665, 228.89, 7.24698, 90.0, 0.0, -40.0, &aid_1);//Аптека
+				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, -205.665, 228.89, 7.24698, 90.0, 0.0, -40.0, &aid_1);
 
 				// Приехать на причал
 				while (TRUE)
@@ -2962,22 +2934,22 @@ void umberto(void)
 					WAIT(0);
 					GET_CHAR_HEALTH(ped1, &rico_hp);
 
-					DRAW_CHECKPOINT( -293.338, -634.651, 4.64145, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -293.338, -634.651, 4.64145, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( -293.338, -634.651, 4.64145, 1.5, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -293.338, -634.651, 4.64145, &PlayR);
 					if (( PlayR < 2.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
-						REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+						REMOVE_BLIP(cuban_ico);
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 						SET_CHAR_INVINCIBLE(ped1, 1);
-						SET_CHAR_COORDINATES(GetPlayerPed(), -293.338, -634.651, 4.69394 );// перемещаем игрока
+						SET_CHAR_COORDINATES(GetPlayerPed(), -293.338, -634.651, 4.69394 );
 						SET_CHAR_HEADING(GetPlayerPed(), -70.0 );
 
 						CREATE_PICKUP_ROTATE(mission_keis2, 22, 20, -216.792, 262.904, 3.689, 0.0, 0.0, 130.0, &keys_1);
 						CREATE_PICKUP_ROTATE(mission_keis2, 22, 20, -198.144, 232.781, 6.201, 0.0, 0.0, 40.0, &keys_2);
 						CREATE_PICKUP_ROTATE(mission_keis2, 22, 20, -198.939, 232.103, 6.201, 0.0, 0.0, 40.0, &keys_3);
 
-						// ставим камеру
+						
 						CREATE_CAM( 14, &camera );
 						POINT_CAM_AT_COORD	( camera, -292.829, -634.263, 5.68324 );
 						SET_CAM_POS			( camera, -290.056, -637.498, 6.78833 );
@@ -2988,14 +2960,14 @@ void umberto(void)
 						SET_WIDESCREEN_BORDERS( 1 );
 						SetTime(500);
 
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 2000 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 2000 );
 						NEW_SCRIPTED_CONVERSATION();
 						ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 						ADD_LINE_TO_CONVERSATION(0, "R8_RA", "CUB3_01", 0, 0);//Hey Rico. Nice boat, you ready?
 						START_SCRIPT_CONVERSATION(1, 1);
 						SetSpeech();
 
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 4000 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 4000 );
 						NEW_SCRIPTED_CONVERSATION();
 						ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 						ADD_LINE_TO_CONVERSATION(0, "R8_SA", "CUB3_05", 0, 0);//Si Tommy. Now you be a good shot today,
@@ -3012,7 +2984,7 @@ void umberto(void)
 						START_SCRIPT_CONVERSATION(1, 1);
 						SetSpeech();
 
-						DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+						DO_SCREEN_FADE_OUT( 1000 );
 						while(true)
 						{
 							WAIT(0);
@@ -3044,13 +3016,13 @@ void umberto(void)
 						DETACH_PED(ped10, 1);
 						SETTIMERA( 0 );
 
-						DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+						DO_SCREEN_FADE_IN( 1000 );
 
 						// меняем ракурс
 						while(true)
 						{
 							WAIT(0);
-							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
 							SET_CAM_POS			( camera, -230.966, 305.548, 4.91723 );
 
@@ -3060,8 +3032,8 @@ void umberto(void)
 							}
 						}
 
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 5000 );//Воиспроизвидение анимации на педе
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped11, "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 5000 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 5000 );
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped11, "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 5000 );
 
 						// меняем ракурс
 						POINT_CAM_AT_COORD	( camera, -217.696, 262.518, 4.36645 );
@@ -3069,9 +3041,9 @@ void umberto(void)
 						SetTime(3000);
 
 						STOP_PLAYBACK_RECORDED_CAR(car1);
-						REMOVE_CAR_RECORDING( 3056 ); // выгружаем пути транспорта
+						REMOVE_CAR_RECORDING( 3056 );
 
-						//удяляем камеру тут
+						//удяляем
 						SET_CAM_BEHIND_PED( GetPlayerPed() );
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
@@ -3209,17 +3181,17 @@ void umberto(void)
 						PRINT_STRING_IN_STRING("string", "CUB3_02", 5000, 1);//~g~KILL ALL THE HAITIANS ON THE BOATS!!
 						break;
 					}
-					// провал миссии тут
+					// провал миссии
 					if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if (IS_CAR_DEAD(car1))
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "COK3_7", 5000, 1);//r~You destroyed the boat!
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if (rico_hp < 100)
@@ -3227,7 +3199,7 @@ void umberto(void)
 						EXPLODE_CHAR_HEAD(ped1);
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "CUB1_11", 5000, 1);//~r~You Killed Rico!
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
@@ -3258,9 +3230,9 @@ void umberto(void)
 							START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3057, 0.0, 0.0, 0.5);
 							SET_PLAYBACK_SPEED(car1, 1.2);
 
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-							// ставим камеру
+							
 							CREATE_CAM( 14, &camera );
 							SET_CAM_ACTIVE( camera, 1 );
 							SET_CAM_PROPAGATE( camera, 1 );
@@ -3273,7 +3245,7 @@ void umberto(void)
 							while(true)
 							{
 								WAIT(0);
-								GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+								GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
 								SET_CAM_POS			( camera, -201.132, 270.474, 7.81752 );
 
@@ -3284,9 +3256,9 @@ void umberto(void)
 							}
 
 							STOP_PLAYBACK_RECORDED_CAR(car1);
-							REMOVE_CAR_RECORDING( 3057 ); // выгружаем пути транспорта
+							REMOVE_CAR_RECORDING( 3057 );
 
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -3296,7 +3268,7 @@ void umberto(void)
 								}
 							}
 
-							//удяляем камеру тут
+							//удяляем
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
@@ -3304,10 +3276,10 @@ void umberto(void)
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 							GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_EPISODIC_9, 30, FALSE);	
-							WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), -184.541, 273.884, 4.69363);//телепартируем из катера
+							WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), -184.541, 273.884, 4.69363);//телепартируем иза
 							SET_CHAR_HEADING(GetPlayerPed(), 130.0);
 							FREEZE_CAR_POSITION(car1, 1);
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							DO_SCREEN_FADE_IN( 500 );
 
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB3_03", 5000, 1);//~g~Collect all the briefcases filled with the drugs and cash.
@@ -3335,24 +3307,24 @@ void umberto(void)
 							break;
 						}
 
-						// провал миссии тут
+						// провал миссии
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (IS_CAR_DEAD(car1))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "COK3_7", 5000, 1);//r~You destroyed the boat!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (rico_hp < 100)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB1_11", 5000, 1);//~r~You Killed Rico!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -3365,17 +3337,17 @@ void umberto(void)
 						WAIT(0);
 						if ((HAS_PICKUP_BEEN_COLLECTED( keys_1 )) && ( keys_UP1 == 0))
 						{
-							REMOVE_BLIP(keys1_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(keys1_ico);
 							keys_UP1 = 1;
 						}
 						if ((HAS_PICKUP_BEEN_COLLECTED( keys_2 )) && ( keys_UP2 == 0))
 						{
-							REMOVE_BLIP(keys2_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(keys2_ico);
 							keys_UP2 = 1;
 						}
 						if ((HAS_PICKUP_BEEN_COLLECTED( keys_3 )) && ( keys_UP3 == 0))
 						{
-							REMOVE_BLIP(keys3_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(keys3_ico);
 							keys_UP3 = 1;
 						}
 
@@ -3383,8 +3355,8 @@ void umberto(void)
 						{
 							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
-							CREATE_CHAR_INSIDE_CAR(car4, 1, PedM2, &ped2);// Гаитянин
-							CREATE_CHAR (26, PedM2, -216.913, 264.901, 3.83098, &ped3, TRUE);// Гаитянин
+							CREATE_CHAR_INSIDE_CAR(car4, 1, PedM2, &ped2);
+							CREATE_CHAR (26, PedM2, -216.913, 264.901, 3.83098, &ped3, TRUE);
 							ATTACH_PED_TO_CAR( ped3, car4, 0, -0.112316, -0.66938, 0.945863, 0.0, 0, 1, 0 );
 
 							UpdateWeaponOfPed(ped2, WEAPON_MICRO_UZI);
@@ -3394,7 +3366,7 @@ void umberto(void)
 							SET_CURRENT_CHAR_WEAPON(ped2, WEAPON_MICRO_UZI, TRUE);
 							SET_CURRENT_CHAR_WEAPON(ped3, WEAPON_GRENADE, TRUE);
 
-							SET_CAR_COORDINATES(car4, -174.639, 295.999, 1.00084 );// перемещаем транспорт
+							SET_CAR_COORDINATES(car4, -174.639, 295.999, 1.00084 );
 							SET_CAR_HEADING(car4, -110.0 );
 
 							FREEZE_CAR_POSITION(car1, 0);
@@ -3402,9 +3374,9 @@ void umberto(void)
 							FREEZE_CAR_POSITION(car3, 0);
 							SetTime(500);
 
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-							// ставим камеру
+							
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, -178.24, 286.227, 1.19084 );
 							SET_CAM_POS			( camera, -199.606, 282.394, 7.87958 );
@@ -3418,18 +3390,18 @@ void umberto(void)
 							DETACH_PED(ped3, 1);
 							SET_CHAR_HEADING(ped3, 170.0);
 
-							TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped3, "grenade_throw_short", "throw_grenade", 8.0, 1, 0, 0, 0, 1100 );//Воиспроизвидение анимации на педе
+							TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped3, "grenade_throw_short", "throw_grenade", 8.0, 1, 0, 0, 0, 1100 );
 							SetTime(2000);
 							WARP_CHAR_INTO_CAR_AS_PASSENGER(ped3, car4, 1);
 
 							EXPLODE_CAR(car1, 1, 1);
 							SetTime(2000);
 
-							SET_CAR_COORDINATES(car4, -196.496, 271.283, 1.19084 );// перемещаем транспорт
+							SET_CAR_COORDINATES(car4, -196.496, 271.283, 1.19084 );
 							SET_CAR_HEADING(car4, 175.0 );
 
-							WARP_CHAR_FROM_CAR_TO_COORD(ped2, -199.778, 269.321, 3.73762);//телепартируем из катера
-							WARP_CHAR_FROM_CAR_TO_COORD(ped3, -198.367, 268.233, 3.73762);//телепартируем из катера
+							WARP_CHAR_FROM_CAR_TO_COORD(ped2, -199.778, 269.321, 3.73762);//телепартируем иза
+							WARP_CHAR_FROM_CAR_TO_COORD(ped3, -198.367, 268.233, 3.73762);//телепартируем иза
 							SET_CHAR_HEADING(ped2, 170.0);
 							SET_CHAR_HEADING(ped3, 170.0);
 
@@ -3445,7 +3417,7 @@ void umberto(void)
 							SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped2, FALSE);
 							SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped3, FALSE);
 
-							//удяляем камеру тут
+							//удяляем
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
@@ -3467,10 +3439,10 @@ void umberto(void)
 							PRINT_STRING_IN_STRING("string", "CUB3_04", 5000, 1);// ~g~Get the drugs and cash back to Umberto.
 							break;
 						}
-						// провал миссии тут
+						// провал миссии
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -3481,15 +3453,15 @@ void umberto(void)
 					while(true)
 					{
 						WAIT(0);
-						DRAW_CHECKPOINT( -737.034, -74.3699, 5.56987, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.034, -74.3699, 5.56987, &PlayR);//проверка "игрок на координатах"
+						DRAW_CHECKPOINT( -737.034, -74.3699, 5.56987, 1.5, 160, 116, 209);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.034, -74.3699, 5.56987, &PlayR);
 						if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
-							// сценка тут
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							// сценка
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-							// ставим камеру
+							
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, -736.916, -74.6126, 7.60915 );
 							SET_CAM_POS			( camera, -737.669, -62.7373, 10.9415 );
@@ -3499,16 +3471,16 @@ void umberto(void)
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
 
-							TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), -735.814, -88.3123, 5.56987, 3, -2);// Томми бежит в двери
+							TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), -735.814, -88.3123, 5.56987, 3, -2);// бежит в двери
 							SetTime(2500);
-							SET_CHAR_COORDINATES(GetPlayerPed(), -728.587, -86.6162, 5.92349);// перемещаем
+							SET_CHAR_COORDINATES(GetPlayerPed(), -728.587, -86.6162, 5.92349);
 							SET_CHAR_HEADING(GetPlayerPed(), -90.0);
 							SetTime(1000);
 
 							ALTER_WANTED_LEVEL(GetPlayerIndex(), 0);
 							APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
 
-							//удяляем камеру тут
+							//удяляем
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
@@ -3518,27 +3490,27 @@ void umberto(void)
 							skip = 2;
 							break;
 						}
-						// провал миссии тут
+						// провал миссии
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
 				}
 
-				// чистим скрипт тут
-				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(keys1_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(keys2_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(keys3_ico);//Удаляем иконку на радаре
+				
+				REMOVE_BLIP(cuban_ico);
+				REMOVE_BLIP(keys1_ico);
+				REMOVE_BLIP(keys2_ico);
+				REMOVE_BLIP(keys3_ico);
 
 				REMOVE_PICKUP(keys_1);
 				REMOVE_PICKUP(keys_2);
 				REMOVE_PICKUP(keys_3);
 				REMOVE_PICKUP(aid_1);
 
-				// выгружвем модели
+				
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
@@ -3549,7 +3521,7 @@ void umberto(void)
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
 
-				// выгружвем педов
+				
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -3571,7 +3543,7 @@ void umberto(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
-				// выгружвем машину
+				
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -3583,11 +3555,11 @@ void umberto(void)
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -3603,17 +3575,17 @@ void umberto(void)
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 4000);// +5000$
 						
 						WAIT( 0 );
@@ -3622,10 +3594,10 @@ void umberto(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +4000 );
 					REGISTER_MISSION_PASSED("CUB_3");
 					G_CUBAN = 4;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 
@@ -3642,18 +3614,18 @@ void umberto(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cuban_ico, "LG_11");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cuban_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -3662,7 +3634,7 @@ void umberto(void)
 						break;
 					}
 				}
-				SET_CHAR_COORDINATES(GetPlayerPed(), -737.142, -73.7556, 5.9432 );// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -737.142, -73.7556, 5.9432 );
 				SET_CHAR_HEADING(GetPlayerPed(), 5.0 );
 
 				Cam camera;
@@ -3698,30 +3670,30 @@ void umberto(void)
 
 				uint CarM1 = MODEL_VOODOO;// Voodoo
 				uint PedM1 = MODEL_M_Y_GLAT_HI_01;// Кубинец
-				uint PedM2 = MODEL_M_M_GJAM_HI_01;// Гаитянин
-				uint dynamite_1 = dynamite;// динамит
-				uint vorotaM = vc_electricgate; //ворота
+				uint PedM2 = MODEL_M_M_GJAM_HI_01;
+				uint dynamite_1 = dynamite;//
+				uint vorotaM = vc_electricgate;
 				uint rico_hp, car_HP;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 
 				REQUEST_MODEL(PedM1);// 
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				REQUEST_MODEL(PedM2);// 
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM2));
 
-				REQUEST_MODEL(dynamite_1);// динамит
+				REQUEST_MODEL(dynamite_1);//
 				while (!HAS_MODEL_LOADED(dynamite_1)) WAIT(0);
-				REQUEST_MODEL(vorotaM);// ворота
+				REQUEST_MODEL(vorotaM);
 				while (!HAS_MODEL_LOADED(vorotaM)) WAIT(0);
 
 				CREATE_CAR(CarM1, -612.301, 705.289, 5.85357, &car1, TRUE);// Voodoo 
 				SET_CAR_HEADING(car1, -175.0);
 				CREATE_CAR(CarM1, -608.904, 708.173, 5.85357, &car2, TRUE);// Voodoo
 				SET_CAR_HEADING(car2, -175.0);
-				LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car2, 3); //блокируем двери автомобиля для игрока
+				LOCK_CAR_DOORS(car1, 3);
+				LOCK_CAR_DOORS(car2, 3);
 
 				// педы
 				CREATE_CHAR (26, PedM1, -735.919, -74.1093, 5.92349, &ped1, TRUE);// Рико
@@ -3730,21 +3702,21 @@ void umberto(void)
 				CREATE_CHAR_AS_PASSENGER(car1, 1, PedM1, 0, &ped4);// Кубинец
 				CREATE_CHAR_AS_PASSENGER(car2, 1, PedM1, 0, &ped5);// Кубинец
 
-				CREATE_CHAR (26, PedM2, -682.235, 607.707, 5.92349, &ped6, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -704.865, 600.751, 5.92349, &ped7, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -705.448, 610.131, 5.92349, &ped8, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -707.101, 610.095, 5.92349, &ped9, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -725.794, 608.262, 5.92349, &ped10, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -733.523, 641.775, 5.92349, &ped11, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -734.912, 641.561, 5.92349, &ped12, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -757.481, 636.052, 5.92349, &ped13, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -755.649, 616.688, 5.92349, &ped14, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -763.191, 615.354, 5.92349, &ped15, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -759.549, 604.395, 5.92349, &ped16, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -747.439, 612.458, 5.92349, &ped17, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -749.721, 600.055, 14.0724, &ped18, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -754.285, 620.572, 14.0724, &ped19, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM2, -740.772, 605.086, 18.2701, &ped20, TRUE);// Гаитянин
+				CREATE_CHAR (26, PedM2, -682.235, 607.707, 5.92349, &ped6, TRUE);
+				CREATE_CHAR (26, PedM2, -704.865, 600.751, 5.92349, &ped7, TRUE);
+				CREATE_CHAR (26, PedM2, -705.448, 610.131, 5.92349, &ped8, TRUE);
+				CREATE_CHAR (26, PedM2, -707.101, 610.095, 5.92349, &ped9, TRUE);
+				CREATE_CHAR (26, PedM2, -725.794, 608.262, 5.92349, &ped10, TRUE);
+				CREATE_CHAR (26, PedM2, -733.523, 641.775, 5.92349, &ped11, TRUE);
+				CREATE_CHAR (26, PedM2, -734.912, 641.561, 5.92349, &ped12, TRUE);
+				CREATE_CHAR (26, PedM2, -757.481, 636.052, 5.92349, &ped13, TRUE);
+				CREATE_CHAR (26, PedM2, -755.649, 616.688, 5.92349, &ped14, TRUE);
+				CREATE_CHAR (26, PedM2, -763.191, 615.354, 5.92349, &ped15, TRUE);
+				CREATE_CHAR (26, PedM2, -759.549, 604.395, 5.92349, &ped16, TRUE);
+				CREATE_CHAR (26, PedM2, -747.439, 612.458, 5.92349, &ped17, TRUE);
+				CREATE_CHAR (26, PedM2, -749.721, 600.055, 14.0724, &ped18, TRUE);
+				CREATE_CHAR (26, PedM2, -754.285, 620.572, 14.0724, &ped19, TRUE);
+				CREATE_CHAR (26, PedM2, -740.772, 605.086, 18.2701, &ped20, TRUE);
 
 				SET_CHAR_MOVEMENT_ANIMS_BLOCKED(ped13, TRUE);
 				SET_CHAR_MOVEMENT_ANIMS_BLOCKED(ped14, TRUE);
@@ -3774,7 +3746,7 @@ void umberto(void)
 				SET_CHAR_HEADING(ped19, 90.0);
 				SET_CHAR_HEADING(ped20, -90.0);
 
-				// создаём ворота
+				
 				CREATE_OBJECT_NO_OFFSET(vorotaM, -681.281, 607.411, 5.23681, &vorota, TRUE);
 				SET_OBJECT_HEADING(vorota, -90.0);
 				SET_OBJECT_DYNAMIC(vorota, 0);
@@ -3785,11 +3757,11 @@ void umberto(void)
 				CREATE_OBJECT_NO_OFFSET(dynamite_1, 875.146, 864.587, 5.441, &tnt_2, TRUE);
 				CREATE_OBJECT_NO_OFFSET(dynamite_1, 877.146, 864.587, 5.441, &tnt_3, TRUE);
 
-				// грузим анимации
+				//им анимации
 				REQUEST_ANIMS( "amb@hang_str_idls" );
 				while (!HAVE_ANIMS_LOADED( "amb@hang_str_idls" )) WAIT(0);
 
-				REQUEST_ANIMS( "amb@atm" );//загружаем файл с анимацией
+				REQUEST_ANIMS( "amb@atm" );
 				while (!HAVE_ANIMS_LOADED( "amb@atm" )) WAIT(0);
 
 				//------------ загрузка путей ----------------
@@ -3802,7 +3774,7 @@ void umberto(void)
 				RELEASE_WEATHER();
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "CUB_3", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "CUB_3", 6 );
 				START_CUTSCENE_NOW("cub_3");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -3941,9 +3913,9 @@ void umberto(void)
 						trigger5 = 1;
 					}
 
-					DRAW_CHECKPOINT( -605.383, 710.026, 5.17858, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -605.383, 710.026, 5.17858, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( -605.383, 710.026, 5.17858, 1.5, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -605.383, 710.026, 5.17858, &PlayR);
 					if (( PlayR < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (!IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_VOODOO)))
 					{
 						if (trigger7 == 0)
@@ -3964,9 +3936,9 @@ void umberto(void)
 						}
 					}
 					
-					// Рико сталкирит за Томми
-					GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+					// Рико 
+					GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 					if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), PedX+22, PedY+22, PedZ+15, PedX-22, PedY-22, PedZ-15, 0 ))
 					{
 						if (stalking == 0)
@@ -3975,7 +3947,7 @@ void umberto(void)
 							stalking = 1;
 						}
 
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &stalkerR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &stalkerR);
 						if ((stalkerR < 1.5) && (stalking == 1) && (in_car == 0))
 						{
 							stalking = 2;
@@ -4033,10 +4005,10 @@ void umberto(void)
 						start = 1;
 						break;
 					}
-					// провал миссии тут
+					// провал миссии
 					if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((IS_CHAR_DEAD(ped1)) || (rico_hp < 100))
@@ -4044,14 +4016,14 @@ void umberto(void)
 						EXPLODE_CHAR_HEAD(ped1);
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_DEAD(ped3)) || (IS_CHAR_DEAD(ped4)) || (IS_CHAR_DEAD(ped5)))
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
@@ -4113,19 +4085,19 @@ void umberto(void)
 							trigger6 = 1;
 						}
 
-						DRAW_CHECKPOINT( -605.383, 710.026, 5.17858, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -605.383, 710.026, 5.17858, &PlayR);//проверка "игрок на координатах"
+						DRAW_CHECKPOINT( -605.383, 710.026, 5.17858, 1.5, 160, 116, 209);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -605.383, 710.026, 5.17858, &PlayR);
 						if (( PlayR < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 							SetSpeech();
-							// сценка тут
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							// сценка
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-							SET_CAR_DENSITY_MULTIPLIER(0);// отключаем пути
-							CLEAR_AREA(-625.475, 664.914, 5.17858, 85.0, 1);//очещаем зону загрузки
+							SET_CAR_DENSITY_MULTIPLIER(0);
+							CLEAR_AREA(-625.475, 664.914, 5.17858, 85.0, 1);
 
-							// ставим камеру
+							
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, -610.569, 709.178, 5.85356 );
 							SET_CAM_POS			( camera, -600.314, 700.914, 9.42846 );
@@ -4177,13 +4149,13 @@ void umberto(void)
 
 							SetTime(2000);
 
-							//убираем камеру
+							
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
-							REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(cuban_ico);
 							ADD_BLIP_FOR_CAR(car2, &cuban_ico);
 							CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(cuban_ico, 19);
@@ -4198,7 +4170,7 @@ void umberto(void)
 						{
 							if (start == 1)
 							{
-								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(cuban_ico);
 								ADD_BLIP_FOR_COORD(-605.383, 710.026, 5.17858, &cuban_ico);
 								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая)
@@ -4214,7 +4186,7 @@ void umberto(void)
 						{
 							if (start == 0)
 							{
-								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(cuban_ico);
 								ADD_BLIP_FOR_CAR(car3, &cuban_ico);
 								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 19);
@@ -4226,10 +4198,10 @@ void umberto(void)
 								start = 1;
 							}
 						}
-						// провал миссии тут
+						// провал миссии
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped1)) || (rico_hp < 100))
@@ -4237,14 +4209,14 @@ void umberto(void)
 							EXPLODE_CHAR_HEAD(ped1);
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_DEAD(ped3)) || (IS_CHAR_DEAD(ped4)) || (IS_CHAR_DEAD(ped5)))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -4261,7 +4233,7 @@ void umberto(void)
 						if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), -546.884, 547.347, 2.128, -696.884, 747.347, 52.128, 0 )) && ( in_zon == 0))
 						{
 							in_zon = 1;
-							SET_CAR_DENSITY_MULTIPLIER(0);// отключаем пути
+							SET_CAR_DENSITY_MULTIPLIER(0);
 						}
 						else if ((!IS_CHAR_IN_AREA_3D( GetPlayerPed(), -546.884, 547.347, 2.128, -696.884, 747.347, 52.128, 0 )) && ( in_zon == 1))
 						{
@@ -4284,9 +4256,9 @@ void umberto(void)
 
 						if (in_zavod == 1)
 						{
-							DRAW_CHECKPOINT( -655.833, 603.265, 5.17858, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -655.833, 603.265, 5.17858, &PlayR);//проверка "игрок на координатах"
+							DRAW_CHECKPOINT( -655.833, 603.265, 5.17858, 1.5, 160, 116, 209);
+							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -655.833, 603.265, 5.17858, &PlayR);
 							if (( PlayR < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 							{
 								CLEAR_PRINTS();
@@ -4297,10 +4269,10 @@ void umberto(void)
 
 								REQUEST_ANIMS( "amb@taxi_hail_m" );
 								while (!HAVE_ANIMS_LOADED( "amb@taxi_hail_m" )) WAIT(0);
-								TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped6, "hail_left", "amb@taxi_hail_m", 1.0, 1, 0, 0, 0, 2000 );//Воиспроизвидение анимации на педе
+								TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped6, "hail_left", "amb@taxi_hail_m", 1.0, 1, 0, 0, 0, 2000 );
 								SetTime(2000);
 
-								TASK_GO_STRAIGHT_TO_COORD(ped6, -682.235, 607.707, 5.92349, 2, -2);// Томми идёт в двери
+								TASK_GO_STRAIGHT_TO_COORD(ped6, -682.235, 607.707, 5.92349, 2, -2);// идёт в двери
 								SetTime(1000);
 
 								NEW_SCRIPTED_CONVERSATION();
@@ -4309,7 +4281,7 @@ void umberto(void)
 								START_SCRIPT_CONVERSATION(1, 1);
 								SetSpeech();
 
-								// открываем ворота
+								// открываем
 								while (true)
 								{
 									WAIT( 0 );
@@ -4328,7 +4300,7 @@ void umberto(void)
 								UNPAUSE_PLAYBACK_RECORDED_CAR(car2);
 								SetTime(2000);
 
-								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(cuban_ico);
 								ADD_BLIP_FOR_COORD(-739.801, 615.565, 5.05374, &cuban_ico);
 								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая)
@@ -4348,7 +4320,7 @@ void umberto(void)
 							{
 								if (start == 1)
 								{
-									REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+									REMOVE_BLIP(cuban_ico);
 									ADD_BLIP_FOR_COORD(-655.833, 603.265, 5.17858, &cuban_ico);
 									CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 									CHANGE_BLIP_COLOUR(cuban_ico, 5);   //цвет иконка на радаре (0=белая)
@@ -4364,7 +4336,7 @@ void umberto(void)
 							{
 								if (start == 1)
 								{
-									REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+									REMOVE_BLIP(cuban_ico);
 									ADD_BLIP_FOR_CAR(car2, &cuban_ico);
 									CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 									CHANGE_BLIP_COLOUR(cuban_ico, 19);
@@ -4381,7 +4353,7 @@ void umberto(void)
 						{
 							if (start == 0)
 							{
-								REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(cuban_ico);
 								ADD_BLIP_FOR_CAR(car3, &cuban_ico);
 								CHANGE_BLIP_SPRITE(cuban_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(cuban_ico, 19);
@@ -4393,10 +4365,10 @@ void umberto(void)
 								start = 1;
 							}
 						}
-						// провал миссии тут
+						// провал миссии
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (IS_CHAR_SHOOTING_IN_AREA(GetPlayerPed(), -546.884, 547.347, -696.884, 747.347, 0))
@@ -4411,14 +4383,14 @@ void umberto(void)
 							EXPLODE_CHAR_HEAD(ped1);
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_DEAD(ped3)) || (IS_CHAR_DEAD(ped4)) || (IS_CHAR_DEAD(ped5)))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -4431,12 +4403,12 @@ void umberto(void)
 						WAIT(0);
 						GET_CHAR_HEALTH(ped1, &rico_hp);
 
-						DRAW_CHECKPOINT( -739.801, 615.565, 5.05374, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -739.801, 615.565, 5.05374, &PlayR);//проверка "игрок на координатах"
+						DRAW_CHECKPOINT( -739.801, 615.565, 5.05374, 1.5, 160, 116, 209);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -739.801, 615.565, 5.05374, &PlayR);
 						if (( PlayR < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
-							REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(cuban_ico);
 							SET_OBJECT_COORDINATES(vorota, -681.281, 607.411, 5.23681);
 
 							NEW_SCRIPTED_CONVERSATION();
@@ -4447,8 +4419,8 @@ void umberto(void)
 
 							STOP_PLAYBACK_RECORDED_CAR(car1);
 							STOP_PLAYBACK_RECORDED_CAR(car2);
-							REMOVE_CAR_RECORDING( 3058 ); // выгружаем пути транспорта
-							REMOVE_CAR_RECORDING( 3059 ); // выгружаем пути транспорта
+							REMOVE_CAR_RECORDING( 3058 );
+							REMOVE_CAR_RECORDING( 3059 );
 							rrr_on = 0;
 
 							TASK_LEAVE_CAR(ped1, car3);
@@ -4459,7 +4431,7 @@ void umberto(void)
 
 							UpdateWeaponOfPed(ped20, WEAPON_MICRO_UZI);
 							SET_CURRENT_CHAR_WEAPON(ped20, WEAPON_MICRO_UZI, TRUE);
-							SET_CHAR_COORDINATES(ped20, -682.169, 599.709, 5.92349);// перемещаем игрока
+							SET_CHAR_COORDINATES(ped20, -682.169, 599.709, 5.92349);
 							SET_CHAR_HEADING(ped20, 90.0);
 
 							ADD_BLIP_FOR_COORD(-754.194, 636.405, 5.12495, &tnt1_ico);
@@ -4568,10 +4540,10 @@ void umberto(void)
 							PRINT_STRING_IN_STRING("string", "CUB4_30", 4000, 1);//~g~After all three bombs are planted, get clear of the factory before it blows.
 							break;
 						}
-						// провал миссии тут
+						// провал миссии
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped1)) || (rico_hp < 100))
@@ -4579,14 +4551,14 @@ void umberto(void)
 							EXPLODE_CHAR_HEAD(ped1);
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_DEAD(ped3)) || (IS_CHAR_DEAD(ped4)) || (IS_CHAR_DEAD(ped5)))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB2_10", 5000, 1);//~r~You are supposed to be killing Haitians, not Cubans.
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((!IS_CHAR_IN_CAR(GetPlayerPed(), car3)) || (IS_CHAR_SHOOTING_IN_AREA(GetPlayerPed(), -546.884, 547.347, -696.884, 747.347, 0)))
@@ -4598,7 +4570,7 @@ void umberto(void)
 						}
 					}
 				}
-				// Расставить динамит
+				// Расставить
 				if (skip == 0)
 				{
 					while (TRUE)
@@ -4607,7 +4579,7 @@ void umberto(void)
 						if (timer_on == 1)
 						{
 							//============================ HUD ============================
-							// таймер тут
+							// таймер
 							if (TIMERA() > 999)
 							{
 								time_s -= 1;
@@ -4637,7 +4609,7 @@ void umberto(void)
 
 								SET_TEXT_COLOUR(235, 25, 35, 255);
 								SET_TEXT_SCALE(0.26, 0.445);
-								SET_TEXT_DROPSHADOW(1, 80, 0, 0, 255);;
+								SET_TEXT_DROPSHADOW(1, 80, 0, 0, 255);
 								DISPLAY_TEXT(0.9203125, 0.76954074, "CP_TIME_SEP");
 
 								SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -4695,48 +4667,48 @@ void umberto(void)
 							}
 						}
 
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 
 						if (tnt1 == 0)
 						{
-							DRAW_CHECKPOINT( -754.194, 636.405, 5.12495, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -754.194, 636.405, 5.12495, &PlayR);//проверка "игрок на координатах"
+							DRAW_CHECKPOINT( -754.194, 636.405, 5.12495, 1.5, 160, 116, 209);
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -754.194, 636.405, 5.12495, &PlayR);
 							if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (tnt1 == 0))
 							{
 								tnt1 = 1;
 								timer_on = 1;
-								REMOVE_BLIP(tnt1_ico);//Удаляем иконку на радаре
-								TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "f_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+								REMOVE_BLIP(tnt1_ico);
+								TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "f_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );
 								SETTIMERB( 0 );
 								p_event = 1;
 							}
 						}
 						if (tnt2 == 0)
 						{
-							DRAW_CHECKPOINT( -748.368, 614.555, 5.12495, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -748.368, 614.555, 5.12495, &PlayR);//проверка "игрок на координатах"
+							DRAW_CHECKPOINT( -748.368, 614.555, 5.12495, 1.5, 160, 116, 209);
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -748.368, 614.555, 5.12495, &PlayR);
 							if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (tnt2 == 0))
 							{
 								tnt2 = 1;
 								timer_on = 1;
-								REMOVE_BLIP(tnt2_ico);//Удаляем иконку на радаре
-								// аримация тут
-								TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "f_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+								REMOVE_BLIP(tnt2_ico);
+								// аримация
+								TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "f_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );
 								SETTIMERB( 0 );
 								p_event = 1;
 							}
 						}
 						if (tnt3 == 0)
 						{
-							DRAW_CHECKPOINT( -740.792, 603.311, 11.8548, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -740.792, 603.311, 11.8548, &PlayR);//проверка "игрок на координатах"
+							DRAW_CHECKPOINT( -740.792, 603.311, 11.8548, 1.5, 160, 116, 209);
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -740.792, 603.311, 11.8548, &PlayR);
 							if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (tnt3 == 0))
 							{
 								tnt3 = 1;
 								timer_on = 1;
-								REMOVE_BLIP(tnt3_ico);//Удаляем иконку на радаре
-								// аримация тут
-								TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "f_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+								REMOVE_BLIP(tnt3_ico);
+								// аримация
+								TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "f_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );
 								SETTIMERB( 0 );
 								p_event = 1;
 							}
@@ -4790,17 +4762,17 @@ void umberto(void)
 							TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped5, -694.352, 567.472, 12.1556, 3, -2, 2.5);
 							break;
 						}
-						// провал миссии тут
+						// провал миссии
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((time_m == 0) && (time_s == 0))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB4_06", 5000, 1);//~r~You did not get far enough away from the base and we had to abort the explosion!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						
@@ -4813,7 +4785,7 @@ void umberto(void)
 					{
 						WAIT(0);
 						//============================ HUD ============================
-						// таймер тут
+						// таймер
 						if (TIMERA() > 999)
 						{
 							time_s -= 1;
@@ -4843,7 +4815,7 @@ void umberto(void)
 
 							SET_TEXT_COLOUR(235, 25, 35, 255);
 							SET_TEXT_SCALE(0.26, 0.445);
-							SET_TEXT_DROPSHADOW(1, 80, 0, 0, 255);;
+							SET_TEXT_DROPSHADOW(1, 80, 0, 0, 255);
 							DISPLAY_TEXT(0.9203125, 0.76954074, "CP_TIME_SEP");
 
 							SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -4910,7 +4882,7 @@ void umberto(void)
 								sound = 0;
 							}
 
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 							SET_OBJECT_COORDINATES(tnt_1, -748.393, 615.169, -12.441);
 							SET_OBJECT_COORDINATES(tnt_2, -744.393, 615.169, -12.441);
 
@@ -4938,48 +4910,48 @@ void umberto(void)
 							skip = 2;
 							break;
 						}
-						// провал миссии тут
+						// провал миссии
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((time_m == 0) && (time_s == 0))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "CUB4_06", 5000, 1);//~r~You did not get far enough away from the base and we had to abort the explosion!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
 				}
 
-				// чистим скрипт тут
+				
 				if (rrr_on == 1)
 				{
 					STOP_PLAYBACK_RECORDED_CAR(car1);
 					STOP_PLAYBACK_RECORDED_CAR(car2);
-					REMOVE_CAR_RECORDING( 3058 ); // выгружаем пути транспорта
-					REMOVE_CAR_RECORDING( 3059 ); // выгружаем пути транспорта
+					REMOVE_CAR_RECORDING( 3058 );
+					REMOVE_CAR_RECORDING( 3059 );
 				}
 
-				REMOVE_BLIP(tnt1_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(tnt2_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(tnt3_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(tnt1_ico);
+				REMOVE_BLIP(tnt2_ico);
+				REMOVE_BLIP(tnt3_ico);
+				REMOVE_BLIP(cuban_ico);
 
 				RELEASE_TEXTURE( fon );
 				RELEASE_TEXTURE( timer );
 				REMOVE_TXD( textur );
 
-				// выгружвем модели
+				
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(dynamite_1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(vorotaM);
 
-				// выгружвем педов
+				
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -5001,7 +4973,7 @@ void umberto(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
-				// выгружвем машину
+				
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -5012,7 +4984,7 @@ void umberto(void)
 				DELETE_OBJECT(&tnt_3);
 				DELETE_OBJECT(&vorota);
 
-				// выгружаем бочки и ворота
+				// выгружаем и
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&tnt_1);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&tnt_2);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&tnt_3);
@@ -5030,11 +5002,11 @@ void umberto(void)
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -5050,17 +5022,17 @@ void umberto(void)
 					while (true)
 					{
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
 						SET_TEXT_COLOUR(255, 159, 255, 255);
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 10000);// +5000$
 						
 						WAIT( 0 );
@@ -5069,10 +5041,10 @@ void umberto(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +10000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +10000 );
 					REGISTER_MISSION_PASSED("CUB_4");
 					G_CUBAN = 6;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 
@@ -5086,7 +5058,7 @@ void umberto(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(cuban_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cuban_ico);
 				blip_on = 0;
 			}
 		}

@@ -579,7 +579,7 @@
 
 	<!-- TEC9 -->
 	<weapon type="EPISODIC_7">
-		<data slot="HANDGUN" firetype="INSTANT_HIT" damagetype="BULLET" group="PISTOL_SMALL" targetrange="55.0" weaponrange="65.0" clipsize="50" ammomax="1500" timebetweenshots="333">
+		<data slot="SMG" firetype="INSTANT_HIT" damagetype="BULLET" group="SMG" targetrange="55.0" weaponrange="65.0" clipsize="50" ammomax="1500" timebetweenshots="333">
 			<damage base="20" networkplayermod="3.0" networkpedmod="1.0"/>
 			<physics force="50.0"/>
 			<reload time="2000" fasttime="2000" crouchtime="2000"/>

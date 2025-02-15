@@ -5,54 +5,26 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, HealGB_1, HealGB_2, HealGB_3, HealGB_4, ragdool, speed, cop_on, textur, start, cam_on, set_cam, help, sutosave;
+float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, HealGB_1, HealGB_2, HealGB_3, HealGB_4, ragdool, speed, cop_on, textur, start, cam_on, set_cam, help, autosave;
 float PedR, add_gun1, add_gun2, add_gun3, add_gun4, touch1, touch2, touch3, touch4, Health, carH1, carH2, carH3, carHUD_w, carHUD_y1, carHUD_y2, carHUD_y3, carHUD_x;
 float PedX1, PedY1, PedZ1, PedR1, PedX2, PedY2, PedZ2, PedX3, PedY3, PedZ3, PedX4, PedY4, PedZ4, point, speech, audio_on;
 float create_car5, create_car6, create_car7, create_car8, press_moped, bonus1, bonus2, bonus3, bonus4, res_moped, del_blip1, del_blip2, del_blip3, del_blip4;
 
-void SetSpeech(void)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (!IS_SCRIPTED_CONVERSATION_ONGOING())
-		{
-			break;
-		}
-		else if (TIMERA() > 10000)
-		{
-			break;
-		}
-	}
-}
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void bonus(void)
 {
 	SETTIMERC( 0 );
 	while(true)
 	{
 		WAIT(0);
-		SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
+		SET_TEXT_COLOUR(255, 159, 255, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
 		DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "BONUS", 100);//BONUS $~1~
 		if ( TIMERC() > 3000 )
 		{
-			ADD_SCORE( GetPlayerIndex(), +100 );//даём игроку денег
+			ADD_SCORE( GetPlayerIndex(), +100 );
 			break;
 		}
 	}
@@ -60,16 +32,16 @@ void bonus(void)
 void phil(void)
 {
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	Blip phil_ico;
 	WAIT(3000);
 	while(true)
 	{
 		WAIT(0);
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -89,19 +61,19 @@ void phil(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phil_ico, "LG_08");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -668.375, 876.086, 5.22, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -668.375, 876.086, 5.22, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -668.375, 876.086, 5.22, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -668.375, 876.086, 5.22, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(phil_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(phil_ico);
 				blip_on = 0;
 				SET_MAX_WANTED_LEVEL(2);
 
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -110,7 +82,7 @@ void phil(void)
 						break;
 					}
 				}
-				SET_CHAR_COORDINATES(GetPlayerPed(), -663.706, 874.532, 5.47574 );// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -663.706, 874.532, 5.47574 );
 				SET_CHAR_HEADING(GetPlayerPed(), -140.0 );
 				ADD_ARMOUR_TO_CHAR(GetPlayerPed(), 100);
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
@@ -123,7 +95,7 @@ void phil(void)
 				Object gunbox1, gunbox2, gunbox3, gunbox4;
 				int dm, cdm;
 
-				skip = 0; // переменная пропуска
+				skip = 0;
 				add_gun1 = 0;
 				add_gun2 = 0;
 				add_gun3 = 0;
@@ -147,27 +119,27 @@ void phil(void)
 				del_blip4 = 0;
 				res_moped = 0;
 
-				uint CarM1 = MODEL_URANUS;// Грузовик
+				uint CarM1 = MODEL_URANUS;
 				uint CarM2 = MODEL_PATRIOT;
 				uint CarM3 = MODEL_FAGGIO;
 
-				uint PedM1 = MODEL_M_Y_DEALER;// охранник 1
-				uint PedM2 = MODEL_M_Y_DORK_02;// охранник 2
+				uint PedM1 = MODEL_M_Y_DEALER;
+				uint PedM2 = MODEL_M_Y_DORK_02;
 				uint gunboxM = ne_wood_gunbox;// GunBox
 				uint CarHP1, CarHP2, CarHP3, CarHP4;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(CarM2);
-				while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 				REQUEST_MODEL(CarM3);
-				while (!HAS_MODEL_LOADED(CarM3)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM3)) WAIT(0);
 				REQUEST_MODEL(PedM1);// Таксист
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				REQUEST_MODEL(PedM2);// Таксист
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM2));
 
-				REQUEST_MODEL(gunboxM);// ворота
+				REQUEST_MODEL(gunboxM);
 				while (!HAS_MODEL_LOADED(gunboxM)) WAIT(0);
 
 				LOAD_CHAR_DECISION_MAKER(2, &dm);
@@ -179,7 +151,7 @@ void phil(void)
 				RELEASE_WEATHER();
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "PHIL_1", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "PHIL_1", 6 );
 				START_CUTSCENE_NOW("phil_1");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -197,7 +169,7 @@ void phil(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				CREATE_OBJECT_NO_OFFSET(gunboxM, -659.77, 868.278, 5.71862, &gunbox1, TRUE);
 				CREATE_OBJECT_NO_OFFSET(gunboxM, -659.77, 868.278, 5.71862, &gunbox2, TRUE);
@@ -227,39 +199,39 @@ void phil(void)
 				ATTACH_OBJECT_TO_CAR(gunbox3, car3, 0, -0.39, -0.415, 0.8, 11, 0.0, 22);
 				ATTACH_OBJECT_TO_CAR(gunbox4, car4, 0, -0.39, -0.415, 0.8, 11, 0.0, 22);
 
-				LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car2, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car3, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car4, 3); //блокируем двери автомобиля для игрока
+				LOCK_CAR_DOORS(car1, 3);
+				LOCK_CAR_DOORS(car2, 3);
+				LOCK_CAR_DOORS(car3, 3);
+				LOCK_CAR_DOORS(car4, 3);
 				TURN_OFF_VEHICLE_EXTRA(car1, 9, 0);
 				TURN_OFF_VEHICLE_EXTRA(car2, 9, 0);
 				TURN_OFF_VEHICLE_EXTRA(car3, 9, 0);
 				TURN_OFF_VEHICLE_EXTRA(car4, 9, 0);
 
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM2, &ped2);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM2, &ped3);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
+				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM2, &ped2);
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM2, &ped3);
+				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);
 
-				CREATE_CHAR_AS_PASSENGER(car1, 1, PedM2, 0, &ped5);// Француз в костюме
-				CREATE_CHAR_AS_PASSENGER(car2, 1, PedM1, 0, &ped6);// Француз в костюме
-				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM1, 0, &ped7);// Француз в костюме
-				CREATE_CHAR_AS_PASSENGER(car4, 1, PedM2, 0, &ped8);// Француз в костюме
+				CREATE_CHAR_AS_PASSENGER(car1, 1, PedM2, 0, &ped5);
+				CREATE_CHAR_AS_PASSENGER(car2, 1, PedM1, 0, &ped6);
+				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM1, 0, &ped7);
+				CREATE_CHAR_AS_PASSENGER(car4, 1, PedM2, 0, &ped8);
 
-				CREATE_CHAR_AS_PASSENGER(car1, 1, PedM2, 2, &ped9);// Француз в костюме
-				CREATE_CHAR_AS_PASSENGER(car2, 1, PedM2, 2, &ped10);// Француз в костюме
-				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM1, 2, &ped11);// Француз в костюме
-				CREATE_CHAR_AS_PASSENGER(car4, 1, PedM1, 2, &ped12);// Француз в костюме
+				CREATE_CHAR_AS_PASSENGER(car1, 1, PedM2, 2, &ped9);
+				CREATE_CHAR_AS_PASSENGER(car2, 1, PedM2, 2, &ped10);
+				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM1, 2, &ped11);
+				CREATE_CHAR_AS_PASSENGER(car4, 1, PedM1, 2, &ped12);
 
 				//мопедисты
-				CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped13);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car6, 1, PedM2, &ped14);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped15);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car8, 1, PedM2, &ped16);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped13);
+				CREATE_CHAR_INSIDE_CAR(car6, 1, PedM2, &ped14);
+				CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped15);
+				CREATE_CHAR_INSIDE_CAR(car8, 1, PedM2, &ped16);
 
-				CREATE_PICKUP_ROTATE(w_grenade, 3, 10, -624.027, 856.452, 5.28738, 90.0, 0.0, 0.0, &sweap_5);// даём грену
-				CREATE_PICKUP_ROTATE(w_mp5, 3, 90, -624.034, 856.909, 5.45563, -75.0, -80.0, 0.0, &sweap_6);// даём винтовку
-				// Дать винтовку тут
+				CREATE_PICKUP_ROTATE(w_grenade, 3, 10, -624.027, 856.452, 5.28738, 90.0, 0.0, 0.0, &sweap_5);
+				CREATE_PICKUP_ROTATE(w_mp5, 3, 90, -624.034, 856.909, 5.45563, -75.0, -80.0, 0.0, &sweap_6);
+				// Дать винтовку
 
 				ADD_BLIP_FOR_CAR(car1, &car1_ico);
 				CHANGE_BLIP_SPRITE(car1_ico, BLIP_OBJECTIVE);
@@ -285,10 +257,10 @@ void phil(void)
 				CHANGE_BLIP_SCALE(car4_ico, 0.6);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(car4_ico, "MO_TARGET");
 
-				TASK_CAR_DRIVE_WANDER(ped1, car1, 20.0, 2);// пед едит куда-то
-				TASK_CAR_DRIVE_WANDER(ped2, car2, 20.0, 2);// пед едит куда-то
-				TASK_CAR_DRIVE_WANDER(ped3, car3, 20.0, 2);// пед едит куда-то
-				TASK_CAR_DRIVE_WANDER(ped4, car4, 20.0, 2);// пед едит куда-то
+				TASK_CAR_DRIVE_WANDER(ped1, car1, 20.0, 2);
+				TASK_CAR_DRIVE_WANDER(ped2, car2, 20.0, 2);
+				TASK_CAR_DRIVE_WANDER(ped3, car3, 20.0, 2);
+				TASK_CAR_DRIVE_WANDER(ped4, car4, 20.0, 2);
 
 				CLEAR_PRINTS();
 				PRINT_STRING_IN_STRING("string", "PHI1_01", 5000, 1);//~g~Go and knock the arms off the back of the dealers' trucks.
@@ -332,29 +304,29 @@ void phil(void)
 					GET_CAR_HEALTH(car3, &CarHP3);
 					GET_CAR_HEALTH(car4, &CarHP4);
 
-					GET_CAR_COORDINATES(car1, &PedX1, &PedY1, &PedZ1);//вписываем координаты игрока в переменную
-					GET_CAR_COORDINATES(car2, &PedX2, &PedY2, &PedZ2);//вписываем координаты игрока в переменную
-					GET_CAR_COORDINATES(car3, &PedX3, &PedY3, &PedZ3);//вписываем координаты игрока в переменную
-					GET_CAR_COORDINATES(car4, &PedX4, &PedY4, &PedZ4);//вписываем координаты игрока в переменную
+					GET_CAR_COORDINATES(car1, &PedX1, &PedY1, &PedZ1);
+					GET_CAR_COORDINATES(car2, &PedX2, &PedY2, &PedZ2);
+					GET_CAR_COORDINATES(car3, &PedX3, &PedY3, &PedZ3);
+					GET_CAR_COORDINATES(car4, &PedX4, &PedY4, &PedZ4);
 
 					//DISPLAY_TEXT_WITH_NUMBER(0.9203125, 0.46587074, "CP_TIME_NOZERO", HealGB_1);// 
 					//DISPLAY_TEXT_WITH_NUMBER(0.9203125, 0.57587074, "CP_TIME_NOZERO", HealGB_2);// 
 					//DISPLAY_TEXT_WITH_NUMBER(0.9203125, 0.68587074, "CP_TIME_NOZERO", HealGB_3);// 
 					//DISPLAY_TEXT_WITH_NUMBER(0.9203125, 0.79587074, "CP_TIME_NOZERO", HealGB_4);// 
 
-					// из грузовика вываливается оружие
+					// изовика вываливается
 					if (((HealGB_1 < 10) && ( add_gun1 == 0)) || ((CarHP1 < 750) && (add_gun1 == 0)))
 					{
 						if (IS_CAR_DEAD(car1))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "RBM1_10", 5000, 1);//~r~You idiot! You have destroyed the merchandise!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else
 						{
-							// Агруссия водителя тут
+							// Агруссия водителя
 							SET_CHAR_RELATIONSHIP_GROUP(ped1, 5);
 							SET_CHAR_RELATIONSHIP(ped1, 5, 0);
 							SET_SENSE_RANGE(ped1, 2000.0);
@@ -366,9 +338,9 @@ void phil(void)
 							PRINT_STRING_IN_STRING("string", "PHI1_02", 5000, 1);//~g~The arms dealer dropped his load. Smash the crate and pick up the weapon.
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							GET_GROUND_Z_FOR_3D_COORD(PedX1, PedY1, PedZ1, &PedZ1);
-							// даём оружие тут
+							// даём
 
-							CREATE_PICKUP_ROTATE(w_eagle, 3, 5, PedX1, PedY1, PedZ1+0.2, 90.0, 0.0, 0.0, &sweap_1);// даём винтовку
+							CREATE_PICKUP_ROTATE(w_eagle, 3, 5, PedX1, PedY1, PedZ1+0.2, 90.0, 0.0, 0.0, &sweap_1);
 							ADD_BLIP_FOR_PICKUP(sweap_1, &weap1_ico);
 							CHANGE_BLIP_SPRITE(weap1_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(weap1_ico, 5);
@@ -383,12 +355,12 @@ void phil(void)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "RBM1_10", 5000, 1);//~r~You idiot! You have destroyed the merchandise!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else
 						{
-							// Агруссия водителя тут
+							// Агруссия водителя
 							SET_CHAR_RELATIONSHIP_GROUP(ped2, 5);
 							SET_CHAR_RELATIONSHIP(ped2, 5, 0);
 							SET_SENSE_RANGE(ped2, 2000.0);
@@ -401,8 +373,8 @@ void phil(void)
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							GET_GROUND_Z_FOR_3D_COORD(PedX2, PedY2, PedZ2, &PedZ2);
 
-							// даём оружие тут
-							CREATE_PICKUP_ROTATE(w_pumpshot, 3, 5, PedX2, PedY2, PedZ2+0.2, 90.0, 0.0, 0.0, &sweap_2);// даём винтовку
+							// даём
+							CREATE_PICKUP_ROTATE(w_pumpshot, 3, 5, PedX2, PedY2, PedZ2+0.2, 90.0, 0.0, 0.0, &sweap_2);
 							ADD_BLIP_FOR_PICKUP(sweap_2, &weap2_ico);
 							CHANGE_BLIP_SPRITE(weap2_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(weap2_ico, 5);
@@ -417,12 +389,12 @@ void phil(void)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "RBM1_10", 5000, 1);//~r~You idiot! You have destroyed the merchandise!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else
 						{
-							// Агруссия водителя тут
+							// Агруссия водителя
 							SET_CHAR_RELATIONSHIP_GROUP(ped3, 5);
 							SET_CHAR_RELATIONSHIP(ped3, 5, 0);
 							SET_SENSE_RANGE(ped3, 2000.0);
@@ -435,8 +407,8 @@ void phil(void)
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							GET_GROUND_Z_FOR_3D_COORD(PedX3, PedY3, PedZ3, &PedZ3);
 
-							// даём оружие тут
-							CREATE_PICKUP_ROTATE(w_e2_m249, 3, 5, PedX3, PedY3, PedZ3+0.2, 90.0, 0.0, 0.0, &sweap_3);// даём винтовку
+							// даём
+							CREATE_PICKUP_ROTATE(w_e2_m249, 3, 5, PedX3, PedY3, PedZ3+0.2, 90.0, 0.0, 0.0, &sweap_3);
 							ADD_BLIP_FOR_PICKUP(sweap_3, &weap3_ico);
 							CHANGE_BLIP_SPRITE(weap3_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(weap3_ico, 5);
@@ -451,12 +423,12 @@ void phil(void)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "RBM1_10", 5000, 1);//~r~You idiot! You have destroyed the merchandise!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else
 						{
-							// Агруссия водителя тут
+							// Агруссия водителя
 							SET_CHAR_RELATIONSHIP_GROUP(ped4, 5);
 							SET_CHAR_RELATIONSHIP(ped4, 5, 0);
 							SET_SENSE_RANGE(ped4, 2000.0);
@@ -469,8 +441,8 @@ void phil(void)
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							GET_GROUND_Z_FOR_3D_COORD(PedX4, PedY4, PedZ4, &PedZ4);
 
-							// даём оружие тут
-							CREATE_PICKUP_ROTATE(w_uzi, 3, 5, PedX4, PedY4, PedZ4+0.2, 90.0, 0.0, 0.0, &sweap_4);// даём винтовку
+							// даём
+							CREATE_PICKUP_ROTATE(w_uzi, 3, 5, PedX4, PedY4, PedZ4+0.2, 90.0, 0.0, 0.0, &sweap_4);
 							ADD_BLIP_FOR_PICKUP(sweap_4, &weap4_ico);
 							CHANGE_BLIP_SPRITE(weap4_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(weap4_ico, 5);
@@ -484,7 +456,7 @@ void phil(void)
 					{
 						if (!IS_CAR_DEAD(car1))
 						{
-							// агрессия пассажиров
+							// агрессия
 							SET_CHAR_RELATIONSHIP_GROUP(ped5, 5);
 							SET_CHAR_RELATIONSHIP_GROUP(ped9, 5);
 							SET_CHAR_RELATIONSHIP(ped5, 5, 0);
@@ -494,7 +466,7 @@ void phil(void)
 							TASK_COMBAT(ped5, GetPlayerPed());
 							TASK_COMBAT(ped9, GetPlayerPed());
 
-							TASK_CAR_DRIVE_WANDER(ped1, car1, 35.0, 2);// пед едит куда-то
+							TASK_CAR_DRIVE_WANDER(ped1, car1, 35.0, 2);
 							touch1 = 1;
 							press_moped = 0;
 						}
@@ -503,7 +475,7 @@ void phil(void)
 					{
 						if (!IS_CAR_DEAD(car2))
 						{
-							// агрессия пассажиров
+							// агрессия
 							SET_CHAR_RELATIONSHIP_GROUP(ped6, 5);
 							SET_CHAR_RELATIONSHIP_GROUP(ped10, 5);
 							SET_CHAR_RELATIONSHIP(ped6, 5, 0);
@@ -513,7 +485,7 @@ void phil(void)
 							TASK_COMBAT(ped6, GetPlayerPed());
 							TASK_COMBAT(ped10, GetPlayerPed());
 
-							TASK_CAR_DRIVE_WANDER(ped2, car2, 35.0, 2);// пед едит куда-то
+							TASK_CAR_DRIVE_WANDER(ped2, car2, 35.0, 2);
 							touch2 = 1;
 							press_moped = 0;
 						}
@@ -522,7 +494,7 @@ void phil(void)
 					{
 						if (!IS_CAR_DEAD(car3))
 						{
-							// агрессия пассажиров
+							// агрессия
 							SET_CHAR_RELATIONSHIP_GROUP(ped7, 5);
 							SET_CHAR_RELATIONSHIP_GROUP(ped11, 5);
 							SET_CHAR_RELATIONSHIP(ped7, 5, 0);
@@ -532,7 +504,7 @@ void phil(void)
 							TASK_COMBAT(ped7, GetPlayerPed());
 							TASK_COMBAT(ped11, GetPlayerPed());
 
-							TASK_CAR_DRIVE_WANDER(ped3, car3, 35.0, 2);// пед едит куда-то
+							TASK_CAR_DRIVE_WANDER(ped3, car3, 35.0, 2);
 							touch3 = 1;
 						press_moped = 0;
 						}
@@ -541,7 +513,7 @@ void phil(void)
 					{
 						if (!IS_CAR_DEAD(car4))
 						{
-							// агрессия пассажиров
+							// агрессия
 							SET_CHAR_RELATIONSHIP_GROUP(ped8, 5);
 							SET_CHAR_RELATIONSHIP_GROUP(ped12, 5);
 							SET_CHAR_RELATIONSHIP(ped8, 5, 0);
@@ -551,16 +523,16 @@ void phil(void)
 							TASK_COMBAT(ped8, GetPlayerPed());
 							TASK_COMBAT(ped12, GetPlayerPed());
 
-							TASK_CAR_DRIVE_WANDER(ped4, car4, 35.0, 2);// пед едит куда-то
+							TASK_CAR_DRIVE_WANDER(ped4, car4, 35.0, 2);
 							touch4 = 1;
 							press_moped = 0;
 						}
 					}
 
-					// создание педов на мопедах
+					// создание наах
 					if (press_moped == 0)
 					{
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GENERATE_RANDOM_FLOAT_IN_RANGE(-20.0, 20.0, &PlayX);
 						GENERATE_RANDOM_FLOAT_IN_RANGE(-20.0, -95.0, &PlayY);
 						GET_OFFSET_FROM_CHAR_IN_WORLD_COORDS(GetPlayerPed(), PlayX, PlayY, 0.0, &PlayX, &PlayY, &PlayZ);
@@ -572,7 +544,7 @@ void phil(void)
 							MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
 							CREATE_CAR(CarM3, PlayX, PlayY, PlayZ, &car5, TRUE);
 							SET_CAR_HEADING(car5, PedR1-180);
-							CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped13);//создаём за рулём автомобиля
+							CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped13);
 							
 							UpdateWeaponOfPed(ped13, WEAPON_PISTOL);
 							SET_CURRENT_CHAR_WEAPON(ped13, WEAPON_PISTOL, TRUE);
@@ -589,7 +561,7 @@ void phil(void)
 							MARK_CAR_AS_NO_LONGER_NEEDED(&car6);
 							CREATE_CAR(CarM3, PlayX-2, PlayY, PlayZ, &car6, TRUE);
 							SET_CAR_HEADING(car6, PedR1-180);
-							CREATE_CHAR_INSIDE_CAR(car6, 1, PedM2, &ped14);//создаём за рулём автомобиля
+							CREATE_CHAR_INSIDE_CAR(car6, 1, PedM2, &ped14);
 
 							UpdateWeaponOfPed(ped14, WEAPON_MICRO_UZI);
 							SET_CURRENT_CHAR_WEAPON(ped14, WEAPON_MICRO_UZI, TRUE);
@@ -606,7 +578,7 @@ void phil(void)
 							MARK_CAR_AS_NO_LONGER_NEEDED(&car7);
 							CREATE_CAR(CarM3, PlayX, PlayY+2, PlayZ, &car7, TRUE);
 							SET_CAR_HEADING(car7, PedR1-180);
-							CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped15);//создаём за рулём автомобиля
+							CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped15);
 
 							UpdateWeaponOfPed(ped15, WEAPON_PISTOL);
 							SET_CURRENT_CHAR_WEAPON(ped15, WEAPON_PISTOL, TRUE);
@@ -623,7 +595,7 @@ void phil(void)
 							MARK_CAR_AS_NO_LONGER_NEEDED(&car8);
 							CREATE_CAR(CarM3, PlayX, PlayY-2, PlayZ, &car8, TRUE);
 							SET_CAR_HEADING(car8, PedR1-180);
-							CREATE_CHAR_INSIDE_CAR(car8, 1, PedM1, &ped16);//создаём за рулём автомобиля
+							CREATE_CHAR_INSIDE_CAR(car8, 1, PedM1, &ped16);
 
 							UpdateWeaponOfPed(ped16, WEAPON_DEAGLE);
 							SET_CURRENT_CHAR_WEAPON(ped16, WEAPON_DEAGLE, TRUE);
@@ -642,8 +614,8 @@ void phil(void)
 						res_moped = 1;
 					}
 
-					// респавн педов если игрок далеко либо педы мертвы
-					GET_CHAR_COORDINATES(ped13, &PedX1, &PedY1, &PedZ1);//вписываем координаты игрока в переменную
+					// респавн если игрок далеко либо педы мертвы
+					GET_CHAR_COORDINATES(ped13, &PedX1, &PedY1, &PedZ1);
 					if ((!IS_CHAR_IN_AREA_3D( GetPlayerPed(), PedX1+200, PedY1+200, PedZ1-20, PedX1-200, PedY1-200, PedZ1+100, 0 )) && (res_moped == 1))
 					{
 						press_moped = 0;
@@ -684,43 +656,43 @@ void phil(void)
 						bonus4 = 1;
 					}
 					
-					// убираем блип с оружия
+					// убираем с оружия
 					if ((HAS_PICKUP_BEEN_COLLECTED( sweap_1 )) && (add_gun1 == 1))
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "PHI1_04", 5000, 1);//~g~Now go and finish off the remaining arms dealers.
-						REMOVE_BLIP(weap1_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(weap1_ico);
 						add_gun1 = 2;
 					}
 					if ((HAS_PICKUP_BEEN_COLLECTED( sweap_2 )) && (add_gun2 == 1))
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "PHI1_04", 5000, 1);//~g~Now go and finish off the remaining arms dealers.
-						REMOVE_BLIP(weap2_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(weap2_ico);
 						add_gun2 = 2;
 					}
 					if ((HAS_PICKUP_BEEN_COLLECTED( sweap_3 )) && (add_gun3 == 1))
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "PHI1_04", 5000, 1);//~g~Now go and finish off the remaining arms dealers.
-						REMOVE_BLIP(weap3_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(weap3_ico);
 						add_gun3 = 2;
 					}
 					if ((HAS_PICKUP_BEEN_COLLECTED( sweap_4 )) && (add_gun4 == 1))
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "PHI1_04", 5000, 1);//~g~Now go and finish off the remaining arms dealers.
-						REMOVE_BLIP(weap4_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(weap4_ico);
 						add_gun4 = 2;
 					}
 
-					// убираем блип с
+					// убираем с
 					if ((IS_CAR_DEAD(car1)) && (del_blip1 == 0))
 					{
 						DETACH_OBJECT(gunbox1, 1);
 						SET_OBJECT_COORDINATES(gunbox1, 10.0, 10.0, -55.0);
 						SET_OBJECT_DYNAMIC(gunbox1, 0);
-						REMOVE_BLIP(car1_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(car1_ico);
 						del_blip1 = 1;
 					}
 					if ((IS_CAR_DEAD(car2)) && (del_blip2 == 0))
@@ -728,7 +700,7 @@ void phil(void)
 						DETACH_OBJECT(gunbox2, 1);
 						SET_OBJECT_COORDINATES(gunbox2, 10.0, 10.0, -55.0);
 						SET_OBJECT_DYNAMIC(gunbox2, 0);
-						REMOVE_BLIP(car2_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(car2_ico);
 						del_blip2 = 1;
 					}
 					if ((IS_CAR_DEAD(car3)) && (del_blip3 == 0))
@@ -736,7 +708,7 @@ void phil(void)
 						DETACH_OBJECT(gunbox3, 1);
 						SET_OBJECT_COORDINATES(gunbox3, 10.0, 10.0, -55.0);
 						SET_OBJECT_DYNAMIC(gunbox3, 0);
-						REMOVE_BLIP(car3_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(car3_ico);
 						del_blip3 = 1;
 					}
 					if ((IS_CAR_DEAD(car4)) && (del_blip4 == 0))
@@ -744,21 +716,21 @@ void phil(void)
 						DETACH_OBJECT(gunbox4, 1);
 						SET_OBJECT_COORDINATES(gunbox4, 10.0, 10.0, -55.0);
 						SET_OBJECT_DYNAMIC(gunbox4, 0);
-						REMOVE_BLIP(car4_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(car4_ico);
 						del_blip4 = 1;
 					}
 
 					// провал и выполнение миссии
 					if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((add_gun1 == 2) && (add_gun2 == 2) && (add_gun3 == 2) && (add_gun4 == 2))
 					{
 						if ((IS_CAR_DEAD(car1)) && (IS_CAR_DEAD(car2)) && (IS_CAR_DEAD(car3)) && (IS_CAR_DEAD(car4))) 
 						{
-							skip = 2;// переменная пропуска
+							skip = 2;
 							break;
 						}
 					}
@@ -766,14 +738,14 @@ void phil(void)
 				// зачещаем скрипт
 				WAIT(0);
 				SET_MAX_WANTED_LEVEL(6);
-				REMOVE_BLIP(car1_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car2_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car3_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car4_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(weap1_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(weap2_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(weap3_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(weap4_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(car1_ico);
+				REMOVE_BLIP(car2_ico);
+				REMOVE_BLIP(car3_ico);
+				REMOVE_BLIP(car4_ico);
+				REMOVE_BLIP(weap1_ico);
+				REMOVE_BLIP(weap2_ico);
+				REMOVE_BLIP(weap3_ico);
+				REMOVE_BLIP(weap4_ico);
 
 				REMOVE_PICKUP(sweap_1);// выгружаем биту
 				REMOVE_PICKUP(sweap_2);// выгружаем биту
@@ -782,7 +754,7 @@ void phil(void)
 				REMOVE_PICKUP(sweap_5);// выгружаем биту
 				REMOVE_PICKUP(sweap_6);// выгружаем биту
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
@@ -799,7 +771,7 @@ void phil(void)
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&gunbox3);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&gunbox4);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -832,12 +804,12 @@ void phil(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -852,18 +824,18 @@ void phil(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 2000);// +5000$
 						
 						WAIT( 0 );
@@ -872,10 +844,10 @@ void phil(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +2000 );
 					REGISTER_MISSION_PASSED("PHIL_1");
 					G_PHIL = 2;
-					sutosave = 1;
+					autosave = 1;
 				}
 
 				blip_on = 0;
@@ -894,17 +866,17 @@ void phil(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phil_ico, "LG_08");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -668.375, 876.086, 5.22, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -668.375, 876.086, 5.22, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -668.375, 876.086, 5.22, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -668.375, 876.086, 5.22, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(phil_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(phil_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -924,12 +896,12 @@ void phil(void)
 				uint hour, minute;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 
 				REQUEST_MODEL(PedM1);// Фил
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 
-				CLEAR_AREA(-631.575, 854.196, 5.86617, 55.0, 1);//очещаем зону загрузки
+				CLEAR_AREA(-631.575, 854.196, 5.86617, 55.0, 1);
 				CREATE_CAR(CarM1, -631.575, 854.196, 5.86617, &car1, TRUE);
 				SET_CAR_HEADING(car1, -115.0);
 
@@ -942,23 +914,23 @@ void phil(void)
 				SET_CHAR_COLLISION(ped1, 0);
 				SET_CHAR_BLEEDING(ped1, 1);
 
-				// грузим текстуры
+				//им текстуры
 				textur = LOAD_TXD( "sunshine_race" );
 				fon = GET_TEXTURE( textur, "fon_hud" );
 
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
 				RELEASE_WEATHER();
-				FORWARD_TO_TIME_OF_DAY(18, 20);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(18, 20);
 
 				//грузим анимацию
-				REQUEST_ANIMS( "amb@drunk" );//загружаем файл с анимацией
+				REQUEST_ANIMS( "amb@drunk" );
 				while (!HAVE_ANIMS_LOADED( "amb@drunk" )) WAIT(0);
 
 				FORCE_WEATHER_NOW(WEATHER_SUNNY);
 				RELEASE_WEATHER();
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "PHIL_2", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "PHIL_2", 6 );
 				START_CUTSCENE_NOW("phil_2");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -976,7 +948,7 @@ void phil(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				GET_ROOT_CAM( &camera );
 				SET_DRUNK_CAM( camera, 0.50000000, 500000 );
@@ -1001,7 +973,7 @@ void phil(void)
 				CHANGE_BLIP_SCALE(phil_ico, 0.6);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phil_ico, "NE_POINT");
 
-				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "wastedc", "amb@drunk", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "wastedc", "amb@drunk", 8.0, 1, 0, 0, 0, -1 );
 
 				PRINT_STRING_IN_STRING("string", "PHI2_01", 5000, 1);//~g~Quick, get Phil to the hospital.
 
@@ -1012,7 +984,7 @@ void phil(void)
 				while (TRUE)
 				{
 					WAIT(0);
-					// аудио тут
+					// аудио
 					if ( audio_on == 0)
 					{
 						if (TIMERC() > 7500)
@@ -1141,7 +1113,7 @@ void phil(void)
 					}
 
 
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 					GET_GROUND_Z_FOR_3D_COORD(PlayX, PlayY, PlayZ, &PedR);
 					GET_CHAR_SPEED(GetPlayerPed(), &speed);
 
@@ -1233,7 +1205,7 @@ void phil(void)
 						}
 						else if (((TIMERA() > 12000) && (bonus1 == 1)) || (bonus1 == 2))
 						{
-							DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 1000 );
 							while(true)
 							{
 								WAIT(0);
@@ -1244,13 +1216,13 @@ void phil(void)
 							}
 							bonus1 = 99;
 							SET_DRUNK_CAM( camera, 0.0, 0 );
-							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-							SET_CHAR_COORDINATES(GetPlayerPed(), PlayX, PlayY, PlayZ );// перемещаем игрока
+							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+							SET_CHAR_COORDINATES(GetPlayerPed(), PlayX, PlayY, PlayZ );
 							WAIT(500);
-							DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+							DO_SCREEN_FADE_IN( 1000 );
 							EXPLODE_CHAR_HEAD(ped1);
 							GET_TIME_OF_DAY(&hour, &minute);
-							FORWARD_TO_TIME_OF_DAY(hour+3, minute+5);//устанавливаем время
+							FORWARD_TO_TIME_OF_DAY(hour+3, minute+5);
 							//break;
 						}
 					}
@@ -1307,11 +1279,11 @@ void phil(void)
 					// Чекпойнты
 					if ( point == 1)
 					{
-						DRAW_CHECKPOINT( -438.495, 63.1979, 4.9, 2.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PedX1, &PedY1, &PedZ1);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -438.495, 63.1979, 4.9, &PlayR);//проверка "игрок на координатах"
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX1, PedY1, PedZ1, -438.495, 63.1979, 4.9, &PedR1);//проверка "игрок на координатах"
+						DRAW_CHECKPOINT( -438.495, 63.1979, 4.9, 2.5, 160, 116, 209);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PedX1, &PedY1, &PedZ1);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -438.495, 63.1979, 4.9, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX1, PedY1, PedZ1, -438.495, 63.1979, 4.9, &PedR1);
 						if (( PlayR < 2.5) && (PedR1 < 2.5))
 						{
 							//Не в больницу...
@@ -1321,7 +1293,7 @@ void phil(void)
 							START_SCRIPT_CONVERSATION(1, 1);
 							audio_on = 1;
 
-							REMOVE_BLIP(phil_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(phil_ico);
 							ADD_BLIP_FOR_COORD(-751.153, -128.764, 5.3, &phil_ico);
 							CHANGE_BLIP_SPRITE(phil_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(phil_ico, 5);
@@ -1332,17 +1304,17 @@ void phil(void)
 					}
 					else
 					{
-						DRAW_CHECKPOINT( -751.153, -128.764, 5.3, 2.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PedX1, &PedY1, &PedZ1);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -751.153, -128.764, 5.3, &PlayR);//проверка "игрок на координатах"
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX1, PedY1, PedZ1, -751.153, -128.764, 5.3, &PedR1);//проверка "игрок на координатах"
+						DRAW_CHECKPOINT( -751.153, -128.764, 5.3, 2.5, 160, 116, 209);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PedX1, &PedY1, &PedZ1);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -751.153, -128.764, 5.3, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX1, PedY1, PedZ1, -751.153, -128.764, 5.3, &PedR1);
 						if (( PlayR < 2.5) && (PedR1 < 2.5))
 						{
 
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -1358,11 +1330,11 @@ void phil(void)
 							SET_CHAR_COLLISION(ped1, 1);
 							SET_ANIM_GROUP_FOR_CHAR(ped1, "move_injured_upper");
 							
-							SET_CHAR_COORDINATES(ped1, -754.906, -130.599, 5.85832);// перемещаем игрока
+							SET_CHAR_COORDINATES(ped1, -754.906, -130.599, 5.85832);
 							SET_CHAR_HEADING(ped1, 90.0);
 							SetTime(500);
 
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							DO_SCREEN_FADE_IN( 500 );
 
 							// камера сверху
 							CREATE_CAM( 14, &camera );
@@ -1377,7 +1349,7 @@ void phil(void)
 							TASK_GO_STRAIGHT_TO_COORD(ped1, -764.689, -131.092, 5.9656, 2, -2);// идёт в двери
 							SetTime(4000);
 
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -1389,16 +1361,16 @@ void phil(void)
 
 							POINT_CAM_AT_COORD	( camera, -620.644, 851.899, 17.9063 );
 							SET_CAM_POS			( camera, -597.032, 846.256, 18.8137 );
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							DO_SCREEN_FADE_IN( 500 );
 
 							SETTIMERA(0);
 							while (true)
 							{
-								SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-								SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-								SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-								SET_TEXT_CENTRE(1); // задаём центр текста
+								SET_TEXT_COLOUR(93, 200, 252, 255);
+								SET_TEXT_SCALE(0.5, 0.7);
+								SET_TEXT_EDGE(1, 0, 0, 0, 255);
+								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+								SET_TEXT_CENTRE(1);
 								DISPLAY_TEXT(0.5, 0.45, "PHI_AS1");//PHILS PLACE ASSET COMPLETED
 								WAIT( 0 );
 								if ( TIMERA() > 5000 )
@@ -1407,14 +1379,14 @@ void phil(void)
 								}
 							}
 
-							SET_CHAR_COORDINATES(ped1, 75.676, 73.762, 6.342);// перемещаем игрока
+							SET_CHAR_COORDINATES(ped1, 75.676, 73.762, 6.342);
 							POINT_CAM_AT_COORD	( camera, -674.954, 876.103, 9.16035 );// куда смотрит камера
 							SET_CAM_POS			( camera, -671.766, 873.266, 8.46922 );// расположение камеры
 
 							PRINT_STRING_IN_STRING("string", "PHI_AS2", 5500, 1);//~g~New Weapons available to purchase from Phils Place.
 							SetTime(5000);
 
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -1425,15 +1397,15 @@ void phil(void)
 							}
 							
 
-							// убираем камеру
+							// убираем
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
 							SetTime(500);
 
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+							DO_SCREEN_FADE_IN( 500 );
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 							skip = 2;
 							break;
@@ -1446,7 +1418,7 @@ void phil(void)
 						{
 							if ( point == 1)
 							{
-								REMOVE_BLIP(phil_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(phil_ico);
 								ADD_BLIP_FOR_COORD(-438.495, 63.1979, 4.9, &phil_ico);
 								CHANGE_BLIP_SPRITE(phil_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(phil_ico, 5);
@@ -1459,7 +1431,7 @@ void phil(void)
 							}
 							else
 							{
-								REMOVE_BLIP(phil_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(phil_ico);
 								ADD_BLIP_FOR_COORD(-751.153, -128.764, 5.3, &phil_ico);
 								CHANGE_BLIP_SPRITE(phil_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(phil_ico, 5);
@@ -1476,7 +1448,7 @@ void phil(void)
 					{
 						if (start == 0)
 						{
-							REMOVE_BLIP(phil_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(phil_ico);
 							ADD_BLIP_FOR_CAR(car1, &phil_ico);
 							CHANGE_BLIP_SPRITE(phil_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(phil_ico, 19);
@@ -1503,8 +1475,8 @@ void phil(void)
 					}
 				}
 
-				// чистим скрипт тут
-				REMOVE_BLIP(phil_ico);//Удаляем иконку на радаре
+				
+				REMOVE_BLIP(phil_ico);
 				RELEASE_TEXTURE( fon );
 				REMOVE_TXD( textur );
 				SET_DRUNK_CAM( camera, 0.0, 0 );
@@ -1538,12 +1510,12 @@ void phil(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -1558,18 +1530,18 @@ void phil(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 4000);// +5000$
 						
 						WAIT( 0 );
@@ -1578,10 +1550,10 @@ void phil(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +4000 );
 					REGISTER_MISSION_PASSED("PHIL_2");
 					G_PHIL = 4;
-					sutosave = 1;
+					autosave = 1;
 				}
 				
 				G_ONMISSION = 0;
@@ -1603,16 +1575,16 @@ void phil(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(phil_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(phil_ico);
 				blip_on = 0;
 			}
 		}
 //============================== Phil Shop ======================================
 		if (G_PHIL == 5)
 		{
-			DRAW_CHECKPOINT( -672.895, 875.737, 5.58947, 0.8, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -672.895, 875.737, 5.58947, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -672.895, 875.737, 5.58947, 0.8, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -672.895, 875.737, 5.58947, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				Cam camera;
@@ -1623,9 +1595,9 @@ void phil(void)
 				help = 0;
 				int money_ped;
 
-				CLEAR_HELP(); // удаляем текст подсказки
+				CLEAR_HELP();
 				PRINT_HELP_FOREVER("NE_NAVIG"); // навигация
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 				CREATE_CAM( 14, &camera );
 				POINT_CAM_AT_COORD	( camera, -674.781, 874.688, 9.10574 );
@@ -1637,7 +1609,7 @@ void phil(void)
 				GET_GAME_CAM(&camera3);
 				CREATE_CAM( 3, &camera2 );
 				SET_CAM_INTERP_STYLE_DETAILED( camera2, 1, 1, 1, 1 );
-				SET_CAM_INTERP_STYLE_CORE( camera2, camera3, camera, 500, 0 ); //перемещение камеры от игрока на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+				SET_CAM_INTERP_STYLE_CORE( camera2, camera3, camera, 500, 0 ); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
 				SET_CAM_ACTIVE( camera2, 1 );
 				SET_CAM_PROPAGATE( camera2, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1649,7 +1621,7 @@ void phil(void)
 					{
 						if (TIMERB() > 1000)
 						{
-							CLEAR_HELP(); // удаляем текст подсказки
+							CLEAR_HELP();
 							PRINT_HELP_FOREVER("NE_NAVIG"); // навигация
 							help = 0;
 						}
@@ -1708,18 +1680,18 @@ void phil(void)
 					}
 					else if ((IS_BUTTON_PRESSED( 0, 16 )) || ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()))) //клавиатура ENTER
 					{
-						STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+						STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 						if (set_cam == 1)
 						{
 							if (money_ped >= 8000)
 							{
-								ADD_SCORE( GetPlayerIndex(), -8000 );//даём игроку денег
+								ADD_SCORE( GetPlayerIndex(), -8000 );
 								GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_RLAUNCHER, 8, FALSE);	
 								SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_RLAUNCHER, TRUE);
 							}
 							else
 							{
-								CLEAR_HELP(); // удаляем текст подсказки
+								CLEAR_HELP();
 								PRINT_HELP("NE_NOTMONEY"); // пишем недостаточно средств
 								help = 1;
 							}
@@ -1728,13 +1700,13 @@ void phil(void)
 						{
 							if (money_ped >= 8000)
 							{
-								ADD_SCORE( GetPlayerIndex(), -8000 );//даём игроку денег
+								ADD_SCORE( GetPlayerIndex(), -8000 );
 								GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_EPISODIC_14, 100, FALSE);	
 								SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_EPISODIC_14, TRUE);
 							}
 							else
 							{
-								CLEAR_HELP(); // удаляем текст подсказки
+								CLEAR_HELP();
 								PRINT_HELP("NE_NOTMONEY"); // пишем недостаточно средств
 								help = 1;
 							}
@@ -1743,13 +1715,13 @@ void phil(void)
 						{
 							if (money_ped >= 4000)
 							{
-								ADD_SCORE( GetPlayerIndex(), -4000 );//даём игроку денег
+								ADD_SCORE( GetPlayerIndex(), -4000 );
 								GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_BARETTA, 20, FALSE);		
 								SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_BARETTA, TRUE);
 							}
 							else
 							{
-								CLEAR_HELP(); // удаляем текст подсказки
+								CLEAR_HELP();
 								PRINT_HELP("NE_NOTMONEY"); // пишем недостаточно средств
 								help = 1;
 							}
@@ -1758,13 +1730,13 @@ void phil(void)
 						{
 							if (money_ped >= 600)
 							{
-								ADD_SCORE( GetPlayerIndex(), -600 );//даём игроку денег
+								ADD_SCORE( GetPlayerIndex(), -600 );
 								GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_GRENADE, 5, FALSE);	
 								SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_GRENADE, TRUE);
 							}
 							else
 							{
-								CLEAR_HELP(); // удаляем текст подсказки
+								CLEAR_HELP();
 								PRINT_HELP("NE_NOTMONEY"); // пишем недостаточно средств
 								help = 1;
 							}
@@ -1773,12 +1745,12 @@ void phil(void)
 						{
 							if (money_ped >= 200)
 							{
-								ADD_SCORE( GetPlayerIndex(), -200 );//даём игроку денег
+								ADD_SCORE( GetPlayerIndex(), -200 );
 								ADD_ARMOUR_TO_CHAR(GetPlayerPed(), 100);
 							}
 							else
 							{
-								CLEAR_HELP(); // удаляем текст подсказки
+								CLEAR_HELP();
 								PRINT_HELP("NE_NOTMONEY"); // пишем недостаточно средств
 								help = 1;
 							}
@@ -1831,22 +1803,22 @@ void phil(void)
 							POINT_CAM_AT_COORD	( camera, -674.781, 879.782, 9.10574 );
 							SET_CAM_POS			( camera, -673.585, 879.782, 9.10574 );
 						}
-						SET_CAM_INTERP_STYLE_CORE( camera2, camera2, camera, 500, 0 ); //перемещение камеры от игрока на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+						SET_CAM_INTERP_STYLE_CORE( camera2, camera2, camera, 500, 0 ); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
 						cam_on = 0;
 					}
 				}
 				ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 				DESTROY_CAM( camera );
 				DESTROY_CAM( camera2 );
-				CLEAR_HELP(); // удаляем текст подсказки
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				CLEAR_HELP();
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				while (TRUE)
 				{
 					WAIT(0);
-					DRAW_CHECKPOINT( -672.895, 875.737, 5.58947, 0.8, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -672.895, 875.737, 5.58947, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( -672.895, 875.737, 5.58947, 0.8, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -672.895, 875.737, 5.58947, &PlayR);
 					if ( PlayR > 2.5)
 					{
 						break;

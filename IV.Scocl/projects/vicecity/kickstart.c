@@ -272,7 +272,7 @@ void mission_cleanup_kickstart(void) {
 		{
 			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
@@ -281,14 +281,14 @@ void mission_cleanup_kickstart(void) {
 		{
 			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
 
 			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", add_cash);// +5000$

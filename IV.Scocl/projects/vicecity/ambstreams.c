@@ -262,24 +262,24 @@ void main(void)
 			SET_ROOM_FOR_CHAR_BY_NAME(ped14, "strip_mloroom");
 			SET_ROOM_FOR_CHAR_BY_NAME(ped15, "strip_mloroom");
 
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "sitting_proposition", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "dance_wisper_2", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped3, "sitting_proposition", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped4, "pole_dance_a", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped5, "wipe_counter", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped6, "clean_glass", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped9, "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped10, "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped11, "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped12, "lean_rail_a", "amb@strip_rail_idl", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped13, "lean_rail_d", "amb@strip_rail_idl", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped14, "lean_rail_e", "amb@strip_rail_idl", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped15, "niko_dance", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "sitting_proposition", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "dance_wisper_2", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped3, "sitting_proposition", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped4, "pole_dance_a", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped5, "wipe_counter", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped6, "clean_glass", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped9, "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped10, "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped11, "watch_lap_dance_loop", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped12, "lean_rail_a", "amb@strip_rail_idl", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped13, "lean_rail_d", "amb@strip_rail_idl", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped14, "lean_rail_e", "amb@strip_rail_idl", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped15, "niko_dance", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
 			in_int = 1;
 		}
 		else if ((!IS_CHAR_IN_AREA_3D( GetPlayerPed(), 565.987, -962.529, 3.104, 490.988, -906.258, 11.197, 0 )) && (in_int == 1))// интрерьер Стрип клуба
 		{
-			// выгружвем модели
+			
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
@@ -295,7 +295,7 @@ void main(void)
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM13);
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM14);
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM15);
-			// выгружвем педов
+			
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -311,7 +311,7 @@ void main(void)
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped15);
-			CLEAR_AREA(515.231, -914.803, 4.32348, 25.0, 1);//очещаем зону загрузки
+			CLEAR_AREA(515.231, -914.803, 4.32348, 25.0, 1);
 			in_int = 0;
 		}
 		if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 936.653, 431.187, 3.387, 886.653, 486.187, 18.387, 0 )) && (in_int2 == 0))// интрерьер клуб Малибу
@@ -363,9 +363,9 @@ void main(void)
 				WAIT(0);
 			}
 
-			REQUEST_ANIMS( "vcne_dance" );//загружаем файл с анимацией
+			REQUEST_ANIMS( "vcne_dance" );
 			while (!HAVE_ANIMS_LOADED( "vcne_dance" )) WAIT(0);
-			REQUEST_ANIMS( "missstripclub" );//загружаем файл с анимацией
+			REQUEST_ANIMS( "missstripclub" );
 			while (!HAVE_ANIMS_LOADED( "missstripclub" )) WAIT(0);
 
 			CREATE_CHAR (26, PedM1, 527.002, -870.002, 4.64608, &ped1, TRUE);// security 1
@@ -552,38 +552,38 @@ void main(void)
 			SET_ROOM_FOR_CHAR_BY_NAME(ped29, "club_mloroom");
 			SET_ROOM_FOR_CHAR_BY_NAME(ped30, "club_mloroom");
 
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped4, "wipe_counter", "missstripclub", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped5, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped6, "m_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped7, "m_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped8, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped9, "f_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped10, "m_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped11, "m_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped12, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped13, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped14, "f_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped15, "m_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped16, "m_loop_d", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped17, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped18, "m_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped19, "m_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped20, "m_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped21, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped22, "m_loop_d", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped23, "f_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped24, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped25, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped26, "f_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped27, "m_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped28, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped29, "m_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped30, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped4, "wipe_counter", "missstripclub", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped5, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped6, "m_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped7, "m_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped8, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped9, "f_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped10, "m_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped11, "m_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped12, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped13, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped14, "f_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped15, "m_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped16, "m_loop_d", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped17, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped18, "m_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped19, "m_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped20, "m_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped21, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped22, "m_loop_d", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped23, "f_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped24, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped25, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped26, "f_loop_c", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped27, "m_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped28, "f_loop_a", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped29, "m_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
+			TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped30, "f_loop_b", "vcne_dance", 8.0, 1, 0, 0, 0, -1 );
 			in_int2 = 1;
 		}
 		else if ((!IS_CHAR_IN_AREA_3D( GetPlayerPed(), 936.653, 431.187, 3.387, 886.653, 486.187, 18.387, 0 )) && (in_int2 == 1))// интрерьер клуб Малибу
 		{
-			/*/ прячим педов
+			/*/ прячим
 			SET_CHAR_COORDINATES(ped1, 11.001, 33.147, 5.6515);
 			SET_CHAR_COORDINATES(ped2, 12.047, 27.962, 5.7054);
 			SET_CHAR_COORDINATES(ped3, 19.065, 30.284, 5.6515);
@@ -615,7 +615,7 @@ void main(void)
 			SET_CHAR_COORDINATES(ped29, 18.455, 25.912, 4.76645);
 			SET_CHAR_COORDINATES(ped30, 17.215, 22.371, 4.76645);
 			//*/
-			// выгружвем модели
+			
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
@@ -629,7 +629,7 @@ void main(void)
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM11);
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM12);
 			MARK_MODEL_AS_NO_LONGER_NEEDED(PedM13);
-			// выгружвем педов
+			
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -660,7 +660,7 @@ void main(void)
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped28);
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped29);
 			MARK_CHAR_AS_NO_LONGER_NEEDED(&ped30);
-			CLEAR_AREA(910.625, 467.498, 4.35257, 18.0, 1);//очещаем зону загрузки
+			CLEAR_AREA(910.625, 467.498, 4.35257, 18.0, 1);
 			in_int2 = 0;
 		}
 
@@ -794,7 +794,7 @@ void main(void)
 								}
 								else
 								{
-									//рендом задержки тут
+									//рендом задержки
 									zombiecord ();
 									SET_CHAR_COORDINATES_NO_OFFSET(zombies[i],Tx, Ty, Tz);
 									SET_ROOM_FOR_CHAR_BY_NAME(zombies[i], "mall_mloroom");
@@ -854,7 +854,7 @@ void main(void)
 					GENERATE_RANDOM_INT_IN_RANGE(0, 25, &wait_fix);
 					if (wait_fix == 5)
 					{
-						WAIT(100);
+						WAIT(0);
 					}
 					//zombiecord ();
 					//PRINT_STRING_WITH_LITERAL_STRING_NOW("string", "ped gen", 1000, 1);

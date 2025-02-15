@@ -1,0 +1,8 @@
+/IV.Scocl/projects/vicecity/.vs
+*.log
+*.recipe
+*.lastbuildstate
+*.tlog
+/IV.Scocl/projects/vicecity/sco
+*.txt
+*.user

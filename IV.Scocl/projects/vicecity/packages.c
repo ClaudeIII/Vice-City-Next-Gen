@@ -15,7 +15,7 @@ int all_pick, part_pick, spawn;
 
 void text(void)
 {
-	ADD_SCORE( GetPlayerIndex(), +100 );//даём игроку денег
+	ADD_SCORE( GetPlayerIndex(), +100 );
 	SETTIMERA(0);
 	while (true)
 	{

@@ -5,25 +5,13 @@
 #include <consts.h>
 #include "globals.h"
 
-Pickup tweap_1, tweap_2;
-uint lawyer_n, Ammo_nan;
-uint Weap1, Weap1_2, get_Weap1, Ammo1_1, Ammo1_2;
-uint Weap2, Weap2_2, get_Weap2, Ammo2_1, Ammo2_2;
-uint Weap3, Weap3_2, get_Weap3, Ammo3_1, Ammo3_2;
-uint Weap4, Weap4_2, get_Weap4, Ammo4_1, Ammo4_2;
-uint Weap5, Weap5_2, get_Weap5, Ammo5_1, Ammo5_2;
-uint Weap6, Weap6_2, get_Weap6, Ammo6_1, Ammo6_2;
-uint Weap7, Weap7_2, get_Weap7, Ammo7_1, Ammo7_2;
-uint Weap8, Weap8_2, get_Weap8, Ammo8_1, Ammo8_2;
-uint Weap9, Weap9_2, get_Weap9, Ammo9_1, Ammo9_2;
-uint Weap0, Weap0_2, get_Weap0, Ammo0_1, Ammo0_2;
-float cop_X, cop_Y, cop_Z, cop_R;
+Pickup tweap[2];
+uint randint, Ammo_nan;
+uint Weap[20], get_Weap[10], Ammo[20];
+int i, isActivated, a[30], c[30], cur;
+float timeScale = 1.0;
 
-float playX, playY, playZ, playR, jump_ok, all_jump, speed;
-float jump_1, jump_2, jump_3, jump_4, jump_5, jump_6, jump_7, jump_8, jump_9, jump_10;
-float jump_11, jump_12, jump_13, jump_14, jump_15, jump_16, jump_17, jump_18, jump_19, jump_20;
-float jump_21, jump_22, jump_23, jump_24, jump_25, jump_26, jump_27, jump_28, jump_29, jump_30;
-float jump_31, jump_32, jump_33, jump_34, jump_35, jump_36;
+float playX, playY, playZ, playR, jump_ok, all_jump, speed, jump[36];
 
 Cam camera;
 Car car1;
@@ -31,20 +19,20 @@ Car car1;
 void text_jump(void)
 {
 	all_jump += 1;
-	ADD_SCORE(GetPlayerIndex(), (all_jump * 100));//äà¸ì èãðîêó äåíåã
+	ADD_SCORE(GetPlayerIndex(), (all_jump * 100));
 	SETTIMERA(0);
 	SET_TEXT_COLOUR(0, 180, 130, 255);
 	SET_TEXT_SCALE(0.5, 0.7);
 	SET_TEXT_EDGE(1, 0, 0, 0, 255);
 	SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
 	SET_TEXT_CENTRE(1);
-	DISPLAY_TEXT(0.5, 0.4, "JUMPING_T1");// ïèøåì "Âûïîëíåí óíèêàëüíûé ïðèæîê"
+	DISPLAY_TEXT(0.5, 0.4, "JUMPING_T1");
 	SET_TEXT_COLOUR(55, 95, 125, 255);
 	SET_TEXT_SCALE(0.45, 0.65);
 	SET_TEXT_EDGE(1, 0, 0, 0, 255);
 	SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
 	SET_TEXT_CENTRE(1);
-	DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "JUMPING_T2", (all_jump * 100));// òåêñò "íàãðàäà $~1~"
+	DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "JUMPING_T2", (all_jump * 100));
 }
 void look_jump(float cam_x, float cam_y, float cam_z)
 {
@@ -87,405 +75,404 @@ void look_jump(float cam_x, float cam_y, float cam_z)
 		text_jump();
 	}
 }
-void jump(void)
+void stuntjump(void)
 {
-	GET_CHAR_COORDINATES(GetPlayerPed(), &playX, &playY, &playZ);//âïèñûâàåì êîîðäèíàòû èãðîêà â ïåðåìåííóþ
+	GET_CHAR_COORDINATES(GetPlayerPed(), &playX, &playY, &playZ);
 	GET_CHAR_SPEED(GetPlayerPed(), &speed);
-	//DISPLAY_TEXT_WITH_NUMBER(0.9083334, 0.72787074, "CP_TIME_NOZERO", speed);// 
 
-	//===================== jump_1 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -1054.781, -511.546, 12.707, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_1 == 0))
+	//===================== jump[0] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -1054.781, -511.546, 12.707, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[0] == 0))
 	{
 		look_jump(-1088.964, -506.8505, 18.1338);
 		if (jump_ok == 1)
 		{
-			jump_1 = 1;
+			jump[0] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_2 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -919.695, -222.212, 22.673, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_2 == 0))
+	//===================== jump[1] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -919.695, -222.212, 22.673, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[1] == 0))
 	{
 		look_jump(-927.8242, -248.5606, 31.2329);
 		if (jump_ok == 1)
 		{
-			jump_2 = 1;
+			jump[1] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_3 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -783.49, -378.833, 13, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_3 == 0))
+	//===================== jump[2] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -783.49, -378.833, 13, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[2] == 0))
 	{
 		look_jump(-767.2437, -361.1972, 20.7296);
 		if (jump_ok == 1)
 		{
-			jump_3 = 1;
+			jump[2] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_4 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -819.139, -521.685, 16.016, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_4 == 0))
+	//===================== jump[3] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -819.139, -521.685, 16.016, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[3] == 0))
 	{
 		look_jump(-761.279, -494.8624, 16.979);
 		if (jump_ok == 1)
 		{
-			jump_4 = 1;
+			jump[3] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_5 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -1118.685, -542.674, 13.121, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_5 == 0))
+	//===================== jump[4] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -1118.685, -542.674, 13.121, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[4] == 0))
 	{
 		look_jump(-1087.165, -540.3603, 18.1604);
 		if (jump_ok == 1)
 		{
-			jump_5 = 1;
+			jump[4] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_6 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -1162.712, -739.881, 13.068, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_6 == 0))
+	//===================== jump[5] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -1162.712, -739.881, 13.068, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[5] == 0))
 	{
 		look_jump(-1131.454, -738.5879, 15.5915);
 		if (jump_ok == 1)
 		{
-			jump_6 = 1;
+			jump[5] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_7 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -1120.337, -697.952, 11.194, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_7 == 0))
+	//===================== jump[6] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -1120.337, -697.952, 11.194, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[6] == 0))
 	{
 		look_jump(-1157.58, -714.3733, 20.3087);
 		if (jump_ok == 1)
 		{
-			jump_7 = 1;
+			jump[6] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_8 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -907.022, -465.257, 13.115, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_8 == 0))
+	//===================== jump[7] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -907.022, -465.257, 13.115, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[7] == 0))
 	{
 		look_jump(-922.2749, -464.9999, 18.0731);
 		if (jump_ok == 1)
 		{
-			jump_8 = 1;
+			jump[7] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_9 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 457.721, 1430.801, 19.103, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_9 == 0))
+	//===================== jump[8] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 457.721, 1430.801, 19.103, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[8] == 0))
 	{
 		look_jump(433.1404, 1411.404, 14.2009);
 		if (jump_ok == 1)
 		{
-			jump_9 = 1;
+			jump[8] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_10 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 111.972, -846.4981, 4.929, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_10 == 0))
+	//===================== jump[9] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 111.972, -846.4981, 4.929, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[9] == 0))
 	{
 		look_jump(121.9503, -866.5061, 3.6779);
 		if (jump_ok == 1)
 		{
-			jump_10 = 1;
+			jump[9] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_11 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 111.972, -743.589, 4.929, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_11 == 0))
+	//===================== jump[10] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 111.972, -743.589, 4.929, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[10] == 0))
 	{
 		look_jump(118.4064, -767.2807, 3.4204);
 		if (jump_ok == 1)
 		{
-			jump_11 = 1;
+			jump[10] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_12 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -241.345, 1695.422, 23.916, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_12 == 0))
+	//===================== jump[11] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -241.345, 1695.422, 23.916, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[11] == 0))
 	{
 		look_jump(-257.7014, 1732.213, 19.0565);
 		if (jump_ok == 1)
 		{
-			jump_12 = 1;
+			jump[11] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_13 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -96.84003, 1363.062, 92.71701, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_13 == 0))
+	//===================== jump[12] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -96.84003, 1363.062, 92.71701, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[12] == 0))
 	{
 		look_jump(-110.2, 1376.4, 93.2);
 		if (jump_ok == 1)
 		{
-			jump_13 = 1;
+			jump[12] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_14 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -406.022, 1686.526, 25.94, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 18) && (jump_14 == 0))
+	//===================== jump[13] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -406.022, 1686.526, 25.94, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 18) && (jump[13] == 0))
 	{
 		look_jump(-420.7, 1705.3, 18.4);
 		if (jump_ok == 1)
 		{
-			jump_14 = 1;
+			jump[13] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_15 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 120.553, 1642.196, 41.741, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_15 == 0))
+	//===================== jump[14] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 120.553, 1642.196, 41.741, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[14] == 0))
 	{
 		look_jump(140.5, 1635.7, 34);
 		if (jump_ok == 1)
 		{
-			jump_15 = 1;
+			jump[14] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_16 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -578.583, 502.902, 9.181, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_16 == 0))
+	//===================== jump[15] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -578.583, 502.902, 9.181, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[15] == 0))
 	{
 		look_jump(-571.154, 470.0057, 9.957);
 		if (jump_ok == 1)
 		{
-			jump_16 = 1;
+			jump[15] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_17 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -509.702, 418.494, 9.181, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_17 == 0))
+	//===================== jump[16] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -509.702, 418.494, 9.181, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[16] == 0))
 	{
 		look_jump(-497.7841, 407.5568, 6.218799);
 		if (jump_ok == 1)
 		{
-			jump_17 = 1;
+			jump[16] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_18 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -467.789, 793.804, 9.915, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_18 == 0))
+	//===================== jump[17] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -467.789, 793.804, 9.915, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[17] == 0))
 	{
 		look_jump(-473.6896, 771.6933, 10.5044);
 		if (jump_ok == 1)
 		{
-			jump_18 = 1;
+			jump[17] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_19 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -608.895, -36.323, 15.855, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 14) && (jump_19 == 0))
+	//===================== jump[18] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, -608.895, -36.323, 15.855, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 14) && (jump[18] == 0))
 	{
 		look_jump(-622.6156, -55.86133, 12.1929);
 		if (jump_ok == 1)
 		{
-			jump_19 = 1;
+			jump[18] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_20 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 641.993, -430.672, 13.967, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_20 == 0))
+	//===================== jump[19] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 641.993, -430.672, 13.967, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[19] == 0))
 	{
 		look_jump(666.5752, -427.8961, 15.5283);
 		if (jump_ok == 1)
 		{
-			jump_20 = 1;
+			jump[19] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_21 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 479.115, -431.415, 19.883, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_21 == 0))
+	//===================== jump[20] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 479.115, -431.415, 19.883, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[20] == 0))
 	{
 		look_jump(496.3356, -434.6796, 22.5317);
 		if (jump_ok == 1)
 		{
-			jump_21 = 1;
+			jump[20] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_22 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 543.481, -697.6, 29.67, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_22 == 0))
+	//===================== jump[21] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 543.481, -697.6, 29.67, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[21] == 0))
 	{
 		look_jump(517.5247, -725.3891, 25.4335);
 		if (jump_ok == 1)
 		{
-			jump_22 = 1;
+			jump[21] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_23 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 440.435, -712.895, 11.752, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_23 == 0))
+	//===================== jump[22] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 440.435, -712.895, 11.752, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[22] == 0))
 	{
 		look_jump(437.1501, -741.4602, 13.7525);
 		if (jump_ok == 1)
 		{
-			jump_23 = 1;
+			jump[22] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_24 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 442.103, -793.505, 14.361, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 16) && (jump_24 == 0))
+	//===================== jump[23] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 442.103, -793.505, 14.361, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 16) && (jump[23] == 0))
 	{
 		look_jump(426.5163, -822.1759, 14.045);
 		if (jump_ok == 1)
 		{
-			jump_24 = 1;
+			jump[23] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_25 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 651.05, -619, 6.84, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_25 == 0))
+	//===================== jump[24] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 651.05, -619, 6.84, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[24] == 0))
 	{
 		look_jump(661.2427, -607.774, 8.4116);
 		if (jump_ok == 1)
 		{
-			jump_25 = 1;
+			jump[24] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_26 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 692.0561, -412.833, 6.84, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_26 == 0))
+	//===================== jump[25] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 692.0561, -412.833, 6.84, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[25] == 0))
 	{
 		look_jump(692.0202, -430.3474, 5.296);
 		if (jump_ok == 1)
 		{
-			jump_26 = 1;
+			jump[25] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_27 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 717.4732, 38.88571, 10, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_27 == 0))
+	//===================== jump[26] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 717.4732, 38.88571, 10, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[26] == 0))
 	{
 		look_jump(701.9545, 63.37839, 9.2438);
 		if (jump_ok == 1)
 		{
-			jump_27 = 1;
+			jump[26] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_28 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 803.7901, -176.863, 13.895, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_28 == 0))
+	//===================== jump[27] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 803.7901, -176.863, 13.895, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[27] == 0))
 	{
 		look_jump(794.3011, -202.6794, 17.4501);
 		if (jump_ok == 1)
 		{
-			jump_28 = 1;
+			jump[27] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_29 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 894.589, 10.77002, 12.931, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_29 == 0))
+	//===================== jump[28] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 894.589, 10.77002, 12.931, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[28] == 0))
 	{
 		look_jump(859.6391, 8.953125, 6.3656);
 		if (jump_ok == 1)
 		{
-			jump_29 = 1;
+			jump[28] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_30 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 887.1049, 28.26401, 12.931, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_30 == 0))
+	//===================== jump[29] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 887.1049, 28.26401, 12.931, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[29] == 0))
 	{
 		look_jump(889.6417, 0.9078979, 13.3283);
 		if (jump_ok == 1)
 		{
-			jump_30 = 1;
+			jump[29] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_31 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 893.91, 149.638, 8.222, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_31 == 0))
+	//===================== jump[30] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 893.91, 149.638, 8.222, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[30] == 0))
 	{
 		look_jump(895.6723, 133.1857, 12.049);
 		if (jump_ok == 1)
 		{
-			jump_31 = 1;
+			jump[30] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_32 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 692.041, 52.392, 8.688, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_32 == 0))
+	//===================== jump[31] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 692.041, 52.392, 8.688, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[31] == 0))
 	{
 		look_jump(715.5344, 53.15881, 4.4141);
 		if (jump_ok == 1)
 		{
-			jump_32 = 1;
+			jump[31] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_33 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 750.2051, 309.7988, 36.3731, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 17) && (jump_33 == 0))
+	//===================== jump[32] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 750.2051, 309.7988, 36.3731, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 17) && (jump[32] == 0))
 	{
 		look_jump(734.9448, 317.0932, 28.4501);
 		if (jump_ok == 1)
 		{
-			jump_33 = 1;
+			jump[32] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_34 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 877.5, 414.6, 10, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_34 == 0))
+	//===================== jump[33] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 877.5, 414.6, 10, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[33] == 0))
 	{
 		look_jump(849.4033, 407.3275, 7.7649);
 		if (jump_ok == 1)
 		{
-			jump_34 = 1;
+			jump[33] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_35 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 868.8542, 198.6788, 9.897701, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump_35 == 0))
+	//===================== jump[34] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 868.8542, 198.6788, 9.897701, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 19) && (jump[34] == 0))
 	{
 		look_jump(853.6179, 165.4967, 8.1343);
 		if (jump_ok == 1)
 		{
-			jump_35 = 1;
+			jump[34] = 1;
 			jump_ok = 0;
 		}
 	}
-	//===================== jump_36 =====================
-	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 86.18201, 242.259, 6.926, &playR); //
-	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 13) && (jump_36 == 0))
+	//===================== jump[35] =====================
+	GET_DISTANCE_BETWEEN_COORDS_3D(playX, playY, playZ, 86.18201, 242.259, 6.926, &playR);
+	if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (playR < 3.6) && (speed > 13) && (jump[35] == 0))
 	{
 		look_jump(115.9934, 234.211, 9.3976);
 		if (jump_ok == 1)
 		{
-			jump_36 = 1;
+			jump[35] = 1;
 			jump_ok = 0;
 		}
 	}
@@ -495,11 +482,6 @@ void jump(void)
 		G_JUMP = 1;
 	}
 }
-
-int i, isActivated;
-int c[30];
-int cur;
-float timeScale = 1.0;
 
 void ChangeLetterPos(void) {
 	isActivated = false;
@@ -644,15 +626,6 @@ void CreateCar(char* name) {
 }
 void cheats(void)
 {
-	if (ALLOW_ONE_TIME_ONLY_COMMANDS_TO_RUN)
-	{
-		isActivated = false;
-		for (i = 0; i < 30; i++)
-		{
-			c[i] = 0;
-		}
-		int a[30];
-	}
 	if (IS_PLAYER_PLAYING(GetPlayerIndex()))
 	{
 		UpdateKeys();
@@ -841,137 +814,125 @@ void cheats(void)
 	}
 }
 
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void get_weap(int ID_scan)
 {
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 1, &get_Weap1, &Ammo_nan, &Ammo_nan);
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 2, &get_Weap2, &Ammo_nan, &Ammo_nan);
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 3, &get_Weap3, &Ammo_nan, &Ammo_nan);
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 4, &get_Weap4, &Ammo_nan, &Ammo_nan);
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 5, &get_Weap5, &Ammo_nan, &Ammo_nan);
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 6, &get_Weap6, &Ammo_nan, &Ammo_nan);
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 7, &get_Weap7, &Ammo_nan, &Ammo_nan);
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 8, &get_Weap8, &Ammo_nan, &Ammo_nan);
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 9, &get_Weap9, &Ammo_nan, &Ammo_nan);
-	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 0, &get_Weap0, &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 1, &get_Weap[1], &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 2, &get_Weap[2], &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 3, &get_Weap[3], &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 4, &get_Weap[4], &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 5, &get_Weap[5], &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 6, &get_Weap[6], &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 7, &get_Weap[7], &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 8, &get_Weap[8], &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 9, &get_Weap[9], &Ammo_nan, &Ammo_nan);
+	GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 0, &get_Weap[0], &Ammo_nan, &Ammo_nan);
 
 	if (ID_scan == 1)
 	{
-		if (get_Weap1 != 0)
+		if (get_Weap[1] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 1, &Weap1, &Ammo1_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 1, &Weap[1], &Ammo[1], &Ammo_nan);
 		}
-		if (get_Weap2 != 0)
+		if (get_Weap[2] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 2, &Weap2, &Ammo2_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 2, &Weap[2], &Ammo[2], &Ammo_nan);
 		}
-		if (get_Weap3 != 0)
+		if (get_Weap[3] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 3, &Weap3, &Ammo3_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 3, &Weap[3], &Ammo[3], &Ammo_nan);
 		}
-		if (get_Weap4 != 0)
+		if (get_Weap[4] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 4, &Weap4, &Ammo4_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 4, &Weap[4], &Ammo[4], &Ammo_nan);
 		}
-		if (get_Weap5 != 0)
+		if (get_Weap[5] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 5, &Weap5, &Ammo5_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 5, &Weap[5], &Ammo[5], &Ammo_nan);
 		}
-		if (get_Weap6 != 0)
+		if (get_Weap[6] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 6, &Weap6, &Ammo6_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 6, &Weap[6], &Ammo[6], &Ammo_nan);
 		}
-		if (get_Weap7 != 0)
+		if (get_Weap[7] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 7, &Weap7, &Ammo7_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 7, &Weap[7], &Ammo[7], &Ammo_nan);
 		}
-		if (get_Weap8 != 0)
+		if (get_Weap[8] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 8, &Weap8, &Ammo8_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 8, &Weap[8], &Ammo[8], &Ammo_nan);
 		}
-		if (get_Weap9 != 0)
+		if (get_Weap[9] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 9, &Weap9, &Ammo9_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 9, &Weap[9], &Ammo[9], &Ammo_nan);
 		}
-		if (get_Weap0 != 0)
+		if (get_Weap[0] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 0, &Weap0, &Ammo0_1, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 0, &Weap[0], &Ammo[0], &Ammo_nan);
 		}
-		if (DOES_PICKUP_EXIST(tweap_1))
+		if (DOES_PICKUP_EXIST(tweap[0]))
 		{
-			REMOVE_PICKUP(tweap_1);
+			REMOVE_PICKUP(tweap[0]);
 		}
-		CREATE_PICKUP_ROTATE(vc_weap_basket, 3, 0, 527.01, 799.434, 16.5562, 0.0, 0.0, 0.0, &tweap_1);
+		CREATE_PICKUP_ROTATE(vc_weap_basket, 3, 0, 527.01, 799.434, 16.5562, 0.0, 0.0, 0.0, &tweap[0]);
 	}
-	else if ((ID_scan == 2) || (ID_scan == 3)) 
+	else if ((ID_scan == 2) || (ID_scan == 3))
 	{
-		if (get_Weap1 != 0)
+		if (get_Weap[1] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 1, &Weap1_2, &Ammo1_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 1, &Weap[11], &Ammo[11], &Ammo_nan);
 		}
-		if (get_Weap2 != 0)
+		if (get_Weap[2] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 2, &Weap2_2, &Ammo2_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 2, &Weap[12], &Ammo[12], &Ammo_nan);
 		}
-		if (get_Weap3 != 0)
+		if (get_Weap[3] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 3, &Weap3_2, &Ammo3_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 3, &Weap[13], &Ammo[13], &Ammo_nan);
 		}
-		if (get_Weap4 != 0)
+		if (get_Weap[4] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 4, &Weap4_2, &Ammo4_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 4, &Weap[14], &Ammo[14], &Ammo_nan);
 		}
-		if (get_Weap5 != 0)
+		if (get_Weap[5] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 5, &Weap5_2, &Ammo5_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 5, &Weap[15], &Ammo[15], &Ammo_nan);
 		}
-		if (get_Weap6 != 0)
+		if (get_Weap[6] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 6, &Weap6_2, &Ammo6_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 6, &Weap[16], &Ammo[16], &Ammo_nan);
 		}
-		if (get_Weap7 != 0)
+		if (get_Weap[7] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 7, &Weap7_2, &Ammo7_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 7, &Weap[17], &Ammo[17], &Ammo_nan);
 		}
-		if (get_Weap8 != 0)
+		if (get_Weap[8] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 8, &Weap8_2, &Ammo8_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 8, &Weap[18], &Ammo[18], &Ammo_nan);
 		}
-		if (get_Weap9 != 0)
+		if (get_Weap[9] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 9, &Weap9_2, &Ammo9_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 9, &Weap[19], &Ammo[19], &Ammo_nan);
 		}
-		if (get_Weap0 != 0)
+		if (get_Weap[0] != 0)
 		{
-			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 0, &Weap0_2, &Ammo0_2, &Ammo_nan);
+			GET_CHAR_WEAPON_IN_SLOT(GetPlayerPed(), 0, &Weap[10], &Ammo[10], &Ammo_nan);
 		}
 
-		if (DOES_PICKUP_EXIST(tweap_2))
+		if (DOES_PICKUP_EXIST(tweap[1]))
 		{
-			REMOVE_PICKUP(tweap_2);
+			REMOVE_PICKUP(tweap[1]);
 		}
 		if (ID_scan == 2)
 		{
-			CREATE_PICKUP_ROTATE(vc_weap_basket, 3, 0, -974.819, -294.504, 8.84402, 0.0, 0.0, -135.0, &tweap_2);
+			CREATE_PICKUP_ROTATE(vc_weap_basket, 3, 0, -974.819, -294.504, 8.84402, 0.0, 0.0, -135.0, &tweap[1]);
 		}
 		else if (ID_scan == 3)
 		{
-			CREATE_PICKUP_ROTATE(vc_weap_basket, 3, 0, -1026.69, -298.557, 8.84074, 0.0, 0.0, -40.0, &tweap_2);
+			CREATE_PICKUP_ROTATE(vc_weap_basket, 3, 0, -1026.69, -298.557, 8.84074, 0.0, 0.0, -40.0, &tweap[1]);
 		}
 	}
 	REMOVE_ALL_CHAR_WEAPONS(GetPlayerPed());
-	while (TRUE) 
+	while (TRUE)
 	{
 		WAIT(0);
 		if ((!IS_CHAR_IN_AREA_2D(GetPlayerPed(), 532.444, 800.618, 522.444, 800.962, 0)) && (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -974.18, -299.184, -974.749, -299.524, 0)) && (!IS_CHAR_IN_AREA_2D(GetPlayerPed(), -1031.328, -298.285, -1032.396, -298.624, 0)))
@@ -982,53 +943,26 @@ void get_weap(int ID_scan)
 }
 void lawyer(void)
 {
-	while (TRUE) 
-	{
-		WAIT(0);
-		if (!HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))
-		{
-			break;
-		}
-	}
-	SET_CHAR_COORDINATES(GetPlayerPed(), cop_X, cop_Y, cop_Z);
-	SET_CHAR_HEADING(GetPlayerPed(), cop_R);
+	while (HAS_CHAR_BEEN_ARRESTED) WAIT(0);
+
 	SetTime(2000);
-	GENERATE_RANDOM_INT_IN_RANGE( 1, 15, &lawyer_n);
-	if ((lawyer_n == 1) || (lawyer_n == 6) || (lawyer_n == 11))
-	{
-		NEW_SCRIPTED_CONVERSATION();
-		ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
+	GENERATE_RANDOM_INT_IN_RANGE(0, 4, &randint);
+
+	NEW_SCRIPTED_CONVERSATION();
+	ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
+
+	if (randint == 0)
 		ADD_LINE_TO_CONVERSATION(0, "R8_CA", "", 0, 0);
-		START_SCRIPT_CONVERSATION(1, 1);
-	}
-	else if ((lawyer_n == 2) || (lawyer_n == 7) || (lawyer_n == 12))
-	{
-		NEW_SCRIPTED_CONVERSATION();
-		ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
+	else if (randint == 1)
 		ADD_LINE_TO_CONVERSATION(0, "R8_DA", "", 0, 0);
-		START_SCRIPT_CONVERSATION(1, 1);
-	}
-	else if ((lawyer_n == 3) || (lawyer_n == 8) || (lawyer_n == 13))
-	{
-		NEW_SCRIPTED_CONVERSATION();
-		ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
+	else if (randint == 2)
 		ADD_LINE_TO_CONVERSATION(0, "R8_EA", "", 0, 0);
-		START_SCRIPT_CONVERSATION(1, 1);
-	}
-	else if ((lawyer_n == 4) || (lawyer_n == 9) || (lawyer_n == 14))
-	{
-		NEW_SCRIPTED_CONVERSATION();
-		ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
+	else if (randint == 3)
 		ADD_LINE_TO_CONVERSATION(0, "R8_ZA", "", 0, 0);
-		START_SCRIPT_CONVERSATION(1, 1);
-	}
-	else if ((lawyer_n == 5) || (lawyer_n == 10) || (lawyer_n == 15))
-	{
-		NEW_SCRIPTED_CONVERSATION();
-		ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
+	else
 		ADD_LINE_TO_CONVERSATION(0, "R8_A_AA", "", 0, 0);
-		START_SCRIPT_CONVERSATION(1, 1);
-	}
+
+	START_SCRIPT_CONVERSATION(1, 1);
 }
 
 float saving, text_on, X, Y, Z, R;
@@ -1039,11 +973,11 @@ void save(void)
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 1;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = -645.084;
 			Y = 246.738;
@@ -1057,7 +991,7 @@ void save(void)
 	{
 		if (text_on == 1)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
@@ -1066,11 +1000,11 @@ void save(void)
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 2;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = -595.363;
 			Y = -318.285;
@@ -1084,7 +1018,7 @@ void save(void)
 	{
 		if (text_on == 2)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
@@ -1093,11 +1027,11 @@ void save(void)
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 3;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = 346.101;
 			Y = 1464.79;
@@ -1107,16 +1041,16 @@ void save(void)
 			G_SAVE_SAVED = 3;
 		}
 	}
-	//äèâàí
+
 	else if ((IS_CHAR_IN_AREA_3D(GetPlayerPed(), 344.294, 1471.025, 4.527, 342.19, 1473.941, 8.02, 0)) && (G_ONMISSION == 0) && (G_PRON > 0) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 3;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = 341.992;
 			Y = 1471.62;
@@ -1130,7 +1064,7 @@ void save(void)
 	{
 		if (text_on == 3)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
@@ -1139,11 +1073,11 @@ void save(void)
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 4;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = -444.516;
 			Y = -45.5149;
@@ -1157,7 +1091,7 @@ void save(void)
 	{
 		if (text_on == 4)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
@@ -1166,11 +1100,11 @@ void save(void)
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 5;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = -567.321;
 			Y = 720.751;
@@ -1184,7 +1118,7 @@ void save(void)
 	{
 		if (text_on == 5)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
@@ -1193,11 +1127,11 @@ void save(void)
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 6;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = 896.001;
 			Y = 479.025;
@@ -1211,7 +1145,7 @@ void save(void)
 	{
 		if (text_on == 6)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
@@ -1220,11 +1154,11 @@ void save(void)
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 7;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = -235.225;
 			Y = -949.423;
@@ -1238,7 +1172,7 @@ void save(void)
 	{
 		if (text_on == 7)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
@@ -1247,11 +1181,11 @@ void save(void)
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 8;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = 507.606;
 			Y = -917.858;
@@ -1265,7 +1199,7 @@ void save(void)
 	{
 		if (text_on == 8)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
@@ -1345,11 +1279,11 @@ void save(void)
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 16;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = 661.254;
 			Y = -731.808;
@@ -1363,21 +1297,21 @@ void save(void)
 	{
 		if (text_on == 16)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
 	//=========================== Vercetti Mansion ===========================
-	//äèâàí 1 ýòàæ 1
+
 	if ((IS_CHAR_IN_AREA_3D(GetPlayerPed(), 29.714, -26.031, 12.711, 26.559, -24.301, 15.638, 0)) && (G_ONMISSION == 0) && (G_PROTECT > 0) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 17;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = 28.115;
 			Y = -26.2823;
@@ -1387,16 +1321,16 @@ void save(void)
 			G_SAVE_SAVED = 17;
 		}
 	}
-	//äèâàí 2 ýòàæ 1
+
 	else if ((IS_CHAR_IN_AREA_3D(GetPlayerPed(), 29.714, -30.213, 12.711, 26.559, -28.483, 15.638, 0)) && (G_ONMISSION == 0) && (G_PROTECT > 0) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 17;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = 28.0589;
 			Y = -28.1805;
@@ -1406,16 +1340,16 @@ void save(void)
 			G_SAVE_SAVED = 17;
 		}
 	}
-	//äèâàí 3 ýòàæ 2
+
 	else if ((IS_CHAR_IN_AREA_3D(GetPlayerPed(), 62.09, -60.884, 19.687, 59.834, -58.636, 24.098, 0)) && (G_ONMISSION == 0) && (G_PROTECT > 0) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 17;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = 60.0189;
 			Y = -58.3347;
@@ -1425,16 +1359,16 @@ void save(void)
 			G_SAVE_SAVED = 17;
 		}
 	}
-	//äèâàí 4 ýòàæ 2
+
 	else if ((IS_CHAR_IN_AREA_3D(GetPlayerPed(), 48.989, -62.33, 19.687, 46.732, -59.231, 24.098, 0)) && (G_ONMISSION == 0) && (G_PROTECT > 0) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 	{
 		if (text_on == 0)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			PRINT_HELP("NESAVINGHELP"); // Press the ~INPUT_PHONE_ACCEPT~ button to save the game.
 			text_on = 17;
 		}
-		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))//ïðîâåðêà íàæàòà-ëè êëàâèøà "Äëÿ ïîêóïêè".
+		if ((IS_CONTROL_PRESSED(2, 181)) && (!IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED(0, 16)))
 		{
 			X = 49.0995;
 			Y = -59.0782;
@@ -1448,7 +1382,7 @@ void save(void)
 	{
 		if (text_on == 17)
 		{
-			CLEAR_HELP(); // óäàëÿåì òåêñò ïîäñêàçêè
+			CLEAR_HELP();
 			text_on = 0;
 		}
 	}
@@ -1492,7 +1426,10 @@ void InitScriptLauncher(void)
 	CreateScript("HAITI");
 	CreateScript("ICECREAM");
 	CreateScript("KAUFMAN");
-	CreateScript("LAWYER");
+	//if (!G_LAWYER == 5)
+	//{
+		CreateScript("LAWYER");
+	//}
 	CreateScript("MALIBU");
 	CreateScript("map_bounds");
 	CreateScript("mob_phone");
@@ -1599,7 +1536,7 @@ void main(void)
 	ADD_HOSPITAL_RESTART(320.068, -433.964, 4.70675, -85, 0); // Ocean Beach
 	ADD_HOSPITAL_RESTART(925.961, 1235.05, 6.33435, 80, 0); // Vice Point
 
-	SPECIFY_SCRIPT_POPULATION_ZONE_NUM_PEDS(100); 
+	SPECIFY_SCRIPT_POPULATION_ZONE_NUM_PEDS(100);
 	SPECIFY_SCRIPT_POPULATION_ZONE_NUM_SCENARIO_PEDS(100);
 	ACTIVATE_SCRIPT_POPULATION_ZONE();
 
@@ -1623,12 +1560,11 @@ void main(void)
 	ENABLE_SAVE_HOUSE(0, TRUE);
 
 	CreateScript("intro");
-	DO_SCREEN_FADE_IN_UNHACKED(0);
 
-	while (TRUE) 
+	while (TRUE)
 	{
 		WAIT(0);
-		jump();
+		stuntjump();
 		cheats();
 		save();
 		if (ALLOW_ONE_TIME_ONLY_COMMANDS_TO_RUN)
@@ -1641,62 +1577,59 @@ void main(void)
 		if (IS_CHAR_IN_AREA_3D(GetPlayerPed(), -1031.328, -298.285, 8.415, -1032.396, -298.624, 13.73, 0))
 			get_weap(3);
 
-		if (HAS_PICKUP_BEEN_COLLECTED( tweap_1 ))
+		if (HAS_PICKUP_BEEN_COLLECTED(tweap[0]))
 		{
-			UpdateWeaponOfPed(GetPlayerPed(), Weap1);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap3);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap4);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap5);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap6);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap7);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap8);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap9);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap0);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap1, Ammo1_1);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap2, Ammo2_1);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap3, Ammo3_1);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap4, Ammo4_1);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap5, Ammo5_1);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap6, Ammo6_1);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap7, Ammo7_1);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap8, Ammo8_1);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap9, Ammo9_1);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap0, Ammo0_1);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[1]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[2]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[3]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[4]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[5]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[6]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[7]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[8]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[9]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[0]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[1], Ammo[1]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[2], Ammo[2]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[3], Ammo[3]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[4], Ammo[4]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[5], Ammo[5]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[6], Ammo[6]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[7], Ammo[7]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[8], Ammo[8]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[9], Ammo[9]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[0], Ammo[0]);
 		}
-		if (HAS_PICKUP_BEEN_COLLECTED( tweap_2 ))
+		if (HAS_PICKUP_BEEN_COLLECTED(tweap[1]))
 		{
-			UpdateWeaponOfPed(GetPlayerPed(), Weap1_2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap2_2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap3_2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap4_2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap5_2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap6_2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap7_2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap8_2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap9_2);
-			UpdateWeaponOfPed(GetPlayerPed(), Weap0_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap1_2, Ammo1_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap2_2, Ammo2_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap3_2, Ammo3_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap4_2, Ammo4_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap5_2, Ammo5_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap6_2, Ammo6_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap7_2, Ammo7_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap8_2, Ammo8_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap9_2, Ammo9_2);
-			SET_CHAR_AMMO(GetPlayerPed(), Weap0_2, Ammo0_2);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[11]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[12]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[13]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[14]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[15]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[16]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[17]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[18]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[19]);
+			UpdateWeaponOfPed(GetPlayerPed(), Weap[10]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[11], Ammo[11]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[12], Ammo[12]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[13], Ammo[13]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[14], Ammo[14]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[15], Ammo[15]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[16], Ammo[16]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[17], Ammo[17]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[18], Ammo[18]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[19], Ammo[19]);
+			SET_CHAR_AMMO(GetPlayerPed(), Weap[10], Ammo[10]);
 		}
 
 		if (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))
-		{
 			lawyer();
-		}
 
 		GET_INTERIOR_FROM_CHAR(GetPlayerPed(), &intHash);
-		//DISPLAY_TEXT_WITH_2_NUMBERS(0.2, 0.2, "CAMTEST", intHash, ROUND(vol));
 		if (intHash == 514)// MALIBU_CLUB
-		{	
+		{
 			if (isPlaying == 0)
 			{
 				GENERATE_RANDOM_INT_IN_RANGE(0, 550000, &startOffset);
@@ -1704,7 +1637,7 @@ void main(void)
 				{
 					WAIT(0);
 				}
-				PLAY_STREAM_FRONTEND();	
+				PLAY_STREAM_FRONTEND();
 				SET_STREAM_PARAMS(0.0, 15000);
 				isPlaying = 1;
 				isVolChanged = 1;
@@ -1712,7 +1645,7 @@ void main(void)
 			inInterior = 1;
 		}
 		else if (intHash == 258) // MALL
-		{	
+		{
 			if (isPlaying == 0)
 			{
 				GENERATE_RANDOM_INT_IN_RANGE(0, 200000, &startOffset);
@@ -1720,7 +1653,7 @@ void main(void)
 				{
 					WAIT(0);
 				}
-				PLAY_STREAM_FRONTEND();	
+				PLAY_STREAM_FRONTEND();
 				SET_STREAM_PARAMS(0.0, 15000);
 				isPlaying = 1;
 				isVolChanged = 1;
@@ -1728,7 +1661,7 @@ void main(void)
 			inInterior = 1;
 		}
 		else if (intHash == 1026)// HOTEL
-		{	
+		{
 			if (isPlaying == 0)
 			{
 				GENERATE_RANDOM_INT_IN_RANGE(0, 450000, &startOffset);
@@ -1736,7 +1669,7 @@ void main(void)
 				{
 					WAIT(0);
 				}
-				PLAY_STREAM_FRONTEND();	
+				PLAY_STREAM_FRONTEND();
 				SET_STREAM_PARAMS(0.0, 15000);
 				isPlaying = 1;
 				isVolChanged = 1;
@@ -1744,7 +1677,7 @@ void main(void)
 			inInterior = 1;
 		}
 		else if (intHash == 1282)// STRIP
-		{	
+		{
 			if (isPlaying == 0)
 			{
 				GENERATE_RANDOM_INT_IN_RANGE(0, 650000, &startOffset);
@@ -1752,7 +1685,7 @@ void main(void)
 				{
 					WAIT(0);
 				}
-				PLAY_STREAM_FRONTEND();	
+				PLAY_STREAM_FRONTEND();
 				SET_STREAM_PARAMS(0.0, 15000);
 				isPlaying = 1;
 				isVolChanged = 1;
@@ -1777,7 +1710,7 @@ void main(void)
 		{
 			if (isVolChanged == 1)
 			{
-				vol += delta*1.5;
+				vol += delta * 1.5;
 				SET_STREAM_PARAMS(vol, 15000);
 				if (vol > 15.1)
 				{
@@ -1790,7 +1723,7 @@ void main(void)
 		{
 			if (isPlaying == 1)
 			{
-				vol -= delta*3;
+				vol -= delta * 3;
 				SET_STREAM_PARAMS(vol, 15000);
 				if (vol <= 0.0)
 				{

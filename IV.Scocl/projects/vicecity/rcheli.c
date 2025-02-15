@@ -23,18 +23,6 @@ void setup_draw_value(void) {
 	SET_TEXT_DROPSHADOW(1, 26, 90, 128, 255);
 	return;
 }
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void rc_raider(void)
 {
 	Car car0, car1, goblin;
@@ -47,7 +35,7 @@ void rc_raider(void)
 	textur = LOAD_TXD( "sunshine_race" );
 	fon = GET_TEXTURE( textur, "fon_hud" );
 
-	DO_SCREEN_FADE_OUT( 250 );// Затемняем экран
+	DO_SCREEN_FADE_OUT( 250 );
 	while(true)
 	{
 		WAIT(0);
@@ -56,25 +44,25 @@ void rc_raider(void)
 			break;
 		}
 	}
-	SET_POLICE_IGNORE_PLAYER(GetPlayerIndex(), 1);// Игрока игнорируют копы
+	SET_POLICE_IGNORE_PLAYER(GetPlayerIndex(), 1);// игнорируют копы
 	SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 1);// Игрок бессмертный
-	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
-	GET_CAR_CHAR_IS_USING(GetPlayerPed(), &car0);//получаем автомобиль
+	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
+	GET_CAR_CHAR_IS_USING(GetPlayerPed(), &car0);//получаем
 	SET_ENGINE_HEALTH(car0, 900);
 	SET_CAR_COORDINATES_NO_OFFSET(car0, -800.605, -700.893, 9.668);
 	SET_CAR_HEADING(car0, -18.916);
 
-	//создаём вертолёт
+	
 	check_cord = 1;
 	uint CarM1 = MODEL_TOURMAV;
 	REQUEST_MODEL(CarM1);
-	while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+	while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 	CREATE_CAR(CarM1, -803.77, -700.257, 9.22, &goblin, TRUE);
 	SET_CAR_HEADING(goblin, -18.916);
 	SET_CAR_LIVERY(goblin, 1);
 	FREEZE_CAR_POSITION(goblin, 1);
 
-	//выставляем камеру
+	//выставляем
 	CREATE_CAM( 14, &camera );
 	POINT_CAM_AT_COORD	( camera, -802.531, -700.031, 9.468 );
 	SET_CAM_POS			( camera, -798.093, -694.052, 12.573 );
@@ -83,27 +71,27 @@ void rc_raider(void)
 	ACTIVATE_SCRIPTED_CAMS(1, 1);
 	SET_CAM_FOV( camera, 45.0 );
 	SET_WIDESCREEN_BORDERS( 1 );
-	DO_SCREEN_FADE_IN( 250 );// убирается затемнение экрана
+	DO_SCREEN_FADE_IN( 250 );
 
-	//воспроизводим анимацию ухода в заднию чать фургона
-	REQUEST_ANIMS( "ne_topfun" );//загружаем файл с анимацией
+	//воспроизводим анимацию ухода в заднию чатьа
+	REQUEST_ANIMS( "ne_topfun" );
 	while (!HAVE_ANIMS_LOADED( "ne_topfun" )) WAIT(0);
 	SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_UNARMED, TRUE);
-	TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_out", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car0);//выгружаем из памяти фургон
+	TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_out", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car0);//выгружаем из памяти
 	
-	//пояснения текстом в низу экрана здесь
+	//пояснения текстом в низу здесь
 	PRINT_STRING_IN_STRING_NOW("string", "RCH1_6", 5000, 1);//~g~Use the RC Helicopter to collect checkpoints scattered throughout the airport.
 	SetTime(2000);
 
-	SET_CHAR_VISIBLE(GetPlayerPed(), 0); //прозрачный игрок
-	TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), goblin, TRUE);//садим игрока в верталёт
+	SET_CHAR_VISIBLE(GetPlayerPed(), 0);
+	TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), goblin, TRUE);
 	SetTime(3000);
 
 	uint CarM2 = MODEL_SPEEDO;
 	REQUEST_MODEL(CarM2);
-	while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
-	CLEAR_AREA( -800.605, -700.893, 9.468, 6.0, 1);//очещаем зону загрузки
+	while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
+	CLEAR_AREA( -800.605, -700.893, 9.468, 6.0, 1);
 	CREATE_CAR(CarM2, -800.605, -700.893, 9.468, &car1, TRUE);
 	SET_CAR_HEADING(car1, -18.916);
 	SET_CAR_LIVERY(car1, 1);
@@ -139,20 +127,20 @@ void rc_raider(void)
 	PRINT_STRING_IN_STRING_NOW("string", "RCH1_7", 5000, 1);//~g~There are 20 checkpoints in total.
 	SetTime(5000);
 
-	//выставляем камеру на верталёт
+	//выставляем на
 	POINT_CAM_AT_COORD	( camera, -803.77, -700.257, 9.22 );
 	SET_CAM_POS			( camera, -806.224, -695.017, 11.192 );
 	PRINT_STRING_IN_STRING_NOW("string", "RCH1_8", 5000, 1);//~g~If you wish to quit this mission press the ~h~~k~~PAD_LB~ ~g~button to detonate your RC Helicopter.
 	SetTime(5000);
 
-	//убираем камеру
+	
 	SET_CAM_BEHIND_PED( GetPlayerPed() );
 	ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 	END_CAM_COMMANDS( &camera );
 	SET_WIDESCREEN_BORDERS( 0 );
 	SET_FOLLOW_VEHICLE_CAM_SUBMODE(2);
 	SetTime(1000);
-	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//замараживаем игрока
+	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//замараживаем
 	FREEZE_CAR_POSITION(goblin, 0);
 	//
 
@@ -162,7 +150,7 @@ void rc_raider(void)
 		WAIT(0);
 		SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 1);
 
-		//таймер тут
+		//таймер
 		if (TIMERB() > 999)
 		{
 			time_s += 1;
@@ -222,7 +210,7 @@ void rc_raider(void)
 		setup_draw_value();
 		DISPLAY_TEXT_WITH_NUMBER(0.9203125, 0.72787074, "OUTOF_NUM", 20);// 
 
-		if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) || (GET_ENGINE_HEALTH(goblin) < 200) || (IS_CAR_IN_WATER(goblin)))//если игрок покинул или унечтожел вертолёт, тогда провал миссии
+		if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) || (GET_ENGINE_HEALTH(goblin) < 200) || (IS_CAR_IN_WATER(goblin)))//если игрок покинул или унечтожел, тогда провал миссии
 		{
 			PRINT_STRING_IN_STRING_NOW("string", "WRECKED", 7000, 1);//~r~The vehicle is wrecked!
 			EXPLODE_CAR(goblin, 1, 1);
@@ -246,13 +234,13 @@ void rc_raider(void)
 		}
 		else if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), -1461.723, -952.569, -15.613, -642.161, -133.007, 265.737, 0 )) && (zone == 0))
 		{
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 			zone = 1;
 		}
 
-		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, checkX, checkY, checkZ, &PlayR);//проверка "игрок на координатах"
-		//чекпойнты тут:
+		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, checkX, checkY, checkZ, &PlayR);
+		//чекпойнты:
 		if (PlayR < 3.1)
 		{
 			check_cord +=1;
@@ -444,8 +432,8 @@ void rc_raider(void)
 			
 			if (check_cord == 20)
 			{
-				REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
-				REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
+				REMOVE_BLIP(Blip_r);
+				REMOVE_BLIP(Blip_r2);
 				DELETE_CHECKPOINT(checkpoint);
 				checkpoint = CREATE_CHECKPOINT( 5, checkX, checkY, checkZ, checkX2, checkY2, checkZ2, 0.20000000 );
 				ADD_BLIP_FOR_COORD(checkX, checkY, checkZ, &Blip_r);
@@ -456,8 +444,8 @@ void rc_raider(void)
 			}
 			else
 			{
-				REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
-				REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
+				REMOVE_BLIP(Blip_r);
+				REMOVE_BLIP(Blip_r2);
 				DELETE_CHECKPOINT(checkpoint);
 				checkpoint = CREATE_CHECKPOINT( 4, checkX, checkY, checkZ, checkX2, checkY2, checkZ2, 0.20000000 );
 				ADD_BLIP_FOR_COORD(checkX, checkY, checkZ, &Blip_r);
@@ -475,14 +463,14 @@ void rc_raider(void)
 			}
 		}
 	}
-	CLEAR_HELP(); // удаляем текст подсказки
-	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+	CLEAR_HELP();
+	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 
-	REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
-	REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
+	REMOVE_BLIP(Blip_r);
+	REMOVE_BLIP(Blip_r2);
 	DELETE_CHECKPOINT(checkpoint);
 	
-	//выставляем камеру на фургон
+	//выставляем на
 	CREATE_CAM( 14, &camera );
 	POINT_CAM_AT_COORD	( camera, -800.605, -700.893, 8.468 );
 	SET_CAM_POS			( camera, -800.398, -688.654, 12.657 );
@@ -494,16 +482,16 @@ void rc_raider(void)
 	WARP_CHAR_INTO_CAR(GetPlayerPed(), car1);
 	SetTime(1500);
 
-	//воспроизводим анимацию выхода из задней чати фургона
-	REQUEST_ANIMS( "ne_topfun" );//загружаем файл с анимацией
+	//воспроизводим анимацию выхода из задней чатиа
+	REQUEST_ANIMS( "ne_topfun" );
 	while (!HAVE_ANIMS_LOADED( "ne_topfun" )) WAIT(0);
-	TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_in", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+	TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_in", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );
 	SetTime(500);
 	TURN_OFF_VEHICLE_EXTRA( car1, 9, 1 );//открываем ширку
-	SET_CHAR_VISIBLE(GetPlayerPed(), 1); //прозрачный игрок
+	SET_CHAR_VISIBLE(GetPlayerPed(), 1);
 	SetTime(1000);
 
-	SET_POLICE_IGNORE_PLAYER(GetPlayerIndex(), 0);// Игрока игнорируют копы
+	SET_POLICE_IGNORE_PLAYER(GetPlayerIndex(), 0);// игнорируют копы
 	SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// Игрок бессмертный
 	SET_CAR_COORDINATES_NO_OFFSET(goblin, 0.9, 0.9, 0.9);
 	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
@@ -516,12 +504,12 @@ void rc_raider(void)
 	ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 	END_CAM_COMMANDS( &camera );
 	SET_WIDESCREEN_BORDERS( 0 );
-	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//замараживаем игрока
+	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//замараживаем
 }
 
 void main(void)
 {
-	CLEAR_HELP(); // удаляем текст подсказки
+	CLEAR_HELP();
 	LOAD_ADDITIONAL_TEXT("RCHELI1", 6);
 	rc_raider();
 
@@ -530,12 +518,12 @@ void main(void)
 		SETTIMERA(0);
 		while (true)
 		{
-			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-			SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-			SET_TEXT_CENTRE(1); // задаём центр текста
-			DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+			SET_TEXT_COLOUR(255, 159, 255, 255);
+			SET_TEXT_SCALE(0.5, 0.6);
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
+			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+			SET_TEXT_CENTRE(1);
+			DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 			WAIT( 0 );
 			if ( TIMERA() > 3000 )
@@ -550,18 +538,18 @@ void main(void)
 		TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 		while (true)
 		{
-			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-			SET_TEXT_CENTRE(1); // задаём центр текста
-			DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+			SET_TEXT_COLOUR(255, 159, 255, 255);
+			SET_TEXT_SCALE(0.5, 0.7);
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
+			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+			SET_TEXT_CENTRE(1);
+			DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-			SET_TEXT_CENTRE(1); // задаём центр текста
+			SET_TEXT_COLOUR(255, 159, 255, 255);
+			SET_TEXT_SCALE(0.5, 0.7);
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
+			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+			SET_TEXT_CENTRE(1);
 			DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 100);// +5000$
 			
 			WAIT( 0 );
@@ -576,7 +564,7 @@ void main(void)
 		} else {
 			PRINT_WITH_2_NUMBERS_NOW("RCH1_10", time_m, time_s, 7000, 1);
 		}
-		ADD_SCORE( GetPlayerIndex(), +100 );//даём игроку денег
+		ADD_SCORE( GetPlayerIndex(), +100 );
 	}
 	TERMINATE_THIS_SCRIPT();
 }

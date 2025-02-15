@@ -21,86 +21,89 @@
 #define AMMO_MAX 30000
 #define INVALID_HANDLE 0
 
-#define KEY_Q 16
-#define KEY_W 17
-#define KEY_E 18
-#define KEY_R 19
-#define KEY_T 20
-#define KEY_Y 21
-#define KEY_U 22
-#define KEY_I 23
-#define KEY_O 34
-#define KEY_P 25
-#define KEY_A 30
-#define KEY_S 31
-#define KEY_D 32
-#define KEY_F 33
-#define KEY_G 34
-#define KEY_H 35
-#define KEY_J 36
-#define KEY_K 37
-#define KEY_L 38
-#define KEY_Z 44
-#define KEY_X 45
-#define KEY_C 46
-#define KEY_V 47
-#define KEY_B 48
-#define KEY_N 49
-#define KEY_M 50
-#define KEY_0 11
-#define KEY_1 2
-#define KEY_2 3
-#define KEY_3 4
-#define KEY_4 5
-#define KEY_5 6
-#define KEY_6 7
-#define KEY_7 8
-#define KEY_8 9
-#define KEY_9 10
-#define KEY_ENTER 28
-#define KEY_ESC 1
-#define KEY_BACKSPACE 14
-#define KEY_MINUS 12
-#define KEY_EQUAL 13
-#define KEY_TAB 15
-#define KEY_CAPS_LOCK 58
-#define KEY_SHIFT 42
-#define KEY_CTRL 29
-#define KEY_ALT 56
-#define KEY_SPACE 57
-#define KEY_SQUARE_BRACKET_RIGHT 27
-#define KEY_SQUARE_BRACKET_LEFT 26
-#define KEY_SEMI_COLON 39
-#define KEY_COMMA 51
-#define KEY_PERIOD 52
-#define KEY_F1 59
-#define KEY_F2 60
-#define KEY_F3 61
-#define KEY_F4 62
-#define KEY_F5 63
-#define KEY_F6 64
-#define KEY_F7 65
-#define KEY_F8 66
-#define KEY_F9 67
-#define KEY_F10 68
-#define KEY_F11 87
-#define KEY_F12 88
-#define KEY_SCROLL_LOCK 70
-#define KEY_NUMLOCK 69
-#define KEY_ASTERISK 55
-#define KEY_NUMLOCK_1 79
-#define KEY_NUMLOCK_2 80
-#define KEY_NUMLOCK_3 81
-#define KEY_NUMLOCK_4 75
-#define KEY_NUMLOCK_5 76
-#define KEY_NUMLOCK_6 77
-#define KEY_NUMLOCK_7 71
-#define KEY_NUMLOCK_8 72
-#define KEY_NUMLOCK_9 73
-#define KEY_NUMLOCK_PLUS 78
-#define KEY_NUMLOCK_MINUS 74
-#define KEY_NUMLOCK_0 82
-
+enum eKeyboardKey
+{
+    KEY_ESC = 1,
+    KEY_1 = 2,
+    KEY_2 = 3,
+    KEY_3 = 4,
+    KEY_4 = 5,
+    KEY_5 = 6,
+    KEY_6 = 7,
+    KEY_7 = 8,
+    KEY_8 = 9,
+    KEY_9 = 10,
+    KEY_0 = 11,
+    KEY_MINUS = 12,
+    KEY_EQUAL = 13,
+    KEY_BACKSPACE = 14,
+    KEY_TAB = 15,
+    KEY_Q = 16,
+    KEY_W = 17,
+    KEY_E = 18,
+    KEY_R = 19,
+    KEY_T = 20,
+    KEY_Y = 21,
+    KEY_U = 22,
+    KEY_I = 23,
+    KEY_O = 24,
+    KEY_P = 25,
+    KEY_SQUARE_BRACKET_LEFT = 26,
+    KEY_SQUARE_BRACKET_RIGHT = 27,
+    KEY_ENTER = 28,
+    KEY_CTRL = 29,
+    KEY_A = 30,
+    KEY_S = 31,
+    KEY_D = 32,
+    KEY_F = 33,
+    KEY_G = 34,
+    KEY_H = 35,
+    KEY_J = 36,
+    KEY_K = 37,
+    KEY_L = 38,
+    KEY_SEMI_COLON = 39,
+    KEY_SHIFT = 42,
+    KEY_Z = 44,
+    KEY_X = 45,
+    KEY_C = 46,
+    KEY_V = 47,
+    KEY_B = 48,
+    KEY_N = 49,
+    KEY_M = 50,
+    KEY_COMMA = 51,
+    KEY_PERIOD = 52,
+    KEY_ASTERISK = 55,
+    KEY_ALT = 56,
+    KEY_SPACE = 57,
+    KEY_CAPS_LOCK = 58,
+    KEY_F1 = 59,
+    KEY_F2 = 60,
+    KEY_F3 = 61,
+    KEY_F4 = 62,
+    KEY_F5 = 63,
+    KEY_F6 = 64,
+    KEY_F7 = 65,
+    KEY_F8 = 66,
+    KEY_F9 = 67,
+    KEY_F10 = 68,
+    KEY_NUMLOCK = 69,
+    KEY_SCROLL_LOCK = 70,
+    KEY_NUMLOCK_7 = 71,
+    KEY_NUMLOCK_8 = 72,
+    KEY_NUMLOCK_9 = 73,
+    KEY_NUMLOCK_MINUS = 74,
+    KEY_NUMLOCK_4 = 75,
+    KEY_NUMLOCK_5 = 76,
+    KEY_NUMLOCK_6 = 77,
+    KEY_NUMLOCK_PLUS = 78,
+    KEY_NUMLOCK_1 = 79,
+    KEY_NUMLOCK_2 = 80,
+    KEY_NUMLOCK_3 = 81,
+    KEY_NUMLOCK_0 = 82,
+    KEY_F11 = 87,
+    KEY_F12 = 88
+};
+   
 enum eWeapon
 {
     WEAPON_UNARMED,
@@ -2704,7 +2707,6 @@ enum eAnimationFlags
     ANIMATION_FLAG_UNKNOWN12 = 0x800
 };
 
-
 enum eBlipColor
 {
     BLIP_COLOR_WHITE,
@@ -2894,46 +2896,46 @@ enum eExplosionType
 
 enum eGameKey
 {
-    GAME_KEY_ACTION = 0x17,
-    GAME_KEY_AIM = 0x57,
-    GAME_KEY_ATTACK = 4,
-    GAME_KEY_CROUCH = 20,
-    GAME_KEY_ENTER_CAR = 3,
-    GAME_KEY_ESC = 0x3D,
+    GAME_KEY_SPRINT = 1,
     GAME_KEY_JUMP = 2,
-    GAME_KEY_LAST_WEAPON = 9,
+    GAME_KEY_ENTER_CAR = 3,
+    GAME_KEY_ATTACK = 4,
     GAME_KEY_LOOK_BEHIND = 7,
-    GAME_KEY_MOVE_BACKWARD = 0x443,
-    GAME_KEY_MOVE_FORWARD = 0x442,
-    GAME_KEY_MOVE_LEFT = 0x444,
-    GAME_KEY_MOVE_RIGHT = 0x445,
-    GAME_KEY_NAV_BACK = 0x4E,
-    GAME_KEY_NAV_DOWN = 0x40,
-    GAME_KEY_NAV_ENTER = 0x4D,
-    GAME_KEY_NAV_LEAVE = 0x4C,
-    GAME_KEY_NAV_LEFT = 0x42,
-    GAME_KEY_NAV_RIGHT = 0x43,
-    GAME_KEY_NAV_UP = 0x41,
     GAME_KEY_NEXT_WEAPON = 8,
-    GAME_KEY_PHONE = 0x15,
-    GAME_KEY_RADAR_ZOOM = 0x56,
-    GAME_KEY_RELOAD = 0x1D,
-    GAME_KEY_SEEK_COVER = 0x1C,
-    GAME_KEY_SOUND_HORN = 0x36,
-    GAME_KEY_SPRINT = 1
+    GAME_KEY_LAST_WEAPON = 9,
+    GAME_KEY_CROUCH = 20,
+    GAME_KEY_PHONE = 21,
+    GAME_KEY_ACTION = 23,
+    GAME_KEY_SEEK_COVER = 28,
+    GAME_KEY_RELOAD = 29,
+    GAME_KEY_SOUND_HORN = 54,
+    GAME_KEY_ESC = 61,
+    GAME_KEY_NAV_DOWN = 64,
+    GAME_KEY_NAV_UP = 65,
+    GAME_KEY_NAV_LEFT = 66,
+    GAME_KEY_NAV_RIGHT = 67,
+    GAME_KEY_NAV_LEAVE = 76,
+    GAME_KEY_NAV_ENTER = 77,
+    GAME_KEY_NAV_BACK = 78,
+    GAME_KEY_AIM = 87,
+    GAME_KEY_RADAR_ZOOM = 86,
+    GAME_KEY_MOVE_FORWARD = 1090,
+    GAME_KEY_MOVE_BACKWARD = 1091,
+    GAME_KEY_MOVE_LEFT = 1092,
+    GAME_KEY_MOVE_RIGHT = 1093
 };
 
 enum eGameKeyDirection
 {
-    GAME_KEY_DIRECTION_BACKWARDS = 2,
-    GAME_KEY_DIRECTION_BACKWARDS_LEFT = 6,
-    GAME_KEY_DIRECTION_BACKWARDS_RIGHT = 10,
-    GAME_KEY_DIRECTION_FORWARD = 1,
-    GAME_KEY_DIRECTION_FORWARD_LEFT = 5,
-    GAME_KEY_DIRECTION_FORWARD_RIGHT = 9,
-    GAME_KEY_DIRECTION_LEFT = 4,
     GAME_KEY_DIRECTION_NONE = 0,
-    GAME_KEY_DIRECTION_RIGHT = 8
+    GAME_KEY_DIRECTION_FORWARD = 1,
+    GAME_KEY_DIRECTION_BACKWARDS = 2,
+    GAME_KEY_DIRECTION_LEFT = 4,
+    GAME_KEY_DIRECTION_FORWARD_LEFT = 5,
+    GAME_KEY_DIRECTION_BACKWARDS_LEFT = 6,
+    GAME_KEY_DIRECTION_RIGHT = 8,
+    GAME_KEY_DIRECTION_FORWARD_RIGHT = 9,
+    GAME_KEY_DIRECTION_BACKWARDS_RIGHT = 10
 };
 
 enum eGameMode
@@ -2943,7 +2945,7 @@ enum eGameMode
     GAME_MODE_COPS_AND_CROOKS = 10,
     GAME_MODE_DEAL_BREAKER = 13,
     GAME_MODE_DEATHMATCH = 0,
-    GAME_MODE_FREE_MODE = 0x10,
+    GAME_MODE_FREE_MODE = 16,
     GAME_MODE_GTA_RACE = 7,
     GAME_MODE_HANGMANS_NOOSE = 14,
     GAME_MODE_MAFIYA_WORK = 2,

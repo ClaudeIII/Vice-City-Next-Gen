@@ -5,51 +5,23 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, PedX, PedY, PedZ, PedR, blip_on, skip, cam_on, sprint, PointX, PointY, PointZ, PointN, car_speed, hate, textur, res, res_on, play, sound, sutosave;
+float PlayX, PlayY, PlayZ, PlayR, PedX, PedY, PedZ, PedR, blip_on, skip, cam_on, sprint, PointX, PointY, PointZ, PointN, car_speed, hate, textur, res, res_on, play, sound, autosave;
 float explo2, explo3, explo4, explo5, explo6, explo7, explo8, explo9, carHUD_x, carHUD_w, carH1, carH2, carH3, carHUD_y1, carHUD_y2, carHUD_y3, text1, time_sub, del_car, in_car, play_Speech;
 float Ped1_c, Ped4_c, Ped5_c, Ped6_c, Ped7_c, Ped8_c, Ped9_c, Ped10_c, Ped11_c, Ped12_c, Health, stalking, stalkerR;
 
-void SetSpeech(void)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (!IS_SCRIPTED_CONVERSATION_ONGOING())
-		{
-			break;
-		}
-		else if (TIMERA() > 10000)
-		{
-			break;
-		}
-	}
-}
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void baron_diaz(void)
 {
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	Blip diaz_ico;
 	WAIT(3000);
 	while(true)
 	{
 		WAIT(0);
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -69,17 +41,17 @@ void baron_diaz(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(diaz_ico, "LG_05");
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( 55.627, -13.084, 11.174, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( 55.627, -13.084, 11.174, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -89,11 +61,11 @@ void baron_diaz(void)
 					}
 				}
 
-				SET_CHAR_COORDINATES(GetPlayerPed(), 54.81, -8.80, 12.028);// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), 54.81, -8.80, 12.028);
 				SET_CHAR_HEADING(GetPlayerPed(), 358.0);
 				
-				//------------ катсцена тут ----------------
-				LOAD_ADDITIONAL_TEXT( "COK_1", 6 ); // загружаем субтитры из *.GTX
+				//------------ катсцена ----------------
+				LOAD_ADDITIONAL_TEXT( "COK_1", 6 );
 				START_CUTSCENE_NOW("cok_1");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -111,7 +83,7 @@ void baron_diaz(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				ADD_BLIP_FOR_COORD(814.0, 781.2, 4.761, &diaz_ico);
 				CHANGE_BLIP_SPRITE(diaz_ico, BLIP_OBJECTIVE);
@@ -135,10 +107,10 @@ void baron_diaz(void)
 				Cam camera;
 
 				uint PedM1 = MODEL_IG_RAY_BOCCINO;// Бос банды Акул
-				uint PedM2 = MODEL_M_Y_GIRI_LO_01;// Банда акул
-				uint CarM1 = MODEL_HABANERO; // транспорт банды Акул
+				uint PedM2 = MODEL_M_Y_GIRI_LO_01;
+				uint CarM1 = MODEL_HABANERO; // банды Акул
 				uint CarM2 = MODEL_FAGGIO; // скутер
-				uint barrel = barrel4; // бочка
+				uint barrel = barrel4; 
 				uint car_heal1;
 				skip = 0;
 				sprint = 0;
@@ -152,35 +124,35 @@ void baron_diaz(void)
 				REQUEST_MODEL(CarM1);
 				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(CarM2);
-				while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
-				REQUEST_MODEL(PedM1);//  Бос банды Акул
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(PedM2);// Банда акул
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
+				REQUEST_MODEL(PedM1);
+				while (!HAS_MODEL_LOADED(PedM1));
+				REQUEST_MODEL(PedM2);
+				while (!HAS_MODEL_LOADED(PedM2));
 
 				CREATE_CAR(CarM1, 286.232, -791.79, 5.445, &car1, TRUE);
-				LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
+				LOCK_CAR_DOORS(car1, 3);
 				CREATE_CAR(CarM2, 289.629, -791.79, 5.445, &car2, TRUE);
 				SET_CAR_ENGINE_ON(car2, 1, 1);
-				CREATE_CHAR (26, PedM1, 286.386, -785.672, 5.06, &ped1, TRUE);//  Бос банды Акул
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM2, &ped2);//создаём за рулём автомобиля
+				CREATE_CHAR (26, PedM1, 286.386, -785.672, 5.06, &ped1, TRUE);
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM2, &ped2);
 
 				//грузим анимацию
-				REQUEST_ANIMS( "ped" );//загружаем файл с анимацией
+				REQUEST_ANIMS( "ped" );
 				while (!HAVE_ANIMS_LOADED( "ped" )) WAIT(0);
 
 				// часть 1
 				while (TRUE)
 				{
 					WAIT(0);
-					DRAW_CHECKPOINT( 814.0, 781.2, 4.761, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 814.0, 781.2, 4.761, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( 814.0, 781.2, 4.761, 1.5, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 814.0, 781.2, 4.761, &PlayR);
 					if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-						//ставим камеру
+						//ставим
 						CREATE_CAM( 14, &camera );
 						POINT_CAM_AT_COORD	( camera, 825.686, 785.054, 11.536 );
 						SET_CAM_POS			( camera, 815.734, 776.458, 7.953 );
@@ -193,14 +165,14 @@ void baron_diaz(void)
 						PRINT_STRING_IN_STRING("string", "COK1_11", 5000, 1);//~g~Have a look through his window.
 						SetTime(2000);
 
-						// убираем камеру
+						// убираем
 						SET_CAM_BEHIND_PED( GetPlayerPed() );
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить
 
-						REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(diaz_ico);
 						ADD_BLIP_FOR_COORD(824.75, 784.14, 9.398, &diaz_ico);
 						CHANGE_BLIP_SPRITE(diaz_ico, BLIP_OBJECTIVE);
 						CHANGE_BLIP_COLOUR(diaz_ico, 5);
@@ -221,17 +193,17 @@ void baron_diaz(void)
 					while(true)
 					{
 						WAIT(0);
-						DRAW_CHECKPOINT( 824.75, 784.14, 9.398, 1.0, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 824.75, 784.14, 9.398, &PlayR);//проверка "игрок на координатах"
+						DRAW_CHECKPOINT( 824.75, 784.14, 9.398, 1.0, 160, 116, 209);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 824.75, 784.14, 9.398, &PlayR);
 						
 						if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
-							REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-							SET_CHAR_VISIBLE(GetPlayerPed(), 0); //прозрачный игрок
+							REMOVE_BLIP(diaz_ico);
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+							SET_CHAR_VISIBLE(GetPlayerPed(), 0);
 							
-							//ставим камеру
+							//ставим
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, 827.4, 785.5, 11.2 );
 							SET_CAM_POS			( camera, 823.88, 783.774, 11.633 );
@@ -241,7 +213,7 @@ void baron_diaz(void)
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
 
-							SET_CHAR_COORDINATES(ped1, 804.395, 789.414, 13.762);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+							SET_CHAR_COORDINATES(ped1, 804.395, 789.414, 13.762);// возвращаем на исходную позицию рядом с чекпойнтом
 							SET_CHAR_HEADING(ped1, -115.5);
 
 
@@ -305,15 +277,15 @@ void baron_diaz(void)
 							TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped1, 788.488, 811.915, 18.537, 3, -2, 5.5);// пед убегает
 							SetTime(1000);
 
-							// убираем камеру
+							// убираем
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
 
 							SET_CHAR_VISIBLE(GetPlayerPed(), 1); //видимый игрок
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить игрока
-							SET_CHAR_COORDINATES(ped1, 788.488, 811.915, 18.537);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить
+							SET_CHAR_COORDINATES(ped1, 788.488, 811.915, 18.537);// возвращаем на исходную позицию рядом с чекпойнтом
 							SET_CHAR_HEADING(ped1, -115.5);
 							UpdateWeaponOfPed(ped1, WEAPON_EPISODIC_9);
 							SET_CURRENT_CHAR_WEAPON(ped1, WEAPON_EPISODIC_9, TRUE);
@@ -349,14 +321,14 @@ void baron_diaz(void)
 					while(true)
 					{
 						WAIT(0);
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 807.305, 797.795, 17.545, &PlayR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 807.305, 797.795, 17.545, &PlayR);
 						if ( PlayR < 2.5)
 						{
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 							TASK_AIM_GUN_AT_COORD(ped1, 807.587, 798.465, 16.937, 10000);
 
-							//ставим камеру
+							//ставим
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, 806.667, 797.199, 19.072 );
 							SET_CAM_POS			( camera, 785.186, 813.273, 19.431 );
@@ -368,7 +340,7 @@ void baron_diaz(void)
 
 							TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(GetPlayerPed(), 807.587, 798.465, 16.937, 3, -2, 2.0);// пед убегает
 							SetTime(500);
-							TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "duck_cower", "ped", 2.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+							TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "duck_cower", "ped", 2.0, 0, 0, 0, 0, -1 );
 
 							SETTIMERB( 0 );
 							while (TRUE)
@@ -387,14 +359,14 @@ void baron_diaz(void)
 							SetTime(1000);
 							TASK_AIM_GUN_AT_COORD(ped1, PlayX, PlayY, PlayZ, 0);
 
-							// убираем камеру
+							// убираем
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
 
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить игрока
-							SET_CHAR_COORDINATES(ped1, 785.256, 840.455, 13.381);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить
+							SET_CHAR_COORDINATES(ped1, 785.256, 840.455, 13.381);// возвращаем на исходную позицию рядом с чекпойнтом
 							SET_CHAR_HEADING(ped1, 0.2);
 
 							TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped1, 790.781, 944.749, 13.856, 3, -2, 2.5);// пед убегает
@@ -428,40 +400,40 @@ void baron_diaz(void)
 					while(true)
 					{
 						WAIT(0);
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
 						if (( PlayR < 20.5) && (sprint == 0))
 						{
-							// Томми начинсет устовать
+							// начинсет устовать
 							DISABLE_PLAYER_SPRINT(GetPlayerIndex(), 1);
 							sprint = 1;
 						}
 						else if (( PlayR > 25.5) && (sprint == 1))
 						{
-							// Томми снова бодр
+							// снова бодр
 							DISABLE_PLAYER_SPRINT(GetPlayerIndex(), 0);
 							sprint = 0;
 						}
 
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 785.749, 944.575, 13.049, &PlayR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 785.749, 944.575, 13.049, &PlayR);
 						if (( PlayR < 15.5) || ( PedZ < 8 ))
 						{
 							if (PedZ < 8)
 							{
 								SET_CHAR_HEALTH(ped1, 1000);
-								SET_CHAR_COORDINATES(GetPlayerPed(), 778.282, 938.726, 13.995);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+								SET_CHAR_COORDINATES(GetPlayerPed(), 778.282, 938.726, 13.995);// возвращаем на исходную позицию рядом с чекпойнтом
 								SET_CHAR_HEADING(GetPlayerPed(), 1.07);
 							}
 							DISABLE_PLAYER_SPRINT(GetPlayerIndex(), 1);
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 							TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped1, 795.194, 968.881, 12.856, 3, -2, 5.5);// пед убегает
-							SET_CHAR_COORDINATES(ped1, 795.194, 968.881, 12.856);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+							SET_CHAR_COORDINATES(ped1, 795.194, 968.881, 12.856);// возвращаем на исходную позицию рядом с чекпойнтом
 							SET_CHAR_HEADING(ped1, 154.437);
 							TASK_AIM_GUN_AT_COORD(ped1, 780.781, 950.424, 15.583, 10000);
 
-							//ставим камеру
+							//ставим
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, 783.905, 949.619, 15.957 );
 							SET_CAM_POS			( camera, 796.036, 971.877, 14.195 );
@@ -481,7 +453,7 @@ void baron_diaz(void)
 							while (TRUE)
 							{
 								WAIT(0);
-								FIRE_PED_WEAPON(ped1, 784.986, 949.192, 16.583);// // пед стреляет в бочки
+								FIRE_PED_WEAPON(ped1, 784.986, 949.192, 16.583);// // пед стреляет в
 								if (TIMERB() > 500)
 								{
 									break;
@@ -494,12 +466,12 @@ void baron_diaz(void)
 							TASK_AIM_GUN_AT_COORD(ped1, PlayX, PlayY, PlayZ, 0);
 							SetTime(800);
 
-							// убираем камеру
+							// убираем
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить
 							SetTime(500);
 							SetSpeech();
 
@@ -545,19 +517,19 @@ void baron_diaz(void)
 					while(true)
 					{
 						WAIT(0);
-						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 806.724, 997.807, 14.466, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 806.724, 997.807, 14.466, &PedR);
 						if (( PedR < 5.5) || (PedZ < 8))
 						{
 							if (PedZ < 8)
 							{
 								SET_CHAR_HEALTH(ped1, 1000);
-								SET_CHAR_COORDINATES(GetPlayerPed(), 806.724, 997.807, 14.466);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+								SET_CHAR_COORDINATES(GetPlayerPed(), 806.724, 997.807, 14.466);// возвращаем на исходную позицию рядом с чекпойнтом
 								SET_CHAR_HEADING(GetPlayerPed(), 2.437);
 							}
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-							//ставим камеру
+							//ставим
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, 804.249, 1008.145, 6.969 );
 							SET_CAM_POS			( camera, 816.963, 1015.829, 8.494 );
@@ -567,7 +539,7 @@ void baron_diaz(void)
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
 
-							SET_CHAR_COORDINATES(ped1, 808.675, 1004.901, 8.837);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+							SET_CHAR_COORDINATES(ped1, 808.675, 1004.901, 8.837);// возвращаем на исходную позицию рядом с чекпойнтом
 							SET_CHAR_HEADING(GetPlayerPed(), 0.2);
 							TASK_ENTER_CAR_AS_PASSENGER(ped1, car1, 10000, 3);
 							SHUT_CAR_DOOR(car1, 1);
@@ -581,7 +553,7 @@ void baron_diaz(void)
 									break;
 								}
 							}
-							// убираем камеру
+							// убираем
 							CHANGE_BLIP_SCALE(diaz_ico, 1.1);
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
@@ -589,7 +561,7 @@ void baron_diaz(void)
 							SET_WIDESCREEN_BORDERS( 0 );
 
 							WARP_CHAR_INTO_CAR_AS_PASSENGER(ped1, car1, 0);
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "COK1_8", 5000, 1);//~g~Quick! Grab some wheels and follow him!
 							break;
@@ -644,8 +616,8 @@ void baron_diaz(void)
 							WARP_CHAR_INTO_CAR_AS_PASSENGER(ped1, car1, 0);
 						}
 
-						GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, PointX, PointY, PointZ, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, PointX, PointY, PointZ, &PedR);
 						if (( PedR < 55.5) && ( car_speed == 0))
 						{
 							car_speed = 1;
@@ -740,8 +712,8 @@ void baron_diaz(void)
 							TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped2, car1, PointX, PointY, PointZ, 4, 35.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 							car_speed = 0;
 						}
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
 
 						if ( PlayR > 250)
 						{
@@ -781,12 +753,12 @@ void baron_diaz(void)
 						else if (( PedR < 15.0 ) && ( PointN == 14 ) && ( PlayR < 50))
 						{
 							// =====Миссия пройдена=====
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 							SET_CHAR_RELATIONSHIP_GROUP(ped1, 0);
 							SET_CHAR_RELATIONSHIP(ped1, 0, 24);
 							SET_SENSE_RANGE(ped1, 0.01);
 
-							DO_SCREEN_FADE_OUT( 100 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 100 );
 							while(true)
 							{
 								WAIT(0);
@@ -796,7 +768,7 @@ void baron_diaz(void)
 								}
 							}
 
-							//ставим камеру
+							//ставим
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, 505.985, 1617.865, 13.324 );
 							SET_CAM_POS			( camera, 492.803, 1608.3, 10.203 );
@@ -806,12 +778,12 @@ void baron_diaz(void)
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
 
-							WARP_CHAR_FROM_CAR_TO_COORD(ped1, 493.708, 1615.576, 10.898);//телепартируем из катера
+							WARP_CHAR_FROM_CAR_TO_COORD(ped1, 493.708, 1615.576, 10.898);//телепартируем иза
 							SET_CHAR_HEADING(ped1, -90.437);
-							DO_SCREEN_FADE_IN( 100 );// убирается затемнение экрана
+							DO_SCREEN_FADE_IN( 100 );
 							TASK_FOLLOW_NAV_MESH_TO_COORD_NO_STOP(ped1, 509.995, 1616.462, 10.598, 3, -2, 1.5);// пед убегает
 							SetTime(3000);
-							DO_SCREEN_FADE_OUT( 100 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 100 );
 							while(true)
 							{
 								WAIT(0);
@@ -820,36 +792,36 @@ void baron_diaz(void)
 									break;
 								}
 							}
-							// убираем камеру
+							// убираем
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							DO_SCREEN_FADE_IN( 100 );// убирается затемнение экрана
+							DO_SCREEN_FADE_IN( 100 );
 
-							SET_CHAR_COORDINATES(ped1, 806.724, 997.807, 6.466);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить игрока
+							SET_CHAR_COORDINATES(ped1, 806.724, 997.807, 6.466);// возвращаем на исходную позицию рядом с чекпойнтом
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить
 							skip = 2;
 							break;
 						}
 					}
 				}
 				// завершение миссии
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 				SET_MAX_WANTED_LEVEL(6);
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(barrel);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 
-				// выгружаем из памяти транспорт
+				// выгружаем из памяти
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 
@@ -857,7 +829,7 @@ void baron_diaz(void)
 				DELETE_OBJECT(&barrel_1);
 				DELETE_OBJECT(&barrel_2);
 
-				// выгружаем бочки
+				// выгружаем
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&barrel_1);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&barrel_2);
 
@@ -866,12 +838,12 @@ void baron_diaz(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -886,18 +858,18 @@ void baron_diaz(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 1000);// +5000$
 						
 						WAIT( 0 );
@@ -906,10 +878,10 @@ void baron_diaz(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +1000 );
 					REGISTER_MISSION_PASSED("COK_1");
 					G_DIAZ = 2;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 			}
@@ -926,13 +898,13 @@ void baron_diaz(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(diaz_ico, "LG_05");
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( 55.627, -13.084, 11.174, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( 55.627, -13.084, 11.174, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 				blip_on = 0;
 				skip = 0;
 				PointN = 1;
@@ -949,8 +921,8 @@ void baron_diaz(void)
 				play_Speech = 0;
 
 				SET_MAX_WANTED_LEVEL(0);
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -977,9 +949,9 @@ void baron_diaz(void)
 				uint CarM7 = MODEL_SPARROW;
 
 				uint PedM1 = MODEL_IG_LILJACOB;// Ланс
-				uint PedM2 = MODEL_M_Y_GIRI_LO_01;// Банда акул1
-				uint PedM3 = MODEL_M_Y_GIRI_LO_02;// Банда акул2
-				uint PedM4 = MODEL_M_Y_GIRI_LO_03;// Банда акул3
+				uint PedM2 = MODEL_M_Y_GIRI_LO_01;
+				uint PedM3 = MODEL_M_Y_GIRI_LO_02;
+				uint PedM4 = MODEL_M_Y_GIRI_LO_03;
 				uint PedM5 = MODEL_IG_RAY_BOCCINO;// Бос банды Акул
 				uint PedM6 = MODEL_IG_TUNA;// рабочий на мосту
 				uint PedM7 = MODEL_M_M_GRU2_HI_02;// Гольфмен1
@@ -990,58 +962,58 @@ void baron_diaz(void)
 				fon = GET_TEXTURE( textur, "fon_hud" );
 				car = GET_TEXTURE( textur, "hel_hud" );
 
-				// грузим модели
+				
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(CarM2);
-				while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 				REQUEST_MODEL(CarM3);
-				while (!HAS_MODEL_LOADED(CarM3)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM3)) WAIT(0);
 				REQUEST_MODEL(CarM4);
-				while (!HAS_MODEL_LOADED(CarM4)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM4)) WAIT(0);
 				REQUEST_MODEL(CarM5);
-				while (!HAS_MODEL_LOADED(CarM5)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM5)) WAIT(0);
 				REQUEST_MODEL(CarM6);
-				while (!HAS_MODEL_LOADED(CarM6)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM6)) WAIT(0);
 				REQUEST_MODEL(CarM7);
-				while (!HAS_MODEL_LOADED(CarM7)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM7)) WAIT(0);
 
 				REQUEST_MODEL(PedM1);
-				while (!HAS_MODEL_LOADED(PedM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(PedM1)) WAIT(0);
 				REQUEST_MODEL(PedM2);
-				while (!HAS_MODEL_LOADED(PedM2)) WAIT(100);
+				while (!HAS_MODEL_LOADED(PedM2)) WAIT(0);
 				REQUEST_MODEL(PedM3);
-				while (!HAS_MODEL_LOADED(PedM3)) WAIT(100);
+				while (!HAS_MODEL_LOADED(PedM3)) WAIT(0);
 				REQUEST_MODEL(PedM4);
-				while (!HAS_MODEL_LOADED(PedM4)) WAIT(100);
+				while (!HAS_MODEL_LOADED(PedM4)) WAIT(0);
 				REQUEST_MODEL(PedM5);
-				while (!HAS_MODEL_LOADED(PedM5)) WAIT(100);
+				while (!HAS_MODEL_LOADED(PedM5)) WAIT(0);
 				REQUEST_MODEL(PedM6);
-				while (!HAS_MODEL_LOADED(PedM6)) WAIT(100);
+				while (!HAS_MODEL_LOADED(PedM6)) WAIT(0);
 				REQUEST_MODEL(PedM7);
-				while (!HAS_MODEL_LOADED(PedM7)) WAIT(100);
+				while (!HAS_MODEL_LOADED(PedM7)) WAIT(0);
 				REQUEST_MODEL(PedM8);
-				while (!HAS_MODEL_LOADED(PedM8)) WAIT(100);
+				while (!HAS_MODEL_LOADED(PedM8)) WAIT(0);
 
 				//Грузим пути
 				REQUEST_CAR_RECORDING( 3018 ); // полёт Основной
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3018 )) WAIT(0);
-				REQUEST_CAR_RECORDING( 3019 ); // релокация Ленса
+				REQUEST_CAR_RECORDING( 3019 ); // релокация
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3019 )) WAIT(0);
-				REQUEST_CAR_RECORDING( 3020 ); // прилёт Ленса (эвакуация)
+				REQUEST_CAR_RECORDING( 3020 ); // прилёт (эвакуация)
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3020 )) WAIT(0);
-				REQUEST_CAR_RECORDING( 3021 );// улёт Ленса (эвакуация)
+				REQUEST_CAR_RECORDING( 3021 );// улёт (эвакуация)
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3021 )) WAIT(0);
-				REQUEST_CAR_RECORDING( 3022 ); // мимо пролетает верталёт 1
+				REQUEST_CAR_RECORDING( 3022 ); // мимо пролетает 1
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3022 )) WAIT(0);
-				REQUEST_CAR_RECORDING( 3023 ); // мимо пролетает верталёт 2
+				REQUEST_CAR_RECORDING( 3023 ); // мимо пролетает 2
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3023 )) WAIT(0);
 				REQUEST_CAR_RECORDING( 3024 ); // подскок Буррито 1
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3024 )) WAIT(0);
 				REQUEST_CAR_RECORDING( 3025 ); // подскок Буррито 2
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3025 )) WAIT(0);
 
-				// создаём транспорт
+				
 				CREATE_CAR(CarM1, 450.837, 1700.35, 33.581, &car1, TRUE);
 				CHANGE_CAR_COLOUR( car1, 112, 30 );//цвет
 				SET_EXTRA_CAR_COLOURS( car1, 127, 127 );//цвет
@@ -1062,27 +1034,27 @@ void baron_diaz(void)
 				CREATE_CAR(CarM6, 275.196, 1032.668, 10.324, &car7, TRUE);
 				SET_CAR_HEADING(car7, 80.0);
 
-				// Верталёты
+				//ы
 				CREATE_CAR(CarM7, 332.46, 1072.503, 8.735, &car8, TRUE);
 				SET_CAR_HEADING(car8, 90.0);
 				CREATE_CAR(CarM7, 332.46, 1084.741, 8.735, &car9, TRUE);
 				SET_CAR_HEADING(car9, 90.0);
 
-				// создаём моделей педов
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля (Ленс)
-				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM7, &ped2);//создаём за рулём автомобиля 
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM8, &ped3);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM7, &ped4);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car5, 1, PedM8, &ped5);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car8, 1, PedM7, &ped6);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car9, 1, PedM8, &ped7);//создаём за рулём автомобиля
+				
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
+				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM7, &ped2); 
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM8, &ped3);
+				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM7, &ped4);
+				CREATE_CHAR_INSIDE_CAR(car5, 1, PedM8, &ped5);
+				CREATE_CHAR_INSIDE_CAR(car8, 1, PedM7, &ped6);
+				CREATE_CHAR_INSIDE_CAR(car9, 1, PedM8, &ped7);
 
-				CREATE_CHAR (26, PedM6, 323.596, 1079.535, 8.828, &ped8, TRUE);// создаём (Прыгун)
-				CREATE_CHAR (26, PedM7, 268.696, 1031.373, 10.081, &ped9, TRUE);// создаём
+				CREATE_CHAR (26, PedM6, 323.596, 1079.535, 8.828, &ped8, TRUE);
+				CREATE_CHAR (26, PedM7, 268.696, 1031.373, 10.081, &ped9, TRUE);
 				SET_CHAR_HEADING(ped9, -60.0);
-				CREATE_CHAR (26, PedM8, 269.781, 1030.586, 10.081, &ped10, TRUE);// создаём
+				CREATE_CHAR (26, PedM8, 269.781, 1030.586, 10.081, &ped10, TRUE);
 				SET_CHAR_HEADING(ped10, -15.0);
-				CREATE_CHAR (26, PedM7, 269.688, 1032.668, 10.081, &ped11, TRUE);// создаём
+				CREATE_CHAR (26, PedM7, 269.688, 1032.668, 10.081, &ped11, TRUE);
 				SET_CHAR_HEADING(ped11, -170.0);
 
 				CREATE_OBJECT_NO_OFFSET(barrel, 498.763, 1635.162, 27.045, &barrel_1, TRUE);
@@ -1096,12 +1068,12 @@ void baron_diaz(void)
 				CREATE_OBJECT_NO_OFFSET(barrel, 451.966, 1681.897, 25.011, &barrel_9, TRUE);
 				CREATE_OBJECT_NO_OFFSET(barrel, 509.788, 1619.213, 19.921, &barrel_10, TRUE);
 
-				FORCE_WEATHER_NOW( WEATHER_EXTRA_SUNNY );//устанавливаем погода
-				FORWARD_TO_TIME_OF_DAY(5, 30);//устанавливаем время
+				FORCE_WEATHER_NOW( WEATHER_EXTRA_SUNNY );
+				FORWARD_TO_TIME_OF_DAY(5, 30);
 				RELEASE_WEATHER();
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "COK_2A", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "COK_2A", 6 );
 				START_CUTSCENE_NOW("cok_2a");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -1114,7 +1086,7 @@ void baron_diaz(void)
 					WAIT(0);
 				}
 
-				LOAD_ADDITIONAL_TEXT( "COK_2B", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "COK_2B", 6 );
 				START_CUTSCENE_NOW("cok_2b");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -1136,7 +1108,7 @@ void baron_diaz(void)
 				WAIT(0);
 				TASK_ENTER_CAR_AS_PASSENGER(GetPlayerPed(), car1, 1, 1);
 
-				//ставим камеру
+				//ставим
 				CREATE_CAM( 14, &camera );
 				POINT_CAM_AT_COORD	( camera, 45.657, -37.678, 35.08 );
 				SET_CAM_POS			( camera, 26.871, -50.819, 35.412 );
@@ -1146,7 +1118,7 @@ void baron_diaz(void)
 				SET_CAM_FOV( camera, 45.0 );
 				SET_WIDESCREEN_BORDERS( 1 );
 				SetTime(4000);
-				DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 500 );
 				while(true)
 				{
 					WAIT(0);
@@ -1160,8 +1132,8 @@ void baron_diaz(void)
 				END_CAM_COMMANDS( &camera );
 				SET_WIDESCREEN_BORDERS( 0 );
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-				DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+				DO_SCREEN_FADE_IN( 500 );
 
 				SET_CHAR_INVINCIBLE(ped1, 1);
 				SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 1);// Игрок бессмертный
@@ -1314,10 +1286,10 @@ void baron_diaz(void)
 					if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 178.35, 585.05, 7.92, 163.35, 590.05, 17.92, 0 )) && (PointN == 1))
 					{
 						// дебаг
-						SET_CAR_COORDINATES(car3, 232.816, 940.724, 1.477);// перемещаем яхту
-						SET_CAR_COORDINATES(car4, 235.118, 924.104, 1.477);// перемещаем яхту
-						SET_CAR_COORDINATES(car5, 248.082, 937.364, 1.477);// перемещаем яхту
-						SET_CHAR_COORDINATES(ped8, 166.0, 594.631, 22.48);// перемещаем прыгуна
+						SET_CAR_COORDINATES(car3, 232.816, 940.724, 1.477);
+						SET_CAR_COORDINATES(car4, 235.118, 924.104, 1.477);
+						SET_CAR_COORDINATES(car5, 248.082, 937.364, 1.477);
+						SET_CHAR_COORDINATES(ped8, 166.0, 594.631, 22.48);
 						PointN = 2;
 					}
 					else if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 248.05, 831.89, 11.37, 233.05, 836.89, 21.37, 0 )) && (PointN == 2))
@@ -1386,16 +1358,16 @@ void baron_diaz(void)
 						explo9 = 1;
 					}
 
-					if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))// Игрок покинул транспорт
+					if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))// Игрок покинул
 					{
 						ABORT_SCRIPTED_CONVERSATION( 0 );
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "NECOK2_H", 5000, 1);//~r~You fell out of the helicopter.
 						skip = 1;
-						WAIT(100);
+						WAIT(0);
 						break;
 					}
-					else if (car_heal1 < 10)// вертолёт унечтожен
+					else if (car_heal1 < 10)// унечтожен
 					{
 						SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// Игрок смертный
 						EXPLODE_CAR(car1, 1, 1);
@@ -1437,17 +1409,17 @@ void baron_diaz(void)
 					STOP_PLAYBACK_RECORDED_CAR(car8);
 					STOP_PLAYBACK_RECORDED_CAR(car9);
 
-					// выгружаем пути транспорта
-					REMOVE_CAR_RECORDING( 3022 ); // выгружаем пути транспорта
-					REMOVE_CAR_RECORDING( 3023 ); // выгружаем пути транспорта
+					// выгружаем путиа
+					REMOVE_CAR_RECORDING( 3022 );
+					REMOVE_CAR_RECORDING( 3023 );
 
-					// выгружаем из памяти транспорт
+					// выгружаем из памяти
 					MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 					MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
 					MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
 					MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
 
-					// создаём новые тачки
+					
 					CREATE_CAR(CarM2, 451.466, 1690.589, 14.033, &car2, TRUE);
 					CREATE_CAR(CarM2, 443.973, 1690.589, 14.033, &car3, TRUE);
 					CREATE_CAR(CarM3, 450.871, 1745.972, 15.94, &car4, TRUE);
@@ -1544,7 +1516,7 @@ void baron_diaz(void)
 							}
 						}
 
-						// Реплики о повреждении тут
+						// Реплики о повреждении
 						if ((car_heal1 < 2995) && (sound == 1))
 						{
 							if (play == 0)
@@ -1589,7 +1561,7 @@ void baron_diaz(void)
 							}
 						}
 
-						// взрывы машин
+						// взрывы
 						GET_CAR_HEALTH(car2, &car_heal2);
 						GET_CAR_HEALTH(car3, &car_heal3);
 						GET_CAR_HEALTH(car4, &car_heal4);
@@ -1617,8 +1589,8 @@ void baron_diaz(void)
 							explo5 = 1;
 						}
 
-						GET_CHAR_COORDINATES(ped1,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 534.5, 1603.5, 20.0, 529.5, 1618.5, 30.0, 0 )) && (PointN == 1))// разморозка педов 1
+						GET_CHAR_COORDINATES(ped1,  &PlayX, &PlayY, &PlayZ);
+						if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 534.5, 1603.5, 20.0, 529.5, 1618.5, 30.0, 0 )) && (PointN == 1))// разморозка 1
 						{
 							FREEZE_CHAR_POSITION(ped8, 0);
 							FREEZE_CHAR_POSITION(ped9, 0);
@@ -1652,7 +1624,7 @@ void baron_diaz(void)
 							res_on = 1;
 							PointN = 5;
 						}
-						else if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 429.5, 1654.5, 37.0, 424.5, 1669.5, 47.0, 0 )) && (PointN == 5))// разморозка педов 2
+						else if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 429.5, 1654.5, 37.0, 424.5, 1669.5, 47.0, 0 )) && (PointN == 5))// разморозка 2
 						{
 							FREEZE_CHAR_POSITION(ped7, 0);
 							FREEZE_CHAR_POSITION(ped8, 0);
@@ -1677,14 +1649,14 @@ void baron_diaz(void)
 						{
 							if ((!IS_CHAR_DEAD(ped2)) || (!IS_CHAR_FATALLY_INJURED(ped2)))//если пед мёртв или фатально ранен.
 							{
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 								UpdateWeaponOfPed(ped2, WEAPON_EPISODIC_9);
 								SET_CURRENT_CHAR_WEAPON(ped2, WEAPON_EPISODIC_9, TRUE);
 								SET_CHAR_HEALTH(ped2, 200);
 								FREEZE_CHAR_POSITION(ped2, 1);
 								SET_CHAR_MOVEMENT_ANIMS_BLOCKED(ped2, 1);
 
-								//ставим камеру
+								//ставим
 								CREATE_CAM( 14, &camera );
 								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
 								SET_CAM_POS			( camera, 527.47, 1621.499, 31.196 );
@@ -1709,12 +1681,12 @@ void baron_diaz(void)
 								SetSpeech();
 								SetTime(2000);
 
-								//убираем камеру
+								
 								SET_CAM_BEHIND_PED( GetPlayerPed() );
 								ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 								END_CAM_COMMANDS( &camera );
 								SET_WIDESCREEN_BORDERS( 0 );
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 							}
 							SET_CHAR_HEALTH(ped3, 200);
 							SET_CHAR_HEALTH(ped4, 200);
@@ -1741,7 +1713,7 @@ void baron_diaz(void)
 							SET_CHAR_MOVEMENT_ANIMS_BLOCKED(ped10, 1);
 							SET_CHAR_MOVEMENT_ANIMS_BLOCKED(ped11, 1);
 
-							CLEAR_AREA(456.463, 1603.771, 1.752, 27.5, 0);//очещаем зону загрузки
+							CLEAR_AREA(456.463, 1603.771, 1.752, 27.5, 0);
 							PointN = 8;
 						}
 						else if ((PointN == 8) && (PlayZ < 10.0))
@@ -1749,11 +1721,11 @@ void baron_diaz(void)
 							break;
 						}
 
-						// высыпаем педов
+						// высыпаем
 						if (res_on == 1)
 						{
 							res_on = 0;
-							// выгружаем из памяти педов
+							// выгружаем из памяти
 							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
 							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
@@ -1767,16 +1739,16 @@ void baron_diaz(void)
 
 							if (res == 1) // первое здание
 							{
-								CREATE_CHAR (26, PedM2, 499.5311, 1628.488, 27.23817, &ped2, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 509.1311, 1631.702, 27.23817, &ped3, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 503.2476, 1637.191, 27.23817, &ped4, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 515.6788, 1633.139, 27.23817, &ped5, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 505.3156, 1619.715, 20.23586, &ped6, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 513.3373, 1618.388, 20.23586, &ped7, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 527.2284, 1630.244, 20.20692, &ped8, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 527.5781, 1642.782, 20.20692, &ped9, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 527.6659, 1640.961, 13.41278, &ped10, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 523.9052, 1651.408, 20.20692, &ped11, TRUE);// создаём
+								CREATE_CHAR (26, PedM2, 499.5311, 1628.488, 27.23817, &ped2, TRUE);
+								CREATE_CHAR (26, PedM3, 509.1311, 1631.702, 27.23817, &ped3, TRUE);
+								CREATE_CHAR (26, PedM4, 503.2476, 1637.191, 27.23817, &ped4, TRUE);
+								CREATE_CHAR (26, PedM2, 515.6788, 1633.139, 27.23817, &ped5, TRUE);
+								CREATE_CHAR (26, PedM3, 505.3156, 1619.715, 20.23586, &ped6, TRUE);
+								CREATE_CHAR (26, PedM4, 513.3373, 1618.388, 20.23586, &ped7, TRUE);
+								CREATE_CHAR (26, PedM2, 527.2284, 1630.244, 20.20692, &ped8, TRUE);
+								CREATE_CHAR (26, PedM3, 527.5781, 1642.782, 20.20692, &ped9, TRUE);
+								CREATE_CHAR (26, PedM4, 527.6659, 1640.961, 13.41278, &ped10, TRUE);
+								CREATE_CHAR (26, PedM2, 523.9052, 1651.408, 20.20692, &ped11, TRUE);
 								SET_CHAR_HEADING(ped2, 180.0);
 								SET_CHAR_HEADING(ped3, 180.0);
 								SET_CHAR_HEADING(ped4, 180.0);
@@ -1799,15 +1771,15 @@ void baron_diaz(void)
 							else if (res == 2) // бассейн
 							{
 								/*/
-								CREATE_CHAR (26, PedM3, 459.5424, 1736.075, 14.40884, &ped3, TRUE);// создаём
+								CREATE_CHAR (26, PedM3, 459.5424, 1736.075, 14.40884, &ped3, TRUE);
 								//*/
-								CREATE_CHAR (26, PedM2, 437.7209, 1733.959, 14.40884, &ped2, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 323.596, 1079.535, 8.828, &ped3, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 457.1077, 1742.261, 16.19898, &ped4, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 454.0889, 1728.231, 12.98335, &ped5, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 447.3544, 1745.027, 16.19898, &ped6, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 434.7601, 1743.938, 15.63101, &ped7, TRUE);// создаём
-								//создаём педов в автомобиле
+								CREATE_CHAR (26, PedM2, 437.7209, 1733.959, 14.40884, &ped2, TRUE);
+								CREATE_CHAR (26, PedM4, 323.596, 1079.535, 8.828, &ped3, TRUE);
+								CREATE_CHAR (26, PedM4, 457.1077, 1742.261, 16.19898, &ped4, TRUE);
+								CREATE_CHAR (26, PedM2, 454.0889, 1728.231, 12.98335, &ped5, TRUE);
+								CREATE_CHAR (26, PedM3, 447.3544, 1745.027, 16.19898, &ped6, TRUE);
+								CREATE_CHAR (26, PedM4, 434.7601, 1743.938, 15.63101, &ped7, TRUE);
+								
 								CREATE_CHAR_INSIDE_CAR(car2, 1, PedM2, &ped8);
 								CREATE_CHAR_AS_PASSENGER(car2, 1, PedM3, 0, &ped9);
 								CREATE_CHAR_AS_PASSENGER(car2, 1, PedM4, 1, &ped10);
@@ -1817,18 +1789,18 @@ void baron_diaz(void)
 							else if (res == 3) // спортивная площадка
 							{
 								/*/
-								CREATE_CHAR (26, PedM4, 416.019, 1738.672, 15.671, &ped2, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 413.807, 1734.175, 15.599, &ped7, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 410.983, 1731.549, 15.599, &ped6, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 401.152, 1735.649, 15.599, &ped3, TRUE);// создаём
+								CREATE_CHAR (26, PedM4, 416.019, 1738.672, 15.671, &ped2, TRUE);
+								CREATE_CHAR (26, PedM2, 413.807, 1734.175, 15.599, &ped7, TRUE);
+								CREATE_CHAR (26, PedM3, 410.983, 1731.549, 15.599, &ped6, TRUE);
+								CREATE_CHAR (26, PedM3, 401.152, 1735.649, 15.599, &ped3, TRUE);
 								//*/
-								CREATE_CHAR (26, PedM4, 323.596, 1079.535, 8.828, &ped2, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 325.596, 1079.535, 8.828, &ped7, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 327.596, 1079.535, 8.828, &ped6, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 329.596, 1079.535, 8.828, &ped3, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 394.828, 1733.286, 15.599, &ped4, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 401.541, 1719.955, 15.599, &ped5, TRUE);// создаём
-								//создаём педов в автомобиле
+								CREATE_CHAR (26, PedM4, 323.596, 1079.535, 8.828, &ped2, TRUE);
+								CREATE_CHAR (26, PedM2, 325.596, 1079.535, 8.828, &ped7, TRUE);
+								CREATE_CHAR (26, PedM3, 327.596, 1079.535, 8.828, &ped6, TRUE);
+								CREATE_CHAR (26, PedM3, 329.596, 1079.535, 8.828, &ped3, TRUE);
+								CREATE_CHAR (26, PedM2, 394.828, 1733.286, 15.599, &ped4, TRUE);
+								CREATE_CHAR (26, PedM4, 401.541, 1719.955, 15.599, &ped5, TRUE);
+								
 								CREATE_CHAR_INSIDE_CAR(car3, 1, PedM4, &ped8);
 								CREATE_CHAR_AS_PASSENGER(car3, 1, PedM3, 0, &ped9);
 								CREATE_CHAR_AS_PASSENGER(car3, 1, PedM2, 1, &ped10);
@@ -1837,16 +1809,16 @@ void baron_diaz(void)
 							}
 							else if (res == 4)// здание 2-3
 							{
-								CREATE_CHAR (26, PedM3, 390.875, 1650.392, 25.205, &ped2, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 386.224, 1656.767, 25.205, &ped3, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 377.709, 1657.395, 25.205, &ped4, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 373.587, 1651.828, 25.205, &ped5, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 390.221, 1655.435, 25.205, &ped6, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 447.745, 1681.026, 24.773, &ped7, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 454.279, 1679.611, 24.773, &ped8, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 461.358, 1679.611, 15.743, &ped9, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 440.195, 1679.611, 15.743, &ped10, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 445.601, 1679.611, 17.752, &ped11, TRUE);// создаём
+								CREATE_CHAR (26, PedM3, 390.875, 1650.392, 25.205, &ped2, TRUE);
+								CREATE_CHAR (26, PedM4, 386.224, 1656.767, 25.205, &ped3, TRUE);
+								CREATE_CHAR (26, PedM2, 377.709, 1657.395, 25.205, &ped4, TRUE);
+								CREATE_CHAR (26, PedM3, 373.587, 1651.828, 25.205, &ped5, TRUE);
+								CREATE_CHAR (26, PedM4, 390.221, 1655.435, 25.205, &ped6, TRUE);
+								CREATE_CHAR (26, PedM2, 447.745, 1681.026, 24.773, &ped7, TRUE);
+								CREATE_CHAR (26, PedM3, 454.279, 1679.611, 24.773, &ped8, TRUE);
+								CREATE_CHAR (26, PedM4, 461.358, 1679.611, 15.743, &ped9, TRUE);
+								CREATE_CHAR (26, PedM2, 440.195, 1679.611, 15.743, &ped10, TRUE);
+								CREATE_CHAR (26, PedM3, 445.601, 1679.611, 17.752, &ped11, TRUE);
 								SET_CHAR_HEADING(ped7, 180.0);
 								SET_CHAR_HEADING(ped8, 180.0);
 								SET_CHAR_HEADING(ped9, 180.0);
@@ -1866,16 +1838,16 @@ void baron_diaz(void)
 							}
 							else if (res == 5)// Босс
 							{
-								CREATE_CHAR (26, PedM5, 500.367, 1631.954, 26.839, &ped2, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 496.771, 1632.476, 26.839, &ped3, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 498.658, 1628.221, 26.839, &ped4, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 495.924, 1640.781, 22.626, &ped5, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 499.931, 1634.356, 19.746, &ped6, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 516.038, 1637.676, 19.746, &ped7, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 507.765, 1647.499, 17.502, &ped8, TRUE);// создаём
-								CREATE_CHAR (26, PedM4, 511.891, 1642.674, 13.015, &ped9, TRUE);// создаём
-								CREATE_CHAR (26, PedM2, 497.831, 1628.534, 13.015, &ped10, TRUE);// создаём
-								CREATE_CHAR (26, PedM3, 512.865, 1645.961, 15.171, &ped11, TRUE);// создаём
+								CREATE_CHAR (26, PedM5, 500.367, 1631.954, 26.839, &ped2, TRUE);
+								CREATE_CHAR (26, PedM4, 496.771, 1632.476, 26.839, &ped3, TRUE);
+								CREATE_CHAR (26, PedM2, 498.658, 1628.221, 26.839, &ped4, TRUE);
+								CREATE_CHAR (26, PedM3, 495.924, 1640.781, 22.626, &ped5, TRUE);
+								CREATE_CHAR (26, PedM4, 499.931, 1634.356, 19.746, &ped6, TRUE);
+								CREATE_CHAR (26, PedM2, 516.038, 1637.676, 19.746, &ped7, TRUE);
+								CREATE_CHAR (26, PedM3, 507.765, 1647.499, 17.502, &ped8, TRUE);
+								CREATE_CHAR (26, PedM4, 511.891, 1642.674, 13.015, &ped9, TRUE);
+								CREATE_CHAR (26, PedM2, 497.831, 1628.534, 13.015, &ped10, TRUE);
+								CREATE_CHAR (26, PedM3, 512.865, 1645.961, 15.171, &ped11, TRUE);
 								SET_CHAR_HEADING(ped2, 120.0);
 								SET_CHAR_HEADING(ped3, 100.0);
 								SET_CHAR_HEADING(ped4, 100.0);
@@ -1976,16 +1948,16 @@ void baron_diaz(void)
 							SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped11, FALSE);
 						}
 
-						if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))// Игрок покинул транспорт
+						if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))// Игрок покинул
 						{
 							ABORT_SCRIPTED_CONVERSATION( 0 );
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "NECOK2_H", 5000, 1);//~r~You fell out of the helicopter.
 							skip = 1;
-							WAIT(100);
+							WAIT(0);
 							break;
 						}
-						else if (car_heal1 < 10)// вертолёт унечтожен
+						else if (car_heal1 < 10)// унечтожен
 						{
 							SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// Игрок смертный
 							EXPLODE_CAR(car1, 1, 1);
@@ -2051,8 +2023,8 @@ void baron_diaz(void)
 						{
 							if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_FATALLY_INJURED(ped2)))//если пед мёртв или фатально ранен.
 							{
-								REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
-								GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
+								REMOVE_BLIP(diaz_ico);
+								GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);
 								GET_GROUND_Z_FOR_3D_COORD(PedX, PedY, PedZ, &PedZ);
 								CREATE_PICKUP( mission_keis, 22, PedX+0.2, PedY+0.2, PedZ+0.2, &bag, 0 );// сумка
 								CLEAR_PRINTS();
@@ -2065,10 +2037,10 @@ void baron_diaz(void)
 								break;
 							}
 						}
-						if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 524.046, 1623.101, 12.505, 492.423, 1650.812, 30.608, 0 )) && (PointN == 0))// релокация Ленса
+						if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 524.046, 1623.101, 12.505, 492.423, 1650.812, 30.608, 0 )) && (PointN == 0))// релокация
 						{
 							STOP_PLAYBACK_RECORDED_CAR(car1);
-							REMOVE_CAR_RECORDING( 3018 ); // выгружаем пути транспорта
+							REMOVE_CAR_RECORDING( 3018 );
 							START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3019, 0.0, 0.0, 0.0);
 							FREEZE_CHAR_POSITION(ped3, 0);
 							FREEZE_CHAR_POSITION(ped9, 0);
@@ -2078,7 +2050,7 @@ void baron_diaz(void)
 							SET_CHAR_MOVEMENT_ANIMS_BLOCKED(ped10, 0);
 							PointN = 1;
 						}
-						if (IS_CAR_DEAD(car1))// вертолёт унечтожен
+						if (IS_CAR_DEAD(car1))// унечтожен
 						{
 							ABORT_SCRIPTED_CONVERSATION( 0 );
 							CLEAR_PRINTS();
@@ -2112,11 +2084,11 @@ void baron_diaz(void)
 						{
 							SET_PLAYBACK_SPEED(car1, 1);
 							STOP_PLAYBACK_RECORDED_CAR(car1);
-							REMOVE_CAR_RECORDING( 3019 ); // выгружаем пути транспорта
+							REMOVE_CAR_RECORDING( 3019 );
 							START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3020, 0.0, 0.0, 0.0);
 							SET_PLAYBACK_SPEED(car1, 1.5);
 
-							REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(diaz_ico);
 							ADD_BLIP_FOR_CHAR(ped1, &diaz_ico);
 							CHANGE_BLIP_SPRITE(diaz_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 							CHANGE_BLIP_COLOUR(diaz_ico, 19);   //цвет иконка на радаре (0=белая)
@@ -2124,11 +2096,11 @@ void baron_diaz(void)
 							PRINT_STRING_IN_STRING("string", "NECOK2_V", 5000, 1);//~COL_NET_12~Get on the helicopter.
 							play = 1;
 						}
-						if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 524.046, 1623.101, 12.505, 492.423, 1650.812, 30.608, 0 )) && (PointN == 0))// релокация Ленса
+						if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 524.046, 1623.101, 12.505, 492.423, 1650.812, 30.608, 0 )) && (PointN == 0))// релокация
 						{
-							// если игрок в здании меняем местоположение Ленса
+							// если игрок меняем местоположение
 							STOP_PLAYBACK_RECORDED_CAR(car1);
-							REMOVE_CAR_RECORDING( 3018 ); // выгружаем пути транспорта
+							REMOVE_CAR_RECORDING( 3018 );
 							START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3019, 0.0, 0.0, 0.0);
 
 							FREEZE_CHAR_POSITION(ped3, 0);
@@ -2143,13 +2115,13 @@ void baron_diaz(void)
 
 						if (PointN == 1)
 						{
-							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-							GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);//проверка "игрок на координатах"
+							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+							GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
 							if (PlayR < 3.2)
 							{
 								FIX_CAR(car1);
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 								TASK_ENTER_CAR_AS_PASSENGER(GetPlayerPed(), car1, 10000, 3);
 								PointN = 2;
 							}
@@ -2160,11 +2132,11 @@ void baron_diaz(void)
 							{
 								SET_PLAYBACK_SPEED(car1, 1);
 								STOP_PLAYBACK_RECORDED_CAR(car1);
-								REMOVE_CAR_RECORDING( 3020 ); // выгружаем пути транспорта
+								REMOVE_CAR_RECORDING( 3020 );
 								START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3021, 0.0, 0.0, 0.0);
-								//ставим камеру
+								//ставим
 								
-								GET_CHAR_COORDINATES(ped1,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+								GET_CHAR_COORDINATES(ped1,  &PlayX, &PlayY, &PlayZ);
 								CREATE_CAM( 14, &camera );
 								POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
 								SET_CAM_POS			( camera, 493.67, 1624.809, 29.511 );
@@ -2179,11 +2151,11 @@ void baron_diaz(void)
 						}
 						else if (PointN == 3)
 						{
-							GET_CHAR_COORDINATES(ped1,  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+							GET_CHAR_COORDINATES(ped1,  &PlayX, &PlayY, &PlayZ);
 							POINT_CAM_AT_COORD	( camera, PlayX, PlayY, PlayZ );
 							if (TIMERA() > 5000)
 							{
-								DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+								DO_SCREEN_FADE_OUT( 500 );
 								while(true)
 								{
 									WAIT(0);
@@ -2198,7 +2170,7 @@ void baron_diaz(void)
 							}
 						}
 
-						if (IS_CAR_DEAD(car1))// вертолёт унечтожен
+						if (IS_CAR_DEAD(car1))// унечтожен
 						{
 							PRINT_STRING_IN_STRING("string", "WRECKED", 5000, 1);//~r~The vehicle is wrecked!
 							skip = 1;
@@ -2222,7 +2194,7 @@ void baron_diaz(void)
 				if (skip == 2)
 				{
 					INCREASE_PLAYER_MAX_HEALTH(GetPlayerIndex(), 1);
-					WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 54.916, -7.17, 11.796);//телепартируем из катера
+					WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 54.916, -7.17, 11.796);//телепартируем иза
 					SET_CAM_BEHIND_PED( GetPlayerPed() );
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
@@ -2230,15 +2202,15 @@ void baron_diaz(void)
 					ALTER_WANTED_LEVEL(GetPlayerIndex(), 0);
 					APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
 					SetTime(1000);
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+					DO_SCREEN_FADE_IN( 500 );
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 				}
 				
-				REMOVE_PICKUP(bag);// выгружаем оружие
+				REMOVE_PICKUP(bag);// выгружаем
 				RELEASE_TEXTURE( fon );
 				RELEASE_TEXTURE( car );
 				REMOVE_TXD( textur );
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 				SET_CHAR_INVINCIBLE(ped1, 0);
 				SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// Игрок смертный
 				SET_MAX_WANTED_LEVEL(6);
@@ -2253,7 +2225,7 @@ void baron_diaz(void)
 				STOP_PLAYBACK_RECORDED_CAR(car8);
 				STOP_PLAYBACK_RECORDED_CAR(car9);
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
@@ -2271,7 +2243,7 @@ void baron_diaz(void)
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM8);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(barrel);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -2284,7 +2256,7 @@ void baron_diaz(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped11);
 
-				// выгружаем из памяти транспорт
+				// выгружаем из памяти
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -2307,7 +2279,7 @@ void baron_diaz(void)
 				DELETE_OBJECT(&barrel_9);
 				DELETE_OBJECT(&barrel_10);
 
-				// выгружаем бочки
+				// выгружаем
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&barrel_1);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&barrel_2);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&barrel_3);
@@ -2319,15 +2291,15 @@ void baron_diaz(void)
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&barrel_9);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&barrel_10);
 
-				// выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3018 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3019 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3020 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3021 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3022 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3023 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3024 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3025 ); // выгружаем пути транспорта
+				// выгружаем путиа
+				REMOVE_CAR_RECORDING( 3018 );
+				REMOVE_CAR_RECORDING( 3019 );
+				REMOVE_CAR_RECORDING( 3020 );
+				REMOVE_CAR_RECORDING( 3021 );
+				REMOVE_CAR_RECORDING( 3022 );
+				REMOVE_CAR_RECORDING( 3023 );
+				REMOVE_CAR_RECORDING( 3024 );
+				REMOVE_CAR_RECORDING( 3025 );
 
 
 				if (skip == 1)
@@ -2335,12 +2307,12 @@ void baron_diaz(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 						GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_EPISODIC_14, 10, FALSE);	
 
 						WAIT( 0 );
@@ -2356,18 +2328,18 @@ void baron_diaz(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 2000);// +5000$
 						
 						WAIT( 0 );
@@ -2376,10 +2348,10 @@ void baron_diaz(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +2000 );
 					REGISTER_MISSION_PASSED("COK_2");
 					G_DIAZ = 3;
-					sutosave = 1;
+					autosave = 1;
 				}
 
 				G_ONMISSION = 0;
@@ -2396,13 +2368,13 @@ void baron_diaz(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(diaz_ico, "LG_05");
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( 55.627, -13.084, 11.174, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( 55.627, -13.084, 11.174, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 				blip_on = 0;
 				skip = 0;
 				cam_on = 0;
@@ -2419,8 +2391,8 @@ void baron_diaz(void)
 				Ped11_c = 0;
 				Ped12_c = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -2430,14 +2402,14 @@ void baron_diaz(void)
 					}
 				}
 
-				SET_CHAR_COORDINATES(GetPlayerPed(), 54.81, -8.80, 12.028);// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), 54.81, -8.80, 12.028);
 				SET_CHAR_HEADING(GetPlayerPed(), 358.0);
-				FORCE_WEATHER_NOW( WEATHER_EXTRA_SUNNY );//устанавливаем погода
-				//FORWARD_TO_TIME_OF_DAY(11, 30);//устанавливаем время
+				FORCE_WEATHER_NOW( WEATHER_EXTRA_SUNNY );
+				//FORWARD_TO_TIME_OF_DAY(11, 30);
 				RELEASE_WEATHER();
 				
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "COK_3", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "COK_3", 6 );
 				START_CUTSCENE_NOW("cok_3");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -2455,7 +2427,7 @@ void baron_diaz(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				Car car1;
 				Ped ped1, ped2, ped3, ped4, ped5, ped6, ped7, ped8, ped9, ped10, ped11, ped12, ped13, ped14, ped15, ped16, ped17, ped18, ped19, ped20;
@@ -2466,9 +2438,9 @@ void baron_diaz(void)
 
 				uint CarM1 = MODEL_SQUALO; // самая быстрая лодка
 				uint PedM1 = MODEL_M_M_PINDUS_01;// рабочий
-				uint PedM2 = MODEL_M_Y_DEALER;// охранник 1
-				uint PedM3 = MODEL_M_Y_DORK_02;// охранник 2
-				uint PedM4 = MODEL_M_Y_DRUG_01;// охранник 3
+				uint PedM2 = MODEL_M_Y_DEALER;
+				uint PedM3 = MODEL_M_Y_DORK_02;
+				uint PedM4 = MODEL_M_Y_DRUG_01;
 				uint stropa = ne_fast_strop;
 
 				LOAD_CHAR_DECISION_MAKER(2, &dm);
@@ -2477,9 +2449,9 @@ void baron_diaz(void)
 				SET_DECISION_MAKER_ATTRIBUTE_SIGHT_RANGE(dm, 50);
 				SET_DECISION_MAKER_ATTRIBUTE_SIGHT_RANGE(cdm, 50);
 
-				//создаём пушку и аптечку
-				CREATE_PICKUP_ROTATE(w_m4, 3, 60, -277.321, -937.242, 5.736, -75.0, -80.0, 170.0, &sweap_1);// даём винтовку
-				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, -226.841, -952.511, 9.276, -90.0, 0.0, 0.0, &aid_1);//Аптека
+				
+				CREATE_PICKUP_ROTATE(w_m4, 3, 60, -277.321, -937.242, 5.736, -75.0, -80.0, 170.0, &sweap_1);
+				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, -226.841, -952.511, 9.276, -90.0, 0.0, 0.0, &aid_1);
 
 				REQUEST_MODEL(stropa);
 				while (!HAS_MODEL_LOADED(stropa)) WAIT(0);
@@ -2487,41 +2459,41 @@ void baron_diaz(void)
 
 				REQUEST_MODEL(CarM1);
 				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
-				REQUEST_MODEL(PedM1);//  Бос банды Акул
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(PedM2);// Банда акул
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(PedM3);// Банда акул
-				while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(PedM4);// Банда акул
-				while (!HAS_MODEL_LOADED(PedM4));////проверка "пед загрузился" если нет то начанаем с начало
+				REQUEST_MODEL(PedM1);
+				while (!HAS_MODEL_LOADED(PedM1));
+				REQUEST_MODEL(PedM2);
+				while (!HAS_MODEL_LOADED(PedM2));
+				REQUEST_MODEL(PedM3);
+				while (!HAS_MODEL_LOADED(PedM3));
+				REQUEST_MODEL(PedM4);
+				while (!HAS_MODEL_LOADED(PedM4));
 
-				CREATE_CAR(CarM1, -162.55, -975.273, 9.726, &car1, 1);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				SET_CAR_HEADING(car1, -110.5);//градус поворота
+				CREATE_CAR(CarM1, -162.55, -975.273, 9.726, &car1, 1);
+				SET_CAR_HEADING(car1, -110.5);
 				CHANGE_CAR_COLOUR( car1, 25, 83 );//цвет
 				SET_EXTRA_CAR_COLOURS( car1, 113, 0 );//цвет отрожений
 				FREEZE_CAR_POSITION(car1, 1);
 
-				CREATE_CHAR (26, PedM2, -170.292, -953.067, 7.048, &ped1, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM1, -229.616, -948.984, 8.244, &ped2, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -221.552, -990.343, 17.89, &ped3, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CHAR (26, PedM3, -240.293, -927.673, 7.048, &ped4, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM4, -246.201, -953.496, 7.048, &ped5, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -184.271, -976.312, 7.048, &ped6, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM3, -236.761, -941.223, 8.278, &ped7, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM4, -201.082, -946.918, 8.278, &ped8, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -182.784, -950.537, 5.615, &ped9, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM3, -173.649, -977.676, 5.615, &ped10, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM4, -166.085, -978.308, 2.503, &ped11, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -133.283, -971.511, 2.503, &ped12, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CHAR (26, PedM1, -229.135, -949.874, 8.244, &ped13, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM1, -230.281, -949.741, 8.244, &ped14, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -329.281, -1008.74, 8.244, &ped15, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM3, -329.281, -1008.74, 8.244, &ped16, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM4, -329.281, -1008.74, 8.244, &ped17, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -329.281, -1008.74, 8.244, &ped18, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM3, -329.281, -1008.74, 8.244, &ped19, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM4, -329.281, -1008.74, 8.244, &ped20, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
+				CREATE_CHAR (26, PedM2, -170.292, -953.067, 7.048, &ped1, TRUE);
+				CREATE_CHAR (26, PedM1, -229.616, -948.984, 8.244, &ped2, TRUE);
+				CREATE_CHAR (26, PedM2, -221.552, -990.343, 17.89, &ped3, TRUE);
+				CREATE_CHAR (26, PedM3, -240.293, -927.673, 7.048, &ped4, TRUE);
+				CREATE_CHAR (26, PedM4, -246.201, -953.496, 7.048, &ped5, TRUE);
+				CREATE_CHAR (26, PedM2, -184.271, -976.312, 7.048, &ped6, TRUE);
+				CREATE_CHAR (26, PedM3, -236.761, -941.223, 8.278, &ped7, TRUE);
+				CREATE_CHAR (26, PedM4, -201.082, -946.918, 8.278, &ped8, TRUE);
+				CREATE_CHAR (26, PedM2, -182.784, -950.537, 5.615, &ped9, TRUE);
+				CREATE_CHAR (26, PedM3, -173.649, -977.676, 5.615, &ped10, TRUE);
+				CREATE_CHAR (26, PedM4, -166.085, -978.308, 2.503, &ped11, TRUE);
+				CREATE_CHAR (26, PedM2, -133.283, -971.511, 2.503, &ped12, TRUE);
+				CREATE_CHAR (26, PedM1, -229.135, -949.874, 8.244, &ped13, TRUE);
+				CREATE_CHAR (26, PedM1, -230.281, -949.741, 8.244, &ped14, TRUE);
+				CREATE_CHAR (26, PedM2, -329.281, -1008.74, 8.244, &ped15, TRUE);
+				CREATE_CHAR (26, PedM3, -329.281, -1008.74, 8.244, &ped16, TRUE);
+				CREATE_CHAR (26, PedM4, -329.281, -1008.74, 8.244, &ped17, TRUE);
+				CREATE_CHAR (26, PedM2, -329.281, -1008.74, 8.244, &ped18, TRUE);
+				CREATE_CHAR (26, PedM3, -329.281, -1008.74, 8.244, &ped19, TRUE);
+				CREATE_CHAR (26, PedM4, -329.281, -1008.74, 8.244, &ped20, TRUE);
 
 				SET_CHAR_HEADING(ped1, 67.802);
 				SET_CHAR_HEADING(ped2, 147.556);
@@ -2695,8 +2667,8 @@ void baron_diaz(void)
 					// патрули
 					if (Ped1_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -223.508, -932.199, 7.048, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -223.508, -932.199, 7.048, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped1_c = 1;
@@ -2705,8 +2677,8 @@ void baron_diaz(void)
 					}
 					else if (Ped1_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -170.292, -953.067, 7.048, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -170.292, -953.067, 7.048, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped1_c = 0;
@@ -2716,8 +2688,8 @@ void baron_diaz(void)
 					//------------------------
 					if (Ped4_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -249.613, -952.128, 7.048, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -249.613, -952.128, 7.048, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped4_c = 1;
@@ -2726,8 +2698,8 @@ void baron_diaz(void)
 					}
 					else if (Ped4_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -240.293, -927.673, 7.048, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -240.293, -927.673, 7.048, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped4_c = 0;
@@ -2737,8 +2709,8 @@ void baron_diaz(void)
 					//------------------------
 					if (Ped5_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped5,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -207.867, -967.923, 7.048, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped5,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -207.867, -967.923, 7.048, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped5_c = 1;
@@ -2747,8 +2719,8 @@ void baron_diaz(void)
 					}
 					else if (Ped5_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped5,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -246.201, -953.496, 7.048, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped5,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -246.201, -953.496, 7.048, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped5_c = 0;
@@ -2758,8 +2730,8 @@ void baron_diaz(void)
 					//------------------------
 					if (Ped6_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -244.966, -953.561, 7.048, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -244.966, -953.561, 7.048, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped6_c = 1;
@@ -2768,8 +2740,8 @@ void baron_diaz(void)
 					}
 					else if (Ped6_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -180.457, -978.327, 7.048, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -180.457, -978.327, 7.048, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped6_c = 0;
@@ -2779,8 +2751,8 @@ void baron_diaz(void)
 					//------------------------
 					if (Ped7_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped7,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -204.882, -953.826, 8.278, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped7,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -204.882, -953.826, 8.278, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped7_c = 1;
@@ -2789,8 +2761,8 @@ void baron_diaz(void)
 					}
 					else if (Ped7_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped7,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -236.761, -941.223, 8.278, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped7,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -236.761, -941.223, 8.278, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped7_c = 0;
@@ -2800,8 +2772,8 @@ void baron_diaz(void)
 					//------------------------
 					if (Ped8_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped8,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -207.062, -962.801, 8.278, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped8,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -207.062, -962.801, 8.278, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped8_c = 1;
@@ -2810,8 +2782,8 @@ void baron_diaz(void)
 					}
 					else if (Ped8_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped8,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -201.082, -946.918, 8.278, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped8,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -201.082, -946.918, 8.278, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped8_c = 0;
@@ -2821,8 +2793,8 @@ void baron_diaz(void)
 					//------------------------
 					if (Ped9_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped9,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -165.565, -957.381, 5.615, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped9,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -165.565, -957.381, 5.615, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped9_c = 1;
@@ -2831,8 +2803,8 @@ void baron_diaz(void)
 					}
 					else if (Ped9_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped9,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -182.784, -950.537, 5.615, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped9,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -182.784, -950.537, 5.615, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped9_c = 0;
@@ -2842,8 +2814,8 @@ void baron_diaz(void)
 					//------------------------
 					if (Ped10_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped10,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -200.412, -967.063, 6.908, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped10,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -200.412, -967.063, 6.908, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped10_c = 1;
@@ -2852,8 +2824,8 @@ void baron_diaz(void)
 					}
 					else if (Ped10_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped10,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -173.649, -977.676, 5.615, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped10,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -173.649, -977.676, 5.615, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped10_c = 0;
@@ -2863,8 +2835,8 @@ void baron_diaz(void)
 					//------------------------
 					if (Ped11_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped11,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -140.69, -989.188, 2.503, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped11,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -140.69, -989.188, 2.503, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped11_c = 1;
@@ -2873,8 +2845,8 @@ void baron_diaz(void)
 					}
 					else if (Ped11_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped11,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -166.085, -978.308, 2.503, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped11,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -166.085, -978.308, 2.503, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped11_c = 0;
@@ -2884,8 +2856,8 @@ void baron_diaz(void)
 					//------------------------
 					if (Ped12_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped12,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -174.126, -956.399, 2.408, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped12,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -174.126, -956.399, 2.408, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped12_c = 1;
@@ -2894,8 +2866,8 @@ void baron_diaz(void)
 					}
 					else if (Ped12_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped12,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -133.283, -971.511, 2.503, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped12,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -133.283, -971.511, 2.503, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped12_c = 0;
@@ -2904,13 +2876,13 @@ void baron_diaz(void)
 					}
 
 					//если игрок в зоне камера на лодку
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -195.725, -955.059, 4.36, &PlayR);//проверка "игрок на координатах"
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -195.725, -955.059, 4.36, &PlayR);
 					if (( PlayR < 20.5) && (cam_on == 0))
 					{
 						//если игрок в зоне камера на лодку
 						cam_on = 1;
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 						CREATE_CAM( 14, &camera );
 						POINT_CAM_AT_COORD	( camera, -161.348, -971.08, 9.819 );
 						SET_CAM_POS			( camera, -184.896, -975.011, 12.363 );
@@ -2922,18 +2894,18 @@ void baron_diaz(void)
 						PRINT_STRING_IN_STRING("string", "NECOK3_F", 5000, 1);//~COL_NET_12~Find a way to lower the boat.
 						SetTime(3000);
 
-						//удяляем камеру тут
+						//удяляем
 						SET_CAM_BEHIND_PED( GetPlayerPed() );
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 					}
 
-					// Рабочие атакуют игрока тут
-					if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), -207.655, -957.678, 7.159, -216.223, -942.365, 13.585, 0 )) && (hate == 0))// релокация Ленса
+					// Рабочие атакуют
+					if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), -207.655, -957.678, 7.159, -216.223, -942.365, 13.585, 0 )) && (hate == 0))// релокация
 					{
-						// Рабочие атакуют игрока
+						// Рабочие атакуют
 						SET_SENSE_RANGE(ped2, 50.0);
 						SET_CHAR_DECISION_MAKER(ped2, dm);
 						SET_COMBAT_DECISION_MAKER(ped2, cdm);
@@ -2960,17 +2932,17 @@ void baron_diaz(void)
 
 					//чекпойнт сброса лодки
 					GET_OBJECT_HEALTH(strop, &Health);
-					DRAW_CHECKPOINT( -232.421, -951.538, 7.695, 0.8, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -232.421, -951.538, 7.695, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( -232.421, -951.538, 7.695, 0.8, 160, 116, 209);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -232.421, -951.538, 7.695, &PlayR);
 					if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 						SET_CHAR_HEADING(GetPlayerPed(), 156.425);
 
-						//анимация тут
-						REQUEST_ANIMS( "amb@atm" );//загружаем файл с анимацией
+						//анимация
+						REQUEST_ANIMS( "amb@atm" );
 						while (!HAVE_ANIMS_LOADED( "amb@atm" )) WAIT(0);
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "f_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "f_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );
 						SetTime(1500);
 
 						//камера на лодку
@@ -2987,19 +2959,19 @@ void baron_diaz(void)
 						FREEZE_CAR_POSITION(car1, 0);
 						SetTime(3000);
 
-						//удяляем камеру тут
+						//удяляем
 						SET_CAM_BEHIND_PED( GetPlayerPed() );
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
-						SET_CHAR_COORDINATES(ped15, -202.931, -947.621, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped16, -202.931, -947.621, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped17, -202.931, -947.621, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped18, -207.561, -959.525, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped19, -207.561, -959.525, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped20, -207.561, -959.525, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped15, -202.931, -947.621, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped16, -202.931, -947.621, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped17, -202.931, -947.621, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped18, -207.561, -959.525, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped19, -207.561, -959.525, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped20, -207.561, -959.525, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
 						break;
 					}
 					else if (Health < 995)
@@ -3007,14 +2979,14 @@ void baron_diaz(void)
 						SET_OBJECT_COORDINATES(strop, -0.61, -0.35, -13.61);
 						FREEZE_CAR_POSITION(car1, 0);
 
-						SET_CHAR_COORDINATES(ped15, -206.1, -945.1, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped16, -206.1, -945.1, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped17, -206.1, -945.1, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped18, -211.2, -958.8, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped19, -211.2, -958.8, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped20, -211.2, -958.8, 8.278);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped15, -206.1, -945.1, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped16, -206.1, -945.1, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped17, -206.1, -945.1, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped18, -211.2, -958.8, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped19, -211.2, -958.8, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped20, -211.2, -958.8, 8.278);// возвращаем на исходную позицию рядом с чекпойнтом
 
-						// Рабочие атакуют игрока
+						// Рабочие атакуют
 						SET_SENSE_RANGE(ped2, 50.0);
 						SET_CHAR_DECISION_MAKER(ped2, dm);
 						SET_COMBAT_DECISION_MAKER(ped2, cdm);
@@ -3054,7 +3026,7 @@ void baron_diaz(void)
 
 				if (skip == 0)
 				{
-					//агрим новых врагов
+					//агрим врагов
 					SET_SENSE_RANGE(ped15, 25.0);
 					SET_SENSE_RANGE(ped16, 25.0);
 					SET_SENSE_RANGE(ped17, 25.0);
@@ -3078,7 +3050,7 @@ void baron_diaz(void)
 						{
 							if (PointN == 1)
 							{
-								REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(diaz_ico);
 								ADD_BLIP_FOR_COORD(52.5, -127.149, -0.657, &diaz_ico);
 								CHANGE_BLIP_SPRITE(diaz_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(diaz_ico, 5);   //цвет иконка на радаре (0=белая)
@@ -3088,13 +3060,13 @@ void baron_diaz(void)
 								PRINT_STRING_IN_STRING("string", "COK3_6", 5000, 1);//~g~Get the boat to the mansion.
 								PointN = 0;
 							}
-							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-							DRAW_CHECKPOINT( 52.5, -127.149, -0.657, 8.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 52.5, -127.149, -0.657, &PlayR);//проверка "игрок на координатах"
+							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+							DRAW_CHECKPOINT( 52.5, -127.149, -0.657, 8.5, 160, 116, 209);
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 52.5, -127.149, -0.657, &PlayR);
 							if (PlayR < 8.5)
 							{
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-								DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+								DO_SCREEN_FADE_OUT( 500 );
 								while(true)
 								{
 									WAIT(0);
@@ -3112,16 +3084,16 @@ void baron_diaz(void)
 								SET_CAM_FOV( camera, 45.0 );
 								SET_WIDESCREEN_BORDERS( 1 );
 
-								//паркуем катер
+								//паркуем
 								REQUEST_CAR_RECORDING( 3026 );
 								while (!HAS_CAR_RECORDING_BEEN_LOADED( 3026 )) WAIT(0);
 								START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3026, 0.0, 0.0, 0.0);
-								DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+								DO_SCREEN_FADE_IN( 500 );
 								SetTime(4000);
 
 								STOP_PLAYBACK_RECORDED_CAR(car1);
-								REMOVE_CAR_RECORDING( 3025 ); // выгружаем пути транспорта
-								DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+								REMOVE_CAR_RECORDING( 3025 );
+								DO_SCREEN_FADE_OUT( 500 );
 								while(true)
 								{
 									WAIT(0);
@@ -3131,17 +3103,17 @@ void baron_diaz(void)
 									}
 								}
 								
-								//удяляем камеру тут
+								//удяляем
 								SET_CAM_BEHIND_PED( GetPlayerPed() );
 								ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 								END_CAM_COMMANDS( &camera );
 								SET_WIDESCREEN_BORDERS( 0 );
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-								WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 58.38, -122.03, 2.5);//телепартируем из катера
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+								WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 58.38, -122.03, 2.5);//телепартируем иза
 								ALTER_WANTED_LEVEL(GetPlayerIndex(), 0);
 								APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
 								SetTime(1000);
-								DO_SCREEN_FADE_IN( 800 );// убирается затемнение экрана
+								DO_SCREEN_FADE_IN( 800 );
 								skip = 2;
 								break;
 							}
@@ -3150,7 +3122,7 @@ void baron_diaz(void)
 						{
 							if (PointN == 0)
 							{
-								REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(diaz_ico);
 								ADD_BLIP_FOR_CAR(car1, &diaz_ico);
 								CHANGE_BLIP_SPRITE(diaz_ico, BLIP_DESTINATION);
 								CHANGE_BLIP_COLOUR(diaz_ico, 19);   //цвет иконка на радаре (0=белая)
@@ -3177,11 +3149,11 @@ void baron_diaz(void)
 				}
 
 				// завершение миссии
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
-				REMOVE_PICKUP(sweap_1);// выгружаем оружие
-				REMOVE_PICKUP(aid_1);// выгружаем оружие
+				REMOVE_BLIP(diaz_ico);
+				REMOVE_PICKUP(sweap_1);// выгружаем
+				REMOVE_PICKUP(aid_1);// выгружаем
 				
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
@@ -3189,7 +3161,7 @@ void baron_diaz(void)
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(stropa);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -3211,7 +3183,7 @@ void baron_diaz(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
-				// выгружаем из памяти транспорт
+				// выгружаем из памяти
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 
 				// удаляем объекты
@@ -3225,12 +3197,12 @@ void baron_diaz(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -3245,18 +3217,18 @@ void baron_diaz(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 4000);// +5000$
 						
 						WAIT( 0 );
@@ -3265,10 +3237,10 @@ void baron_diaz(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +4000 );
 					REGISTER_MISSION_PASSED("COK_3");
 					G_DIAZ = 4;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 			}
@@ -3284,13 +3256,13 @@ void baron_diaz(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(diaz_ico, "LG_05");
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( 55.627, -13.084, 11.174, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( 55.627, -13.084, 11.174, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 				blip_on = 0;
 				skip = 0;
 				explo3 = 0;
@@ -3306,8 +3278,8 @@ void baron_diaz(void)
 				carHUD_x = 0.8421875;
 				carHUD_w = 0.0739583;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -3317,9 +3289,9 @@ void baron_diaz(void)
 					}
 				}
 
-				SET_CHAR_COORDINATES(GetPlayerPed(), 21.402, -83.133, 10.136);// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), 21.402, -83.133, 10.136);
 				SET_CHAR_HEADING(GetPlayerPed(), -80.802);
-				SET_CAR_DENSITY_MULTIPLIER(0);// отключаем пути
+				SET_CAR_DENSITY_MULTIPLIER(0);
 				SET_MAX_WANTED_LEVEL(0);
 				
 
@@ -3329,13 +3301,13 @@ void baron_diaz(void)
 				Object barrel_1, barrel_2, barrel_3;
 				Cam camera;
 
-				// грузим всё тут
+				//им всё
 				uint CarM1 = MODEL_MARQUIS;// барыга
 				uint CarM2 = MODEL_DINGHY;// конкуренты
 				uint CarM3 = MODEL_SQUALO;// игрок
-				uint CarM4 = MODEL_MAVERICK;// вертуха
+				uint CarM4 = MODEL_MAVERICK;//ртуха
 				uint PedM1 = MODEL_IG_LILJACOB;// Ланс
-				uint PedM2 = MODEL_M_Y_GLAT_LO_01;// Кубинец 1
+				uint PedM2 = MODEL_M_Y_GLAT_LO_01;
 
 				uint barrel = barrel4;
 				uint boatHEAL, vehHEAL;
@@ -3388,12 +3360,12 @@ void baron_diaz(void)
 				SET_EXTRA_CAR_COLOURS( car1, 113, 0 );//цвет отрожений
 				SET_CAR_HEALTH(car1, 2000);
 				SET_CAR_ENGINE_ON(car1, 1, 1);
-				LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
+				LOCK_CAR_DOORS(car1, 3);
 
 				CREATE_CAR(CarM1, 752.88, 1105.45, 0.9, &car2, TRUE);// барыга
 				SET_CAR_HEADING(car2, -18.916);
 
-				CREATE_CAR(CarM4, 448.778, 1692.379, 14.872, &car3, TRUE);// вертуха
+				CREATE_CAR(CarM4, 448.778, 1692.379, 14.872, &car3, TRUE);//ртуха
 				SET_CAR_HEADING(car3, 180.0);
 
 				// соперники
@@ -3402,36 +3374,36 @@ void baron_diaz(void)
 				CREATE_CAR(CarM2, 385.6, 1644.5, 9.5, &car6, TRUE);
 				CREATE_CAR(CarM2, 382.8, 1644.5, 9.5, &car7, TRUE);
 
-				// создаём педов тут
+				
 				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//Ленс
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM2, &ped2);// Водитель верталёта
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM2, &ped2);// Водительа
 				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM2, &ped3);// Водитель лодки 1
 				CREATE_CHAR_INSIDE_CAR(car5, 1, PedM2, &ped4);// Водитель лодки 2
 				CREATE_CHAR_INSIDE_CAR(car6, 1, PedM2, &ped5);// Водитель лодки 3
 				CREATE_CHAR_INSIDE_CAR(car7, 1, PedM2, &ped6);// Водитель лодки 4
 
-				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM2, 1, &ped7);// Пассажир верталёта 1
-				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM2, 2, &ped8);// Пассажир верталёта 2
+				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM2, 1, &ped7);// Пассажира 1
+				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM2, 2, &ped8);// Пассажира 2
 				CREATE_CHAR_AS_PASSENGER(car4, 1, PedM2, 0, &ped9);// Пассажир лодки 1
 				CREATE_CHAR_AS_PASSENGER(car5, 1, PedM2, 0, &ped10);// Пассажир лодки 2
 				CREATE_CHAR_AS_PASSENGER(car6, 1, PedM2, 0, &ped11);// Пассажир лодки 3
 				CREATE_CHAR_AS_PASSENGER(car7, 1, PedM2, 0, &ped12);// Пассажир лодки 4
 
-				CREATE_CHAR (26, PedM2, 285.901, -785.033, 5.06, &ped13, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, 289.048, -785.033, 5.06, &ped14, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, 292.287, -785.033, 5.06, &ped15, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, 293.268, -785.033, 5.06, &ped16, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, 295.563, -785.033, 5.06, &ped17, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, 296.544, -785.033, 5.06, &ped18, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, 299.098, -785.033, 5.06, &ped19, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
+				CREATE_CHAR (26, PedM2, 285.901, -785.033, 5.06, &ped13, TRUE);
+				CREATE_CHAR (26, PedM2, 289.048, -785.033, 5.06, &ped14, TRUE);
+				CREATE_CHAR (26, PedM2, 292.287, -785.033, 5.06, &ped15, TRUE);
+				CREATE_CHAR (26, PedM2, 293.268, -785.033, 5.06, &ped16, TRUE);
+				CREATE_CHAR (26, PedM2, 295.563, -785.033, 5.06, &ped17, TRUE);
+				CREATE_CHAR (26, PedM2, 296.544, -785.033, 5.06, &ped18, TRUE);
+				CREATE_CHAR (26, PedM2, 299.098, -785.033, 5.06, &ped19, TRUE);
 
-				// создаём бочки
+				
 				CREATE_OBJECT_NO_OFFSET(barrel, 286.008, -787.416, 5.445, &barrel_1, TRUE);
 				CREATE_OBJECT_NO_OFFSET(barrel, 289.167, -787.416, 5.445, &barrel_2, TRUE);
 				CREATE_OBJECT_NO_OFFSET(barrel, 292.585, -787.416, 5.445, &barrel_3, TRUE);
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "COK_4A", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "COK_4A", 6 );
 				START_CUTSCENE_NOW("cok_4a");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -3448,10 +3420,10 @@ void baron_diaz(void)
 				{
 					DO_SCREEN_FADE_IN(0);
 				}
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				FORCE_WEATHER_NOW( WEATHER_SUNNY );//устанавливаем погоду
-				FORWARD_TO_TIME_OF_DAY(18, 20);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(18, 20);
 
 				ADD_BLIP_FOR_COORD(54.246, -116.908, 4.154, &diaz_ico);
 				CHANGE_BLIP_SPRITE(diaz_ico, BLIP_OBJECTIVE);
@@ -3511,14 +3483,14 @@ void baron_diaz(void)
 				while (true)
 				{
 					WAIT( 0 );
-					DRAW_CHECKPOINT( 54.246, -116.908, 4.154, 2.0, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 54.246, -116.908, 4.154, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( 54.246, -116.908, 4.154, 2.0, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 54.246, -116.908, 4.154, &PlayR);
 					if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
-						REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-						DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+						REMOVE_BLIP(diaz_ico);
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+						DO_SCREEN_FADE_OUT( 500 );
 						while(true)
 						{
 							WAIT(0);
@@ -3528,11 +3500,11 @@ void baron_diaz(void)
 							}
 						}
 						SET_CAR_COORDINATES(car1, 96.83, -127.9, 1.5);
-						FORWARD_TO_TIME_OF_DAY(18, 30);//устанавливаем время
+						FORWARD_TO_TIME_OF_DAY(18, 30);
 
 						//==============================
 						//катсцена
-						LOAD_ADDITIONAL_TEXT( "COK_4A2", 6 ); // загружаем субтитры из *.GTX
+						LOAD_ADDITIONAL_TEXT( "COK_4A2", 6 );
 						START_CUTSCENE_NOW("cok_4a2");
 						while (!HAS_CUTSCENE_LOADED())
 						{
@@ -3556,7 +3528,7 @@ void baron_diaz(void)
 						START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car6, 3029, 0.0, 0.0, -0.515);
 						START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car7, 3030, 0.0, 0.0, -0.515);
 
-						DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+						DO_SCREEN_FADE_IN( 500 );
 						CREATE_CAM( 14, &camera );
 						POINT_CAM_AT_COORD	( camera, 156.604, -174.536, 5.136 );
 						SET_CAM_POS			( camera, 118.491, -182.894, 6.453 );
@@ -3580,7 +3552,7 @@ void baron_diaz(void)
 						APPLY_FORCE_TO_CAR( car1, 1, 0, 15, -1.5, 0, 0, 0, 1, 1, 1, 1 );
 						LOCK_CAR_DOORS(car1, 1); //убираем блокировку дверей
 
-						DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+						DO_SCREEN_FADE_OUT( 500 );
 						while(true)
 						{
 							WAIT(0);
@@ -3590,15 +3562,15 @@ void baron_diaz(void)
 							}
 						}
 
-						//убираем камеру
+						
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 						WARP_CHAR_INTO_CAR_AS_PASSENGER(ped1, car1, 0);
 						WARP_CHAR_INTO_CAR(GetPlayerPed(), car1);
-						DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+						DO_SCREEN_FADE_IN( 500 );
 						break;
 					}
 					else if ((HAS_DEATHARREST_EXECUTED()))
@@ -3749,38 +3721,38 @@ void baron_diaz(void)
 							STOP_PLAYBACK_RECORDED_CAR(car7);
 						}
 
-						// проверка соперники опередили игрока
+						// проверка соперники опередили
 						GET_CHAR_COORDINATES(ped3,  &PedX, &PedY, &PedZ);//вписываем координаты водитель лодки1 в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 752.88, 1105.45, 0.9, &PedR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 752.88, 1105.45, 0.9, &PedR);
 						if ( PedR < 20.5 )
 						{
 							hate = 1;
 						}
 						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);//вписываем координаты водитель лодки1 в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 752.88, 1105.45, 0.9, &PedR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 752.88, 1105.45, 0.9, &PedR);
 						if ( PedR < 20.5 )
 						{
 							hate = 1;
 						}
 						GET_CHAR_COORDINATES(ped5,  &PedX, &PedY, &PedZ);//вписываем координаты водитель лодки1 в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 752.88, 1105.45, 0.9, &PedR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 752.88, 1105.45, 0.9, &PedR);
 						if ( PedR < 20.5 )
 						{
 							hate = 1;
 						}
 						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);//вписываем координаты водитель лодки1 в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 752.88, 1105.45, 0.9, &PedR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 752.88, 1105.45, 0.9, &PedR);
 						if ( PedR < 20.5 )
 						{
 							hate = 1;
 						}
 
-						// Вернитесь в лодку тут
+						//рнитесь в лодку
 						if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (text1 == 7))
 						{
 							if (res == 0)
 							{
-								REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(diaz_ico);
 								ADD_BLIP_FOR_CAR(car1, &diaz_ico);
 								CHANGE_BLIP_SPRITE(diaz_ico, BLIP_DESTINATION);
 								CHANGE_BLIP_COLOUR(diaz_ico, 5);   //цвет иконка на радаре (0=белая)
@@ -3794,7 +3766,7 @@ void baron_diaz(void)
 						{
 							if ((res == 1) && (text1 == 7))
 							{
-								REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(diaz_ico);
 								ADD_BLIP_FOR_CAR(car2, &diaz_ico);
 								CHANGE_BLIP_SPRITE(diaz_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 								CHANGE_BLIP_SCALE(diaz_ico, 1.1);
@@ -3806,8 +3778,8 @@ void baron_diaz(void)
 							}
 						}
 
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 752.88, 1105.45, 0.9, &PlayR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 752.88, 1105.45, 0.9, &PlayR);
 						if ( PlayR < 20.5 )
 						{
 							break;
@@ -3874,13 +3846,13 @@ void baron_diaz(void)
 
 				if (skip == 0)
 				{
-					REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+					REMOVE_BLIP(diaz_ico);
 					FIX_CAR(car1);
 					SET_CAR_HEALTH(car1, 3000);
 					SET_ENGINE_HEALTH(car1, 5500);
 
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -3901,16 +3873,16 @@ void baron_diaz(void)
 					SET_CAR_COORDINATES(car7, 4.1, 0.1, 0.1);
 
 					// прячим тела
-					SET_CHAR_COORDINATES(ped3, 0.1, 1.1, 0.1);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-					SET_CHAR_COORDINATES(ped4, 0.1, 2.1, 0.1);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-					SET_CHAR_COORDINATES(ped5, 0.1, 3.1, 0.1);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-					SET_CHAR_COORDINATES(ped6, 0.1, 4.1, 0.1);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-					SET_CHAR_COORDINATES(ped9, 1.1, 0.1, 0.1);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-					SET_CHAR_COORDINATES(ped10, 2.1, 0.1, 0.1);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-					SET_CHAR_COORDINATES(ped11, 3.1, 0.1, 0.1);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-					SET_CHAR_COORDINATES(ped12, 4.1, 0.1, 0.1);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+					SET_CHAR_COORDINATES(ped3, 0.1, 1.1, 0.1);// возвращаем на исходную позицию рядом с чекпойнтом
+					SET_CHAR_COORDINATES(ped4, 0.1, 2.1, 0.1);// возвращаем на исходную позицию рядом с чекпойнтом
+					SET_CHAR_COORDINATES(ped5, 0.1, 3.1, 0.1);// возвращаем на исходную позицию рядом с чекпойнтом
+					SET_CHAR_COORDINATES(ped6, 0.1, 4.1, 0.1);// возвращаем на исходную позицию рядом с чекпойнтом
+					SET_CHAR_COORDINATES(ped9, 1.1, 0.1, 0.1);// возвращаем на исходную позицию рядом с чекпойнтом
+					SET_CHAR_COORDINATES(ped10, 2.1, 0.1, 0.1);// возвращаем на исходную позицию рядом с чекпойнтом
+					SET_CHAR_COORDINATES(ped11, 3.1, 0.1, 0.1);// возвращаем на исходную позицию рядом с чекпойнтом
+					SET_CHAR_COORDINATES(ped12, 4.1, 0.1, 0.1);// возвращаем на исходную позицию рядом с чекпойнтом
 
-					// удаляем педов
+					// удаляем
 					MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
 					MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
 					MARK_CHAR_AS_NO_LONGER_NEEDED(&ped5);
@@ -3927,13 +3899,13 @@ void baron_diaz(void)
 					MARK_CAR_AS_NO_LONGER_NEEDED(&car6);
 					MARK_CAR_AS_NO_LONGER_NEEDED(&car7);
 
-					// грузим новые лодки
+					//им новые лодки
 					CREATE_CAR(CarM2, 391.0, 1644.5, 9.5, &car4, TRUE);
 					CREATE_CAR(CarM2, 388.3, 1644.5, 9.5, &car5, TRUE);
 					CREATE_CAR(CarM2, 385.6, 1644.5, 9.5, &car6, TRUE);
 					CREATE_CAR(CarM2, 382.8, 1644.5, 9.5, &car7, TRUE);
 
-					// грузим новых педов
+					//им
 					CREATE_CHAR_INSIDE_CAR(car4, 1, PedM2, &ped3);// Водитель лодки 1
 					CREATE_CHAR_INSIDE_CAR(car5, 1, PedM2, &ped4);// Водитель лодки 2
 					CREATE_CHAR_INSIDE_CAR(car6, 1, PedM2, &ped5);// Водитель лодки 3
@@ -3946,7 +3918,7 @@ void baron_diaz(void)
 					WARP_CHAR_INTO_CAR_AS_PASSENGER(ped13, car4, 2);
 					WARP_CHAR_INTO_CAR_AS_PASSENGER(ped14, car5, 2);
 
-					// создаём педов на пристани
+					
 					SET_CHAR_COORDINATES(ped15, 830.5306, 338.5532, 2.391025);
 					SET_CHAR_COORDINATES(ped16, 830.9352, 345.6001, 2.391025);
 					SET_CHAR_COORDINATES(ped17, 833.6221, 353.6065, 2.391025);
@@ -3958,7 +3930,7 @@ void baron_diaz(void)
 					SET_CHAR_HEADING(ped18, -90.0);
 					SET_CHAR_HEADING(ped19, -90.0);
 
-					// переносим бочки
+					// переносим
 					SET_OBJECT_COORDINATES(barrel_1, 828.001, 341.093, 1.899);
 					SET_OBJECT_COORDINATES(barrel_2, 829.436, 353.956, 1.899);
 					SET_OBJECT_COORDINATES(barrel_3, 830.827, 367.108, 1.899);
@@ -4059,10 +4031,10 @@ void baron_diaz(void)
 					SET_SENSE_RANGE(ped19, 55.0);
 					SET_SENSE_RANGE(ped1, 0.01);
 
-					FORWARD_TO_TIME_OF_DAY(19, 20);//устанавливаем время
+					FORWARD_TO_TIME_OF_DAY(19, 20);
 
 					//============= катсцена =================
-					LOAD_ADDITIONAL_TEXT( "COK_4B", 6 ); // загружаем субтитры из *.GTX
+					LOAD_ADDITIONAL_TEXT( "COK_4B", 6 );
 					START_CUTSCENE_NOW("cok_4b");
 					while (!HAS_CUTSCENE_LOADED())
 					{
@@ -4092,7 +4064,7 @@ void baron_diaz(void)
 					WARP_CHAR_INTO_CAR(ped1, car1);
 					WARP_CHAR_INTO_CAR_AS_PASSENGER(GetPlayerPed(), car1, 0);
 
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 					explo2 = 0;
 					explo3 = 0;
 					explo4 = 0;
@@ -4108,17 +4080,17 @@ void baron_diaz(void)
 					{
 						WAIT( 0 );
 						GET_CAR_HEALTH(car1, &boatHEAL);
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты водитель лодки1 в переменную
 
 						// Игрок покинул лодку
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, PlayX, PlayY, PlayZ, &PlayR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, PlayX, PlayY, PlayZ, &PlayR);
 						if ((boatHEAL < 10) || ( PlayR > 80.0 ))
 						{
 							SET_CHAR_INVINCIBLE(ped1, 0);
 							SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// Игрок смертный
 							EXPLODE_CAR(car1, 1, 1);
-							WAIT(100);
+							WAIT(0);
 							if (!IS_CHAR_DEAD(GetPlayerPed()))
 							{
 								PRINT_STRING_IN_STRING("string", "COK3_7", 5000, 1);//~r~You destroyed the boat!
@@ -4133,7 +4105,7 @@ void baron_diaz(void)
 						}
 
 						// смертность соперников
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 765.95, 636.33, 1.7, &PlayR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 765.95, 636.33, 1.7, &PlayR);
 						if (( PlayR < 10.0 ) && (explo2 == 0))
 						{
 							UpdateWeaponOfPed(GetPlayerPed(), WEAPON_EPISODIC_9);
@@ -4147,7 +4119,7 @@ void baron_diaz(void)
 							SET_CHAR_INVINCIBLE(ped4, 1);
 						}
 
-						// выкрики Томми
+						// выкрики
 						if (text1 == 1)
 						{
 							NEW_SCRIPTED_CONVERSATION();
@@ -4218,7 +4190,7 @@ void baron_diaz(void)
 						{
 							if (play_Speech == 0)
 							{
-								GET_DISTANCE_BETWEEN_COORDS_3D(  PlayX, PlayY, PlayZ, 846.84, 438.12, 1.7, &PlayR);//проверка "игрок на координатах"
+								GET_DISTANCE_BETWEEN_COORDS_3D(  PlayX, PlayY, PlayZ, 846.84, 438.12, 1.7, &PlayR);
 								if ( PlayR < 10.0 )
 								{
 									NEW_SCRIPTED_CONVERSATION();
@@ -4234,7 +4206,7 @@ void baron_diaz(void)
 						{
 							if (play_Speech == 0)
 							{
-								GET_DISTANCE_BETWEEN_COORDS_3D(  PlayX, PlayY, PlayZ, 727.99, 85.03, 1.7, &PlayR);//проверка "игрок на координатах"
+								GET_DISTANCE_BETWEEN_COORDS_3D(  PlayX, PlayY, PlayZ, 727.99, 85.03, 1.7, &PlayR);
 								if ( PlayR < 10.0 )
 								{
 									NEW_SCRIPTED_CONVERSATION();
@@ -4276,7 +4248,7 @@ void baron_diaz(void)
 						carHUD_y3 = carHUD_x-carHUD_y2;
 						DRAW_SPRITE( 0, carHUD_y3, 0.80925926, carH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
 
-						// взрыв вертолёта
+						// взрыва
 						GET_CAR_HEALTH(car3, &vehHEAL);
 						if ((vehHEAL < 600) && (explo9 == 0))
 						{
@@ -4284,7 +4256,7 @@ void baron_diaz(void)
 							explo9 = 1;
 						}
 
-						// пересаживаем второго стрелка с верталёта
+						// пересаживаем второго стрелка са
 						if ((IS_CHAR_DEAD(ped8)) && (explo8 == 0))
 						{
 							if ((!IS_CHAR_DEAD(ped7)) && (explo7 == 0))
@@ -4319,7 +4291,7 @@ void baron_diaz(void)
 						}
 
 						// финалим миссию
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 99.77, -128.93, 1.5, &PedR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, 99.77, -128.93, 1.5, &PedR);
 						if ( PedR < 10.0 )
 						{
 							FIX_CAR(car1);
@@ -4329,8 +4301,8 @@ void baron_diaz(void)
 							STOP_PLAYBACK_RECORDED_CAR(car5);
 							STOP_PLAYBACK_RECORDED_CAR(car6);
 							STOP_PLAYBACK_RECORDED_CAR(car7);
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -4340,16 +4312,16 @@ void baron_diaz(void)
 								}
 							}
 
-							// прячем вертолёт и лодки соперников
+							// прячем и лодки соперников
 							SET_CAR_COORDINATES(car1, 57.78, -127.52, 1.4);
 							SET_CAR_COORDINATES(car3, 752.88, 1105.45, 0.9);
 							SET_CAR_COORDINATES(car4, 753.88, 1105.45, 0.9);
 							SET_CAR_COORDINATES(car5, 752.88, 1106.45, 0.9);
 							SET_CAR_COORDINATES(car6, 753.88, 1106.45, 0.9);
 							SET_CAR_COORDINATES(car7, 751.88, 1104.45, 0.9);
-							WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 56.41, -122.91, 2.2);//телепартируем из катера
+							WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 56.41, -122.91, 2.2);//телепартируем иза
 							SET_CHAR_HEADING(GetPlayerPed(), 169.87);
-							WARP_CHAR_INTO_CAR(ped1, car1);// садим Ленса за руль
+							WARP_CHAR_INTO_CAR(ped1, car1);// садим за руль
 
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, 58.431, -125.217, 2.447 );
@@ -4360,9 +4332,9 @@ void baron_diaz(void)
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
 							SetTime(500);
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							DO_SCREEN_FADE_IN( 500 );
 
-							// грузим анимации
+							//им анимации
 							REQUEST_ANIMS( "amb@hang_str_idls" );
 							while (!HAVE_ANIMS_LOADED( "amb@hang_str_idls" )) WAIT(0);
 
@@ -4387,7 +4359,7 @@ void baron_diaz(void)
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 							ADD_LINE_TO_CONVERSATION(0, "R2_GB", "COK4_27", 0, 0);//Okay, Mr. Lance Vance Dance.
-							TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 1500 );//Воиспроизвидение анимации на педе
+							TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 1500 );
 							START_SCRIPT_CONVERSATION(1, 1);
 							SetSpeech();
 
@@ -4396,7 +4368,7 @@ void baron_diaz(void)
 							GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_EPISODIC_9, 30, FALSE);
 							SET_CHAR_AMMO(GetPlayerPed(), WEAPON_EPISODIC_9, 60);
 
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -4406,15 +4378,15 @@ void baron_diaz(void)
 								}
 							}
 
-							// убираем камеру
+							// убираем
 							SET_CAM_BEHIND_PED( GetPlayerPed() );
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// разморозить
 
-							SET_CAR_COORDINATES(car1, 1907.78, 1927.52, 1.4);// телепортируем Ланса и его катер
-							DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+							SET_CAR_COORDINATES(car1, 1907.78, 1927.52, 1.4);
+							DO_SCREEN_FADE_IN( 1000 );
 							skip = 2;
 							break;
 						}
@@ -4430,7 +4402,7 @@ void baron_diaz(void)
 				SET_CAR_DENSITY_MULTIPLIER(1);// включаем пути
 				SET_MAX_WANTED_LEVEL(6);
 				RELEASE_WEATHER();
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 
 				STOP_PLAYBACK_RECORDED_CAR(car1);
 				STOP_PLAYBACK_RECORDED_CAR(car3);
@@ -4439,7 +4411,7 @@ void baron_diaz(void)
 				STOP_PLAYBACK_RECORDED_CAR(car6);
 				STOP_PLAYBACK_RECORDED_CAR(car7);
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM3);
@@ -4448,7 +4420,7 @@ void baron_diaz(void)
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(barrel);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -4469,7 +4441,7 @@ void baron_diaz(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped18);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
 
-				// выгружаем из памяти транспорт
+				// выгружаем из памяти
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -4488,29 +4460,29 @@ void baron_diaz(void)
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&barrel_2);
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&barrel_3);
 
-				// выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3027 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3028 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3029 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3030 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3031 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3032 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3033 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3034 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3035 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3036 ); // выгружаем пути транспорта
+				// выгружаем путиа
+				REMOVE_CAR_RECORDING( 3027 );
+				REMOVE_CAR_RECORDING( 3028 );
+				REMOVE_CAR_RECORDING( 3029 );
+				REMOVE_CAR_RECORDING( 3030 );
+				REMOVE_CAR_RECORDING( 3031 );
+				REMOVE_CAR_RECORDING( 3032 );
+				REMOVE_CAR_RECORDING( 3033 );
+				REMOVE_CAR_RECORDING( 3034 );
+				REMOVE_CAR_RECORDING( 3035 );
+				REMOVE_CAR_RECORDING( 3036 );
 
 				if (skip == 1)
 				{
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 						GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_EPISODIC_9, 10, FALSE);	
 
 						WAIT( 0 );
@@ -4527,18 +4499,18 @@ void baron_diaz(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 10000);// +5000$
 						
 						WAIT( 0 );
@@ -4547,10 +4519,10 @@ void baron_diaz(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +10000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +10000 );
 					REGISTER_MISSION_PASSED("COK_4");
 					G_DIAZ = 5;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 			}
@@ -4566,18 +4538,18 @@ void baron_diaz(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(diaz_ico, "LG_06");
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( 925.599, 453.827, 5.389, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 925.599, 453.827, 5.389, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( 925.599, 453.827, 5.389, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 925.599, 453.827, 5.389, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 				blip_on = 0;
 				skip = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -4587,7 +4559,7 @@ void baron_diaz(void)
 					}
 				}
 
-				SET_CHAR_COORDINATES(GetPlayerPed(), 925.06, 453.041, 5.763);// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), 925.06, 453.041, 5.763);
 				SET_CHAR_HEADING(GetPlayerPed(), -128.321);
 
 				// меняем погоду
@@ -4595,7 +4567,7 @@ void baron_diaz(void)
 				FORCE_WEATHER(WEATHER_LIGHTNING);
 				
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "RESC_1A", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "RESC_1A", 6 );
 				START_CUTSCENE_NOW("resc_1a");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -4613,7 +4585,7 @@ void baron_diaz(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				Ped ped1, ped2, ped3, ped4, ped5, ped6, ped7, ped8, ped9, ped10, ped11, ped12, ped13, ped14, ped15, ped16, ped17, ped18, ped19, ped20;
 				Car car1, car2, car3, car4, car5, car6, car7, car8;
@@ -4629,90 +4601,90 @@ void baron_diaz(void)
 
 				uint PedM1 = MODEL_M_Y_GMAF_HI_02;// мафиозник 1
 				uint PedM2 = MODEL_M_Y_GMAF_LO_01;// мафиозник 2
-				uint PedM3 = MODEL_IG_LILJACOBW;// Ленс
+				uint PedM3 = MODEL_IG_LILJACOBW;
 				uint CarM1 = MODEL_SENTINEL;//
 				uint CarM2 = MODEL_COMET;//
 
-				REQUEST_MODEL(CarM1);//загрузка модели из переменной
-				while (!HAS_MODEL_LOADED(CarM1));//проверка "машина загрузилась" если нет то начанаем с начало
-				REQUEST_MODEL(CarM2);//загрузка модели из переменной
-				while (!HAS_MODEL_LOADED(CarM2));//проверка "машина загрузилась" если нет то начанаем с начало
+				REQUEST_MODEL(CarM1);
+				while (!HAS_MODEL_LOADED(CarM1));
+				REQUEST_MODEL(CarM2);
+				while (!HAS_MODEL_LOADED(CarM2));
 				REQUEST_MODEL(PedM1);// мафиозник 1
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				REQUEST_MODEL(PedM2);// мафиозник 2
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(PedM3);// Ленс
-				while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM2));
+				REQUEST_MODEL(PedM3);
+				while (!HAS_MODEL_LOADED(PedM3));
 
-				// грузим текстуры
+				//им текстуры
 				textur = LOAD_TXD( "sunshine_race" );
 				fon = GET_TEXTURE( textur, "fon_hud" );
 
-				// грузим анимации
+				//им анимации
 				REQUEST_ANIMS( "amb@hospital_idles_b" );
 				while (!HAVE_ANIMS_LOADED( "amb@hospital_idles_b" )) WAIT(0);
 				REQUEST_ANIMS( "amb@hang_str_idls" );
 				while (!HAVE_ANIMS_LOADED( "amb@hang_str_idls" )) WAIT(0);
 
-				// грузим пути
+				//им пути
 				REQUEST_CAR_RECORDING( 3037 );
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3037 )) WAIT(0);
 				REQUEST_CAR_RECORDING( 3038 );
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3038 )) WAIT(0);
 
-				CREATE_CAR(CarM1, -859.371, 687.583, 6.024, &car1, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
+				CREATE_CAR(CarM1, -859.371, 687.583, 6.024, &car1, TRUE);
 				SET_CAR_HEADING(car1, 180.0);
-				CREATE_CAR(CarM1, -804.949, 540.607, 6.024, &car2, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CAR(CarM1, 280.497, -789.48, 5.134, &car3, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CAR(CarM1, 285.003, -789.48, 5.134, &car4, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CAR(CarM2, 290.229, -789.48, 5.134, &car5, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CAR(CarM2, 294.735, -789.48, 5.134, &car6, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CAR(CarM2, 299.961, -789.48, 5.134, &car7, TRUE);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				LOCK_CAR_DOORS(car2, 3); // запераем автомобиль
-				LOCK_CAR_DOORS(car5, 3); // запераем автомобиль
-				LOCK_CAR_DOORS(car6, 3); // запераем автомобиль
-				LOCK_CAR_DOORS(car7, 3); // запераем автомобиль
+				CREATE_CAR(CarM1, -804.949, 540.607, 6.024, &car2, TRUE);
+				CREATE_CAR(CarM1, 280.497, -789.48, 5.134, &car3, TRUE);
+				CREATE_CAR(CarM1, 285.003, -789.48, 5.134, &car4, TRUE);
+				CREATE_CAR(CarM2, 290.229, -789.48, 5.134, &car5, TRUE);
+				CREATE_CAR(CarM2, 294.735, -789.48, 5.134, &car6, TRUE);
+				CREATE_CAR(CarM2, 299.961, -789.48, 5.134, &car7, TRUE);
+				LOCK_CAR_DOORS(car2, 3); // запераем
+				LOCK_CAR_DOORS(car5, 3); // запераем
+				LOCK_CAR_DOORS(car6, 3); // запераем
+				LOCK_CAR_DOORS(car7, 3); // запераем
 
-				// создаём педов
-				CREATE_CHAR (26, PedM3, -877.801, 698.787, 6.087, &ped1, TRUE);// Ленс
+				
+				CREATE_CHAR (26, PedM3, -877.801, 698.787, 6.087, &ped1, TRUE);
 				SET_CHAR_HEADING(ped1, -85.0);
-				CREATE_CHAR (26, PedM2, -806.318, 543.247, 6.376, &ped2, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -806.318, 543.247, 6.376, &ped2, TRUE);
 				SET_CHAR_HEADING(ped2, -90.0);
-				CREATE_CHAR (26, PedM1, -832.028, 551.219, 6.376, &ped3, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM1, -832.028, 551.219, 6.376, &ped3, TRUE);
 				SET_CHAR_HEADING(ped3, -90.0);
-				CREATE_CHAR (26, PedM2, -829.532, 569.635, 6.376, &ped4, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -829.532, 569.635, 6.376, &ped4, TRUE);
 				SET_CHAR_HEADING(ped4, -135.0);
-				CREATE_CHAR (26, PedM1, -823.867, 589.372, 6.376, &ped5, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM1, -823.867, 589.372, 6.376, &ped5, TRUE);
 				SET_CHAR_HEADING(ped5, 70.0);
-				CREATE_CHAR (26, PedM2, -833.512, 589.755, 6.376, &ped6, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -833.512, 589.755, 6.376, &ped6, TRUE);
 				SET_CHAR_HEADING(ped6, -90.0);
-				CREATE_CHAR (26, PedM2, -839.194, 595.568, 6.376, &ped7, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -839.194, 595.568, 6.376, &ped7, TRUE);
 				SET_CHAR_HEADING(ped7, -40.0);
-				CREATE_CHAR (26, PedM1, -828.775, 604.308, 6.376, &ped8, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM1, -828.775, 604.308, 6.376, &ped8, TRUE);
 				SET_CHAR_HEADING(ped8, 45.0);
-				CREATE_CHAR (26, PedM1, -826.28, 626.677, 6.376, &ped9, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM1, -826.28, 626.677, 6.376, &ped9, TRUE);
 				SET_CHAR_HEADING(ped9, -175.0);
-				CREATE_CHAR (26, PedM2, -834.626, 628.5, 6.376, &ped10, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -834.626, 628.5, 6.376, &ped10, TRUE);
 				SET_CHAR_HEADING(ped10, 135);
-				CREATE_CHAR (26, PedM1, -843.056, 629.552, 6.376, &ped11, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM1, -843.056, 629.552, 6.376, &ped11, TRUE);
 				SET_CHAR_HEADING(ped11, -90.0);
-				CREATE_CHAR (26, PedM2, -852.833, 646.328, 6.376, &ped12, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -852.833, 646.328, 6.376, &ped12, TRUE);
 				SET_CHAR_HEADING(ped12, -105.0);
-				CREATE_CHAR (26, PedM1, -841.6, 654.367, 6.376, &ped13, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM1, -841.6, 654.367, 6.376, &ped13, TRUE);
 				SET_CHAR_HEADING(ped13, 35.0);
-				CREATE_CHAR (26, PedM2, -851.658, 658.97, 6.376, &ped14, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -851.658, 658.97, 6.376, &ped14, TRUE);
 				SET_CHAR_HEADING(ped14, -160.0);
-				CREATE_CHAR (26, PedM1, -846.861, 674.119, 6.376, &ped15, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM1, -846.861, 674.119, 6.376, &ped15, TRUE);
 				SET_CHAR_HEADING(ped15, 50.0);
-				CREATE_CHAR (26, PedM1, -859.724, 674.275, 12.058, &ped16, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM1, -859.724, 674.275, 12.058, &ped16, TRUE);
 				SET_CHAR_HEADING(ped16, -125.0);
-				CREATE_CHAR (26, PedM2, -877.905, 687.239, 6.376, &ped17, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -877.905, 687.239, 6.376, &ped17, TRUE);
 				SET_CHAR_HEADING(ped17, -140.0);
-				CREATE_CHAR (26, PedM2, -869.438, 688.449, 6.376, &ped18, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -869.438, 688.449, 6.376, &ped18, TRUE);
 				SET_CHAR_HEADING(ped18, 160.0);
-				CREATE_CHAR (26, PedM2, -868.151, 662.902, 6.376, &ped19, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -868.151, 662.902, 6.376, &ped19, TRUE);
 				SET_CHAR_HEADING(ped19, -90.0);
-				CREATE_CHAR (26, PedM2, -806.372, 538.009, 6.376, &ped20, TRUE);// Сбитый прохожий
+				CREATE_CHAR (26, PedM2, -806.372, 538.009, 6.376, &ped20, TRUE);
 				SET_CHAR_HEADING(ped20, -90.0);
 
 				// вооружаем
@@ -4869,15 +4841,15 @@ void baron_diaz(void)
 
 				SET_CHAR_COMPONENT_VARIATION(ped1, 1, 0, 0);
 				SET_CHAR_COLLISION(ped1, 0);
-				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stomach", "amb@hospital_idles_b", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stomach", "amb@hospital_idles_b", 8.0, 1, 0, 0, 0, -1 );
 				SetTime(1000);
-				SET_CHAR_COORDINATES_NO_OFFSET(ped1, -877.801, 698.787, 6.5);// перемещаем игрока
+				SET_CHAR_COORDINATES_NO_OFFSET(ped1, -877.801, 698.787, 6.5);
 				FREEZE_CHAR_POSITION(ped1, 1);
 
-				//создаём пушку и аптечку
-				CREATE_PICKUP_ROTATE(w_ruger, 3, 60, -737.191, 552.031, 5.861, -75.0, -80.0, 80.0, &sweap_1);// даём винтовку
-				CREATE_PICKUP_ROTATE(w_uzi, 3, 60, -873.587, 697.847, 6.403, -90.0, 0.0, -70.0, &sweap_2);// даём винтовку
-				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, -873.723, 695.923, 6.403, -90.0, 0.0, 0.0, &aid_1);//Аптека
+				
+				CREATE_PICKUP_ROTATE(w_ruger, 3, 60, -737.191, 552.031, 5.861, -75.0, -80.0, 80.0, &sweap_1);
+				CREATE_PICKUP_ROTATE(w_uzi, 3, 60, -873.587, 697.847, 6.403, -90.0, 0.0, -70.0, &sweap_2);
+				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, -873.723, 695.923, 6.403, -90.0, 0.0, 0.0, &aid_1);
 				SET_MAX_WANTED_LEVEL(2);
 
 				SETTIMERB( 0 );
@@ -4910,7 +4882,7 @@ void baron_diaz(void)
 					SET_TEXT_DROPSHADOW(1, 26, 90, 128, 255);
 					DISPLAY_TEXT(0.78815097, 0.77731852, "KPM1_3"); //LANCE'S HEALTH:
 
-					// тики тут
+					// тики
 					if (TIMERB() > 700)
 					{
 						Health -= 1;
@@ -4931,14 +4903,14 @@ void baron_diaz(void)
 						hate = 0;
 					}
 
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 					GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты водитель лодки1 в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, PlayX, PlayY, PlayZ, &PlayR);//проверка "игрок на координатах"
+					GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, PlayX, PlayY, PlayZ, &PlayR);
 					if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
-						REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-						DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+						REMOVE_BLIP(diaz_ico);
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+						DO_SCREEN_FADE_OUT( 1000 );
 						while(true)
 						{
 							WAIT(0);
@@ -4952,7 +4924,7 @@ void baron_diaz(void)
 						PAUSE_PLAYBACK_RECORDED_CAR(car3);
 						PAUSE_PLAYBACK_RECORDED_CAR(car4);
 
-						// выгружаем из памяти педов
+						// выгружаем из памяти
 						MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 						MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
 						MARK_CHAR_AS_NO_LONGER_NEEDED(&ped4);
@@ -4973,29 +4945,29 @@ void baron_diaz(void)
 						MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
 						MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
-						// создаём новых мафиозников тут
-						CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped2);// Вуду за рулём Гаитянин
-						CREATE_CHAR_INSIDE_CAR(car4, 1, PedM2, &ped3);// Вуду за рулём Гаитянин
-						CREATE_CHAR_AS_PASSENGER(car3, 1, PedM2, 0, &ped4);// Вуду пассажир Гаитянин
-						CREATE_CHAR_AS_PASSENGER(car4, 1, PedM2, 0, &ped5);// Вуду пассажир Гаитянин
-						CREATE_CHAR_AS_PASSENGER(car3, 1, PedM2, 1, &ped6);// Вуду пассажир Гаитянин
-						CREATE_CHAR_AS_PASSENGER(car4, 1, PedM1, 2, &ped7);// Вуду пассажир Гаитянин
+						
+						CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped2);
+						CREATE_CHAR_INSIDE_CAR(car4, 1, PedM2, &ped3);
+						CREATE_CHAR_AS_PASSENGER(car3, 1, PedM2, 0, &ped4);
+						CREATE_CHAR_AS_PASSENGER(car4, 1, PedM2, 0, &ped5);
+						CREATE_CHAR_AS_PASSENGER(car3, 1, PedM2, 1, &ped6);
+						CREATE_CHAR_AS_PASSENGER(car4, 1, PedM1, 2, &ped7);
 
-						CREATE_CHAR_INSIDE_CAR(car5, 1, PedM2, &ped10);// Вуду за рулём Гаитянин
-						CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped11);// Вуду за рулём Гаитянин
-						CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped12);// Вуду за рулём Гаитянин
-						CREATE_CHAR_AS_PASSENGER(car5, 1, PedM2, 0, &ped13);// Вуду пассажир Гаитянин
-						CREATE_CHAR_AS_PASSENGER(car6, 1, PedM1, 0, &ped14);// Вуду пассажир Гаитянин
-						CREATE_CHAR_AS_PASSENGER(car7, 1, PedM1, 0, &ped15);// Вуду пассажир Гаитянин
-						CREATE_CHAR (26, PedM2, 280.231, -784.338, 5.134, &ped16, TRUE);// Сбитый прохожий
-						CREATE_CHAR (26, PedM2, 282.531, -784.338, 5.134, &ped17, TRUE);// Сбитый прохожий
-						CREATE_CHAR (26, PedM2, 284.837, -784.338, 5.134, &ped18, TRUE);// Сбитый прохожий
-						CREATE_CHAR (26, PedM2, 287.141, -784.338, 5.134, &ped19, TRUE);// Сбитый прохожий
-						CREATE_CHAR (26, PedM2, 289.444, -784.338, 5.134, &ped20, TRUE);// Сбитый прохожий
-						CREATE_CHAR (26, PedM2, 291.844, -784.338, 5.134, &ped8, TRUE);// Сбитый прохожий
-						CREATE_CHAR (26, PedM2, 294.144, -784.338, 5.134, &ped9, TRUE);// Сбитый прохожий
+						CREATE_CHAR_INSIDE_CAR(car5, 1, PedM2, &ped10);
+						CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped11);
+						CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped12);
+						CREATE_CHAR_AS_PASSENGER(car5, 1, PedM2, 0, &ped13);
+						CREATE_CHAR_AS_PASSENGER(car6, 1, PedM1, 0, &ped14);
+						CREATE_CHAR_AS_PASSENGER(car7, 1, PedM1, 0, &ped15);
+						CREATE_CHAR (26, PedM2, 280.231, -784.338, 5.134, &ped16, TRUE);
+						CREATE_CHAR (26, PedM2, 282.531, -784.338, 5.134, &ped17, TRUE);
+						CREATE_CHAR (26, PedM2, 284.837, -784.338, 5.134, &ped18, TRUE);
+						CREATE_CHAR (26, PedM2, 287.141, -784.338, 5.134, &ped19, TRUE);
+						CREATE_CHAR (26, PedM2, 289.444, -784.338, 5.134, &ped20, TRUE);
+						CREATE_CHAR (26, PedM2, 291.844, -784.338, 5.134, &ped8, TRUE);
+						CREATE_CHAR (26, PedM2, 294.144, -784.338, 5.134, &ped9, TRUE);
 
-						// ставим камеру
+						
 						CREATE_CAM( 14, &camera );
 						POINT_CAM_AT_COORD	( camera, -876.923, 698.383, 6.289);
 						SET_CAM_POS			( camera, -879.756, 705.374, 7.414 );
@@ -5005,37 +4977,37 @@ void baron_diaz(void)
 						SET_CAM_FOV( camera, 45.0 );
 						SET_WIDESCREEN_BORDERS( 1 );
 
-						SET_CHAR_COORDINATES(GetPlayerPed(), -875.998, 698.787, 5.622);// перемещаем игрока
+						SET_CHAR_COORDINATES(GetPlayerPed(), -875.998, 698.787, 5.622);
 						SET_CHAR_HEADING(GetPlayerPed(), 85.0);
 
-						SET_CHAR_COORDINATES(ped1, -877.062, 698.787, 5.74);// перемещаем игрока
+						SET_CHAR_COORDINATES(ped1, -877.062, 698.787, 5.74);
 						SET_CHAR_HEADING(ped1, -85.0);
 
 						FREEZE_CHAR_POSITION(ped1, 0);
 						SET_CHAR_COLLISION(ped1, 1);
 						SET_CHAR_MOVEMENT_ANIMS_BLOCKED(ped1, 0);
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stomach", "amb@hospital_idles_b", 8.0, 1, 0, 0, 0, 10 );//Воиспроизвидение анимации на педе
-						DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stomach", "amb@hospital_idles_b", 8.0, 1, 0, 0, 0, 10 );
+						DO_SCREEN_FADE_IN( 1000 );
 
-						// воспроизводим звук
+						
 						NEW_SCRIPTED_CONVERSATION();
 						ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "NIKO");
 						ADD_LINE_TO_CONVERSATION(0, "R2_GC", "RESC_4", 0, 0);//There goes my careful planning blown to shit, thanks to you. You screwed up real good, Lance!
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 5000 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 5000 );
 						START_SCRIPT_CONVERSATION(1, 1);
 						SetSpeech();
 
 						NEW_SCRIPTED_CONVERSATION();
 						ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "ROMAN");
 						ADD_LINE_TO_CONVERSATION(0, "R2_GD", "RESC_5", 0, 0);//He killed my brother. What do you expect me to do, mow his lawns?
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 4000 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 4000 );
 						START_SCRIPT_CONVERSATION(1, 1);
 						SetSpeech();
 
 						NEW_SCRIPTED_CONVERSATION();
 						ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "NIKO");
 						ADD_LINE_TO_CONVERSATION(0, "R2_HA", "RESC_6", 0, 0);//We're gonna have to take out that prick Diaz before he takes us out.
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 4500 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 4500 );
 						START_SCRIPT_CONVERSATION(1, 1);
 						SetTime(3200);
 						SetSpeech();
@@ -5049,7 +5021,7 @@ void baron_diaz(void)
 						NEW_SCRIPTED_CONVERSATION();
 						ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "ROMAN");
 						ADD_LINE_TO_CONVERSATION(0, "R2_HC", "RESC_2", 0, 0);//Sure...I guess...nice to see you, too.
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 3000 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 3000 );
 						START_SCRIPT_CONVERSATION(1, 1);
 						SetSpeech();
 
@@ -5060,7 +5032,7 @@ void baron_diaz(void)
 						NEW_SCRIPTED_CONVERSATION();
 						ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "NIKO");
 						ADD_LINE_TO_CONVERSATION(0, "R2_HD", "RESC_3", 0, 0);//Let's get out of here.
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 2000 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 2000 );
 						START_SCRIPT_CONVERSATION(1, 1);
 						SetSpeech();
 
@@ -5148,11 +5120,11 @@ void baron_diaz(void)
 						// приезжают ещё мафиозники
 						SET_CAR_COORDINATES(car2, -808.543, 538.712, 6.024);
 						SET_CAR_HEADING(car2, 50.0);
-						SET_CAR_COORDINATES(car5, -723.865, 543.306, 6.007);// перемещаем игрока
+						SET_CAR_COORDINATES(car5, -723.865, 543.306, 6.007);
 						SET_CAR_HEADING(car5, 95.0);
-						SET_CAR_COORDINATES(car6, -641.205, 556.361, 5.847);// перемещаем игрока
+						SET_CAR_COORDINATES(car6, -641.205, 556.361, 5.847);
 						SET_CAR_HEADING(car6, -175.0);
-						SET_CAR_COORDINATES(car7, -633.097, 521.224, 5.853);// перемещаем игрока
+						SET_CAR_COORDINATES(car7, -633.097, 521.224, 5.853);
 						SET_CAR_HEADING(car7, 5.0);
 
 						// меняем ракурс
@@ -5163,7 +5135,7 @@ void baron_diaz(void)
 						PRINT_STRING_IN_STRING("string", "KPM1_5", 5000, 1);//~g~Diaz's guys are after you! Get Lance to the hospital.
 						SetTime(2000);
 
-						// высаживаются тут
+						// высаживаются
 						STOP_PLAYBACK_RECORDED_CAR(car3);
 						STOP_PLAYBACK_RECORDED_CAR(car4);
 						TASK_GO_STRAIGHT_TO_COORD(ped2, -865.191, 684.245, 6.376, 3, -2);
@@ -5178,12 +5150,12 @@ void baron_diaz(void)
 						SET_CHAR_RELATIONSHIP_GROUP(ped1, 0);
 						SET_CHAR_RELATIONSHIP(ped1, 5, 24);
 
-						//убираем камеру
+						
 						SetTime(500);
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 						SET_CHAR_HEALTH(ped1, 1500);
 
 						del_car = 1;
@@ -5224,9 +5196,9 @@ void baron_diaz(void)
 					while (true)
 					{
 						WAIT( 0 );
-						// Ленс сталкирит за Томми
-						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+						 
+						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), PedX+15, PedY+15, PedZ+15, PedX-15, PedY-15, PedZ-15, 0 ))
 						{
 							if (stalking == 0)
@@ -5235,7 +5207,7 @@ void baron_diaz(void)
 								stalking = 1;
 							}
 
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &stalkerR);//проверка "игрок на координатах"
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &stalkerR);
 							if ((stalkerR < 1.5) && (stalking == 1) && (in_car == 0))
 							{
 								stalking = 2;
@@ -5294,16 +5266,16 @@ void baron_diaz(void)
 							hate = 0;
 						}
 
-						DRAW_CHECKPOINT( -388.097, 1695.986, 4.953, 2.0, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -388.097, 1695.986, 4.953, &PedR);//проверка "игрок на координатах"
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -388.097, 1695.986, 4.953, &PlayR);//проверка "игрок на координатах"
+						DRAW_CHECKPOINT( -388.097, 1695.986, 4.953, 2.0, 160, 116, 209);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -388.097, 1695.986, 4.953, &PedR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -388.097, 1695.986, 4.953, &PlayR);
 						if (( PlayR < 2.0) && ( PedR < 2.0))
 						{
 							//
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -5313,7 +5285,7 @@ void baron_diaz(void)
 								}
 							}
 
-							// ставим камеру
+							
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, -388.097, 1695.986, 5.961);
 							SET_CAM_POS			( camera, -397.775, 1692.438, 7.52 );
@@ -5322,9 +5294,9 @@ void baron_diaz(void)
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							DO_SCREEN_FADE_IN( 500 );
 
-							// воспроизводим звук
+							
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "ROMAN");
 							ADD_LINE_TO_CONVERSATION(0, "R2_LA", "RESC_7", 0, 0);//Get patched up and meet me on the bridge to Star Island, ok?
@@ -5337,7 +5309,7 @@ void baron_diaz(void)
 							START_SCRIPT_CONVERSATION(1, 1);
 							SetSpeech();
 
-							WARP_CHAR_FROM_CAR_TO_COORD(ped1, -388.488, 1693.351, 5.156);//телепартируем из катера
+							WARP_CHAR_FROM_CAR_TO_COORD(ped1, -388.488, 1693.351, 5.156);//телепартируем иза
 							SET_CHAR_HEADING(ped1, 160.0);
 							TASK_GO_STRAIGHT_TO_COORD(ped1, -389.176, 1684.607, 6.763, 2, -2);// идёт в двери
 
@@ -5346,12 +5318,12 @@ void baron_diaz(void)
 							SET_CAM_POS			( camera, -395.328, 1690.509, 5.97 );
 							SetTime(2000);
 
-							//убираем камеру
+							
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-							SET_CHAR_COORDINATES(ped1, -877.447, 698.787, 5.74);// перемещаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+							SET_CHAR_COORDINATES(ped1, -877.447, 698.787, 5.74);
 
 							skip = 2;
 							break;
@@ -5374,24 +5346,24 @@ void baron_diaz(void)
 				// завершение миссии
 				SET_MAX_WANTED_LEVEL(6);
 				RELEASE_WEATHER();
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
-				REMOVE_PICKUP(sweap_1);// выгружаем оружие
-				REMOVE_PICKUP(sweap_2);// выгружаем оружие
-				REMOVE_PICKUP(aid_1);// выгружаем оружие
+				REMOVE_BLIP(diaz_ico);
+				REMOVE_PICKUP(sweap_1);// выгружаем
+				REMOVE_PICKUP(sweap_2);// выгружаем
+				REMOVE_PICKUP(aid_1);// выгружаем
 				RELEASE_TEXTURE( fon );
 				REMOVE_TXD( textur );
 
-				REMOVE_CAR_RECORDING( 3037 ); // выгружаем пути транспорта
-				REMOVE_CAR_RECORDING( 3038 ); // выгружаем пути транспорта
+				REMOVE_CAR_RECORDING( 3037 );
+				REMOVE_CAR_RECORDING( 3038 );
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -5413,7 +5385,7 @@ void baron_diaz(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
-				// выгружаем из памяти транспорт
+				// выгружаем из памяти
 				if (del_car == 0)
 				{
 					MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
@@ -5435,12 +5407,12 @@ void baron_diaz(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -5455,12 +5427,12 @@ void baron_diaz(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 						WAIT( 0 );
 						if ( TIMERA() > 4000 )
 						{
@@ -5469,7 +5441,7 @@ void baron_diaz(void)
 					}
 					REGISTER_MISSION_PASSED("KENT_1");
 					G_DIAZ = 8;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 			}
@@ -5485,13 +5457,13 @@ void baron_diaz(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(diaz_ico, "LG_05");
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( 172.483, 40.766, 4.996, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 172.483, 40.766, 4.996, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( 172.483, 40.766, 4.996, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 172.483, 40.766, 4.996, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 				blip_on = 0;
 				skip = 0;
 				PointN = 0;
@@ -5523,8 +5495,8 @@ void baron_diaz(void)
 				textur = LOAD_TXD( "sunshine_race" );
 				fon = GET_TEXTURE( textur, "fon_hud" );
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -5535,60 +5507,60 @@ void baron_diaz(void)
 				}
 
 				FORCE_WEATHER_NOW(WEATHER_SUNNY);
-				FORWARD_TO_TIME_OF_DAY(19, 30);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(19, 30);
 				RELEASE_WEATHER();
 
-				SET_CHAR_COORDINATES(GetPlayerPed(), 169.921, 40.644, 5.385);// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), 169.921, 40.644, 5.385);
 				SET_CHAR_HEADING(GetPlayerPed(), 5.0);
 
-				// грузим модели
+				
 				REQUEST_MODEL(PedM1);// Ланс
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				REQUEST_MODEL(PedM2);// Диаз
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM2));
 				REQUEST_MODEL(PedM3);// охрана 1
-				while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM3));
 				REQUEST_MODEL(PedM4);// охрана 2
-				while (!HAS_MODEL_LOADED(PedM4));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM4));
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 
-				// грузим пути
+				//им пути
 				REQUEST_CAR_RECORDING( 3039 );
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3039 )) WAIT(0);
 
-				// грузим анимации
+				//им анимации
 				REQUEST_ANIMS( "amb_sit_couch_m" );
 				while (!HAVE_ANIMS_LOADED( "amb_sit_couch_m" )) WAIT(0);
 
-				// создайм машину и Ланса в ней
-				CREATE_CAR(CarM1, 75.654, -11.412, 7.35, &car1, TRUE);// Инфернус
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);// Вуду за рулём Гаитянин
-				CLEAR_AREA( 172.483, 40.766, 4.996, 45.0, 1);//очещаем зону загрузки
+				// создайм и в ней
+				CREATE_CAR(CarM1, 75.654, -11.412, 7.35, &car1, TRUE);
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
+				CLEAR_AREA( 172.483, 40.766, 4.996, 45.0, 1);
 
 
-				// создаём моделей педов
+				
 				CREATE_CHAR (26, PedM2, 49.176, -62.955, 20.605, &ped2, TRUE);// Диаз
-				CREATE_CHAR (26, PedM3, 88.581, 1.5411, 9.4441, &ped3, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, 87.779, -9.641, 11.637, &ped4, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, 57.935, -20.11, 13.921, &ped5, TRUE);// охранник
-				CREATE_CHAR (26, PedM3, 50.579, -20.11, 13.921, &ped6, TRUE);// охранник
-				CREATE_CHAR (26, PedM3, 44.647, -4.735, 11.518, &ped7, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, 44.647, -3.187, 11.518, &ped8, TRUE);// охранник
-				CREATE_CHAR (26, PedM3, 116.704, -27.488, 7.034, &ped9, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, 142.989, -30.812, 7.034, &ped10, TRUE);// охранник
-				CREATE_CHAR (26, PedM3, 143.403, -56.902, 7.034, &ped11, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, 114.436, -64.933, 7.034, &ped12, TRUE);// охранник
-				CREATE_CHAR (26, PedM3, 91.8561, -87.436, 7.034, &ped13, TRUE);// охранник
-				CREATE_CHAR (26, PedM3, -14.858, -29.318, 7.034, &ped14, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, -16.798, -55.771, 7.034, &ped15, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, -36.821, -40.292, 7.034, &ped16, TRUE);// охранник
-				CREATE_CHAR (26, PedM3, -42.248, -52.966, 7.034, &ped17, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, 16.8441, -90.387, 7.034, &ped18, TRUE);// охранник
-				CREATE_CHAR (26, PedM3, 30.6181, -83.031, 7.034, &ped19, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, 62.9211, -65.775, 4.573, &ped20, TRUE);// охранник
-				CREATE_CHAR (26, PedM4, 67.8221, -91.899, 4.737, &ped21, TRUE);// охранник
-				CREATE_CHAR (26, PedM3, 27.2501, -54.622, 5.855, &ped22, TRUE);// охранник
+				CREATE_CHAR (26, PedM3, 88.581, 1.5411, 9.4441, &ped3, TRUE);
+				CREATE_CHAR (26, PedM4, 87.779, -9.641, 11.637, &ped4, TRUE);
+				CREATE_CHAR (26, PedM4, 57.935, -20.11, 13.921, &ped5, TRUE);
+				CREATE_CHAR (26, PedM3, 50.579, -20.11, 13.921, &ped6, TRUE);
+				CREATE_CHAR (26, PedM3, 44.647, -4.735, 11.518, &ped7, TRUE);
+				CREATE_CHAR (26, PedM4, 44.647, -3.187, 11.518, &ped8, TRUE);
+				CREATE_CHAR (26, PedM3, 116.704, -27.488, 7.034, &ped9, TRUE);
+				CREATE_CHAR (26, PedM4, 142.989, -30.812, 7.034, &ped10, TRUE);
+				CREATE_CHAR (26, PedM3, 143.403, -56.902, 7.034, &ped11, TRUE);
+				CREATE_CHAR (26, PedM4, 114.436, -64.933, 7.034, &ped12, TRUE);
+				CREATE_CHAR (26, PedM3, 91.8561, -87.436, 7.034, &ped13, TRUE);
+				CREATE_CHAR (26, PedM3, -14.858, -29.318, 7.034, &ped14, TRUE);
+				CREATE_CHAR (26, PedM4, -16.798, -55.771, 7.034, &ped15, TRUE);
+				CREATE_CHAR (26, PedM4, -36.821, -40.292, 7.034, &ped16, TRUE);
+				CREATE_CHAR (26, PedM3, -42.248, -52.966, 7.034, &ped17, TRUE);
+				CREATE_CHAR (26, PedM4, 16.8441, -90.387, 7.034, &ped18, TRUE);
+				CREATE_CHAR (26, PedM3, 30.6181, -83.031, 7.034, &ped19, TRUE);
+				CREATE_CHAR (26, PedM4, 62.9211, -65.775, 4.573, &ped20, TRUE);
+				CREATE_CHAR (26, PedM4, 67.8221, -91.899, 4.737, &ped21, TRUE);
+				CREATE_CHAR (26, PedM3, 27.2501, -54.622, 5.855, &ped22, TRUE);
 				SET_CHAR_INVINCIBLE(ped2, 1);
 
 				SET_CHAR_HEADING(ped2, 50.0);
@@ -5605,7 +5577,7 @@ void baron_diaz(void)
 				SET_CHAR_HEADING(ped20, 95.0);
 				SET_CHAR_HEADING(ped22, 95.0);
 
-				// ставим камеру
+				
 				CREATE_CAM( 14, &camera );
 				POINT_CAM_AT_COORD	( camera, 162.309, 41.062, 6.396);
 				SET_CAM_POS			( camera, 182.717, 44.488, 6.448 );
@@ -5617,10 +5589,10 @@ void baron_diaz(void)
 
 				// стартуем пути
 				START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3039, 0.0, 0.0, 0.0);
-				DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+				DO_SCREEN_FADE_IN( 1000 );
 				SetTime(5000);
 
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -5632,17 +5604,17 @@ void baron_diaz(void)
 				
 				// пути стоп
 				STOP_PLAYBACK_RECORDED_CAR(car1);
-				REMOVE_CAR_RECORDING( 3039 ); // выгружаем пути транспорта
+				REMOVE_CAR_RECORDING( 3039 );
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 
-				// высаживаем Ленса
-				WARP_CHAR_FROM_CAR_TO_COORD(ped1, 158.191, 34.033, 5.84);//телепартируем из катера
+				
+				WARP_CHAR_FROM_CAR_TO_COORD(ped1, 158.191, 34.033, 5.84);//телепартируем иза
 				SET_CHAR_HEADING(ped1, -180.0);
-				SET_CHAR_COORDINATES(GetPlayerPed(), 157.288, 33.366, 5.841);// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), 157.288, 33.366, 5.841);
 				SET_CHAR_HEADING(GetPlayerPed(), -180.0);
 
-				// даём винтовку
+				
 				GIVE_WEAPON_TO_CHAR(GetPlayerPed(), WEAPON_M4, 30, FALSE);	
 				SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_M4, TRUE);
 				ADD_ARMOUR_TO_CHAR(GetPlayerPed(), 100);
@@ -5650,8 +5622,8 @@ void baron_diaz(void)
 				SET_CURRENT_CHAR_WEAPON(ped1, WEAPON_M4, TRUE);
 
 				SET_CHAR_COLLISION(ped2, 0);
-				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "sit_down_idle_01", "amb_sit_couch_m", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-				SET_CHAR_COORDINATES_NO_OFFSET(ped2, 51.228, -63.21, 20.815);// перемещаем игрока
+				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "sit_down_idle_01", "amb_sit_couch_m", 8.0, 1, 0, 0, 0, -1 );
+				SET_CHAR_COORDINATES_NO_OFFSET(ped2, 51.228, -63.21, 20.815);
 				FREEZE_CHAR_POSITION(ped2, 1);
 
 				// меняем ракурс камеры
@@ -5659,7 +5631,7 @@ void baron_diaz(void)
 				SET_CAM_POS			( camera, 57.033, -62.379, 20.633 );
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "ASS_1", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "ASS_1", 6 );
 				START_CUTSCENE_NOW("ass_1");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -5681,35 +5653,35 @@ void baron_diaz(void)
 				POINT_CAM_AT_COORD	( camera, 49.246, -62.855, 21.229);
 				SET_CAM_POS			( camera, 55.855, -57.442, 22.821 );
 				SET_CHAR_COLLISION(ped2, 1);
-				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "sit_down_idle_01", "amb_sit_couch_m", 8.0, 1, 0, 0, 0, 10 );//Воиспроизвидение анимации на педе
-				SET_CHAR_COORDINATES_NO_OFFSET(ped2, 50.906, -62.993, 19.952);// перемещаем игрока
+				TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "sit_down_idle_01", "amb_sit_couch_m", 8.0, 1, 0, 0, 0, 10 );
+				SET_CHAR_COORDINATES_NO_OFFSET(ped2, 50.906, -62.993, 19.952);
 				FREEZE_CHAR_POSITION(ped2, 0);
-				TASK_GO_STRAIGHT_TO_COORD(ped2, 49.126, -62.994, 19.952, 2, -2);// Диаз идёт к мониторам
+				TASK_GO_STRAIGHT_TO_COORD(ped2, 49.126, -62.994, 19.952, 2, -2);// Диаз мониторам
 				SetTime(4000);
 
-				// создаём пикапы
-				CREATE_PICKUP_ROTATE(w_mp5, 3, 60, 50.487, -60.02, 20.299, 90.0, -180.0, -50.0, &sweap_1);// даём винтовку
-				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, 105.462, -42.917, 6.995, 0.0, 0.0, 90.0, &aid_1);//Аптека
+				
+				CREATE_PICKUP_ROTATE(w_mp5, 3, 60, 50.487, -60.02, 20.299, 90.0, -180.0, -50.0, &sweap_1);
+				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, 105.462, -42.917, 6.995, 0.0, 0.0, 90.0, &aid_1);
 				ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(sweap_1, "mansion_int");
 				ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(aid_1, "mansion_int");
 
 				// меняем ракурс камеры
 				POINT_CAM_AT_COORD	( camera, 161.229, 25.492, 8.204);
 				SET_CAM_POS			( camera, 139.721, 27.711, 10.859 );
-				SET_CHAR_COORDINATES(ped2, 51.317, -62.526, 19.952);// перемещаем игрока
+				SET_CHAR_COORDINATES(ped2, 51.317, -62.526, 19.952);
 				SET_CHAR_HEADING(ped2, 5.0);
-				// эффект видеозаписи тут
-				TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 153.382, 8.826, 6.906, 3, -2);// Томми бежит по территории
+				// эффект видеозаписи
+				TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 153.382, 8.826, 6.906, 3, -2);// бежит по территории
 				TASK_GO_STRAIGHT_TO_COORD(ped1, 153.038, 8.826, 6.905, 3, -2);// Ланс бедит по территории
 				SetTime(3500);
 
 				// меняем ракурс камеры
 				POINT_CAM_AT_COORD	( camera, 51.635, -67.683, 21.761);
 				SET_CAM_POS			( camera, 50.696, -55.421, 20.402 );
-				TASK_GO_STRAIGHT_TO_COORD(ped2, 51.226, -60.046, 19.952, 2, -2);// Диаз идёт к столу с МР5
+				TASK_GO_STRAIGHT_TO_COORD(ped2, 51.226, -60.046, 19.952, 2, -2);// Диаз столу с МР5
 				SetTime(3500);
 
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -5719,18 +5691,18 @@ void baron_diaz(void)
 					}
 				}
 
-				//убираем камеру
+				
 				ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 				END_CAM_COMMANDS( &camera );
 				SET_WIDESCREEN_BORDERS( 0 );
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
-				SET_CHAR_COORDINATES(ped1, 153.382, 23.08, 6.906);// перемещаем игрока
+				SET_CHAR_COORDINATES(ped1, 153.382, 23.08, 6.906);
 				SET_CHAR_HEADING(ped1, 165.0);
-				SET_CHAR_COORDINATES_NO_OFFSET(GetPlayerPed(), 153.038, 21.733, 7.179);// перемещаем игрока
+				SET_CHAR_COORDINATES_NO_OFFSET(GetPlayerPed(), 153.038, 21.733, 7.179);
 				SET_CHAR_HEADING(GetPlayerPed(), 0.0);
 
-				// вооружаем тут;
+				// вооружаем;
 				UpdateWeaponOfPed(ped3, WEAPON_MP5);
 				UpdateWeaponOfPed(ped4, WEAPON_MICRO_UZI);
 				UpdateWeaponOfPed(ped5, WEAPON_MICRO_UZI);
@@ -5773,7 +5745,7 @@ void baron_diaz(void)
 				SET_CURRENT_CHAR_WEAPON(ped21, WEAPON_MP5, TRUE);
 				SET_CURRENT_CHAR_WEAPON(ped22, WEAPON_MP5, TRUE);
 
-				// агрим тут
+				// агрим
 				SET_CHAR_RELATIONSHIP_GROUP(ped3, 5);
 				SET_CHAR_RELATIONSHIP_GROUP(ped4, 5);
 				SET_CHAR_RELATIONSHIP_GROUP(ped5, 5);
@@ -5880,11 +5852,11 @@ void baron_diaz(void)
 				SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped22, FALSE);
 				SetTime(500);
 
-				DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+				DO_SCREEN_FADE_IN( 1000 );
 				SET_MAX_WANTED_LEVEL(0);
 				SET_CHAR_INVINCIBLE(ped2, 0);
 				SET_CHAR_HEALTH(ped2, 1000);
-				SET_CHAR_COORDINATES(ped2, 54.242, -56.25, 19.59);// перемещаем игрока
+				SET_CHAR_COORDINATES(ped2, 54.242, -56.25, 19.59);
 				SET_CHAR_HEADING(ped2, 5.0);
 				UpdateWeaponOfPed(ped2, WEAPON_MP5);
 				SET_CURRENT_CHAR_WEAPON(ped2, WEAPON_MP5, TRUE);
@@ -5904,7 +5876,7 @@ void baron_diaz(void)
 				ADD_BLIP_FOR_CHAR(ped1, &lance_ico);
 				CHANGE_BLIP_SPRITE(lance_ico, BLIP_DESTINATION);
 				CHANGE_BLIP_COLOUR(lance_ico, 19);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(lance_ico, "NE_LANCE");//иконка на радаре "Связной"
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(lance_ico, "NE_LANCE");
 				CHANGE_BLIP_SCALE(lance_ico, 0.77999990);
 				PRINT_STRING_IN_STRING("string", "ASS1_16", 5000, 1);//~g~Kill Diaz!
 				play = 2;
@@ -6018,9 +5990,9 @@ void baron_diaz(void)
 						}
 					}
 
-					GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);//проверка "игрок на координатах"
+					GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
 					if ( PlayR > 75)
 					{
 						EXPLODE_CHAR_HEAD(ped1);
@@ -6049,7 +6021,7 @@ void baron_diaz(void)
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
 						SET_CAM_FOV( camera, 45.0 );
 						SET_WIDESCREEN_BORDERS( 1 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 						TASK_GO_STRAIGHT_TO_COORD(ped2, 54.242, -44.102, 19.59, 2, -2);// идёт в двери
 						SetTime(2000);
 
@@ -6072,11 +6044,11 @@ void baron_diaz(void)
 						SetSpeech();
 						SetTime(1000);
 
-						//убираем камеру
+						
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 						// агрим Диаза
 						SET_CHAR_RELATIONSHIP_GROUP(ped2, 5);
@@ -6113,49 +6085,49 @@ void baron_diaz(void)
 						MARK_CHAR_AS_NO_LONGER_NEEDED(&ped21);
 						MARK_CHAR_AS_NO_LONGER_NEEDED(&ped22);
 
-						// создаём моделей педов
-						CREATE_CHAR (26, PedM3, 167.981, -22.2, 7.01, &ped3, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -24.2, 7.01, &ped4, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -26.2, 7.01, &ped5, TRUE);// охранник
-						CREATE_CHAR (26, PedM3, 167.981, -28.2, 7.01, &ped6, TRUE);// охранник
-						CREATE_CHAR (26, PedM3, 167.981, -30.2, 7.01, &ped7, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -32.2, 7.01, &ped8, TRUE);// охранник
-						CREATE_CHAR (26, PedM3, 167.981, -34.2, 7.01, &ped9, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -36.2, 7.01, &ped10, TRUE);// охранник
-						CREATE_CHAR (26, PedM3, 167.981, -38.2, 7.01, &ped11, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -40.2, 7.01, &ped12, TRUE);// охранник
-						CREATE_CHAR (26, PedM3, 167.981, -42.2, 7.01, &ped13, TRUE);// охранник
-						CREATE_CHAR (26, PedM3, 167.981, -44.2, 7.01, &ped14, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -46.2, 7.01, &ped15, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -48.2, 7.01, &ped16, TRUE);// охранник
-						CREATE_CHAR (26, PedM3, 167.981, -50.2, 7.01, &ped17, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -52.2, 7.01, &ped18, TRUE);// охранник
-						CREATE_CHAR (26, PedM3, 167.981, -54.2, 7.01, &ped19, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -56.2, 7.01, &ped20, TRUE);// охранник
-						CREATE_CHAR (26, PedM4, 167.981, -58.2, 7.01, &ped21, TRUE);// охранник
-						CREATE_CHAR (26, PedM3, 167.981, -60.2, 7.01, &ped22, TRUE);// охранник
+						
+						CREATE_CHAR (26, PedM3, 167.981, -22.2, 7.01, &ped3, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -24.2, 7.01, &ped4, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -26.2, 7.01, &ped5, TRUE);
+						CREATE_CHAR (26, PedM3, 167.981, -28.2, 7.01, &ped6, TRUE);
+						CREATE_CHAR (26, PedM3, 167.981, -30.2, 7.01, &ped7, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -32.2, 7.01, &ped8, TRUE);
+						CREATE_CHAR (26, PedM3, 167.981, -34.2, 7.01, &ped9, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -36.2, 7.01, &ped10, TRUE);
+						CREATE_CHAR (26, PedM3, 167.981, -38.2, 7.01, &ped11, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -40.2, 7.01, &ped12, TRUE);
+						CREATE_CHAR (26, PedM3, 167.981, -42.2, 7.01, &ped13, TRUE);
+						CREATE_CHAR (26, PedM3, 167.981, -44.2, 7.01, &ped14, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -46.2, 7.01, &ped15, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -48.2, 7.01, &ped16, TRUE);
+						CREATE_CHAR (26, PedM3, 167.981, -50.2, 7.01, &ped17, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -52.2, 7.01, &ped18, TRUE);
+						CREATE_CHAR (26, PedM3, 167.981, -54.2, 7.01, &ped19, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -56.2, 7.01, &ped20, TRUE);
+						CREATE_CHAR (26, PedM4, 167.981, -58.2, 7.01, &ped21, TRUE);
+						CREATE_CHAR (26, PedM3, 167.981, -60.2, 7.01, &ped22, TRUE);
 						SetTime(500);
 
-						SET_CHAR_COORDINATES(ped3, 116.126, -49.704, 11.825);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped4, 106.418, -44.642, 13.865);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped5, 115.103, -40.408, 16.805);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped6, 107.395, -49.736, 21.885);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped7, 115.103, -41.019, 24.776);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped8, 96.261, -42.201, 21.927);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped9, 97.395, -33.025, 21.927);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped10, 87.475, -26.625, 21.927);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped11, 96.261, -42.201, 13.771);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped12, 97.395, -33.025, 13.771);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped13, 87.475, -26.625, 13.771);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped14, 60.915, -23.015, 21.832);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped15, 49.775, -27.361, 21.832);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped16, 41.422, -39.817, 19.535);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped17, 71.359, -45.963, 19.584);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped18, 57.144, -49.929, 19.584);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped19, 51.869, -49.812, 19.584);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped20, 58.639, -23.448, 13.818);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped21, 58.617, -30.433, 13.818);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped22, 49.859, -30.247, 13.818);// перемещаем игрока
+						SET_CHAR_COORDINATES(ped3, 116.126, -49.704, 11.825);
+						SET_CHAR_COORDINATES(ped4, 106.418, -44.642, 13.865);
+						SET_CHAR_COORDINATES(ped5, 115.103, -40.408, 16.805);
+						SET_CHAR_COORDINATES(ped6, 107.395, -49.736, 21.885);
+						SET_CHAR_COORDINATES(ped7, 115.103, -41.019, 24.776);
+						SET_CHAR_COORDINATES(ped8, 96.261, -42.201, 21.927);
+						SET_CHAR_COORDINATES(ped9, 97.395, -33.025, 21.927);
+						SET_CHAR_COORDINATES(ped10, 87.475, -26.625, 21.927);
+						SET_CHAR_COORDINATES(ped11, 96.261, -42.201, 13.771);
+						SET_CHAR_COORDINATES(ped12, 97.395, -33.025, 13.771);
+						SET_CHAR_COORDINATES(ped13, 87.475, -26.625, 13.771);
+						SET_CHAR_COORDINATES(ped14, 60.915, -23.015, 21.832);
+						SET_CHAR_COORDINATES(ped15, 49.775, -27.361, 21.832);
+						SET_CHAR_COORDINATES(ped16, 41.422, -39.817, 19.535);
+						SET_CHAR_COORDINATES(ped17, 71.359, -45.963, 19.584);
+						SET_CHAR_COORDINATES(ped18, 57.144, -49.929, 19.584);
+						SET_CHAR_COORDINATES(ped19, 51.869, -49.812, 19.584);
+						SET_CHAR_COORDINATES(ped20, 58.639, -23.448, 13.818);
+						SET_CHAR_COORDINATES(ped21, 58.617, -30.433, 13.818);
+						SET_CHAR_COORDINATES(ped22, 49.859, -30.247, 13.818);
 
 						SET_CHAR_HEADING(ped4, -95.0);
 						SET_CHAR_HEADING(ped5, 90.0);
@@ -6173,7 +6145,7 @@ void baron_diaz(void)
 						SET_CHAR_HEADING(ped20, 170.0);
 						SET_CHAR_HEADING(ped22, -90.0);
 
-						// вооружаем тут;
+						// вооружаем;
 						UpdateWeaponOfPed(ped3, WEAPON_PISTOL);// 1
 						UpdateWeaponOfPed(ped4, WEAPON_PISTOL);// 2
 						UpdateWeaponOfPed(ped5, WEAPON_PISTOL);// 3
@@ -6216,7 +6188,7 @@ void baron_diaz(void)
 						SET_CURRENT_CHAR_WEAPON(ped21, WEAPON_PISTOL, TRUE);
 						SET_CURRENT_CHAR_WEAPON(ped22, WEAPON_MP5, TRUE);
 
-						// агрим тут
+						// агрим
 						SET_CHAR_RELATIONSHIP_GROUP(ped3, 5);
 						SET_CHAR_RELATIONSHIP_GROUP(ped4, 5);
 						SET_CHAR_RELATIONSHIP_GROUP(ped5, 5);
@@ -6351,7 +6323,7 @@ void baron_diaz(void)
 						}
 					}
 
-					// Ленс сталкирит за Томми
+					 
 					if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), PedX+22, PedY+22, PedZ+15, PedX-22, PedY-22, PedZ-15, 0 ))
 					{
 						if (stalking == 0)
@@ -6360,7 +6332,7 @@ void baron_diaz(void)
 							stalking = 1;
 						}
 
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &stalkerR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &stalkerR);
 						if ((stalkerR < 1.5) && (stalking == 1) && (in_car == 0))
 						{
 							stalking = 2;
@@ -6454,8 +6426,8 @@ void baron_diaz(void)
 				}
 				// завершение миссии
 				G_DIAZ = 8;
-				REMOVE_BLIP(lance_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(lance_ico);
+				REMOVE_BLIP(diaz_ico);
 				SET_MAX_WANTED_LEVEL(6);
 				REMOVE_PICKUP(sweap_1);
 				REMOVE_PICKUP(aid_1);
@@ -6465,39 +6437,39 @@ void baron_diaz(void)
 				
 				if (skip == 2)
 				{
-					SET_CHAR_COORDINATES(ped1, 167.981, -18.2, 7.01);// перемещаем игрока
+					SET_CHAR_COORDINATES(ped1, 167.981, -18.2, 7.01);
 					/*/ прячим трупы
-					SET_CHAR_COORDINATES(ped3, 167.981, -22.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped4, 167.981, -24.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped5, 167.981, -26.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped6, 167.981, -28.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped7, 167.981, -30.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped8, 167.981, -32.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped9, 167.981, -34.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped10, 167.981, -36.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped11, 167.981, -38.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped12, 167.981, -40.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped13, 167.981, -42.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped14, 167.981, -44.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped15, 167.981, -46.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped16, 167.981, -48.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped17, 167.981, -50.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped18, 167.981, -52.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped19, 167.981, -54.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped20, 167.981, -56.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped21, 167.981, -58.2, 7.01);// перемещаем игрока
-					SET_CHAR_COORDINATES(ped22, 167.981, -60.2, 7.01);// перемещаем игрока
+					SET_CHAR_COORDINATES(ped3, 167.981, -22.2, 7.01);
+					SET_CHAR_COORDINATES(ped4, 167.981, -24.2, 7.01);
+					SET_CHAR_COORDINATES(ped5, 167.981, -26.2, 7.01);
+					SET_CHAR_COORDINATES(ped6, 167.981, -28.2, 7.01);
+					SET_CHAR_COORDINATES(ped7, 167.981, -30.2, 7.01);
+					SET_CHAR_COORDINATES(ped8, 167.981, -32.2, 7.01);
+					SET_CHAR_COORDINATES(ped9, 167.981, -34.2, 7.01);
+					SET_CHAR_COORDINATES(ped10, 167.981, -36.2, 7.01);
+					SET_CHAR_COORDINATES(ped11, 167.981, -38.2, 7.01);
+					SET_CHAR_COORDINATES(ped12, 167.981, -40.2, 7.01);
+					SET_CHAR_COORDINATES(ped13, 167.981, -42.2, 7.01);
+					SET_CHAR_COORDINATES(ped14, 167.981, -44.2, 7.01);
+					SET_CHAR_COORDINATES(ped15, 167.981, -46.2, 7.01);
+					SET_CHAR_COORDINATES(ped16, 167.981, -48.2, 7.01);
+					SET_CHAR_COORDINATES(ped17, 167.981, -50.2, 7.01);
+					SET_CHAR_COORDINATES(ped18, 167.981, -52.2, 7.01);
+					SET_CHAR_COORDINATES(ped19, 167.981, -54.2, 7.01);
+					SET_CHAR_COORDINATES(ped20, 167.981, -56.2, 7.01);
+					SET_CHAR_COORDINATES(ped21, 167.981, -58.2, 7.01);
+					SET_CHAR_COORDINATES(ped22, 167.981, -60.2, 7.01);
 					//*/
 				}
 				
 
-				// выгружвем модели
+				
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM3);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM4);
 
-				// выгружвем педов
+				
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -6520,7 +6492,7 @@ void baron_diaz(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped21);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped22);
-				CLEAR_AREA(55.5, -30.3, 14.1, 75.5, 0);//очещаем зону загрузки
+				CLEAR_AREA(55.5, -30.3, 14.1, 75.5, 0);
 
 				if (car2 != 0)
 				{
@@ -6532,12 +6504,12 @@ void baron_diaz(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -6548,8 +6520,8 @@ void baron_diaz(void)
 				}
 				else if (skip == 2)
 				{
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-					DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+					DO_SCREEN_FADE_OUT( 1000 );
 					while(true)
 					{
 						WAIT(0);
@@ -6560,7 +6532,7 @@ void baron_diaz(void)
 					}
 
 					//------------ катсцена ----------------
-					LOAD_ADDITIONAL_TEXT( "ASS_2", 6 ); // загружаем субтитры из *.GTX
+					LOAD_ADDITIONAL_TEXT( "ASS_2", 6 );
 					START_CUTSCENE_NOW("ass_2");
 					while (!HAS_CUTSCENE_LOADED())
 					{
@@ -6595,11 +6567,11 @@ void baron_diaz(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(95, 195, 247, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT(0.5, 0.45, "PROP_A");//PROPERTY ACQUIRED!
 
 						WAIT( 0 );
@@ -6609,7 +6581,7 @@ void baron_diaz(void)
 						}
 					}
 
-					DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 1000 );
 					while(true)
 					{
 						WAIT(0);
@@ -6618,30 +6590,30 @@ void baron_diaz(void)
 							break;
 						}
 					}
-					DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 1000 );
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 50000);// +5000$
 						
 						WAIT( 0 );
@@ -6650,11 +6622,11 @@ void baron_diaz(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +50000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +50000 );
 					REGISTER_MISSION_PASSED("ASS_1");
 					G_DIAZ = 9;
 					G_PROTECT = 1;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 			}
@@ -6667,7 +6639,7 @@ void baron_diaz(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(diaz_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(diaz_ico);
 				blip_on = 0;
 			}
 		}

@@ -5,27 +5,15 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, spisok, spisok_on, s_car_1, s_car_2, s_car_3, s_car_4, s_car_5, s_car_6, in_model, text, text2, cash, sutosave;
+float PlayX, PlayY, PlayZ, PlayR, blip_on, spisok, spisok_on, s_car_1, s_car_2, s_car_3, s_car_4, s_car_5, s_car_6, in_model, text, text2, cash, autosave;
 float textur1;
 int income, load_mashin, help, time_income, temp;
 
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void Sunshine(void)
 {
 	Cam camera;
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	spisok_on = 0;
 	Blip sun_ico;
 	Texture fon_spiska, polosa_spiska;
@@ -48,10 +36,10 @@ void Sunshine(void)
 	while(true)
 	{
 		WAIT(0);
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -77,7 +65,7 @@ void Sunshine(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(sun_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(sun_ico);
 				blip_on = 0;
 			}
 		}
@@ -86,7 +74,7 @@ void Sunshine(void)
 		{
 			if (text == 0)
 			{
-				CLEAR_HELP(); // удаляем текст подсказки
+				CLEAR_HELP();
 				PRINT_HELP("NECAR_SA1"); //Press ~INPUT_VEH_HORN~ to sound your horn to enter the garage.
 				text = 1;
 			}
@@ -94,13 +82,13 @@ void Sunshine(void)
 			{
 				if (G_ONMISSION == 1)
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NECAR_SA8"); //Come back when you're not so busy...
 					while (true)
 					{
 						if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) || (!IS_CHAR_IN_AREA_3D( GetPlayerPed(), -538.322, -308.536, 0.405, -546.322, -296.536, 5.905, 0 )) )
 						{
-							CLEAR_HELP(); // удаляем текст подсказки
+							CLEAR_HELP();
 							break;
 						}
 						WAIT(0);
@@ -108,13 +96,13 @@ void Sunshine(void)
 				}
 				else if (IS_WANTED_LEVEL_GREATER(GetPlayerIndex(), 0))//проверка на розыск
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NECAR_SA9"); //There are too many cops about, lose your wanted level.
 					while (true)
 					{
 						if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) || (!IS_CHAR_IN_AREA_3D( GetPlayerPed(), -538.322, -308.536, 0.405, -546.322, -296.536, 5.905, 0 )) )
 						{
-							CLEAR_HELP(); // удаляем текст подсказки
+							CLEAR_HELP();
 							break;
 						}
 						WAIT(0);
@@ -215,7 +203,7 @@ void Sunshine(void)
 							{
 								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 								CLOSE_GARAGE("ab_auto");
-								CLEAR_HELP(); // удаляем текст подсказки
+								CLEAR_HELP();
 								while (true)
 								{
 									WAIT(0);
@@ -255,12 +243,12 @@ void Sunshine(void)
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "NECAR_SA6", 5000, 1);//Delivered like a pro. Complete the list and there'll be a bonus for you.
 
-								// демонстрация пиризовых авто тут
+								// демонстрация пиризовых
 								if ((s_car_1 == 1) && (s_car_2 == 1) && (s_car_3 == 1) && (s_car_4 == 1) && (s_car_5 == 1) && (s_car_6 == 1))
 								{
 									if (spisok == 1)
 									{
-										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
+										DO_SCREEN_FADE_OUT( 2500 );
 										while (true)
 										{
 											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
@@ -272,7 +260,7 @@ void Sunshine(void)
 
 										uint CarM1 = MODEL_FUTO;// Deluxo
 										REQUEST_MODEL(CarM1);
-										while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+										while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
   										Car a1;
   										CREATE_CAR(CarM1, -589.355, -333.968, 7.66709, &car1, TRUE);
   										SET_CAR_HEADING(car1, 160.0);
@@ -282,7 +270,7 @@ void Sunshine(void)
 										cash = 1500;
 										time_income = 1920;
 										G_BUSINES_SA = 2;
-										sutosave = 1;
+										autosave = 1;
 
 										CREATE_CAM( 14, &camera );
 										POINT_CAM_AT_COORD	( camera, -589.355, -333.968, 7.66709 );
@@ -293,17 +281,17 @@ void Sunshine(void)
 										SET_WIDESCREEN_BORDERS( 1 );
 										SETTIMERA(0);
 
-										DO_SCREEN_FADE_IN( 2500 );// убирается затемнение экрана
+										DO_SCREEN_FADE_IN( 2500 );
 
 										while (true)
 										{
 											WAIT( 0 );
 											DISABLE_PAUSE_MENU(1);// отключаем главное меню
-											SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
-											SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-											SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-											SET_TEXT_CENTRE(1); // задаём центр текста
+											SET_TEXT_COLOUR(109, 205, 255, 255);
+											SET_TEXT_SCALE(0.5, 0.7);
+											SET_TEXT_EDGE(1, 0, 0, 0, 255);
+											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+											SET_TEXT_CENTRE(1);
 											DISPLAY_TEXT(0.5, 0.4, "NECAR_SA7");//All the cars. NICE! Here's a little something.
 											if (( TIMERA() > 4000 ) || (HAS_DEATHARREST_EXECUTED()))
 											{
@@ -315,7 +303,7 @@ void Sunshine(void)
 										SET_CAM_POS			( camera, -587.284, -340.629, 8.38526); 
 										SetTime(4000);
 
-										DO_SCREEN_FADE_OUT( 1500 );// Затемняем экран
+										DO_SCREEN_FADE_OUT( 1500 );
 										while (true)
 										{
 											WAIT( 0 );
@@ -325,7 +313,7 @@ void Sunshine(void)
 											}
 										}
 
-										DO_SCREEN_FADE_IN( 1500 );// убирается затемнение экрана
+										DO_SCREEN_FADE_IN( 1500 );
 										TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве) 
 										SETTIMERA(0);
 										POINT_CAM_AT_COORD	( camera, -583.188, -334.591, 12.646);
@@ -334,11 +322,11 @@ void Sunshine(void)
 										{
 											WAIT( 0 );
 											DISABLE_PAUSE_MENU(1);// отключаем главное меню
-											SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
-											SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-											SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-											SET_TEXT_CENTRE(1); // задаём центр текста
+											SET_TEXT_COLOUR(109, 205, 255, 255);
+											SET_TEXT_SCALE(0.5, 0.7);
+											SET_TEXT_EDGE(1, 0, 0, 0, 255);
+											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+											SET_TEXT_CENTRE(1);
 											DISPLAY_TEXT(0.5, 0.4, "CAR_AS1");//CAR SHOWROOM ASSET COMPLETED
 
 											if (( TIMERA() > 5500 ) || (HAS_DEATHARREST_EXECUTED()))
@@ -349,7 +337,7 @@ void Sunshine(void)
 									}
 									else if (spisok == 2)
 									{
-										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
+										DO_SCREEN_FADE_OUT( 2500 );
 										while (true)
 										{
 											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
@@ -361,7 +349,7 @@ void Sunshine(void)
 
 										uint CarM1 = MODEL_SABREGT;// Sabre Turbo
 										REQUEST_MODEL(CarM1);
-										while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+										while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
   										Car a1;
   										CREATE_CAR(CarM1, -580.991, -335.121, 7.66709, &car1, TRUE);
   										SET_CAR_HEADING(car1, -170.0);
@@ -371,7 +359,7 @@ void Sunshine(void)
 										cash = 3000;
 										time_income = 960;
 										G_BUSINES_SA = 3;
-										sutosave = 1;
+										autosave = 1;
 
 										CREATE_CAM( 14, &camera );
 										POINT_CAM_AT_COORD	( camera, -580.991,-335.121,7.66709 );
@@ -382,17 +370,17 @@ void Sunshine(void)
 										SET_WIDESCREEN_BORDERS( 1 );
 										SETTIMERA(0);
 
-										DO_SCREEN_FADE_IN( 2500 );// убирается затемнение экрана
+										DO_SCREEN_FADE_IN( 2500 );
 
 										while (true)
 										{
 											WAIT( 0 );
 											DISABLE_PAUSE_MENU(1);// отключаем главное меню
-											SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
-											SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-											SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-											SET_TEXT_CENTRE(1); // задаём центр текста
+											SET_TEXT_COLOUR(109, 205, 255, 255);
+											SET_TEXT_SCALE(0.5, 0.7);
+											SET_TEXT_EDGE(1, 0, 0, 0, 255);
+											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+											SET_TEXT_CENTRE(1);
 											DISPLAY_TEXT(0.5, 0.4, "NECAR_SA7");//All the cars. NICE! Here's a little something.
 											if (( TIMERA() > 4000 ) || (HAS_DEATHARREST_EXECUTED()))
 											{
@@ -404,7 +392,7 @@ void Sunshine(void)
 										SET_CAM_POS			( camera, -584.233,-341.182,8.18265); 
 										SetTime(4000);
 
-										DO_SCREEN_FADE_OUT( 1500 );// Затемняем экран
+										DO_SCREEN_FADE_OUT( 1500 );
 										while (true)
 										{
 											WAIT( 0 );
@@ -413,11 +401,11 @@ void Sunshine(void)
 												break;
 											}
 										}
-										DO_SCREEN_FADE_IN( 2500 );// убирается затемнение экрана
+										DO_SCREEN_FADE_IN( 2500 );
 									}
 									else if (spisok == 3)
 									{
-										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
+										DO_SCREEN_FADE_OUT( 2500 );
 										while (true)
 										{
 											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
@@ -429,7 +417,7 @@ void Sunshine(void)
 
 										uint CarM1 = MODEL_CAVALCADE;// Sandking
 										REQUEST_MODEL(CarM1);
-										while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+										while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
   										Car a1;
   										CREATE_CAR(CarM1, -580.991, -335.121, 12.5935, &car1, TRUE);
   										SET_CAR_HEADING(car1, -170.0);
@@ -439,7 +427,7 @@ void Sunshine(void)
 										cash = 6000;
 										time_income = 480;
 										G_BUSINES_SA = 4;
-										sutosave = 1;
+										autosave = 1;
 
 										CREATE_CAM( 14, &camera );
 										POINT_CAM_AT_COORD	( camera, -580.991, -335.121, 12.5935 );
@@ -450,17 +438,17 @@ void Sunshine(void)
 										SET_WIDESCREEN_BORDERS( 1 );
 										SETTIMERA(0);
 
-										DO_SCREEN_FADE_IN( 2500 );// убирается затемнение экрана
+										DO_SCREEN_FADE_IN( 2500 );
 
 										while (true)
 										{
 											WAIT( 0 );
 											DISABLE_PAUSE_MENU(1);// отключаем главное меню
-											SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
-											SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-											SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-											SET_TEXT_CENTRE(1); // задаём центр текста
+											SET_TEXT_COLOUR(109, 205, 255, 255);
+											SET_TEXT_SCALE(0.5, 0.7);
+											SET_TEXT_EDGE(1, 0, 0, 0, 255);
+											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+											SET_TEXT_CENTRE(1);
 											DISPLAY_TEXT(0.5, 0.4, "NECAR_SA7");//All the cars. NICE! Here's a little something.
 											if (( TIMERA() > 4000 ) || (HAS_DEATHARREST_EXECUTED()))
 											{
@@ -472,7 +460,7 @@ void Sunshine(void)
 										SET_CAM_POS			( camera, -583.154,-340.068,13.109); 
 										SetTime(4000);
 
-										DO_SCREEN_FADE_OUT( 1500 );// Затемняем экран
+										DO_SCREEN_FADE_OUT( 1500 );
 										while (true)
 										{
 											WAIT( 0 );
@@ -481,11 +469,11 @@ void Sunshine(void)
 												break;
 											}
 										}
-										DO_SCREEN_FADE_IN( 2500 );// убирается затемнение экрана
+										DO_SCREEN_FADE_IN( 2500 );
 									}
 									else if (spisok == 4)
 									{
-										DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
+										DO_SCREEN_FADE_OUT( 2500 );
 										while (true)
 										{
 											if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
@@ -497,7 +485,7 @@ void Sunshine(void)
 
 										uint CarM1 = MODEL_FELTZER;// Hotring Racer
 										REQUEST_MODEL(CarM1);
-										while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+										while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
   										Car a1;
   										CREATE_CAR(CarM1, -589.355, -333.968, 12.5935, &car1, TRUE);
   										SET_CAR_HEADING(car1, 160.0);
@@ -507,7 +495,7 @@ void Sunshine(void)
 										cash = 9000;
 										time_income = 320;
 										G_BUSINES_SA = 5;
-										sutosave = 1;
+										autosave = 1;
 
 										CREATE_CAM( 14, &camera );
 										POINT_CAM_AT_COORD	( camera, -589.355,-333.968,12.5935 );
@@ -518,17 +506,17 @@ void Sunshine(void)
 										SET_WIDESCREEN_BORDERS( 1 );
 										SETTIMERA(0);
 
-										DO_SCREEN_FADE_IN( 2500 );// убирается затемнение экрана
+										DO_SCREEN_FADE_IN( 2500 );
 
 										while (true)
 										{
 											WAIT( 0 );
 											DISABLE_PAUSE_MENU(1);// отключаем главное меню
-											SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
-											SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-											SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-											SET_TEXT_CENTRE(1); // задаём центр текста
+											SET_TEXT_COLOUR(109, 205, 255, 255);
+											SET_TEXT_SCALE(0.5, 0.7);
+											SET_TEXT_EDGE(1, 0, 0, 0, 255);
+											SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+											SET_TEXT_CENTRE(1);
 											DISPLAY_TEXT(0.5, 0.4, "NECAR_SA7");//All the cars. NICE! Here's a little something.
 											if (( TIMERA() > 4000 ) || (HAS_DEATHARREST_EXECUTED()))
 											{
@@ -540,7 +528,7 @@ void Sunshine(void)
 										SET_CAM_POS			( camera, -587.284,-340.629,13.3116); 
 										SetTime(4000);
 
-										DO_SCREEN_FADE_OUT( 1500 );// Затемняем экран
+										DO_SCREEN_FADE_OUT( 1500 );
 										while (true)
 										{
 											WAIT( 0 );
@@ -549,11 +537,11 @@ void Sunshine(void)
 												break;
 											}
 										}
-										DO_SCREEN_FADE_IN( 2500 );// убирается затемнение экрана
+										DO_SCREEN_FADE_IN( 2500 );
 									}
 
 
-									// камера на счёную машинку
+									// камера на счёнуюку
 									POINT_CAM_AT_COORD	( camera, -603.847, -312.336, 8.01287);
 									SET_CAM_POS			( camera, -605.552, -312.669, 9.08054); 
 									PRINT_WITH_NUMBER("CAR_AS2", cash, 5500, 1);//~g~Sunshine Auto's will now generate revenue up to a maximum of $~1~. Make sure you collect it regularly.
@@ -589,7 +577,7 @@ void Sunshine(void)
 									//DRAW_RECT(0.5, 0.5, 1.0, 1.0, 0, 0, 0, 255);
 									//*/
 
-									DO_SCREEN_FADE_OUT( 2500 );// Затемняем экран
+									DO_SCREEN_FADE_OUT( 2500 );
 									while (true)
 									{
 										if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
@@ -602,7 +590,7 @@ void Sunshine(void)
 									ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 									END_CAM_COMMANDS( &camera );
 									SET_WIDESCREEN_BORDERS( 0 );
-									DO_SCREEN_FADE_IN( 2500 );// убирается затемнение экрана
+									DO_SCREEN_FADE_IN( 2500 );
 									ADD_SCORE( GetPlayerIndex(), +2000 );//  даём игроку сумму
 
 									if (spisok < 4)
@@ -617,7 +605,7 @@ void Sunshine(void)
 									spisok += 1;
 								}
 								
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем
 								ADD_SCORE( GetPlayerIndex(), +500 );//  даём игроку сумму
 								in_model = 0;
 								spisok_on = 0;
@@ -636,7 +624,7 @@ void Sunshine(void)
 										break;
 									}
 								}
-								CLEAR_HELP(); // удаляем текст подсказки
+								CLEAR_HELP();
 								MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 								in_model = 0;
 								text = 0;
@@ -652,7 +640,7 @@ void Sunshine(void)
 		{
 			if (text == 1)
 			{
-				CLEAR_HELP(); // удаляем текст подсказки
+				CLEAR_HELP();
 				text = 0;
 				text2 = 0;
 			}
@@ -694,9 +682,9 @@ void Sunshine(void)
 						PRINT_HELP_FOREVER("NEGETMONEY"); // Press the ~INPUT_PHONE_ACCEPT~ button to cash out.
 						help = 1;
 					}
-					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))
 					{
-						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у игрока сумму
+						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у сумму
 						income = 0;
 					}
 				}
@@ -705,7 +693,7 @@ void Sunshine(void)
 			{
 				if (load_mashin == 1) 
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					WAIT( 100 );
 					SET_TEXT_RENDER_ID(rId92);
 					DRAW_RECT(0.5, 0.5, 1.0, 1.0, 35, 35, 35, 255);
@@ -715,7 +703,7 @@ void Sunshine(void)
 			}
 		}
 
-		// ----- Визуализация списков транспорта -----
+		// ----- Визуализация спискова -----
 		if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -509.54, -339.738, -4.0, -564.54, -284.738, 21.0, 0 ))//если игрок на кординатах
 		{
 			if (spisok_on == 0)

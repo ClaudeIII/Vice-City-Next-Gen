@@ -9,18 +9,6 @@ int model1_on, model2_on, model3_on, model4_on, model5_on, model6_on, model7_on,
 int help, help2, money_ped, cam_res;
 int blip1_on, blip2_on, blip3_on, blip4_on, blip5_on, blip6_on, blip7_on, blip8_on;
 
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void business(void)
 {
 	Blip property1_ico, property2_ico, property3_ico, property4_ico, property5_ico, property6_ico, property7_ico, property8_ico;
@@ -576,14 +564,14 @@ void business(void)
 					help = 1;
 				}
 			}
-			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))//проверка нажата-ли клавиша "Для покупки".
+			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -592,7 +580,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -600,13 +588,13 @@ void business(void)
 				else if ((money_ped >= 70000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -70000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -70000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_COUNT = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -615,7 +603,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), -627.057, 246.12, 5.39574);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), -627.057, 246.12, 5.39574);
 					SET_CHAR_HEADING(GetPlayerPed(), -90.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -629,16 +617,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "CNTBUY1", 70000); //Printworks purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 5000 )
@@ -649,11 +637,11 @@ void business(void)
 					//Камера на диван
 					POINT_CAM_AT_COORD	( camera, -645.223, 244.068, 6.51072 );
 					SET_CAM_POS			( camera, -643.529, 249.673, 8.48956 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -663,12 +651,12 @@ void business(void)
 						}
 					}
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 
 					help = 0;
@@ -693,14 +681,14 @@ void business(void)
 					help = 1;
 				}
 			}
-			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))//проверка нажата-ли клавиша "Для покупки".
+			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -709,7 +697,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -717,12 +705,12 @@ void business(void)
 				else if ((money_ped >= 50000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -50000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -50000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_BUSINES_SA = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -732,12 +720,12 @@ void business(void)
 						}
 					}
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
-					SET_CHAR_COORDINATES(GetPlayerPed(), -588.85, -325.996, 7.17353);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), -588.85, -325.996, 7.17353);
 					SET_CHAR_HEADING(GetPlayerPed(), -105.0);
 					FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
 					RELEASE_WEATHER();
 
-					LOAD_ADDITIONAL_TEXT( "CAR_1", 6 ); // загружаем субтитры из *.GTX
+					LOAD_ADDITIONAL_TEXT( "CAR_1", 6 );
 					START_CUTSCENE_NOW("car_1");
 					while (!HAS_CUTSCENE_LOADED())
 					{
@@ -759,16 +747,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "CARBUY", 50000); //Car Showroom purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 5000 )
@@ -779,11 +767,11 @@ void business(void)
 					//Камера на диван
 					POINT_CAM_AT_COORD	( camera, -596.941, -315.536, 7.53233 );
 					SET_CAM_POS			( camera, -596.425, -319.508, 9.06065 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -793,13 +781,13 @@ void business(void)
 						}
 					}
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
 					DO_SCREEN_FADE_IN(500);
 
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 					G_ONMISSION = 0;
 					help = 0;
 					help2 = 0;
@@ -823,14 +811,14 @@ void business(void)
 					help = 1;
 				}
 			}
-			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))//проверка нажата-ли клавиша "Для покупки".
+			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -839,7 +827,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -847,13 +835,13 @@ void business(void)
 				else if ((money_ped >= 60000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -60000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -60000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_PRON = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -862,7 +850,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), 426.072,1493.69,5.22053);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), 426.072,1493.69,5.22053);
 					SET_CHAR_HEADING(GetPlayerPed(), -70.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -876,16 +864,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "PORNBUY", 60000); //Film Studio purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 5000 )
@@ -896,11 +884,11 @@ void business(void)
 					//Камера на диван
 					POINT_CAM_AT_COORD	( camera, 348.119, 1466.341, 5.10739 );
 					SET_CAM_POS			( camera, 347.723, 1461.501, 6.42478 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -910,12 +898,12 @@ void business(void)
 						}
 					}
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 
 					help = 0;
@@ -939,14 +927,14 @@ void business(void)
 					help = 1;
 				}
 			}
-			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))//проверка нажата-ли клавиша "Для покупки".
+			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -955,7 +943,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -963,12 +951,12 @@ void business(void)
 				else if ((money_ped >= 20000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -20000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -20000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_ICECREAM = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -978,16 +966,16 @@ void business(void)
 						}
 					}
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
-					SET_CHAR_COORDINATES(GetPlayerPed(), -442.448, -35.7613, 5.47654);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), -442.448, -35.7613, 5.47654);
 					SET_CHAR_HEADING(GetPlayerPed(), -125.0);
 
 					uint hour, minute, weather;
 					GET_TIME_OF_DAY(&hour, &minute);
 					GET_CURRENT_WEATHER(&weather);
 					FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
-					FORWARD_TO_TIME_OF_DAY(18, 25);//устанавливаем время
+					FORWARD_TO_TIME_OF_DAY(18, 25);
 
-					LOAD_ADDITIONAL_TEXT( "ICE_1", 6 ); // загружаем субтитры из *.GTX
+					LOAD_ADDITIONAL_TEXT( "ICE_1", 6 );
 					START_CUTSCENE_NOW("ice_1");
 					while (!HAS_CUTSCENE_LOADED())
 					{
@@ -999,9 +987,9 @@ void business(void)
 						WAIT(0);
 					}
 
-					FORCE_WEATHER_NOW( weather );//устанавливаем погода
+					FORCE_WEATHER_NOW( weather );
 					RELEASE_WEATHER();
-					FORWARD_TO_TIME_OF_DAY(hour, minute);//устанавливаем время
+					FORWARD_TO_TIME_OF_DAY(hour, minute);
 
 					// камера
 					CREATE_CAM( 14, &camera );
@@ -1013,16 +1001,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "ICEBUY", 20000); //Ice Cream Factory purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 5000 )
@@ -1033,11 +1021,11 @@ void business(void)
 					//Камера на диван
 					POINT_CAM_AT_COORD	( camera, -446.558, -45.5251, 5.69816 );
 					SET_CAM_POS			( camera, -443.155, -48.0858, 6.07822 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1047,7 +1035,7 @@ void business(void)
 						}
 					}
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
@@ -1059,7 +1047,7 @@ void business(void)
 					ADD_LINE_TO_CONVERSATION(0, "R14_VV", "", 0, 0);//
 					START_SCRIPT_CONVERSATION(1, 1);
 
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 					G_ONMISSION = 0;
 					help = 0;
 					help2 = 0;
@@ -1082,14 +1070,14 @@ void business(void)
 					help = 1;
 				}
 			}
-			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))//проверка нажата-ли клавиша "Для покупки".
+			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -1098,7 +1086,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -1106,12 +1094,12 @@ void business(void)
 				else if ((money_ped >= 40000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -40000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -40000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_CABS = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1121,17 +1109,17 @@ void business(void)
 						}
 					}
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
-					SET_CHAR_COORDINATES(GetPlayerPed(), -565.688, 724.969, 5.67434);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), -565.688, 724.969, 5.67434);
 					SET_CHAR_HEADING(GetPlayerPed(), 60.0);
 
 					uint hour, minute, weather;
 					GET_TIME_OF_DAY(&hour, &minute);
 					GET_CURRENT_WEATHER(&weather);
 					FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
-					FORWARD_TO_TIME_OF_DAY(18, 30);//устанавливаем время
+					FORWARD_TO_TIME_OF_DAY(18, 30);
 					
 
-					LOAD_ADDITIONAL_TEXT( "TAX_1", 6 ); // загружаем субтитры из *.GTX
+					LOAD_ADDITIONAL_TEXT( "TAX_1", 6 );
 					START_CUTSCENE_NOW("tax_1");
 					while (!HAS_CUTSCENE_LOADED())
 					{
@@ -1143,9 +1131,9 @@ void business(void)
 						WAIT(0);
 					}
 
-					FORCE_WEATHER_NOW( weather );//устанавливаем погода
+					FORCE_WEATHER_NOW( weather );
 					RELEASE_WEATHER();
-					FORWARD_TO_TIME_OF_DAY(hour, minute);//устанавливаем время
+					FORWARD_TO_TIME_OF_DAY(hour, minute);
 
 					// камера
 					CREATE_CAM( 14, &camera );
@@ -1157,16 +1145,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "TAXIBUY", 40000); //Taxi Firm purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 5000 )
@@ -1177,11 +1165,11 @@ void business(void)
 					//Камера на диван
 					POINT_CAM_AT_COORD	( camera, -565.577, 720.491, 5.86685 );
 					SET_CAM_POS			( camera, -567.029, 724.304, 6.30875 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1191,13 +1179,13 @@ void business(void)
 						}
 					}
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
 					DO_SCREEN_FADE_IN(500);
 
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 					G_ONMISSION = 0;
 					help = 0;
 					help2 = 0;
@@ -1220,14 +1208,14 @@ void business(void)
 					help = 1;
 				}
 			}
-			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))//проверка нажата-ли клавиша "Для покупки".
+			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -1236,7 +1224,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -1244,13 +1232,13 @@ void business(void)
 				else if ((money_ped >= 120000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -120000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -120000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_CLUB = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1259,7 +1247,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), 924.827,454.729,5.73708);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), 924.827,454.729,5.73708);
 					SET_CHAR_HEADING(GetPlayerPed(), -130.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -1273,16 +1261,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "BANKBUY", 120000); //The Malibu purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 5000 )
@@ -1293,11 +1281,11 @@ void business(void)
 					//Камера на диван
 					POINT_CAM_AT_COORD	( camera, 896.968, 481.86, 10.0952 );
 					SET_CAM_POS			( camera, 896.723, 478.72, 11.6229 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1307,12 +1295,12 @@ void business(void)
 						}
 					}
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 
 					help = 0;
@@ -1336,14 +1324,14 @@ void business(void)
 					help = 1;
 				}
 			}
-			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))//проверка нажата-ли клавиша "Для покупки".
+			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -1352,7 +1340,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -1360,12 +1348,12 @@ void business(void)
 				else if ((money_ped >= 10000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -10000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -10000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_COKERUN = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1381,12 +1369,12 @@ void business(void)
 					CREATE_OBJECT_NO_OFFSET(reefM, -218.0, -948.21, 11.647, &cutObj, 1);
 
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
-					SET_CHAR_COORDINATES(GetPlayerPed(), -209.378, -952.158, 8.07865);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), -209.378, -952.158, 8.07865);
 					SET_CHAR_HEADING(GetPlayerPed(), -115.0);
 					FORCE_WEATHER_NOW(WEATHER_SUNNY);
 
 
-					LOAD_ADDITIONAL_TEXT( "DRUG_1", 6 ); // загружаем субтитры из *.GTX
+					LOAD_ADDITIONAL_TEXT( "DRUG_1", 6 );
 					START_CUTSCENE_NOW("drug_1");
 					while (!HAS_CUTSCENE_LOADED())
 					{
@@ -1412,16 +1400,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "BOATBUY", 10000); //Boatyard purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 5000 )
@@ -1432,11 +1420,11 @@ void business(void)
 					//Камера на диван
 					POINT_CAM_AT_COORD	( camera, -235.751, -951.261, 8.20742 );
 					SET_CAM_POS			( camera, -231.451, -950.318, 9.67795 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1446,13 +1434,13 @@ void business(void)
 						}
 					}
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
 					DO_SCREEN_FADE_IN(500);
 
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 					G_ONMISSION = 0;
 					help = 0;
 					help2 = 0;
@@ -1475,14 +1463,14 @@ void business(void)
 					help = 1;
 				}
 			}
-			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))//проверка нажата-ли клавиша "Для покупки".
+			if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) && (G_SALE_NO == 1) || (IS_BUTTON_PRESSED( 0, 16 )) && (G_SALE_NO == 1))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -1491,7 +1479,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -1499,13 +1487,13 @@ void business(void)
 				else if ((money_ped >= 30000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -30000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -30000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_STRIP = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1514,7 +1502,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), 529.927, -938.109, 4.66887);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), 529.927, -938.109, 4.66887);
 					SET_CHAR_HEADING(GetPlayerPed(), -145.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -1528,16 +1516,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "STRPBUY", 30000); //Pole Position Club purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 5000 )
@@ -1551,11 +1539,11 @@ void business(void)
 					SetTime(10);
 					POINT_CAM_AT_COORD	( camera, 506.755, -916.366, 4.9338 );
 					SET_CAM_POS			( camera, 509.832, -918.184, 6.3462 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEHELP1"); //Sleeping on the bed will save the game and advance time by six hours.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1565,12 +1553,12 @@ void business(void)
 						}
 					}
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 					PRINT_HELP("NECLOTH8"); //Mr Vercetti outfit delivered to Pole Position Club on Ocean Beach and on Vercetti Mansion.
 					help = 0;
@@ -1586,14 +1574,14 @@ void business(void)
 				PRINT_HELP_FOREVER_WITH_NUMBER("NBMN_L", 8000); //Press the ~INPUT_PHONE_ACCEPT~ button to purchase El Swanko Casa for ~g~$~1~
 				help = 1;
 			}
-			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -1602,7 +1590,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -1610,13 +1598,13 @@ void business(void)
 				else if ((money_ped >= 8000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -8000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -8000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_SWANKO = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1625,7 +1613,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), 878.706, 1157.56, 5.64922);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), 878.706, 1157.56, 5.64922);
 					SET_CHAR_HEADING(GetPlayerPed(), 0.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -1639,16 +1627,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "NBMNBUY", 8000); //El Swanko Casa purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 6000 )
@@ -1660,7 +1648,7 @@ void business(void)
 					//NEHELP1
 					POINT_CAM_AT_COORD	( camera, 859.646, 1136.19, 6.70153 );
 					SET_CAM_POS			( camera, 870.455, 1148.84, 13.3133 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
@@ -1668,11 +1656,11 @@ void business(void)
 					OPEN_GARAGE("gdoor10");
 					POINT_CAM_AT_COORD	( camera, 886.138, 1171.57, 6.75008 );
 					SET_CAM_POS			( camera, 871.395, 1179.61, 11.849 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("BUYGARG"); //You can also store vehicles in this garage.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1682,12 +1670,12 @@ void business(void)
 						}
 					}
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 
 					help = 0;
@@ -1703,14 +1691,14 @@ void business(void)
 				PRINT_HELP_FOREVER_WITH_NUMBER("LNKV_L", 6000); //Press the ~INPUT_PHONE_ACCEPT~ button to purchase Links View Apartment for ~g~$~1~
 				help = 1;
 			}
-			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -1719,7 +1707,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -1727,13 +1715,13 @@ void business(void)
 				else if ((money_ped >= 6000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -6000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -6000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_LINKS = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1742,7 +1730,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), 739.479, 917.924, 7.4594);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), 739.479, 917.924, 7.4594);
 					SET_CHAR_HEADING(GetPlayerPed(), -90.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -1756,16 +1744,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "LNKVBUY", 6000); //Links View Apartment purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 6000 )
@@ -1776,7 +1764,7 @@ void business(void)
 					//Камера на двери
 					POINT_CAM_AT_COORD	( camera, 735.808, 908.971, 8.72206 );
 					SET_CAM_POS			( camera, 745.684, 912.931, 13.9169 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
@@ -1784,11 +1772,11 @@ void business(void)
 					OPEN_GARAGE("gdoor11");
 					POINT_CAM_AT_COORD	( camera, 735.575, 938.531, 6.27094 );
 					SET_CAM_POS			( camera, 749.416, 919.618, 16.9161 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("BUYGARG"); //You can also store vehicles in this garage.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1797,12 +1785,12 @@ void business(void)
 							break;
 						}
 					}
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 
 					help = 0;
@@ -1818,14 +1806,14 @@ void business(void)
 				PRINT_HELP_FOREVER_WITH_NUMBER("HYCO_L", 14000); //Press the ~INPUT_PHONE_ACCEPT~ button to purchase Hyman Condo for ~g~$~1~
 				help = 1;
 			}
-			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -1834,7 +1822,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -1842,13 +1830,13 @@ void business(void)
 				else if ((money_ped >= 14000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -14000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -14000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_CONDO = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1857,7 +1845,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), -398.812, 1839.41, 5.75065);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), -398.812, 1839.41, 5.75065);
 					SET_CHAR_HEADING(GetPlayerPed(), -165.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -1871,16 +1859,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "HYCOBUY", 14000); //Hyman Condo purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 6000 )
@@ -1891,14 +1879,14 @@ void business(void)
 					//Камера на двери
 					POINT_CAM_AT_COORD	( camera, -402.008, 1841.04, 6.70257 );
 					SET_CAM_POS			( camera, -404.554, 1834.86, 8.30057 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
 					/*/камера на гараж
 					POINT_CAM_AT_COORD	( camera, -398.571, 1844.99, 8.5453 );
 					SET_CAM_POS			( camera, -417.093, 1828.67, 7.1639 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("BUYGARG"); //You can also store vehicles in this garage.
 					OPEN_GARAGE("gdoor5");
 					SetTime(500);
@@ -1908,7 +1896,7 @@ void business(void)
 					SetTime(4000);
 					//*/
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1917,13 +1905,13 @@ void business(void)
 							break;
 						}
 					}
-					CLEAR_HELP(); // удаляем текст подсказки
-					//убираем камеру
+					CLEAR_HELP();
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 					PRINT_HELP("CLOTH2"); //Street outfit delivered to Safehouses.
 
@@ -1940,14 +1928,14 @@ void business(void)
 				PRINT_HELP_FOREVER_WITH_NUMBER("OCHE_L", 7000); //Press the ~INPUT_PHONE_ACCEPT~ button to purchase Ocean Heights Apartment for ~g~$~1~
 				help = 1;
 			}
-			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -1956,7 +1944,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -1964,13 +1952,13 @@ void business(void)
 				else if ((money_ped >= 7000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -7000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -7000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_HEIGHS = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -1979,7 +1967,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), 450.872, -963.737, 7.49369);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), 450.872, -963.737, 7.49369);
 					SET_CHAR_HEADING(GetPlayerPed(), -10.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -1993,16 +1981,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "OCHEBUY", 7000); //Ocean Heights Apartment purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 6000 )
@@ -2013,7 +2001,7 @@ void business(void)
 					//Камера на двери
 					POINT_CAM_AT_COORD	( camera, 450.069, -969.381, 8.00377 );
 					SET_CAM_POS			( camera, 452.951, -962.111, 9.85656 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
@@ -2021,11 +2009,11 @@ void business(void)
 					OPEN_GARAGE("gdoor9");
 					POINT_CAM_AT_COORD	( camera, 457.097, -954.075, 4.37774 );
 					SET_CAM_POS			( camera, 449.727, -939.958, 11.2557 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("BUYGARG"); //You can also store vehicles in this garage.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -2034,12 +2022,12 @@ void business(void)
 							break;
 						}
 					}
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 
 					help = 0;
@@ -2055,14 +2043,14 @@ void business(void)
 				PRINT_HELP_FOREVER_WITH_NUMBER("WASH_L", 3000); //Press the ~INPUT_PHONE_ACCEPT~ button to purchase 1102 Washington Street for ~g~$~1~
 				help = 1;
 			}
-			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -2071,7 +2059,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -2079,13 +2067,13 @@ void business(void)
 				else if ((money_ped >= 3000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -3000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -3000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_WS_1102 = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -2094,7 +2082,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), 527.872, -269.953, 4.77075);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), 527.872, -269.953, 4.77075);
 					SET_CHAR_HEADING(GetPlayerPed(), -120.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -2108,16 +2096,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "WASHBUY", 3000); //1102 Washington Street purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 6000 )
@@ -2128,11 +2116,11 @@ void business(void)
 					//Камера на двери
 					POINT_CAM_AT_COORD	( camera, 520.104, -269.722, 5.70883 );
 					SET_CAM_POS			( camera, 522.505, -280.804, 9.75918 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -2141,12 +2129,12 @@ void business(void)
 							break;
 						}
 					}
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 
 					help = 0;
@@ -2162,14 +2150,14 @@ void business(void)
 				PRINT_HELP_FOREVER_WITH_NUMBER("VCPT_L", 2500); //Press the ~INPUT_PHONE_ACCEPT~ button to purchase 3321 Vice Point for ~g~$~1~
 				help = 1;
 			}
-			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -2178,7 +2166,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -2186,13 +2174,13 @@ void business(void)
 				else if ((money_ped >= 2500) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -2500 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -2500 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_VP_3321 = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -2201,7 +2189,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), 962.848, 1802, 10.7663);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), 962.848, 1802, 10.7663);
 					SET_CHAR_HEADING(GetPlayerPed(), 140.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -2215,16 +2203,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "VCPTBUY", 2500); //3321 Vice Point purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 6000 )
@@ -2235,11 +2223,11 @@ void business(void)
 					//Камера на двери
 					POINT_CAM_AT_COORD	( camera, 966.469, 1807.381, 13.9696 );
 					SET_CAM_POS			( camera, 963.064, 1799.901, 16.8672 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -2248,12 +2236,12 @@ void business(void)
 							break;
 						}
 					}
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 
 					help = 0;
@@ -2269,14 +2257,14 @@ void business(void)
 				PRINT_HELP_FOREVER_WITH_NUMBER("SKUM_L", 1000); //Press the ~INPUT_PHONE_ACCEPT~ button to purchase Skumole Shack for ~g~$~1~
 				help = 1;
 			}
-			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+			if (((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER())) || (IS_BUTTON_PRESSED( 0, 16 )))
 			{
-				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства игрока в переменную
+				STORE_SCORE(GetPlayerIndex(), &money_ped);// записываем средства в переменную
 				if (G_ONMISSION == 1)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_MISSION_NO"); //You cannot buy property while on a mission.
 						help2 = 1;
 					}
@@ -2285,7 +2273,7 @@ void business(void)
 				{
 					if (help2 == 0)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP("NE_NO_BUY"); //You don't have enough cash for this property.
 						help2 = 1;
 					}
@@ -2293,13 +2281,13 @@ void business(void)
 				else if ((money_ped >= 1000) && (G_ONMISSION == 0))
 				{
 					G_ONMISSION = 1;
-					ADD_SCORE( GetPlayerIndex(), -1000 );// отнимаем у игрока сумму
-					CLEAR_HELP(); // удаляем текст подсказки
+					ADD_SCORE( GetPlayerIndex(), -1000 );// отнимаем у сумму
+					CLEAR_HELP();
 					G_SHACK = 1;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -2308,7 +2296,7 @@ void business(void)
 							break;
 						}
 					}
-					SET_CHAR_COORDINATES(GetPlayerPed(), -120.805, 1237.01, 14.7873);// перемещаем игрока
+					SET_CHAR_COORDINATES(GetPlayerPed(), -120.805, 1237.01, 14.7873);
 					SET_CHAR_HEADING(GetPlayerPed(), -110.0);
 					SET_OBJECT_COORDINATES(stend, 5.9, 6.8, 2.6);
 
@@ -2322,16 +2310,16 @@ void business(void)
 					SET_CAM_FOV( camera, 45.0 );
 					SET_WIDESCREEN_BORDERS( 1 );
 
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					DO_SCREEN_FADE_IN( 500 );
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(93, 200, 252, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "SKUMBUY", 1000); //Skumole Shack purchased: $~1~
 						WAIT( 0 );
 						if ( TIMERA() > 6000 )
@@ -2342,11 +2330,11 @@ void business(void)
 					//Камера на двери
 					POINT_CAM_AT_COORD	( camera, -127.331, 1234.95, 15.8352 );
 					SET_CAM_POS			( camera, -128.922, 1240.21, 18.1244 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEBUYSAVE"); //You can now save your game here when not on a mission. To do this, walk through the doors of your property.
 					SetTime(5000);
 
-					DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 500 );
 					while(true)
 					{
 						WAIT(0);
@@ -2355,12 +2343,12 @@ void business(void)
 							break;
 						}
 					}
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-					DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+					DO_SCREEN_FADE_IN( 500 );
 					G_ONMISSION = 0;
 
 					help = 0;
@@ -2372,7 +2360,7 @@ void business(void)
 		{
 			if ((help == 1) || (help2 == 1))
 			{
-				CLEAR_HELP(); // удаляем текст подсказки
+				CLEAR_HELP();
 				help = 0;
 				help2 = 0;
 			}
@@ -2396,7 +2384,7 @@ void business(void)
 		{
 			if (blip1_on == 1)
 			{
-				REMOVE_BLIP(property1_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(property1_ico);
 				blip1_on = 0;
 			}
 		}
@@ -2417,7 +2405,7 @@ void business(void)
 		{
 			if (blip2_on == 1)
 			{
-				REMOVE_BLIP(property2_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(property2_ico);
 				blip2_on = 0;
 			}
 		}
@@ -2438,7 +2426,7 @@ void business(void)
 		{
 			if (blip3_on == 1)
 			{
-				REMOVE_BLIP(property3_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(property3_ico);
 				blip3_on = 0;
 			}
 		}
@@ -2459,7 +2447,7 @@ void business(void)
 		{
 			if (blip4_on == 1)
 			{
-				REMOVE_BLIP(property4_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(property4_ico);
 				blip4_on = 0;
 			}
 		}
@@ -2480,7 +2468,7 @@ void business(void)
 		{
 			if (blip5_on == 1)
 			{
-				REMOVE_BLIP(property5_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(property5_ico);
 				blip5_on = 0;
 			}
 		}
@@ -2501,7 +2489,7 @@ void business(void)
 		{
 			if (blip6_on == 1)
 			{
-				REMOVE_BLIP(property6_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(property6_ico);
 				blip6_on = 0;
 			}
 		}
@@ -2522,7 +2510,7 @@ void business(void)
 		{
 			if (blip7_on == 1)
 			{
-				REMOVE_BLIP(property7_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(property7_ico);
 				blip7_on = 0;
 			}
 		}
@@ -2542,7 +2530,7 @@ void business(void)
 		{
 			if (blip8_on == 1)
 			{
-				REMOVE_BLIP(property8_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(property8_ico);
 				blip8_on = 0;
 			}
 		}

@@ -20,7 +20,7 @@ void business(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "CAR_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CAR_1", 6 );
 			START_CUTSCENE_NOW("car_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -41,7 +41,7 @@ void business(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "ICE_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "ICE_1", 6 );
 			START_CUTSCENE_NOW("ice_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -62,7 +62,7 @@ void business(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "TAX_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "TAX_1", 6 );
 			START_CUTSCENE_NOW("tax_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -83,7 +83,7 @@ void business(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(5))
 		{
-			LOAD_ADDITIONAL_TEXT( "DRUG_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "DRUG_1", 6 );
 			START_CUTSCENE_NOW("drug_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -117,7 +117,7 @@ void rockers(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "ROK_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "ROK_1", 6 );
 			START_CUTSCENE_NOW("rok_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -138,7 +138,7 @@ void rockers(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "ROK_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "ROK_2", 6 );
 			START_CUTSCENE_NOW("rok_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -159,7 +159,7 @@ void rockers(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "ROK_3A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "ROK_3A", 6 );
 			START_CUTSCENE_NOW("rok_3a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -193,7 +193,7 @@ void versetty(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "BUD_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BUD_1", 6 );
 			START_CUTSCENE_NOW("bud_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -214,7 +214,7 @@ void versetty(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "BUD_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BUD_2", 6 );
 			START_CUTSCENE_NOW("bud_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -235,7 +235,7 @@ void versetty(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "BUD_3", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BUD_3", 6 );
 			START_CUTSCENE_NOW("bud_3");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -269,7 +269,7 @@ void studio(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "PORN_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "PORN_1", 6 );
 			START_CUTSCENE_NOW("porn_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -290,7 +290,7 @@ void studio(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "PORN_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "PORN_2", 6 );
 			START_CUTSCENE_NOW("porn_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -311,7 +311,7 @@ void studio(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "PORN_3", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "PORN_3", 6 );
 			START_CUTSCENE_NOW("porn_3");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -332,7 +332,7 @@ void studio(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(5))
 		{
-			LOAD_ADDITIONAL_TEXT( "PORN_4", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "PORN_4", 6 );
 			START_CUTSCENE_NOW("porn_4");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -366,7 +366,7 @@ void phil(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "PHIL_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "PHIL_1", 6 );
 			START_CUTSCENE_NOW("phil_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -387,7 +387,7 @@ void phil(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "PHIL_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "PHIL_2", 6 );
 			START_CUTSCENE_NOW("phil_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -422,7 +422,7 @@ void club(void)
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
 			MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 1 );
-			LOAD_ADDITIONAL_TEXT( "BANK_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BANK_1", 6 );
 			START_CUTSCENE_NOW("bank_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -445,7 +445,7 @@ void club(void)
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
 			MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 1 );
-			LOAD_ADDITIONAL_TEXT( "BANK_2A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BANK_2A", 6 );
 			START_CUTSCENE_NOW("bank_2a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -468,7 +468,7 @@ void club(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "BANK_2B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BANK_2B", 6 );
 			START_CUTSCENE_NOW("bank_2b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -489,7 +489,7 @@ void club(void)
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(5))
 		{
 			MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 1 );
-			LOAD_ADDITIONAL_TEXT( "BANK_3A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BANK_3A", 6 );
 			START_CUTSCENE_NOW("bank_3a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -510,7 +510,7 @@ void club(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(6))
 		{
-			LOAD_ADDITIONAL_TEXT( "BANK_3B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BANK_3B", 6 );
 			START_CUTSCENE_NOW("bank_3b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -530,7 +530,7 @@ void club(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(7))
 		{
-			LOAD_ADDITIONAL_TEXT( "BANK_4", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BANK_4", 6 );
 			START_CUTSCENE_NOW("bank_4");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -563,7 +563,7 @@ void lawyer(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "LAW_1A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "LAW_1A", 6 );
 			START_CUTSCENE_NOW("law_1a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -584,7 +584,7 @@ void lawyer(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "LAW_1B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "LAW_1B", 6 );
 			START_CUTSCENE_NOW("law_1b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -605,7 +605,7 @@ void lawyer(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "LAW_2A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "LAW_2A", 6 );
 			START_CUTSCENE_NOW("law_2a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -626,7 +626,7 @@ void lawyer(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(5))
 		{
-			LOAD_ADDITIONAL_TEXT( "LAW_2B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "LAW_2B", 6 );
 			START_CUTSCENE_NOW("law_2b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -647,7 +647,7 @@ void lawyer(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(6))
 		{
-			LOAD_ADDITIONAL_TEXT( "LAW_2C", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "LAW_2C", 6 );
 			START_CUTSCENE_NOW("law_2c");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -668,7 +668,7 @@ void lawyer(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(7))
 		{
-			LOAD_ADDITIONAL_TEXT( "LAW_3", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "LAW_3", 6 );
 			START_CUTSCENE_NOW("law_3");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -689,7 +689,7 @@ void lawyer(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(8))
 		{
-			LOAD_ADDITIONAL_TEXT( "LAW_4", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "LAW_4", 6 );
 			START_CUTSCENE_NOW("law_4");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -723,7 +723,7 @@ void voodoo(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "HAT_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "HAT_1", 6 );
 			START_CUTSCENE_NOW("hat_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -744,7 +744,7 @@ void voodoo(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "HAT_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "HAT_2", 6 );
 			START_CUTSCENE_NOW("hat_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -765,7 +765,7 @@ void voodoo(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "HAT_3", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "HAT_3", 6 );
 			START_CUTSCENE_NOW("hat_3");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -799,7 +799,7 @@ void baron_diaz(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "COK_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COK_1", 6 );
 			START_CUTSCENE_NOW("cok_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -820,7 +820,7 @@ void baron_diaz(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "COK_2A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COK_2A", 6 );
 			START_CUTSCENE_NOW("cok_2a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -833,7 +833,7 @@ void baron_diaz(void)
 				WAIT(0);
 			}
 
-			LOAD_ADDITIONAL_TEXT( "COK_2B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COK_2B", 6 );
 			START_CUTSCENE_NOW("cok_2b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -843,7 +843,7 @@ void baron_diaz(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "COK_3", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COK_3", 6 );
 			START_CUTSCENE_NOW("cok_3");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -864,7 +864,7 @@ void baron_diaz(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(5))
 		{
-			LOAD_ADDITIONAL_TEXT( "COK_4A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COK_4A", 6 );
 			START_CUTSCENE_NOW("cok_4a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -885,7 +885,7 @@ void baron_diaz(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(6))
 		{
-			LOAD_ADDITIONAL_TEXT( "COK_4A2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COK_4A2", 6 );
 			START_CUTSCENE_NOW("cok_4a2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -906,7 +906,7 @@ void baron_diaz(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(7))
 		{
-			LOAD_ADDITIONAL_TEXT( "COK_4B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COK_4B", 6 );
 			START_CUTSCENE_NOW("cok_4b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -927,7 +927,7 @@ void baron_diaz(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(8))
 		{
-			LOAD_ADDITIONAL_TEXT( "RESC_1A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "RESC_1A", 6 );
 			START_CUTSCENE_NOW("resc_1a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -948,7 +948,7 @@ void baron_diaz(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(9))
 		{
-			LOAD_ADDITIONAL_TEXT( "ASS_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "ASS_1", 6 );
 			START_CUTSCENE_NOW("ass_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -969,7 +969,7 @@ void baron_diaz(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(10))
 		{
-			LOAD_ADDITIONAL_TEXT( "ASS_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "ASS_2", 6 );
 			START_CUTSCENE_NOW("ass_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1006,7 +1006,7 @@ void umberto(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "CUB_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CUB_1", 6 );
 			START_CUTSCENE_NOW("cub_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1027,7 +1027,7 @@ void umberto(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "CUB_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CUB_2", 6 );
 			START_CUTSCENE_NOW("cub_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1048,7 +1048,7 @@ void umberto(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "CUB_4", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CUB_4", 6 );
 			START_CUTSCENE_NOW("cub_4");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1069,7 +1069,7 @@ void umberto(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(5))
 		{
-			LOAD_ADDITIONAL_TEXT( "CUB_3", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CUB_3", 6 );
 			START_CUTSCENE_NOW("cub_3");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1125,7 +1125,7 @@ void fin(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "CAP_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CAP_1", 6 );
 			START_CUTSCENE_NOW("cap_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1177,7 +1177,7 @@ void fin(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "FINALE", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "FINALE", 6 );
 			START_CUTSCENE_NOW("finale");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1211,7 +1211,7 @@ void typography(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "CNT_1A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CNT_1A", 6 );
 			START_CUTSCENE_NOW("cnt_1a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1232,7 +1232,7 @@ void typography(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "CNT_1B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CNT_1B", 6 );
 			START_CUTSCENE_NOW("cnt_1b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1253,7 +1253,7 @@ void typography(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "CNT_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CNT_2", 6 );
 			START_CUTSCENE_NOW("cnt_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1287,7 +1287,7 @@ void cortez(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "COL_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COL_1", 6 );
 			START_CUTSCENE_NOW("col_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1308,7 +1308,7 @@ void cortez(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "COL_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COL_2", 6 );
 			START_CUTSCENE_NOW("col_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1329,7 +1329,7 @@ void cortez(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "COL_3A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COL_3A", 6 );
 			START_CUTSCENE_NOW("col_3a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1350,7 +1350,7 @@ void cortez(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(5))
 		{
-			LOAD_ADDITIONAL_TEXT( "COL_4A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COL_4A", 6 );
 			START_CUTSCENE_NOW("col_4a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1371,7 +1371,7 @@ void cortez(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(6))
 		{
-			LOAD_ADDITIONAL_TEXT( "COL_5A", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COL_5A", 6 );
 			START_CUTSCENE_NOW("col_5a");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1392,7 +1392,7 @@ void cortez(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(7))
 		{
-			LOAD_ADDITIONAL_TEXT( "COL_5B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "COL_5B", 6 );
 			START_CUTSCENE_NOW("col_5b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1426,7 +1426,7 @@ void biker(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "BIKE_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BIKE_1", 6 );
 			START_CUTSCENE_NOW("bike_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1447,7 +1447,7 @@ void biker(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "BIKE_3", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BIKE_3", 6 );
 			START_CUTSCENE_NOW("bike_3");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1468,7 +1468,7 @@ void biker(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "BIKE_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BIKE_2", 6 );
 			START_CUTSCENE_NOW("bike_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1502,7 +1502,7 @@ void avery(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "TEX_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "TEX_1", 6 );
 			START_CUTSCENE_NOW("tex_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1523,7 +1523,7 @@ void avery(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "TEX_3", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "TEX_3", 6 );
 			START_CUTSCENE_NOW("tex_3");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1544,7 +1544,7 @@ void avery(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			G_AVERY = 99; // отключаем все модели стройки в WORLD.sco
+			G_AVERY = 99; // отключаем все стройки в WORLD.sco
 			START_CUTSCENE_NOW("destr1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1566,7 +1566,7 @@ void avery(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(5))
 		{
-			LOAD_ADDITIONAL_TEXT( "TEX_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "TEX_2", 6 );
 			START_CUTSCENE_NOW("tex_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1600,7 +1600,7 @@ void temp(void)
 
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(2))
 		{
-			LOAD_ADDITIONAL_TEXT( "PHIL_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "PHIL_1", 6 );
 			START_CUTSCENE_NOW("phil_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1621,7 +1621,7 @@ void temp(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(3))
 		{
-			LOAD_ADDITIONAL_TEXT( "PHIL_2", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "PHIL_2", 6 );
 			START_CUTSCENE_NOW("phil_2");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1642,7 +1642,7 @@ void temp(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(4))
 		{
-			LOAD_ADDITIONAL_TEXT( "BANK_2B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BANK_2B", 6 );
 			START_CUTSCENE_NOW("bank_2b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1663,7 +1663,7 @@ void temp(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(5))
 		{
-			LOAD_ADDITIONAL_TEXT( "BANK_3B", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BANK_3B", 6 );
 			START_CUTSCENE_NOW("bank_3b");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1684,7 +1684,7 @@ void temp(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(6))
 		{
-			LOAD_ADDITIONAL_TEXT( "CAR_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "CAR_1", 6 );
 			START_CUTSCENE_NOW("car_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1705,7 +1705,7 @@ void temp(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(7))
 		{
-			LOAD_ADDITIONAL_TEXT( "BUD_3", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "BUD_3", 6 );
 			START_CUTSCENE_NOW("bud_3");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1726,7 +1726,7 @@ void temp(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(8))
 		{
-			LOAD_ADDITIONAL_TEXT( "ICE_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "ICE_1", 6 );
 			START_CUTSCENE_NOW("ice_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1747,7 +1747,7 @@ void temp(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(9))
 		{
-			LOAD_ADDITIONAL_TEXT( "TAX_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "TAX_1", 6 );
 			START_CUTSCENE_NOW("tax_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1768,7 +1768,7 @@ void temp(void)
 		}
 		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(10))
 		{
-			LOAD_ADDITIONAL_TEXT( "DRUG_1", 6 ); // загружаем субтитры из *.GTX
+			LOAD_ADDITIONAL_TEXT( "DRUG_1", 6 );
 			START_CUTSCENE_NOW("drug_1");
 			while (!HAS_CUTSCENE_LOADED())
 			{
@@ -1800,7 +1800,7 @@ void main(void)
 		WAIT(0);
 		if ((IS_CONTROL_PRESSED( 2, 182 )) && (! IS_USING_CONTROLLER())) //клавиатура BACKSPACE
 		{
-			//ADD_SCORE( GetPlayerIndex(), +50000 );//даём игроку денег
+			//ADD_SCORE( GetPlayerIndex(), +50000 );
 			G_DIAZ = 2;
 			PRINT_STRING_WITH_LITERAL_STRING_NOW("string", "Phnom Penh 86", 5000, 4);
 			WAIT(1000);

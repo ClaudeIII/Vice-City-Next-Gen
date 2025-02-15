@@ -5,50 +5,22 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, textur, time_m, time_s, sound, text, text2, volna_1, volna_2, sutosave;
+float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, textur, time_m, time_s, sound, text, text2, volna_1, volna_2, autosave;
 float attach_1, deton, PedX, PedY, PedZ, ico_1, ico_2, ico_3, ico_4, ico_5, ico_6, ico_7, ico_8, ico_9, ico_10, in_car, path_on, hel_set;
 
-void SetSpeech(void)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (!IS_SCRIPTED_CONVERSATION_ONGOING())
-		{
-			break;
-		}
-		else if (TIMERA() > 10000)
-		{
-			break;
-		}
-	}
-}
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void voodoo(void)
 {
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	Blip haiti_ico;
 	WAIT(3000);
 	while(true)
 	{
 		WAIT(0);
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -68,18 +40,18 @@ void voodoo(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "LG_14");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -529.349, 677.904, 3.32976, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -529.349, 677.904, 3.32976, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(haiti_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -88,7 +60,7 @@ void voodoo(void)
 						break;
 					}
 				}
-				SET_CHAR_COORDINATES(GetPlayerPed(), -529.452, 675.58, 3.45918 );// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -529.452, 675.58, 3.45918 );
 				SET_CHAR_HEADING(GetPlayerPed(), 180.0 );
 
 				Cam camera;
@@ -106,7 +78,7 @@ void voodoo(void)
 				uint PedM1 = MODEL_M_Y_NHELIPILOT;// SWAT
 
 				REQUEST_MODEL(PedM1);// 
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 
 				textur = LOAD_TXD( "sunshine_race" );
 				fon = GET_TEXTURE( textur, "fon_hud" );
@@ -127,10 +99,10 @@ void voodoo(void)
 				GET_TIME_OF_DAY(&hour, &minute);
 				GET_CURRENT_WEATHER(&weather);
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
-				FORWARD_TO_TIME_OF_DAY(18, 55);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(18, 55);
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "HAT_1", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "HAT_1", 6 );
 				START_CUTSCENE_NOW("hat_1");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -148,10 +120,10 @@ void voodoo(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				FORCE_WEATHER_NOW( weather );//устанавливаем погода
+				FORCE_WEATHER_NOW( weather );
 				RELEASE_WEATHER();
-				FORWARD_TO_TIME_OF_DAY(hour, minute);//устанавливаем время
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				FORWARD_TO_TIME_OF_DAY(hour, minute);
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				// вооружаем
 				UpdateWeaponOfPed(ped1, WEAPON_MP5);
@@ -186,7 +158,7 @@ void voodoo(void)
 				PRINT_STRING_IN_STRING("string", "HAM1_1", 5000, 1);//~g~The cops are closing in on our stashes. BE quick, and beat dem to it!
 
 				//грузим анимацию
-				REQUEST_ANIMS( "ne_missbank" );//загружаем файл с анимацией
+				REQUEST_ANIMS( "ne_missbank" );
 				while (!HAVE_ANIMS_LOADED( "ne_missbank" )) WAIT(0);
 
 				// поднять первый кейс
@@ -195,8 +167,8 @@ void voodoo(void)
 					WAIT(0);
 					if (HAS_PICKUP_BEEN_COLLECTED( keys_1 ))
 					{
-						REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+						REMOVE_BLIP(haiti_ico);
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 						SET_CHAR_COORDINATES(ped1, -728.021, 502.665, 14.2908);
 						SET_CHAR_COORDINATES(ped2, -721.543, 502.665, 14.2908);
@@ -208,7 +180,7 @@ void voodoo(void)
 						SET_CHAR_HEADING(ped4, 90.0);
 						SetTime(500);
 
-						// ставим камеру
+						
 						CREATE_CAM( 14, &camera );
 						POINT_CAM_AT_COORD	( camera, -731.279, 514.042, 10.2528);
 						SET_CAM_POS			( camera, -726.811, 499.881, 17.7508 );
@@ -226,14 +198,14 @@ void voodoo(void)
 						START_SCRIPT_CONVERSATION(1, 1);
 						SetTime(1000);
 
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "armsup_loop", "ne_missbank", 8.0, 1, 0, 0, 0, 3000 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "armsup_loop", "ne_missbank", 8.0, 1, 0, 0, 0, 3000 );
 						SetTime(2500);
 
-						//убираем камеру
+						
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 						SET_CHAR_COORDINATES(ped5, -534.981, 503.633, 5.25463);
 						SET_CHAR_COORDINATES(ped6, -535.403, 487.612, 5.25463);
@@ -291,7 +263,7 @@ void voodoo(void)
 					}
 					if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
@@ -302,7 +274,7 @@ void voodoo(void)
 					{
 						WAIT(0);
 						//============================ HUD ============================
-						// таймер тут
+						// таймер
 						if (TIMERA() > 999)
 						{
 							time_s -= 1;
@@ -391,7 +363,7 @@ void voodoo(void)
 
 						if (HAS_PICKUP_BEEN_COLLECTED( keys_1 ))
 						{
-							REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(haiti_ico);
 
 							CREATE_PICKUP_ROTATE(mission_keis2, 22, 20, -483.234, 882.274, 5.42256, 0.0, 0.0, 80.0, &keys_1);
 
@@ -420,14 +392,14 @@ void voodoo(void)
 						}
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((time_m == 0) && (time_s == 0))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "HAM1_2", 5000, 1);//~r~The cops got to the stash first!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -439,7 +411,7 @@ void voodoo(void)
 					{
 						WAIT(0);
 						//============================ HUD ============================
-						// таймер тут
+						// таймер
 						if (TIMERA() > 999)
 						{
 							time_s -= 1;
@@ -528,7 +500,7 @@ void voodoo(void)
 
 						if (HAS_PICKUP_BEEN_COLLECTED( keys_1 ))
 						{
-							REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(haiti_ico);
 
 							ALTER_WANTED_LEVEL(GetPlayerIndex(), 5);
 							APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
@@ -563,14 +535,14 @@ void voodoo(void)
 						}
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((time_m == 0) && (time_s == 0))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "HAM1_2", 5000, 1);//~r~The cops got to the stash first!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -583,13 +555,13 @@ void voodoo(void)
 						WAIT(0);
 						if (!IS_WANTED_LEVEL_GREATER(GetPlayerIndex(), 0))
 						{
-							//DRAW_CHECKPOINT( -529.537, 675.639, 3.15269, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-							//GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-							//GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.537, 675.639, 3.15269, &PlayR);//проверка "игрок на координатах"
+							//DRAW_CHECKPOINT( -529.537, 675.639, 3.15269, 1.5, 160, 116, 209);
+							//GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+							//GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.537, 675.639, 3.15269, &PlayR);
 							//if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 							//{
 								PRINT_STRING_IN_STRING("string", "HAM1_3", 5000, 1);//~g~Get this stuff back to the hideout!
-								skip = 2;// переменная пропуска
+								skip = 2;
 								break;
 							//}
 						}
@@ -597,7 +569,7 @@ void voodoo(void)
 						{
 							if ( text == 0)
 							{
-								REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(haiti_ico);
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "NEWANTED", 5000, 1);//~COL_NET_12~Shake the cops and lose your wanted level!
 								text = 1;
@@ -622,13 +594,13 @@ void voodoo(void)
 
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
 				}
 
-				REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(haiti_ico);
 
 				RELEASE_TEXTURE( fon );
 				RELEASE_TEXTURE( timer );
@@ -644,7 +616,7 @@ void voodoo(void)
 
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -660,12 +632,12 @@ void voodoo(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -680,18 +652,18 @@ void voodoo(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 1000);// +5000$
 						
 						WAIT( 0 );
@@ -700,10 +672,10 @@ void voodoo(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +1000 );
 					REGISTER_MISSION_PASSED("HAT_1");
 					G_HAITI = 2;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 
@@ -721,17 +693,17 @@ void voodoo(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "LG_14");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -529.349, 677.904, 3.32976, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -529.349, 677.904, 3.32976, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(haiti_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -741,17 +713,17 @@ void voodoo(void)
 					}
 				}
 
-				SET_CHAR_COORDINATES(GetPlayerPed(), -529.452, 675.58, 3.45918 );// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -529.452, 675.58, 3.45918 );
 				SET_CHAR_HEADING(GetPlayerPed(), 180.0 );
 				
 				uint hour, minute, weather;
 				GET_TIME_OF_DAY(&hour, &minute);
 				GET_CURRENT_WEATHER(&weather);
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
-				FORWARD_TO_TIME_OF_DAY(18, 55);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(18, 55);
 				
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "HAT_2", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "HAT_2", 6 );
 				START_CUTSCENE_NOW("hat_2");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -769,10 +741,10 @@ void voodoo(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				FORCE_WEATHER_NOW( weather );//устанавливаем погода
+				FORCE_WEATHER_NOW( weather );
 				RELEASE_WEATHER();
-				FORWARD_TO_TIME_OF_DAY(hour, minute);//устанавливаем время
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				FORWARD_TO_TIME_OF_DAY(hour, minute);
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				Car car1, car2, car3, car4, car5, car6;
 				Ped ped1, ped2, ped3, ped4, ped5, ped6, ped7, ped8, ped9;
@@ -786,8 +758,8 @@ void voodoo(void)
 				hel = GET_TEXTURE( textur, "rc_hel_hud" );
 
 				uint PedM1 = MODEL_M_Y_GLAT_HI_01;// Кубинец
-				uint CarM1 = MODEL_SPEEDO;// фургон
-				uint CarM2 = MODEL_TOURMAV;// вертолёт
+				uint CarM1 = MODEL_SPEEDO;//
+				uint CarM2 = MODEL_TOURMAV;//
 				uint CarM3 = MODEL_COASTG;// Лодка 1
 				uint CarM4 = MODEL_JETMAX;// Лодка 2
 				uint CarM5 = MODEL_DINGHY;// Лодка 3
@@ -810,52 +782,52 @@ void voodoo(void)
 				path_on = 0;
 				hel_set = 3;
 
-				// загрузаем автомобиль
+				// загрузаем
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 
-				// загружаем вертолётик
+				// загружаемик
 				REQUEST_MODEL(CarM2);
-				while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 
 				// загружаем Лодка 1
 				REQUEST_MODEL(CarM3);
-				while (!HAS_MODEL_LOADED(CarM3)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM3)) WAIT(0);
 
 				// загружаем Лодка 2
 				REQUEST_MODEL(CarM4);
-				while (!HAS_MODEL_LOADED(CarM4)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM4)) WAIT(0);
 
 				// загружаем пЛодка 3
 				REQUEST_MODEL(CarM5);
-				while (!HAS_MODEL_LOADED(CarM5)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM5)) WAIT(0);
 
 				// загружаем Гермес
 				REQUEST_MODEL(CarM6);
-				while (!HAS_MODEL_LOADED(CarM6)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM6)) WAIT(0);
 
 				// загружаем Кубинец
 				REQUEST_MODEL(PedM1);// Кубинец
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 
-				// загружаем динамит
-				REQUEST_MODEL(dynamite_1);// бочки
+				// загружаем
+				REQUEST_MODEL(dynamite_1);//
 				while (!HAS_MODEL_LOADED(dynamite_1)) WAIT(0);
 
-				// создаём фургон
+				
 				CREATE_CAR(CarM1, -374.205, 377.547, 5.65768, &car1, TRUE);
 				SET_CAR_HEADING(car1, 0.0);
 
-				// создаём верталёт
+				
 				CREATE_CAR(CarM2, 277.635, -797.568, 4.80212, &car2, TRUE);
 
-				// создаём автомобиль
+				
 				CREATE_CAR(CarM3, -29.6848, 283.813, 1.0, &car3, TRUE);// Лодка 1
 				CREATE_CAR(CarM4, -22.7851, 283.813, 1.0, &car4, TRUE);// Лодка 2
 				CREATE_CAR(CarM5, -15.8854, 283.813, 1.0, &car5, TRUE);// Лодка 3
 				CREATE_CAR(CarM6, 282.497, -797.568, 4.80212, &car6, TRUE);// Гермес
 
-				// создаём динамит
+				
 				CREATE_OBJECT_NO_OFFSET(dynamite_1, 294.8487, -798.9435, 5.445457, &tnt_1, TRUE);
 			
 				// педы
@@ -869,7 +841,7 @@ void voodoo(void)
 				CREATE_CHAR (26, PedM1, 290.977, -770.5, 4.6677, &ped8, TRUE);// 
 				CREATE_CHAR (26, PedM1, 290.978, -770.5, 4.6677, &ped9, TRUE);//
 
-				// маркер на автомобиле
+				
 				ADD_BLIP_FOR_CAR(car1, &haiti_ico);
 				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);
 				CHANGE_BLIP_COLOUR(haiti_ico, 5);
@@ -879,14 +851,14 @@ void voodoo(void)
 				CLEAR_PRINTS();
 				PRINT_STRING_IN_STRING("string", "HAT2_B1", 5000, 1);//~g~Get to the van that contains the flying bombs.
 
-				// грузим анимации
+				//им анимации
 				REQUEST_ANIMS( "amb@hang_str_idls" );
 				while (!HAVE_ANIMS_LOADED( "amb@hang_str_idls" )) WAIT(0);
 
-				REQUEST_ANIMS( "amb@atm" );//загружаем файл с анимацией
+				REQUEST_ANIMS( "amb@atm" );
 				while (!HAVE_ANIMS_LOADED( "amb@atm" )) WAIT(0);
 
-				REQUEST_ANIMS( "ne_topfun" );//загружаем файл с анимацией
+				REQUEST_ANIMS( "ne_topfun" );
 				while (!HAVE_ANIMS_LOADED( "ne_topfun" )) WAIT(0);
 				SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_UNARMED, TRUE);
 
@@ -895,9 +867,9 @@ void voodoo(void)
 					WAIT( 0 );
 					if (IS_CHAR_IN_CAR(GetPlayerPed(), car1))
 					{
-						REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(haiti_ico);
 						SetTime(1000);
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 						// вооружаем
 						UpdateWeaponOfPed(ped1, WEAPON_MP5);
@@ -920,10 +892,10 @@ void voodoo(void)
 						SET_CURRENT_CHAR_WEAPON(ped8, WEAPON_MP5, TRUE);
 						SET_CURRENT_CHAR_WEAPON(ped9, WEAPON_MP5, TRUE);
 
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_out", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_out", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );
 						SetTime(2000);
 
-						DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+						DO_SCREEN_FADE_OUT( 1000 );
 						while(true)
 						{
 							WAIT(0);
@@ -942,18 +914,18 @@ void voodoo(void)
 						SET_ENGINE_HEALTH(car2, 3000);
 						SET_PETROL_TANK_HEALTH(car2, 3000);
 
-						SET_CHAR_VISIBLE(GetPlayerPed(), 0); //прозрачный игрок
-						TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), car2, TRUE);//садим игрока в верталёт
+						SET_CHAR_VISIBLE(GetPlayerPed(), 0);
+						TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), car2, TRUE);
 
-						SET_CHAR_COORDINATES(ped1, -98.1484,281.855,4.77167);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped2, -75.7422,296.294,2.4526);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped3, -95.5094,294.563,2.4526);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped4, -95.0721,296.614,2.4526);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped5, -96.9814,295.639,2.4526);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped6, -103.829,296.98,2.4526);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped7, -84.1499,288.359,4.77167);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped8, -84.5231,289.671,4.77167);// перемещаем игрока
-						SET_CHAR_COORDINATES(ped9, -85.532,288.178,4.77167);// перемещаем игрока
+						SET_CHAR_COORDINATES(ped1, -98.1484,281.855,4.77167);
+						SET_CHAR_COORDINATES(ped2, -75.7422,296.294,2.4526);
+						SET_CHAR_COORDINATES(ped3, -95.5094,294.563,2.4526);
+						SET_CHAR_COORDINATES(ped4, -95.0721,296.614,2.4526);
+						SET_CHAR_COORDINATES(ped5, -96.9814,295.639,2.4526);
+						SET_CHAR_COORDINATES(ped6, -103.829,296.98,2.4526);
+						SET_CHAR_COORDINATES(ped7, -84.1499,288.359,4.77167);
+						SET_CHAR_COORDINATES(ped8, -84.5231,289.671,4.77167);
+						SET_CHAR_COORDINATES(ped9, -85.532,288.178,4.77167);
 						SET_CHAR_HEADING(ped1, -170.0);
 						SET_CHAR_HEADING(ped2, 0.0);
 						SET_CHAR_HEADING(ped3, -5.0);
@@ -973,19 +945,19 @@ void voodoo(void)
 						SET_CAR_HEADING(car5, 45.0);
 						SET_CAR_HEADING(car6, -175.0);
 
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "f_insertcard", "amb@atm", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped3, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped4, "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped5, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped6, "f_insertcard", "amb@atm", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped7, "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped8, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped9, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "f_insertcard", "amb@atm", 8.0, 1, 0, 0, 0, -1 );
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped3, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped4, "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped5, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped6, "f_insertcard", "amb@atm", 8.0, 1, 0, 0, 0, -1 );
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped7, "stand_idle_d", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped8, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped9, "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );
 						SetTime(500);
 
-						DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+						DO_SCREEN_FADE_IN( 1000 );
 
-						// ставим камеру
+						
 						CREATE_CAM( 14, &camera );
 						POINT_CAM_AT_COORD	( camera, -86.0409, 295.163, -1.7832 );
 						SET_CAM_POS			( camera, -114.335, 310.239, 11.8853 );
@@ -1007,7 +979,7 @@ void voodoo(void)
 						PRINT_STRING_IN_STRING("string", "HAT2_B4", 5000, 1);//...and destroy their boats!
 						SetTime(4000);
 
-						DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+						DO_SCREEN_FADE_OUT( 1000 );
 						while(true)
 						{
 							WAIT(0);
@@ -1017,15 +989,15 @@ void voodoo(void)
 							}
 						}
 
-						//убираем камеру
+						
 						ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 						END_CAM_COMMANDS( &camera );
 						SET_WIDESCREEN_BORDERS( 0 );
 
 						PRINT_HELP("BOLLOX"); //Press the ~h~~INPUT_PHONE_ACCEPT~ ~w~button to drop a bomb. Press the ~h~~INPUT_ENTER~ ~w~button to cancel.
 
-						DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
-						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+						DO_SCREEN_FADE_IN( 1000 );
+						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 						SET_FOLLOW_VEHICLE_CAM_SUBMODE(2);
 						ATTACH_OBJECT_TO_CAR(tnt_1, car2, 0, 0, 0, -0.5, 0, 0, 0);
 
@@ -1041,12 +1013,12 @@ void voodoo(void)
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "TEX3_31", 5000, 1);//~r~You destroyed the TOPFUN van that contained the bombs and RC helicopter!
-						skip = 3;// переменная пропуска
+						skip = 3;
 						break;
 					}
 					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
@@ -1085,7 +1057,7 @@ void voodoo(void)
 						}
 						if (attach_1 == 0)
 						{
-							GET_OBJECT_COORDINATES(tnt_1,  &PedX, &PedY, &PedZ);//вписываем координаты модели в переменную
+							GET_OBJECT_COORDINATES(tnt_1,  &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 							GET_GROUND_Z_FOR_3D_COORD(PedX, PedY, PedZ, &deton);
 							if ((PedZ < deton+0.25) || (IS_OBJECT_IN_WATER(tnt_1)) || (TIMERB() > 5000))
 							{
@@ -1103,7 +1075,7 @@ void voodoo(void)
 
 						if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -48.02, 263.384, -1.951, -134.821, 350.186, 58.049, 0 ))
 						{
-							REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(haiti_ico);
 
 							ADD_BLIP_FOR_CHAR(ped1, &ped1_ico);
 							CHANGE_BLIP_SPRITE(ped1_ico, BLIP_OBJECTIVE);
@@ -1168,7 +1140,7 @@ void voodoo(void)
 							TASK_GO_STRAIGHT_TO_COORD(ped6, -98.9897, 300.063, 2.18294, 3, -2);// пед бежит
 
 							TASK_ENTER_CAR_AS_PASSENGER(ped7, car6, -1, 0);
-							TASK_ENTER_CAR_AS_DRIVER(ped1, car6, TRUE);//садим игрока в верталёт
+							TASK_ENTER_CAR_AS_DRIVER(ped1, car6, TRUE);
 
 							ATTACH_OBJECT_TO_CAR(tnt_1, car2, 0, 0, 0, -0.5, 0, 0, 0);
 							attach_1 = 1;
@@ -1181,7 +1153,7 @@ void voodoo(void)
 							if (hel_set > 1)
 							{
 
-								DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+								DO_SCREEN_FADE_OUT( 500 );
 								while(true)
 								{
 									WAIT(0);
@@ -1199,9 +1171,9 @@ void voodoo(void)
 								SET_CAR_HEALTH(car2, 3000);
 								SET_ENGINE_HEALTH(car2, 3000);
 								SET_PETROL_TANK_HEALTH(car2, 3000);
-								TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), car2, TRUE);//садим игрока в верталёт
+								TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), car2, TRUE);
 							
-								DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+								DO_SCREEN_FADE_IN( 500 );
 
 								DETACH_OBJECT(tnt_1, 1);
 								ADD_EXPLOSION( PedX, PedY, PedZ, 0, 5.5, 1, 0, 0.1 );
@@ -1212,12 +1184,12 @@ void voodoo(void)
 						}
 
 						// провал миссии
-						if (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))//если игрок покинул или унечтожел вертолёт, тогда провал миссии
+						if (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))//если игрок покинул или унечтожел, тогда провал миссии
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "NERCCANX", 5000, 1);//~r~RC helicopter cancelled.
 							EXPLODE_CAR(car2, 1, 1);
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (IS_CAR_DEAD(car1))
@@ -1225,7 +1197,7 @@ void voodoo(void)
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "TEX3_31", 5500, 1);//~r~You destroyed the TOPFUN van that contained the bombs and RC helicopter!
 							SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);
-							skip = 1;// переменная пропуска
+							skip = 1;
 							EXPLODE_CHAR_HEAD(GetPlayerPed());
 							break;
 						}
@@ -1233,12 +1205,12 @@ void voodoo(void)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "NEHAT2_B8", 5000, 1);//~r~You have no RC helicopters left!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -1278,7 +1250,7 @@ void voodoo(void)
 							if (hel_set > 1)
 							{
 								
-								DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+								DO_SCREEN_FADE_OUT( 500 );
 								while(true)
 								{
 									WAIT(0);
@@ -1297,9 +1269,9 @@ void voodoo(void)
 								SET_CAR_HEALTH(car2, 3000);
 								SET_ENGINE_HEALTH(car2, 3000);
 								SET_PETROL_TANK_HEALTH(car2, 3000);
-								TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), car2, TRUE);//садим игрока в верталёт
+								TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), car2, TRUE);
 							
-								DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+								DO_SCREEN_FADE_IN( 500 );
 
 								DETACH_OBJECT(tnt_1, 1);
 								ADD_EXPLOSION( PedX, PedY, PedZ, 0, 5.5, 1, 0, 0.1 );
@@ -1321,9 +1293,9 @@ void voodoo(void)
 							WARP_CHAR_INTO_CAR_AS_PASSENGER(ped9, car3, 0);
 							WARP_CHAR_INTO_CAR_AS_PASSENGER(ped7, car6, 0);
 
-							TASK_CAR_DRIVE_WANDER(ped2, car3, 20.0, 2);// пед едит куда-то
-							TASK_CAR_DRIVE_WANDER(ped4, car4, 20.0, 2);// пед едит куда-то
-							TASK_CAR_DRIVE_WANDER(ped5, car5, 20.0, 2);// пед едит куда-то
+							TASK_CAR_DRIVE_WANDER(ped2, car3, 20.0, 2);
+							TASK_CAR_DRIVE_WANDER(ped4, car4, 20.0, 2);
+							TASK_CAR_DRIVE_WANDER(ped5, car5, 20.0, 2);
 
 							//------------ загрузка путей ----------------
 							REQUEST_CAR_RECORDING( 3060 );
@@ -1364,9 +1336,9 @@ void voodoo(void)
 						else if ((in_car == 1) && (TIMERC() > 15000))
 						{
 							STOP_PLAYBACK_RECORDED_CAR(car6);
-							REMOVE_CAR_RECORDING( 3060 ); // выгружаем пути транспорта
+							REMOVE_CAR_RECORDING( 3060 );
 
-							TASK_CAR_DRIVE_WANDER(ped1, car6, 20.0, 2);// пед едит куда-то
+							TASK_CAR_DRIVE_WANDER(ped1, car6, 20.0, 2);
 
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "HAT2_B7", 5000, 1);//~g~One of the Cubans in escaping in a car. Don't leave any witnesses!
@@ -1389,7 +1361,7 @@ void voodoo(void)
 						}
 						if (attach_1 == 0)
 						{
-							GET_OBJECT_COORDINATES(tnt_1,  &PedX, &PedY, &PedZ);//вписываем координаты модели в переменную
+							GET_OBJECT_COORDINATES(tnt_1,  &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 							GET_GROUND_Z_FOR_3D_COORD(PedX, PedY, PedZ, &deton);
 							if ((PedZ < deton+0.25) || (IS_OBJECT_IN_WATER(tnt_1)) || (TIMERB() > 5000))
 							{
@@ -1407,62 +1379,62 @@ void voodoo(void)
 
 						if ((ped1_hp < 100) && (ico_1 == 1))
 						{
-							REMOVE_BLIP(ped1_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped1_ico);
 							EXPLODE_CHAR_HEAD(ped1);
 							ico_1 = 0;
 						}
 						if ((ped2_hp < 100) && (ico_2 == 1))
 						{
-							REMOVE_BLIP(ped2_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped2_ico);
 							EXPLODE_CHAR_HEAD(ped2);
 							ico_2 = 0;
 						}
 						if ((ped3_hp < 100) && (ico_3 == 1))
 						{
-							REMOVE_BLIP(ped3_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped3_ico);
 							EXPLODE_CHAR_HEAD(ped3);
 							ico_3 = 0;
 						}
 						if ((ped4_hp < 100) && (ico_4 == 1))
 						{
-							REMOVE_BLIP(ped4_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped4_ico);
 							EXPLODE_CHAR_HEAD(ped4);
 							ico_4 = 0;
 						}
 						if ((ped5_hp < 100) && (ico_5 == 1))
 						{
-							REMOVE_BLIP(ped5_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped5_ico);
 							EXPLODE_CHAR_HEAD(ped5);
 							ico_5 = 0;
 						}
 						if ((ped6_hp < 100) && (ico_6 == 1))
 						{
-							REMOVE_BLIP(ped6_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped6_ico);
 							EXPLODE_CHAR_HEAD(ped6);
 							ico_6 = 0;
 						}
 						if ((ped7_hp < 100) && (ico_7 == 1))
 						{
-							REMOVE_BLIP(ped7_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped7_ico);
 							EXPLODE_CHAR_HEAD(ped7);
 							ico_7 = 0;
 						}
 						if ((ped8_hp < 100) && (ico_8 == 1))
 						{
-							REMOVE_BLIP(ped8_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped8_ico);
 							EXPLODE_CHAR_HEAD(ped8);
 							ico_8 = 0;
 						}
 						if ((ped9_hp < 100) && (ico_9 == 1))
 						{
-							REMOVE_BLIP(ped9_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped9_ico);
 							EXPLODE_CHAR_HEAD(ped9);
 							ico_9 = 0;
 						}
 
 						if ((ico_1 == 0) && (ico_2 == 0) && (ico_3 == 0) && (ico_4 == 0) && (ico_5 == 0) && (ico_6 == 0) && (ico_7 == 0) && (ico_8 == 0) && (ico_9 == 0))
 						{
-							skip = 2;// переменная пропуска
+							skip = 2;
 							//TASK_ENTER_CAR_AS_PASSENGER(GetPlayerIndex(), car1, -1, 1);
 							break;
 						}
@@ -1472,7 +1444,7 @@ void voodoo(void)
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "NERCCANX", 5000, 1);//~r~RC helicopter cancelled.
 							EXPLODE_CAR(car2, 1, 1);
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (IS_CAR_DEAD(car1))
@@ -1480,7 +1452,7 @@ void voodoo(void)
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "TEX3_31", 5500, 1);//~r~You destroyed the TOPFUN van that contained the bombs and RC helicopter!
 							SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);
-							skip = 1;// переменная пропуска
+							skip = 1;
 							EXPLODE_CHAR_HEAD(GetPlayerPed());
 							break;
 						}
@@ -1488,21 +1460,21 @@ void voodoo(void)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "NEHAT2_B8", 5000, 1);//~r~You have no RC helicopters left!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
 				}
-				/// чистим скрипт тут
+				
 
 				if ((skip == 1) || (skip == 2))
 				{
-					DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+					DO_SCREEN_FADE_OUT( 1000 );
 					while(true)
 					{
 						WAIT(0);
@@ -1513,43 +1485,43 @@ void voodoo(void)
 					}
 
 					WARP_CHAR_INTO_CAR(GetPlayerPed(), car1);
-					DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
-					WAIT(100);
+					DO_SCREEN_FADE_IN( 1000 );
+					WAIT(0);
 					SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0); // смертный
 					SET_CHAR_VISIBLE(GetPlayerPed(), 1); // видимый игрок
 
 					if ((!HAS_DEATHARREST_EXECUTED()))
 					{
-						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_in", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_in", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );
 						SetTime(1500);
 					}
 				}
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 				SET_CAR_COORDINATES(car2, 0.01, 0.01, -10.01);
 
 				if (path_on == 1)
 				{
 					STOP_PLAYBACK_RECORDED_CAR(car6);
-					REMOVE_CAR_RECORDING( 3060 ); // выгружаем пути транспорта
+					REMOVE_CAR_RECORDING( 3060 );
 				}
 
 				RELEASE_TEXTURE( fon );
 				RELEASE_TEXTURE( hel );
 				REMOVE_TXD( textur );
 
-				REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped1_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped2_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped3_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped4_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped5_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped6_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped7_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped8_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped9_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(haiti_ico);
+				REMOVE_BLIP(ped1_ico);
+				REMOVE_BLIP(ped2_ico);
+				REMOVE_BLIP(ped3_ico);
+				REMOVE_BLIP(ped4_ico);
+				REMOVE_BLIP(ped5_ico);
+				REMOVE_BLIP(ped6_ico);
+				REMOVE_BLIP(ped7_ico);
+				REMOVE_BLIP(ped8_ico);
+				REMOVE_BLIP(ped9_ico);
 
-				// выгружвем модели
+				
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
@@ -1559,7 +1531,7 @@ void voodoo(void)
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM6);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(dynamite_1);
 
-				// выгружвем машину
+				
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -1567,7 +1539,7 @@ void voodoo(void)
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car6);
 
-				// выгружвем педов
+				
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -1582,7 +1554,7 @@ void voodoo(void)
 				// удаляем объекты
 				DELETE_OBJECT(&tnt_1);
 
-				// выгружаем динамит
+				// выгружаем
 				MARK_OBJECT_AS_NO_LONGER_NEEDED(&tnt_1);
 
 				if ((skip == 1) || (skip == 3))
@@ -1590,12 +1562,12 @@ void voodoo(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -1610,18 +1582,18 @@ void voodoo(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 2000);// +5000$
 						
 						WAIT( 0 );
@@ -1630,10 +1602,10 @@ void voodoo(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +2000 );
 					REGISTER_MISSION_PASSED("HAT_2");
 					G_HAITI = 3;
-					sutosave = 1;
+					autosave = 1;
 				}
 				blip_on = 0;
 				G_ONMISSION = 0;
@@ -1650,17 +1622,17 @@ void voodoo(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "LG_14");//иконка на радаре называние в истории карты "Боярский"
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -529.349, 677.904, 3.32976, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -529.349, 677.904, 3.32976, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(haiti_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -1670,17 +1642,17 @@ void voodoo(void)
 					}
 				}
 
-				SET_CHAR_COORDINATES(GetPlayerPed(), -529.452, 675.58, 3.45918 );// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -529.452, 675.58, 3.45918 );
 				SET_CHAR_HEADING(GetPlayerPed(), 180.0 );
 				
 				uint hour, minute, weather;
 				GET_TIME_OF_DAY(&hour, &minute);
 				GET_CURRENT_WEATHER(&weather);
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
-				FORWARD_TO_TIME_OF_DAY(18, 55);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(18, 55);
 				
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "HAT_3", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "HAT_3", 6 );
 				START_CUTSCENE_NOW("hat_3");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -1698,19 +1670,19 @@ void voodoo(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				FORCE_WEATHER_NOW( weather );//устанавливаем погода
+				FORCE_WEATHER_NOW( weather );
 				RELEASE_WEATHER();
-				FORWARD_TO_TIME_OF_DAY(hour, minute);//устанавливаем время
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				FORWARD_TO_TIME_OF_DAY(hour, minute);
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				Car car1;
 				Ped ped1, ped2, ped3, ped4, ped5, ped6, ped7, ped8, ped9, ped10, ped11, ped12, ped13, ped14, ped15, ped16, ped17, ped18, ped19, ped20;
 				Blip ped1_ico, ped2_ico, ped3_ico, ped4_ico, ped5_ico, ped6_ico, ped7_ico, ped8_ico, ped9_ico, ped10_ico;
 				int dm, cdm;
 
-				uint PedM1 = MODEL_M_M_GJAM_HI_01;// Гаитянин
+				uint PedM1 = MODEL_M_M_GJAM_HI_01;
 				uint PedM2 = MODEL_M_Y_GLAT_HI_01;// Кубинец
-				uint CarM1 = MODEL_BURRITO;// фургон
+				uint CarM1 = MODEL_BURRITO;//
 
 				uint ped1_hp, ped2_hp, ped3_hp, ped4_hp, ped5_hp, ped6_hp, ped7_hp, ped8_hp, ped9_hp, ped10_hp;
 				uint ped11_hp, ped12_hp, ped13_hp, ped14_hp, ped15_hp, ped16_hp, ped17_hp, ped18_hp, ped19_hp, ped20_hp;
@@ -1731,25 +1703,25 @@ void voodoo(void)
 				in_car = 1;
 				text = 0;
 
-				// загрузаем автомобиль
+				// загрузаем
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 
 				REQUEST_MODEL(PedM1);// 
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				REQUEST_MODEL(PedM2);// 
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM2));
 
-				CREATE_CHAR (26, PedM1, -446.221, 573.818, 4.47146, &ped1, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM1, -449.742, 576.932, 4.09862, &ped2, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM1, -455.343, 576.791, 4.47146, &ped3, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM1, -458.604, 581.879, 3.96489, &ped4, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM1, -461.851, 575.531, 4.47146, &ped5, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM1, -462.547, 579.456, 4.47146, &ped6, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM1, -466.388, 576.574, 4.47146, &ped7, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM1, -465.051, 584.207, 3.80116, &ped8, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM1, -471.211, 578.552, 4.47146, &ped9, TRUE);// Гаитянин
-				CREATE_CHAR (26, PedM1, -469.951, 582.437, 4.47146, &ped10, TRUE);// Гаитянин
+				CREATE_CHAR (26, PedM1, -446.221, 573.818, 4.47146, &ped1, TRUE);
+				CREATE_CHAR (26, PedM1, -449.742, 576.932, 4.09862, &ped2, TRUE);
+				CREATE_CHAR (26, PedM1, -455.343, 576.791, 4.47146, &ped3, TRUE);
+				CREATE_CHAR (26, PedM1, -458.604, 581.879, 3.96489, &ped4, TRUE);
+				CREATE_CHAR (26, PedM1, -461.851, 575.531, 4.47146, &ped5, TRUE);
+				CREATE_CHAR (26, PedM1, -462.547, 579.456, 4.47146, &ped6, TRUE);
+				CREATE_CHAR (26, PedM1, -466.388, 576.574, 4.47146, &ped7, TRUE);
+				CREATE_CHAR (26, PedM1, -465.051, 584.207, 3.80116, &ped8, TRUE);
+				CREATE_CHAR (26, PedM1, -471.211, 578.552, 4.47146, &ped9, TRUE);
+				CREATE_CHAR (26, PedM1, -469.951, 582.437, 4.47146, &ped10, TRUE);
 
 				SET_CHAR_HEADING(ped1, 50.0);
 				SET_CHAR_HEADING(ped2, 50.0);
@@ -1783,7 +1755,7 @@ void voodoo(void)
 				SET_CHAR_HEADING(ped19, 120.0);
 				SET_CHAR_HEADING(ped20, 120.0);
 
-				CREATE_CAR(CarM1, 299.551, -787.416, 5.44546, &car1, TRUE);// Фургон 
+				CREATE_CAR(CarM1, 299.551, -787.416, 5.44546, &car1, TRUE);// 
 
 				LOAD_CHAR_DECISION_MAKER(2, &dm);
 				LOAD_COMBAT_DECISION_MAKER(3, &cdm);
@@ -1835,7 +1807,7 @@ void voodoo(void)
 				SET_COMBAT_DECISION_MAKER(ped9, cdm);
 				SET_COMBAT_DECISION_MAKER(ped10, cdm);
 
-				//Агрим педов
+				//Агрим
 				SET_CHAR_RELATIONSHIP_GROUP(ped11, 17);
 				SET_CHAR_RELATIONSHIP_GROUP(ped12, 17);
 				SET_CHAR_RELATIONSHIP_GROUP(ped13, 17);
@@ -1978,28 +1950,28 @@ void voodoo(void)
 				while (TRUE)
 				{
 					WAIT(0);
-					DRAW_CHECKPOINT( -462.814, 610.598, 9.89533, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -462.814, 610.598, 9.89533, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( -462.814, 610.598, 9.89533, 1.5, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -462.814, 610.598, 9.89533, &PlayR);
 					if ( PlayR < 2.5 )
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "HAM3_3", 5000, 1);//~g~I expect the Cubans to cheat so be on your guard.
 
-						REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(haiti_ico);
 						SET_MAX_WANTED_LEVEL(0);
 						break;
 					}
 					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), -432.665, 547.768, 2.627, -502.665, 597.768, 12.627, 0 )) ||  (IS_CHAR_SHOOTING_IN_AREA(GetPlayerPed(), -321.538, 428.19, -621.538, 728.19, 0)))
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "HAM3_4", 5000, 1);//~r~You have been spotted! The mission is a failure!
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
@@ -2032,32 +2004,32 @@ void voodoo(void)
 						GET_CHAR_HEALTH(ped19, &ped19_hp);
 						GET_CHAR_HEALTH(ped20, &ped20_hp);
 
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 
 						if ((ped11_hp < 100) && (ico_1 == 1))
 						{
-							REMOVE_BLIP(ped1_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped1_ico);
 							EXPLODE_CHAR_HEAD(ped11);
 							ico_1 = 0;
 							volna_1 +=1;
 						}
 						if ((ped12_hp < 100) && (ico_2 == 1))
 						{
-							REMOVE_BLIP(ped2_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped2_ico);
 							EXPLODE_CHAR_HEAD(ped12);
 							ico_2 = 0;
 							volna_1 +=1;
 						}
 						if ((ped13_hp < 100) && (ico_3 == 1))
 						{
-							REMOVE_BLIP(ped3_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped3_ico);
 							EXPLODE_CHAR_HEAD(ped13);
 							ico_3 = 0;
 							volna_1 +=1;
 						}
 						if ((ped14_hp < 100) && (ico_4 == 1))
 						{
-							REMOVE_BLIP(ped4_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped4_ico);
 							EXPLODE_CHAR_HEAD(ped14);
 							ico_4 = 0;
 							volna_1 +=1;
@@ -2065,42 +2037,42 @@ void voodoo(void)
 
 						if ((ped15_hp < 100) && (ico_5 == 1))
 						{
-							REMOVE_BLIP(ped5_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped5_ico);
 							EXPLODE_CHAR_HEAD(ped15);
 							ico_5 = 0;
 							volna_2 +=1;
 						}
 						if ((ped16_hp < 100) && (ico_6 == 1))
 						{
-							REMOVE_BLIP(ped6_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped6_ico);
 							EXPLODE_CHAR_HEAD(ped16);
 							ico_6 = 0;
 							volna_2 +=1;
 						}
 						if ((ped17_hp < 100) && (ico_7 == 1))
 						{
-							REMOVE_BLIP(ped7_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped7_ico);
 							EXPLODE_CHAR_HEAD(ped17);
 							ico_7 = 0;
 							volna_2 +=1;
 						}
 						if ((ped18_hp < 100) && (ico_8 == 1))
 						{
-							REMOVE_BLIP(ped8_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped8_ico);
 							EXPLODE_CHAR_HEAD(ped18);
 							ico_8 = 0;
 							volna_2 +=1;
 						}
 						if ((ped19_hp < 100) && (ico_9 == 1))
 						{
-							REMOVE_BLIP(ped9_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped9_ico);
 							EXPLODE_CHAR_HEAD(ped19);
 							ico_9 = 0;
 							volna_2 +=1;
 						}
 						if ((ped20_hp < 100) && (ico_10 == 1))
 						{
-							REMOVE_BLIP(ped10_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped10_ico);
 							EXPLODE_CHAR_HEAD(ped20);
 							ico_10 = 0;
 							volna_2 +=1;
@@ -2109,7 +2081,7 @@ void voodoo(void)
 
 						if (volna_1 == 4)
 						{
-							// Пды на фургоне тут
+							// Пды нае
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "HAM3_7", 5000, 1);//~g~Look Out! The Cubans have brought reinforcements. Kill them all!!
 
@@ -2117,15 +2089,15 @@ void voodoo(void)
 							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped12);
 							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped13);
 							MARK_CHAR_AS_NO_LONGER_NEEDED(&ped14);
-							WAIT(100);
-							CLEAR_AREA(-452.428, 572.987, 1.64151, 45.0, 1);//очещаем зону загрузки
+							WAIT(0);
+							CLEAR_AREA(-452.428, 572.987, 1.64151, 45.0, 1);
 
 							CREATE_CHAR_AS_PASSENGER(car1, 1, PedM2, 0, &ped11);// Кубинкц
 							CREATE_CHAR_AS_PASSENGER(car1, 1, PedM2, 1, &ped12);// Кубинкц
 							CREATE_CHAR_AS_PASSENGER(car1, 1, PedM2, 2, &ped13);// Кубинкц
 							CREATE_CHAR_INSIDE_CAR(car1, 1, PedM2, &ped14);// Кубинкц
 
-							CLEAR_AREA(-493.221, 565.447, 5.33107, 15.0, 1);//очещаем зону загрузки
+							CLEAR_AREA(-493.221, 565.447, 5.33107, 15.0, 1);
 							
 							REQUEST_CAR_RECORDING( 3061 ); // полёт Основной
 							while (!HAS_CAR_RECORDING_BEEN_LOADED( 3061 )) WAIT(0);
@@ -2169,12 +2141,12 @@ void voodoo(void)
 							if (TIMERA() > 5500)
 							{
 								STOP_PLAYBACK_RECORDED_CAR(car1);
-								REMOVE_CAR_RECORDING( 3061 ); // выгружаем пути транспорта
+								REMOVE_CAR_RECORDING( 3061 );
 
-								TASK_GO_STRAIGHT_TO_COORD(ped11, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
-								TASK_GO_STRAIGHT_TO_COORD(ped12, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
-								TASK_GO_STRAIGHT_TO_COORD(ped13, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
-								TASK_GO_STRAIGHT_TO_COORD(ped14, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
+								TASK_GO_STRAIGHT_TO_COORD(ped11, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
+								TASK_GO_STRAIGHT_TO_COORD(ped12, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
+								TASK_GO_STRAIGHT_TO_COORD(ped13, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
+								TASK_GO_STRAIGHT_TO_COORD(ped14, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
 
 								/*TASK_LEAVE_CAR(ped11, car1);
 								TASK_LEAVE_CAR(ped12, car1);
@@ -2224,7 +2196,7 @@ void voodoo(void)
 							//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
 							//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 							WAIT(250);
-							CLEAR_AREA(-452.428, 572.987, 1.64151, 45.0, 1);//очещаем зону загрузки
+							CLEAR_AREA(-452.428, 572.987, 1.64151, 45.0, 1);
 
 							CREATE_CHAR (26, PedM2, -439.793, 598.086, 3.96489, &ped15, TRUE);// Кубинец
 							CREATE_CHAR (26, PedM2, -439.569, 598.815, 3.68376, &ped16, TRUE);// Кубинец
@@ -2240,12 +2212,12 @@ void voodoo(void)
 							//SET_CHAR_HEADING(ped19, 165.0);
 							//SET_CHAR_HEADING(ped20, 165.0);
 
-							TASK_GO_STRAIGHT_TO_COORD(ped15, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
-							TASK_GO_STRAIGHT_TO_COORD(ped16, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
-							TASK_GO_STRAIGHT_TO_COORD(ped17, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
-							//TASK_GO_STRAIGHT_TO_COORD(ped18, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
-							//TASK_GO_STRAIGHT_TO_COORD(ped19, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
-							//TASK_GO_STRAIGHT_TO_COORD(ped20, -462.547, 579.456, 4.47146, 3, -2);// Томми бежит в двери
+							TASK_GO_STRAIGHT_TO_COORD(ped15, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
+							TASK_GO_STRAIGHT_TO_COORD(ped16, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
+							TASK_GO_STRAIGHT_TO_COORD(ped17, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
+							//TASK_GO_STRAIGHT_TO_COORD(ped18, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
+							//TASK_GO_STRAIGHT_TO_COORD(ped19, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
+							//TASK_GO_STRAIGHT_TO_COORD(ped20, -462.547, 579.456, 4.47146, 3, -2);// бежит в двери
 
 							SET_CHAR_RELATIONSHIP_GROUP(ped15, 17);
 							SET_CHAR_RELATIONSHIP_GROUP(ped16, 17);
@@ -2341,56 +2313,56 @@ void voodoo(void)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "HAM3_2", 5000, 1);//~r~The Haitians have died!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (PlayZ < 8.5)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "HAM3_4", 5000, 1);//~r~You have been spotted! The mission is a failure!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((ped11_hp < 100) && (ped12_hp < 100) && (ped13_hp < 100) && (ped14_hp < 100) && (ped15_hp < 100) && (ped16_hp < 100) && (ped17_hp < 100) && (ped18_hp < 100) && (ped19_hp < 100) && (ped20_hp < 100))
 						{
-							skip = 2;// переменная пропуска
+							skip = 2;
 							break;
 						}
 					}
 				}
 
-				// чистим скрипт тут
-				REMOVE_BLIP(ped1_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped2_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped3_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped4_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped5_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped6_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped7_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped8_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped9_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(ped10_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+				
+				REMOVE_BLIP(ped1_ico);
+				REMOVE_BLIP(ped2_ico);
+				REMOVE_BLIP(ped3_ico);
+				REMOVE_BLIP(ped4_ico);
+				REMOVE_BLIP(ped5_ico);
+				REMOVE_BLIP(ped6_ico);
+				REMOVE_BLIP(ped7_ico);
+				REMOVE_BLIP(ped8_ico);
+				REMOVE_BLIP(ped9_ico);
+				REMOVE_BLIP(ped10_ico);
+				REMOVE_BLIP(haiti_ico);
 
 				SET_MAX_WANTED_LEVEL(6);
 
 				if (in_car == 2)
 				{
 					STOP_PLAYBACK_RECORDED_CAR(car1);
-					REMOVE_CAR_RECORDING( 3061 ); // выгружаем пути транспорта
+					REMOVE_CAR_RECORDING( 3061 );
 				}
 
-				// выгружвем модели
+				
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
-				// выгружвем педов
+				
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -2412,7 +2384,7 @@ void voodoo(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
-				// выгружвем машину
+				
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 
 				if (skip == 1)
@@ -2420,12 +2392,12 @@ void voodoo(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -2440,18 +2412,18 @@ void voodoo(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 5000);// +5000$
 						
 						WAIT( 0 );
@@ -2460,10 +2432,10 @@ void voodoo(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +5000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +5000 );
 					REGISTER_MISSION_PASSED("HAT_3");
 					G_HAITI = 4;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 				
@@ -2481,7 +2453,7 @@ void voodoo(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(haiti_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(haiti_ico);
 				blip_on = 0;
 			}
 		}

@@ -105,9 +105,9 @@ void race_launcher(void)
 		WAIT(0);
 		if ((G_ONMISSION == 0) && (G_BUSINES_SA >= 1))// 0-временно
 		{
-			DRAW_CHECKPOINT( -534.695, -294.287, 0.738626, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -534.695, -294.287, 0.738626, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -534.695, -294.287, 0.738626, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -534.695, -294.287, 0.738626, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
@@ -141,7 +141,7 @@ void race_launcher(void)
 				DRAW_SPRITE( map_fon, 0.50000000, 0.50000000, 1.00000000, 1.00000000, 0.00000000, 255, 255, 255, 255 );
 
 				CREATE_CAM( 14, &camera );
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 				POINT_CAM_AT_COORD	( camera, -532.651, -294.214, 3.63159 );
 				SET_CAM_POS			( camera, -535.251, -294.214, 3.63159 );
 				SET_CAM_ACTIVE( camera, 1 );
@@ -151,13 +151,13 @@ void race_launcher(void)
 				GET_GAME_CAM(&camera3);
 				CREATE_CAM( 3, &camera2 );
 				SET_CAM_INTERP_STYLE_DETAILED( camera2, 1, 1, 1, 1 );
-				SET_CAM_INTERP_STYLE_CORE( camera2, camera3, camera, 500, 0 ); //перемещение камеры от игрока на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+				SET_CAM_INTERP_STYLE_CORE( camera2, camera3, camera, 500, 0 ); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
 				SET_CAM_ACTIVE( camera2, 1 );
 				SET_CAM_PROPAGATE( camera2, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
 
 				SET_WIDESCREEN_BORDERS( 1 ); //отключаем инетрфейс
-				SET_CHAR_COORDINATES(GetPlayerPed(), -590.215, -298.284, 1.57197);// убераем игрока из кадра
+				SET_CHAR_COORDINATES(GetPlayerPed(), -590.215, -298.284, 1.57197);// убераем из кадра
 
 				while (true)
 				{
@@ -171,7 +171,7 @@ void race_launcher(void)
 					}
 					else if (help_wait == 2)
 					{
-						CLEAR_HELP(); // удаляем текст подсказки
+						CLEAR_HELP();
 						PRINT_HELP_FOREVER("VC2_RACE_HELP1"); // Тест подсказки "для выбора маршрута используйте клавиши (< и >) для продолжения нажмите ENTER для отмена нажмите BACKSPACE"*/
 						help_wait = 0;
 					}
@@ -239,10 +239,10 @@ void race_launcher(void)
 					}
 					else if ((IS_BUTTON_PRESSED( 0, 16 )) || ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()))) //клавиатура ENTER
 					{
-						STORE_SCORE(GetPlayerIndex(), &money_plaer);// записываем средства игрока в переменную
+						STORE_SCORE(GetPlayerIndex(), &money_plaer);// записываем средства в переменную
 						if ( money_plaer >= add_money )// проверяем хватает-дли средств
 						{
-							ADD_SCORE( GetPlayerIndex(), - (add_money));// отнимаем у игрока сумму
+							ADD_SCORE( GetPlayerIndex(), - (add_money));// отнимаем у сумму
 							race_start = 1;// активируем переменную старта гонки
 							break;
 						}
@@ -250,7 +250,7 @@ void race_launcher(void)
 						{
 							if (help_wait == 0)
 							{
-								CLEAR_HELP(); // удаляем текст подсказки
+								CLEAR_HELP();
 								PRINT_HELP_FOREVER("VC2_RACE_HELP2"); // пишем недостаточно средств
 								SETTIMERA(0);
 								help_wait = 1;// переменная для активации таймера подсказки навигации
@@ -400,16 +400,16 @@ void race_launcher(void)
 				RELEASE_TEXTURE( map_fon );
 				REMOVE_TXD( textur );
 
-				CLEAR_HELP(); // удаляем текст подсказки
-				SET_OBJECT_COORDINATES(spript_map1, -504.61, -287.35, -3.61); // прячем модель (фикс моргания модели чёрной заливкой)
-				SET_OBJECT_COORDINATES(spript_map2, -504.61, -287.35, -3.61); // прячем модель (фикс моргания модели чёрной заливкой)
-				SET_OBJECT_COORDINATES(spript_map3, -504.61, -287.35, -3.61); // прячем модель (фикс моргания модели чёрной заливкой)
-				SET_OBJECT_COORDINATES(spript_map4, -504.61, -287.35, -3.61); // прячем модель (фикс моргания модели чёрной заливкой)
-				SET_OBJECT_COORDINATES(spript_map5, -504.61, -287.35, -3.61); // прячем модель (фикс моргания модели чёрной заливкой)
-				SET_OBJECT_COORDINATES(spript_map6, -504.61, -287.35, -3.61); // прячем модель (фикс моргания модели чёрной заливкой)
-				SET_CHAR_COORDINATES(GetPlayerPed(), -590.215, -298.284, 1.57197);// убираем игрока из зоны
+				CLEAR_HELP();
+				SET_OBJECT_COORDINATES(spript_map1, -504.61, -287.35, -3.61); // прячем модель (фикс моргания чёрной заливкой)
+				SET_OBJECT_COORDINATES(spript_map2, -504.61, -287.35, -3.61); // прячем модель (фикс моргания чёрной заливкой)
+				SET_OBJECT_COORDINATES(spript_map3, -504.61, -287.35, -3.61); // прячем модель (фикс моргания чёрной заливкой)
+				SET_OBJECT_COORDINATES(spript_map4, -504.61, -287.35, -3.61); // прячем модель (фикс моргания чёрной заливкой)
+				SET_OBJECT_COORDINATES(spript_map5, -504.61, -287.35, -3.61); // прячем модель (фикс моргания чёрной заливкой)
+				SET_OBJECT_COORDINATES(spript_map6, -504.61, -287.35, -3.61); // прячем модель (фикс моргания чёрной заливкой)
+				SET_CHAR_COORDINATES(GetPlayerPed(), -590.215, -298.284, 1.57197);// убираем из зоны
 				WAIT(90);
-				SET_CHAR_COORDINATES(GetPlayerPed(), -536.192, -295.507, 0.839274);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+				SET_CHAR_COORDINATES(GetPlayerPed(), -536.192, -295.507, 0.839274);// возвращаем на исходную позицию рядом с чекпойнтом
 
 				if (race_start == 0)
 				{
@@ -417,7 +417,7 @@ void race_launcher(void)
 					DESTROY_CAM( camera );
 					DESTROY_CAM( camera2 );
 					SET_WIDESCREEN_BORDERS( 0 ); //возвращаем инетрфейс
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем
 					G_ONMISSION = 0;
 				}
 				DELETE_OBJECT(&spript_map1);
@@ -442,11 +442,11 @@ void race_launcher(void)
 
 				if (race_start == 1)
 				{
-					WAIT(100);
+					WAIT(0);
 					GET_TIME_OF_DAY(&hour, &min);
 					if ((hour < 22) && (hour > 4))
 					{
-						//выставляем камеру
+						//выставляем
 						CREATE_CAM( 14, &camera );
 						SET_CAM_POS			( camera, -542.888, -335.2, 8.443 );
 						POINT_CAM_AT_COORD	( camera, -580, -489.638, 85.291 );
@@ -507,7 +507,7 @@ void race_launcher(void)
 								}
 							}
 						}
-						DO_SCREEN_FADE_OUT( 800 );// Затемняем экран
+						DO_SCREEN_FADE_OUT( 800 );
 						SETTIMERA(0);
 						while (true)
 						{
@@ -527,14 +527,14 @@ void race_launcher(void)
 
 						SETTIMERA(0);
 						FORWARD_TO_TIME_OF_DAY(22, min);
-						DO_SCREEN_FADE_IN( 800 );// убирается затемнение экрана
+						DO_SCREEN_FADE_IN( 800 );
 					}
 					PRINT_STRING_IN_STRING("string", "VC2_RACE_TEXT10", 3500, 1);//Выводим на экран сообщение "Уже стемнело,отправляйтесь к месту проведения гонки."
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					DESTROY_CAM( camera );
 					DESTROY_CAM( camera2 );
 					SET_WIDESCREEN_BORDERS( 0 ); //возвращаем инетрфейс;
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем
 					start_race();
 				}
 			}

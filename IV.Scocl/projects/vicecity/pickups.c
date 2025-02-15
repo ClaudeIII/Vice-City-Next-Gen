@@ -15,7 +15,7 @@ int add_weap1, add_weap2, add_weap3, add_weap4, add_weap5, add_weap6, add_weap7;
 
 void swap_skin(int skinID)
 {
-	DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+	DO_SCREEN_FADE_OUT( 500 );
 	while(true)
 	{
 		WAIT(0);
@@ -30,11 +30,11 @@ void swap_skin(int skinID)
 		APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
 	}
 	SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, skinID, 0);
-	DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+	DO_SCREEN_FADE_IN( 500 );
 }
 void pickups(void)
 {
-//============================== ОРУЖИЕ ==============================
+//============================== ==============================
 	CREATE_PICKUP_ROTATE(w_knife, 2, 1, 551.7, -1013.1, 4.778, 90.0, 0.0, 0.0, &weap_1);
 	CREATE_PICKUP_ROTATE(w_pumpshot, 2, 14, -926.01, -209.2, 8.848, 90.0, 0.0, 90.0, &weap_2);
 	CREATE_PICKUP_ROTATE(w_rpg, 2, 8, -562.1, -650.57, 8.835, 80.0, 0.0, 0.0, &weap_3);
@@ -152,10 +152,10 @@ void pickups(void)
 	while (TRUE)
 	{
 		WAIT(0);
-		//бонусное оружие сбора пакетов
+		//бонусное сбора пакетов
 		if ((G_PACKET == 1) && (add_weap1 == 0))
 		{
-			CREATE_PICKUP_ROTATE(ec_bpjacket, 2, 100, 658.081, -738.753, 13.2342, -11.166, 0.252, 64.538, &pack_weap_1);// отель
+			CREATE_PICKUP_ROTATE(ec_bpjacket, 2, 100, 658.081, -738.753, 13.2342, -11.166, 0.252, 64.538, &pack_weap_1);
 			CREATE_PICKUP_ROTATE(ec_bpjacket, 2, 100, 95.2247, -38.3479, 5.57377, -10.0, 0.0, 90.0, &pack_weap_2);// особняк
 			CREATE_PICKUP_ROTATE(ec_bpjacket, 2, 100, -393.338, 1895.59, 60.7043, -15.0, 0.0, 0.0, &pack_weap_3);// хюман конго
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_2, "mansion_int");
@@ -164,7 +164,7 @@ void pickups(void)
 		}
 		if ((G_PACKET == 2) && (add_weap2 == 0))
 		{
-			CREATE_PICKUP_ROTATE(w_eagle, 2, 6, 654.738, -738.542, 13.2924, -91.638, -0.147, 87.579, &pack_weap_4);// отель
+			CREATE_PICKUP_ROTATE(w_eagle, 2, 6, 654.738, -738.542, 13.2924, -91.638, -0.147, 87.579, &pack_weap_4);
 			CREATE_PICKUP_ROTATE(w_eagle, 2, 6, 101.028, -35.0397, 5.60441, -84.565, -0.019, 4.981, &pack_weap_5);// особняк
 			CREATE_PICKUP_ROTATE(w_eagle, 2, 6, -394.505, 1895.02, 60.7353, -90.0, 0.0, 0.0, &pack_weap_6);// хюман конго
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_5, "mansion_int");
@@ -173,7 +173,7 @@ void pickups(void)
 		}
 		if ((G_PACKET == 3) && (add_weap3 == 0))
 		{
-			CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, 654.881, -737.891, 13.3729, -2.117, 4.531, 64.916, &pack_weap_7);// отель
+			CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, 654.881, -737.891, 13.3729, -2.117, 4.531, 64.916, &pack_weap_7);
 			CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, 102.313, -35.2893, 5.72876, 0.0, 0.0, 0.0, &pack_weap_8);// особняк
 			CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, -385.332, 1895.79, 60.8665, 0.0, 0.0, -40.0, &pack_weap_9);// хюман конго
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_8, "mansion_int");
@@ -182,7 +182,7 @@ void pickups(void)
 		}
 		if ((G_PACKET == 4) && (add_weap4 == 0))
 		{
-			CREATE_PICKUP_ROTATE(w_mp5, 2, 30, 654.413, -740.585, 13.2924, -91.638, -0.147, 87.579, &pack_weap_10);// отель
+			CREATE_PICKUP_ROTATE(w_mp5, 2, 30, 654.413, -740.585, 13.2924, -91.638, -0.147, 87.579, &pack_weap_10);
 			CREATE_PICKUP_ROTATE(w_mp5, 2, 30, 99.0192, -35.2361, 5.6018, -85.0, -5.0, 40.0, &pack_weap_11);// особняк
 			CREATE_PICKUP_ROTATE(w_mp5, 2, 30, -392.622, 1894.95, 60.7353, -90.0, 0.0, 30.0, &pack_weap_12);// хюман конго
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_11, "mansion_int");
@@ -191,7 +191,7 @@ void pickups(void)
 		}
 		if ((G_PACKET == 5) && (add_weap5 == 0))
 		{
-			CREATE_PICKUP_ROTATE(w_psg1, 2, 20, 654.405, -739.743, 13.6601, 90.0, -65.0, 160.0, &pack_weap_13);// отель
+			CREATE_PICKUP_ROTATE(w_psg1, 2, 20, 654.405, -739.743, 13.6601, 90.0, -65.0, 160.0, &pack_weap_13);
 			CREATE_PICKUP_ROTATE(w_psg1, 2, 20, 95.2833, -35.0347, 6.0449, 90.0, -105.0, 0.0, &pack_weap_14);// особняк
 			CREATE_PICKUP_ROTATE(w_psg1, 2, 20, -402.12, 1895.18, 60.7539, -90.0, 0.0, 90.0, &pack_weap_15);// хюман конго
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_14, "mansion_int");
@@ -200,7 +200,7 @@ void pickups(void)
 		}
 		if ((G_PACKET == 6) && (add_weap6 == 0))
 		{
-			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, 658.576, -738.166, 13.6815, 101.696, -64.536, 74.413, &pack_weap_16);// отель
+			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, 658.576, -738.166, 13.6815, 101.696, -64.536, 74.413, &pack_weap_16);
 			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, 95.2652, -36.4558, 6.02537, -90.0, -75.0, -180.0, &pack_weap_17);// особняк
 			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, -403.225, 1894.99, 61.1544, -90.0, -75.0, 90.0, &pack_weap_18);// хюман конго
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_17, "mansion_int");
@@ -209,7 +209,7 @@ void pickups(void)
 		}
 		if ((G_PACKET == 7) && (add_weap7 == 0))
 		{
-			CREATE_PICKUP_ROTATE(w_rpg, 2, 8, 654.459, -739.168, 13.8412, -87.294, -112.761, -17.117, &pack_weap_19);// отель
+			CREATE_PICKUP_ROTATE(w_rpg, 2, 8, 654.459, -739.168, 13.8412, -87.294, -112.761, -17.117, &pack_weap_19);
 			CREATE_PICKUP_ROTATE(w_rpg, 2, 8, 97.3453, -34.7902, 6.19572, -90.0, -75.0, 90.0, &pack_weap_20);// особняк
 			CREATE_PICKUP_ROTATE(w_rpg, 2, 8, -404.197, 1894.61, 60.7386, -80.0, 0.0, 0.0, &pack_weap_21);// хюман конго
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_20, "mansion_int");
@@ -235,7 +235,7 @@ void pickups(void)
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(skin_1, "ocean_view_int");
 			pick_skin_1 = 1;
 		}
-		//"Костюм Вечеринка" в отеле
+		//"Костюмчеринка" в отеле
 		if ((G_LAWYER > 1) && (pick_skin_2 == 0))
 		{
 			CREATE_PICKUP_ROTATE(vc_skin_2, 2, 0, 662.679, -728.231, 14.5412, 0.0, 0.0, -14.0, &skin_2);
@@ -281,7 +281,7 @@ void pickups(void)
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(skin_8, "mall_int");
 			pick_skin_8 = 1;
 		}
-		//"Костюм Мр. Версетти" в Стрипклубе и в Особняке
+		//"Костюм Мр.рсетти" в Стрипклубе и в Особняке
 		if ((G_STRIP > 0) && (pick_skin_9 == 0))
 		{
 			CREATE_PICKUP_ROTATE(vc_skin_9, 2, 0, 508.992, -916.912, 5.33723, 0.0, 0.0, -165.0, &skin_9);
@@ -338,7 +338,7 @@ void pickups(void)
 		}
 		if ((HAS_PICKUP_BEEN_COLLECTED( skin_2 )) && (DOES_PICKUP_EXIST(skin_2)))
 		{
-			swap_skin(1); //Костюм Вечеринка
+			swap_skin(1); //Костюмчеринка
 		}
 		if ((HAS_PICKUP_BEEN_COLLECTED( skin_3 )) && (DOES_PICKUP_EXIST(skin_3)))
 		{
@@ -366,7 +366,7 @@ void pickups(void)
 		}
 		if (((HAS_PICKUP_BEEN_COLLECTED( skin_9 )) && (DOES_PICKUP_EXIST(skin_9))) || ((HAS_PICKUP_BEEN_COLLECTED( skin_10 )) && (DOES_PICKUP_EXIST(skin_10))))
 		{
-			swap_skin(8); //Костюм Мр. Версетти
+			swap_skin(8); //Костюм Мр.рсетти
 		}
 		if ((HAS_PICKUP_BEEN_COLLECTED( skin_11 )) && (DOES_PICKUP_EXIST(skin_11)))
 		{

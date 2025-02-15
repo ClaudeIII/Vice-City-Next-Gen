@@ -246,3 +246,51 @@ boolean G_SA_RACE;
 #define MODEL_SULTAN2_1 0xE76CB60A
 #define MODEL_SULTAN2_2 0xB0D748EC
 #define MODEL_SULTAN2_3 0xBE926462
+
+float skip_cam;
+int call_drop;
+
+void SetTime(uint time)
+{
+	SETTIMERA(0);
+	while (true)
+	{
+		WAIT(0);
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
+			break;
+	}
+}
+void SetTime2(uint time)
+{
+	SETTIMERA(0);
+	while (true)
+	{
+		WAIT(0);
+		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
+		{
+			break;
+		}
+		if ((IS_GAME_KEYBOARD_KEY_PRESSED(GAME_KEY_ESC)) || (TIMERA() > time) || (IS_GAME_KEYBOARD_KEY_PRESSED(57)) || (IS_GAME_KEYBOARD_KEY_PRESSED(42)) || (IS_GAME_KEYBOARD_KEY_PRESSED(54)) || (IS_GAME_KEYBOARD_KEY_PRESSED(28)))
+		{
+			skip_cam = 1;
+			break;
+		}
+	}
+}
+void SetSpeech(void)
+{
+	SETTIMERA(0);
+	while (true)
+	{
+		WAIT(0);
+		if (!IS_SCRIPTED_CONVERSATION_ONGOING() || (TIMERA() > 10000))
+			break;
+
+		else if ((IS_CHAR_IN_WATER(GetPlayerPed())) || (HAS_DEATHARREST_EXECUTED()) || (IS_BUTTON_PRESSED(0, 17)) || ((IS_CONTROL_PRESSED(2, 182)) && (!IS_USING_CONTROLLER()))) // BACKSPACE
+		{
+			call_drop = 1;
+			ABORT_SCRIPTED_CONVERSATION(0);
+			break;
+		}
+	}
+}

@@ -9,14 +9,14 @@ float PlayX, PlayY, PlayZ, PlayR, help_1, set_txd, language, textur, alpha, set_
 void SetCut(uint time)
 {
 	SETTIMERA( 0 );
-	DO_SCREEN_FADE_IN( 1 );// убирается затемнение экрана
+	DO_SCREEN_FADE_IN( 1 );
 	while(true)
 	{
 		WAIT(0);
 		DRAW_MOVIE( 0.50000000, 0.50000000, 1.00000000, 1.00000000, 0.00000000, 255, 255, 255, 255 );
 		if ((IS_GAME_KEYBOARD_KEY_PRESSED(GAME_KEY_ESC)) || (TIMERA() > time) || (IS_GAME_KEYBOARD_KEY_PRESSED(57)) || (IS_GAME_KEYBOARD_KEY_PRESSED(42)) || (IS_GAME_KEYBOARD_KEY_PRESSED(54)) ||(IS_GAME_KEYBOARD_KEY_PRESSED(28)))
 		{
-			DO_SCREEN_FADE_OUT( 50 );// Затемняем экран
+			DO_SCREEN_FADE_OUT( 50 );
 			while(true)
 			{
 				WAIT(0);
@@ -30,41 +30,12 @@ void SetCut(uint time)
 		}
 	}
 }
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (TIMERA() > time)
-		{
-			break;
-		}
-	}
-}
-
-void SetSpeech(void)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (!IS_SCRIPTED_CONVERSATION_ONGOING())
-		{
-			break;
-		}
-		else if (TIMERA() > 10000)
-		{
-			break;
-		}
-	}
-}
 
 void INTRO(void)
 {
 	//============================== Intro ======================================
-	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-	SET_CAR_DENSITY_MULTIPLIER(0);// отключаем пути
+	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+	SET_CAR_DENSITY_MULTIPLIER(0);
 	uint CarM1 = MODEL_ADMIRAL;
 	uint CarM2 = MODEL_CABBY;
 	uint CarM3 = MODEL_SENTINEL;
@@ -99,7 +70,7 @@ void INTRO(void)
 	intro_3 = GET_TEXTURE( textur, "Intro_3" );
 	intro_4 = GET_TEXTURE( textur, "Intro_4" );
 
-//------------ создание автомобиля ----------------
+//------------ созданиемобиля ----------------
 	REQUEST_MODEL(CarM1);
 	while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 	REQUEST_MODEL(CarM2);
@@ -117,7 +88,7 @@ void INTRO(void)
 	CHANGE_CAR_COLOUR( car1, 112, 112 );//цвет
 	SET_EXTRA_CAR_COLOURS( car1, 112, 112 );//цвет отрожений
 
-	SET_CHAR_COORDINATES(GetPlayerPed(), -253.936, -1031.04, 6.83345);// перемещаем игрока
+	SET_CHAR_COORDINATES(GetPlayerPed(), -253.936, -1031.04, 6.83345);
 	CREATE_CAR(CarM2, -1095.01,-40.467,8.37876, &car2, TRUE);
 	CREATE_CAR(CarM3, -1213.33,-18.8215,8.37876, &car3, TRUE);
 	CREATE_CAR(CarM4, -1094.52,-53.372,8.37876, &car4, TRUE);
@@ -132,13 +103,13 @@ void INTRO(void)
 
 //------------ создание водителя ----------------
 	REQUEST_MODEL(PedM1);//
-	while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
-	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);//создаём за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped5);//создаём за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped6);//создаём за рулём автомобиля
+	while (!HAS_MODEL_LOADED(PedM1));
+	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
+	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);
+	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);
+	CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);
+	CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped5);
+	CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped6);
 	CHANGE_CAR_COLOUR( car1, 112, 66 );//цвет
 	SET_EXTRA_CAR_COLOURS( car1, 0, 0 );//цвет
 
@@ -147,9 +118,9 @@ void INTRO(void)
 	while (!HAS_CAR_RECORDING_BEEN_LOADED( 2992 )) WAIT(0);
 	FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
 
-//------------ катсцена тут ----------------
-	LOAD_ADDITIONAL_TEXT( "INT_A", 6 ); // загружаем субтитры из *.GTX
-	FORWARD_TO_TIME_OF_DAY(20, 0);//устанавливаем время
+//------------ катсцена ----------------
+	LOAD_ADDITIONAL_TEXT( "INT_A", 6 );
+	FORWARD_TO_TIME_OF_DAY(20, 0);
 	START_CUTSCENE_NOW("int_a");
 	while (!HAS_CUTSCENE_LOADED())
 	{
@@ -194,8 +165,8 @@ void INTRO(void)
 			DRAW_SPRITE( intro_1, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );// рисуем фоновую текстуру.
 		}
 	}
-	LOAD_ADDITIONAL_TEXT( "INT_M", 6 ); // загружаем субтитры из *.GTX
-	FORWARD_TO_TIME_OF_DAY(6, 0);//устанавливаем время
+	LOAD_ADDITIONAL_TEXT( "INT_M", 6 );
+	FORWARD_TO_TIME_OF_DAY(6, 0);
 	START_CUTSCENE_NOW("int_m");
 	while (!HAS_CUTSCENE_LOADED())
 	{
@@ -250,8 +221,8 @@ void INTRO(void)
 			DRAW_SPRITE( intro_2, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );// рисуем фоновую текстуру.
 		}
 	}
-	LOAD_ADDITIONAL_TEXT( "INT_D", 6 ); // загружаем субтитры из *.GTX
-	FORWARD_TO_TIME_OF_DAY(6, 30);//устанавливаем время
+	LOAD_ADDITIONAL_TEXT( "INT_D", 6 );
+	FORWARD_TO_TIME_OF_DAY(6, 30);
 	START_CUTSCENE_NOW("int_d");
 
 	while (!HAS_CUTSCENE_LOADED())
@@ -302,7 +273,7 @@ void INTRO(void)
 		DO_SCREEN_FADE_IN(0);
 	}
 	// Интро ролик
-	SET_CAR_COORDINATES(car1, 555.13, -304.68, 5.41);// перемещаем игрока
+	SET_CAR_COORDINATES(car1, 555.13, -304.68, 5.41);
 	TASK_ENTER_CAR_AS_PASSENGER(GetPlayerPed(), car1, 1, 1);
 	MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 1 );
 	SET_CURRENT_MOVIE( "GTAtitles" );
@@ -313,12 +284,12 @@ void INTRO(void)
 	STOP_STREAM();//останавливаем катсцену
 	RELEASE_MOVIE();//останавливаем всё видео
 	//*/
-	DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+	DO_SCREEN_FADE_IN( 1000 );
 
 //------------------------------------------
 	RELEASE_WEATHER();
-	FORWARD_TO_TIME_OF_DAY(19, 45);//устанавливаем время
-	CLEAR_AREA(555.13, -304.68, 5.41, 80.5, 1);//очещаем зону загрузки
+	FORWARD_TO_TIME_OF_DAY(19, 45);
+	CLEAR_AREA(555.13, -304.68, 5.41, 80.5, 1);
 	START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 2992, 0.0, 0.0, 0.0);
 	SET_PLAYBACK_SPEED(car1, 1.15);
 
@@ -398,13 +369,13 @@ void INTRO(void)
 	TASK_GO_STRAIGHT_TO_COORD(ped1, 551.715, -291.361, 5.398, 4, -2);
 	SetTime(3000);
 
-	WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 568.261, -284.221, 5.156);//телепартируем из катера
+	WARP_CHAR_FROM_CAR_TO_COORD(GetPlayerPed(), 568.261, -284.221, 5.156);//телепартируем иза
 	SET_CHAR_HEADING(GetPlayerPed(), 210.0);
 
 	POINT_CAM_AT_COORD	( camera, 114.307+433, -816.57+533, 11.083-6 );
 	SET_CAM_POS			( camera, 113.655+433, -815.814+533, 11.029-6 );
 	STOP_PLAYBACK_RECORDED_CAR(car1);
-	SET_CHAR_COORDINATES(ped1, 562.961, -278.867, 4.567);// перемещаем
+	SET_CHAR_COORDINATES(ped1, 562.961, -278.867, 4.567);
 	SET_CHAR_HEADING(ped1, 133.0);
 	TASK_GO_STRAIGHT_TO_COORD(ped1, 548.288, -290.367, 5.398, 4, -2);
 	CLOSE_ALL_CAR_DOORS(car1);
@@ -417,7 +388,7 @@ void INTRO(void)
 	SET_WIDESCREEN_BORDERS( 0 );
 	REMOVE_CAR_RECORDING( 2992 );
 
-	SET_CHAR_COORDINATES(ped1, 5.13, -3.68, 10.41);// перемещаем
+	SET_CHAR_COORDINATES(ped1, 5.13, -3.68, 10.41);
 	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 
 	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
@@ -437,9 +408,9 @@ void INTRO(void)
 	MARK_CAR_AS_NO_LONGER_NEEDED(&car4);
 	MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
 	MARK_CAR_AS_NO_LONGER_NEEDED(&car6);
-	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
-	//------------------ подсказки тут -------------
+	//------------------ подсказки -------------
 	SetTime(3000);
 	PRINT_HELP_FOREVER("HELP42"); // Follow the ~p~pink blip~w~ to find the hotel.
 
@@ -449,7 +420,7 @@ void INTRO(void)
 	CHANGE_BLIP_SCALE(hotel, 0.6);
 	CHANGE_BLIP_NAME_FROM_TEXT_FILE(hotel, "NE_POINT");//иконка на радаре называние в истории карты "Цель"
 
-	// мигиние радара
+	
 	DISPLAY_RADAR(0);
 	SetTime(250);
 	DISPLAY_RADAR(1);
@@ -466,10 +437,10 @@ void INTRO(void)
 	SetTime(250);
 	DISPLAY_RADAR(1);
 	SetTime(1250);
-	CLEAR_HELP(); // удаляем текст подсказки
+	CLEAR_HELP();
 
 	
-	//штормовое предуприждение тут
+	//штормовое предуприждение
 	SetTime(5000);
 	PRINT_HELP_FOREVER("BRID_CL"); // Storm warning: All bridges to the mainland are closed.
 	SETTIMERA( 0 );
@@ -478,7 +449,7 @@ void INTRO(void)
 		WAIT(0);
 		if ((TIMERA() > 3000) && (help_1 == 0))
 		{
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 			SETTIMERA( 0 );
 			help_1 = 1;
 		}
@@ -503,7 +474,7 @@ void INTRO(void)
 				WAIT(0);
 				if ((TIMERA() > 3000) && (help_1 == 1))
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					help_1 = 0;
 				}
 				if (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))
@@ -517,13 +488,13 @@ void INTRO(void)
 				}
 			}
 			ENABLE_FRONTEND_RADIO();
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 			help_1 = 0;
 			break;
 		}
 		else if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), 659.314, -785.552, 1.332, 705.314, -709.552, 30.135, 0 ))
 		{
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 			help_1 = 0;
 			break;
 		}
@@ -544,19 +515,19 @@ void INTRO(void)
 		{
 			if (TIMERA() > 3000)
 			{
-				CLEAR_HELP(); // удаляем текст подсказки
+				CLEAR_HELP();
 				help_1 = 2;
 			}
 		}
 
-		DRAW_CHECKPOINT( 671.029, -747.042, 4.934, 1.3, 246, 151, 255);//создание чекпойнт на координатах и его цвет
-		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 671.029, -747.042, 4.934, &PlayR);//проверка "игрок на координатах"
+		DRAW_CHECKPOINT( 671.029, -747.042, 4.934, 1.3, 246, 151, 255);
+		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 671.029, -747.042, 4.934, &PlayR);
 		if ( PlayR < 1.3 )
 		{
-			// камера тут
-			REMOVE_BLIP(hotel);//Удаляем иконку на радаре
-			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+			
+			REMOVE_BLIP(hotel);
+			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 			CREATE_CAM( 14, &camera );
 			POINT_CAM_AT_COORD	( camera, 263.577+433, -1310.574+533, 10.589-5  );
 			SET_CAM_POS			( camera, 264.334+433, -1311.161+533, 10.297-5 );
@@ -568,13 +539,13 @@ void INTRO(void)
 			
 			PRINT_HELP_FOREVER("HELP16"); // Walk through the front door of the ~m~Ocean View~w~ Hotel to enter the building.
 			SetTime(4000);
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 
 			SET_CAM_BEHIND_PED( GetPlayerPed() );
 			ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 			DESTROY_CAM( camera );
 			SET_WIDESCREEN_BORDERS( 0 );
-			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 			ADD_BLIP_FOR_COORD(642.789, -755.855, 5.974, &hotel);
 			CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);
@@ -586,7 +557,7 @@ void INTRO(void)
 		else if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), 656.296, -748.324, 4.946, 660.846, -740.824, 11.446, 0 ))
 		{
 			// маркер в отеле
-			REMOVE_BLIP(hotel);//Удаляем иконку на радаре
+			REMOVE_BLIP(hotel);
 			ADD_BLIP_FOR_COORD(642.789, -755.855, 5.974, &hotel);
 			CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);
 			CHANGE_BLIP_COLOUR(hotel, 5);   //цвет иконка на радаре (0=белая)
@@ -598,11 +569,11 @@ void INTRO(void)
 	while (TRUE)
 	{
 		WAIT(0);
-		DRAW_CHECKPOINT( 642.789, -755.855, 5.974, 1.3, 246, 151, 255);//создание чекпойнт на координатах и его цвет
+		DRAW_CHECKPOINT( 642.789, -755.855, 5.974, 1.3, 246, 151, 255);
 		if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), 656.296, -748.324, 4.946, 660.846, -740.824, 11.446, 0 ))
 		{
-			// камера тут
-			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+			
+			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 			CREATE_CAM( 14, &camera );
 			POINT_CAM_AT_COORD	( camera, 642.625, -755.805, 6.653  );
 			SET_CAM_POS			( camera, 657.751, -739.661, 8.751 );
@@ -617,18 +588,18 @@ void INTRO(void)
 			while(true)
 			{
 				WAIT(0);
-				DRAW_CHECKPOINT( 642.789, -755.855, 5.974, 1.3, 246, 151, 255);//создание чекпойнт на координатах и его цвет
+				DRAW_CHECKPOINT( 642.789, -755.855, 5.974, 1.3, 246, 151, 255);
 				if (TIMERA() > 3000)
 				{
 					break;
 				}
 			}
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 			SET_CAM_BEHIND_PED( GetPlayerPed() );
 			ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 			DESTROY_CAM( camera );
 			SET_WIDESCREEN_BORDERS( 0 );
-			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 			break;
 		}
 	}
@@ -638,16 +609,16 @@ void INTRO(void)
 	while (TRUE)
 	{
 		WAIT(0);
-		DRAW_CHECKPOINT( 642.789, -755.855, 5.974, 1.3, 246, 151, 255);//создание чекпойнт на координатах и его цвет
-		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 642.789, -755.855, 5.974, &PlayR);//проверка "игрок на координатах"
+		DRAW_CHECKPOINT( 642.789, -755.855, 5.974, 1.3, 246, 151, 255);
+		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 642.789, -755.855, 5.974, &PlayR);
 		if ( PlayR < 1.8 )
 		{
-			REMOVE_BLIP(hotel);//Удаляем иконку на радаре
-			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+			REMOVE_BLIP(hotel);
+			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 			ALTER_WANTED_LEVEL(GetPlayerIndex(), 0);
 			APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
-			// камера тут
+			
 			CREATE_CAM( 14, &camera );
 			POINT_CAM_AT_COORD	( camera, 641.511, -756.154, 6.713  );
 			SET_CAM_POS			( camera, 647.924, -752.37, 6.9967 );
@@ -657,12 +628,12 @@ void INTRO(void)
 			SET_CAM_FOV( camera, 45.0 );
 			SET_WIDESCREEN_BORDERS( 1 );
 
-			// томми поднимается по лестнице
+			// поднимается по лестнице
 			TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 637.021, -754.877, 8.832, 2, -2);
 			SetTime(500);
 
 			// затимнение
-			DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+			DO_SCREEN_FADE_OUT( 1000 );
 			while(true)
 			{
 				WAIT(0);
@@ -672,12 +643,12 @@ void INTRO(void)
 				}
 			}
 			MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 1 );
-			SET_CHAR_COORDINATES(GetPlayerPed(), 660.337, -733.43, 14.48);// перемещаем игрока
+			SET_CHAR_COORDINATES(GetPlayerPed(), 660.337, -733.43, 14.48);
 			SET_CHAR_HEADING(GetPlayerPed(), 0.1);
 
 			//------------ катсцена ----------------
-			LOAD_ADDITIONAL_TEXT( "INT_B", 6 ); // загружаем субтитры из *.GTX
-			FORWARD_TO_TIME_OF_DAY(19, 0);//устанавливаем время
+			LOAD_ADDITIONAL_TEXT( "INT_B", 6 );
+			FORWARD_TO_TIME_OF_DAY(19, 0);
 			FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
 			START_CUTSCENE_NOW("int_b");
 			while (!HAS_CUTSCENE_LOADED())
@@ -697,22 +668,22 @@ void INTRO(void)
 				DO_SCREEN_FADE_IN(0);
 			}
 
-			FORWARD_TO_TIME_OF_DAY(7, 30);//устанавливаем время
+			FORWARD_TO_TIME_OF_DAY(7, 30);
 			RELEASE_WEATHER();
-			DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+			DO_SCREEN_FADE_IN( 1000 );
 			MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 0 );
 
 			POINT_CAM_AT_COORD	( camera, 660.537, -729.304, 14.183  );
 			SET_CAM_POS			( camera, 663.181, -734.941, 16.065 );
 			PRINT_HELP_FOREVER("NEHELP1");  // Sleeping on the bed will save the game and advance time by six hours.
 			SetTime(5000);
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 
 			SET_CAM_BEHIND_PED( GetPlayerPed() );
 			ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 			DESTROY_CAM( camera );
 			SET_WIDESCREEN_BORDERS( 0 );
-			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 			REGISTER_MISSION_PASSED("INT_B");
 			G_LAWYER = 1;
 			G_ONMISSION = 0;
@@ -725,7 +696,7 @@ void INTRO(void)
 		WAIT(0);
 		if (IS_CHAR_IN_AREA_3D( GetPlayerPed(), 662.581, -750.27, 5.496, 667.581, -740.27, 10.496, 0 ))
 		{
-			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 			CREATE_CAM( 14, &camera );
 			POINT_CAM_AT_COORD	( camera, 679.021, -723.314, 5.507  );
 			SET_CAM_POS			( camera, 690.751, -711.325, 9.127 );
@@ -737,13 +708,13 @@ void INTRO(void)
 			
 			PRINT_HELP_FOREVER("CARSAVE");  // You can save any vehicle in the parking spot outside your safehouse. Park your car there and exit it. The car will remain there for you to use.
 			SetTime(5000);
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 
 			SET_CAM_BEHIND_PED( GetPlayerPed() );
 			ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 			DESTROY_CAM( camera );
 			SET_WIDESCREEN_BORDERS( 0 );
-			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 			break;
 		}
 		else if (!IS_CHAR_IN_AREA_3D( GetPlayerPed(), 627.417, -777.408, 3.332, 677.166, -710.844, 40.07, 0 ))
@@ -754,12 +725,12 @@ void INTRO(void)
 	SetTime(1000);
 	PRINT_HELP("CLOTH2"); //Street outfit delivered to Safehouses.
 	SetTime(3000);
-	CLEAR_HELP(); // удаляем текст подсказки
+	CLEAR_HELP();
 	PRINT_HELP("HELP14"); // To find the Lawyer's office, follow the ~h~L blip~w~ on the radar
 	SetTime(5000);
 	if (G_ONMISSION == 0)
 	{
-		G_SAVE_SAVED = 16; // точка входа 
+		G_SAVE_SAVED = 16;
 		G_SAVE_OCCURED = TRUE;
 		DO_AUTO_SAVE();
 		WAIT(500);

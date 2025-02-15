@@ -5,42 +5,14 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, textur, text1, text2, time_m, time_s, sound, play, sutosave;
+float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, textur, text1, text2, time_m, time_s, sound, play, autosave;
 float PedX, PedY, PedZ, PedR, taxi_1, taxi_2, taxi_3, touch1, touch2, touch3, engine, res_on, vorotaX, vorotaY;
 int income, load_mashin, help;
 
-void SetSpeech(void)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (!IS_SCRIPTED_CONVERSATION_ONGOING())
-		{
-			break;
-		}
-		else if (TIMERA() > 10000)
-		{
-			break;
-		}
-	}
-}
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void kaufman(void)
 {
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	Blip cabs_ico;
 	load_mashin = 0;
 	help = 0;
@@ -49,10 +21,10 @@ void kaufman(void)
 	while(true)
 	{
 		WAIT(0);
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -72,11 +44,11 @@ void kaufman(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(cabs_ico, "LG_18");
 				blip_on = 1;
 			}
-			//DRAW_CHECKPOINT( -569.498, 738.454, 5.354, 2.1, 160, 116, 209);//создание чекпойнт на координатах и его цвет
+			//DRAW_CHECKPOINT( -569.498, 738.454, 5.354, 2.1, 160, 116, 209);
 			if ((IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_CABBY)) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -566.998, 733.454, 4.45, -571.998, 743.454, 12.45, 0 )))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(cabs_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cabs_ico);
 				blip_on = 0;
 
 				Ped ped1, ped2;
@@ -85,7 +57,7 @@ void kaufman(void)
 				Texture fon, timer;
 				Blip ped_ico;
 
-				skip = 0; // переменная пропуска
+				skip = 0;
 				text1 = 0;
 				text2 = 0;
 				time_m = 1;
@@ -109,21 +81,21 @@ void kaufman(void)
 				uint car_HP;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(PedM1);// Таксист
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 				REQUEST_MODEL(PedM2);// Пассажир
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM2));
 
 				CREATE_CAR(CarM1, 286.232, -791.79, 5.445, &car1, TRUE);
-				LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
+				LOCK_CAR_DOORS(car1, 3);
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
 				SET_CHAR_COMPONENT_VARIATION(ped1, 1, 0, 0);
 				CREATE_CHAR (26, PedM2, 291.032, -785.32, 5.06, &ped2, TRUE);// Пассажир
 				SET_CHAR_DECISION_MAKER(ped2, dm);
 				SET_COMBAT_DECISION_MAKER(ped2, cdm);
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 				SetTime(600);
 
 				// камера сверху
@@ -153,11 +125,11 @@ void kaufman(void)
 				SetTime(500);
 				CLEAR_PRINTS();
 
-				//убираем камеру
+				
 				ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 				END_CAM_COMMANDS( &camera );
 				SET_WIDESCREEN_BORDERS( 0 );
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 				SetTime(500);
 
 				ADD_BLIP_FOR_COORD(-143.203, 52.906, 4.974, &cabs_ico);
@@ -172,7 +144,7 @@ void kaufman(void)
 				{
 					WAIT(0);
 					//============================ HUD ============================
-					// таймер тут
+					// таймер
 					if (TIMERA() > 999)
 					{
 						time_s -= 1;
@@ -202,7 +174,7 @@ void kaufman(void)
 
 						SET_TEXT_COLOUR(235, 25, 35, 255);
 						SET_TEXT_SCALE(0.26, 0.445);
-						SET_TEXT_DROPSHADOW(1, 80, 0, 0, 255);;
+						SET_TEXT_DROPSHADOW(1, 80, 0, 0, 255);
 						DISPLAY_TEXT(0.9203125, 0.76954074, "CP_TIME_SEP");
 
 						SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -259,9 +231,9 @@ void kaufman(void)
 						sound = 1;
 					}
 					
-					DRAW_CHECKPOINT( -143.203, 52.906, 4.974, 2.0, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -143.203, 52.906, 4.974, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( -143.203, 52.906, 4.974, 2.0, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -143.203, 52.906, 4.974, &PlayR);
 					if ( PlayR < 2.1)
 					{
 						if (IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_CABBY))
@@ -275,7 +247,7 @@ void kaufman(void)
 							}
 							if (IS_PLAYER_PRESSING_HORN(0))// проверка "игрок посигналил"
 							{
-								CLEAR_HELP(); // удаляем текст подсказки
+								CLEAR_HELP();
 
 								if (sound == 1)
 								{
@@ -292,10 +264,10 @@ void kaufman(void)
 								ACTIVATE_SCRIPTED_CAMS(1, 1);
 								SET_CAM_FOV( camera, 45.0 );
 								SET_WIDESCREEN_BORDERS( 1 );
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 								// идёт пассажир
-								SET_CHAR_COORDINATES(ped2, -139.74, 86.059, 9.134);// перемещаем игрока
+								SET_CHAR_COORDINATES(ped2, -139.74, 86.059, 9.134);
 								SET_CHAR_HEADING(ped2, -90.0);
 								TASK_GO_STRAIGHT_TO_COORD(ped2, -130.615, 86.059, 9.134, 2, -2);// Пед идёт
 								SetTime(5000);
@@ -305,14 +277,14 @@ void kaufman(void)
 								SET_CAM_POS			( camera, -153.178, 63.934, 8.209 );
 
 								// идёт пассажир
-								SET_CHAR_COORDINATES(ped2, -142.725, 65.634, 5.365);// перемещаем игрока
+								SET_CHAR_COORDINATES(ped2, -142.725, 65.634, 5.365);
 								SET_CHAR_HEADING(ped2, 180.0);
 								TASK_GO_STRAIGHT_TO_COORD(ped2, -142.725, 60.487, 5.365, 2, -2);// Пед идёт
 
 								// подъезжает таксист
 								REQUEST_CAR_RECORDING( 3042 );
 								while (!HAS_CAR_RECORDING_BEEN_LOADED( 3042 )) WAIT(0);
-								CLEAR_AREA(-144.496, 58.904, 4.974, 25.0, 1);//очещаем зону загрузки
+								CLEAR_AREA(-144.496, 58.904, 4.974, 25.0, 1);
 								START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3042, 0.0, 0.0, 0.0);
 								SetTime(1500);
 
@@ -344,14 +316,14 @@ void kaufman(void)
 								CLEAR_PRINTS();
 								CLOSE_ALL_CAR_DOORS(car1);
 								
-								//убираем камеру
+								
 								ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 								END_CAM_COMMANDS( &camera );
 								SET_WIDESCREEN_BORDERS( 0 );
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 								PRINT_STRING_IN_STRING("string", "TAXW1_2", 5000, 1);//~g~Get the V.I.P back! Take the other car out!
 								
-								REMOVE_BLIP(cabs_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(cabs_ico);
 								TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, -1021.249, -294.609, 8.418, 4, 20.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 								
 								ADD_BLIP_FOR_COORD(-1021.249, -294.609, 8.418, &cabs_ico);
@@ -395,12 +367,12 @@ void kaufman(void)
 					if ((time_m == 0) && (time_s == 0))
 					{
 						PRINT_STRING_IN_STRING("string", "OUTTIME", 5000, 1);//~r~Too slow, man, too slow!
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
@@ -416,7 +388,7 @@ void kaufman(void)
 
 						if (car_HP < 400)
 						{
-							GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
+							GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);
 							TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, PedX, PedY, PedZ, 4, 25.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 							TASK_LEAVE_CAR(ped2, car1);
 						}
@@ -426,17 +398,17 @@ void kaufman(void)
 							break;
 						}
 						// провал миссии
-						GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -1021.249, -294.609, 8.418, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -1021.249, -294.609, 8.418, &PedR);
 						if ( PedR < 2.1)
 						{
 							PRINT_STRING_IN_STRING("string", "OUTTIME", 5000, 1);//~r~Too slow, man, too slow!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (IS_CHAR_DEAD(ped1))
@@ -444,13 +416,13 @@ void kaufman(void)
 							PRINT_STRING_IN_STRING("string", "TAXW1_D", 5000, 1);//You scared the V.I.P. client
 							TASK_WANDER_STANDARD(ped2);
 							PANIC_SCREAM(ped2);
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							PRINT_STRING_IN_STRING("string", "TAXW1_3", 5000, 1);//~r~The V.I.P. is dead!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -480,7 +452,7 @@ void kaufman(void)
 						}
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (IS_CHAR_DEAD(ped1))
@@ -488,13 +460,13 @@ void kaufman(void)
 							PRINT_STRING_IN_STRING("string", "TAXW1_D", 5000, 1);//You scared the V.I.P. client
 							TASK_WANDER_STANDARD(ped2);
 							PANIC_SCREAM(ped2);
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							PRINT_STRING_IN_STRING("string", "TAXW1_3", 5000, 1);//~r~The V.I.P. is dead!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -527,7 +499,7 @@ void kaufman(void)
 						{
 							if (TIMERB() > 5000)
 							{
-								GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
+								GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);
 								TASK_GO_STRAIGHT_TO_COORD(ped2, PedX, PedY, PedZ, 2, -2);// Пед идёт
 								TASK_ENTER_CAR_AS_PASSENGER(ped2, car2, -1, 2);// пед содится к игроку
 								SETTIMERB( 0 );
@@ -537,7 +509,7 @@ void kaufman(void)
 						{
 							if (play == 2)
 							{
-								// таксист атакует игрока
+								// таксист атакует
 								SET_CHAR_RELATIONSHIP_GROUP(ped1, 5);
 								SET_CHAR_RELATIONSHIP(ped1, 5, 0);
 								SET_SENSE_RANGE(ped1, 2000.0);
@@ -550,7 +522,7 @@ void kaufman(void)
 						}
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (IS_CHAR_DEAD(ped1))
@@ -558,13 +530,13 @@ void kaufman(void)
 							PRINT_STRING_IN_STRING("string", "TAXW1_D", 5000, 1);//You scared the V.I.P. client
 							TASK_WANDER_STANDARD(ped2);
 							PANIC_SCREAM(ped2);
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							PRINT_STRING_IN_STRING("string", "TAXW1_3", 5000, 1);//~r~The V.I.P. is dead!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -584,7 +556,7 @@ void kaufman(void)
 							ADD_NEW_CONVERSATION_SPEAKER(0, ped2, "ROMAN");
 							ADD_LINE_TO_CONVERSATION(0, "R1_BW_XXX1", "TAX1_5", 0, 0);//Ok, ok! Just don't hurt me!
 							START_SCRIPT_CONVERSATION(1, 1);
-							REMOVE_BLIP(ped_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(ped_ico);
 							play = 1;
 						}
 						else if (play == 1)
@@ -597,9 +569,9 @@ void kaufman(void)
 							}
 						}
 
-						DRAW_CHECKPOINT( -1021.249, -294.609, 8.418, 2.1, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-						GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -1021.249, -294.609, 8.418, &PedR);//проверка "игрок на координатах"
+						DRAW_CHECKPOINT( -1021.249, -294.609, 8.418, 2.1, 160, 116, 209);
+						GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -1021.249, -294.609, 8.418, &PedR);
 						if ( PedR < 2.0)
 						{
 							// камера сверху
@@ -611,11 +583,11 @@ void kaufman(void)
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 							SetTime(2000);
 
 							// меняем ракурс
-							WARP_CHAR_FROM_CAR_TO_COORD(ped2, -1028.089, -294.76, 9.075);//телепартируем из катера
+							WARP_CHAR_FROM_CAR_TO_COORD(ped2, -1028.089, -294.76, 9.075);//телепартируем иза
 							SET_CHAR_HEADING(ped2, 125.0);
 							TASK_GO_STRAIGHT_TO_COORD(ped2, -1033.576, -300.022, 9.075, 2, -2);// Пед идёт
 
@@ -623,12 +595,12 @@ void kaufman(void)
 							SET_CAM_POS			( camera, -1038.524, -304.516, 12.678 );
 							SetTime(3000);
 
-							// убираем камеру
+							// убираем
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-							skip = 2;// переменная пропуска
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+							skip = 2;
 							break;
 						}
 						if (!IS_CHAR_IN_CAR(GetPlayerPed(), car2))
@@ -649,7 +621,7 @@ void kaufman(void)
 							if (text2 == 1)
 							{
 								PRINT_STRING_IN_STRING("string", "TAXW1_6", 5000, 1);//~COL_NET_12~Take the V.I.P. to the airport!
-								REMOVE_BLIP(ped_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(ped_ico);
 								text2 = 0;
 							}
 						}
@@ -658,12 +630,12 @@ void kaufman(void)
 						{
 							EXPLODE_CHAR_HEAD(ped2);
 							PRINT_STRING_IN_STRING("string", "TAXW1_3", 5000, 1);//~r~The V.I.P. is dead!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if (IS_CHAR_DEAD(ped1))
@@ -671,13 +643,13 @@ void kaufman(void)
 							PRINT_STRING_IN_STRING("string", "TAXW1_D", 5000, 1);//You scared the V.I.P. client
 							TASK_WANDER_STANDARD(ped2);
 							PANIC_SCREAM(ped2);
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((IS_CHAR_DEAD(ped2)) || (IS_CHAR_INJURED(ped2)))
 						{
 							PRINT_STRING_IN_STRING("string", "TAXW1_3", 5000, 1);//~r~The V.I.P. is dead!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -685,19 +657,19 @@ void kaufman(void)
 				// зачещаем скрипт
 				WAIT(0);
 
-				REMOVE_BLIP(ped_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(cabs_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(ped_ico);
+				REMOVE_BLIP(cabs_ico);
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				
-				// выгружаем из памяти транспорт
+				// выгружаем из памяти
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				if (car2 != 0)
 				{
@@ -719,12 +691,12 @@ void kaufman(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -739,18 +711,18 @@ void kaufman(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 1000);// +5000$
 						
 						WAIT( 0 );
@@ -759,10 +731,10 @@ void kaufman(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +1000 );
 					REGISTER_MISSION_PASSED("TAXI_1");
 					G_CABS = 2;
-					sutosave = 1;
+					autosave = 1;
 				}
 				blip_on = 0;
 				G_ONMISSION = 0;
@@ -783,7 +755,7 @@ void kaufman(void)
 			if ((IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_CABBY)) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -566.998, 733.454, 4.45, -571.998, 743.454, 12.45, 0 )))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(cabs_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cabs_ico);
 				blip_on = 0;
 
 				Ped ped1, ped2, ped3;
@@ -792,7 +764,7 @@ void kaufman(void)
 				Pickup sweap_1;
 				Blip car1_ico, car2_ico, car3_ico;
 
-				skip = 0; // переменная пропуска
+				skip = 0;
 				taxi_1 = 1;
 				taxi_2 = 1;
 				taxi_3 = 1;
@@ -805,9 +777,9 @@ void kaufman(void)
 				uint checkpoint;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(PedM1);// Таксист
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(PedM1));
 
 				GENERATE_RANDOM_INT_IN_RANGE( 1, 6, &checkpoint);
 				if ((checkpoint == 1) || (checkpoint == 3) || (checkpoint == 5))
@@ -823,18 +795,18 @@ void kaufman(void)
 					CREATE_CAR(CarM1, -383.16, -932.21, 6.15, &car3, TRUE);
 				}
 
-				LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car2, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car3, 3); //блокируем двери автомобиля для игрока
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём за рулём автомобиля
+				LOCK_CAR_DOORS(car1, 3);
+				LOCK_CAR_DOORS(car2, 3);
+				LOCK_CAR_DOORS(car3, 3);
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
+				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);
 				SET_CHAR_COMPONENT_VARIATION(ped1, 1, 0, 0);
 				SET_CHAR_COMPONENT_VARIATION(ped2, 1, 0, 0);
 				SET_CHAR_COMPONENT_VARIATION(ped3, 1, 0, 0);
 
-				CREATE_PICKUP_ROTATE(w_mp5, 3, 60, -571.12, 721.369, 6.419, 90.0, 0.0, 140.0, &sweap_1);// даём винтовку
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+				CREATE_PICKUP_ROTATE(w_mp5, 3, 60, -571.12, 721.369, 6.419, 90.0, 0.0, 140.0, &sweap_1);
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 				SetTime(600);
 
 				// камера сверху
@@ -870,11 +842,11 @@ void kaufman(void)
 				SetTime(500);
 				CLEAR_PRINTS();
 
-				//убираем камеру
+				
 				ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 				END_CAM_COMMANDS( &camera );
 				SET_WIDESCREEN_BORDERS( 0 );
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 				SetTime(500);
 
 				ADD_BLIP_FOR_CAR(car1, &car1_ico);
@@ -895,9 +867,9 @@ void kaufman(void)
 				CHANGE_BLIP_SCALE(car3_ico, 0.6);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(car3_ico, "MO_TARGET");
 
-				TASK_CAR_DRIVE_WANDER(ped1, car1, 20.0, 2);// пед едит куда-то
-				TASK_CAR_DRIVE_WANDER(ped2, car2, 20.0, 2);// пед едит куда-то
-				TASK_CAR_DRIVE_WANDER(ped3, car3, 20.0, 2);// пед едит куда-то
+				TASK_CAR_DRIVE_WANDER(ped1, car1, 20.0, 2);
+				TASK_CAR_DRIVE_WANDER(ped2, car2, 20.0, 2);
+				TASK_CAR_DRIVE_WANDER(ped3, car3, 20.0, 2);
 
 				CLEAR_PRINTS();
 				PRINT_STRING_IN_STRING("string", "TAXW2_1", 5000, 1);//~g~Destroy 3 of the rival taxis!
@@ -907,7 +879,7 @@ void kaufman(void)
 					WAIT(0);
 					if ((IS_CHAR_TOUCHING_VEHICLE(GetPlayerPed(), car1)) && (touch1 == 0))
 					{
-						// таксист атакует игрока
+						// таксист атакует
 						SET_CHAR_RELATIONSHIP_GROUP(ped1, 5);
 						SET_CHAR_RELATIONSHIP(ped1, 5, 0);
 						SET_SENSE_RANGE(ped1, 2000.0);
@@ -942,7 +914,7 @@ void kaufman(void)
 						if (taxi_1 == 1)
 						{
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
-							REMOVE_BLIP(car1_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(car1_ico);
 							taxi_1 = 0;
 						}
 					}
@@ -951,7 +923,7 @@ void kaufman(void)
 						if (taxi_2 == 1)
 						{
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
-							REMOVE_BLIP(car2_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(car2_ico);
 							taxi_2 = 0;
 						}
 					}
@@ -960,33 +932,33 @@ void kaufman(void)
 						if (taxi_3 == 1)
 						{
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
-							REMOVE_BLIP(car3_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(car3_ico);
 							taxi_3 = 0;
 						}
 					}
 					if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((taxi_1 == 0) && (taxi_2 == 0) && (taxi_3 == 0))
 					{
-						skip = 2;// переменная пропуска
+						skip = 2;
 						break;
 					}
 				}
 				// зачещаем скрипт
 				WAIT(0);
-				REMOVE_BLIP(car1_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car2_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car3_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(car1_ico);
+				REMOVE_BLIP(car2_ico);
+				REMOVE_BLIP(car3_ico);
 				REMOVE_PICKUP(sweap_1);// выгружаем биту
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -1000,12 +972,12 @@ void kaufman(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -1020,18 +992,18 @@ void kaufman(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 2000);// +5000$
 						
 						WAIT( 0 );
@@ -1040,10 +1012,10 @@ void kaufman(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +2000 );
 					REGISTER_MISSION_PASSED("TAXI_2");
 					G_CABS = 3;
-					sutosave = 1;
+					autosave = 1;
 				}
 				blip_on = 0;
 				G_ONMISSION = 0;
@@ -1063,7 +1035,7 @@ void kaufman(void)
 			if ((IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_CABBY)) && (IS_CHAR_IN_AREA_3D( GetPlayerPed(), -566.998, 733.454, 4.45, -571.998, 743.454, 12.45, 0 )))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(cabs_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cabs_ico);
 				blip_on = 0;
 
 				Ped ped1, ped2, ped3, ped4, ped5, ped6, ped7;
@@ -1073,7 +1045,7 @@ void kaufman(void)
 				Blip car1_ico, car2_ico, car3_ico, car4_ico, car5_ico, car6_ico;
 				Object vorota;
 
-				skip = 0; // переменная пропуска
+				skip = 0;
 				text1 = 0;
 				text2 = 0;
 				time_m = 1;
@@ -1091,16 +1063,16 @@ void kaufman(void)
 				uint CarM1 = MODEL_TAXI;// Такси
 				uint CarM2 = MODEL_ROM;// зебра
 				uint PedM1 = MODEL_M_M_TAXIDRIVER;// Таксист
-				uint vorotaM = vc_electricgate; //ворота
+				uint vorotaM = vc_electricgate;
 				uint car_HP, PTFX, PTFX2;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(CarM2);
-				while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
+				while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 				REQUEST_MODEL(PedM1);// Таксист
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(vorotaM);// ворота
+				while (!HAS_MODEL_LOADED(PedM1));
+				REQUEST_MODEL(vorotaM);
 				while (!HAS_MODEL_LOADED(vorotaM)) WAIT(0);
 
 				CREATE_CAR(CarM1, 303.109, -787.416, 5.445, &car1, TRUE);
@@ -1111,21 +1083,21 @@ void kaufman(void)
 				CREATE_CAR(CarM1, 286.008, -787.416, 5.445, &car6, TRUE);
 				CREATE_CAR(CarM2, 294.306, -779.725, 5.445, &car7, TRUE);
 
-				LOCK_CAR_DOORS(car1, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car2, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car3, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car4, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car5, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car6, 3); //блокируем двери автомобиля для игрока
-				LOCK_CAR_DOORS(car7, 3); //блокируем двери автомобиля для игрока
+				LOCK_CAR_DOORS(car1, 3);
+				LOCK_CAR_DOORS(car2, 3);
+				LOCK_CAR_DOORS(car3, 3);
+				LOCK_CAR_DOORS(car4, 3);
+				LOCK_CAR_DOORS(car5, 3);
+				LOCK_CAR_DOORS(car6, 3);
+				LOCK_CAR_DOORS(car7, 3);
 
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped5);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped6);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped7);//создаём за рулём автомобиля
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
+				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);
+				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);
+				CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped5);
+				CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped6);
+				CREATE_CHAR_INSIDE_CAR(car7, 1, PedM1, &ped7);
 
 				SET_CHAR_COMPONENT_VARIATION(ped1, 1, 0, 0);
 				SET_CHAR_COMPONENT_VARIATION(ped2, 1, 0, 0);
@@ -1141,7 +1113,7 @@ void kaufman(void)
 				SET_OBJECT_INVINCIBLE(vorota, 1);
 				FREEZE_OBJECT_POSITION(vorota, 1);
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 				SetTime(600);
 
 				// камера сверху
@@ -1171,11 +1143,11 @@ void kaufman(void)
 				SetTime(500);
 				CLEAR_PRINTS();
 
-				//убираем камеру
+				
 				ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 				END_CAM_COMMANDS( &camera );
 				SET_WIDESCREEN_BORDERS( 0 );
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 				SetTime(500);
 
 				ADD_BLIP_FOR_COORD(-678.792, -756.889, 5.098, &cabs_ico);
@@ -1188,9 +1160,9 @@ void kaufman(void)
 				while(true)
 				{
 					WAIT(0);
-					DRAW_CHECKPOINT( -678.792, -756.889, 5.098, 2.0, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -678.792, -756.889, 5.098, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( -678.792, -756.889, 5.098, 2.0, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -678.792, -756.889, 5.098, &PlayR);
 					if ( PlayR < 2.1)
 					{
 						if (IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_CABBY))
@@ -1204,11 +1176,11 @@ void kaufman(void)
 							}
 							if (IS_PLAYER_PRESSING_HORN(0))// проверка "игрок посигналил"
 							{
-								CLEAR_HELP(); // удаляем текст подсказки
-								REMOVE_BLIP(cabs_ico);//Удаляем иконку на радаре
+								CLEAR_HELP();
+								REMOVE_BLIP(cabs_ico);
 								GET_CAR_CHAR_IS_USING(GetPlayerPed(), &car8);
-								LOCK_CAR_DOORS(car8, 4); //блокируем двери автомобиля для игрока
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+								LOCK_CAR_DOORS(car8, 4);
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
 								// камера сверху
@@ -1240,7 +1212,7 @@ void kaufman(void)
 								START_SCRIPT_CONVERSATION(1, 1);
 								SetSpeech();
 
-								// выезд таксистов тут
+								// выезд таксистов
 								REQUEST_CAR_RECORDING( 3043 );
 								while (!HAS_CAR_RECORDING_BEEN_LOADED( 3043 )) WAIT(0);
 								REQUEST_CAR_RECORDING( 3044 );
@@ -1254,7 +1226,7 @@ void kaufman(void)
 								REQUEST_CAR_RECORDING( 3048 );
 								while (!HAS_CAR_RECORDING_BEEN_LOADED( 3048 )) WAIT(0);
 
-								CLEAR_AREA(-539.753, -721.065, 5.823, 25.0, 1);//очещаем зону загрузки
+								CLEAR_AREA(-539.753, -721.065, 5.823, 25.0, 1);
 								START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3043, 0.0, 0.0, 0.0);
 								START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car2, 3044, 0.0, 0.0, 0.0);
 								START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car3, 3045, 0.0, 0.0, 0.0);
@@ -1294,11 +1266,11 @@ void kaufman(void)
 								REMOVE_CAR_RECORDING( 3047 );
 								REMOVE_CAR_RECORDING( 3048 );
 
-								//убираем камеру
+								
 								ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 								END_CAM_COMMANDS( &camera );
 								SET_WIDESCREEN_BORDERS( 0 );
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 								SET_OBJECT_COORDINATES(vorota, -556.453, -718.6, 5.338);
 								SetTime(500);
 
@@ -1310,7 +1282,7 @@ void kaufman(void)
 								//TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped6, car6, -616.451, -712.534, 5.758, 4, 40.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 								//SetTime(2000);
 
-								// атака таксистов тут
+								// атака таксистов
 								SET_CHAR_RELATIONSHIP_GROUP(ped1, 5);
 								SET_CHAR_RELATIONSHIP_GROUP(ped2, 5);
 								SET_CHAR_RELATIONSHIP_GROUP(ped3, 5);
@@ -1416,7 +1388,7 @@ void kaufman(void)
 
 					if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
@@ -1488,7 +1460,7 @@ void kaufman(void)
 
 
 						//============================ HUD ============================
-						// таймер тут
+						// таймер
 						if (TIMERA() > 1250)
 						{
 							time_s -= 1;
@@ -1584,13 +1556,13 @@ void kaufman(void)
 								sound = 1;
 							}
 
-							REMOVE_BLIP(car1_ico);//Удаляем иконку на радаре
-							REMOVE_BLIP(car2_ico);//Удаляем иконку на радаре
-							REMOVE_BLIP(car3_ico);//Удаляем иконку на радаре
-							REMOVE_BLIP(car4_ico);//Удаляем иконку на радаре
-							REMOVE_BLIP(car5_ico);//Удаляем иконку на радаре
-							REMOVE_BLIP(car6_ico);//Удаляем иконку на радаре
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							REMOVE_BLIP(car1_ico);
+							REMOVE_BLIP(car2_ico);
+							REMOVE_BLIP(car3_ico);
+							REMOVE_BLIP(car4_ico);
+							REMOVE_BLIP(car5_ico);
+							REMOVE_BLIP(car6_ico);
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 							// камера
 							CREATE_CAM( 14, &camera );
@@ -1602,12 +1574,12 @@ void kaufman(void)
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
 
-							// выезжает зебра тут
-							SET_CHAR_COORDINATES(ped7, -551.883, -716.317, 5.823);// перемещаем игрока
+							// выезжает зебра
+							SET_CHAR_COORDINATES(ped7, -551.883, -716.317, 5.823);
 							SET_CHAR_HEADING(ped7, 70.0);
 							SetTime(1000);
 
-							// открываем ворота
+							// открываем
 							while (true)
 							{
 								WAIT( 1 );
@@ -1630,14 +1602,14 @@ void kaufman(void)
 							TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped7, car7, -616.451, -712.534, 5.758, 4, 30.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 							SetTime(2000);
 
-							//убираем камеру
+							
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 							SetTime(500);
 
-							// нападает зебра тут
+							// нападает зебра
 							SET_OBJECT_COORDINATES(vorota, -556.453, -718.6, 5.338);
 							SET_CHAR_RELATIONSHIP_GROUP(ped7, 5);
 							SET_CHAR_RELATIONSHIP(ped7, 5, 0);
@@ -1676,7 +1648,7 @@ void kaufman(void)
 
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
@@ -1688,7 +1660,7 @@ void kaufman(void)
 					{
 						WAIT(0);
 						GET_CAR_HEALTH(car7, &car_HP);
-						if ((IS_CHAR_TOUCHING_VEHICLE(GetPlayerPed(), car7)) && (engine == 0)) // если игрок поцарапал машину соперника
+						if ((IS_CHAR_TOUCHING_VEHICLE(GetPlayerPed(), car7)) && (engine == 0)) // если игрок поцарапал соперника
 						{
 							if (TIMERA() > 3000)
 							{
@@ -1700,7 +1672,7 @@ void kaufman(void)
 						}
 						if ((car_HP < 5) && (engine == 0))
 						{
-							//поджигаем автомобиль
+							//поджигаем
 							SETTIMERB(0);
 							PTFX = START_PTFX_ON_VEH("fire_chopper_tail", car7, -1.035, -1.33, -0.35, 1, 1, 90, 0.36);
 							PTFX2 = START_PTFX_ON_VEH("fire_chopper_tail", car7, 1.035, -1.33, -0.05, 1, 1, -90, 0.36);
@@ -1730,7 +1702,7 @@ void kaufman(void)
 						if ((IS_CHAR_DEAD(ped7)) || (IS_CAR_DEAD(car7)))
 						{
 
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -1749,17 +1721,17 @@ void kaufman(void)
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
 
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+							DO_SCREEN_FADE_IN( 500 );
 
 							SETTIMERA(0);
 							while (true)
 							{
-								SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-								SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-								SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-								SET_TEXT_CENTRE(1); // задаём центр текста
+								SET_TEXT_COLOUR(93, 200, 252, 255);
+								SET_TEXT_SCALE(0.5, 0.7);
+								SET_TEXT_EDGE(1, 0, 0, 0, 255);
+								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+								SET_TEXT_CENTRE(1);
 								DISPLAY_TEXT(0.5, 0.45, "TAX_AS1");//TAXI FIRM ASSET COMPLETED
 								WAIT( 0 );
 								if ( TIMERA() > 5000 )
@@ -1807,7 +1779,7 @@ void kaufman(void)
 							SET_TEXT_RENDER_ID(rId9);
 							DRAW_RECT(0.5, 0.5, 1.0, 1.0, 0, 0, 0, 255);
 
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -1817,39 +1789,39 @@ void kaufman(void)
 								}
 							}
 
-							//убираем камеру
+							
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
-							skip = 2;// переменная пропуска
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+							DO_SCREEN_FADE_IN( 500 );
+							skip = 2;
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
 				}
 				// зачещаем скрипт
 				WAIT(0);
-				REMOVE_BLIP(car1_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car2_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car3_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car4_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car5_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(car6_ico);//Удаляем иконку на радаре
-				LOCK_CAR_DOORS(car7, 1); //разблокируем двери автомобиля для игрока
+				REMOVE_BLIP(car1_ico);
+				REMOVE_BLIP(car2_ico);
+				REMOVE_BLIP(car3_ico);
+				REMOVE_BLIP(car4_ico);
+				REMOVE_BLIP(car5_ico);
+				REMOVE_BLIP(car6_ico);
+				LOCK_CAR_DOORS(car7, 1); //разблокируем дверимобиля для
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(vorotaM);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -1858,7 +1830,7 @@ void kaufman(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped6);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
 
-				// выгружаем из памяти транспорт
+				// выгружаем из памяти
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -1868,7 +1840,7 @@ void kaufman(void)
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car7);
 				if (car8 != 0)
 				{
-					LOCK_CAR_DOORS(car8, 1); //блокируем двери автомобиля для игрока
+					LOCK_CAR_DOORS(car8, 1);
 					MARK_CAR_AS_NO_LONGER_NEEDED(&car8);
 				}
 				DELETE_OBJECT(&vorota);
@@ -1893,12 +1865,12 @@ void kaufman(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -1913,18 +1885,18 @@ void kaufman(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 5000);// +5000$
 						
 						WAIT( 0 );
@@ -1933,10 +1905,10 @@ void kaufman(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +5000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +5000 );
 					REGISTER_MISSION_PASSED("TAXI_3");
 					G_CABS = 4;
-					sutosave = 1;
+					autosave = 1;
 				}
 				blip_on = 0;
 				G_ONMISSION = 0;
@@ -1958,7 +1930,7 @@ void kaufman(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(cabs_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(cabs_ico);
 				blip_on = 0;
 			}
 		}
@@ -1999,9 +1971,9 @@ void kaufman(void)
 						PRINT_HELP_FOREVER("NEGETMONEY"); // Press the ~INPUT_PHONE_ACCEPT~ button to cash out.
 						help = 1;
 					}
-					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))
 					{
-						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у игрока сумму
+						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у сумму
 						income = 0;
 					}
 				}
@@ -2010,7 +1982,7 @@ void kaufman(void)
 			{
 				if (load_mashin == 1) 
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					WAIT( 100 );
 					SET_TEXT_RENDER_ID(rId9);
 					DRAW_RECT(0.5, 0.5, 1.0, 1.0, 35, 35, 35, 255);

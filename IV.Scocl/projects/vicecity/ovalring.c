@@ -1984,14 +1984,14 @@ void ovalring_loop(void) {
 		{
 			SET_TEXT_COLOUR(0, 197, 145, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT(0.5, 0.45, "HOTR_30");// пишем "Миссия завершина"
 
 			SET_TEXT_COLOUR(50, 182, 255, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "HOTR_29", 5000);// +5000$
@@ -2000,14 +2000,14 @@ void ovalring_loop(void) {
 		{
 			SET_TEXT_COLOUR(0, 197, 145, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT(0.5, 0.45, "HOTR_31");// пишем "Миссия завершина"
 
 			SET_TEXT_COLOUR(50, 182, 255, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "HOTR_29", 1500);// +5000$
@@ -2016,14 +2016,14 @@ void ovalring_loop(void) {
 		{
 			SET_TEXT_COLOUR(0, 197, 145, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT(0.5, 0.45, "HOTR_32");// пишем "Миссия завершина"
 
 			SET_TEXT_COLOUR(50, 182, 255, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "HOTR_29", 500);// +5000$

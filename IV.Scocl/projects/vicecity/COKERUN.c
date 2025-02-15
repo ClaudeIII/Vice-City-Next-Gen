@@ -5,25 +5,13 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, tovarX, tovarY, tovarZ, help_text1, all_tovar, go, sound, time_m, time_s, textur, skip, sutosave;
+float PlayX, PlayY, PlayZ, PlayR, blip_on, tovarX, tovarY, tovarZ, help_text1, all_tovar, go, sound, time_m, time_s, textur, skip, autosave;
 int income, load_mashin, help, message;
 
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void boat_race(void)
 {
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	Blip boat_ico;
 	help_text1 = 0;
 	message = 0;
@@ -75,10 +63,10 @@ void boat_race(void)
 				message = 5;
 			}
 		}
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -103,14 +91,14 @@ void boat_race(void)
 			{
 				if (help_text1 == 0)
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("NEHELP2"); //Press the ~PAD_LB~ button to activate the mission
 					help_text1 = 1;
 				}
 				if (((IS_CONTROL_PRESSED( 2, 23 )) && (! IS_USING_CONTROLLER()) && (G_COKERUN > 0) && (G_ONMISSION == 0)) || ((IS_BUTTON_PRESSED( 0, 4 )) && (IS_USING_CONTROLLER()) && (G_COKERUN > 0) && (G_ONMISSION == 0)))
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
-					REMOVE_BLIP(boat_ico);//Удаляем иконку на радаре
+					CLEAR_HELP();
+					REMOVE_BLIP(boat_ico);
 					blip_on = 0;
 					G_ONMISSION = 1;
 					Cam camera;
@@ -130,9 +118,9 @@ void boat_race(void)
 					fon = GET_TEXTURE( textur, "fon_hud" );
 					timer = GET_TEXTURE( textur, "timer_hud" );
 
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 
-					//создаём груз
+					
 					REQUEST_MODEL(gruz);
 					while (!HAS_MODEL_LOADED(gruz)) WAIT(0);
 					CREATE_OBJECT_NO_OFFSET(gruz, -107.1, -993.9, 1.095, &tovar, TRUE);
@@ -142,7 +130,7 @@ void boat_race(void)
 					CHANGE_BLIP_NAME_FROM_TEXT_FILE(boat_ico, "MO_TARGET");//иконка на радаре называние в истории карты
 					CHANGE_BLIP_SCALE(boat_ico, 0.6);
 
-					//создаём рампы
+					
 					REQUEST_MODEL(ramp);
 					while (!HAS_MODEL_LOADED(ramp)) WAIT(0);
 					CREATE_OBJECT_NO_OFFSET(ramp, 159.7, -930.1, 0.5, &rampa_1, TRUE);
@@ -158,7 +146,7 @@ void boat_race(void)
 					FREEZE_OBJECT_POSITION(rampa_2, 1);
 					FREEZE_OBJECT_POSITION(rampa_3, 1);
 
-					//камера на груз
+					//камера на
 					CREATE_CAM( 14, &camera );
 					POINT_CAM_AT_COORD	( camera, -103.378, -989.718, 1.207 );
 					SET_CAM_POS			( camera, -143.117, -977.164, 3.736);
@@ -174,7 +162,7 @@ void boat_race(void)
 					PRINT_STRING_IN_STRING("string", "NE_BOATYARD2", 3000, 1);//Pick up the goods in the allowed time before the cops have returned.
 					SetTime(3000);
 
-					//убираем камеру
+					
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
 					SET_WIDESCREEN_BORDERS( 0 );
@@ -230,7 +218,7 @@ void boat_race(void)
 						}
 						WAIT(0);
 					}
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 					SETTIMERA(0);
 					SETTIMERB(0);
 
@@ -258,7 +246,7 @@ void boat_race(void)
 							}
 						}
 						//============================ HUD ============================
-						// таймер тут
+						// таймер
 						if (TIMERA() > 999)
 						{
 							time_s -= 1;
@@ -345,9 +333,9 @@ void boat_race(void)
 							sound = 1;
 						}
 
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GET_OBJECT_COORDINATES(tovar, &tovarX, &tovarY, &tovarZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, tovarX, tovarY, tovarZ, &PlayR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, tovarX, tovarY, tovarZ, &PlayR);
 
 						if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && ( PlayR < 6.5 ))
 						{
@@ -456,26 +444,26 @@ void boat_race(void)
 						}
 						if (all_tovar > 26)
 						{
-							REMOVE_BLIP(boat_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(boat_ico);
 							SET_OBJECT_COORDINATES(tovar, -0.36, -0.402, 0.095);
-							skip = 2;// переменная пропуска
+							skip = 2;
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
 						{
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 						else if ((time_m == 0) && (time_s == 0))
 						{
 							PRINT_STRING_IN_STRING("string", "NETAXI2", 5000, 1);//~r~You're out of time!
-							skip = 1;// переменная пропуска
+							skip = 1;
 							break;
 						}
 					}
-					// чистим скрипт тут
-					WAIT(100);
-					REMOVE_BLIP(boat_ico);//Удаляем иконку на радаре
+					
+					WAIT(0);
+					REMOVE_BLIP(boat_ico);
 
 					if (sound == 1)
 					{
@@ -504,12 +492,12 @@ void boat_race(void)
 						SETTIMERA(0);
 						while (true)
 						{
-							SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-							SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-							SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-							SET_TEXT_CENTRE(1); // задаём центр текста
-							DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+							SET_TEXT_COLOUR(255, 159, 255, 255);
+							SET_TEXT_SCALE(0.5, 0.6);
+							SET_TEXT_EDGE(1, 0, 0, 0, 255);
+							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+							SET_TEXT_CENTRE(1);
+							DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 							WAIT( 0 );
 							if ( TIMERA() > 3000 )
@@ -522,7 +510,7 @@ void boat_race(void)
 					{
 						if (G_COKERUN == 1)
 						{
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -540,17 +528,17 @@ void boat_race(void)
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+							DO_SCREEN_FADE_IN( 500 );
 
 							SETTIMERA(0);
 							while (true)
 							{
-								SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-								SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-								SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-								SET_TEXT_CENTRE(1); // задаём центр текста
+								SET_TEXT_COLOUR(93, 200, 252, 255);
+								SET_TEXT_SCALE(0.5, 0.7);
+								SET_TEXT_EDGE(1, 0, 0, 0, 255);
+								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+								SET_TEXT_CENTRE(1);
 								DISPLAY_TEXT(0.5, 0.45, "BOAT_A2");//BOATYARD ASSET COMPLETED
 								WAIT( 0 );
 								if ( TIMERA() > 5000 )
@@ -597,7 +585,7 @@ void boat_race(void)
 							SET_TEXT_RENDER_ID(rId9);
 							DRAW_RECT(0.5, 0.5, 1.0, 1.0, 0, 0, 0, 255);
 
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -607,30 +595,30 @@ void boat_race(void)
 								}
 							}
 
-							//убираем камеру
+							
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+							DO_SCREEN_FADE_IN( 500 );
 							G_COKERUN = 2;
 						}
 						SETTIMERA(0);
 						TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 						while (true)
 						{
-							SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-							SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-							SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-							SET_TEXT_CENTRE(1); // задаём центр текста
-							DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+							SET_TEXT_COLOUR(255, 159, 255, 255);
+							SET_TEXT_SCALE(0.5, 0.7);
+							SET_TEXT_EDGE(1, 0, 0, 0, 255);
+							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+							SET_TEXT_CENTRE(1);
+							DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-							SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-							SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-							SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-							SET_TEXT_CENTRE(1); // задаём центр текста
+							SET_TEXT_COLOUR(255, 159, 255, 255);
+							SET_TEXT_SCALE(0.5, 0.7);
+							SET_TEXT_EDGE(1, 0, 0, 0, 255);
+							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+							SET_TEXT_CENTRE(1);
 							DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 5000);// +5000$
 							
 							WAIT( 0 );
@@ -639,9 +627,9 @@ void boat_race(void)
 								break;
 							}
 						}
-						ADD_SCORE( GetPlayerIndex(), +5000 );//даём игроку денег
+						ADD_SCORE( GetPlayerIndex(), +5000 );
 						REGISTER_MISSION_PASSED("BOAT_N");
-						sutosave = 1;
+						autosave = 1;
 					}
 					G_ONMISSION = 0;
 				}
@@ -651,7 +639,7 @@ void boat_race(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(boat_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(boat_ico);
 				blip_on = 0;
 			}
 		}
@@ -692,9 +680,9 @@ void boat_race(void)
 						PRINT_HELP_FOREVER("NEGETMONEY"); // Press the ~INPUT_PHONE_ACCEPT~ button to cash out.
 						help = 1;
 					}
-					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))
 					{
-						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у игрока сумму
+						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у сумму
 						income = 0;
 					}
 				}
@@ -703,7 +691,7 @@ void boat_race(void)
 			{
 				if (load_mashin == 1) 
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					WAIT( 100 );
 					SET_TEXT_RENDER_ID(rId9);
 					DRAW_RECT(0.5, 0.5, 1.0, 1.0, 35, 35, 35, 255);

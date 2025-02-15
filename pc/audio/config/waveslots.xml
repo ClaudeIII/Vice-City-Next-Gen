@@ -475,36 +475,6 @@
     <Size value="794624" />
   </Slot>
   <Slot>
-    <Name content="ascii">STREAM_ENGINE_16</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="794624" />
-  </Slot>
-  <Slot>
-    <Name content="ascii">STREAM_ENGINE_17</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="794624" />
-  </Slot>
-  <Slot>
-    <Name content="ascii">STREAM_ENGINE_18</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="794624" />
-  </Slot>
-  <Slot>
-    <Name content="ascii">STREAM_ENGINE_19</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="794624" />
-  </Slot>
-  <Slot>
-    <Name content="ascii">STREAM_ENGINE_20</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="794624" />
-  </Slot>
-  <Slot>
     <Name content="ascii">SUBWAY_TRAIN</Name>
     <MaxHeaderSize value="2048" />
     <LoadType content="ascii">BANK</LoadType>
@@ -530,7 +500,7 @@
     <MaxHeaderSize value="20480" />
     <LoadType content="ascii">BANK</LoadType>
     <StaticBank content="ascii">RESIDENT\WEAPONS</StaticBank>
-    <Size value="13174784" />
+    <Size value="14020862" />
   </Slot>
   <Slot>
     <Name content="ascii">WEATHER_RAIN</Name>
@@ -557,13 +527,13 @@
     <MaxHeaderSize value="20480" />
     <LoadType content="ascii">BANK</LoadType>
     <StaticBank content="ascii">EP1_SFX\RESIDENT_WEAPON</StaticBank>
-    <Size value="3350528" />
+    <Size value="3309012" />
   </Slot>
   <Slot>
     <Name content="ascii">EP2_RESIDENT</Name>
     <MaxHeaderSize value="20480" />
     <LoadType content="ascii">BANK</LoadType>
     <StaticBank content="ascii">EP2_SFX\EP2_RESIDENT</StaticBank>
-    <Size value="3315712" />
+    <Size value="3584260" />
   </Slot>
 </WaveSlots>

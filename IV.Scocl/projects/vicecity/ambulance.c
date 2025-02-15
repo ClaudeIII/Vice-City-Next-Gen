@@ -50,14 +50,14 @@ void ambulance_failed(void) {
 		{
 			SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT(0.5, 0.4, "A_FAIL1");// пишем "Миссия завершина"
 
 			SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
 			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
 			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 			SET_TEXT_CENTRE(1); // задаём центр текста
 			DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "A_SAVES", saved_peds_this_go);//
@@ -357,7 +357,7 @@ void injured_ped_checks(void) {
 			{
 				SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
 				SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-				SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+				SET_TEXT_EDGE(1, 0, 0, 0, 255);
 				SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 				SET_TEXT_CENTRE(1); // задаём центр текста
 				DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "A_TIME", time_chunk_in_secs);//
@@ -404,7 +404,7 @@ void injured_ped_checks(void) {
 				{
 					SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
 					SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-					SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+					SET_TEXT_EDGE(1, 0, 0, 0, 255);
 					SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 					SET_TEXT_CENTRE(1); // задаём центр текста
 					DISPLAY_TEXT(0.5, 0.4, "A_PASS");//
@@ -413,7 +413,7 @@ void injured_ped_checks(void) {
 					{
 						SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
 						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
 						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 						SET_TEXT_CENTRE(1); // задаём центр текста
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "A_TIME", time_chunk_in_secs);//
@@ -919,7 +919,7 @@ void ambulance_loop(void) {
 			{
 				SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
 				SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-				SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+				SET_TEXT_EDGE(1, 0, 0, 0, 255);
 				SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 				SET_TEXT_CENTRE(1); // задаём центр текста
 				DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "A_REW", score_am);//
@@ -958,7 +958,7 @@ void ambulance_loop(void) {
 				{
 					SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
 					SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-					SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+					SET_TEXT_EDGE(1, 0, 0, 0, 255);
 					SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 					SET_TEXT_CENTRE(1); // задаём центр текста
 					DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "A_COMP1", 15000);//
@@ -1103,7 +1103,7 @@ void mission_start_ambulance(void) {
 	{
 		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
 		SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
 		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
 		SET_TEXT_CENTRE(1); // задаём центр текста
 		DISPLAY_TEXT(0.5, 0.45, "AMBUL_M");//

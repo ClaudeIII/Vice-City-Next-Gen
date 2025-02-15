@@ -7,52 +7,7 @@
 
 Object trubka_1;
 int incoming_call = 0;
-int call_drop = 0;
 
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (TIMERA() > time)
-		{
-			break;
-		}
-		else if ((HAS_DEATHARREST_EXECUTED()))
-		{
-			SETTIMERA( 0 );
-		}
-	}
-}
-void SetSpeech(void)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (!IS_SCRIPTED_CONVERSATION_ONGOING())
-		{
-			break;
-		}
-		else if ((IS_CHAR_IN_WATER(GetPlayerPed())) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			call_drop = 1;
-			ABORT_SCRIPTED_CONVERSATION( 0 );
-			break;
-		}
-		else if ((IS_BUTTON_PRESSED( 0, 17 )) || ((IS_CONTROL_PRESSED( 2, 182 )) && (! IS_USING_CONTROLLER()))) // BACKSPACE
-		{
-			call_drop = 1;
-			ABORT_SCRIPTED_CONVERSATION( 0 );
-			break;
-		}
-		else if (TIMERA() > 10000)
-		{
-			break;
-		}
-	}
-}
 void call_1(void)
 {
 	if (call_drop == 0)
@@ -1936,20 +1891,20 @@ void call_43(void)
 }
 void set_anim_in(void)
 {
-	REQUEST_ANIMS( "cellphone" );//загружаем файл с анимацией
+	REQUEST_ANIMS( "cellphone" );
 	while (!HAVE_ANIMS_LOADED( "cellphone" )) WAIT(0);
 	
 	ATTACH_OBJECT_TO_PED( trubka_1, GetPlayerPed(), 1232, 0.070, 0.052, 0.003, 3.30000000, 0.30000000, -0.45000000, 0 );
 	
 	SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_UNARMED, TRUE);
-	TASK_PLAY_ANIM_SECONDARY_UPPER_BODY( GetPlayerPed(), "cellphone_in", "cellphone", 8.0, 0, 0, 0, 1, -1 );//Воиспроизвидение анимации на педе
+	TASK_PLAY_ANIM_SECONDARY_UPPER_BODY( GetPlayerPed(), "cellphone_in", "cellphone", 8.0, 0, 0, 0, 1, -1 );
 	WAIT(1000);
-	TASK_PLAY_ANIM_SECONDARY_UPPER_BODY( GetPlayerPed(), "cellphone_talk", "cellphone", 8.0, 1, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+	TASK_PLAY_ANIM_SECONDARY_UPPER_BODY( GetPlayerPed(), "cellphone_talk", "cellphone", 8.0, 1, 0, 0, 0, -1 );
 	incoming_call = 1;
 }
 void set_anim_out(void)
 {
-	TASK_PLAY_ANIM_SECONDARY_UPPER_BODY( GetPlayerPed(), "cellphone_out", "cellphone", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+	TASK_PLAY_ANIM_SECONDARY_UPPER_BODY( GetPlayerPed(), "cellphone_out", "cellphone", 1.0, 0, 0, 0, 0, -1 );
 	SetTime(1000);
 	DETACH_OBJECT( trubka_1, 1 );
 	SET_OBJECT_COORDINATES(trubka_1, 1.1, 1.1, -1.1);
@@ -1987,7 +1942,7 @@ void melodi(void)
 		{
 			// останавливаем воспроизведение звонка
 			STOP_MOBILE_PHONE_RINGING();
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 			set_anim_in();
 			call_drop = 0;
 			break;
@@ -1996,7 +1951,7 @@ void melodi(void)
 		{
 			// останавливаем воспроизведение звонка
 			STOP_MOBILE_PHONE_RINGING();
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 			G_ONMISSION = 0;
 			SetTime(25000);
 			break;
@@ -2005,7 +1960,7 @@ void melodi(void)
 		{
 			// останавливаем воспроизведение звонка
 			STOP_MOBILE_PHONE_RINGING();
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 			G_ONMISSION = 0;
 			SetTime(25000);
 			break;
@@ -2138,7 +2093,7 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_8();// звонок от Ленса (звонок "Мы можем это сделать.")
+					call_8();// звонок от (звонок "Мы можем это сделать.")
 					set_anim_out();
 					G_DIAZ = 6;
 					G_ONMISSION = 0;
@@ -2218,7 +2173,7 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_13();// звонок от Сонни ("эй Томми, это я, Сонни. Твой станый друг...")
+					call_13();// звонок от Сонни ("эй, это я, Сонни. Твой станый друг...")
 					set_anim_out();
 					G_MAIN_CALL = 4;
 					G_ONMISSION = 0;
@@ -2250,7 +2205,7 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_15();// звонок от Ланса ("Томми, есть разговор...")
+					call_15();// звонок от ("Томми, есть разговор...")
 					set_anim_out();
 					G_LANCE_CALL = 1;
 					G_ONMISSION = 0;
@@ -2266,7 +2221,7 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_16();// звонок от Ланса ("Томми, это я, Ланс. Заткнись и слушай, Томми, у меня мало времени..")
+					call_16();// звонок от ("Томми, это я, Ланс. Заткнись и слушай,, у меня мало времени..")
 					set_anim_out();
 					G_LANCE_CALL = 2;
 					G_ONMISSION = 0;
@@ -2346,7 +2301,7 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_21();// звонок от Тётушки Полет (Зачем ты вернулся Томми? Ны не хотим тебя здесь видеть.)
+					call_21();// звонок от Тётушки Полет (Зачем тырнулся? Ны не хотим тебя здесь видеть.)
 					set_anim_out();
 					G_HAITI = 6;
 					G_ONMISSION = 0;
@@ -2522,7 +2477,7 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_31();// звонок от Фила (старт миссии "Торговец оружием")
+					call_31();// звонок от Фила (старт миссии "Торговецм")
 					set_anim_out();
 					G_PHIL = 1;
 					G_ONMISSION = 0;
@@ -2538,14 +2493,14 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_32();// звонок от Розенберга ("Томми, Томми, Томми, я говорил с Сонни. Слышишь?")
+					call_32();// звонок от Розенберга ("Томми,,, я говорил с Сонни. Слышишь?")
 					set_anim_out();
 					G_MAIN_CALL = 6;
 					G_ONMISSION = 0;
 				}
 			}
 		}
-		if ((G_PHIL == 2) && (G_ONMISSION == 0)) // если миссия "Торговец оружием" пройдена
+		if ((G_PHIL == 2) && (G_ONMISSION == 0)) // если миссия "Торговецм" пройдена
 		{
 			SetTime(8000);
 			if ((G_ONMISSION == 0) && (!IS_CHAR_IN_WATER(GetPlayerPed())))
@@ -2602,7 +2557,7 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_36();// звонок от Стива Скотта ("...Никогда не верил, что я художник, и теперь я добился этого...")
+					call_36();// звонок от Стива Скотта ("...Никогда нерил, что я художник, и теперь я добился этого...")
 					set_anim_out();
 					G_PRON = 7;
 					G_ONMISSION = 0;
@@ -2634,7 +2589,7 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_38();// звонок от Ленса (старт миссии "Держите друзей рядом...")
+					call_38();// звонок от (старт миссии "Держите друзей рядом...")
 					set_anim_out();
 					G_COUNT = 6;
 					G_ONMISSION = 0;
@@ -2682,7 +2637,7 @@ void launcher(void)
 				melodi();
 				if (incoming_call == 1)
 				{
-					call_41();// звонок от Кента Пола ("Томми Версетти, как дела, мистер большая шишка?")
+					call_41();// звонок от Кента Пола ("Томмирсетти, как дела, мистер большая шишка?")
 					set_anim_out();
 					G_MAIN_CALL = 9;
 					G_ONMISSION = 0;

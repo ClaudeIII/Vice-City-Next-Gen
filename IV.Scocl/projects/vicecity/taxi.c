@@ -54,18 +54,18 @@ void mission_cleanup_taxi1(void) {
 	SETTIMERA(0);
 	while (true)
 	{
-		SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
-		DISPLAY_TEXT(0.5, 0.5, "TAXI6");// пишем "Миссия завершина"
+		SET_TEXT_COLOUR(95, 195, 247, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
+		DISPLAY_TEXT(0.5, 0.5, "TAXI6");
 
-		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
+		SET_TEXT_COLOUR(30, 215, 135, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
 		DISPLAY_TEXT_WITH_NUMBER(0.5, 0.4, "TSCORE", taxi_score);//
 
 		WAIT( 0 );
@@ -164,28 +164,28 @@ void score(void) {
 	SETTIMERA(0);
 	while (true)
 	{
-		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
+		SET_TEXT_COLOUR(30, 215, 135, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
 		DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "TSCORE2", score_for_this_fare);//
 
 
-		SET_TEXT_COLOUR(95, 195, 247, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
+		SET_TEXT_COLOUR(95, 195, 247, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
 
 		if (TIMERB() > speedbonus) {
 		score_for_this_fare = WMOCAistance_int_old / 10;
 		//PRINT_BIG("TAXI4", 5000, 5);
-		DISPLAY_TEXT(0.5, 0.4, "TAXI4");// пишем "Миссия завершина"
+		DISPLAY_TEXT(0.5, 0.4, "TAXI4");
 		} else {
 			score_for_this_fare = WMOCAistance_int_old / 8;
 			//PRINT_BIG("TAXI5", 5000, 5);
-			DISPLAY_TEXT(0.5, 0.4, "TAXI5");// пишем "Миссия завершина"
+			DISPLAY_TEXT(0.5, 0.4, "TAXI5");
 		}
 		
 		WAIT( 0 );
@@ -229,11 +229,11 @@ void score(void) {
 		SETTIMERA(0);
 		while (true)
 		{
-			SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
-			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-			SET_TEXT_CENTRE(1); // задаём центр текста
+			SET_TEXT_COLOUR(30, 215, 135, 255);
+			SET_TEXT_SCALE(0.5, 0.7);
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
+			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+			SET_TEXT_CENTRE(1);
 			DISPLAY_TEXT_WITH_2_NUMBERS(0.5, 0.4, "IN_ROW", taxi_passed_this_shot, in_a_row_cash);
 			
 			WAIT( 0 );
@@ -706,7 +706,7 @@ void passenger_destination(void) {
 			DISPLAY_TEXT_WITH_NUMBER(0.9348959, 0.72916666, "CP_TIME_ZERO", taxi_passed_this_shot);
 		}
 
-		DRAW_CHECKPOINT( WMOCAestx1, WMOCAesty1, WMOCAestz1, 5.0, 160, 116, 209);//создание чекпойнт на координатах и его цвет
+		DRAW_CHECKPOINT( WMOCAestx1, WMOCAesty1, WMOCAestz1, 5.0, 160, 116, 209);
 		if ((LOCATE_CHAR_IN_CAR_3D(GetPlayerPed(), WMOCAestx1, WMOCAesty1, WMOCAestz1, 4.0, 4.0, 4.0, 1)) && (IS_CAR_STOPPED(taxi_car1))) {
 			break;
 		}
@@ -1037,11 +1037,11 @@ void mission_start_taxi1(void) {
 	SETTIMERA(0);
 	while (true)
 	{
-		SET_TEXT_COLOUR(30, 215, 135, 255); // задаём цвет текста
-		SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-		SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-		SET_TEXT_CENTRE(1); // задаём центр текста
+		SET_TEXT_COLOUR(30, 215, 135, 255);
+		SET_TEXT_SCALE(0.5, 0.6);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+		SET_TEXT_CENTRE(1);
 		DISPLAY_TEXT(0.5, 0.45, "TAXI_M");//
 
 		WAIT( 0 );

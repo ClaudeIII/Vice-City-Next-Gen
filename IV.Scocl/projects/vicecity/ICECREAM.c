@@ -5,26 +5,14 @@
 #include <consts.h>
 #include "globals.h"
 
-float temp, prodano, speed, klient, zon_on, textur, help_text, PlayX, PlayY, PlayZ, PlayX2, PlayY2, PlayZ2, PlayR, sutosave;
+float temp, prodano, speed, klient, zon_on, textur, help_text, PlayX, PlayY, PlayZ, PlayX2, PlayY2, PlayZ2, PlayR, autosave;
 float x, x2, y, y2, PedX, PedY, PedZ, BortLX, BortLY, BortRX, BortRY, PedR1, PedR2, PedR3, skip, blip_on;
 int income, load_mashin, help;
 
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void whoopee(void)
 {
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	Cam camera;
 	Blip ice_ico;
 	help_text = 0;
@@ -36,10 +24,10 @@ void whoopee(void)
 	while(true)
 	{
 		WAIT(0);
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -60,12 +48,12 @@ void whoopee(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(ice_ico, "LG_17");
 				blip_on = 1;
 			}
-			if (IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_MRTASTY))//проверка игрок в определённой машине (MR TASTY)
+			if (IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_MRTASTY))//проверка игрок в определённойе (MR TASTY)
 			{
 				
-				if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), -423.987, -41.119, 4.062, -434.088, -33.443, 9.312, 0 )) && (temp == 0))//проверка игрок в зоне объяснения как работает миссия(при первом входе в автомобиль).
+				if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), -423.987, -41.119, 4.062, -434.088, -33.443, 9.312, 0 )) && (temp == 0))//проверка игрок в зоне объяснения как работает миссия(при первом входе в).
 				{
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 					CREATE_CAM( 14, &camera );
 					POINT_CAM_AT_COORD	( camera, -429.169, -37.004, 6.227 );
 					SET_CAM_POS			( camera, -420.103, -41.6, 10.022 );
@@ -73,17 +61,17 @@ void whoopee(void)
 					SET_CAM_PROPAGATE( camera, 1 );
 					ACTIVATE_SCRIPTED_CAMS(1, 1);
 					SET_WIDESCREEN_BORDERS( 1 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP_FOREVER("ICC1_7"); //~g~You receive money for each transaction you make, but the more transactions you make the more police attention you get.
 					SetTime(3500);
 					
 					POINT_CAM_AT_COORD	( camera, -429.169, -37.004, 6.227 );
 					SET_CAM_POS			( camera, -420.103, -41.6, 10.022 );
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP_FOREVER("ICC1_9"); //~g~Local gangs will not appreciate you doing business on their turf so expect hostility if you do so.
 					SetTime(3500);
 
-					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем игрока
+					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем
 					SET_CAM_BEHIND_PED( GetPlayerPed() );
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					END_CAM_COMMANDS( &camera );
@@ -92,16 +80,16 @@ void whoopee(void)
 				}
 				if (help_text == 0)
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					PRINT_HELP("ICC1_8"); //To make a transaction,park your van and press the ~PAD_LB~ button to play the ice cream jingle to attract customers.
 					help_text = 1;
 					temp = 1;
 				}
 				if (((IS_CONTROL_PRESSED( 2, 23 )) && (! IS_USING_CONTROLLER()) && (G_ICECREAM > 0) && (G_ONMISSION == 0)) || ((IS_BUTTON_PRESSED( 0, 4 )) && (IS_USING_CONTROLLER()) && (G_ICECREAM > 0) && (G_ONMISSION == 0)))
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					G_ONMISSION = 1;
-					REMOVE_BLIP(ice_ico);//Удаляем иконку на радаре
+					REMOVE_BLIP(ice_ico);
 					skip = 0;
 
 					Car car1;
@@ -122,9 +110,9 @@ void whoopee(void)
 					GET_CAR_CHAR_IS_USING(GetPlayerPed(), &car1);
 					SWITCH_CAR_SIREN(car1, 1);
 					GENERATE_RANDOM_INT_IN_RANGE( 1, 7, &all_klient);
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 
-					REQUEST_ANIMS( "amb@atm" );//загружаем файл с анимацией
+					REQUEST_ANIMS( "amb@atm" );
 					while (!HAVE_ANIMS_LOADED( "amb@atm" )) WAIT(0);
 
 					textur = LOAD_TXD( "sunshine_race" );
@@ -168,7 +156,7 @@ void whoopee(void)
 							{
 								klient = 0;
 								GENERATE_RANDOM_INT_IN_RANGE( 1, 7, &all_klient);
-								GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+								GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 							}
 						}
 						else
@@ -177,7 +165,7 @@ void whoopee(void)
 							{
 								if (klient < all_klient)
 								{
-									GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX2, &PlayY2, &PlayZ2);//вписываем координаты игрока в переменную
+									GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX2, &PlayY2, &PlayZ2);
 									GET_RANDOM_CHAR_IN_AREA_OFFSET_NO_SAVE(PlayX2, PlayY2, PlayZ2, 15.0, 15.0, 5.0, &ped1);
 									if (ped1 != FALSE)
 									{
@@ -198,7 +186,7 @@ void whoopee(void)
 										}
 										else
 										{
-											GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX2, &PlayY2, &PlayZ2);//вписываем координаты игрока в переменную
+											GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX2, &PlayY2, &PlayZ2);
 											if (!IS_CHAR_IN_AREA_3D( ped1, (PlayX2+7), (PlayY2+7), (PlayZ2+7), (PlayX2-7), (PlayY2-7), (PlayZ2-7), 0 ))
 											{
 												klient += 1;
@@ -214,7 +202,7 @@ void whoopee(void)
 												CHANGE_BLIP_NAME_FROM_TEXT_FILE(ice_ico, "NE_ICE1");//иконка на радаре называние в истории карты
 												CHANGE_BLIP_SCALE(ice_ico, 0.77999990);
 
-												GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX2, &PlayY2, &PlayZ2);//вписываем координаты игрока в переменную
+												GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX2, &PlayY2, &PlayZ2);
 												GET_CHAR_HEADING(GetPlayerPed(), &PlayR);
 
 												BortLX = (x*COS(PlayR+35)+y*SIN(PlayR+35))+PlayX2; // x- координата r- угол поворота
@@ -224,17 +212,17 @@ void whoopee(void)
 												BortRY = (y2*SIN(PlayR+45)-(x2*COS(PlayR+45)))+PlayY2; // y- координата r- угол поворота
 
 												GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);//вписываем координаты в переменную
-												GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, BortLX, BortLY, PlayZ2, &PedR1);//проверка "игрок на координатах"
-												GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, BortRX, BortRY, PlayZ2, &PedR2);//проверка "игрок на координатах"
+												GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, BortLX, BortLY, PlayZ2, &PedR1);
+												GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, BortRX, BortRY, PlayZ2, &PedR2);
 
 												if (PedR1 < PedR2)
 												{
-													TASK_GO_STRAIGHT_TO_COORD(ped1, BortLX, BortLY, PlayZ2, 4, -1);//заставляем идти к машине
+													TASK_GO_STRAIGHT_TO_COORD(ped1, BortLX, BortLY, PlayZ2, 4, -1);//заставляем идти ке
 													PedR3 = 1;
 												}
 												else
 												{
-													TASK_GO_STRAIGHT_TO_COORD(ped1, BortRX, BortRY, PlayZ2, 4, -1);//заставляем идти к машине
+													TASK_GO_STRAIGHT_TO_COORD(ped1, BortRX, BortRY, PlayZ2, 4, -1);//заставляем идти ке
 													PedR3 = 2;
 												}
 
@@ -270,30 +258,30 @@ void whoopee(void)
 													if (speed > 2)
 													{
 														ped1 = FALSE;
-														REMOVE_BLIP(ice_ico);//Удаляем иконку на радаре
+														REMOVE_BLIP(ice_ico);
 														break;
 													}
 													else if (IS_CHAR_DEAD(ped1))
 													{
 														ped1 = FALSE;
-														REMOVE_BLIP(ice_ico);//Удаляем иконку на радаре
+														REMOVE_BLIP(ice_ico);
 														break;
 													}
 													else if (IS_CHAR_FATALLY_INJURED(ped1))
 													{
 														ped1 = FALSE;
-														REMOVE_BLIP(ice_ico);//Удаляем иконку на радаре
+														REMOVE_BLIP(ice_ico);
 														break;
 													}
 													else if (IS_CHAR_INJURED(ped1))
 													{
 														ped1 = FALSE;
-														REMOVE_BLIP(ice_ico);//Удаляем иконку на радаре
+														REMOVE_BLIP(ice_ico);
 														break;
 													}
 													else if ((IS_CHAR_IN_AREA_3D( ped1, (BortLX+0.8), (BortLY+0.8), (PlayZ2+2), (BortLX-0.8), (BortLY-0.8), (PlayZ2-3), 0 )) || (IS_CHAR_IN_AREA_3D( ped1, (BortRX+0.8), (BortRY+0.8), (PlayZ2+2), (BortRX-0.8), (BortRY-0.8), (PlayZ2-3), 0 )))
 													{
-														//поворачиваем на автомобиль
+														//поворачиваем на
 														if (PedR3 == 1)
 														{
 															SET_CHAR_HEADING(ped1, PlayR+90);
@@ -303,7 +291,7 @@ void whoopee(void)
 															SET_CHAR_HEADING(ped1, PlayR-90);
 														}
 														//проигрываем анимацию
-														TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "m_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+														TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "m_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );
 														SETTIMERA(0);
 														while (true)
 														{
@@ -337,10 +325,10 @@ void whoopee(void)
 																break;
 															}
 														}
-														ADD_SCORE( GetPlayerIndex(), +20 );//даём игроку денег
+														ADD_SCORE( GetPlayerIndex(), +20 );
 														prodano += 1;//добавляем количество проданых порций
 														ped1 = FALSE;
-														REMOVE_BLIP(ice_ico);//Удаляем иконку на радаре
+														REMOVE_BLIP(ice_ico);
 														break;
 													}
 												}
@@ -367,7 +355,7 @@ void whoopee(void)
 								if (ped1 != FALSE)
 								{
 									ped1 = FALSE;
-									REMOVE_BLIP(ice_ico);//Удаляем иконку на радаре
+									REMOVE_BLIP(ice_ico);
 								}
 							}
 						}
@@ -394,9 +382,9 @@ void whoopee(void)
 					}
 
 
-					// чистим скрипт тут
-					WAIT(100);
-					REMOVE_BLIP(ice_ico);//Удаляем иконку на радаре
+					
+					WAIT(0);
+					REMOVE_BLIP(ice_ico);
 					MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 					if (ped1 != FALSE)
 					{
@@ -412,7 +400,7 @@ void whoopee(void)
 					{
 						if (G_ICECREAM == 1)
 						{
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -430,17 +418,17 @@ void whoopee(void)
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+							DO_SCREEN_FADE_IN( 500 );
 
 							SETTIMERA(0);
 							while (true)
 							{
-								SET_TEXT_COLOUR(93, 200, 252, 255); // задаём цвет текста
-								SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-								SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-								SET_TEXT_CENTRE(1); // задаём центр текста
+								SET_TEXT_COLOUR(93, 200, 252, 255);
+								SET_TEXT_SCALE(0.5, 0.7);
+								SET_TEXT_EDGE(1, 0, 0, 0, 255);
+								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+								SET_TEXT_CENTRE(1);
 								DISPLAY_TEXT(0.5, 0.45, "ICE_AT1");//ICECREAM FACTORY ASSET COMPLETED
 								WAIT( 0 );
 								if ( TIMERA() > 5000 )
@@ -488,7 +476,7 @@ void whoopee(void)
 							SET_TEXT_RENDER_ID(rId9);
 							DRAW_RECT(0.5, 0.5, 1.0, 1.0, 0, 0, 0, 255);
 
-							DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
 							{
 								WAIT(0);
@@ -497,32 +485,32 @@ void whoopee(void)
 									break;
 								}
 							}
-							//убираем камеру
+							
 							ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 							END_CAM_COMMANDS( &camera );
 							SET_WIDESCREEN_BORDERS( 0 );
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
-							DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
+							DO_SCREEN_FADE_IN( 500 );
 							REGISTER_MISSION_PASSED("ICE_1");
 							G_ICECREAM = 2;
-							sutosave = 1;
+							autosave = 1;
 
 							SETTIMERA(0);
 							TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 							while (true)
 							{
-								SET_TEXT_COLOUR(0, 180, 130, 255); // задаём цвет текста
-								SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-								SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-								SET_TEXT_CENTRE(1); // задаём центр текста
-								DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+								SET_TEXT_COLOUR(0, 180, 130, 255);
+								SET_TEXT_SCALE(0.5, 0.7);
+								SET_TEXT_EDGE(1, 0, 0, 0, 255);
+								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+								SET_TEXT_CENTRE(1);
+								DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-								SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
-								SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-								SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-								SET_TEXT_CENTRE(1); // задаём центр текста
+								SET_TEXT_COLOUR(109, 205, 255, 255);
+								SET_TEXT_SCALE(0.5, 0.7);
+								SET_TEXT_EDGE(1, 0, 0, 0, 255);
+								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+								SET_TEXT_CENTRE(1);
 								DISPLAY_TEXT_WITH_NUMBER(0.500, 0.500, "ICC1_19", prodano);//Total deals done: ~1~
 								
 								WAIT( 0 );
@@ -537,11 +525,11 @@ void whoopee(void)
 							SETTIMERA(0);
 							while (true)
 							{
-								SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
-								SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-								SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-								SET_TEXT_CENTRE(1); // задаём центр текста
+								SET_TEXT_COLOUR(109, 205, 255, 255);
+								SET_TEXT_SCALE(0.5, 0.7);
+								SET_TEXT_EDGE(1, 0, 0, 0, 255);
+								SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+								SET_TEXT_CENTRE(1);
 								DISPLAY_TEXT_WITH_NUMBER(0.500, 0.500, "ICC1_19", prodano);//Total deals done: ~1~
 								
 								WAIT( 0 );
@@ -557,11 +545,11 @@ void whoopee(void)
 						SETTIMERA(0);
 						while (true)
 						{
-							SET_TEXT_COLOUR(109, 205, 255, 255); // задаём цвет текста
-							SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-							SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-							SET_TEXT_CENTRE(1); // задаём центр текста
+							SET_TEXT_COLOUR(109, 205, 255, 255);
+							SET_TEXT_SCALE(0.5, 0.7);
+							SET_TEXT_EDGE(1, 0, 0, 0, 255);
+							SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+							SET_TEXT_CENTRE(1);
 							DISPLAY_TEXT_WITH_NUMBER(0.500, 0.500, "ICC1_19", prodano);//Total deals done: ~1~
 							
 							WAIT( 0 );
@@ -576,7 +564,7 @@ void whoopee(void)
 			}
 			if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (help_text == 1))
 			{
-				CLEAR_HELP(); // удаляем текст подсказки
+				CLEAR_HELP();
 				WAIT(3000);
 				help_text = 0;
 			}
@@ -585,7 +573,7 @@ void whoopee(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(ice_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(ice_ico);
 				blip_on = 0;
 			}
 		}
@@ -626,9 +614,9 @@ void whoopee(void)
 						PRINT_HELP_FOREVER("NEGETMONEY"); // Press the ~INPUT_PHONE_ACCEPT~ button to cash out.
 						help = 1;
 					}
-					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))//проверка нажата-ли клавиша "Для покупки".
+					if ((IS_CONTROL_PRESSED( 2, 181 )) && (! IS_USING_CONTROLLER()) || (IS_BUTTON_PRESSED( 0, 16 )))
 					{
-						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у игрока сумму
+						ADD_SCORE( GetPlayerIndex(), +income );// отнимаем у сумму
 						income = 0;
 					}
 				}
@@ -637,7 +625,7 @@ void whoopee(void)
 			{
 				if (load_mashin == 1) 
 				{
-					CLEAR_HELP(); // удаляем текст подсказки
+					CLEAR_HELP();
 					WAIT( 100 );
 					SET_TEXT_RENDER_ID(rId9);
 					DRAW_RECT(0.5, 0.5, 1.0, 1.0, 35, 35, 35, 255);

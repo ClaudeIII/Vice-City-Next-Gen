@@ -4,53 +4,25 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
-float PlayX, PlayY, PlayZ, PlayR, blip_on, textur, text1, skip, start, Blip_x, Blip_y, Blip_z, Blip_x2, Blip_y2, Blip_z2, play_cord, speed, poziteon, ugol, time_m, time_s, sound, bike_in, wanted, sutosave;
+float PlayX, PlayY, PlayZ, PlayR, blip_on, textur, text1, skip, start, Blip_x, Blip_y, Blip_z, Blip_x2, Blip_y2, Blip_z2, play_cord, speed, poziteon, ugol, time_m, time_s, sound, bike_in, wanted, autosave;
 float Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, Ped1R, SetSped1, ped1_cord, sped_wall1, sped_wall2, sped_wall3;
 float shkalaH1, shkalaH2, shkalaH3, shkalaHUD_y1, shkalaHUD_y2, shkalaHUD_y3, HUD_w, HUD_x, shkala;
 float Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, Ped2R, SetSped2, ped2_cord;
 float Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, Ped3R, SetSped3, ped3_cord;
 float Ped1_c, Ped4_c, Ped5_c, Ped6_c, Ped7_c, Ped8_c, Ped9_c, Ped10_c, Ped11_c, Ped12_c, hate, PointN, PedX, PedY, PedZ, PedR, shoot, siren;
 
-void SetSpeech(void)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if (!IS_SCRIPTED_CONVERSATION_ONGOING())
-		{
-			break;
-		}
-		else if (TIMERA() > 10000)
-		{
-			break;
-		}
-	}
-}
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void bikers(void)
 {
 	blip_on = 0;
-	sutosave = 0;
+	autosave = 0;
 	Blip bike_ico;
 	while(true)
 	{
 		WAIT(0);
-		if (sutosave == 1)
+		if (autosave == 1)
 		{
-			sutosave = 0;
-			G_SAVE_SAVED = 16; // точка входа 
+			autosave = 0;
+			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
 			DO_AUTO_SAVE();
 			WAIT(500);
@@ -70,17 +42,17 @@ void bikers(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(bike_ico, "LG_03");
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -164.663, 1185.16, 4.96332, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -164.663, 1185.16, 4.96332, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(bike_ico);
 				blip_on = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -89,7 +61,7 @@ void bikers(void)
 						break;
 					}
 				}
-				SET_CHAR_COORDINATES(GetPlayerPed(), -164.834, 1186.85, 5.19596);// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -164.834, 1186.85, 5.19596);
 				SET_CHAR_HEADING(GetPlayerPed(), 0.0);
 
 				Car car1, car2, car3;
@@ -135,16 +107,16 @@ void bikers(void)
 				fon = GET_TEXTURE( textur, "fon_hud" );
 				timer = GET_TEXTURE( textur, "timer_hud" );
 
-				uint CarM1 = MODEL_ZOMBIEB;// байк
-				uint PedM1 = MODEL_M_Y_GALB_LO_01;// байкер 1
-				uint PedM2 = MODEL_M_Y_GALB_LO_02;// байкер 2
+				uint CarM1 = MODEL_ZOMBIEB;
+				uint PedM1 = MODEL_M_Y_GALB_LO_01;
+				uint PedM2 = MODEL_M_Y_GALB_LO_02;
 
 				REQUEST_MODEL(CarM1);
-				while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
-				REQUEST_MODEL(PedM1);// Мерседес
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(PedM2);// Мерседес
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
+				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
+				REQUEST_MODEL(PedM1);
+				while (!HAS_MODEL_LOADED(PedM1));
+				REQUEST_MODEL(PedM2);
+				while (!HAS_MODEL_LOADED(PedM2));
 
 				CREATE_CAR(CarM1, -157.506, 1193.88, 4.96332, &car1, TRUE);
 				CREATE_CAR(CarM1, -157.832, 1195.92, 4.96332, &car2, TRUE);
@@ -152,25 +124,25 @@ void bikers(void)
 				SET_CAR_HEADING(car1, -82.0);
 				SET_CAR_HEADING(car2, -82.0);
 				SET_CAR_HEADING(car3, -82.0);
-				SET_CAN_BURST_CAR_TYRES(car1, 0); // шины автомобиля нельзя повредить
-				SET_CAN_BURST_CAR_TYRES(car2, 0); // шины автомобиля нельзя повредить
-				SET_CAN_BURST_CAR_TYRES(car3, 0); // шины автомобиля нельзя повредить
+				SET_CAN_BURST_CAR_TYRES(car1, 0);
+				SET_CAN_BURST_CAR_TYRES(car2, 0);
+				SET_CAN_BURST_CAR_TYRES(car3, 0);
 
-				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM2, &ped2);//создаём за рулём автомобиля
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём за рулём автомобиля
-				SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
-				SET_CHAR_PROOFS(ped2, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
-				SET_CHAR_PROOFS(ped3, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
+				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
+				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM2, &ped2);
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);
+				SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);
+				SET_CHAR_PROOFS(ped2, TRUE, TRUE, TRUE, TRUE, TRUE);
+				SET_CHAR_PROOFS(ped3, TRUE, TRUE, TRUE, TRUE, TRUE);
 
 				uint hour, minute, weather;
 				GET_TIME_OF_DAY(&hour, &minute);
 				GET_CURRENT_WEATHER(&weather);
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
-				FORWARD_TO_TIME_OF_DAY(19, 30);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(19, 30);
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "BIKE_1", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "BIKE_1", 6 );
 				START_CUTSCENE_NOW("bike_1");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -188,11 +160,11 @@ void bikers(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				FORCE_WEATHER_NOW( weather );//устанавливаем погода
+				FORCE_WEATHER_NOW( weather );
 				RELEASE_WEATHER();
-				FORWARD_TO_TIME_OF_DAY(hour, minute);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(hour, minute);
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				ADD_BLIP_FOR_COORD(-158.485, 1200.02, 4.69314, &bike_ico);
 				CHANGE_BLIP_SPRITE(bike_ico, BLIP_OBJECTIVE);
@@ -201,14 +173,14 @@ void bikers(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(bike_ico, "NE_POINT");
 
 				PRINT_STRING_IN_STRING("string", "BM1_1", 5000, 1);//~g~Get a Freeway or an Angel and get to the starting grid.
-				CLEAR_AREA( -158.485, 1200.02, 4.69314, 65.0, 1);//очещаем зону загрузки
+				CLEAR_AREA( -158.485, 1200.02, 4.69314, 65.0, 1);
 
 				while(true)
 				{
 					WAIT(0);
-					DRAW_CHECKPOINT( -158.485, 1200.02, 4.69314, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -158.485, 1200.02, 4.69314, &PlayR);//проверка "игрок на координатах"
+					DRAW_CHECKPOINT( -158.485, 1200.02, 4.69314, 1.5, 160, 116, 209);
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -158.485, 1200.02, 4.69314, &PlayR);
 					if ( PlayR < 2.1)
 					{
 						if ((IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_ZOMBIEB)) || (IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_BOBBER)))
@@ -217,12 +189,12 @@ void bikers(void)
 							{
 								text1 = 0;
 							}
-							REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(bike_ico);
 							// 3..2..1.. GO
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 							CLEAR_PRINTS();
 
-							//айдио тут
+							//айдио
 							NEW_SCRIPTED_CONVERSATION();
 							ADD_NEW_CONVERSATION_SPEAKER(0, GetPlayerPed(), "NIKO");
 							ADD_LINE_TO_CONVERSATION(0, "R2_BA", "BIKE1_1", 0, 0);//All right, fancy clothes. Let's see what you can do.
@@ -286,7 +258,7 @@ void bikers(void)
 								}
 								WAIT(0);
 							}
-							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем игрока
+							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем
 							SETTIMERA(0);
 							start = 1;
 							break;
@@ -301,23 +273,23 @@ void bikers(void)
 							}
 						}
 					}
-					else if (!IS_CHAR_SITTING_IN_ANY_CAR(ped1)) // если игрок поцарапал машину соперника
+					else if (!IS_CHAR_SITTING_IN_ANY_CAR(ped1)) // если игрок поцарапал соперника
 					{
-						REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(bike_ico);
 						SETTIMERA(0);
 						start = 2;
 						break;
 					}
-					else if (!IS_CHAR_SITTING_IN_ANY_CAR(ped2)) // если игрок поцарапал машину соперника
+					else if (!IS_CHAR_SITTING_IN_ANY_CAR(ped2)) // если игрок поцарапал соперника
 					{
-						REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(bike_ico);
 						SETTIMERA(0);
 						start = 2;
 						break;
 					}
-					else if (!IS_CHAR_SITTING_IN_ANY_CAR(ped3)) // если игрок поцарапал машину соперника
+					else if (!IS_CHAR_SITTING_IN_ANY_CAR(ped3)) // если игрок поцарапал соперника
 					{
-						REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+						REMOVE_BLIP(bike_ico);
 						SETTIMERA(0);
 						start = 2;
 						break;
@@ -328,7 +300,7 @@ void bikers(void)
 						break;
 					}
 				}
-				// сама гонка тут
+				// сама гонка
 				if (skip == 0)
 				{
 					ADD_BLIP_FOR_CHAR(ped1, &Blip_c1);
@@ -434,10 +406,10 @@ void bikers(void)
 								start = 99;
 							}
 						}
-						// гонка тут
+						// гонка
 						DRAW_SPHERE(Blip_x, Blip_y, (Blip_z-4.5), 7.0);
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);
 						if ( PlayR < 8.5 )
 						{
 							play_cord += 1;
@@ -561,8 +533,8 @@ void bikers(void)
 							}
 							if (play_cord < 19)
 							{
-								REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
-								REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
+								REMOVE_BLIP(Blip_r);
+								REMOVE_BLIP(Blip_r2);
 								DELETE_CHECKPOINT(checkpoint);
 								ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 								CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
@@ -591,8 +563,8 @@ void bikers(void)
 							}
 							else
 							{
-								REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
-								REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
+								REMOVE_BLIP(Blip_r);
+								REMOVE_BLIP(Blip_r2);
 								DELETE_CHECKPOINT(checkpoint);
 								ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 								CHANGE_BLIP_SPRITE(Blip_r, BLIP_FINISH_LINE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
@@ -636,7 +608,7 @@ void bikers(void)
 
 
 						GET_CHAR_COORDINATES(ped1,  &Ped1X, &Ped1Y, &Ped1Z);//вписываем координаты соперника в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, &Ped1R);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, &Ped1R);
 						if ( Ped1R < 55.0)
 						{
 							if (SetSped1 == 0)
@@ -798,7 +770,7 @@ void bikers(void)
 
 
 						GET_CHAR_COORDINATES(ped2,  &Ped2X, &Ped2Y, &Ped2Z);//вписываем координаты соперника в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, &Ped2R);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, &Ped2R);
 						if ( Ped2R < 55.0)
 						{
 							if (SetSped2 == 0)
@@ -961,7 +933,7 @@ void bikers(void)
 
 
 						GET_CHAR_COORDINATES(ped3,  &Ped3X, &Ped3Y, &Ped3Z);//вписываем координаты соперника в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);
 						if ( Ped3R < 55.0)
 						{
 							if (SetSped3 == 0)
@@ -1128,13 +1100,13 @@ void bikers(void)
 
 						//***************** позиция *****************
 						GET_CHAR_COORDINATES(ped1,  &Ped1X, &Ped1Y, &Ped1Z);//вписываем координаты соперника в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, &Ped1R);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, &Ped1R);
 						GET_CHAR_COORDINATES(ped2,  &Ped2X, &Ped2Y, &Ped2Z);//вписываем координаты соперника в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, &Ped2R);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, &Ped2R);
 						GET_CHAR_COORDINATES(ped3,  &Ped3X, &Ped3Y, &Ped3Z);//вписываем координаты соперника в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);//проверка "игрок на координатах"
-						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);//проверка "игрок на координатах"
+						GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);
+						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);
 
 						if ((play_cord == ped1_cord) && (play_cord == ped2_cord) && (play_cord == ped3_cord))
 						{
@@ -1485,7 +1457,7 @@ void bikers(void)
 							poziteon = 3;
 						}
 
-						// HUD позицыя игрока 
+						// HUD позицыя 
 						DRAW_SPRITE( fon, 0.8765625, 0.74213, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
@@ -1573,7 +1545,7 @@ void bikers(void)
 							{
 								if (IS_CHAR_IN_AREA_3D( ped1, -223.827, 1266.457, 4.189, -253.827, 1296.457, 14.189, 0 ))
 								{
-									SET_CHAR_COORDINATES(ped1, -220.926, 1279.21, 5.7918);// перемещаем игрока
+									SET_CHAR_COORDINATES(ped1, -220.926, 1279.21, 5.7918);
 								}
 								TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped1, car1, ped1B_x, ped1B_y, ped1B_z, 4, 60.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 								SETTIMERB(0);
@@ -1585,7 +1557,7 @@ void bikers(void)
 							{
 								if (IS_CHAR_IN_AREA_3D( ped2, -223.827, 1266.457, 4.189, -253.827, 1296.457, 14.189, 0 ))
 								{
-									SET_CHAR_COORDINATES(ped2, -220.926, 1279.21, 5.7918);// перемещаем игрока
+									SET_CHAR_COORDINATES(ped2, -220.926, 1279.21, 5.7918);
 								}
 								TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped2, car2, ped2B_x, ped2B_y, ped2B_z, 4, 60.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 								SETTIMERB(0);
@@ -1597,7 +1569,7 @@ void bikers(void)
 							{
 								if (IS_CHAR_IN_AREA_3D( ped3, -223.827, 1266.457, 4.189, -253.827, 1296.457, 14.189, 0 ))
 								{
-									SET_CHAR_COORDINATES(ped3, -220.926, 1279.21, 5.7918);// перемещаем игрока
+									SET_CHAR_COORDINATES(ped3, -220.926, 1279.21, 5.7918);
 								}
 								TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped3, car3, ped3B_x, ped3B_y, ped3B_z, 4, 60.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 								SETTIMERB(0);
@@ -1612,27 +1584,27 @@ void bikers(void)
 
 					}
 				}
-				// чистим скрипт тут
-				WAIT(100);
-				REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
-				REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
-				REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
-				REMOVE_BLIP(Blip_c1);//Удаляем иконку на радаре
-				REMOVE_BLIP(Blip_c2);//Удаляем иконку на радаре
-				REMOVE_BLIP(Blip_c3);//Удаляем иконку на радаре
+				
+				WAIT(0);
+				REMOVE_BLIP(bike_ico);
+				REMOVE_BLIP(Blip_r);
+				REMOVE_BLIP(Blip_r2);
+				REMOVE_BLIP(Blip_c1);
+				REMOVE_BLIP(Blip_c2);
+				REMOVE_BLIP(Blip_c3);
 				DELETE_CHECKPOINT(checkpoint);
 
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
 
-				// выгружаем из памяти транспорт
+				// выгружаем из памяти
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -1646,12 +1618,12 @@ void bikers(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -1666,18 +1638,18 @@ void bikers(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 1000);// +5000$
 						
 						WAIT( 0 );
@@ -1686,10 +1658,10 @@ void bikers(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +1000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +1000 );
 					REGISTER_MISSION_PASSED("BIKE_1");
 					G_BIKE = 2;
-					sutosave = 1;
+					autosave = 1;
 				}
 
 				G_ONMISSION = 0;
@@ -1707,17 +1679,17 @@ void bikers(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(bike_ico, "LG_03");
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -164.663, 1185.16, 4.96332, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -164.663, 1185.16, 4.96332, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(bike_ico);
 				blip_on = 0;
 				
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -1727,17 +1699,17 @@ void bikers(void)
 					}
 				}
 
-				SET_CHAR_COORDINATES(GetPlayerPed(), -164.834, 1186.85, 5.19596);// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -164.834, 1186.85, 5.19596);
 				SET_CHAR_HEADING(GetPlayerPed(), 0.0);
 
 				uint hour, minute, weather;
 				GET_TIME_OF_DAY(&hour, &minute);
 				GET_CURRENT_WEATHER(&weather);
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
-				FORWARD_TO_TIME_OF_DAY(19, 30);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(19, 30);
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "BIKE_3", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "BIKE_3", 6 );
 				START_CUTSCENE_NOW("bike_3");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -1755,10 +1727,10 @@ void bikers(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				FORCE_WEATHER_NOW( weather );//устанавливаем погода
+				FORCE_WEATHER_NOW( weather );
 				RELEASE_WEATHER();
-				FORWARD_TO_TIME_OF_DAY(hour, minute);//устанавливаем время
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				FORWARD_TO_TIME_OF_DAY(hour, minute);
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				Texture fon, timer;
 				uint random;
@@ -1778,7 +1750,7 @@ void bikers(void)
 				timer = GET_TEXTURE( textur, "timer_hud" );
 
 				PRINT_STRING_IN_STRING("string", "BM2_2", 5000, 1);//~g~You must fill the Chaos Meter in the time given to show us how much of a badass you are!
-				CREATE_PICKUP_ROTATE(w_uzi, 3, 60, -162.254, 1180.55, 6.80878, -90.0, 0.0, 0.0, &sweap_1);// даём винтовку
+				CREATE_PICKUP_ROTATE(w_uzi, 3, 60, -162.254, 1180.55, 6.80878, -90.0, 0.0, 0.0, &sweap_1);
 
 				SETTIMERA( 0 );
 				SETTIMERB( 0 );
@@ -1786,7 +1758,7 @@ void bikers(void)
 				{
 					WAIT(0);
 					//============================ HUD ============================
-					// таймер тут
+					// таймер
 
 					if (TIMERA() > 999)
 					{
@@ -1874,9 +1846,9 @@ void bikers(void)
 						sound = 1;
 					}
 
-					// расчёт полоски Хаоса тут
+					// расчёт полоски Хаоса
 					GENERATE_RANDOM_INT_IN_RANGE( 1, 20, &random);
-					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
+					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 					if (!IS_WANTED_LEVEL_GREATER(GetPlayerIndex(), 0))
 					{
 						if (IS_WANTED_LEVEL_GREATER(GetPlayerIndex(), 1))
@@ -1963,13 +1935,13 @@ void bikers(void)
 					}
 					else if ((HAS_DEATHARREST_EXECUTED()))
 					{
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 					else if ((time_m == 0) && (time_s == 0))
 					{
 						PRINT_STRING_IN_STRING("string", "BM2_4", 5000, 1);//~r~You failed to fill the Chaos Meter in time!
-						skip = 1;// переменная пропуска
+						skip = 1;
 						break;
 					}
 				}
@@ -1993,12 +1965,12 @@ void bikers(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -2013,18 +1985,18 @@ void bikers(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 2000);// +5000$
 						
 						WAIT( 0 );
@@ -2033,10 +2005,10 @@ void bikers(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +2000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +2000 );
 					REGISTER_MISSION_PASSED("BIKE_2");
 					G_BIKE = 3;
-					sutosave = 1;
+					autosave = 1;
 				}
 
 				G_ONMISSION = 0;
@@ -2053,13 +2025,13 @@ void bikers(void)
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(bike_ico, "LG_03");
 				blip_on = 1;
 			}
-			DRAW_CHECKPOINT( -164.663, 1185.16, 4.96332, 1.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &PlayR);//проверка "игрок на координатах"
+			DRAW_CHECKPOINT( -164.663, 1185.16, 4.96332, 1.5, 160, 116, 209);
+			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &PlayR);
 			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
-				REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(bike_ico);
 
 				Car car1, car2, car3, car4;
 				Ped ped1, ped2, ped3, ped4, ped5, ped6, ped7, ped8, ped9, ped10, ped11, ped12, ped13, ped14, ped15, ped16, ped17, ped18, ped19, ped20;
@@ -2085,8 +2057,8 @@ void bikers(void)
 				Ped12_c = 0;
 				siren = 0;
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 1000 );
 				while(true)
 				{
 					WAIT(0);
@@ -2096,17 +2068,17 @@ void bikers(void)
 					}
 				}
 
-				SET_CHAR_COORDINATES(GetPlayerPed(), -164.834, 1186.85, 5.19596);// перемещаем игрока
+				SET_CHAR_COORDINATES(GetPlayerPed(), -164.834, 1186.85, 5.19596);
 				SET_CHAR_HEADING(GetPlayerPed(), 0.0);
 				
 				uint hour, minute, weather;
 				GET_TIME_OF_DAY(&hour, &minute);
 				GET_CURRENT_WEATHER(&weather);
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
-				FORWARD_TO_TIME_OF_DAY(19, 30);//устанавливаем время
+				FORWARD_TO_TIME_OF_DAY(19, 30);
 
 				//------------ катсцена ----------------
-				LOAD_ADDITIONAL_TEXT( "BIKE_2", 6 ); // загружаем субтитры из *.GTX
+				LOAD_ADDITIONAL_TEXT( "BIKE_2", 6 );
 				START_CUTSCENE_NOW("bike_2");
 				while (!HAS_CUTSCENE_LOADED())
 				{
@@ -2124,18 +2096,18 @@ void bikers(void)
 					DO_SCREEN_FADE_IN(0);
 				}
 
-				FORCE_WEATHER_NOW( weather );//устанавливаем погода
+				FORCE_WEATHER_NOW( weather );
 				RELEASE_WEATHER();
-				FORWARD_TO_TIME_OF_DAY(hour, minute);//устанавливаем время
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				FORWARD_TO_TIME_OF_DAY(hour, minute);
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 				PRINT_STRING_IN_STRING("string", "BM3_1", 3500, 1);//~g~A local gang has stolen Mitch Baker's Angel. Get it back!
 				SetTime(3500);
 				PRINT_STRING_IN_STRING("string", "BM3_6", 3500, 1);//~g~They are holed up behind Ammu-Nation in the Downtown area.
 				SetTime(3500);
 
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
-				DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
+				DO_SCREEN_FADE_OUT( 500 );
 				while (true)
 				{
 					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
@@ -2145,7 +2117,7 @@ void bikers(void)
 					WAIT( 0 );
 				}
 
-				DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+				DO_SCREEN_FADE_IN( 500 );
 
 				CREATE_CAM( 14, &camera );
 				POINT_CAM_AT_COORD	( camera, -240.539, 1676.1, 11.9703 );
@@ -2164,7 +2136,7 @@ void bikers(void)
 				PRINT_STRING_IN_STRING("string", "BM3_8", 4000, 1);//~g~Use the bike to jump from these stairs to the roof on the far side of the road.
 				SetTime(4000);
 
-				DO_SCREEN_FADE_OUT( 500 );// Затемняем экран
+				DO_SCREEN_FADE_OUT( 500 );
 				while (true)
 				{
 					if ((IS_SCREEN_FADED_OUT()) || (HAS_DEATHARREST_EXECUTED())) //если экран затемнился
@@ -2174,20 +2146,20 @@ void bikers(void)
 					WAIT( 0 );
 				}
 
-				DO_SCREEN_FADE_IN( 500 );// убирается затемнение экрана
+				DO_SCREEN_FADE_IN( 500 );
 
-				//удяляем камеру тут
+				//удяляем
 				SET_CAM_BEHIND_PED( GetPlayerPed() );
 				ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 				DESTROY_CAM( camera );
 				SET_WIDESCREEN_BORDERS( 0 );
-				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
-				uint CarM1 = MODEL_ZOMBIEB; // Мопед
-				uint CarM2 = MODEL_BURRITO2; // Фургон
-				uint PedM1 = MODEL_M_Y_GIRI_LO_01;// охранник 1
-				uint PedM2 = MODEL_M_Y_GIRI_LO_02;// охранник 2
-				uint PedM3 = MODEL_M_Y_GALB_LO_01;// Байкер
+				uint CarM1 = MODEL_ZOMBIEB;
+				uint CarM2 = MODEL_BURRITO2;
+				uint PedM1 = MODEL_M_Y_GIRI_LO_01;
+				uint PedM2 = MODEL_M_Y_GIRI_LO_02;
+				uint PedM3 = MODEL_M_Y_GALB_LO_01;
 
 				uint stairs_1 = stairs_fix_1;
 				uint stairs_2 = stairs_fix_2;
@@ -2199,9 +2171,9 @@ void bikers(void)
 				SET_DECISION_MAKER_ATTRIBUTE_SIGHT_RANGE(dm, 50);
 				SET_DECISION_MAKER_ATTRIBUTE_SIGHT_RANGE(cdm, 50);
 
-				//создаём пушку и аптечку
-				CREATE_PICKUP_ROTATE(w_uzi, 3, 60, -162.254, 1180.55, 6.80878, -90.0, 0.0, 0.0, &sweap_1);// даём винтовку
-				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, -270.407,1824.91,6.61801, -90.0, 0.0, -70.0, &aid_1);//Аптека
+				
+				CREATE_PICKUP_ROTATE(w_uzi, 3, 60, -162.254, 1180.55, 6.80878, -90.0, 0.0, 0.0, &sweap_1);
+				CREATE_PICKUP_ROTATE(cj_first_aid_pickup, 2, 200, -270.407,1824.91,6.61801, -90.0, 0.0, -70.0, &aid_1);
 
 				REQUEST_MODEL(stairs_1);
 				while (!HAS_MODEL_LOADED(stairs_1)) WAIT(0);
@@ -2222,40 +2194,40 @@ void bikers(void)
 				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				REQUEST_MODEL(CarM2);
 				while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
-				REQUEST_MODEL(PedM1);//  Бос банды Акул
-				while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(PedM2);// Банда акул
-				while (!HAS_MODEL_LOADED(PedM2));////проверка "пед загрузился" если нет то начанаем с начало
-				REQUEST_MODEL(PedM3);// Банда акул
-				while (!HAS_MODEL_LOADED(PedM3));////проверка "пед загрузился" если нет то начанаем с начало
+				REQUEST_MODEL(PedM1);
+				while (!HAS_MODEL_LOADED(PedM1));
+				REQUEST_MODEL(PedM2);
+				while (!HAS_MODEL_LOADED(PedM2));
+				REQUEST_MODEL(PedM3);
+				while (!HAS_MODEL_LOADED(PedM3));
 
-				CREATE_CAR(CarM1, -267.195, 1832.37, 6.26482, &car1, 1);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CAR(CarM2, 294.641, -787.452, 5.03766, &car2, 1);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CAR(CarM2, 290.701, -787.452, 5.03766, &car3, 1);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CAR(CarM2, 286.762, -787.452, 5.03766, &car4, 1);// создаём машину,(Модель в переменной"Car2"),("&a2"переменная в корорую вписона загрузка) на нужных координатах
-				SET_CAR_HEADING(car1, 180.0);//градус поворота
-				TURN_OFF_VEHICLE_EXTRA( car1, 9, 0 );//активируем внешний вид ""
+				CREATE_CAR(CarM1, -267.195, 1832.37, 6.26482, &car1, 1);
+				CREATE_CAR(CarM2, 294.641, -787.452, 5.03766, &car2, 1);
+				CREATE_CAR(CarM2, 290.701, -787.452, 5.03766, &car3, 1);
+				CREATE_CAR(CarM2, 286.762, -787.452, 5.03766, &car4, 1);
+				SET_CAR_HEADING(car1, 180.0);
+				TURN_OFF_VEHICLE_EXTRA( car1, 9, 0 );
 
-				CREATE_CHAR (26, PedM2, -226.221, 1743.44, 18.0789, &ped1, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM3, 290.701, -778.676, 5.03766, &ped2, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -328.247, 1781.57, 19.1239, &ped3, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CHAR (26, PedM1, -271.181, 1743.67, 18.0789, &ped4, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -290.408, 1786.91, 5.75737, &ped5, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -275.841, 1820.75, 5.75737, &ped6, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM1, -292.656, 1823.66, 5.75737, &ped7, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -295.768, 1783.25, 5.75737, &ped8, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -257.248, 1823.81, 5.75737, &ped9, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM1, -257.322, 1787.07, 5.75737, &ped10, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM1, -316.977, 1781.46, 5.75737, &ped11, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM2, -293.561, 1778.59, 5.75737, &ped12, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах
-				CREATE_CHAR (26, PedM1, -269.625, 1835.11, 5.91157, &ped13, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR (26, PedM1, -270.427, 1832.56, 5.91157, &ped14, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
-				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped15);// 
-				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM2, &ped16);// 
-				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped17);// 
-				CREATE_CHAR_AS_PASSENGER(car2, 1, PedM2, 0, &ped18);// 
-				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM1, 0, &ped19);// 
-				CREATE_CHAR_AS_PASSENGER(car4, 1, PedM2, 0, &ped20);// 
+				CREATE_CHAR (26, PedM2, -226.221, 1743.44, 18.0789, &ped1, TRUE);
+				CREATE_CHAR (26, PedM3, 290.701, -778.676, 5.03766, &ped2, TRUE);
+				CREATE_CHAR (26, PedM2, -328.247, 1781.57, 19.1239, &ped3, TRUE);
+				CREATE_CHAR (26, PedM1, -271.181, 1743.67, 18.0789, &ped4, TRUE);
+				CREATE_CHAR (26, PedM2, -290.408, 1786.91, 5.75737, &ped5, TRUE);
+				CREATE_CHAR (26, PedM2, -275.841, 1820.75, 5.75737, &ped6, TRUE);
+				CREATE_CHAR (26, PedM1, -292.656, 1823.66, 5.75737, &ped7, TRUE);
+				CREATE_CHAR (26, PedM2, -295.768, 1783.25, 5.75737, &ped8, TRUE);
+				CREATE_CHAR (26, PedM2, -257.248, 1823.81, 5.75737, &ped9, TRUE);
+				CREATE_CHAR (26, PedM1, -257.322, 1787.07, 5.75737, &ped10, TRUE);
+				CREATE_CHAR (26, PedM1, -316.977, 1781.46, 5.75737, &ped11, TRUE);
+				CREATE_CHAR (26, PedM2, -293.561, 1778.59, 5.75737, &ped12, TRUE);
+				CREATE_CHAR (26, PedM1, -269.625, 1835.11, 5.91157, &ped13, TRUE);
+				CREATE_CHAR (26, PedM1, -270.427, 1832.56, 5.91157, &ped14, TRUE);
+				CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped15);
+				CREATE_CHAR_INSIDE_CAR(car3, 1, PedM2, &ped16);
+				CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped17);
+				CREATE_CHAR_AS_PASSENGER(car2, 1, PedM2, 0, &ped18);
+				CREATE_CHAR_AS_PASSENGER(car3, 1, PedM1, 0, &ped19);
+				CREATE_CHAR_AS_PASSENGER(car4, 1, PedM2, 0, &ped20);
 				
 				SET_CHAR_HEADING(ped2, 130.0);
 				SET_CHAR_HEADING(ped3, -70.0);
@@ -2416,8 +2388,8 @@ void bikers(void)
 					// патрули
 					if (Ped1_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -225.389, 1774.36, 18.3355, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -225.389, 1774.36, 18.3355, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped1_c = 1;
@@ -2426,8 +2398,8 @@ void bikers(void)
 					}
 					else if (Ped1_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -226.22, 1743.44, 18.0789, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -226.22, 1743.44, 18.0789, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped1_c = 0;
@@ -2437,8 +2409,8 @@ void bikers(void)
 					//------------------------
 					if (Ped4_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -310.589, 1741.64, 18.3355, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -310.589, 1741.64, 18.3355, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped4_c = 1;
@@ -2447,8 +2419,8 @@ void bikers(void)
 					}
 					else if (Ped4_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -271.18, 1743.67, 18.0789, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -271.18, 1743.67, 18.0789, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped4_c = 0;
@@ -2458,8 +2430,8 @@ void bikers(void)
 					//------------------------
 					if (Ped5_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped5,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -259.054, 1786.98, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped5,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -259.054, 1786.98, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped5_c = 1;
@@ -2468,8 +2440,8 @@ void bikers(void)
 					}
 					else if (Ped5_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped5,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -290.408, 1786.9, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped5,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -290.408, 1786.9, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped5_c = 0;
@@ -2479,8 +2451,8 @@ void bikers(void)
 					//------------------------
 					if (Ped6_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -275.416, 1793.9, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -275.416, 1793.9, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped6_c = 1;
@@ -2489,8 +2461,8 @@ void bikers(void)
 					}
 					else if (Ped6_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -275.84, 1820.75, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -275.84, 1820.75, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped6_c = 0;
@@ -2500,8 +2472,8 @@ void bikers(void)
 					//------------------------
 					if (Ped7_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped7,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -293.294, 1787.15, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped7,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -293.294, 1787.15, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped7_c = 1;
@@ -2510,8 +2482,8 @@ void bikers(void)
 					}
 					else if (Ped7_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped7,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -292.656, 1823.66, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped7,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -292.656, 1823.66, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped7_c = 0;
@@ -2521,8 +2493,8 @@ void bikers(void)
 					//------------------------
 					if (Ped8_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped8,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -295.029, 1821.56, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped8,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -295.029, 1821.56, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped8_c = 1;
@@ -2531,8 +2503,8 @@ void bikers(void)
 					}
 					else if (Ped8_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped8,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -295.768, 1783.25, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped8,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -295.768, 1783.25, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped8_c = 0;
@@ -2542,8 +2514,8 @@ void bikers(void)
 					//------------------------
 					if (Ped9_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped9,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -289.929, 1820.4, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped9,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -289.929, 1820.4, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped9_c = 1;
@@ -2552,8 +2524,8 @@ void bikers(void)
 					}
 					else if (Ped9_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped9,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -257.248, 1823.81, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped9,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -257.248, 1823.81, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped9_c = 0;
@@ -2563,8 +2535,8 @@ void bikers(void)
 					//------------------------
 					if (Ped10_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped10,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -257.182, 1822.16, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped10,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -257.182, 1822.16, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped10_c = 1;
@@ -2573,8 +2545,8 @@ void bikers(void)
 					}
 					else if (Ped10_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped10,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -257.322, 1787.07, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped10,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -257.322, 1787.07, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped10_c = 0;
@@ -2584,8 +2556,8 @@ void bikers(void)
 					//------------------------
 					if (Ped11_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped11,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -317.976, 1820.08, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped11,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -317.976, 1820.08, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped11_c = 1;
@@ -2594,8 +2566,8 @@ void bikers(void)
 					}
 					else if (Ped11_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped11,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -316.977, 1781.46, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped11,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -316.977, 1781.46, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped11_c = 0;
@@ -2605,8 +2577,8 @@ void bikers(void)
 					//------------------------
 					if (Ped12_c == 0)
 					{
-						GET_CHAR_COORDINATES(ped12,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -322.805, 1778.74, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped12,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -322.805, 1778.74, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped12_c = 1;
@@ -2615,8 +2587,8 @@ void bikers(void)
 					}
 					else if (Ped12_c == 1)
 					{
-						GET_CHAR_COORDINATES(ped12,  &PedX, &PedY, &PedZ);//вписываем координаты игрока в переменную
-						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -293.56, 1778.59, 5.75737, &PedR);//проверка "игрок на координатах"
+						GET_CHAR_COORDINATES(ped12,  &PedX, &PedY, &PedZ);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -293.56, 1778.59, 5.75737, &PedR);
 						if (PedR < 4.0)
 						{
 							Ped12_c = 0;
@@ -2642,7 +2614,7 @@ void bikers(void)
 							SET_SENSE_RANGE(ped1, 55.01);
 							SET_SENSE_RANGE(ped4, 55.01);
 
-							// аудио тут
+							// аудио
 							while (!(REQUEST_AMBIENT_AUDIO_BANK( "SCRIPT_MISSION/RB4_MUSEUM_PIECE" )))
 							{
 								 WAIT(0);
@@ -2660,7 +2632,7 @@ void bikers(void)
 						}
 					}
 					
-					// Рабочие атакуют игрока тут
+					// Рабочие атакуют
 					if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), -260.027, 1823.191, 5.445, -275.104, 1838.246, 10.445, 0 )) && (hate == 0))
 					{
 						SET_SENSE_RANGE(ped13, 50.0);
@@ -2683,7 +2655,7 @@ void bikers(void)
 					{
 						DELETE_CHAR(&ped7);//удаляем модель
 						//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped7);
-						CREATE_CHAR (26, PedM1, -300.136, 1796.01, 5.75737, &ped7, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
+						CREATE_CHAR (26, PedM1, -300.136, 1796.01, 5.75737, &ped7, TRUE);
 						SET_CHAR_HEADING(ped7, -95.0);
 						UpdateWeaponOfPed(ped7, WEAPON_MICRO_UZI);
 						SET_CURRENT_CHAR_WEAPON(ped7, WEAPON_MICRO_UZI, TRUE);
@@ -2699,7 +2671,7 @@ void bikers(void)
 					{
 						DELETE_CHAR(&ped10);//удаляем модель
 						//MARK_CHAR_AS_NO_LONGER_NEEDED(&ped10);
-						CREATE_CHAR (26, PedM1, -258.113, 1831.5, 5.75737, &ped10, TRUE);// создаём,(Модель в переменной"Ped1"),("&p1"переменная в корорую вписона загрузка) на нужных координатах//ok
+						CREATE_CHAR (26, PedM1, -258.113, 1831.5, 5.75737, &ped10, TRUE);
 						SET_CHAR_HEADING(ped10, 180.0);
 						UpdateWeaponOfPed(ped10, WEAPON_MICRO_UZI);
 						SET_CURRENT_CHAR_WEAPON(ped10, WEAPON_MICRO_UZI, TRUE);
@@ -2715,9 +2687,9 @@ void bikers(void)
 					//чекпойнт сброса лодки
 					if ((!IS_CAR_IN_AREA_3D(car1, -248.25, 1749.447, 3.467, -314.344, 1837.654, 23.467, 0)) && (!IS_CAR_IN_AREA_3D(car1, -309.474, 1745.853, 3.467, -334.59, 1821.711, 23.467, 0)))
 					{
-						SET_CHAR_COORDINATES(ped15, -309.266, 1841.41, 6.26482);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped16, -259.518, 1856.37, 6.26482);// возвращаем игрока на исходную позицию рядом с чекпойнтом
-						SET_CHAR_COORDINATES(ped17, -362.808, 1909.42, 6.26482);// возвращаем игрока на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped15, -309.266, 1841.41, 6.26482);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped16, -259.518, 1856.37, 6.26482);// возвращаем на исходную позицию рядом с чекпойнтом
+						SET_CHAR_COORDINATES(ped17, -362.808, 1909.42, 6.26482);// возвращаем на исходную позицию рядом с чекпойнтом
 						SET_CHAR_HEADING(ped15, 95.0);
 						SET_CHAR_HEADING(ped16, 95.0);
 						SET_CHAR_HEADING(ped17, -90.0);
@@ -2728,7 +2700,7 @@ void bikers(void)
 					{
 						if (PointN == 0)
 						{
-							REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(bike_ico);
 							ADD_BLIP_FOR_COORD(-170.075, 1187.86, 4.90098, &bike_ico);
 							CHANGE_BLIP_SPRITE(bike_ico, BLIP_OBJECTIVE);
 							CHANGE_BLIP_COLOUR(bike_ico, 5);   //цвет иконка на радаре (0=белая)
@@ -2744,7 +2716,7 @@ void bikers(void)
 					{
 						if (PointN == 1)
 						{
-							REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+							REMOVE_BLIP(bike_ico);
 							ADD_BLIP_FOR_CAR(car1, &bike_ico);
 							CHANGE_BLIP_SPRITE(bike_ico, BLIP_DESTINATION);
 							CHANGE_BLIP_COLOUR(bike_ico, 19);   //цвет иконка на радаре (0=белая)
@@ -2772,7 +2744,7 @@ void bikers(void)
 
 				if (skip == 0)
 				{
-					//агрим новых врагов
+					//агрим врагов
 					SET_SENSE_RANGE(ped15, 25.0);
 					SET_SENSE_RANGE(ped16, 25.0);
 					SET_SENSE_RANGE(ped17, 25.0);
@@ -2794,7 +2766,7 @@ void bikers(void)
 						{
 							if (PointN == 1)
 							{
-								REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(bike_ico);
 								ADD_BLIP_FOR_COORD(-170.075, 1187.86, 4.90098, &bike_ico);
 								CHANGE_BLIP_SPRITE(bike_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(bike_ico, 5);   //цвет иконка на радаре (0=белая)
@@ -2804,12 +2776,12 @@ void bikers(void)
 								PRINT_STRING_IN_STRING("string", "BM3_3", 5000, 1);//~g~Get the bike back to the bar!
 								PointN = 0;
 							}
-							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-							DRAW_CHECKPOINT( -170.075, 1187.86, 4.90098, 4.5, 160, 116, 209);//создание чекпойнт на координатах и его цвет
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -170.075, 1187.86, 4.90098, &PlayR);//проверка "игрок на координатах"
+							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+							DRAW_CHECKPOINT( -170.075, 1187.86, 4.90098, 4.5, 160, 116, 209);
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -170.075, 1187.86, 4.90098, &PlayR);
 							if (PlayR < 5.5)
 							{
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 								CREATE_CAM( 14, &camera );
 								POINT_CAM_AT_COORD	( camera, -169.511, 1187.54, 5.30201 );
@@ -2820,14 +2792,14 @@ void bikers(void)
 								SET_CAM_FOV( camera, 45.0 );
 								SET_WIDESCREEN_BORDERS( 1 );
 								SetTime(500);
-								TASK_LEAVE_CAR(GetPlayerPed(), car1);// томми слазит с байка
+								TASK_LEAVE_CAR(GetPlayerPed(), car1);// слазит с байка
 								
 								SetTime(1500);
-								SET_CHAR_COORDINATES(ped2, -162.992, 1182.32, 5.87116);// перемещаем игрока
+								SET_CHAR_COORDINATES(ped2, -162.992, 1182.32, 5.87116);
 								SET_CHAR_HEADING(ped2, 60.0);
 								SETTIMERA(0);
 
-								TASK_ENTER_CAR_AS_DRIVER(ped2, car1, 10000);// байкер содится на байк
+								TASK_ENTER_CAR_AS_DRIVER(ped2, car1, 10000);
 								while (true)
 								{
 									WAIT( 0 );
@@ -2839,12 +2811,12 @@ void bikers(void)
 								TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped2, car1, -228.428, 1141.56, 4.90098, 4, 50.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движения,какие-то флаги)
 								SetTime(3000);
 
-								//удяляем камеру тут
+								//удяляем
 								SET_CAM_BEHIND_PED( GetPlayerPed() );
 								ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 								DESTROY_CAM( camera );
 								SET_WIDESCREEN_BORDERS( 0 );
-								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );//размораживаем игрока
+								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 								skip = 2;
 								break;
 							}
@@ -2853,7 +2825,7 @@ void bikers(void)
 						{
 							if (PointN == 0)
 							{
-								REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+								REMOVE_BLIP(bike_ico);
 								ADD_BLIP_FOR_CAR(car1, &bike_ico);
 								CHANGE_BLIP_SPRITE(bike_ico, BLIP_DESTINATION);
 								CHANGE_BLIP_COLOUR(bike_ico, 19);   //цвет иконка на радаре (0=белая)
@@ -2891,11 +2863,11 @@ void bikers(void)
 					RELEASE_SOUND_ID(AudID2);
 					RELEASE_SOUND_ID(AudID3);
 				}
-				REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
-				REMOVE_PICKUP(sweap_1);// выгружаем оружие
-				REMOVE_PICKUP(aid_1);// выгружаем оружие
+				REMOVE_BLIP(bike_ico);
+				REMOVE_PICKUP(sweap_1);// выгружаем
+				REMOVE_PICKUP(aid_1);// выгружаем
 				
-				// выгружаем из памяти модели
+				// выгружаем из памяти
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
@@ -2904,7 +2876,7 @@ void bikers(void)
 				MARK_MODEL_AS_NO_LONGER_NEEDED(stairs_1);
 				MARK_MODEL_AS_NO_LONGER_NEEDED(stairs_2);
 
-				// выгружаем из памяти педов
+				// выгружаем из памяти
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
@@ -2926,7 +2898,7 @@ void bikers(void)
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped19);
 				MARK_CHAR_AS_NO_LONGER_NEEDED(&ped20);
 
-				// выгружаем из памяти транспорт
+				// выгружаем из памяти
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 				MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -2946,12 +2918,12 @@ void bikers(void)
 					SETTIMERA(0);
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.6);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 						WAIT( 0 );
 						if ( TIMERA() > 3000 )
@@ -2966,18 +2938,18 @@ void bikers(void)
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
 					{
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
-						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
+						DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-						SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-						SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-						SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-						SET_TEXT_CENTRE(1); // задаём центр текста
+						SET_TEXT_COLOUR(255, 159, 255, 255);
+						SET_TEXT_SCALE(0.5, 0.7);
+						SET_TEXT_EDGE(1, 0, 0, 0, 255);
+						SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+						SET_TEXT_CENTRE(1);
 						DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 4000);// +5000$
 						
 						WAIT( 0 );
@@ -2986,10 +2958,10 @@ void bikers(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +4000 );//даём игроку денег
+					ADD_SCORE( GetPlayerIndex(), +4000 );
 					REGISTER_MISSION_PASSED("BIKE_3");
 					G_BIKE = 4;
-					sutosave = 1;
+					autosave = 1;
 				}
 				G_ONMISSION = 0;
 			}
@@ -3002,7 +2974,7 @@ void bikers(void)
 		{
 			if (blip_on == 1)
 			{
-				REMOVE_BLIP(bike_ico);//Удаляем иконку на радаре
+				REMOVE_BLIP(bike_ico);
 				blip_on = 0;
 			}
 		}

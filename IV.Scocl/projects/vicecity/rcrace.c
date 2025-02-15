@@ -34,18 +34,6 @@ void setup_draw_value(void) {
 	SET_TEXT_DROPSHADOW(1, 26, 90, 128, 255);
 	return;
 }
-void SetTime(uint time)
-{
-	SETTIMERA( 0 );
-	while(true)
-	{
-		WAIT(0);
-		if ((TIMERA() > time) || (HAS_DEATHARREST_EXECUTED()))
-		{
-			break;
-		}
-	}
-}
 void rc_bandit(void)
 {
 	skip = 0;
@@ -82,13 +70,13 @@ void rc_bandit(void)
 	fon = GET_TEXTURE( textur, "fon_hud" );
 	timer = GET_TEXTURE( textur, "timer_hud" );
 
-	uint CarM1 = MODEL_DILETTANTE;// байк
-	uint PedM1 = MODEL_M_Y_GALB_LO_01;// байкер 1
+	uint CarM1 = MODEL_DILETTANTE;
+	uint PedM1 = MODEL_M_Y_GALB_LO_01;
 
 	REQUEST_MODEL(CarM1);
-	while (!HAS_MODEL_LOADED(CarM1)) WAIT(100);
-	REQUEST_MODEL(PedM1);// Мерседес
-	while (!HAS_MODEL_LOADED(PedM1));////проверка "пед загрузился" если нет то начанаем с начало
+	while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
+	REQUEST_MODEL(PedM1);
+	while (!HAS_MODEL_LOADED(PedM1));
 
 	REQUEST_CAR_RECORDING( 3069 ); // полёт Основной
 	while (!HAS_CAR_RECORDING_BEEN_LOADED( 3069 )) WAIT(0);
@@ -111,18 +99,18 @@ void rc_bandit(void)
 	CHANGE_CAR_COLOUR( car3, 83, 112 );//цвет
 	CHANGE_CAR_COLOUR( car4, 112, 89 );//цвет
 
-	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);//создаём за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);//создаём за рулём автомобиля
-	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);//создаём за рулём автомобиля
-	SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
-	SET_CHAR_PROOFS(ped2, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
-	SET_CHAR_PROOFS(ped3, TRUE, TRUE, TRUE, TRUE, TRUE);//делает бесмертным
+	CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
+	CREATE_CHAR_INSIDE_CAR(car2, 1, PedM1, &ped2);
+	CREATE_CHAR_INSIDE_CAR(car3, 1, PedM1, &ped3);
+	SET_CHAR_PROOFS(ped1, TRUE, TRUE, TRUE, TRUE, TRUE);
+	SET_CHAR_PROOFS(ped2, TRUE, TRUE, TRUE, TRUE, TRUE);
+	SET_CHAR_PROOFS(ped3, TRUE, TRUE, TRUE, TRUE, TRUE);
 
-	WAIT(100);
-	SET_CHAR_VISIBLE(ped1, 0); //прозрачный игрок
-	SET_CHAR_VISIBLE(ped2, 0); //прозрачный игрок
-	SET_CHAR_VISIBLE(ped3, 0); //прозрачный игрок
-	TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), car4, TRUE);//садим игрока в верталёт
+	WAIT(0);
+	SET_CHAR_VISIBLE(ped1, 0);
+	SET_CHAR_VISIBLE(ped2, 0);
+	SET_CHAR_VISIBLE(ped3, 0);
+	TASK_ENTER_CAR_AS_DRIVER(GetPlayerPed(), car4, TRUE);
 	START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 3069, 0.0, 0.0, -0.53);
 	START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car2, 3070, 0.0, 0.0, -0.53);
 	START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car3, 3071, 0.0, 0.0, -0.53);
@@ -130,7 +118,7 @@ void rc_bandit(void)
 	PAUSE_PLAYBACK_RECORDED_CAR(car2);
 	PAUSE_PLAYBACK_RECORDED_CAR(car3);
 
-	DO_SCREEN_FADE_OUT( 250 );// Затемняем экран
+	DO_SCREEN_FADE_OUT( 250 );
 	while(true)
 	{
 		WAIT(0);
@@ -141,7 +129,7 @@ void rc_bandit(void)
 	}
 	POINT_CAM_AT_COORD	( camera, 1172.28, 1243.92, 6.35618 );
 	SET_CAM_POS			( camera, 1178.89, 1260.78, 7.77962 );
-	DO_SCREEN_FADE_IN( 250 );// убирается затемнение экрана
+	DO_SCREEN_FADE_IN( 250 );
 	PRINT_STRING_IN_STRING("string", "RCR1_1", 5000, 1);//~g~Compete in a checkpoint race with 3 other RC Cars.
 	SetTime(5000);
 
@@ -149,7 +137,7 @@ void rc_bandit(void)
 	SET_CAM_POS			( camera, 1396.79, 1174.541, 66.6964 );
 	PRINT_STRING_IN_STRING("string", "RCR1_2", 5000, 1);//~g~Be the first to complete two laps of the track to win!
 	SetTime(5000);
-	CLEAR_AREA( 1162.67, 1225.26, 8.77136, 5.0, 1);//очещаем зону загрузки
+	CLEAR_AREA( 1162.67, 1225.26, 8.77136, 5.0, 1);
 
 	POINT_CAM_AT_COORD	( camera, 1172.33, 1249.89, 6.24164 );
 	SET_CAM_POS			( camera, 1180.86, 1238.46, 10.4531 );
@@ -161,7 +149,7 @@ void rc_bandit(void)
 	SET_CAR_PROOFS(car5, 1, 1, 1, 1, 1);
 	FREEZE_CAR_POSITION(car5, 1);
 
-	DO_SCREEN_FADE_OUT( 250 );// Затемняем экран
+	DO_SCREEN_FADE_OUT( 250 );
 	while(true)
 	{
 		WAIT(0);
@@ -175,7 +163,7 @@ void rc_bandit(void)
 	ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 	END_CAM_COMMANDS( &camera );
 	SET_WIDESCREEN_BORDERS( 0 );
-	DO_SCREEN_FADE_IN( 250 );// убирается затемнение экрана
+	DO_SCREEN_FADE_IN( 250 );
 	SetTime(1000);
 
 	SET_FOLLOW_VEHICLE_CAM_SUBMODE(3);
@@ -231,9 +219,9 @@ void rc_bandit(void)
 		}
 		WAIT(0);
 	}
-	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем игрока
+	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем
 
-	// сама гонка тут
+	// сама гонка
 	ADD_BLIP_FOR_CHAR(ped1, &Blip_c1);
 	CHANGE_BLIP_SPRITE(Blip_c1, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
 	CHANGE_BLIP_COLOUR(Blip_c1, 12);   //цвет иконка на радаре (0=белая)
@@ -258,9 +246,9 @@ void rc_bandit(void)
 	{
 		WAIT(0);
 		SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 1);
-		if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) || (GET_ENGINE_HEALTH(car4) < 200) || (IS_CAR_IN_WATER(car4)))//если игрок покинул или унечтожел вертолёт, тогда провал миссии
+		if ((!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) || (GET_ENGINE_HEALTH(car4) < 200) || (IS_CAR_IN_WATER(car4)))//если игрок покинул или унечтожел, тогда провал миссии
 		{
-			//пояснения текстом в низу экрана здесь
+			//пояснения текстом в низу здесь
 			PRINT_STRING_IN_STRING_NOW("string", "RACEFA", 5000, 1);//r~You failed to win the race!
 			EXPLODE_CAR(car4, 1, 1);
 			skip = 1;
@@ -269,7 +257,7 @@ void rc_bandit(void)
 		}
 		else if (!IS_CHAR_IN_AREA_3D( GetPlayerPed(), 1487.23, 1031.237, -6.613, 937.23, 1581.237, 50.0, 0 ))
 		{
-			//пояснения текстом в низу экрана здесь
+			//пояснения текстом в низу здесь
 			PRINT_STRING_IN_STRING_NOW("string", "RCR1_7", 5000, 1);//~r~Your RC Car went out of range!
 			EXPLODE_CAR(car4, 1, 1);
 			skip = 1;
@@ -284,7 +272,7 @@ void rc_bandit(void)
 		}
 		else if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), 1412.23, 1106.237, -5.613, 1012.23, 1506.237, 45.0, 0 )) && (zone == 0))
 		{
-			CLEAR_HELP(); // удаляем текст подсказки
+			CLEAR_HELP();
 			zone = 1;
 		}
 
@@ -336,10 +324,10 @@ void rc_bandit(void)
 			pley_rrr = 3;
 		}
 
-		// гонка тут
+		// гонка
 		DRAW_SPHERE(Blip_x, Blip_y, (Blip_z-4.5), 7.0);
-		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);//проверка "игрок на координатах"
+		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);
 		if ( PlayR < 8.5 )
 		{
 			play_cord += 1;
@@ -512,8 +500,8 @@ void rc_bandit(void)
 			}
 			if (play_cord < 49)
 			{
-				REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
-				REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
+				REMOVE_BLIP(Blip_r);
+				REMOVE_BLIP(Blip_r2);
 				DELETE_CHECKPOINT(checkpoint);
 				ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 				CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
@@ -542,8 +530,8 @@ void rc_bandit(void)
 			}
 			else
 			{
-				REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
-				REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
+				REMOVE_BLIP(Blip_r);
+				REMOVE_BLIP(Blip_r2);
 				DELETE_CHECKPOINT(checkpoint);
 				ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
 				CHANGE_BLIP_SPRITE(Blip_r, BLIP_FINISH_LINE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
@@ -556,7 +544,7 @@ void rc_bandit(void)
 
 
 		GET_CHAR_COORDINATES(ped1,  &Ped1X, &Ped1Y, &Ped1Z);//вписываем координаты соперника в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, &Ped1R);//проверка "игрок на координатах"
+		GET_DISTANCE_BETWEEN_COORDS_3D( Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, &Ped1R);
 		if ( Ped1R < 10.0)
 		{
 			ped1_cord += 1;
@@ -727,7 +715,7 @@ void rc_bandit(void)
 
 
 		GET_CHAR_COORDINATES(ped2,  &Ped2X, &Ped2Y, &Ped2Z);//вписываем координаты соперника в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, &Ped2R);//проверка "игрок на координатах"
+		GET_DISTANCE_BETWEEN_COORDS_3D( Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, &Ped2R);
 		if ( Ped2R < 10.0)
 		{
 			ped2_cord += 1;
@@ -898,7 +886,7 @@ void rc_bandit(void)
 
 
 		GET_CHAR_COORDINATES(ped3,  &Ped3X, &Ped3Y, &Ped3Z);//вписываем координаты соперника в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);//проверка "игрок на координатах"
+		GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);
 		if ( Ped3R < 10.0)
 		{
 			ped3_cord += 1;
@@ -1073,13 +1061,13 @@ void rc_bandit(void)
 
 		//***************** позиция *****************
 		GET_CHAR_COORDINATES(ped1,  &Ped1X, &Ped1Y, &Ped1Z);//вписываем координаты соперника в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, &Ped1R);//проверка "игрок на координатах"
+		GET_DISTANCE_BETWEEN_COORDS_3D( Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, &Ped1R);
 		GET_CHAR_COORDINATES(ped2,  &Ped2X, &Ped2Y, &Ped2Z);//вписываем координаты соперника в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, &Ped2R);//проверка "игрок на координатах"
+		GET_DISTANCE_BETWEEN_COORDS_3D( Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, &Ped2R);
 		GET_CHAR_COORDINATES(ped3,  &Ped3X, &Ped3Y, &Ped3Z);//вписываем координаты соперника в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);//проверка "игрок на координатах"
-		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);//вписываем координаты игрока в переменную
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);//проверка "игрок на координатах"
+		GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);
+		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);
 
 		if ((play_cord == ped1_cord) && (play_cord == ped2_cord) && (play_cord == ped3_cord))
 		{
@@ -1445,7 +1433,7 @@ void rc_bandit(void)
 		SET_TEXT_CENTRE(1);
 		DISPLAY_TEXT_WITH_NUMBER(0.9348959, 0.68625, "OUTOF_NUM", 2);// 
 
-		// HUD позицыя игрока
+		// HUD позицыя
 		setup_draw_text();	
 		DISPLAY_TEXT(0.78815097, 0.73555, "NE_RACE5"); //POSITION:
 
@@ -1506,32 +1494,32 @@ void rc_bandit(void)
 		}
 	}
 
-	// чистим скрипт тут
-	WAIT(100);
-	REMOVE_BLIP(Blip_r);//Удаляем иконку на радаре
-	REMOVE_BLIP(Blip_r2);//Удаляем иконку на радаре
-	REMOVE_BLIP(Blip_c1);//Удаляем иконку на радаре
-	REMOVE_BLIP(Blip_c2);//Удаляем иконку на радаре
-	REMOVE_BLIP(Blip_c3);//Удаляем иконку на радаре
+	
+	WAIT(0);
+	REMOVE_BLIP(Blip_r);
+	REMOVE_BLIP(Blip_r2);
+	REMOVE_BLIP(Blip_c1);
+	REMOVE_BLIP(Blip_c2);
+	REMOVE_BLIP(Blip_c3);
 	DELETE_CHECKPOINT(checkpoint);
 
 	STOP_PLAYBACK_RECORDED_CAR(car1);
 	STOP_PLAYBACK_RECORDED_CAR(car2);
 	STOP_PLAYBACK_RECORDED_CAR(car3);
-	REMOVE_CAR_RECORDING( 3069 ); // выгружаем пути транспорта
-	REMOVE_CAR_RECORDING( 3070 ); // выгружаем пути транспорта
-	REMOVE_CAR_RECORDING( 3071 ); // выгружаем пути транспорта
+	REMOVE_CAR_RECORDING( 3069 );
+	REMOVE_CAR_RECORDING( 3070 );
+	REMOVE_CAR_RECORDING( 3071 );
 
-	// выгружаем из памяти модели
+	// выгружаем из памяти
 	MARK_MODEL_AS_NO_LONGER_NEEDED(PedM1);
 	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM1);
 
-	// выгружаем из памяти педов
+	// выгружаем из памяти
 	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped1);
 	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped2);
 	MARK_CHAR_AS_NO_LONGER_NEEDED(&ped3);
 
-	// выгружаем из памяти транспорт
+	// выгружаем из памяти
 	MARK_CAR_AS_NO_LONGER_NEEDED(&car1);
 	MARK_CAR_AS_NO_LONGER_NEEDED(&car2);
 	MARK_CAR_AS_NO_LONGER_NEEDED(&car3);
@@ -1544,9 +1532,9 @@ void rc_bandit(void)
 }
 void main(void)
 {
-	CLEAR_HELP(); // удаляем текст подсказки
+	CLEAR_HELP();
 	LOAD_ADDITIONAL_TEXT("RCRACE1", 6);
-	DO_SCREEN_FADE_OUT( 250 );// Затемняем экран
+	DO_SCREEN_FADE_OUT( 250 );
 	while(true)
 	{
 		WAIT(0);
@@ -1556,15 +1544,15 @@ void main(void)
 		}
 	}
 
-	SET_POLICE_IGNORE_PLAYER(GetPlayerIndex(), 1);// Игрока игнорируют копы
+	SET_POLICE_IGNORE_PLAYER(GetPlayerIndex(), 1);// игнорируют копы
 	SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 1);// Игрок бессмертный
-	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем игрока
-	GET_CAR_CHAR_IS_USING(GetPlayerPed(), &car0);//получаем автомобиль
+	SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
+	GET_CAR_CHAR_IS_USING(GetPlayerPed(), &car0);//получаем
 	SET_CAR_COORDINATES_NO_OFFSET(car0, 1162.67, 1225.26, 8.77136);
 	SET_CAR_HEADING(car0, -5.0);
 	SET_ENGINE_HEALTH(car0, 900);
 
-	//выставляем камеру
+	//выставляем
 	CREATE_CAM( 14, &camera );
 	POINT_CAM_AT_COORD	( camera, 1162.54, 1225.101, 8.77136 );
 	SET_CAM_POS			( camera, 1166.25, 1230.351, 10.9641 );
@@ -1573,23 +1561,23 @@ void main(void)
 	ACTIVATE_SCRIPTED_CAMS(1, 1);
 	SET_CAM_FOV( camera, 45.0 );
 	SET_WIDESCREEN_BORDERS( 1 );
-	DO_SCREEN_FADE_IN( 250 );// убирается затемнение экрана
+	DO_SCREEN_FADE_IN( 250 );
 
-	//воспроизводим анимацию ухода в заднию чать фургона
-	REQUEST_ANIMS( "ne_topfun" );//загружаем файл с анимацией
+	//воспроизводим анимацию ухода в заднию чатьа
+	REQUEST_ANIMS( "ne_topfun" );
 	while (!HAVE_ANIMS_LOADED( "ne_topfun" )) WAIT(0);
 	SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), WEAPON_UNARMED, TRUE);
-	TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_out", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+	TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_out", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );
 	SetTime(2000);
-	SET_CHAR_VISIBLE(GetPlayerPed(), 0); //прозрачный игрок
-	MARK_CAR_AS_NO_LONGER_NEEDED(&car0);//выгружаем из памяти фургон
+	SET_CHAR_VISIBLE(GetPlayerPed(), 0);
+	MARK_CAR_AS_NO_LONGER_NEEDED(&car0);//выгружаем из памяти
 	
 	
 	REQUEST_MODEL(CarM2);
-	while (!HAS_MODEL_LOADED(CarM2)) WAIT(100);
+	while (!HAS_MODEL_LOADED(CarM2)) WAIT(0);
 	rc_bandit();
 
-	DO_SCREEN_FADE_OUT( 1000 );// Затемняем экран
+	DO_SCREEN_FADE_OUT( 1000 );
 	while(true)
 	{
 		WAIT(0);
@@ -1599,7 +1587,7 @@ void main(void)
 		}
 	}
 
-	//выставляем камеру на фургон
+	//выставляем на
 	CREATE_CAM( 14, &camera );
 	POINT_CAM_AT_COORD	( camera, 1162.54, 1225.101, 8.77136 );
 	SET_CAM_POS			( camera, 1166.25, 1230.351, 10.9641 );
@@ -1609,18 +1597,18 @@ void main(void)
 	SET_CAM_FOV( camera, 45.0 );
 	SET_WIDESCREEN_BORDERS( 1 );
 	WARP_CHAR_INTO_CAR(GetPlayerPed(), car5);
-	DO_SCREEN_FADE_IN( 1000 );// убирается затемнение экрана
+	DO_SCREEN_FADE_IN( 1000 );
 
-	REQUEST_ANIMS( "ne_topfun" );//загружаем файл с анимацией
+	REQUEST_ANIMS( "ne_topfun" );
 	while (!HAVE_ANIMS_LOADED( "ne_topfun" )) WAIT(0);
-	TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_in", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );//Воиспроизвидение анимации на педе
+	TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "topfun_in", "ne_topfun", 1.0, 0, 0, 0, 0, -1 );
 	SetTime(500);
-	SET_CHAR_VISIBLE(GetPlayerPed(), 1); //прозрачный игрок
+	SET_CHAR_VISIBLE(GetPlayerPed(), 1);
 	SetTime(1000);
 	MARK_MODEL_AS_NO_LONGER_NEEDED(CarM2);
 	MARK_CAR_AS_NO_LONGER_NEEDED(&car5);
 
-	SET_POLICE_IGNORE_PLAYER(GetPlayerIndex(), 0);// Игрока игнорируют копы
+	SET_POLICE_IGNORE_PLAYER(GetPlayerIndex(), 0);// игнорируют копы
 	SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// Игрок бессмертный
 	SetTime(1000);
 
@@ -1628,19 +1616,19 @@ void main(void)
 	ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 	END_CAM_COMMANDS( &camera );
 	SET_WIDESCREEN_BORDERS( 0 );
-	CLEAR_AREA( 1226.34, 1306.24, 1.87054, 160.0, 1);//очещаем зону загрузки
+	CLEAR_AREA( 1226.34, 1306.24, 1.87054, 160.0, 1);
 	
 	if (skip == 1)
 	{
 		SETTIMERA(0);
 		while (true)
 		{
-			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-			SET_TEXT_SCALE(0.5, 0.6); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-			SET_TEXT_CENTRE(1); // задаём центр текста
-			DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");// пишем "Миссия провалена"
+			SET_TEXT_COLOUR(255, 159, 255, 255);
+			SET_TEXT_SCALE(0.5, 0.6);
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
+			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+			SET_TEXT_CENTRE(1);
+			DISPLAY_TEXT(0.5, 0.45, "MISSION_FAILED");
 
 			WAIT( 0 );
 			if ( TIMERA() > 3000 )
@@ -1655,18 +1643,18 @@ void main(void)
 		TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 		while (true)
 		{
-			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-			SET_TEXT_CENTRE(1); // задаём центр текста
-			DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");// пишем "Миссия завершина"
+			SET_TEXT_COLOUR(255, 159, 255, 255);
+			SET_TEXT_SCALE(0.5, 0.7);
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
+			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+			SET_TEXT_CENTRE(1);
+			DISPLAY_TEXT(0.5, 0.45, "MISSION_PASSED");
 
-			SET_TEXT_COLOUR(255, 159, 255, 255); // задаём цвет текста
-			SET_TEXT_SCALE(0.5, 0.7); // размеры шрифта
-			SET_TEXT_EDGE(1, 0, 0, 0, 255); //
-			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200); // задаём тень текста
-			SET_TEXT_CENTRE(1); // задаём центр текста
+			SET_TEXT_COLOUR(255, 159, 255, 255);
+			SET_TEXT_SCALE(0.5, 0.7);
+			SET_TEXT_EDGE(1, 0, 0, 0, 255);
+			SET_TEXT_DROPSHADOW(1, 0, 0, 0, 200);
+			SET_TEXT_CENTRE(1);
 			DISPLAY_TEXT_WITH_NUMBER(0.5, 0.5, "CASH", 100);// +5000$
 			
 			WAIT( 0 );
@@ -1681,7 +1669,7 @@ void main(void)
 		} else {
 			PRINT_WITH_2_NUMBERS_NOW("RCH1_10", time_m, time_s, 7000, 1);
 		}
-		ADD_SCORE( GetPlayerIndex(), +100 );//даём игроку денег
+		ADD_SCORE( GetPlayerIndex(), +100 );
 	}
 	TERMINATE_THIS_SCRIPT();
 }
