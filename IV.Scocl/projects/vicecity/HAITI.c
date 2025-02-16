@@ -149,8 +149,8 @@ void voodoo(void)
 				CREATE_PICKUP_ROTATE(mission_keis2, 22, 20, -731.569, 516.03, 10.8419, 0.0, 0.0, 0.0, &keys_1);
 
 				ADD_BLIP_FOR_PICKUP(keys_1, &haiti_ico);
-				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=бела€)
+				CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(haiti_ico, 5);
 				CHANGE_BLIP_SCALE(haiti_ico, 0.6);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "MO_TARGET");//иконка на радаре "“овар"
 
@@ -249,8 +249,8 @@ void voodoo(void)
 						CREATE_PICKUP_ROTATE(mission_keis2, 22, 20, -562.938, 514.365, 4.8622, 0.0, 0.0, -95.0, &keys_1);
 
 						ADD_BLIP_FOR_PICKUP(keys_1, &haiti_ico);
-						CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-						CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=бела€)
+						CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);
+						CHANGE_BLIP_COLOUR(haiti_ico, 5);
 						CHANGE_BLIP_SCALE(haiti_ico, 0.6);
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "MO_TARGET");//иконка на радаре "“овар"
 
@@ -287,8 +287,8 @@ void voodoo(void)
 						}
 
 						// таймер
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 						if ((time_m == 0) && (time_s < 16))
 						{
 							SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -368,8 +368,8 @@ void voodoo(void)
 							CREATE_PICKUP_ROTATE(mission_keis2, 22, 20, -483.234, 882.274, 5.42256, 0.0, 0.0, 80.0, &keys_1);
 
 							ADD_BLIP_FOR_PICKUP(keys_1, &haiti_ico);
-							CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(haiti_ico, 5);   //цвет иконка на радаре (0=бела€)
+							CHANGE_BLIP_SPRITE(haiti_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(haiti_ico, 5);
 							CHANGE_BLIP_SCALE(haiti_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(haiti_ico, "MO_TARGET");//иконка на радаре "“овар"
 
@@ -424,8 +424,8 @@ void voodoo(void)
 						}
 
 						// таймер
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 						if ((time_m == 0) && (time_s < 16))
 						{
 							SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -971,7 +971,7 @@ void voodoo(void)
 						PRINT_STRING_IN_STRING("string", "HAT2_B2", 5000, 1);//Kill the Cubans...
 						SetTime(4000);
 
-						// ћен€ем ракурс
+						
 						POINT_CAM_AT_COORD	( camera, -100.478 ,299.158, 2.4526 );
 						SET_CAM_POS			( camera, -108.127, 294.953, 5.6447 );
 
@@ -1029,8 +1029,8 @@ void voodoo(void)
 					{
 						WAIT( 0 );
 						// худ
-						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						DRAW_SPRITE( hel, 0.8720625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						DRAW_SPRITE( hel, 0.8720625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
@@ -1231,8 +1231,8 @@ void voodoo(void)
 						GET_CHAR_HEALTH(ped9, &ped9_hp);
 
 						// худ
-						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						DRAW_SPRITE( hel, 0.8720625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						DRAW_SPRITE( hel, 0.8720625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);

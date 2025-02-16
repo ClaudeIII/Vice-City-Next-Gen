@@ -181,8 +181,8 @@ void telephone(void)
 				 
 				CREATE_CAR(CarM1, 462.71, -942.87, 5.27, &car1, TRUE);
 				SET_CAR_HEADING(car1, 267.0);
-				CHANGE_CAR_COLOUR( car1, 28, 127 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 127, 127 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 28, 127 );
+				SET_EXTRA_CAR_COLOURS( car1, 127, 127 );
 				//TURN_OFF_VEHICLE_EXTRA( car1, 9, 0 );//активируем внешний вид "PIZZABOY"
 
 				
@@ -194,9 +194,9 @@ void telephone(void)
 				SET_OBJECT_HEADING(PIZZA_1, 80);
 
 				ADD_BLIP_FOR_CHAR(ped1, &phone);
-				CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
+				CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);
+				CHANGE_BLIP_COLOUR(phone, 5);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");
 				CHANGE_BLIP_SCALE(phone, 0.77999990);
 				Pizza_N = 25;
 				skip = 0;
@@ -210,8 +210,8 @@ void telephone(void)
 					GET_CHAR_HEALTH(ped1, &Ped_hp);
 
 					// худ
-					DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-					DRAW_SPRITE( pizz, 0.8555625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+					DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+					DRAW_SPRITE( pizz, 0.8555625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 
 					SET_TEXT_COLOUR(95, 195, 247, 255);
 					SET_TEXT_SCALE(0.156, 0.267);
@@ -236,7 +236,7 @@ void telephone(void)
 						if (TIMERA() > time_r)
 						{
 							GET_CHAR_COORDINATES(ped1,  &PlayX, &PlayY, &PlayZ);
-							GET_CHAR_HEADING(ped1, &PlayR); //получаем угол поворота
+							GET_CHAR_HEADING(ped1, &PlayR);
 							SET_OBJECT_COORDINATES(PIZZA_1, (1*COS((0-PlayR))+0*SIN((0-PlayR)))+PlayX, (0*COS((0-PlayR))-(1*SIN((0-PlayR))))+PlayY, PlayZ);
 							SET_OBJECT_HEADING(PIZZA_1, PlayR);
 							APPLY_FORCE_TO_OBJECT(PIZZA_1, 1, 5.5, 0, 1.0, 0, 0, 0, 1, 1, 1, 1);
@@ -512,8 +512,8 @@ void telephone(void)
 
 				 
 				CREATE_CAR(CarM1, 299.905, -791.79, 5.445, &car1, TRUE);
-				CHANGE_CAR_COLOUR( car1, 132, 132 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 29, 29 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 132, 132 );
+				SET_EXTRA_CAR_COLOURS( car1, 29, 29 );
 
 				
 				CREATE_CHAR (26, PedM1, 299.976, -785.672, 5.06, &ped1, TRUE);
@@ -614,9 +614,9 @@ void telephone(void)
 							SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// Игрок смертный
 
 							ADD_BLIP_FOR_CHAR(ped1, &phone);
-							CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(phone, 19);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);
+							CHANGE_BLIP_COLOUR(phone, 19);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");
 							CHANGE_BLIP_SCALE(phone, 0.77999990);
 							Text = 0;
 							break;
@@ -653,9 +653,9 @@ void telephone(void)
 						WAIT(0);
 						// ------------------- HUD -------------------
 						GET_CAR_HEALTH(car1, &car_HP);
-						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						DRAW_SPRITE( car, 0.8765625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
-						DRAW_SPRITE( 0, 0.8421875, 0.80925926, 0.0739583, 0.014, 0.0, 27, 89, 130, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						DRAW_SPRITE( car, 0.8765625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
+						DRAW_SPRITE( 0, 0.8421875, 0.80925926, 0.0739583, 0.014, 0.0, 27, 89, 130, 255 );
 						carHUD_x = 0.8421875;
 						carHUD_w = 0.0739583;
 
@@ -672,7 +672,7 @@ void telephone(void)
 						carHUD_y1 = carHUD_w-carH3;
 						carHUD_y2 = carHUD_y1/2;
 						carHUD_y3 = carHUD_x-carHUD_y2;
-						DRAW_SPRITE( 0, carHUD_y3, 0.80925926, carH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( 0, carHUD_y3, 0.80925926, carH3, 0.014, 0.0, 97, 194, 247, 255 );
 
 						// ------------------------- реплики --------------------------------
 						if ((IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (IS_CHAR_TOUCHING_VEHICLE(GetPlayerPed(), car1))) // если игрок поцарапал соперника
@@ -1100,10 +1100,10 @@ void telephone(void)
 				WAIT(0);
 
 				// красим
-				CHANGE_CAR_COLOUR( car1, 133, 133 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car3, 0, 29 );//цвет
-				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 133, 133 );
+				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );
+				CHANGE_CAR_COLOUR( car3, 0, 29 );
+				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );
 
 				
 				CREATE_CHAR (26, PedM1, 286.386, -785.672, 5.56, &ped1, TRUE);// строитель
@@ -1157,9 +1157,9 @@ void telephone(void)
 						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "preacher_default", "amb@default", 8.0, 1, 0, 0, 0, -1 );
 
 						ADD_BLIP_FOR_CHAR(ped1, &phone);
-						CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-						CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
-						CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
+						CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
+						CHANGE_BLIP_COLOUR(phone, 5);
+						CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");
 						CHANGE_BLIP_SCALE(phone, 0.6);
 						PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 						stage = 1;
@@ -1177,9 +1177,9 @@ void telephone(void)
 
 							REMOVE_BLIP(phone);
 							ADD_BLIP_FOR_CHAR(ped2, &phone);
-							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(phone, 5);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");
 							CHANGE_BLIP_SCALE(phone, 0.6);
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							stage = 2;
@@ -1230,15 +1230,15 @@ void telephone(void)
 
 							REMOVE_BLIP(phone);
 							ADD_BLIP_FOR_CHAR(ped3, &phone);
-							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(phone, 5);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");
 							CHANGE_BLIP_SCALE(phone, 0.6);
 
 							ADD_BLIP_FOR_CHAR(ped4, &phone2);
-							CHANGE_BLIP_SPRITE(phone2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(phone2, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone2, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(phone2, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(phone2, 5);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone2, "MO_TARGET");
 							CHANGE_BLIP_SCALE(phone2, 0.6);
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							Text = 0;
@@ -1306,9 +1306,9 @@ void telephone(void)
 							REMOVE_BLIP(phone);
 							REMOVE_BLIP(phone2);
 							ADD_BLIP_FOR_CHAR(ped5, &phone);
-							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(phone, 5);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");
 							CHANGE_BLIP_SCALE(phone, 0.6);
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							Text = 0;
@@ -1350,9 +1350,9 @@ void telephone(void)
 
 							REMOVE_BLIP(phone);
 							ADD_BLIP_FOR_CHAR(ped6, &phone);
-							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(phone, 5);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");
 							CHANGE_BLIP_SCALE(phone, 0.6);
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
 							Text = 0;
@@ -1420,8 +1420,8 @@ void telephone(void)
 					time_ms = TIMERB();
 
 					// таймер
-					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-					//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+					//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 					if ((time_m == 0) && (time_s < 16))
 					{
 						SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -1744,8 +1744,8 @@ void telephone(void)
 				CLEAR_PRINTS();
 				PRINT_STRING_IN_STRING("string", "ASM4_15", 5000, 1);//~g~Get the sniper rifle to your right.
 				ADD_BLIP_FOR_PICKUP(sweap_1, &phone);
-				CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(phone, 19);   //цвет иконка на радаре (0=белая)
+				CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);
+				CHANGE_BLIP_COLOUR(phone, 19);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "винтовка"
 
 				
@@ -1808,14 +1808,14 @@ void telephone(void)
 				CREATE_CAR(CarM2, 296.422, -791.79, 5.445, &car4, TRUE);
 
 				// цвет
-				CHANGE_CAR_COLOUR( car1, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car2, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car2, 133, 133 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car3, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car4, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car4, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );
+				CHANGE_CAR_COLOUR( car2, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car2, 133, 133 );
+				CHANGE_CAR_COLOUR( car3, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );
+				CHANGE_CAR_COLOUR( car4, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car4, 133, 133 );
 
 				REQUEST_ANIMS( "amb@hang_str_f_idls" );
 				while (!HAVE_ANIMS_LOADED( "amb@hang_str_f_idls" )) WAIT(0);
@@ -1933,7 +1933,7 @@ void telephone(void)
 						if (Text == 0)
 						{
 							POINT_CAM_AT_COORD	( camera, -987.341, -341.461, 15.845 );
-							SET_CAM_POS			( camera, -1018.073, -318.076, 15.348);// расположение камеры
+							SET_CAM_POS			( camera, -1018.073, -318.076, 15.348);// расположение
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM4_19", 5000, 1);//~g~Keep your distance from the target! Use the distance bar in the upper right corner of the screen.
 							SetTime2(6000);
@@ -1955,8 +1955,8 @@ void telephone(void)
 						SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// Игрок смертный
 
 						ADD_BLIP_FOR_CHAR(ped1, &phone);
-						CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-						CHANGE_BLIP_COLOUR(phone, 19);   //цвет иконка на радаре (0=белая)
+						CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);
+						CHANGE_BLIP_COLOUR(phone, 19);
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");
 						CHANGE_BLIP_SCALE(phone, 0.77999990);
 						SETTIMERB( 0 );
@@ -1993,8 +1993,8 @@ void telephone(void)
 						SET_TEXT_DROPSHADOW(1, 26, 90, 128, 255);
 						DISPLAY_TEXT(0.78815097, 0.80277778, "ASM4_12"); //DISTANCE:
 
-						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						DRAW_SPRITE( 0, 0.9088541, 0.80925926, 0.0739583, 0.014, 0.0, 27, 89, 130, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						DRAW_SPRITE( 0, 0.9088541, 0.80925926, 0.0739583, 0.014, 0.0, 27, 89, 130, 255 );
 
 						carHUD_x = 0.9088541;
 						carHUD_w = 0.0739583;
@@ -2016,7 +2016,7 @@ void telephone(void)
 						carHUD_y1 = carHUD_w-carH3;
 						carHUD_y2 = carHUD_y1/2;
 						carHUD_y3 = carHUD_x-carHUD_y2;
-						DRAW_SPRITE( 0, carHUD_y3, 0.80925926, carH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( 0, carHUD_y3, 0.80925926, carH3, 0.014, 0.0, 97, 194, 247, 255 );
 
 						if ((HAS_DEATHARREST_EXECUTED()))
 						{
@@ -2102,8 +2102,8 @@ void telephone(void)
 							PRINT_STRING_IN_STRING("string", "ASM4_21", 5000, 1);//~g~Get the briefcase!
 
 							ADD_BLIP_FOR_PICKUP(bag, &phone);
-							CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(phone, 19);   //цвет иконка на радаре (0=белая)
+							CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);
+							CHANGE_BLIP_COLOUR(phone, 19);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Товар"
 
 							if (!IS_CHAR_DEAD(ped3))
@@ -2158,9 +2158,9 @@ void telephone(void)
 
 							ADD_BLIP_FOR_COORD(-234.027, 1728.927, 4.98, &phone);
 							CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
-							CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
+							CHANGE_BLIP_COLOUR(phone, 5);
 							CHANGE_BLIP_SCALE(phone, 0.6);
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "NE_POINT");//иконка на радаре называние в истории карты "Телефонный звонок"
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "NE_POINT");
 							
 							// ставим охраны
 							SET_CAR_COORDINATES(car1, -749.967, -403.764, 9.373);
@@ -2552,8 +2552,8 @@ void telephone(void)
 				while (!HAS_MODEL_LOADED(CarM1));
 				CREATE_CAR(CarM1, -505.284, 20.37, 5.356, &car1, TRUE);
 				SET_CAR_HEADING(car1, 5.0);
-				CHANGE_CAR_COLOUR( car1, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );
 
 				REQUEST_MODEL(CarM2);
 				while (!HAS_MODEL_LOADED(CarM2));
@@ -2567,13 +2567,13 @@ void telephone(void)
 
 				CREATE_CAR(CarM1, -937.7, -756.65, 9.53, &car4, TRUE);
 				SET_CAR_HEADING(car4, 76.0);
-				CHANGE_CAR_COLOUR( car4, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car4, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car4, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car4, 133, 133 );
 
 				CREATE_CAR(CarM1, -492.283, 0.701, 6.266, &car5, TRUE);
 				SET_CAR_HEADING(car5, 95.0);
-				CHANGE_CAR_COLOUR( car5, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car5, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car5, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car5, 133, 133 );
 
 				CREATE_CAR(CarM3, -935.69, -723.65, 13.03, &car6, TRUE);
 				SET_CAR_HEADING(car6, 302.0);
@@ -2903,8 +2903,8 @@ void telephone(void)
 				SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped30, FALSE);
 
 				ADD_BLIP_FOR_PICKUP(bag, &phone);
-				CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(phone, 19);   //цвет иконка на радаре (0=белая)
+				CHANGE_BLIP_SPRITE(phone, BLIP_DESTINATION);
+				CHANGE_BLIP_COLOUR(phone, 19);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "MO_TARGET");//иконка на радаре "Товар"
 
 				
@@ -2938,9 +2938,9 @@ void telephone(void)
 
 						ADD_BLIP_FOR_COORD(-932.99, -726.01, 10.01, &phone);
 						CHANGE_BLIP_SPRITE(phone, BLIP_OBJECTIVE);
-						CHANGE_BLIP_COLOUR(phone, 5);   //цвет иконка на радаре (0=белая)
+						CHANGE_BLIP_COLOUR(phone, 5);
 						CHANGE_BLIP_SCALE(phone, 0.6);
-						CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "NE_POINT");//иконка на радаре называние в истории карты "Телефонный звонок"
+						CHANGE_BLIP_NAME_FROM_TEXT_FILE(phone, "NE_POINT");
 
 						
 						DISPLAY_RADAR(0);

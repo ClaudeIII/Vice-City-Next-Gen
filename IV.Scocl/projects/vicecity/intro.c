@@ -85,8 +85,8 @@ void INTRO(void)
     //CREATE_CAR(CarM1, 555.13, -304.68, 5.41, &car1, TRUE);
 	//SET_CAR_HEADING(car1, 15.31);
 	CREATE_CAR(CarM1, -1154.64,-13.088,9.37876, &car1, TRUE);
-	CHANGE_CAR_COLOUR( car1, 112, 112 );//цвет
-	SET_EXTRA_CAR_COLOURS( car1, 112, 112 );//цвет отрожений
+	CHANGE_CAR_COLOUR( car1, 112, 112 );
+	SET_EXTRA_CAR_COLOURS( car1, 112, 112 );
 
 	SET_CHAR_COORDINATES(GetPlayerPed(), -253.936, -1031.04, 6.83345);
 	CREATE_CAR(CarM2, -1095.01,-40.467,8.37876, &car2, TRUE);
@@ -110,8 +110,8 @@ void INTRO(void)
 	CREATE_CHAR_INSIDE_CAR(car4, 1, PedM1, &ped4);
 	CREATE_CHAR_INSIDE_CAR(car5, 1, PedM1, &ped5);
 	CREATE_CHAR_INSIDE_CAR(car6, 1, PedM1, &ped6);
-	CHANGE_CAR_COLOUR( car1, 112, 66 );//цвет
-	SET_EXTRA_CAR_COLOURS( car1, 0, 0 );//цвет
+	CHANGE_CAR_COLOUR( car1, 112, 66 );
+	SET_EXTRA_CAR_COLOURS( car1, 0, 0 );
 
 //------------ загрузка путей ----------------
 	REQUEST_CAR_RECORDING( 2992 );
@@ -162,7 +162,7 @@ void INTRO(void)
 					SETTIMERC( 0 );
 				}
 			}
-			DRAW_SPRITE( intro_1, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );// рисуем фоновую текстуру.
+			DRAW_SPRITE( intro_1, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );
 		}
 	}
 	LOAD_ADDITIONAL_TEXT( "INT_M", 6 );
@@ -218,7 +218,7 @@ void INTRO(void)
 					SETTIMERC( 0 );
 				}
 			}
-			DRAW_SPRITE( intro_2, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );// рисуем фоновую текстуру.
+			DRAW_SPRITE( intro_2, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );
 		}
 	}
 	LOAD_ADDITIONAL_TEXT( "INT_D", 6 );
@@ -264,7 +264,7 @@ void INTRO(void)
 					SETTIMERC( 0 );
 				}
 			}
-			DRAW_SPRITE( intro_3, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );// рисуем фоновую текстуру.
+			DRAW_SPRITE( intro_3, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );
 		}
 	}
 	
@@ -339,7 +339,7 @@ void INTRO(void)
 					SETTIMERC( 0 );
 				}
 			}
-			DRAW_SPRITE( intro_4, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );// рисуем фоновую текстуру.
+			DRAW_SPRITE( intro_4, 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, alpha );
 		}
 	}
 	SetSpeech();
@@ -416,7 +416,7 @@ void INTRO(void)
 
 	ADD_BLIP_FOR_COORD(671.029, -747.042, 4.934, &hotel);
 	CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);
-	CHANGE_BLIP_COLOUR(hotel, 5);   //цвет иконка на радаре (0=белая)
+	CHANGE_BLIP_COLOUR(hotel, 5);
 	CHANGE_BLIP_SCALE(hotel, 0.6);
 	CHANGE_BLIP_NAME_FROM_TEXT_FILE(hotel, "NE_POINT");//иконка на радаре называние в истории карты "Цель"
 
@@ -549,7 +549,7 @@ void INTRO(void)
 
 			ADD_BLIP_FOR_COORD(642.789, -755.855, 5.974, &hotel);
 			CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);
-			CHANGE_BLIP_COLOUR(hotel, 5);   //цвет иконка на радаре (0=белая)
+			CHANGE_BLIP_COLOUR(hotel, 5);
 			CHANGE_BLIP_SCALE(hotel, 0.6);
 			CHANGE_BLIP_NAME_FROM_TEXT_FILE(hotel, "NE_POINT");//иконка на радаре называние в истории карты "Цель"
 			break;
@@ -560,7 +560,7 @@ void INTRO(void)
 			REMOVE_BLIP(hotel);
 			ADD_BLIP_FOR_COORD(642.789, -755.855, 5.974, &hotel);
 			CHANGE_BLIP_SPRITE(hotel, BLIP_OBJECTIVE);
-			CHANGE_BLIP_COLOUR(hotel, 5);   //цвет иконка на радаре (0=белая)
+			CHANGE_BLIP_COLOUR(hotel, 5);
 			CHANGE_BLIP_SCALE(hotel, 0.6);
 			CHANGE_BLIP_NAME_FROM_TEXT_FILE(hotel, "NE_POINT");//иконка на радаре называние в истории карты "Цель"
 			break;

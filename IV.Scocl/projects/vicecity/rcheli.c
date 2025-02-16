@@ -106,15 +106,15 @@ void rc_raider(void)
 	checkZ2 = 18.04353;
 	checkpoint = CREATE_CHECKPOINT( 4, checkX, checkY, checkZ, checkX2, checkY2, checkZ2, 0.20000000 );
 	ADD_BLIP_FOR_COORD(checkX, checkY, checkZ, &Blip_r);
-	CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-	CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
+	CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+	CHANGE_BLIP_COLOUR(Blip_r, 5);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");
 	CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 
 	ADD_BLIP_FOR_COORD(checkX2, checkY2, checkZ2, &Blip_r2);
-	CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-	CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
-	CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
+	CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);
+	CHANGE_BLIP_COLOUR(Blip_r2, 5);
+	CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");
 	CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 	CHANGE_BLIP_ALPHA(Blip_r2, 125);
 
@@ -164,8 +164,8 @@ void rc_raider(void)
 
 
 		//============================ HUD ============================
-		DRAW_SPRITE( fon, 0.8765625, 0.74213, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-		DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
+		DRAW_SPRITE( fon, 0.8765625, 0.74213, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+		DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
 
 		//Время
 		setup_draw_text();	
@@ -437,9 +437,9 @@ void rc_raider(void)
 				DELETE_CHECKPOINT(checkpoint);
 				checkpoint = CREATE_CHECKPOINT( 5, checkX, checkY, checkZ, checkX2, checkY2, checkZ2, 0.20000000 );
 				ADD_BLIP_FOR_COORD(checkX, checkY, checkZ, &Blip_r);
-				CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
+				CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(Blip_r, 5);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");
 				CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 			}
 			else
@@ -449,15 +449,15 @@ void rc_raider(void)
 				DELETE_CHECKPOINT(checkpoint);
 				checkpoint = CREATE_CHECKPOINT( 4, checkX, checkY, checkZ, checkX2, checkY2, checkZ2, 0.20000000 );
 				ADD_BLIP_FOR_COORD(checkX, checkY, checkZ, &Blip_r);
-				CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
+				CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(Blip_r, 5);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");
 				CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 
 				ADD_BLIP_FOR_COORD(checkX2, checkY2, checkZ2, &Blip_r2);
-				CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-				CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
+				CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);
+				CHANGE_BLIP_COLOUR(Blip_r2, 5);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");
 				CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 				CHANGE_BLIP_ALPHA(Blip_r2, 125);
 			}

@@ -98,7 +98,7 @@ void kaufman(void)
 				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 				SetTime(600);
 
-				// камера сверху
+				
 				CREATE_CAM( 14, &camera );
 				POINT_CAM_AT_COORD	( camera, -570.081, 737.787, 5.891 );
 				SET_CAM_POS			( camera, -562.707, 743.712, 10.922 );
@@ -157,8 +157,8 @@ void kaufman(void)
 					}
 
 					// таймер
-					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-					//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+					//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 					if ((time_m == 0) && (time_s < 16))
 					{
 						SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -255,7 +255,7 @@ void kaufman(void)
 									ENABLE_FRONTEND_RADIO();
 								}
 
-								// камера сверху
+								
 								CREATE_CAM( 14, &camera );
 								POINT_CAM_AT_COORD	( camera, -133.389, 84.425, 9.72 );
 								SET_CAM_POS			( camera, -151.251, 67.174, 6.0 );
@@ -272,7 +272,7 @@ void kaufman(void)
 								TASK_GO_STRAIGHT_TO_COORD(ped2, -130.615, 86.059, 9.134, 2, -2);// Пед идёт
 								SetTime(5000);
 
-								// меняем ракурс камеры
+								
 								POINT_CAM_AT_COORD	( camera, -136.855, 52.543, 4.63 );
 								SET_CAM_POS			( camera, -153.178, 63.934, 8.209 );
 
@@ -574,7 +574,7 @@ void kaufman(void)
 						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -1021.249, -294.609, 8.418, &PedR);
 						if ( PedR < 2.0)
 						{
-							// камера сверху
+							
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, -1020.61, -296.039, 9.56 );
 							SET_CAM_POS			( camera, -1039.026, -250.1, 12.843 );
@@ -586,7 +586,7 @@ void kaufman(void)
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 							SetTime(2000);
 
-							// меняем ракурс
+							
 							WARP_CHAR_FROM_CAR_TO_COORD(ped2, -1028.089, -294.76, 9.075);//телепартируем иза
 							SET_CHAR_HEADING(ped2, 125.0);
 							TASK_GO_STRAIGHT_TO_COORD(ped2, -1033.576, -300.022, 9.075, 2, -2);// Пед идёт
@@ -809,7 +809,7 @@ void kaufman(void)
 				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 				SetTime(600);
 
-				// камера сверху
+				
 				CREATE_CAM( 14, &camera );
 				POINT_CAM_AT_COORD	( camera, -570.081, 737.787, 5.891 );
 				SET_CAM_POS			( camera, -562.707, 743.712, 10.922 );
@@ -1116,7 +1116,7 @@ void kaufman(void)
 				SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 				SetTime(600);
 
-				// камера сверху
+				
 				CREATE_CAM( 14, &camera );
 				POINT_CAM_AT_COORD	( camera, -570.081, 737.787, 5.891 );
 				SET_CAM_POS			( camera, -562.707, 743.712, 10.922 );
@@ -1183,7 +1183,7 @@ void kaufman(void)
 								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
-								// камера сверху
+								
 								CREATE_CAM( 14, &camera );
 								POINT_CAM_AT_COORD	( camera, -675.899, -804.163, 7.433 );
 								SET_CAM_POS			( camera, -676.856, -742.078, 7.916 );
@@ -1194,7 +1194,7 @@ void kaufman(void)
 								SET_WIDESCREEN_BORDERS( 1 );
 								SetTime(2000);
 
-								// меняем ракурс
+								
 								POINT_CAM_AT_COORD	( camera, -650.254, -734.201, 5.541 );
 								SET_CAM_POS			( camera, -688.891, -763.655, 8.102 );
 								SetTime(500);
@@ -1234,7 +1234,7 @@ void kaufman(void)
 								START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car5, 3047, 0.0, 0.0, 0.0);
 								START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car6, 3048, 0.0, 0.0, 0.0);
 
-								// меняем ракурс
+								
 								POINT_CAM_AT_COORD	( camera, -555.041, -729.485, 7.753 );
 								SET_CAM_POS			( camera, -556.249, -700.029, 6.567 );
 								SetTime(1000);
@@ -1248,7 +1248,7 @@ void kaufman(void)
 								SET_PLAYBACK_SPEED(car5, 1.5);
 								SET_PLAYBACK_SPEED(car6, 1.5);
 
-								// меняем ракурс
+								
 								POINT_CAM_AT_COORD	( camera, -613.355, -700.484, 3.418 );
 								SET_CAM_POS			( camera, -676.901, -750.855, 8.962 );
 								SetTime(7000);
@@ -1473,8 +1473,8 @@ void kaufman(void)
 						}
 
 						// таймер
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 						if ((time_m == 0) && (time_s < 16))
 						{
 							SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -1740,7 +1740,7 @@ void kaufman(void)
 								}
 							}
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, -565.734, 714.121, 6.778 );
 							SET_CAM_POS			( camera, -560.881, 716.777, 7.953 );
 							PRINT_STRING_IN_STRING("string", "TAX_AS2", 5000, 1);//~g~Kaufman Cabs will now generate revenue up to a maximum of $5000. Make sure you collect it regularly.

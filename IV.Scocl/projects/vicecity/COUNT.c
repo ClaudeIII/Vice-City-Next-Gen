@@ -374,12 +374,12 @@ void typography(void)
 
 				ADD_BLIP_FOR_CAR(car1, &taxi_ico);
 				CHANGE_BLIP_SPRITE(taxi_ico, BLIP_DESTINATION);
-				CHANGE_BLIP_COLOUR(taxi_ico, 19);   //цвет иконка на радаре (0=белая)
+				CHANGE_BLIP_COLOUR(taxi_ico, 19);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(taxi_ico, "NE_CAR");//иконка на радаре называние в истории карты "ЛОДКА"
 
 				ADD_BLIP_FOR_COORD(924.402, 455.03, 5.42028, &count_ico);
 				CHANGE_BLIP_SPRITE(count_ico, BLIP_OBJECTIVE);
-				CHANGE_BLIP_COLOUR(count_ico, 5);   //цвет иконка на радаре (0=белая)
+				CHANGE_BLIP_COLOUR(count_ico, 5);
 				CHANGE_BLIP_SCALE(count_ico, 0.6);
 				CHANGE_BLIP_NAME_FROM_TEXT_FILE(count_ico, "NE_POINT");//иконка на радаре называние в истории карты "ЛОДКА"
 
@@ -441,7 +441,7 @@ void typography(void)
 
 						ADD_BLIP_FOR_COORD(-253.866, -711.997, 25.0507, &count_ico);
 						CHANGE_BLIP_SPRITE(count_ico, BLIP_OBJECTIVE);
-						CHANGE_BLIP_COLOUR(count_ico, 5);   //цвет иконка на радаре (0=белая)
+						CHANGE_BLIP_COLOUR(count_ico, 5);
 						CHANGE_BLIP_SCALE(count_ico, 0.6);
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(count_ico, "NE_POINT");//иконка на радаре называние в истории карты "ЛОДКА"
 						PRINT_STRING_IN_STRING("string", "CM1_1", 5000, 1);//~COL_NET_12~Go to the Chartered Libertine Lines boat at the docks.
@@ -913,7 +913,7 @@ void typography(void)
 
 							ADD_BLIP_FOR_COORD(-625.551, 246.349, 5.08937, &count_ico);
 							CHANGE_BLIP_SPRITE(count_ico, BLIP_OBJECTIVE);
-							CHANGE_BLIP_COLOUR(count_ico, 5);   //цвет иконка на радаре (0=белая)
+							CHANGE_BLIP_COLOUR(count_ico, 5);
 							CHANGE_BLIP_SCALE(count_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(count_ico, "NE_POINT");//иконка на радаре называние в истории карты
 							PRINT_STRING_IN_STRING("string", "CM1_6", 5000, 1);//~COL_NET_12~Get the information back to the Print Works!
@@ -1879,9 +1879,9 @@ void typography(void)
 								}
 							}
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, -648.068, 257.938, 7.48352 );
-							SET_CAM_POS			( camera, -647.136, 255.391, 8.43172 ); // расположение камеры
+							SET_CAM_POS			( camera, -647.136, 255.391, 8.43172 ); // расположение
 
 							PRINT_STRING_IN_STRING("string", "CNT2_10", 5000, 1);// = ~g~The print works will now generate revenue up to a maximum of $8000. Make sure you collect it regularly.
 
@@ -3128,12 +3128,12 @@ void typography(void)
 				CREATE_CAR(CarM1, 67.7153, 16.8315, 7.34593, &car3, TRUE);
 				SET_CAR_HEADING(car3, 80.0);
 
-				CHANGE_CAR_COLOUR( car1, 112, 112 );//цвет
-				CHANGE_CAR_COLOUR( car2, 112, 112 );//цвет
-				CHANGE_CAR_COLOUR( car3, 112, 112 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 112, 112 );//цвет
-				SET_EXTRA_CAR_COLOURS( car2, 112, 112 );//цвет
-				SET_EXTRA_CAR_COLOURS( car3, 112, 112 );//цвет
+				CHANGE_CAR_COLOUR( car1, 112, 112 );
+				CHANGE_CAR_COLOUR( car2, 112, 112 );
+				CHANGE_CAR_COLOUR( car3, 112, 112 );
+				SET_EXTRA_CAR_COLOURS( car1, 112, 112 );
+				SET_EXTRA_CAR_COLOURS( car2, 112, 112 );
+				SET_EXTRA_CAR_COLOURS( car3, 112, 112 );
 
 				CREATE_CHAR (26, PedM1, 290.493, -783.023, 4.63619, &ped1, TRUE);
 				CREATE_CHAR (26, PedM2, 288.569, -783.023, 4.63619, &ped2, TRUE);// Сонни
@@ -3602,7 +3602,7 @@ void typography(void)
 						SET_SENSE_RANGE(ped9, 25.05);
 						
 						ADD_BLIP_FOR_CHAR(ped1, &ped_ico);
-						CHANGE_BLIP_SPRITE(ped_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
+						CHANGE_BLIP_SPRITE(ped_ico, BLIP_DESTINATION);
 						CHANGE_BLIP_COLOUR(ped_ico, 19);
 						CHANGE_BLIP_SCALE(ped_ico, 0.77999990);
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped_ico, "MO_TARGET");
@@ -4016,7 +4016,7 @@ void typography(void)
 						TASK_COMBAT(ped8, GetPlayerPed());// агрим
 
 						ADD_BLIP_FOR_CHAR(ped2, &ped_ico);
-						CHANGE_BLIP_SPRITE(ped_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
+						CHANGE_BLIP_SPRITE(ped_ico, BLIP_DESTINATION);
 						CHANGE_BLIP_COLOUR(ped_ico, 19);
 						CHANGE_BLIP_SCALE(ped_ico, 0.77999990);
 						CHANGE_BLIP_NAME_FROM_TEXT_FILE(ped_ico, "MO_TARGET");
@@ -4136,7 +4136,7 @@ void typography(void)
 							if ((fon_black == 1) && (set_cam < 8))
 							{
 								fon_black = 0; // осветляем экран
-								// камеры
+								//
 								if (set_cam == 1)
 								{
 									set_cam = 2;

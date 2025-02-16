@@ -173,7 +173,7 @@ void boyarsky(void)
 						REMOVE_BLIP(avery_ico);
 						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-						// камера сверху
+						
 						CREATE_CAM( 14, &camera );
 						POINT_CAM_AT_COORD	( camera, 761.797, 738.767, 5.123 );
 						SET_CAM_POS			( camera, 751.643, 733.932, 17.341 );
@@ -183,7 +183,7 @@ void boyarsky(void)
 						SET_CAM_FOV( camera, 45.0 );
 						SET_WIDESCREEN_BORDERS( 1 );
 
-						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 760.891, 738.67, 6.342, 2, -2);// идёт в двери
+						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 760.891, 738.67, 6.342, 2, -2);
 						SetTime(1000);
 
 						DO_SCREEN_FADE_OUT( 1000 );
@@ -195,21 +195,21 @@ void boyarsky(void)
 								break;
 							}
 						}
-						// переодивание	
+						
 						SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 3, 0);
 						SET_CHAR_COORDINATES(GetPlayerPed(), 759.676, 737.762, 6.342);
 						SET_CHAR_HEADING(GetPlayerPed(), 125.0);
 						SetTime(200);
 						DO_SCREEN_FADE_IN( 1000 );
 
-						// подём камеры
+						
 						CREATE_CAM( 3, &camera2 );
 						CREATE_CAM( 14, &camera3 );
 						POINT_CAM_AT_COORD	( camera, 759.495, 737.587, 5.486 );
 						SET_CAM_POS			( camera, 757.903, 736.734, 6.006 );
 						POINT_CAM_AT_COORD	( camera3, 759.495, 737.587, 6.765 );
 						SET_CAM_POS			( camera3, 757.903, 736.734, 6.006 );
-						SET_CAM_INTERP_STYLE_CORE( camera2, camera, camera3, 3500, 0 ); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+						SET_CAM_INTERP_STYLE_CORE( camera2, camera, camera3, 3500, 0 );
 						SET_CAM_ACTIVE( camera2, 1 );
 						SET_CAM_PROPAGATE( camera2, 1 );
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1761,7 +1761,7 @@ void boyarsky(void)
 							time_ms = TIMERB();
 
 							// таймер
-							DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
+							DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
 							if ((time_m == 0) && (time_s < 16))
 							{
 								SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -1836,7 +1836,7 @@ void boyarsky(void)
 						}
 						// счётчик бомб 
 						DRAW_SPRITE( fon, 0.8765625, 0.74213, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
-						DRAW_SPRITE( tnt, 0.8420625, 0.74213, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( tnt, 0.8420625, 0.74213, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
 						SET_TEXT_DROPSHADOW(1, 26, 90, 128, 255);
@@ -2214,12 +2214,12 @@ void boyarsky(void)
 				CREATE_CAR(CarM2, 299.905, -791.79, 4.445, &car5, TRUE);
 
 				// красим
-				CHANGE_CAR_COLOUR( car1, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car2, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car2, 133, 133 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car3, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car1, 133, 133 );
+				CHANGE_CAR_COLOUR( car2, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car2, 133, 133 );
+				CHANGE_CAR_COLOUR( car3, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car3, 133, 133 );
 				TURN_OFF_VEHICLE_EXTRA(car1, 1, 0);
 				TURN_OFF_VEHICLE_EXTRA(car1, 2, 1);
 				TURN_OFF_VEHICLE_EXTRA(car1, 3, 1);
@@ -2258,7 +2258,7 @@ void boyarsky(void)
 						REMOVE_BLIP(avery_ico);
 						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
-						// камера сверху
+						
 						CREATE_CAM( 14, &camera );
 						POINT_CAM_AT_COORD	( camera, -590.879, 104.026, 4.616 );
 						SET_CAM_POS			( camera, -577.948, 106.167, 15.366 );
@@ -2268,7 +2268,7 @@ void boyarsky(void)
 						SET_CAM_FOV( camera, 45.0 );
 						SET_WIDESCREEN_BORDERS( 1 );
 
-						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), -591.203, 103.965, 5.835, 2, -2);// идёт в двери
+						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), -591.203, 103.965, 5.835, 2, -2);
 						SetTime(1000);
 
 						DO_SCREEN_FADE_OUT( 1000 );
@@ -2280,21 +2280,21 @@ void boyarsky(void)
 								break;
 							}
 						}
-						// переодивание	
+						
 						SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 4, 0); // переодиваем
 						SET_CHAR_COORDINATES(GetPlayerPed(), -589.702, 104.208, 5.52);
 						SET_CHAR_HEADING(GetPlayerPed(), -80.0);
 						SetTime(200);
 						DO_SCREEN_FADE_IN( 1000 );
 
-						// подём камеры
+						
 						CREATE_CAM( 3, &camera2 );
 						CREATE_CAM( 14, &camera3 );
 						POINT_CAM_AT_COORD	( camera, -589.481, 104.356, 4.981 );
 						SET_CAM_POS			( camera, -587.677, 104.457, 5.501 );
 						POINT_CAM_AT_COORD	( camera3, -589.481, 104.356, 6.258 );
 						SET_CAM_POS			( camera3, -587.677, 104.457, 5.501 );
-						SET_CAM_INTERP_STYLE_CORE( camera2, camera, camera3, 3500, 0 ); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+						SET_CAM_INTERP_STYLE_CORE( camera2, camera, camera3, 3500, 0 );
 						SET_CAM_ACTIVE( camera2, 1 );
 						SET_CAM_PROPAGATE( camera2, 1 );
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -2507,7 +2507,7 @@ void boyarsky(void)
 						{
 							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 							GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
-							GET_CHAR_HEADING(ped1, &PedR); //получаем угол поворота
+							GET_CHAR_HEADING(ped1, &PedR);
 							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
 							if (PlayR > 200.3)
 							{

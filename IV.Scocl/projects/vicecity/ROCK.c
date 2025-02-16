@@ -216,7 +216,7 @@ void rockers(void)
 								}
 								SET_CHAR_MONEY(ped2, 500);
 								
-								// меняем ракурс
+								
 								POINT_CAM_AT_COORD	( camera, -85.137, 1649.687, 5.924 );
 								SET_CAM_POS			( camera, -79.945, 1661.095, 8.333 );
 								SETTIMERA( 0 );
@@ -317,8 +317,8 @@ void rockers(void)
 							REMOVE_BLIP(rock_ico);
 
 							ADD_BLIP_FOR_PICKUP(bag, &rock_ico);
-							CHANGE_BLIP_SPRITE(rock_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(rock_ico, 5);   //цвет иконка на радаре (0=белая)
+							CHANGE_BLIP_SPRITE(rock_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(rock_ico, 5);
 							CHANGE_BLIP_SCALE(rock_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(rock_ico, "MO_TARGET");//иконка на радаре ""
 
@@ -405,8 +405,8 @@ void rockers(void)
 							SET_CHAR_HEADING(ped1, -90.0);
 
 							ADD_BLIP_FOR_COORD(738.624, 825.113, 10.174, &rock_ico);
-							CHANGE_BLIP_SPRITE(rock_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(rock_ico, 5);   //цвет иконка на радаре (0=белая)
+							CHANGE_BLIP_SPRITE(rock_ico, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(rock_ico, 5);
 							CHANGE_BLIP_SCALE(rock_ico, 0.6);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(rock_ico, "NE_POINT");//иконка на радаре ""
 
@@ -481,8 +481,8 @@ void rockers(void)
 								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );
 
 								ADD_BLIP_FOR_COORD(-438.107, 1696.831, 4.989, &rock_ico);
-								CHANGE_BLIP_SPRITE(rock_ico, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(rock_ico, 5);   //цвет иконка на радаре (0=белая)
+								CHANGE_BLIP_SPRITE(rock_ico, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(rock_ico, 5);
 								CHANGE_BLIP_SCALE(rock_ico, 0.6);
 								CHANGE_BLIP_NAME_FROM_TEXT_FILE(rock_ico, "NE_POINT");//иконка на радаре ""
 								SetTime(500);
@@ -542,8 +542,8 @@ void rockers(void)
 						}
 
 						// таймер
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 						if ((time_m == 0) && (time_s < 16))
 						{
 							SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -710,7 +710,7 @@ void rockers(void)
 							START_SCRIPT_CONVERSATION(1, 1);
 							SetTime (6000);
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, -442.551, 1692.462, 6.279 );
 							SET_CAM_POS			( camera, -436.217, 1683.129, 7.715 );
 							SetTime (3000);
@@ -1012,7 +1012,7 @@ void rockers(void)
 
 
 
-				// загружаем анимацию
+				
 				REQUEST_ANIMS( "missivan_1" );
 				while (!HAVE_ANIMS_LOADED( "missivan_1" ));
 				REQUEST_ANIMS( "amb@inquisitive" );
@@ -1086,7 +1086,7 @@ void rockers(void)
 							REQUEST_ANIMS( "amb@hang_str_idls" );
 							while (!HAVE_ANIMS_LOADED( "amb@hang_str_idls" )) WAIT(0);
 
-							// камера сверху
+							
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, -449.047, 1285.901, 6.95093 );
 							SET_CAM_POS			( camera, -436.626, 1284.841, 5.43647 );
@@ -1934,8 +1934,8 @@ void rockers(void)
 					GET_CHAR_SPEED(GetPlayerPed(), &speed);
 
 					// -------------------------- HUD --------------------------
-					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-					DRAW_SPRITE( 0, 0.915054, 0.7838, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );// рисуем фоновую текстуру.
+					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+					DRAW_SPRITE( 0, 0.915054, 0.7838, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );
 					if (shkala < 105)
 					{
 						shkalaH1 = 0;
@@ -1950,7 +1950,7 @@ void rockers(void)
 					shkalaHUD_y1 = HUD_w-shkalaH3;
 					shkalaHUD_y2 = shkalaHUD_y1/2;
 					shkalaHUD_y3 = HUD_x-shkalaHUD_y2;
-					DRAW_SPRITE( 0, shkalaHUD_y3, 0.7838, shkalaH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
+					DRAW_SPRITE( 0, shkalaHUD_y3, 0.7838, shkalaH3, 0.014, 0.0, 97, 194, 247, 255 );
 
 					SET_TEXT_COLOUR(95, 195, 247, 255);
 					SET_TEXT_SCALE(0.156, 0.267);

@@ -405,8 +405,8 @@ void versetty(void)
 					}
 
 					// таймер
-					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-					//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+					//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 					if ((time_m == 0) && (time_s < 16))
 					{
 						SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -1136,8 +1136,8 @@ void versetty(void)
 				LOCK_CAR_DOORS(car5, 3);
 				LOCK_CAR_DOORS(car6, 3);
 				LOCK_CAR_DOORS(car7, 3);
-				CHANGE_CAR_COLOUR( car4, 112, 89 );//цвет
-				SET_EXTRA_CAR_COLOURS( car4, 112, 112 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car4, 112, 89 );
+				SET_EXTRA_CAR_COLOURS( car4, 112, 112 );
 
 				
 				CREATE_CHAR (26, PedM1, 55.874, -11.151, 11.316, &ped1, TRUE);// Приспешник 1
@@ -1416,7 +1416,7 @@ void versetty(void)
 							// выбигает бизнесмен
 							SET_CHAR_COORDINATES(ped5, 667.893, -705.689, 6.547);
 							SET_CHAR_HEADING(ped5, 175.0);
-							TASK_GO_STRAIGHT_TO_COORD(ped5, 672.549, -708.319, 6.147, 3, -2);// идёт в двери
+							TASK_GO_STRAIGHT_TO_COORD(ped5, 672.549, -708.319, 6.147, 3, -2);
 							SetTime(1500);
 
 							// диалог
@@ -1645,8 +1645,8 @@ void versetty(void)
 						}
 
 						// таймер
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 						if ((time_m == 0) && (time_s < 16))
 						{
 							SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -1960,8 +1960,8 @@ void versetty(void)
 						}
 
 						// таймер
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 						if ((time_m == 0) && (time_s < 16))
 						{
 							SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -3175,11 +3175,11 @@ void versetty(void)
 							SET_WIDESCREEN_BORDERS( 1 );
 
 							// забегат в особняк
-							TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 54.113, -32.102, 14.306, 3, -2);// идёт в двери
+							TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 54.113, -32.102, 14.306, 3, -2);
 							SetTime(3000);
 							SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, Torso, 0);
 
-							// меняем раурс камеры
+							// меняем раурс
 							DO_SCREEN_FADE_OUT( 1000 );
 							while(true)
 							{

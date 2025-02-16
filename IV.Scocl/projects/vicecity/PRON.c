@@ -121,8 +121,8 @@ void studio(void)
 				CREATE_CAR(CarM2, 295.942, -779.725, 5.44546, &car2, TRUE);
 				CREATE_CAR(CarM2, 292.585, -779.725, 5.44546, &car3, TRUE);
 
-				CHANGE_CAR_COLOUR( car4, 110, 110 );//цвет
-				SET_EXTRA_CAR_COLOURS( car4, 132, 132 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car4, 110, 110 );
+				SET_EXTRA_CAR_COLOURS( car4, 132, 132 );
 				LOCK_CAR_DOORS(car2, 3);
 				LOCK_CAR_DOORS(car3, 3);
 				LOCK_CAR_DOORS(car4, 3);
@@ -841,7 +841,7 @@ void studio(void)
 							START_SCRIPT_CONVERSATION(1, 1);
 							SetSpeech();
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, 352.194, 1465.011, 2.34472 );
 							SET_CAM_POS			( camera, 372.899, 1466.501, 9.29127 );
 
@@ -1165,8 +1165,8 @@ void studio(void)
 					if (hud_on == 1)
 					{
 						// -------------------------- HUD --------------------------
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						DRAW_SPRITE( 0, 0.915054, 0.7838, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						DRAW_SPRITE( 0, 0.915054, 0.7838, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );
 
 						if (Health < 5)
 						{
@@ -1181,7 +1181,7 @@ void studio(void)
 						carHUD_y1 = carHUD_w-carH3;
 						carHUD_y2 = carHUD_y1/2;
 						carHUD_y3 = carHUD_x-carHUD_y2;
-						DRAW_SPRITE( 0, carHUD_y3, 0.7838, carH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( 0, carHUD_y3, 0.7838, carH3, 0.014, 0.0, 97, 194, 247, 255 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
@@ -1768,8 +1768,8 @@ void studio(void)
 				SET_CAR_HEADING(car1, -10.0);
 				SET_CAR_HEADING(car2, 170.0);
 
-				CHANGE_CAR_COLOUR( car1, 110, 110 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 132, 132 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 110, 110 );
+				SET_EXTRA_CAR_COLOURS( car1, 132, 132 );
 				LOCK_CAR_DOORS(car1, 3);
 
 				CREATE_CHAR (26, PedM1, 396.052, 1485.11, 5.05974, &ped1, TRUE);// Кенди
@@ -2247,8 +2247,8 @@ void studio(void)
 
 						// ХУД
 						//1779/1920=0,9265625
-						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						DRAW_SPRITE( photos, 0.8555625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						DRAW_SPRITE( photos, 0.8555625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
@@ -2917,8 +2917,8 @@ void studio(void)
 
 
 				CREATE_CAR(CarM1, 421.713, 1489.76, 5.53541, &car1, TRUE);//
-				CHANGE_CAR_COLOUR( car1, 132, 132 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 131, 131 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 132, 132 );
+				SET_EXTRA_CAR_COLOURS( car1, 131, 131 );
 
 				CREATE_CHAR (26, PedM1, 289.762, -777.475, 5.05974, &ped1, TRUE);// 
 				CREATE_CHAR (26, PedM2, 288.738, -777.447, 5.05974, &ped2, TRUE);// 
@@ -2967,7 +2967,7 @@ void studio(void)
 				REQUEST_ANIMS( "amb@hang_str_idls" );
 				while (!HAVE_ANIMS_LOADED( "amb@hang_str_idls" )) WAIT(0);
 
-				//им пути
+				
 				REQUEST_CAR_RECORDING( 3050 );//а (Washington)
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3050 )) WAIT(0);
 				REQUEST_CAR_RECORDING( 3051 );//а (Washington)
@@ -3099,17 +3099,17 @@ void studio(void)
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(pron_ico, "MO_TARGET");
 
 							ADD_BLIP_FOR_COORD(Blip_x, Blip_y, Blip_z, &Blip_r);
-							CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(Blip_r, 5);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");
 							CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 							checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.60000000 );
 							check_on = 1;
 							
 							ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, Blip_z2, &Blip_r2);
-							CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(Blip_r2, 5);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");
 							CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 							CHANGE_BLIP_ALPHA(Blip_r2, 125);
 
@@ -3325,16 +3325,16 @@ void studio(void)
 							Blip_z2 = 46.4839;
 
 							ADD_BLIP_FOR_COORD(Blip_x, Blip_y, Blip_z, &Blip_r);
-							CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(Blip_r, 5);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");
 							CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 							checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.60000000 );
 							
 							ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, Blip_z2, &Blip_r2);
-							CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
+							CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);
+							CHANGE_BLIP_COLOUR(Blip_r2, 5);
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");
 							CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 							CHANGE_BLIP_ALPHA(Blip_r2, 125);
 
@@ -3425,16 +3425,16 @@ void studio(void)
 								DELETE_CHECKPOINT(checkpoint);
 
 								ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
-								CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
+								CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(Blip_r, 5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");
 								CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 								checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.50000000 );
 
 								ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);
-								CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
+								CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(Blip_r2, 5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");
 								CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 								CHANGE_BLIP_ALPHA(Blip_r2, 125);
 								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -3471,16 +3471,16 @@ void studio(void)
 								DELETE_CHECKPOINT(checkpoint);
 
 								ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
-								CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
+								CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(Blip_r, 5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");
 								CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 								checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.50000000 );
 
 								ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);
-								CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
+								CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(Blip_r2, 5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");
 								CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 								CHANGE_BLIP_ALPHA(Blip_r2, 125);
 							}
@@ -3685,16 +3685,16 @@ void studio(void)
 								REMOVE_BLIP(Blip_r2);
 								DELETE_CHECKPOINT(checkpoint);
 								ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
-								CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");//иконка на радаре "Blip01" называние в истории карты
+								CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(Blip_r, 5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "NE_RACE2");
 								CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 								checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x2, Blip_y2, Blip_z2, 0.50000000 );
 
 								ADD_BLIP_FOR_COORD(Blip_x2, Blip_y2, (Blip_z2 + 0.1), &Blip_r2);
-								CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(Blip_r2, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");//иконка на радаре "Blip01" называние в истории карты
+								CHANGE_BLIP_SPRITE(Blip_r2, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(Blip_r2, 5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r2, "NE_RACE3");
 								CHANGE_BLIP_SCALE(Blip_r2, (0.77999990 / 1.50000000));
 								CHANGE_BLIP_ALPHA(Blip_r2, 125);
 							}
@@ -3704,9 +3704,9 @@ void studio(void)
 								REMOVE_BLIP(Blip_r2);
 								DELETE_CHECKPOINT(checkpoint);
 								ADD_BLIP_FOR_COORD(Blip_x, Blip_y, (Blip_z + 0.1), &Blip_r);
-								CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-								CHANGE_BLIP_COLOUR(Blip_r, 5);   //цвет иконка на радаре (0=белая)
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "MO_TARGET");//иконка на радаре "Blip01" называние в истории карты
+								CHANGE_BLIP_SPRITE(Blip_r, BLIP_OBJECTIVE);
+								CHANGE_BLIP_COLOUR(Blip_r, 5);
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Blip_r, "MO_TARGET");
 								CHANGE_BLIP_SCALE(Blip_r, 0.77999990);
 								checkpoint = CREATE_CHECKPOINT( 6, Blip_x, Blip_y, (Blip_z+1.5), Blip_x, Blip_y, (Blip_z-1.5), 0.50000000 );
 							}
@@ -3714,7 +3714,7 @@ void studio(void)
 						
 						// HUD время
 						GET_TIME_OF_DAY(&hour, &min);
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
@@ -3775,7 +3775,7 @@ void studio(void)
 						WAIT(0);
 						// HUD время
 						GET_TIME_OF_DAY(&hour, &min);
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
@@ -3945,7 +3945,7 @@ void studio(void)
 								}
 							}
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, 435.441, 1491.101, 6.07797 );
 							SET_CAM_POS			( camera, 432.529, 1489.461, 7.16788 );
 

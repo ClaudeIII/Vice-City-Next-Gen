@@ -165,13 +165,13 @@ void cortez(void)
 
 						SetTime(200);
 						DO_SCREEN_FADE_IN( 1000 );
-						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 892.86, 561.146, 29.284, 2, -2);// идёт в двери
+						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 892.86, 561.146, 29.284, 2, -2);
 						// анимации разговора
 						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "stand_idle_a", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );
 						TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped2, "stand_idle_b", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, -1 );
 
 						SetTime(3000);
-						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 893.19, 562.085, 29.284, 2, -2);// идёт в двери
+						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 893.19, 562.085, 29.284, 2, -2);
 						SetTime(1000);
 						TASK_PLAY_ANIM_NON_INTERRUPTABLE( GetPlayerPed(), "stand_idle_k", "amb@hang_str_idls", 8.0, 1, 0, 0, 0, 1500 );
 
@@ -954,8 +954,8 @@ void cortez(void)
 
 							REMOVE_BLIP(cortez_ico);
 							ADD_BLIP_FOR_PICKUP(bag, &cortez_ico);
-							CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(cortez_ico, 5);   //цвет иконка на радаре (0=белая)
+							CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);
+							CHANGE_BLIP_COLOUR(cortez_ico, 5);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "MO_TARGET");//иконка на радаре "Товар"
 							break;
 						}
@@ -1004,9 +1004,9 @@ void cortez(void)
 
 							ADD_BLIP_FOR_COORD(189.427, -827.564, 2.028, &cortez_ico);
 							CHANGE_BLIP_SPRITE(cortez_ico, BLIP_OBJECTIVE);
-							CHANGE_BLIP_COLOUR(cortez_ico, 5);   //цвет иконка на радаре (0=белая)
+							CHANGE_BLIP_COLOUR(cortez_ico, 5);
 							CHANGE_BLIP_SCALE(cortez_ico, 0.6);
-							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "NE_POINT");//иконка на радаре называние в истории карты "Телефонный звонок"
+							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "NE_POINT");
 							break;
 						}
 						else if ((HAS_DEATHARREST_EXECUTED()))
@@ -1268,12 +1268,12 @@ void cortez(void)
 				LOCK_CAR_DOORS(car2, 3); // запераем
 				LOCK_CAR_DOORS(car10, 3); // запераем
 
-				CHANGE_CAR_COLOUR( car1, 112, 112 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 112, 112 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car9, 89, 89 );//цвет
-				SET_EXTRA_CAR_COLOURS( car9, 27, 27 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car10, 89, 89 );//цвет
-				SET_EXTRA_CAR_COLOURS( car10, 27, 27 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 112, 112 );
+				SET_EXTRA_CAR_COLOURS( car1, 112, 112 );
+				CHANGE_CAR_COLOUR( car9, 89, 89 );
+				SET_EXTRA_CAR_COLOURS( car9, 27, 27 );
+				CHANGE_CAR_COLOUR( car10, 89, 89 );
+				SET_EXTRA_CAR_COLOURS( car10, 27, 27 );
 
 				
 				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);
@@ -1305,7 +1305,7 @@ void cortez(void)
 				REQUEST_ANIMS( "amb@hang_str_idls" );
 				while (!HAVE_ANIMS_LOADED( "amb@hang_str_idls" )) WAIT(0);
 
-				//им пути
+				
 				REQUEST_CAR_RECORDING( 2999 );
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 2999 )) WAIT(0);
 				REQUEST_CAR_RECORDING( 3000 );
@@ -1397,7 +1397,7 @@ void cortez(void)
 						START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car1, 2999, 0.0, 0.0, 0.0);// подъезд
 						SetTime(7000);
 					
-						// меняем ракурс
+						
 						POINT_CAM_AT_COORD	( camera, 585.171, -661.506, 12.827);
 						SET_CAM_POS			( camera, 588.315, -668.298, 12.885 );
 
@@ -1558,7 +1558,7 @@ void cortez(void)
 							START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car2, 3000, 0.0, 0.0, 0.0);// подъезд Диаса
 							SetTime(3000);
 						
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, 894.318, 44.199, 5.192);
 							SET_CAM_POS			( camera, 893.822, 34.996, 6.659 );
 
@@ -1577,7 +1577,7 @@ void cortez(void)
 							SET_CHAR_HEADING(ped1, 5.0);
 							SetTime(2000);
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, 896.823, 35.329, 4.878);
 							SET_CAM_POS			( camera, 888.071, 41.434, 7.708 );
 							SetTime(3000);
@@ -1597,7 +1597,7 @@ void cortez(void)
 							START_SCRIPT_CONVERSATION(1, 1);
 							SetSpeech();
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, 893.955, 34.872, 5.658);
 							SET_CAM_POS			( camera, 896.875, 40.563, 6.79 );
 
@@ -1776,7 +1776,7 @@ void cortez(void)
 
 						// -------------------------- Diaz HUD --------------------------
 						DRAW_SPRITE( fon, 0.8765625, 0.74213, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
-						DRAW_SPRITE( 0, 0.915054, 0.74213, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( 0, 0.915054, 0.74213, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );
 						if (Diaz_hp < 105)
 						{
 							DiazH1 = 0;
@@ -1790,7 +1790,7 @@ void cortez(void)
 						DiazHUD_y1 = pedHUD_w-DiazH3;
 						DiazHUD_y2 = DiazHUD_y1/2;
 						DiazHUD_y3 = pedHUD_x-DiazHUD_y2;
-						DRAW_SPRITE( 0, DiazHUD_y3, 0.74213, DiazH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( 0, DiazHUD_y3, 0.74213, DiazH3, 0.014, 0.0, 97, 194, 247, 255 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
@@ -1798,8 +1798,8 @@ void cortez(void)
 						DISPLAY_TEXT(0.78815097, 0.73564852, "GEN3_22"); //DIAZ'S HEALTH:
 
 						// -------------------------- Lance HUD --------------------------
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						DRAW_SPRITE( 0, 0.915054, 0.7838, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						DRAW_SPRITE( 0, 0.915054, 0.7838, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );
 						if (Lance_hp < 105)
 						{
 							LanceH1 = 0;
@@ -1813,7 +1813,7 @@ void cortez(void)
 						LanceHUD_y1 = pedHUD_w-LanceH3;
 						LanceHUD_y2 = LanceHUD_y1/2;
 						LanceHUD_y3 = pedHUD_x-LanceHUD_y2;
-						DRAW_SPRITE( 0, LanceHUD_y3, 0.7838, LanceH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( 0, LanceHUD_y3, 0.7838, LanceH3, 0.014, 0.0, 97, 194, 247, 255 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
@@ -1851,7 +1851,7 @@ void cortez(void)
 								if (gogogo == 0)
 								{
 									ADD_BLIP_FOR_CHAR(ped7, &cortez_ico);
-									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
+									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);
 									CHANGE_BLIP_COLOUR(cortez_ico, 19);
 									CHANGE_BLIP_SCALE(cortez_ico, 0.77999990);
 									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "MO_TARGET");
@@ -1896,7 +1896,7 @@ void cortez(void)
 								if (gogogo == 0)
 								{
 									ADD_BLIP_FOR_CHAR(ped9, &cortez_ico);
-									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
+									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);
 									CHANGE_BLIP_COLOUR(cortez_ico, 19);
 									CHANGE_BLIP_SCALE(cortez_ico, 0.77999990);
 									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "MO_TARGET");//иконка на радаре называние в истории карты "магазин одежды"
@@ -1939,7 +1939,7 @@ void cortez(void)
 								if (gogogo == 0)
 								{
 									ADD_BLIP_FOR_CHAR(ped11, &cortez_ico);
-									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
+									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);
 									CHANGE_BLIP_COLOUR(cortez_ico, 19);
 									CHANGE_BLIP_SCALE(cortez_ico, 0.77999990);
 									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "MO_TARGET");//иконка на радаре называние в истории карты "магазин одежды"
@@ -1997,7 +1997,7 @@ void cortez(void)
 								if (gogogo == 0)
 								{
 									ADD_BLIP_FOR_CHAR(ped15, &cortez_ico);
-									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
+									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);
 									CHANGE_BLIP_COLOUR(cortez_ico, 19);
 									CHANGE_BLIP_SCALE(cortez_ico, 0.77999990);
 									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "MO_TARGET");//иконка на радаре называние в истории карты "магазин одежды"
@@ -2055,7 +2055,7 @@ void cortez(void)
 								if (gogogo == 0)
 								{
 									ADD_BLIP_FOR_CHAR(ped19, &cortez_ico);
-									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
+									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);
 									CHANGE_BLIP_COLOUR(cortez_ico, 19);
 									CHANGE_BLIP_SCALE(cortez_ico, 0.77999990);
 									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "MO_TARGET");//иконка на радаре называние в истории карты "магазин одежды"
@@ -2194,7 +2194,7 @@ void cortez(void)
 									SET_CAR_HEADING(car9, 160.00);
 
 									ADD_BLIP_FOR_CHAR(ped22, &cortez_ico);
-									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
+									CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);
 									CHANGE_BLIP_COLOUR(cortez_ico, 19);
 									CHANGE_BLIP_SCALE(cortez_ico, 0.77999990);
 									CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "MO_TARGET");//иконка на радаре называние в истории карты "магазин одежды"
@@ -2278,8 +2278,8 @@ void cortez(void)
 							PRINT_STRING_IN_STRING("string", "GEN3_29", 5000, 1);//~g~Collect the briefcase and take it back to Diaz.
 
 							ADD_BLIP_FOR_PICKUP(bag, &cortez_ico);
-							CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);//иконка на радаре "Blip01" равна "BLIP_FINISH_LINE"
-							CHANGE_BLIP_COLOUR(cortez_ico, 19);   //цвет иконка на радаре (0=белая)
+							CHANGE_BLIP_SPRITE(cortez_ico, BLIP_DESTINATION);
+							CHANGE_BLIP_COLOUR(cortez_ico, 19);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(cortez_ico, "MO_TARGET");//иконка на радаре "Товар"
 							break;
 						}
@@ -2817,14 +2817,14 @@ void cortez(void)
 				TURN_OFF_VEHICLE_EXTRA( car2, 2, 1 );
 				TURN_OFF_VEHICLE_EXTRA( car4, 2, 1 );
 
-				CHANGE_CAR_COLOUR( car1, 96, 96 );//цвет
-				SET_EXTRA_CAR_COLOURS( car1, 112, 112 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car2, 112, 112 );//цвет
-				SET_EXTRA_CAR_COLOURS( car2, 112, 112 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car3, 112, 112 );//цвет
-				SET_EXTRA_CAR_COLOURS( car3, 112, 112 );//цвет отрожений
-				CHANGE_CAR_COLOUR( car4, 112, 112 );//цвет
-				SET_EXTRA_CAR_COLOURS( car4, 112, 112 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car1, 96, 96 );
+				SET_EXTRA_CAR_COLOURS( car1, 112, 112 );
+				CHANGE_CAR_COLOUR( car2, 112, 112 );
+				SET_EXTRA_CAR_COLOURS( car2, 112, 112 );
+				CHANGE_CAR_COLOUR( car3, 112, 112 );
+				SET_EXTRA_CAR_COLOURS( car3, 112, 112 );
+				CHANGE_CAR_COLOUR( car4, 112, 112 );
+				SET_EXTRA_CAR_COLOURS( car4, 112, 112 );
 
 				
 				CREATE_CHAR_INSIDE_CAR(car1, 1, PedM1, &ped1);// Патриот
@@ -3040,7 +3040,7 @@ void cortez(void)
 					if ((speed < 0.5) && (del_car == 0))
 					{
 						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
-						GET_CHAR_HEADING(ped1, &PedR); //получаем угол поворота
+						GET_CHAR_HEADING(ped1, &PedR);
 						convoy_x = (0*COS((0-PedR))+(4*SIN((0-PedR))))+PedX;
 						convoy_y = (4*COS((0-PedR))-(0*SIN((0-PedR))))+PedY;
 						del_car = 5;
@@ -3048,7 +3048,7 @@ void cortez(void)
 					else if ((speed2 < 0.5) && (del_car == 0))
 					{
 						GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);
-						GET_CHAR_HEADING(ped2, &PedR); //получаем угол поворота
+						GET_CHAR_HEADING(ped2, &PedR);
 						convoy_x = (0*COS((0-PedR))+(4*SIN((0-PedR))))+PedX;
 						convoy_y = (4*COS((0-PedR))-(0*SIN((0-PedR))))+PedY;
 						del_car = 5;
@@ -3056,7 +3056,7 @@ void cortez(void)
 					else if ((speed3 < 0.5) && (del_car == 0))
 					{
 						GET_CHAR_COORDINATES(ped3,  &PedX, &PedY, &PedZ);
-						GET_CHAR_HEADING(ped3, &PedR); //получаем угол поворота
+						GET_CHAR_HEADING(ped3, &PedR);
 						convoy_x = (0*COS((0-PedR))+(4*SIN((0-PedR))))+PedX;
 						convoy_y = (4*COS((0-PedR))-(0*SIN((0-PedR))))+PedY;
 						del_car = 5;
@@ -3064,7 +3064,7 @@ void cortez(void)
 					else if ((speed4 < 0.5) && (del_car == 0))
 					{
 						GET_CHAR_COORDINATES(ped4,  &PedX, &PedY, &PedZ);
-						GET_CHAR_HEADING(ped4, &PedR); //получаем угол поворота
+						GET_CHAR_HEADING(ped4, &PedR);
 						convoy_x = (0*COS((0-PedR))+(4*SIN((0-PedR))))+PedX;
 						convoy_y = (4*COS((0-PedR))-(0*SIN((0-PedR))))+PedY;
 						del_car = 5;
@@ -3456,7 +3456,7 @@ void cortez(void)
 					if ((IS_CHAR_IN_AREA_3D( GetPlayerPed(), PedX2+65, PedY2+65, PedZ2-5, PedX2-65, PedY2-65, PedZ2+20, 0 )) && ( help_2 == 0))
 					{
 						GET_CHAR_COORDINATES(ped3,  &PedX2, &PedY2, &PedZ2);
-						GET_CHAR_HEADING(ped3, &PedR2); //получаем угол поворота
+						GET_CHAR_HEADING(ped3, &PedR2);
 
 						convoy_x2 = (3*COS((0-PedR2))+(3.5*SIN((0-PedR2))))+PedX2;
 						convoy_y2 = (3.5*COS((0-PedR2))-(3*SIN((0-PedR2))))+PedY2;
@@ -3650,7 +3650,7 @@ void cortez(void)
 						FREEZE_CHAR_POSITION(ped15, 0);
 						FREEZE_CHAR_POSITION(ped16, 0);
 
-						// педы выпрыгивают изовика
+						// педы выпрыгивают из
 
 						TASK_COMBAT(ped1, GetPlayerPed());
 						TASK_COMBAT(ped2, GetPlayerPed());
@@ -3702,7 +3702,7 @@ void cortez(void)
 
 					// педы бегут
 					GET_CHAR_COORDINATES(ped3,  &PedX2, &PedY2, &PedZ2);
-					GET_CHAR_HEADING(ped3, &PedR2); //получаем угол поворота
+					GET_CHAR_HEADING(ped3, &PedR2);
 
 					convoy_x2 = (3*COS((0-PedR2))+(3.5*SIN((0-PedR2))))+PedX2;
 					convoy_y2 = (3.5*COS((0-PedR2))-(3*SIN((0-PedR2))))+PedY2;
@@ -3967,8 +3967,8 @@ void cortez(void)
 								SET_TEXT_DROPSHADOW(1, 26, 90, 128, 255);
 								DISPLAY_TEXT(0.78815097, 0.80277778, "RBM3_6"); //DETONATION:
 
-								DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-								DRAW_SPRITE( 0, 0.9088541, 0.80925926, 0.0739583, 0.014, 0.0, 27, 89, 130, 255 );// рисуем фоновую текстуру.
+								DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+								DRAW_SPRITE( 0, 0.9088541, 0.80925926, 0.0739583, 0.014, 0.0, 27, 89, 130, 255 );
 
 								DiazH1 = boom;
 								DiazH2 = pedHUD_w/1000;
@@ -3976,7 +3976,7 @@ void cortez(void)
 								DiazHUD_y1 = pedHUD_w-DiazH3;
 								DiazHUD_y2 = DiazHUD_y1/2;
 								DiazHUD_y3 = pedHUD_x-DiazHUD_y2;
-								DRAW_SPRITE( 0, DiazHUD_y3, 0.80925926, DiazH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
+								DRAW_SPRITE( 0, DiazHUD_y3, 0.80925926, DiazH3, 0.014, 0.0, 97, 194, 247, 255 );
 
 							}
 						}
@@ -4185,7 +4185,7 @@ void cortez(void)
 				REQUEST_MODEL(CarM8);// 
 				while (!HAS_MODEL_LOADED(CarM8));
 
-				//им пути
+				
 				REQUEST_CAR_RECORDING( 3010 );//а (Washington)
 				while (!HAS_CAR_RECORDING_BEEN_LOADED( 3010 )) WAIT(0);
 				REQUEST_CAR_RECORDING( 3011 );//а (Washington)
@@ -4229,11 +4229,11 @@ void cortez(void)
 				CREATE_CAR(CarM1, 54.0, -789.9, -3.0, &car1, TRUE);// Яхта Котеса
 				TURN_OFF_VEHICLE_EXTRA(car1, 1, 0);
 				CREATE_CAR(CarM2, 247.149, -907.476, 3.468, &car2, TRUE);//а (Washington)
-				CHANGE_CAR_COLOUR( car2, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car2, 0, 0 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car2, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car2, 0, 0 );
 				CREATE_CAR(CarM2, 251.749, -906.255, 4.103, &car3, TRUE);//а (Washington)
-				CHANGE_CAR_COLOUR( car3, 0, 0 );//цвет
-				SET_EXTRA_CAR_COLOURS( car3, 0, 0 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car3, 0, 0 );
+				SET_EXTRA_CAR_COLOURS( car3, 0, 0 );
 				CREATE_CAR(CarM3, 100.991, -690.089, 1.587, &car4, TRUE);// (Speedre)
 				SET_CAR_HEADING(car4, 90.0);
 				CREATE_CAR(CarM4, 101.697, -699.992, 1.587, &car5, TRUE);// яхта (Tripic)
@@ -4254,8 +4254,8 @@ void cortez(void)
 				SET_CAR_HEADING(car12, 90.0);
 				CREATE_CAR(CarM3, 120.173, -733.062, 1.587, &car13, TRUE);// (Speedre)
 				SET_CAR_HEADING(car13, 180.0);
-				CHANGE_CAR_COLOUR( car13, 30, 4 );//цвет
-				SET_EXTRA_CAR_COLOURS( car13, 0, 0 );//цвет отрожений
+				CHANGE_CAR_COLOUR( car13, 30, 4 );
+				SET_EXTRA_CAR_COLOURS( car13, 0, 0 );
 
 				
 				CREATE_CHAR (26, PedM1, 41.17, -821.214, 2.606, &ped1, TRUE);// Кортес
@@ -4333,12 +4333,12 @@ void cortez(void)
 				UNPAUSE_PLAYBACK_RECORDED_CAR(car2);
 				UNPAUSE_PLAYBACK_RECORDED_CAR(car3);
 
-				// меняем ракурс
+				
 				POINT_CAM_AT_COORD	( camera, 53.588, -742.778, 7.715);
 				SET_CAM_POS			( camera, 42.605, -849.751, 8.827 );
 				SetTime(5500);
 
-				// меняем ракурс
+				
 				POINT_CAM_AT_COORD	( camera, 188.281, -748.055, 2.386);
 				SET_CAM_POS			( camera, 185.821, -658.835, 6.594 );
 				SetTime(5500);
@@ -4348,7 +4348,7 @@ void cortez(void)
 				REMOVE_CAR_RECORDING( 3010 );
 				REMOVE_CAR_RECORDING( 3011 );
 
-				// меняем ракурс
+				
 				POINT_CAM_AT_COORD	( camera, 176.847, -678.321, 4.518);
 				SET_CAM_POS			( camera, 198.709, -688.142, 4.591 );
 
@@ -4363,7 +4363,7 @@ void cortez(void)
 				TASK_GO_STRAIGHT_TO_COORD(ped13, 109.659, -681.011, 2.606, 3, -2);
 				SetTime(3000);
 				
-				// меняем ракурс
+				
 				POINT_CAM_AT_COORD	( camera, 90.848, -683.712, 7.504);
 				SET_CAM_POS			( camera, 158.721, -686.547, 3.787 );
 
@@ -4378,7 +4378,7 @@ void cortez(void)
 				SET_CHAR_COORDINATES(ped13, 157.634, -682.841, 2.171);
 				SetTime(3000);
 
-				// меняем ракурс
+				
 				POINT_CAM_AT_COORD	( camera, 116.05, -681.641, 0.167);
 				SET_CAM_POS			( camera, 67.945, -716.863, 24.279 );
 				SetTime(3500);
@@ -4865,7 +4865,7 @@ void cortez(void)
 					DO_SCREEN_FADE_IN( 1000 );
 					SetTime(4000);
 
-					// меняем ракурс
+					
 					POINT_CAM_AT_COORD	( camera, 631.069, 1443.263, 6.032);
 					SET_CAM_POS			( camera, 581.424, 1377.638, 15.011 );
 					SetTime(3000);
@@ -5560,7 +5560,7 @@ void cortez(void)
 					DO_SCREEN_FADE_IN( 1000 );
 					SetTime(4000);
 
-					// меняем ракурс
+					
 					POINT_CAM_AT_COORD	( camera, 628.874, 1506.061, 10.863);
 					SET_CAM_POS			( camera, 634.541, 1342.408, 13.411 );
 					SetTime(4000);

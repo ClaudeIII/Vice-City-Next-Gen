@@ -586,8 +586,8 @@ void copcar_oddjob_loop(void) {
 			cop_time_limit -= 1000;
 			SETTIMERC(0);
 		}
-		DRAW_SPRITE( fon, 0.8765625, 0.74213, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-		DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
+		DRAW_SPRITE( fon, 0.8765625, 0.74213, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+		DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
 		int timemin, timesec, timetemp;
 		timesec = cop_time_limit / 1000;
 		timemin = timesec / 60;

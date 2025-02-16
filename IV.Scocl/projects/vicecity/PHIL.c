@@ -314,7 +314,7 @@ void phil(void)
 					//DISPLAY_TEXT_WITH_NUMBER(0.9203125, 0.68587074, "CP_TIME_NOZERO", HealGB_3);// 
 					//DISPLAY_TEXT_WITH_NUMBER(0.9203125, 0.79587074, "CP_TIME_NOZERO", HealGB_4);// 
 
-					// изовика вываливается
+					// из вываливается
 					if (((HealGB_1 < 10) && ( add_gun1 == 0)) || ((CarHP1 < 750) && (add_gun1 == 0)))
 					{
 						if (IS_CAR_DEAD(car1))
@@ -1247,8 +1247,8 @@ void phil(void)
 					}
 
 					// Phil HUD
-					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-					DRAW_SPRITE( 0, 0.915054, 0.7838, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );// рисуем фоновую текстуру.
+					DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+					DRAW_SPRITE( 0, 0.915054, 0.7838, 0.059166, 0.014, 0.0, 27, 89, 130, 255 );
 
 					if (Health < 5)
 					{
@@ -1263,7 +1263,7 @@ void phil(void)
 					carHUD_y1 = carHUD_w-carH3;
 					carHUD_y2 = carHUD_y1/2;
 					carHUD_y3 = carHUD_x-carHUD_y2;
-					DRAW_SPRITE( 0, carHUD_y3, 0.7838, carH3, 0.014, 0.0, 97, 194, 247, 255 );// рисуем фоновую текстуру.
+					DRAW_SPRITE( 0, carHUD_y3, 0.7838, carH3, 0.014, 0.0, 97, 194, 247, 255 );
 
 					SET_TEXT_COLOUR(95, 195, 247, 255);
 					SET_TEXT_SCALE(0.156, 0.267);
@@ -1336,7 +1336,7 @@ void phil(void)
 
 							DO_SCREEN_FADE_IN( 500 );
 
-							// камера сверху
+							
 							CREATE_CAM( 14, &camera );
 							POINT_CAM_AT_COORD	( camera, -755.721, -130.771, 5.85832 );
 							SET_CAM_POS			( camera, -751.107, -117.519, 9.45726 );
@@ -1346,7 +1346,7 @@ void phil(void)
 							SET_CAM_FOV( camera, 45.0 );
 							SET_WIDESCREEN_BORDERS( 1 );
 
-							TASK_GO_STRAIGHT_TO_COORD(ped1, -764.689, -131.092, 5.9656, 2, -2);// идёт в двери
+							TASK_GO_STRAIGHT_TO_COORD(ped1, -764.689, -131.092, 5.9656, 2, -2);
 							SetTime(4000);
 
 							DO_SCREEN_FADE_OUT( 500 );
@@ -1381,7 +1381,7 @@ void phil(void)
 
 							SET_CHAR_COORDINATES(ped1, 75.676, 73.762, 6.342);
 							POINT_CAM_AT_COORD	( camera, -674.954, 876.103, 9.16035 );// куда смотрит камера
-							SET_CAM_POS			( camera, -671.766, 873.266, 8.46922 );// расположение камеры
+							SET_CAM_POS			( camera, -671.766, 873.266, 8.46922 );// расположение
 
 							PRINT_STRING_IN_STRING("string", "PHI_AS2", 5500, 1);//~g~New Weapons available to purchase from Phils Place.
 							SetTime(5000);
@@ -1609,7 +1609,7 @@ void phil(void)
 				GET_GAME_CAM(&camera3);
 				CREATE_CAM( 3, &camera2 );
 				SET_CAM_INTERP_STYLE_DETAILED( camera2, 1, 1, 1, 1 );
-				SET_CAM_INTERP_STYLE_CORE( camera2, camera3, camera, 500, 0 ); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+				SET_CAM_INTERP_STYLE_CORE( camera2, camera3, camera, 500, 0 );
 				SET_CAM_ACTIVE( camera2, 1 );
 				SET_CAM_PROPAGATE( camera2, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -1803,7 +1803,7 @@ void phil(void)
 							POINT_CAM_AT_COORD	( camera, -674.781, 879.782, 9.10574 );
 							SET_CAM_POS			( camera, -673.585, 879.782, 9.10574 );
 						}
-						SET_CAM_INTERP_STYLE_CORE( camera2, camera2, camera, 500, 0 ); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+						SET_CAM_INTERP_STYLE_CORE( camera2, camera2, camera, 500, 0 );
 						cam_on = 0;
 					}
 				}

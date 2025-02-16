@@ -151,12 +151,12 @@ void race_launcher(void)
 				GET_GAME_CAM(&camera3);
 				CREATE_CAM( 3, &camera2 );
 				SET_CAM_INTERP_STYLE_DETAILED( camera2, 1, 1, 1, 1 );
-				SET_CAM_INTERP_STYLE_CORE( camera2, camera3, camera, 500, 0 ); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+				SET_CAM_INTERP_STYLE_CORE( camera2, camera3, camera, 500, 0 );
 				SET_CAM_ACTIVE( camera2, 1 );
 				SET_CAM_PROPAGATE( camera2, 1 );
 				ACTIVATE_SCRIPTED_CAMS(1, 1);
 
-				SET_WIDESCREEN_BORDERS( 1 ); //отключаем инетрфейс
+				SET_WIDESCREEN_BORDERS( 1 );
 				SET_CHAR_COORDINATES(GetPlayerPed(), -590.215, -298.284, 1.57197);// убераем из кадра
 
 				while (true)

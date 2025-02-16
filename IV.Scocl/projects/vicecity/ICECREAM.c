@@ -125,8 +125,8 @@ void whoopee(void)
 						GET_CAR_SPEED(car1, &speed);
 
 						// худ
-						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						DRAW_SPRITE( ice, 0.8435625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						DRAW_SPRITE( ice, 0.8435625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
@@ -198,7 +198,7 @@ void whoopee(void)
 												}
 												ADD_BLIP_FOR_CHAR(ped1, &ice_ico);
 												CHANGE_BLIP_SPRITE(ice_ico, BLIP_DESTINATION);//иконка на радаре
-												CHANGE_BLIP_COLOUR(ice_ico, 5);   //цвет иконкb на радаре
+												CHANGE_BLIP_COLOUR(ice_ico, 5);
 												CHANGE_BLIP_NAME_FROM_TEXT_FILE(ice_ico, "NE_ICE1");//иконка на радаре называние в истории карты
 												CHANGE_BLIP_SCALE(ice_ico, 0.77999990);
 
@@ -231,8 +231,8 @@ void whoopee(void)
 												{
 													WAIT( 0 );
 													GET_CAR_SPEED(car1, &speed);
-													DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-													DRAW_SPRITE( ice, 0.8435625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+													DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+													DRAW_SPRITE( ice, 0.8435625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 
 													SET_TEXT_COLOUR(95, 195, 247, 255);
 													SET_TEXT_SCALE(0.156, 0.267);
@@ -296,8 +296,8 @@ void whoopee(void)
 														while (true)
 														{
 															WAIT( 0 );
-															DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-															DRAW_SPRITE( ice, 0.8435625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+															DRAW_SPRITE( fon, 0.8765625, 0.80925926, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+															DRAW_SPRITE( ice, 0.8435625, 0.80925926, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 
 															SET_TEXT_COLOUR(95, 195, 247, 255);
 															SET_TEXT_SCALE(0.156, 0.267);
@@ -437,9 +437,9 @@ void whoopee(void)
 								}
 							}
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, -450.462, -41.6111, 6.268 );
-							SET_CAM_POS			( camera, -448.533, -43.4632, 7.208 ); // расположение камеры
+							SET_CAM_POS			( camera, -448.533, -43.4632, 7.208 ); // расположение
 							PRINT_STRING_IN_STRING("string", "ICE_AT2", 5000, 1);//~g~The Cherry Popper factory will now generate revenue up to a maximum of $3000. Make sure you collect it regularly.
 
 							//МАШИНКА СЧЁТКА ДЕНЕГ

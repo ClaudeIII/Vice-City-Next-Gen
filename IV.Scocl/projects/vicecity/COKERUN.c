@@ -126,7 +126,7 @@ void boat_race(void)
 					CREATE_OBJECT_NO_OFFSET(gruz, -107.1, -993.9, 1.095, &tovar, TRUE);
 					ADD_BLIP_FOR_OBJECT(tovar, &boat_ico);
 					CHANGE_BLIP_SPRITE(boat_ico, BLIP_OBJECTIVE);//иконка на радаре
-					CHANGE_BLIP_COLOUR(boat_ico, 5);   //цвет иконкb на радаре
+					CHANGE_BLIP_COLOUR(boat_ico, 5);
 					CHANGE_BLIP_NAME_FROM_TEXT_FILE(boat_ico, "MO_TARGET");//иконка на радаре называние в истории карты
 					CHANGE_BLIP_SCALE(boat_ico, 0.6);
 
@@ -259,8 +259,8 @@ void boat_race(void)
 						}
 
 						// таймер
-						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );// рисуем фоновую текстуру.
-						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );// рисуем фоновую текстуру.
+						DRAW_SPRITE( fon, 0.8765625, 0.7838, 0.14322917, 0.0296, 0.0, 246, 151, 255, 155 );
+						//DRAW_SPRITE( timer, 0.8765625, 0.7838, 0.14322917, 0.0592, 0.0, 255, 255, 255, 255 );
 						if ((time_m == 0) && (time_s < 16))
 						{
 							SET_TEXT_COLOUR(235, 25, 35, 255);
@@ -546,9 +546,9 @@ void boat_race(void)
 									break;
 								}
 							}
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, -231.592, -952.518, 9.05262 );
-							SET_CAM_POS			( camera, -227.057, -949.979, 11.9171 ); // расположение камеры
+							SET_CAM_POS			( camera, -227.057, -949.979, 11.9171 ); // расположение
 
 							PRINT_STRING_IN_STRING("string", "BOAT_AS", 5000, 1);//~g~The Boatyard will now generate revenue up to a maximum of $2000. Make sure you collect it regularly.
 							//МАШИНКА СЧЁТКА ДЕНЕГ

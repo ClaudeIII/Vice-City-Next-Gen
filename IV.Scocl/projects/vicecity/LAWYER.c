@@ -64,11 +64,7 @@ void main(void)
 				//------------ катсцена ----------------
 				LOAD_ADDITIONAL_TEXT("LAW_1A", 6);
 				START_CUTSCENE_NOW("law_1a");
-				while (!HAS_CUTSCENE_LOADED()) WAIT(0);
-
-				DO_SCREEN_FADE_IN(0);
-				while (!HAS_CUTSCENE_LOADED()) WAIT(0);
-
+				while (!HAS_CUTSCENE_LOADED() || !HAS_CUTSCENE_FINISHED()) WAIT(0);				
 				if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT())) DO_SCREEN_FADE_IN(0);
 
 				FORCE_WEATHER_NOW(weather);
@@ -170,8 +166,7 @@ void main(void)
 					{
 						REMOVE_BLIP(Party_ico);
 						SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
-
-						// камера сверху
+						
 						CREATE_CAM(14, &camera);
 						POINT_CAM_AT_COORD(camera, 530.273, -604.626, 4.197);
 						SET_CAM_POS(camera, 522.552, -596.448, 16.414);
@@ -181,19 +176,12 @@ void main(void)
 						SET_CAM_FOV(camera, 45.0);
 						SET_WIDESCREEN_BORDERS(1);
 
-						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 529.623, -603.946, 4.766, 2, -2);// идёт в двери
+						TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 529.623, -603.946, 4.766, 2, -2);
 						SetTime(1000);
 
 						DO_SCREEN_FADE_OUT(1000);
-						while (true)
-						{
-							WAIT(0);
-							if (IS_SCREEN_FADED_OUT())
-							{
-								break;
-							}
-						}
-						// переодивание	
+						while (!IS_SCREEN_FADED_OUT) WAIT(0);
+						
 						SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 1, 0);
 
 						FORWARD_TO_TIME_OF_DAY(19, 30);
@@ -201,15 +189,14 @@ void main(void)
 						SET_CHAR_HEADING(GetPlayerPed(), 52.9);
 						SetTime(200);
 						DO_SCREEN_FADE_IN(1000);
-
-						// подём камеры
+						
 						CREATE_CAM(3, &camera2);
 						CREATE_CAM(14, &camera3);
 						POINT_CAM_AT_COORD(camera, 528.442, -602.798, 4.56);
 						SET_CAM_POS(camera, 527.141, -601.545, 5.08);
 						POINT_CAM_AT_COORD(camera3, 528.442, -602.798, 5.839);
 						SET_CAM_POS(camera3, 527.141, -601.545, 5.08);
-						SET_CAM_INTERP_STYLE_CORE(camera2, camera, camera3, 3500, 0); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+						SET_CAM_INTERP_STYLE_CORE(camera2, camera, camera3, 3500, 0);
 						SET_CAM_ACTIVE(camera2, 1);
 						SET_CAM_PROPAGATE(camera2, 1);
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
@@ -223,7 +210,6 @@ void main(void)
 						DESTROY_CAM(camera);
 						DESTROY_CAM(camera2);
 						DESTROY_CAM(camera3);
-
 
 						CREATE_CAM(14, &camera);
 						POINT_CAM_AT_COORD(camera, 529.848, -602.708, 5.331);
@@ -327,14 +313,7 @@ void main(void)
 							REMOVE_BLIP(Party_ico);
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 							DO_SCREEN_FADE_OUT(1000);
-							while (true)
-							{
-								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())
-								{
-									break;
-								}
-							}
+							while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 
 							if (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))
 							{
@@ -356,21 +335,8 @@ void main(void)
 							//------------ катсцена ----------------
 							LOAD_ADDITIONAL_TEXT("LAW_1B", 6);
 							START_CUTSCENE_NOW("law_1b");
-							while (!HAS_CUTSCENE_LOADED())
-							{
-								WAIT(0);
-							}
-
-							DO_SCREEN_FADE_IN(0);
-							while (!HAS_CUTSCENE_FINISHED())
-							{
-								WAIT(0);
-							}
-
-							if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT()))
-							{
-								DO_SCREEN_FADE_IN(0);
-							}
+							while (!HAS_CUTSCENE_LOADED() || !HAS_CUTSCENE_FINISHED()) WAIT(0);
+							if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT())) DO_SCREEN_FADE_IN(0);
 
 							FORWARD_TO_TIME_OF_DAY(04, 35);
 							RELEASE_WEATHER();
@@ -580,24 +546,12 @@ void main(void)
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 							REMOVE_BLIP(Party_ico);
 							DO_SCREEN_FADE_OUT(1000);
-							while (true)
-							{
-								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())
-								{
-									break;
-								}
-							}
-							if (IS_CHAR_SITTING_IN_ANY_CAR(ped2))
-							{
-								WARP_CHAR_FROM_CAR_TO_COORD(ped2, 533.717, -943.083, 4.834);
-							}
-							else
-							{
-								SET_CHAR_COORDINATES(ped2, 533.717, -943.083, 4.834);
-							}
-							TASK_GO_STRAIGHT_TO_COORD(ped2, 524.137, -930.173, 4.834, 2, -2);
+							while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 
+							if (IS_CHAR_SITTING_IN_ANY_CAR(ped2)) WARP_CHAR_FROM_CAR_TO_COORD(ped2, 533.717, -943.083, 4.834);
+							else SET_CHAR_COORDINATES(ped2, 533.717, -943.083, 4.834);
+
+							TASK_GO_STRAIGHT_TO_COORD(ped2, 524.137, -930.173, 4.834, 2, -2);
 
 							CREATE_CAM(14, &camera);
 							POINT_CAM_AT_COORD(camera, 535.314, -937.212, 8.304);
@@ -766,14 +720,7 @@ void main(void)
 				SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 
 				DO_SCREEN_FADE_OUT(1000);
-				while (true)
-				{
-					WAIT(0);
-					if (IS_SCREEN_FADED_OUT())
-					{
-						break;
-					}
-				}
+				while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 
 				SET_CHAR_COORDINATES(GetPlayerPed(), 552.036, -293.714, 4.766);
 				SET_CHAR_HEADING(GetPlayerPed(), 52.894);
@@ -786,21 +733,8 @@ void main(void)
 				//------------ катсцена ----------------
 				LOAD_ADDITIONAL_TEXT("LAW_2A", 6);
 				START_CUTSCENE_NOW("law_2a");
-				while (!HAS_CUTSCENE_LOADED())
-				{
-					WAIT(0);
-				}
-
-				DO_SCREEN_FADE_IN(0);
-				while (!HAS_CUTSCENE_FINISHED())
-				{
-					WAIT(0);
-				}
-
-				if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT()))
-				{
-					DO_SCREEN_FADE_IN(0);
-				}
+				while (!HAS_CUTSCENE_LOADED() || !HAS_CUTSCENE_FINISHED()) WAIT(0);
+				if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT())) DO_SCREEN_FADE_IN(0);
 
 				FORCE_WEATHER_NOW(weather);
 				RELEASE_WEATHER();
@@ -811,8 +745,8 @@ void main(void)
 				CHANGE_BLIP_SPRITE(Party_ico, BLIP_OBJECTIVE);
 				CHANGE_BLIP_COLOUR(Party_ico, 5);
 				CHANGE_BLIP_SCALE(Party_ico, 0.6);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "NE_POINT");//иконка на радаре называние в истории карты "Телефонный звонок"
-				PRINT_STRING_IN_STRING("string", "LAW2_6", 5500, 1);//~g~Go to the Malibu Club and find Kent Paul.
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "NE_POINT");
+				PRINT_STRING_IN_STRING("string", "LAW2_6", 5500, 1);
 
 				Car car1;
 				Pickup mob_phone;
@@ -840,37 +774,34 @@ void main(void)
 				REQUEST_MODEL(PedM3);// Ланс
 				while (!HAS_MODEL_LOADED(PedM3));
 
-
 				CREATE_CHAR(26, PedM1, 281.145, -791.79, 5.445, &ped1, TRUE);
 				CREATE_CHAR(26, PedM2, 281.145, -791.79, 5.445, &ped2, TRUE);
 				CREATE_CHAR(26, PedM2, 281.145, -791.79, 5.445, &ped3, TRUE);
 				CREATE_CHAR(26, PedM2, 281.145, -791.79, 5.445, &ped4, TRUE);
 				CREATE_CHAR(26, PedM3, 281.145, -791.79, 5.445, &ped5, TRUE);
 
-
 				REQUEST_MODEL(CarM1);
 				while (!HAS_MODEL_LOADED(CarM1)) WAIT(0);
 				CREATE_CAR(CarM1, 196.987, -842.386, 2.732, &car1, TRUE);
 				SET_CAR_HEADING(car1, 102.336);
 				LOCK_CAR_DOORS(car1, 3);
-				CHANGE_CAR_COLOUR(car1, 112, 112);//цвет
-				SET_EXTRA_CAR_COLOURS(car1, 112, 112);//цвет отрожений
+				CHANGE_CAR_COLOUR(car1, 112, 112);
+				SET_EXTRA_CAR_COLOURS(car1, 112, 112);
 
-				//им пути
-				REQUEST_CAR_RECORDING(2994);//им пути подъезд
+				
+				REQUEST_CAR_RECORDING(2994);
 				while (!HAS_CAR_RECORDING_BEEN_LOADED(2994)) WAIT(0);
-				REQUEST_CAR_RECORDING(2995);//им пути уезд
+				REQUEST_CAR_RECORDING(2995);
 				while (!HAS_CAR_RECORDING_BEEN_LOADED(2995)) WAIT(0);
 
-				//им телефон
+				
 				REQUEST_MODEL(trubka);
 				while (!HAS_MODEL_LOADED(trubka)) WAIT(0);
 				CREATE_OBJECT_NO_OFFSET(trubka, 1.1, 1.1, -1.1, &trubka_1, TRUE);
 
 
 				while (TRUE)
-				{
-					// клуб молибу
+				{					
 					WAIT(0);
 					DRAW_CHECKPOINT(925.599, 453.827, 5.389, 1.3, 246, 151, 255);
 					GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
@@ -894,14 +825,7 @@ void main(void)
 
 						REMOVE_BLIP(Party_ico);
 						DO_SCREEN_FADE_OUT(1000);
-						while (true)
-						{
-							WAIT(0);
-							if (IS_SCREEN_FADED_OUT())
-							{
-								break;
-							}
-						}
+						while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 						SetTime(200);
 						SET_CHAR_COORDINATES(GetPlayerPed(), 925.06, 453.041, 5.763);
 						SET_CHAR_HEADING(GetPlayerPed(), -128.321);
@@ -915,27 +839,14 @@ void main(void)
 						//------------ катсцена ----------------
 						LOAD_ADDITIONAL_TEXT("LAW_2B", 6);
 						START_CUTSCENE_NOW("law_2b");
-						while (!HAS_CUTSCENE_LOADED())
-						{
-							WAIT(0);
-						}
-
-						DO_SCREEN_FADE_IN(0);
-						while (!HAS_CUTSCENE_FINISHED())
-						{
-							WAIT(0);
-						}
-
-						if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT()))
-						{
-							DO_SCREEN_FADE_IN(0);
-						}
+						while (!HAS_CUTSCENE_LOADED() || !HAS_CUTSCENE_FINISHED()) WAIT(0);
+						if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT())) DO_SCREEN_FADE_IN(0);
 
 						ADD_BLIP_FOR_COORD(869.546, -37.984, 5.566, &Party_ico);
 						CHANGE_BLIP_SPRITE(Party_ico, BLIP_OBJECTIVE);
-						CHANGE_BLIP_COLOUR(Party_ico, 19);  //цвет иконка на радаре (0=белая 5=розовый 19=жёлтый)
+						CHANGE_BLIP_COLOUR(Party_ico, 19);
 						CHANGE_BLIP_SCALE(Party_ico, 0.6);
-						CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "NE_POINT");//иконка на радаре называние в истории карты "Телефонный звонок"
+						CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "NE_POINT");
 						PRINT_STRING_IN_STRING("string", "LAW2_7", 5500, 1);//~g~Go and find the chef on Ocean Drive.
 
 						SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 1, 1, 1);
@@ -1001,7 +912,7 @@ void main(void)
 							TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 870.175, -36.652, 4.918, 2, -2);
 							SetTime(200);
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD(camera, 870.603, -38.014, 4.678);
 							SET_CAM_POS(camera, 867.869, -25.671, 8.817);
 
@@ -1067,7 +978,7 @@ void main(void)
 									CHANGE_BLIP_SPRITE(Party_ico, BLIP_OBJECTIVE);
 									CHANGE_BLIP_COLOUR(Party_ico, 5);
 									CHANGE_BLIP_SCALE(Party_ico, 0.6);
-									CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "MO_TARGET");//иконка на радаре называние в истории карты "Телефонный звонок"
+									CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "MO_TARGET");
 									add_phone = 1;
 									break;
 								}
@@ -1105,7 +1016,7 @@ void main(void)
 								CHANGE_BLIP_SPRITE(Party_ico, BLIP_OBJECTIVE);
 								CHANGE_BLIP_COLOUR(Party_ico, 5);
 								CHANGE_BLIP_SCALE(Party_ico, 0.6);
-								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "MO_TARGET");//иконка на радаре называние в истории карты "Телефонный звонок"
+								CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "MO_TARGET");
 								add_phone = 1;
 							}
 							break;
@@ -1132,14 +1043,7 @@ void main(void)
 							SetTime(1000);
 
 							DO_SCREEN_FADE_OUT(1000);
-							while (true)
-							{
-								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())
-								{
-									break;
-								}
-							}
+							while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 							CLEAR_HELP();
 
 							// раздаём
@@ -1190,21 +1094,8 @@ void main(void)
 							//------------ катсцена ----------------
 							LOAD_ADDITIONAL_TEXT("LAW_2C", 6);
 							START_CUTSCENE_NOW("law_2c");
-							while (!HAS_CUTSCENE_LOADED())
-							{
-								WAIT(0);
-							}
-
-							DO_SCREEN_FADE_IN(0);
-							while (!HAS_CUTSCENE_FINISHED())
-							{
-								WAIT(0);
-							}
-
-							if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT()))
-							{
-								DO_SCREEN_FADE_IN(0);
-							}
+							while (!HAS_CUTSCENE_LOADED() || !HAS_CUTSCENE_FINISHED()) WAIT(0);
+							if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT())) DO_SCREEN_FADE_IN(0);
 
 							CREATE_CAM(14, &camera);
 							POINT_CAM_AT_COORD(camera, 870.993, -32.916, 5.651);
@@ -1409,14 +1300,7 @@ void main(void)
 								SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 
 								DO_SCREEN_FADE_OUT(500);
-								while (true)
-								{
-									WAIT(0);
-									if (IS_SCREEN_FADED_OUT())
-									{
-										break;
-									}
-								}
+								while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 
 								CREATE_CAM(14, &camera);
 								POINT_CAM_AT_COORD(camera, 369.507, -948.653, 5.431);
@@ -1493,14 +1377,7 @@ void main(void)
 								}
 
 								DO_SCREEN_FADE_OUT(500);
-								while (true)
-								{
-									WAIT(0);
-									if (IS_SCREEN_FADED_OUT())
-									{
-										break;
-									}
-								}
+								while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 								CLEAR_HELP();
 								SET_CAM_BEHIND_PED(GetPlayerPed());
 								ACTIVATE_SCRIPTED_CAMS(0, 0);
@@ -1575,14 +1452,7 @@ void main(void)
 						{
 							REMOVE_BLIP(Party_ico);
 							DO_SCREEN_FADE_OUT(1000);
-							while (true)
-							{
-								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())
-								{
-									break;
-								}
-							}
+							while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 							SET_CAR_DENSITY_MULTIPLIER(0);
 							CLEAR_AREA_OF_CARS(680.758, -755.964, 1.154, 100.0);
@@ -1768,14 +1638,7 @@ void main(void)
 				SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 
 				DO_SCREEN_FADE_OUT(1000);
-				while (true)
-				{
-					WAIT(0);
-					if (IS_SCREEN_FADED_OUT())
-					{
-						break;
-					}
-				}
+				while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 
 				SET_CHAR_COORDINATES(GetPlayerPed(), 552.036, -293.714, 4.766);
 				SET_CHAR_HEADING(GetPlayerPed(), 52.894);
@@ -1859,8 +1722,7 @@ void main(void)
 				SET_CHAR_RELATIONSHIP(ped2, 5, 24);
 				SET_CHAR_RELATIONSHIP(ped3, 5, 24);
 				SET_PED_DONT_DO_EVASIVE_DIVES(ped4, 1);
-
-				//им пути драндулета
+				
 				REQUEST_CAR_RECORDING(2996);
 				while (!HAS_CAR_RECORDING_BEEN_LOADED(2996)) WAIT(0);
 
@@ -1872,21 +1734,8 @@ void main(void)
 				//------------ катсцена ----------------
 				LOAD_ADDITIONAL_TEXT("LAW_3", 6);
 				START_CUTSCENE_NOW("law_3");
-				while (!HAS_CUTSCENE_LOADED())
-				{
-					WAIT(0);
-				}
-
-				DO_SCREEN_FADE_IN(0);
-				while (!HAS_CUTSCENE_FINISHED())
-				{
-					WAIT(0);
-				}
-
-				if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT()))
-				{
-					DO_SCREEN_FADE_IN(0);
-				}
+				while (!HAS_CUTSCENE_LOADED() || !HAS_CUTSCENE_FINISHED()) WAIT(0);
+				if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT())) DO_SCREEN_FADE_IN(0);
 
 				FORCE_WEATHER_NOW(weather);
 				RELEASE_WEATHER();
@@ -1909,14 +1758,12 @@ void main(void)
 				ADD_LINE_TO_CONVERSATION(0, "R14_XF", "", 0, 0);//
 				START_SCRIPT_CONVERSATION(1, 1);
 				SetSpeech();
-
-				// проигрвыаем пути
+				
 				SetTime(1000);
 				START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car3, 2996, 0.0, 0.0, 0.0);
 				SetTime(1000);
 				SETTIMERA(0);
-
-				//а сбивает
+				
 				while (TRUE)
 				{
 					WAIT(0);
@@ -1927,7 +1774,7 @@ void main(void)
 						break;
 					}
 				}
-				// получаем координаты
+				
 				GET_CHAR_COORDINATES(ped4, &PedX, &PedY, &PedZ);
 				GET_GROUND_Z_FOR_3D_COORD(PedX, PedY, PedZ, &PedZ);
 				CREATE_PICKUP_ROTATE(w_hammer, 3, 1, PedX, PedY, PedZ, -87.532, -108.556, 8.524, &sweap_1);
@@ -1939,7 +1786,6 @@ void main(void)
 				SET_CAM_POS(camera, 543.173, -296.107, 6.183);
 				PRINT_STRING_IN_STRING("string", "LAW3_24", 5500, 1);//~g~That hammer would be useful.
 				SetTime(4000);
-
 
 				SET_CAM_BEHIND_PED(GetPlayerPed());
 				ACTIVATE_SCRIPTED_CAMS(0, 0);
@@ -2012,14 +1858,7 @@ void main(void)
 					{
 
 						DO_SCREEN_FADE_OUT(1000);
-						while (true)
-						{
-							WAIT(0);
-							if (IS_SCREEN_FADED_OUT())
-							{
-								break;
-							}
-						}
+						while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 						SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 						REMOVE_BLIP(jury_car1);
 						SET_CHAR_COORDINATES(ped1, 984.8, 727.5, 8.539);
@@ -2108,7 +1947,7 @@ void main(void)
 							SetSpeech();
 						}
 
-						// меняем ракурс
+						
 						POINT_CAM_AT_COORD(camera, 980.528, 733.934, 10.859);
 						SET_CAM_POS(camera, 981.683, 736.051, 10.808);
 
@@ -2137,14 +1976,7 @@ void main(void)
 					if ((car2_HP < 5) && (car2_des == 0))
 					{
 						DO_SCREEN_FADE_OUT(1000);
-						while (true)
-						{
-							WAIT(0);
-							if (IS_SCREEN_FADED_OUT())
-							{
-								break;
-							}
-						}
+						while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 
 						SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 						REMOVE_BLIP(jury_car2);
@@ -2193,7 +2025,7 @@ void main(void)
 						START_SCRIPT_CONVERSATION(1, 1);
 						SetSpeech();
 
-						// меняем ракурс
+						
 						POINT_CAM_AT_COORD(camera, 632.427, -490.956, 5.862);
 						SET_CAM_POS(camera, 632.131, -491.902, 5.988);
 
@@ -2224,14 +2056,7 @@ void main(void)
 						if (IS_CAR_IN_AREA_3D(car2, 615.574, -502.26, 3.946, 621.074, -499.26, 6.946, 0))
 						{
 							DO_SCREEN_FADE_OUT(1000);
-							while (true)
-							{
-								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())
-								{
-									break;
-								}
-							}
+							while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 							SET_CHAR_COORDINATES(ped2, 620.943, -497.315, 4.451);
@@ -2243,10 +2068,10 @@ void main(void)
 							SET_CAR_COORDINATES(car2, 618.48, -500.79, 5.058);
 							SET_CAR_HEADING(car2, 261.36);
 
-							//им пути
-							REQUEST_CAR_RECORDING(2997);//им пути адмирала
+							
+							REQUEST_CAR_RECORDING(2997);
 							while (!HAS_CAR_RECORDING_BEEN_LOADED(2997)) WAIT(0);
-							REQUEST_CAR_RECORDING(2998);//им путиовика
+							REQUEST_CAR_RECORDING(2998);
 							while (!HAS_CAR_RECORDING_BEEN_LOADED(2998)) WAIT(0);
 
 							REQUEST_ANIMS("ped");
@@ -2294,13 +2119,13 @@ void main(void)
 							START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car2, 2997, 0.0, 0.374, -0.164);
 							START_PLAYBACK_RECORDED_CAR_WITH_OFFSET(car4, 2998, 0.0, 0.142, -0.693);
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD(camera, 626.665, -503.788, 4.24);
 							SET_CAM_POS(camera, 611.616, -498.071, 6.533);
 							CLOSE_ALL_CAR_DOORS(car2);// закрываем двери
 							SetTime(4000);
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD(camera, 633.956, -505.002, 5.19);
 							SET_CAM_POS(camera, 633.633, -496.148, 8.663);
 							SetTime(4000);
@@ -2380,14 +2205,7 @@ void main(void)
 									}
 
 									DO_SCREEN_FADE_OUT(1000);
-									while (true)
-									{
-										WAIT(0);
-										if (IS_SCREEN_FADED_OUT())
-										{
-											break;
-										}
-									}
+									while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 									SetTime(1000);
 									if (IS_CHAR_SITTING_IN_ANY_CAR(ped2))
 									{
@@ -2483,7 +2301,7 @@ void main(void)
 										SetSpeech();
 									}
 
-									// меняем ракурс
+									
 									POINT_CAM_AT_COORD(camera, 632.427, -490.956, 5.862);
 									SET_CAM_POS(camera, 632.131, -491.902, 5.988);
 									SET_CHAR_COORDINATES(ped2, 634.284, -489.079, 4.451);
@@ -2529,14 +2347,7 @@ void main(void)
 						else
 						{
 							DO_SCREEN_FADE_OUT(1000);
-							while (true)
-							{
-								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())
-								{
-									break;
-								}
-							}
+							while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 							REMOVE_BLIP(jury_car2);
@@ -2590,7 +2401,7 @@ void main(void)
 							START_SCRIPT_CONVERSATION(1, 1);
 							SetSpeech();
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD(camera, 632.427, -490.956, 5.862);
 							SET_CAM_POS(camera, 632.131, -491.902, 5.988);
 							SET_CHAR_COORDINATES(ped2, 634.284, -489.079, 4.451);
@@ -2760,11 +2571,7 @@ void main(void)
 
 				LOAD_ADDITIONAL_TEXT("LAW_4", 6);
 				START_CUTSCENE_NOW("law_4");
-				while (!HAS_CUTSCENE_LOADED()) WAIT(0);
-
-				DO_SCREEN_FADE_IN(0);
-				while (!HAS_CUTSCENE_LOADED()) WAIT(0);
-
+				while (!HAS_CUTSCENE_LOADED() || !HAS_CUTSCENE_FINISHED()) WAIT(0);
 				if ((IS_SCREEN_FADING_OUT()) || (IS_SCREEN_FADED_OUT())) DO_SCREEN_FADE_IN(0);
 
 				FORCE_WEATHER_NOW(weather);
@@ -3109,8 +2916,7 @@ void main(void)
 				SET_CURRENT_CHAR_WEAPON(ped2, WEAPON_EPISODIC_24, TRUE);
 				UpdateWeaponOfPed(ped3, WEAPON_EPISODIC_24);
 				SET_CURRENT_CHAR_WEAPON(ped3, WEAPON_EPISODIC_24, TRUE);
-
-				// загружаем анимацию
+				
 				REQUEST_ANIMS("amb@bum_a");
 				while (!HAVE_ANIMS_LOADED("amb@bum_a")); WAIT(0);
 				REQUEST_ANIMS("amb@nightclub_ext");
@@ -3202,7 +3008,7 @@ void main(void)
 							REMOVE_BLIP(Party_ico);
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 
-							// камера сверху
+							
 							CREATE_CAM(14, &camera);
 							POINT_CAM_AT_COORD(camera, 530.273, -604.626, 4.197);
 							SET_CAM_POS(camera, 522.552, -596.448, 16.414);
@@ -3212,38 +3018,31 @@ void main(void)
 							SET_CAM_FOV(camera, 45.0);
 							SET_WIDESCREEN_BORDERS(1);
 
-							TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 529.623, -603.946, 4.766, 2, -2);// идёт в двери
+							TASK_GO_STRAIGHT_TO_COORD(GetPlayerPed(), 529.623, -603.946, 4.766, 2, -2);
 							SetTime(1000);
 
 							DO_SCREEN_FADE_OUT(1000);
-							while (true)
-							{
-								WAIT(0);
-								if (IS_SCREEN_FADED_OUT())
-								{
-									break;
-								}
-							}
-							// переодивание	
-							SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 2, 0);// куртка
+							while (!IS_SCREEN_FADED_OUT()) WAIT(0);
+							
+							SET_CHAR_COMPONENT_VARIATION(GetPlayerPed(), 1, 2, 0);
 
 							SET_CHAR_COORDINATES(GetPlayerPed(), 528.664, -602.916, 4.766);
 							SET_CHAR_HEADING(GetPlayerPed(), 52.9);
 							SetTime(200);
 							DO_SCREEN_FADE_IN(1000);
 
-							// подём камеры
+							
 							CREATE_CAM(3, &camera2);
 							CREATE_CAM(14, &camera3);
 							POINT_CAM_AT_COORD(camera, 528.442, -602.798, 4.56);
 							SET_CAM_POS(camera, 527.141, -601.545, 5.08);
 							POINT_CAM_AT_COORD(camera3, 528.442, -602.798, 5.839);
 							SET_CAM_POS(camera3, 527.141, -601.545, 5.08);
-							SET_CAM_INTERP_STYLE_CORE(camera2, camera, camera3, 3500, 0); //перемещение камеры от на точку указанную в координатах "SET_CAM_POS(camera, X, Y, Z)" 
+							SET_CAM_INTERP_STYLE_CORE(camera2, camera, camera3, 3500, 0);
 							SET_CAM_ACTIVE(camera2, 1);
 							SET_CAM_PROPAGATE(camera2, 1);
 							ACTIVATE_SCRIPTED_CAMS(1, 1);
-							SET_WIDESCREEN_BORDERS(1); //отключаем инетрфейс
+							SET_WIDESCREEN_BORDERS(1);
 							SetTime(5000);
 
 							ACTIVATE_SCRIPTED_CAMS(0, 0);
@@ -3277,8 +3076,7 @@ void main(void)
 					GET_CHAR_HEALTH(ped22, &ped22_HP);
 					GET_CHAR_HEALTH(ped23, &ped23_HP);
 					GET_CHAR_HEALTH(ped24, &ped24_HP);
-
-					// чекпойнт бунта
+					
 					GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
 					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 731.166, 210.147, 6.354, &PlayR);
 					if ((PlayR < 40.0) && (sound == 0))
@@ -3299,7 +3097,7 @@ void main(void)
 							{
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, ped2, "ROMAN");
-								ADD_LINE_TO_CONVERSATION(0, "R1_DA", " ", 0, 0);//
+								ADD_LINE_TO_CONVERSATION(0, "R1_DA", " ", 0, 0);
 								START_SCRIPT_CONVERSATION(1, 1);
 								SETTIMERB(0);
 								soundID = 2;
@@ -3311,7 +3109,7 @@ void main(void)
 							{
 								NEW_SCRIPTED_CONVERSATION();
 								ADD_NEW_CONVERSATION_SPEAKER(0, ped5, "ROMAN");
-								ADD_LINE_TO_CONVERSATION(0, "R1_EA", " ", 0, 0);//
+								ADD_LINE_TO_CONVERSATION(0, "R1_EA", " ", 0, 0);
 								START_SCRIPT_CONVERSATION(1, 1);
 								SETTIMERB(0);
 								soundID = 1;
@@ -3319,8 +3117,7 @@ void main(void)
 						}
 					}
 					if ((PlayR < 25.0) && (textID == 0))
-					{
-						// начните драку с несколькими рабочими
+					{						
 						PRINT_STRING_IN_STRING("string", "LAW4_13", 5500, 1);//~g~Start fighting with at least 4 workers to get a riot started.
 						textID = 1;
 					}
@@ -3388,7 +3185,7 @@ void main(void)
 							TASK_GO_STRAIGHT_TO_COORD(ped3, 736.048, 218.378, 6.354, 2, -2);// Пед идёт в пойнт
 							SetTime(2000);
 
-							// убираем камиру
+							
 							SET_CAM_BEHIND_PED(GetPlayerPed());
 							ACTIVATE_SCRIPTED_CAMS(0, 0);
 							DESTROY_CAM(camera);
@@ -3503,13 +3300,11 @@ void main(void)
 						SET_CAM_PROPAGATE(camera, 1);
 						ACTIVATE_SCRIPTED_CAMS(1, 1);
 						SetTime(4000);
-
-						// меняем ракурс
+			
 						POINT_CAM_AT_COORD(camera, 748.657, 232.445, 5.295);
 						SET_CAM_POS(camera, 732.313, 232.226, 8.498);
 						SetTime(4000);
-
-						// убираем камиру
+						
 						SET_CAM_BEHIND_PED(GetPlayerPed());
 						ACTIVATE_SCRIPTED_CAMS(0, 0);
 						DESTROY_CAM(camera);
@@ -3683,10 +3478,7 @@ void main(void)
 				blip_on = 0;
 			}
 		}
-		else if ((G_ONMISSION == 0) && (G_LAWYER == 5))
-		{
-			break;
-		}
+		else if ((G_ONMISSION == 0) && (G_LAWYER == 5)) break;
 		else
 		{
 			if (blip_on == 1)

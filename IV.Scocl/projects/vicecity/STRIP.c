@@ -217,13 +217,13 @@ void stripclub(void)
 							LOAD_SCENE_FOR_ROOM_BY_KEY( getint, uVar14 );
 							MUTE_GAMEWORLD_AND_POSITIONED_RADIO_FOR_TV( 0 );
 
-							// меняем ракурс
+							
 							POINT_CAM_AT_COORD	( camera, 499.998, -921.742, 5.56992 );
 							SET_CAM_POS			( camera, 500.307, -919.739, 4.72875 );
 							SetTime(10);
 
 							POINT_CAM_AT_COORD	( camera, 510.385, -915.861, 5.43983 );
-							SET_CAM_POS			( camera, 510.517, -917.174, 6.08692 ); // расположение камеры
+							SET_CAM_POS			( camera, 510.517, -917.174, 6.08692 ); // расположение
 
 							PRINT_STRING_IN_STRING("string", "ASSET_D", 5000, 1);//~g~The Pole Position Club will now generate revenue up to a maximum of $4000 per day. Pick up your cash regularly!
 

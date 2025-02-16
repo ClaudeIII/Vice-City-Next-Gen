@@ -7,36 +7,6 @@
     <Size value="8777728" />
   </Slot>
   <Slot>
-    <Name content="ascii">AMBIENT_SCRIPT_SLOT_0</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="552960" />
-  </Slot>
-  <Slot>
-    <Name content="ascii">AMBIENT_SCRIPT_SLOT_1</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="552960" />
-  </Slot>
-  <Slot>
-    <Name content="ascii">AMBIENT_SCRIPT_SLOT_2</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="552960" />
-  </Slot>
-  <Slot>
-    <Name content="ascii">AMBIENT_SCRIPT_SLOT_3</Name>
-    <MaxHeaderSize value="2048" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="552960" />
-  </Slot>
-  <Slot>
-    <Name content="ascii">AMBIENT_SCRIPT_SLOT_4</Name>
-    <MaxHeaderSize value="4096" />
-    <LoadType content="ascii">BANK</LoadType>
-    <Size value="3354624" />
-  </Slot>
-  <Slot>
     <Name content="ascii">COLLISIONS</Name>
     <MaxHeaderSize value="49152" />
     <LoadType content="ascii">BANK</LoadType>
