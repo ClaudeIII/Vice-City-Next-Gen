@@ -943,7 +943,7 @@ void get_weap(int ID_scan)
 }
 void lawyer(void)
 {
-	while (HAS_CHAR_BEEN_ARRESTED) WAIT(0);
+	while (HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())) WAIT(0);
 
 	SetTime(2000);
 	GENERATE_RANDOM_INT_IN_RANGE(0, 4, &randint);
