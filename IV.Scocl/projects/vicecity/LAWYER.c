@@ -1254,7 +1254,7 @@ void main(void)
 							SetSpeech();
 
 							SetTime(1000);
-							ADD_BLIP_FOR_COORD(379.082, -948.858, 4.217, &Party_ico);
+							ADD_BLIP_FOR_COORD(369.825, -949.315, 4.43197, &Party_ico);
 							CHANGE_BLIP_SPRITE(Party_ico, BLIP_WEAPONS);
 							CHANGE_BLIP_SCALE(Party_ico, 1.1);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "NE_POINT");//иконка на радаре называние в истории карты "Ammu-Nation"
@@ -1281,7 +1281,7 @@ void main(void)
 
 							PRINT_STRING_IN_STRING("string", "LAW2_15", 5500, 1);//~g~Go to Ammu-Nation.
 							REMOVE_BLIP(lance_car);
-							ADD_BLIP_FOR_COORD(379.082, -948.858, 4.217, &Party_ico);
+							ADD_BLIP_FOR_COORD(369.825, -949.315, 4.43197, &Party_ico);
 							CHANGE_BLIP_SPRITE(Party_ico, BLIP_WEAPONS);
 							CHANGE_BLIP_SCALE(Party_ico, 1.1);
 							CHANGE_BLIP_NAME_FROM_TEXT_FILE(Party_ico, "NE_POINT");//иконка на радаре называние в истории карты "Ammu-Nation"
