@@ -1,6 +1,5 @@
 #platformimg:/data/maps/parking/parking
 commonimg:/data/cdimages/carrec
-commonimg:/data/cdimages/navgen_script
 commonimg:/data/cdimages/script
 commonimg:/data/cdimages/script_network
 platformimg:/anim/anim
@@ -9,7 +8,6 @@ platformimg:/anim/cutsprops
 platformimg:/data/cdimages/gtxd
 platformimg:/data/cdimages/navmeshes
 platformimg:/data/cdimages/paths
-platformimg:/data/cdimages/scripttxds
 platformimg:/data/maps/generic/procobj
 platformimg:/data/maps/props/commercial/clothes
 platformimg:/data/maps/props/lev_des/icons

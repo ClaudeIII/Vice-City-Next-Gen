@@ -4,7 +4,7 @@
 
 IMGLIST common:/data/images.txt
 
-WATER common:/DATA/WATER.DAT common:/DATA/WATERLOW.DAT
+WATER common:/data/water.dat
 
 #IDE platform:/DATA/MAPS/parking/parking.IDE
 #IPL platform:/data/maps/parking/parking.IPL
