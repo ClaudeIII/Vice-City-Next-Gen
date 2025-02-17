@@ -589,6 +589,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -70000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(9, TRUE);
 					CLEAR_HELP();
 					G_COUNT = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -706,6 +707,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -50000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(10, TRUE);
 					CLEAR_HELP();
 					G_BUSINES_SA = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -836,6 +838,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -60000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(11, TRUE);
 					CLEAR_HELP();
 					G_PRON = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -952,6 +955,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -20000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(12, TRUE);
 					CLEAR_HELP();
 					G_ICECREAM = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1095,6 +1099,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -40000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(13, TRUE);
 					CLEAR_HELP();
 					G_CABS = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1233,6 +1238,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -120000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(14, TRUE);
 					CLEAR_HELP();
 					G_CLUB = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1349,6 +1355,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -10000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(15, TRUE);
 					CLEAR_HELP();
 					G_COKERUN = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1488,6 +1495,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -30000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(16, TRUE);
 					CLEAR_HELP();
 					G_STRIP = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1599,6 +1607,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -8000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(3, TRUE);
 					CLEAR_HELP();
 					G_SWANKO = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1716,6 +1725,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -6000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(2, TRUE);
 					CLEAR_HELP();
 					G_LINKS = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1831,6 +1841,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -14000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(7, TRUE);
 					CLEAR_HELP();
 					G_CONDO = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1953,6 +1964,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -7000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(5, TRUE);
 					CLEAR_HELP();
 					G_HEIGHS = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -2068,6 +2080,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -3000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(4, TRUE);
 					CLEAR_HELP();
 					G_WS_1102 = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -2175,6 +2188,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -2500 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(1, TRUE);
 					CLEAR_HELP();
 					G_VP_3321 = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -2282,6 +2296,7 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -1000 );// отнимаем у сумму
+					ENABLE_SAVE_HOUSE(6, TRUE);
 					CLEAR_HELP();
 					G_SHACK = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
