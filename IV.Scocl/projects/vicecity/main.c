@@ -8,7 +8,7 @@
 Pickup tweap[2];
 uint randint, Ammo_nan;
 uint Weap[20], get_Weap[10], Ammo[20];
-int i, isActivated, a[30], c[30], cur;
+int i, isActivated, c[30], cur, letterKey[26];
 float timeScale = 1.0;
 
 float playX, playY, playZ, playR, jump_ok, all_jump, speed, jump[36];
@@ -492,114 +492,14 @@ void ChangeLetterPos(void) {
 	return;
 }
 void UpdateKeys(void) {
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(16)) {
-		cur = 16;
-		ChangeLetterPos();
-	}
-	else
-		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(17)) {
-			cur = 17;
+	for (i = 0; i < 26; i++)
+	{
+		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(letterKey[i]))
+		{
+			cur = letterKey[i];
 			ChangeLetterPos();
+			break;
 		}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(18)) {
-		cur = 18;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(19)) {
-		cur = 19;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(20)) {
-		cur = 20;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(21)) {
-		cur = 21;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(22)) {
-		cur = 22;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(23)) {
-		cur = 23;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(24)) {
-		cur = 24;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(25)) {
-		cur = 25;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(30)) {
-		cur = 30;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(31)) {
-		cur = 31;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(32)) {
-		cur = 32;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(33)) {
-		cur = 33;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(34)) {
-		cur = 34;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(35)) {
-		cur = 35;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(36)) {
-		cur = 36;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(37)) {
-		cur = 37;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(38)) {
-		cur = 38;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(44)) {
-		cur = 44;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(45)) {
-		cur = 45;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(46)) {
-		cur = 46;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(47)) {
-		cur = 47;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(48)) {
-		cur = 48;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(49)) {
-		cur = 49;
-		ChangeLetterPos();
-	}
-	if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(50)) {
-		cur = 50;
-		ChangeLetterPos();
-	}
-	if ((IS_GAME_KEYBOARD_KEY_JUST_PRESSED(57)) || (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(26)) || (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(27)) || (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(39)) || (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(40)) || (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(51)) || (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(52)) || (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(53))) {
-		cur = 0;
-		ChangeLetterPos();
 	}
 	return;
 }
@@ -1461,6 +1361,33 @@ void main(void)
 	isPlaying = 0;
 	isVolChanged = 0;
 	stop_aud = 0;
+
+	letterKey[0] = KEY_Q;
+	letterKey[1] = KEY_W;
+	letterKey[2] = KEY_E;
+	letterKey[3] = KEY_R;
+	letterKey[4] = KEY_T;
+	letterKey[5] = KEY_Y;
+	letterKey[6] = KEY_U;
+	letterKey[7] = KEY_I;
+	letterKey[8] = KEY_O;
+	letterKey[9] = KEY_P;
+	letterKey[10] = KEY_A;
+	letterKey[11] = KEY_S;
+	letterKey[12] = KEY_D;
+	letterKey[13] = KEY_F;
+	letterKey[14] = KEY_G;
+	letterKey[15] = KEY_H;
+	letterKey[16] = KEY_J;
+	letterKey[17] = KEY_K;
+	letterKey[18] = KEY_L;
+	letterKey[19] = KEY_Z;
+	letterKey[20] = KEY_X;
+	letterKey[21] = KEY_C;
+	letterKey[22] = KEY_V;
+	letterKey[23] = KEY_B;
+	letterKey[24] = KEY_N;
+	letterKey[25] = KEY_M;
 
 	int randint;
 	GENERATE_RANDOM_INT(&randint);
