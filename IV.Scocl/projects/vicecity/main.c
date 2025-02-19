@@ -482,9 +482,7 @@ void stuntjump(void)
 		G_JUMP = 1;
 	}
 }
-
 void ChangeLetterPos(void) {
-	isActivated = false;
 	for (i = 1; i < 30; i++) {
 		c[i - 1] = c[i];
 	}
@@ -492,10 +490,8 @@ void ChangeLetterPos(void) {
 	return;
 }
 void UpdateKeys(void) {
-	for (i = 0; i < 26; i++)
-	{
-		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(letterKey[i]))
-		{
+	for (i = 0; i < 26; i++) {
+		if (IS_GAME_KEYBOARD_KEY_JUST_PRESSED(letterKey[i])) {
 			cur = letterKey[i];
 			ChangeLetterPos();
 			break;
@@ -520,7 +516,6 @@ void CreateCar(char* name) {
 	SET_CAR_HEADING(ccar, h);
 	MARK_CAR_AS_NO_LONGER_NEEDED(&ccar);
 	MARK_MODEL_AS_NO_LONGER_NEEDED(GET_HASH_KEY(name));
-	PRINT_HELP("CHEAT1");
 	isActivated = true;
 	return;
 }
@@ -579,13 +574,11 @@ void cheats(void)
 					SET_ENGINE_HEALTH(hcar, 1500);
 					MARK_CAR_AS_NO_LONGER_NEEDED(&hcar);
 				}
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// PRECIOUSPROTECTION - броня
 			}
 			else if ((c[12] == 25) && (c[13] == 19) && (c[14] == 18) && (c[15] == 46) && (c[16] == 23) && (c[17] == 24) && (c[18] == 22) && (c[19] == 31) && (c[20] == 25) && (c[21] == 19) && (c[22] == 24) && (c[23] == 20) && (c[24] == 18) && (c[25] == 46) && (c[26] == 20) && (c[27] == 23) && (c[28] == 24) && (c[29] == 49)) {
 				ADD_ARMOUR_TO_CHAR(GetPlayerPed(), 100);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// THUGSTOOLS - первый пак с оружием
 			}
@@ -595,7 +588,6 @@ void cheats(void)
 				UpdateWeaponOfPed(GetPlayerPed(), WEAPON_MICRO_UZI);
 				UpdateWeaponOfPed(GetPlayerPed(), WEAPON_BASEBALLBAT);
 				UpdateWeaponOfPed(GetPlayerPed(), WEAPON_MOLOTOV);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// PROFESSIONALTOOLS - второй пак с оружием
 			}
@@ -605,7 +597,6 @@ void cheats(void)
 				UpdateWeaponOfPed(GetPlayerPed(), WEAPON_MP5);
 				UpdateWeaponOfPed(GetPlayerPed(), WEAPON_KNIFE);
 				UpdateWeaponOfPed(GetPlayerPed(), WEAPON_GRENADE);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// NUTTERTOOLS - третий пак с оружием
 			}
@@ -615,13 +606,11 @@ void cheats(void)
 				UpdateWeaponOfPed(GetPlayerPed(), WEAPON_M4);
 				UpdateWeaponOfPed(GetPlayerPed(), WEAPON_EPISODIC_22);
 				UpdateWeaponOfPed(GetPlayerPed(), WEAPON_RLAUNCHER);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// LEAVEMEALONE - убрать звезды розыска
 			}
 			else if ((c[18] == 38) && (c[19] == 18) && (c[20] == 30) && (c[21] == 47) && (c[22] == 18) && (c[23] == 50) && (c[24] == 18) && (c[25] == 30) && (c[26] == 38) && (c[27] == 24) && (c[28] == 49) && (c[29] == 18)) {
 				CLEAR_WANTED_LEVEL(GetPlayerIndex());
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// YOUWONTTAKEMEALIVE - добавить две звезды
 			}
@@ -634,43 +623,36 @@ void cheats(void)
 				}
 				ALTER_WANTED_LEVEL(GetPlayerIndex(), wl);
 				APPLY_WANTED_LEVEL_CHANGE_NOW(GetPlayerIndex());
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// ICANTTAKEITANYMORE - игрок умирает
 			}
 			else if ((c[12] == 23) && (c[13] == 46) && (c[14] == 30) && (c[15] == 49) && (c[16] == 20) && (c[17] == 20) && (c[18] == 30) && (c[19] == 37) && (c[20] == 18) && (c[21] == 23) && (c[22] == 20) && (c[23] == 30) && (c[24] == 49) && (c[25] == 21) && (c[26] == 50) && (c[27] == 24) && (c[28] == 19) && (c[29] == 18)) {
 				EXPLODE_CHAR_HEAD(GetPlayerPed());
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// ABITDRIEG - облачная погода
 			}
 			else if ((c[21] == 30) && (c[22] == 48) && (c[23] == 23) && (c[24] == 20) && (c[25] == 32) && (c[26] == 19) && (c[27] == 23) && (c[28] == 18) && (c[29] == 34)) {
 				FORCE_WEATHER_NOW(WEATHER_CLOUDY);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// APLEASANTDAY - хорошая погода
 			}
 			else if ((c[18] == 30) && (c[19] == 25) && (c[20] == 38) && (c[21] == 18) && (c[22] == 30) && (c[23] == 31) && (c[24] == 30) && (c[25] == 49) && (c[26] == 20) && (c[27] == 32) && (c[28] == 30) && (c[29] == 21)) {
 				FORCE_WEATHER_NOW(WEATHER_SUNNY);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// ALOVELYDAY - ясная погода
 			}
 			else if ((c[20] == 30) && (c[21] == 38) && (c[22] == 24) && (c[23] == 47) && (c[24] == 18) && (c[25] == 38) && (c[26] == 21) && (c[27] == 32) && (c[28] == 30) && (c[29] == 21)) {
 				FORCE_WEATHER_NOW(WEATHER_EXTRA_SUNNY);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// CATSANDDOGS - дождливая погода
 			}
 			else if ((c[19] == 46) && (c[20] == 30) && (c[21] == 20) && (c[22] == 31) && (c[23] == 30) && (c[24] == 49) && (c[25] == 32) && (c[26] == 32) && (c[27] == 24) && (c[28] == 34) && (c[29] == 31)) {
 				FORCE_WEATHER_NOW(WEATHER_RAINING);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// CANTSEEATHING - туманная погода
 			}
 			else if ((c[17] == 46) && (c[18] == 30) && (c[19] == 49) && (c[20] == 20) && (c[21] == 31) && (c[22] == 18) && (c[23] == 18) && (c[24] == 30) && (c[25] == 20) && (c[26] == 35) && (c[27] == 23) && (c[28] == 49) && (c[29] == 34)) {
 				FORCE_WEATHER_NOW(WEATHER_FOGGY);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// BIGBANG - взорвать все машины
 			}
@@ -687,7 +669,6 @@ void cheats(void)
 						}
 					}
 				}
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// ONSPEED - ускорить время игры
 			}
@@ -697,7 +678,6 @@ void cheats(void)
 					timeScale = 2.4;
 				}
 				SET_TIME_SCALE(timeScale);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
 				// BOOOOOORING - замедлить время игры
 			}
@@ -707,8 +687,20 @@ void cheats(void)
 					timeScale = 0.2;
 				}
 				SET_TIME_SCALE(timeScale);
-				PRINT_HELP("CHEAT1");
 				isActivated = true;
+			}
+
+			if (isActivated)
+			{
+				isActivated = false;
+				cur = 0;
+
+				for (i = 0; i < 30; i++) {
+					c[i] = 0;
+				}
+
+				PRINT_HELP("CHEAT1");
+				INCREMENT_INT_STAT(STAT_TIMES_CHEATED, 1);
 			}
 		}
 	}
@@ -1306,6 +1298,7 @@ void save(void)
 		WAIT(2000);
 		if (DID_SAVE_COMPLETE_SUCCESSFULLY())
 		{
+			INCREMENT_INT_STAT(STAT_SAVES_MADE, 1);
 			G_SAVE_OCCURED = FALSE;
 		}
 		//DO_SCREEN_FADE_IN_UNHACKED(2000);
@@ -1456,6 +1449,7 @@ void main(void)
 	RELEASE_TIME_OF_DAY();
 	SET_CAR_DENSITY_MULTIPLIER(1.0);
 	SET_MAX_WANTED_LEVEL(6);
+	SET_INT_STAT(STAT_ISLANDS_UNLOCKED, 2);
 
 	REGISTER_SAVE_HOUSE(664.601, -746.511, 7.041, 250, "OceanViewHotel", 0);
 	REGISTER_SAVE_HOUSE(963.529, 1805.22, 12.0903, 130, "3321VicePoint", 1);

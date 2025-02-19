@@ -94,7 +94,7 @@ void i_need_tools(void)
 
 		buy_1 = 20;
 		buy_2 = 50;
-		buy_3 = 80;
+		buy_3 = 90;
 		buy_4 = 90;
 
 		set_weap_1 = WEAPON_EPISODIC_23;//молоток - w_hammer
@@ -128,7 +128,7 @@ void i_need_tools(void)
 
 		buy_1 = 20;
 		buy_2 = 50;
-		buy_3 = 80;
+		buy_3 = 90;
 		buy_4 = 90;
 
 		set_weap_1 = WEAPON_EPISODIC_23;//молоток - w_hammer
@@ -382,6 +382,7 @@ void i_need_tools(void)
 				if (money_ped >= buy_1)
 				{
 					ADD_SCORE( GetPlayerIndex(), -buy_1 );
+					INCREMENT_FLOAT_STAT(STAT_SPENT_IN_GUN_SHOP, buy_1);
 					GIVE_WEAPON_TO_CHAR(GetPlayerPed(), set_weap_1, add_ammo1, FALSE);	
 					SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), set_weap_1, TRUE);
 				}
@@ -397,6 +398,7 @@ void i_need_tools(void)
 				if (money_ped >= buy_2)
 				{
 					ADD_SCORE( GetPlayerIndex(), -buy_2 );
+					INCREMENT_FLOAT_STAT(STAT_SPENT_IN_GUN_SHOP, buy_2);
 					GIVE_WEAPON_TO_CHAR(GetPlayerPed(), set_weap_2, add_ammo2, FALSE);	
 					SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), set_weap_2, TRUE);
 				}
@@ -412,6 +414,7 @@ void i_need_tools(void)
 				if (money_ped >= buy_3)
 				{
 					ADD_SCORE( GetPlayerIndex(), -buy_3 );
+					INCREMENT_FLOAT_STAT(STAT_SPENT_IN_GUN_SHOP, buy_3);
 					GIVE_WEAPON_TO_CHAR(GetPlayerPed(), set_weap_3, add_ammo3, FALSE);		
 					SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), set_weap_3, TRUE);
 				}
@@ -427,6 +430,7 @@ void i_need_tools(void)
 				if (money_ped >= buy_4)
 				{
 					ADD_SCORE( GetPlayerIndex(), -buy_4 );
+					INCREMENT_FLOAT_STAT(STAT_SPENT_IN_GUN_SHOP, buy_4);
 					GIVE_WEAPON_TO_CHAR(GetPlayerPed(), set_weap_4, add_ammo4, FALSE);	
 					SET_CURRENT_CHAR_WEAPON(GetPlayerPed(), set_weap_4, TRUE);
 				}
@@ -442,6 +446,7 @@ void i_need_tools(void)
 				if (money_ped >= buy_5)
 				{
 					ADD_SCORE( GetPlayerIndex(), -buy_5 );
+					INCREMENT_FLOAT_STAT(STAT_SPENT_IN_GUN_SHOP, buy_5);
 					if (set_weap_5 == 0)
 					{
 						ADD_ARMOUR_TO_CHAR(GetPlayerPed(), 100);
@@ -464,6 +469,7 @@ void i_need_tools(void)
 				if (money_ped >= 200)
 				{
 					ADD_SCORE( GetPlayerIndex(), -200 );
+					INCREMENT_FLOAT_STAT(STAT_SPENT_IN_GUN_SHOP, 200);
 					ADD_ARMOUR_TO_CHAR(GetPlayerPed(), 100);
 				}
 				else
@@ -598,6 +604,8 @@ void i_need_hiling(void)
 			}
 		}
 		ADD_SCORE( GetPlayerIndex(), -5 );
+		INCREMENT_FLOAT_STAT(STAT_SPENT_ON_FOOD, 5);
+		INCREMENT_INT_STAT(STAT_MEALS_EATEN, 1);
 		SET_CHAR_HEALTH(GetPlayerPed(), 200);
 	}
 }
@@ -1382,6 +1390,7 @@ void global_world(void)
 				SET_OBJECT_COORDINATES(star_door1, 251.549, 60.39, -6.31316);
 				SET_OBJECT_COORDINATES(star_door2, 249.176, 59.777, 7.52204);
 				SWITCH_ROADS_BACK_TO_ORIGINAL( 606.697, 34.711, 0.0, 192.455, 125.665, 50.0 );// Вице Пойнт <> Остров Морской Звезды
+				SET_INT_STAT(STAT_ISLANDS_UNLOCKED, 3);
 				open_star1 = 1;
 			}
 		}
@@ -1400,6 +1409,7 @@ void global_world(void)
 				SWITCH_ROADS_BACK_TO_ORIGINAL( 368.373, 546.309, 0.0, 379.467, 659.573, 50.0 );//  Гольф <> клуб Гаити 2
 				SWITCH_ROADS_BACK_TO_ORIGINAL( -379.467, 568.191, 0.0, 490.939, 624.621, 50.0 );// Гольф <> клуб Гаити 3
 				SWITCH_ROADS_BACK_TO_ORIGINAL( -211.183, -9.076, 0.0, -384.859, 63.049, 50.0 );//  Остров Морской Звезды <> Гавана
+				SET_INT_STAT(STAT_ISLANDS_UNLOCKED, 4);
 				open_star2 = 1;
 			}
 		}
