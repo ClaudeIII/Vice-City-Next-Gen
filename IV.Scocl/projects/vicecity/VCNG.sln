@@ -67,8 +67,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "packages", "packages.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ovalring", "ovalring.vcxproj", "{3EB36EC5-D1B2-4B04-9C02-6DB4B90C704A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "no_save_script", "no_save_script.vcxproj", "{74EB4072-FE6F-4304-85F1-99DADCB3BFF6}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mob_phone", "mob_phone.vcxproj", "{7DE486AF-ED82-44C0-8D4A-A11EAEA9DB86}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "map_bounds", "map_bounds.vcxproj", "{50CE784C-B7F6-474B-99AB-A316330BDEBE}"
@@ -186,8 +184,6 @@ Global
 		{89A54E59-B3DC-4BD9-9470-12DB1B63547D}.sco|Win32.Build.0 = sco|Win32
 		{3EB36EC5-D1B2-4B04-9C02-6DB4B90C704A}.sco|Win32.ActiveCfg = sco|Win32
 		{3EB36EC5-D1B2-4B04-9C02-6DB4B90C704A}.sco|Win32.Build.0 = sco|Win32
-		{74EB4072-FE6F-4304-85F1-99DADCB3BFF6}.sco|Win32.ActiveCfg = sco|Win32
-		{74EB4072-FE6F-4304-85F1-99DADCB3BFF6}.sco|Win32.Build.0 = sco|Win32
 		{7DE486AF-ED82-44C0-8D4A-A11EAEA9DB86}.sco|Win32.ActiveCfg = sco|Win32
 		{7DE486AF-ED82-44C0-8D4A-A11EAEA9DB86}.sco|Win32.Build.0 = sco|Win32
 		{50CE784C-B7F6-474B-99AB-A316330BDEBE}.sco|Win32.ActiveCfg = sco|Win32
