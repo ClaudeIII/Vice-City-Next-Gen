@@ -20,19 +20,28 @@ void text_jump(void)
 {
 	all_jump += 1;
 	ADD_SCORE(GetPlayerIndex(), (all_jump * 100));
+	INCREMENT_INT_STAT(STAT_STUNT_JUMPS_COMPLETED, 1);
 	SETTIMERA(0);
-	SET_TEXT_COLOUR(0, 180, 130, 255);
-	SET_TEXT_SCALE(0.5, 0.7);
-	SET_TEXT_EDGE(1, 0, 0, 0, 255);
-	SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
-	SET_TEXT_CENTRE(1);
-	DISPLAY_TEXT(0.5, 0.4, "JUMPING_T1");
-	SET_TEXT_COLOUR(55, 95, 125, 255);
-	SET_TEXT_SCALE(0.45, 0.65);
-	SET_TEXT_EDGE(1, 0, 0, 0, 255);
-	SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
-	SET_TEXT_CENTRE(1);
-	DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "JUMPING_T2", (all_jump * 100));
+	while (true)
+	{
+		WAIT(0);
+		SET_TEXT_COLOUR(0, 180, 130, 255);
+		SET_TEXT_SCALE(0.5, 0.7);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
+		SET_TEXT_CENTRE(1);
+		DISPLAY_TEXT(0.5, 0.4, "JUMPING_T1");
+		SET_TEXT_COLOUR(55, 95, 125, 255);
+		SET_TEXT_SCALE(0.45, 0.65);
+		SET_TEXT_EDGE(1, 0, 0, 0, 255);
+		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
+		SET_TEXT_CENTRE(1);
+		DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "JUMPING_T2", (all_jump * 100));
+		if ((TIMERA() > 5000) || (HAS_DEATHARREST_EXECUTED()))
+		{
+			break;
+		}
+	}
 }
 void look_jump(float cam_x, float cam_y, float cam_z)
 {
@@ -50,18 +59,22 @@ void look_jump(float cam_x, float cam_y, float cam_z)
 
 	if (IS_CAR_IN_AIR_PROPER(car1))
 	{
-		GET_CHAR_COORDINATES(GetPlayerPed(), &playX, &playY, &playZ);
-		POINT_CAM_AT_COORD(camera, playX, playY, playZ);
-		DISABLE_PAUSE_MENU(1);
-		if ((!IS_CAR_IN_AIR_PROPER(car1)) && (TIMERA() > 150) || (TIMERA() > 3000))
+		while (true) 
 		{
-			if (TIMERA() < 1000)
+			GET_CHAR_COORDINATES(GetPlayerPed(), &playX, &playY, &playZ);
+			POINT_CAM_AT_COORD(camera, playX, playY, playZ);
+			DISABLE_PAUSE_MENU(1);
+			if ((!IS_CAR_IN_AIR_PROPER(car1)) && (TIMERA() > 150) || (TIMERA() > 3000))
 			{
-				jump_ok = 0;
-			}
-			else
-			{
-				jump_ok = 1;
+				if (TIMERA() < 1000)
+				{
+					jump_ok = 0;
+				}
+				else
+				{
+					jump_ok = 1;
+				}
+				break;
 			}
 		}
 	}
@@ -77,6 +90,10 @@ void look_jump(float cam_x, float cam_y, float cam_z)
 }
 void stuntjump(void)
 {
+	if(G_JUMP == 1) {
+		return;
+	}
+
 	GET_CHAR_COORDINATES(GetPlayerPed(), &playX, &playY, &playZ);
 	GET_CHAR_SPEED(GetPlayerPed(), &speed);
 
@@ -481,6 +498,7 @@ void stuntjump(void)
 	{
 		G_JUMP = 1;
 	}
+	return;
 }
 void ChangeLetterPos(void) {
 	for (i = 1; i < 30; i++) {
