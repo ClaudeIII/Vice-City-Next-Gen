@@ -4,6 +4,12 @@ NeedDecode False
 SingleFileTable False
 MAIN
 {
+	JUMPING_T8 = ALL UNIQUE STUNTS COMPLETED!
+	JUMPING_T7 = Not good enough, but this stunt jump has been completed before.
+	JUMPING_T6 = Stunt jump completed again.
+	JUMPING_T5 = Not good enough.
+	JUMPING_T4 = Just one stunt jump left to do.
+	JUMPING_T3 = ~1~ stunt jumps left to do.
 	INT_A = In The Beginning...
 	INT_B = An Old Friend
 	LAW_1 = The Party
