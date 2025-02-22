@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, PedX, PedY, PedZ, PedR, blip_on, skip, cam_on, sprint, PointX, PointY, PointZ, PointN, car_speed, hate, textur, res, res_on, play, sound, autosave;
+float PlayX, PlayY, PlayZ, heading, PedX, PedY, PedZ, PedR, blip_on, skip, cam_on, sprint, PointX, PointY, PointZ, PointN, car_speed, hate, textur, res, res_on, play, sound, autosave;
 float explo2, explo3, explo4, explo5, explo6, explo7, explo8, explo9, carHUD_x, carHUD_w, carH1, carH2, carH3, carHUD_y1, carHUD_y2, carHUD_y3, text1, time_sub, del_car, in_car, play_Speech;
 float Ped1_c, Ped4_c, Ped5_c, Ped6_c, Ped7_c, Ped8_c, Ped9_c, Ped10_c, Ped11_c, Ped12_c, Health, stalking, stalkerR;
 
@@ -43,8 +43,8 @@ void baron_diaz(void)
 			}
 			DRAW_CHECKPOINT(55.627, -13.084, 11.174, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);
-			if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &heading);
+			if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(diaz_ico);
@@ -147,8 +147,8 @@ void baron_diaz(void)
 					WAIT(0);
 					DRAW_CHECKPOINT(814.0, 781.2, 4.761, 1.5, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 814.0, 781.2, 4.761, &PlayR);
-					if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 814.0, 781.2, 4.761, &heading);
+					if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
 						SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 
@@ -195,9 +195,9 @@ void baron_diaz(void)
 						WAIT(0);
 						DRAW_CHECKPOINT(824.75, 784.14, 9.398, 1.0, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 824.75, 784.14, 9.398, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 824.75, 784.14, 9.398, &heading);
 
-						if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+						if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 							REMOVE_BLIP(diaz_ico);
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
@@ -322,8 +322,8 @@ void baron_diaz(void)
 					{
 						WAIT(0);
 						GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 807.305, 797.795, 17.545, &PlayR);
-						if (PlayR < 2.5)
+						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 807.305, 797.795, 17.545, &heading);
+						if (heading < 2.5)
 						{
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 							TASK_AIM_GUN_AT_COORD(ped1, 807.587, 798.465, 16.937, 10000);
@@ -403,22 +403,22 @@ void baron_diaz(void)
 						GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
 						GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 
-						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-						if ((PlayR < 20.5) && (sprint == 0))
+						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+						if ((heading < 20.5) && (sprint == 0))
 						{
 							// начинсет устовать
 							DISABLE_PLAYER_SPRINT(GetPlayerIndex(), 1);
 							sprint = 1;
 						}
-						else if ((PlayR > 25.5) && (sprint == 1))
+						else if ((heading > 25.5) && (sprint == 1))
 						{
 							// снова бодр
 							DISABLE_PLAYER_SPRINT(GetPlayerIndex(), 0);
 							sprint = 0;
 						}
 
-						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 785.749, 944.575, 13.049, &PlayR);
-						if ((PlayR < 15.5) || (PedZ < 8))
+						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 785.749, 944.575, 13.049, &heading);
+						if ((heading < 15.5) || (PedZ < 8))
 						{
 							if (PedZ < 8)
 							{
@@ -713,9 +713,9 @@ void baron_diaz(void)
 							car_speed = 0;
 						}
 						GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
 
-						if (PlayR > 250)
+						if (heading > 250)
 						{
 							PRINT_STRING_IN_STRING("string", "TEX1_5", 5000, 1);//~r~He got away!
 							skip = 1;
@@ -729,7 +729,7 @@ void baron_diaz(void)
 							WARP_CHAR_INTO_CAR_AS_PASSENGER(ped1, car1, 0);
 							TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC(ped2, car1, PointX, PointY, PointZ, 4, 25.0, 2, 5, 10);// пед едит на нужные координаты("p1"-пед,"a2"-машины,хyz,какой-то флаг,скорость движени€,какие-то флаги)
 						}
-						else if ((PlayR < 80) && (hate == 0) && (PointN > 1))
+						else if ((heading < 80) && (hate == 0) && (PointN > 1))
 						{
 							SET_CHAR_RELATIONSHIP_GROUP(ped1, 24);
 							SET_CHAR_RELATIONSHIP(ped1, 5, 0);
@@ -750,7 +750,7 @@ void baron_diaz(void)
 							break;
 						}
 
-						else if ((PedR < 15.0) && (PointN == 14) && (PlayR < 50))
+						else if ((PedR < 15.0) && (PointN == 14) && (heading < 50))
 						{
 							// =====ћисси€ пройдена=====
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
@@ -900,8 +900,8 @@ void baron_diaz(void)
 			}
 			DRAW_CHECKPOINT(55.627, -13.084, 11.174, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);
-			if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &heading);
+			if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(diaz_ico);
@@ -2117,8 +2117,8 @@ void baron_diaz(void)
 						{
 							GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
 							GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);
-							GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-							if (PlayR < 3.2)
+							GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+							if (heading < 3.2)
 							{
 								FIX_CAR(car1);
 								SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
@@ -2370,8 +2370,8 @@ void baron_diaz(void)
 			}
 			DRAW_CHECKPOINT(55.627, -13.084, 11.174, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);
-			if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &heading);
+			if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(diaz_ico);
@@ -2877,8 +2877,8 @@ void baron_diaz(void)
 
 					//если игрок в зоне камера на лодку
 					GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, -195.725, -955.059, 4.36, &PlayR);
-					if ((PlayR < 20.5) && (cam_on == 0))
+					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, -195.725, -955.059, 4.36, &heading);
+					if ((heading < 20.5) && (cam_on == 0))
 					{
 						//если игрок в зоне камера на лодку
 						cam_on = 1;
@@ -2933,8 +2933,8 @@ void baron_diaz(void)
 					//чекпойнт сброса лодки
 					GET_OBJECT_HEALTH(strop, &Health);
 					DRAW_CHECKPOINT(-232.421, -951.538, 7.695, 0.8, 160, 116, 209);
-					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, -232.421, -951.538, 7.695, &PlayR);
-					if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, -232.421, -951.538, 7.695, &heading);
+					if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
 						SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);//замараживаем
 						SET_CHAR_HEADING(GetPlayerPed(), 156.425);
@@ -3062,8 +3062,8 @@ void baron_diaz(void)
 							}
 							GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
 							DRAW_CHECKPOINT(52.5, -127.149, -0.657, 8.5, 160, 116, 209);
-							GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 52.5, -127.149, -0.657, &PlayR);
-							if (PlayR < 8.5)
+							GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 52.5, -127.149, -0.657, &heading);
+							if (heading < 8.5)
 							{
 								SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
 								DO_SCREEN_FADE_OUT(500);
@@ -3258,8 +3258,8 @@ void baron_diaz(void)
 			}
 			DRAW_CHECKPOINT(55.627, -13.084, 11.174, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &PlayR);
-			if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 55.627, -13.084, 11.174, &heading);
+			if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(diaz_ico);
@@ -3485,8 +3485,8 @@ void baron_diaz(void)
 					WAIT(0);
 					DRAW_CHECKPOINT(54.246, -116.908, 4.154, 2.0, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 54.246, -116.908, 4.154, &PlayR);
-					if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 54.246, -116.908, 4.154, &heading);
+					if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
 						REMOVE_BLIP(diaz_ico);
 						SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
@@ -3779,8 +3779,8 @@ void baron_diaz(void)
 						}
 
 						GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 752.88, 1105.45, 0.9, &PlayR);
-						if (PlayR < 20.5)
+						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 752.88, 1105.45, 0.9, &heading);
+						if (heading < 20.5)
 						{
 							break;
 						}
@@ -4084,8 +4084,8 @@ void baron_diaz(void)
 						GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);//вписываем координаты водитель лодки1 в переменную
 
 						// »грок покинул лодку
-						GET_DISTANCE_BETWEEN_COORDS_3D(PedX, PedY, PedZ, PlayX, PlayY, PlayZ, &PlayR);
-						if ((boatHEAL < 10) || (PlayR > 80.0))
+						GET_DISTANCE_BETWEEN_COORDS_3D(PedX, PedY, PedZ, PlayX, PlayY, PlayZ, &heading);
+						if ((boatHEAL < 10) || (heading > 80.0))
 						{
 							SET_CHAR_INVINCIBLE(ped1, 0);
 							SET_PLAYER_INVINCIBLE(GetPlayerIndex(), 0);// »грок смертный
@@ -4105,8 +4105,8 @@ void baron_diaz(void)
 						}
 
 						// смертность соперников
-						GET_DISTANCE_BETWEEN_COORDS_3D(PedX, PedY, PedZ, 765.95, 636.33, 1.7, &PlayR);
-						if ((PlayR < 10.0) && (explo2 == 0))
+						GET_DISTANCE_BETWEEN_COORDS_3D(PedX, PedY, PedZ, 765.95, 636.33, 1.7, &heading);
+						if ((heading < 10.0) && (explo2 == 0))
 						{
 							UpdateWeaponOfPed(GetPlayerPed(), WEAPON_EPISODIC_9);
 							SET_CHAR_INVINCIBLE(ped3, 0);
@@ -4190,8 +4190,8 @@ void baron_diaz(void)
 						{
 							if (play_Speech == 0)
 							{
-								GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 846.84, 438.12, 1.7, &PlayR);
-								if (PlayR < 10.0)
+								GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 846.84, 438.12, 1.7, &heading);
+								if (heading < 10.0)
 								{
 									NEW_SCRIPTED_CONVERSATION();
 									ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "NIKO");
@@ -4206,8 +4206,8 @@ void baron_diaz(void)
 						{
 							if (play_Speech == 0)
 							{
-								GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 727.99, 85.03, 1.7, &PlayR);
-								if (PlayR < 10.0)
+								GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 727.99, 85.03, 1.7, &heading);
+								if (heading < 10.0)
 								{
 									NEW_SCRIPTED_CONVERSATION();
 									ADD_NEW_CONVERSATION_SPEAKER(0, ped1, "NIKO");
@@ -4540,8 +4540,8 @@ void baron_diaz(void)
 			}
 			DRAW_CHECKPOINT(925.599, 453.827, 5.389, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 925.599, 453.827, 5.389, &PlayR);
-			if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 925.599, 453.827, 5.389, &heading);
+			if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(diaz_ico);
@@ -4905,8 +4905,8 @@ void baron_diaz(void)
 
 					GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
 					GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);//вписываем координаты водитель лодки1 в переменную
-					GET_DISTANCE_BETWEEN_COORDS_3D(PedX, PedY, PedZ, PlayX, PlayY, PlayZ, &PlayR);
-					if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+					GET_DISTANCE_BETWEEN_COORDS_3D(PedX, PedY, PedZ, PlayX, PlayY, PlayZ, &heading);
+					if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
 						REMOVE_BLIP(diaz_ico);
 						SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
@@ -5270,8 +5270,8 @@ void baron_diaz(void)
 						GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
 						GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);
 						GET_DISTANCE_BETWEEN_COORDS_3D(PedX, PedY, PedZ, -388.097, 1695.986, 4.953, &PedR);
-						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, -388.097, 1695.986, 4.953, &PlayR);
-						if ((PlayR < 2.0) && (PedR < 2.0))
+						GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, -388.097, 1695.986, 4.953, &heading);
+						if ((heading < 2.0) && (PedR < 2.0))
 						{
 							//
 							SET_PLAYER_CONTROL_ADVANCED(GetPlayerIndex(), 0, 0, 0);
@@ -5459,8 +5459,8 @@ void baron_diaz(void)
 			}
 			DRAW_CHECKPOINT(172.483, 40.766, 4.996, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 172.483, 40.766, 4.996, &PlayR);
-			if ((PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, 172.483, 40.766, 4.996, &heading);
+			if ((heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(diaz_ico);
@@ -5992,8 +5992,8 @@ void baron_diaz(void)
 
 					GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);
 					GET_CHAR_COORDINATES(GetPlayerPed(), &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-					if (PlayR > 75)
+					GET_DISTANCE_BETWEEN_COORDS_3D(PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+					if (heading > 75)
 					{
 						EXPLODE_CHAR_HEAD(ped1);
 					}

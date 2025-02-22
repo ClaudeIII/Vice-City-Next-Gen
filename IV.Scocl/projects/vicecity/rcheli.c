@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, checkX, checkY, checkZ, checkX2, checkY2, checkZ2, check_cord, textur;
+float PlayX, PlayY, PlayZ, heading, checkX, checkY, checkZ, checkX2, checkY2, checkZ2, check_cord, textur;
 float time_m, time_s, skip, zone;
 
 Texture fon;
@@ -239,9 +239,9 @@ void rc_raider(void)
 		}
 
 		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, checkX, checkY, checkZ, &PlayR);
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, checkX, checkY, checkZ, &heading);
 		//чекпойнты:
-		if (PlayR < 3.1)
+		if (heading < 3.1)
 		{
 			check_cord +=1;
 			PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
@@ -425,7 +425,7 @@ void rc_raider(void)
 			}
 			else if (check_cord == 21)
 			{
-				TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве) 
+				TRIGGER_MISSION_COMPLETE_AUDIO(1);
 				skip = 2;
 				break;
 			}

@@ -8,7 +8,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
-float PlayX, PlayY, PlayZ, PlayR, blip_on, tovarX, tovarY, tovarZ, help_text1, all_tovar, go, sound, time_m, time_s, textur, skip, vVar4, rampaX, rampaY, rampaZ, rampaR, speed, bonus, camer;
+float PlayX, PlayY, PlayZ, heading, blip_on, tovarX, tovarY, tovarZ, help_text1, all_tovar, go, sound, time_m, time_s, textur, skip, vVar4, rampaX, rampaY, rampaZ, rampaR, speed, bonus, camer;
 float cameraX, cameraY, cameraZ, ricoX, ricoY, ricoZ, ricoR, start, text, get_car, explo_car, PedX, PedY, PedZ, stalking, in_car, stalkerR, trigger1, trigger2, trigger3, trigger4, trigger5, trigger6, trigger7;
 float blip_off1, blip_off2, blip_off3, blip_off4, blip_off5, keys_UP1, keys_UP2, keys_UP3, tnt1, tnt2, tnt3, timer_on, in_zon, in_zavod, rrr_on, vorotaY, p_event, autosave;
 
@@ -46,8 +46,8 @@ void umberto(void)
 			}
 			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(cuban_ico);
@@ -575,8 +575,8 @@ void umberto(void)
 
 
 					
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, tovarX, tovarY, tovarZ, &PlayR);
-					if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && ( PlayR < 6.5 ))
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, tovarX, tovarY, tovarZ, &heading);
+					if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && ( heading < 6.5 ))
 					{
 						all_tovar += 1;
 						PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );
@@ -1108,8 +1108,8 @@ void umberto(void)
 			}
 			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(cuban_ico);
@@ -1326,8 +1326,8 @@ void umberto(void)
 					WAIT(0);
 					DRAW_CHECKPOINT( -734.82, -69.1976, 5.6909, 1.5, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -734.82, -69.1976, 5.6909, &PlayR);
-					if ( PlayR < 2.5 )
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -734.82, -69.1976, 5.6909, &heading);
+					if ( heading < 2.5 )
 					{
 						if (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))
 						{
@@ -1451,10 +1451,10 @@ void umberto(void)
 						WAIT(0);
 						DRAW_CHECKPOINT( -641.682, 607.685, 5.0648, 1.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -641.682, 607.685, 5.0648, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -641.682, 607.685, 5.0648, &heading);
 						if (IS_CHAR_IN_CAR(GetPlayerPed(), car4))
 						{
-							if ( PlayR < 2.0 )
+							if ( heading < 2.0 )
 							{
 								// сценка
 								REMOVE_BLIP(cuban_ico);
@@ -2542,8 +2542,8 @@ void umberto(void)
 						{
 							DRAW_CHECKPOINT( -729.157, -71.6485, 5.6909, 1.5, 160, 116, 209);
 							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -729.157, -71.6485, 5.6909, &PlayR);
-							if ( PlayR < 2.0 )
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -729.157, -71.6485, 5.6909, &heading);
+							if ( heading < 2.0 )
 							{
 								skip = 2;
 								break;
@@ -2714,8 +2714,8 @@ void umberto(void)
 			}
 			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(cuban_ico);
@@ -2936,8 +2936,8 @@ void umberto(void)
 
 					DRAW_CHECKPOINT( -293.338, -634.651, 4.64145, 1.5, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -293.338, -634.651, 4.64145, &PlayR);
-					if (( PlayR < 2.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -293.338, -634.651, 4.64145, &heading);
+					if (( heading < 2.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
 						REMOVE_BLIP(cuban_ico);
 						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -3455,8 +3455,8 @@ void umberto(void)
 						WAIT(0);
 						DRAW_CHECKPOINT( -737.034, -74.3699, 5.56987, 1.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.034, -74.3699, 5.56987, &PlayR);
-						if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.034, -74.3699, 5.56987, &heading);
+						if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 							// сценка
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -3616,8 +3616,8 @@ void umberto(void)
 			}
 			DRAW_CHECKPOINT( -737.043, -74.3556, 5.6213, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -737.043, -74.3556, 5.6213, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(cuban_ico);
@@ -3915,8 +3915,8 @@ void umberto(void)
 
 					DRAW_CHECKPOINT( -605.383, 710.026, 5.17858, 1.5, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -605.383, 710.026, 5.17858, &PlayR);
-					if (( PlayR < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (!IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_VOODOO)))
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -605.383, 710.026, 5.17858, &heading);
+					if (( heading < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (!IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_VOODOO)))
 					{
 						if (trigger7 == 0)
 						{
@@ -4087,8 +4087,8 @@ void umberto(void)
 
 						DRAW_CHECKPOINT( -605.383, 710.026, 5.17858, 1.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -605.383, 710.026, 5.17858, &PlayR);
-						if (( PlayR < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -605.383, 710.026, 5.17858, &heading);
+						if (( heading < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 							SetSpeech();
 							// сценка
@@ -4258,8 +4258,8 @@ void umberto(void)
 						{
 							DRAW_CHECKPOINT( -655.833, 603.265, 5.17858, 1.5, 160, 116, 209);
 							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -655.833, 603.265, 5.17858, &PlayR);
-							if (( PlayR < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -655.833, 603.265, 5.17858, &heading);
+							if (( heading < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 							{
 								CLEAR_PRINTS();
 								PRINT_STRING_IN_STRING("string", "CUB4_03", 5000, 1);//~g~Stay in the car until safely parked inside the compound.
@@ -4405,8 +4405,8 @@ void umberto(void)
 
 						DRAW_CHECKPOINT( -739.801, 615.565, 5.05374, 1.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -739.801, 615.565, 5.05374, &PlayR);
-						if (( PlayR < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -739.801, 615.565, 5.05374, &heading);
+						if (( heading < 1.5) && (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 							REMOVE_BLIP(cuban_ico);
 							SET_OBJECT_COORDINATES(vorota, -681.281, 607.411, 5.23681);
@@ -4672,8 +4672,8 @@ void umberto(void)
 						if (tnt1 == 0)
 						{
 							DRAW_CHECKPOINT( -754.194, 636.405, 5.12495, 1.5, 160, 116, 209);
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -754.194, 636.405, 5.12495, &PlayR);
-							if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (tnt1 == 0))
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -754.194, 636.405, 5.12495, &heading);
+							if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (tnt1 == 0))
 							{
 								tnt1 = 1;
 								timer_on = 1;
@@ -4686,8 +4686,8 @@ void umberto(void)
 						if (tnt2 == 0)
 						{
 							DRAW_CHECKPOINT( -748.368, 614.555, 5.12495, 1.5, 160, 116, 209);
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -748.368, 614.555, 5.12495, &PlayR);
-							if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (tnt2 == 0))
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -748.368, 614.555, 5.12495, &heading);
+							if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (tnt2 == 0))
 							{
 								tnt2 = 1;
 								timer_on = 1;
@@ -4701,8 +4701,8 @@ void umberto(void)
 						if (tnt3 == 0)
 						{
 							DRAW_CHECKPOINT( -740.792, 603.311, 11.8548, 1.5, 160, 116, 209);
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -740.792, 603.311, 11.8548, &PlayR);
-							if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (tnt3 == 0))
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -740.792, 603.311, 11.8548, &heading);
+							if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (tnt3 == 0))
 							{
 								tnt3 = 1;
 								timer_on = 1;

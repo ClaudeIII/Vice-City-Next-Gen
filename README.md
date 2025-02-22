@@ -17,7 +17,7 @@
 - [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader)
 - [XLivelessAddon](https://github.com/GTAmodding/XLivelessAddon)
 - [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix)
-
+- [VC Weapon models by @ARScorpion & @Enhancer913](https://libertycity.net/files/gta-4/219362-gta-vice-city-next-gen-edition-weapon.html)
 - [DXVK](https://github.com/doitsujin/dxvk) (Specifically [this artifact](https://github.com/doitsujin/dxvk/actions/runs/13330433100))
 
 ### Credits:

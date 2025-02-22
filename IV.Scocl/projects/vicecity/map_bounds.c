@@ -46,7 +46,7 @@ void shark_event(void) {
 			} else if (state == 2) {
 				GET_CHAR_COORDINATES(GetPlayerPed(), &px, &py, &pz);
 				GET_CHAR_HEADING(GetPlayerPed(), &heading);
-				GET_WATER_HEIGHT(px, py, pz, &wh);						
+				GET_WATER_HEIGHT(px, py, pz, &wh);		
 				CREATE_OBJECT_NO_OFFSET(GET_HASH_KEY("shark_ocean"), px, py, wh - 0.5, &shark_obj, 1);
 				SET_OBJECT_HEADING(shark_obj, heading);
 				GENERATE_RANDOM_INT_IN_RANGE(1, 7, &curAnim);

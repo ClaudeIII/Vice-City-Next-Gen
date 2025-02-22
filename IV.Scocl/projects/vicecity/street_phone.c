@@ -4,7 +4,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
-float PlayX, PlayY, PlayZ, PlayR, PedX, PedY, PedZ, PedX2, PedY2, PedZ2, PedR, blip_on, sound_load, volume, textur, Pizza_N, skip, Text, Text2, in_car, set_cam, kill, autosave;
+float PlayX, PlayY, PlayZ, heading, PedX, PedY, PedZ, PedX2, PedY2, PedZ2, PedR, blip_on, sound_load, volume, textur, Pizza_N, skip, Text, Text2, in_car, set_cam, kill, autosave;
 float carHUD_x, carHUD_w, carHUD_y1, carHUD_y2, carHUD_y3, carH1, carH2, carH3, touch_car, sound, time_m, time_s, time_ms, stage;
 
 void telephone(void)
@@ -59,9 +59,9 @@ void telephone(void)
 				sound_load = 0;
 			}
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 470.635, -490.757, 5.01, &PlayR);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 470.635, -490.757, 5.01, &heading);
 			DRAW_CHECKPOINT( 470.635, -490.757, 4.51, 1.5, 160, 116, 209);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(phone);
@@ -236,9 +236,9 @@ void telephone(void)
 						if (TIMERA() > time_r)
 						{
 							GET_CHAR_COORDINATES(ped1,  &PlayX, &PlayY, &PlayZ);
-							GET_CHAR_HEADING(ped1, &PlayR);
-							SET_OBJECT_COORDINATES(PIZZA_1, (1*COS((0-PlayR))+0*SIN((0-PlayR)))+PlayX, (0*COS((0-PlayR))-(1*SIN((0-PlayR))))+PlayY, PlayZ);
-							SET_OBJECT_HEADING(PIZZA_1, PlayR);
+							GET_CHAR_HEADING(ped1, &heading);
+							SET_OBJECT_COORDINATES(PIZZA_1, (1*COS((0-heading))+0*SIN((0-heading)))+PlayX, (0*COS((0-heading))-(1*SIN((0-heading))))+PlayY, PlayZ);
+							SET_OBJECT_HEADING(PIZZA_1, heading);
 							APPLY_FORCE_TO_OBJECT(PIZZA_1, 1, 5.5, 0, 1.0, 0, 0, 0, 1, 1, 1, 1);
 							GENERATE_RANDOM_INT_IN_RANGE( 6500, 15000, &time_r);
 							SETTIMERA(0);
@@ -393,9 +393,9 @@ void telephone(void)
 				sound_load = 0;
 			}
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 915.516, 777.734, 5.019, &PlayR);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 915.516, 777.734, 5.019, &heading);
 			DRAW_CHECKPOINT( 915.516, 777.734, 5.019, 1.5, 160, 116, 209);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(phone);
@@ -529,8 +529,8 @@ void telephone(void)
 					WAIT(0);
 					DRAW_CHECKPOINT(836.844, 756.51, 4.62, 3.3, 246, 151, 255);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 836.844, 756.51, 4.62, &PlayR);
-					if (PlayR < 3.3)
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 836.844, 756.51, 4.62, &heading);
+					if (heading < 3.3)
 					{
 						if (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))
 						{
@@ -763,8 +763,8 @@ void telephone(void)
 						// ------------------------- провел миссии -------------------------
 						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-						if (PlayR > 200)
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+						if (heading > 200)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM2_5", 5000, 1);//~r~She got away!
@@ -826,8 +826,8 @@ void telephone(void)
 						ABORT_SCRIPTED_CONVERSATION( 0 );
 						GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-						if (PlayR > 80)
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+						if (heading > 80)
 						{
 							EXPLODE_CAR(car1, 1, 1);
 							skip = 2;
@@ -949,9 +949,9 @@ void telephone(void)
 				sound_load = 0;
 			}
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 470.635, -490.757, 5.01, &PlayR);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 470.635, -490.757, 5.01, &heading);
 			DRAW_CHECKPOINT( 470.635, -490.757, 4.51, 1.5, 160, 116, 209);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(phone);
@@ -1195,8 +1195,8 @@ void telephone(void)
 					{
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-						if ( PlayR < 40.0 )
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+						if ( heading < 40.0 )
 						{
 							if ((Text == 0) && (Text2 == 0))
 							{
@@ -1213,7 +1213,7 @@ void telephone(void)
 							}
 						}
 
-						if (( PlayR < 20.0) && (Text2 == 0))
+						if (( heading < 20.0) && (Text2 == 0))
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM3_19", 5000, 1);//~g~He's seen you! Waste him!
@@ -1256,8 +1256,8 @@ void telephone(void)
 					{
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GET_CHAR_COORDINATES(ped3,  &PedX, &PedY, &PedZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-						if ( PlayR < 40.0 )
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+						if ( heading < 40.0 )
 						{
 							if ((Text == 0) && (Text2 == 0))
 							{
@@ -1274,7 +1274,7 @@ void telephone(void)
 							}
 						}
 
-						if (( PlayR < 20.0) && (Text2 == 0))
+						if (( heading < 20.0) && (Text2 == 0))
 						{
 							TASK_CAR_DRIVE_WANDER(ped3, car3, 40.0, 2);
 							CLEAR_PRINTS();
@@ -1369,8 +1369,8 @@ void telephone(void)
 					{
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GET_CHAR_COORDINATES(ped6,  &PedX, &PedY, &PedZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-						if ( PlayR < 40.0 )
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+						if ( heading < 40.0 )
 						{
 							if ((Text == 0) && (Text2 == 0))
 							{
@@ -1386,7 +1386,7 @@ void telephone(void)
 								Text = 0;
 							}
 						}
-						if (( PlayR < 20.0) && (Text2 == 0))
+						if (( heading < 20.0) && (Text2 == 0))
 						{
 							TASK_CAR_DRIVE_WANDER(ped6, car5, 40.0, 2);
 							CLEAR_PRINTS();
@@ -1635,9 +1635,9 @@ void telephone(void)
 				sound_load = 0;
 			}
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -1050.36, -291.03, 8.83, &PlayR);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -1050.36, -291.03, 8.83, &heading);
 			DRAW_CHECKPOINT( -1050.36, -291.03, 8.83, 1.5, 160, 116, 209);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(phone);
@@ -1986,7 +1986,7 @@ void telephone(void)
 						// HUD
 						GET_CHAR_COORDINATES(ped2,  &PedX2, &PedY2, &PedZ2);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX2, PedY2, PedZ2, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX2, PedY2, PedZ2, &heading);
 
 						SET_TEXT_COLOUR(95, 195, 247, 255);
 						SET_TEXT_SCALE(0.156, 0.267);
@@ -1999,17 +1999,17 @@ void telephone(void)
 						carHUD_x = 0.9088541;
 						carHUD_w = 0.0739583;
 
-						if (PlayR < 50)
+						if (heading < 50)
 						{
 							carH1 = 0;
 						}
-						else if (PlayR > 99)
+						else if (heading > 99)
 						{
 							carH1 = 50;
 						}
 						else
 						{
-							carH1 = PlayR-50;
+							carH1 = heading-50;
 						}
 						carH2 = carHUD_w/50;
 						carH3 = carH2*carH1;
@@ -2030,7 +2030,7 @@ void telephone(void)
 							skip = 1;
 							break;
 						}
-						else if (PlayR < 50)
+						else if (heading < 50)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "ASM4_27", 5000, 1);//~r~The target has seen you! You should have kept your distance!
@@ -2241,8 +2241,8 @@ void telephone(void)
 						WAIT(0);
 						DRAW_CHECKPOINT( -234.027, 1728.927, 4.98, 1.3, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -234.027, 1728.927, 4.98, &PlayR);
-						if ( PlayR < 1.3 )
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -234.027, 1728.927, 4.98, &heading);
+						if ( heading < 1.3 )
 						{
 							REMOVE_BLIP(phone);
 
@@ -2458,9 +2458,9 @@ void telephone(void)
 				sound_load = 0;
 			}
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -544.91, 2.23, 4.81, &PlayR);
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -544.91, 2.23, 4.81, &heading);
 			DRAW_CHECKPOINT( -544.91, 2.23, 4.81, 1.5, 160, 116, 209);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(phone);
@@ -2982,8 +2982,8 @@ void telephone(void)
 
 						DRAW_CHECKPOINT( -932.99, -726.01, 12.093, 2.0, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -932.99, -726.01, 12.093, &PlayR);
-						if (( PlayR < 2.0) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -932.99, -726.01, 12.093, &heading);
+						if (( heading < 2.0) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 								REMOVE_BLIP(phone);
 								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );

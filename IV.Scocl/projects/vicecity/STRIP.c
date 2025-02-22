@@ -6,7 +6,7 @@
 #include "globals.h"
 
 int money_ped, income, load_mashin, help, autosave;
-float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, cash, cam_set;
+float PlayX, PlayY, PlayZ, heading, blip_on, skip, cash, cam_set;
 
 void stripclub(void)
 {

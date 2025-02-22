@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, PedX, PedY, PedZ, PedR, blip_on, skip, car_on, car_n, time_m, time_s, time_ms, timer_on, sound, textur1, help_1, help_2, help_3, help_4, autosave;
+float PlayX, PlayY, PlayZ, heading, PedX, PedY, PedZ, PedR, blip_on, skip, car_on, car_n, time_m, time_s, time_ms, timer_on, sound, textur1, help_1, help_2, help_3, help_4, autosave;
 float attach_1, attach_2, attach_3, attach_4, point_1, point_2, point_3, point_4, attach_on, tnt1_on, tnt2_on, tnt3_on, tnt4_on, bomb_add, fail, zone, grob_x, grob_y, grob_r, open_d;
 
 void boyarsky(void)
@@ -42,8 +42,8 @@ void boyarsky(void)
 			}
 			DRAW_CHECKPOINT( 691.139, 300.702, 4.845, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 691.139, 300.702, 4.845, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 691.139, 300.702, 4.845, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(avery_ico);
@@ -167,8 +167,8 @@ void boyarsky(void)
 					WAIT(0);
 					DRAW_CHECKPOINT( 758.381, 736.977, 5.287, 1.3, 246, 151, 255);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 758.381, 736.977, 5.287, &PlayR);
-					if (( PlayR < 1.3) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 758.381, 736.977, 5.287, &heading);
+					if (( heading < 1.3) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
 						REMOVE_BLIP(avery_ico);
 						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -259,8 +259,8 @@ void boyarsky(void)
 						WAIT(0);
 						DRAW_CHECKPOINT( 534.333, 784.791, 15.724, 1.3, 246, 151, 255);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 534.333, 784.791, 15.724, &PlayR);
-						if (( PlayR < 1.3) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 534.333, 784.791, 15.724, &heading);
+						if (( heading < 1.3) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 							REMOVE_BLIP(avery_ico);
 							// расставляем
@@ -565,13 +565,13 @@ void boyarsky(void)
 						}
 
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
 						if (IS_CHAR_DEAD(ped7))// проверка игрок убил цель
 						{
 							skip = 2;
 							break;
 						}
-						else if (PlayR > 200.3)
+						else if (heading > 200.3)
 						{
 							PRINT_STRING_IN_STRING("string", "TEX1_5", 5500, 1);//~r~He got away!
 							skip = 1;
@@ -685,8 +685,8 @@ void boyarsky(void)
 			}
 			DRAW_CHECKPOINT( 691.139, 300.702, 4.845, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 691.139, 300.702, 4.845, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 691.139, 300.702, 4.845, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(avery_ico);
@@ -830,7 +830,7 @@ void boyarsky(void)
 				CREATE_OBJECT_NO_OFFSET(dynamite_1, 294.8487, -798.9435, 5.445457, &tnt_1, TRUE);
 				CREATE_OBJECT_NO_OFFSET(dynamite_1, 295.5919, -798.9435, 5.445457, &tnt_2, TRUE);
 				CREATE_OBJECT_NO_OFFSET(dynamite_1, 293.3623, -798.9435, 5.445457, &tnt_3, TRUE);
-				CREATE_OBJECT_NO_OFFSET(dynamite_1, 294.1054, -798.9435, 5.445457, &tnt_4, TRUE);				
+				CREATE_OBJECT_NO_OFFSET(dynamite_1, 294.1054, -798.9435, 5.445457, &tnt_4, TRUE);
 				
 				
 				CREATE_CHAR (26, PedM1, 290.8138, -794.7287, 5.059736, &ped1, TRUE);
@@ -2125,8 +2125,8 @@ void boyarsky(void)
 			}
 			DRAW_CHECKPOINT( 691.139, 300.702, 4.845, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 691.139, 300.702, 4.845, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 691.139, 300.702, 4.845, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(avery_ico);
@@ -2251,8 +2251,8 @@ void boyarsky(void)
 					WAIT(0);
 					DRAW_CHECKPOINT( -588.894, 104.258, 4.781, 1.3, 246, 151, 255);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -588.894, 104.258, 4.781, &PlayR);
-					if (( PlayR < 1.3) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -588.894, 104.258, 4.781, &heading);
+					if (( heading < 1.3) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
 						WAIT(0);
 						REMOVE_BLIP(avery_ico);
@@ -2508,8 +2508,8 @@ void boyarsky(void)
 							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 							GET_CHAR_COORDINATES(ped1,  &PedX, &PedY, &PedZ);
 							GET_CHAR_HEADING(ped1, &PedR);
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-							if (PlayR > 200.3)
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+							if (heading > 200.3)
 							{
 								PRINT_STRING_IN_STRING("string", "TEX1_5", 5000, 1);//~r~He got away!
 								skip = 1;

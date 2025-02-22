@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, textur, text1, text2, time_m, time_s, sound, play, autosave;
+float PlayX, PlayY, PlayZ, heading, blip_on, skip, textur, text1, text2, time_m, time_s, sound, play, autosave;
 float PedX, PedY, PedZ, PedR, taxi_1, taxi_2, taxi_3, touch1, touch2, touch3, engine, res_on, vorotaX, vorotaY;
 int income, load_mashin, help;
 
@@ -233,8 +233,8 @@ void kaufman(void)
 					
 					DRAW_CHECKPOINT( -143.203, 52.906, 4.974, 2.0, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -143.203, 52.906, 4.974, &PlayR);
-					if ( PlayR < 2.1)
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -143.203, 52.906, 4.974, &heading);
+					if ( heading < 2.1)
 					{
 						if (IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_CABBY))
 						{
@@ -1162,8 +1162,8 @@ void kaufman(void)
 					WAIT(0);
 					DRAW_CHECKPOINT( -678.792, -756.889, 5.098, 2.0, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -678.792, -756.889, 5.098, &PlayR);
-					if ( PlayR < 2.1)
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -678.792, -756.889, 5.098, &heading);
+					if ( heading < 2.1)
 					{
 						if (IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_CABBY))
 						{

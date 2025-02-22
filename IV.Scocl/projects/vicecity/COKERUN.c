@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, tovarX, tovarY, tovarZ, help_text1, all_tovar, go, sound, time_m, time_s, textur, skip, autosave;
+float PlayX, PlayY, PlayZ, heading, blip_on, tovarX, tovarY, tovarZ, help_text1, all_tovar, go, sound, time_m, time_s, textur, skip, autosave;
 int income, load_mashin, help, message;
 
 void boat_race(void)
@@ -335,9 +335,9 @@ void boat_race(void)
 
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GET_OBJECT_COORDINATES(tovar, &tovarX, &tovarY, &tovarZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, tovarX, tovarY, tovarZ, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, tovarX, tovarY, tovarZ, &heading);
 
-						if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && ( PlayR < 6.5 ))
+						if ((IS_CHAR_IN_ANY_BOAT(GetPlayerPed())) && ( heading < 6.5 ))
 						{
 							all_tovar += 1;
 							PLAY_AUDIO_EVENT( "FRONTEND_OTHER_RACE_321" );

@@ -4,7 +4,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
-float PlayX, PlayY, PlayZ, PlayR, PedX, PedY, PedZ, PedR, blip_on, blip_on2, skip, hate, PointN, Ped1_c, Ped4_c, Ped5_c, Ped6_c, Ped7_c, Ped8_c, Ped9_c, Ped10_c, Ped11_c, Ped12_c, taxi_cam, in_cord, siren, shoot;
+float PlayX, PlayY, PlayZ, heading, PedX, PedY, PedZ, PedR, blip_on, blip_on2, skip, hate, PointN, Ped1_c, Ped4_c, Ped5_c, Ped6_c, Ped7_c, Ped8_c, Ped9_c, Ped10_c, Ped11_c, Ped12_c, taxi_cam, in_cord, siren, shoot;
 float in_car1, in_car2, in_car3, keis, rrr_onV, rrr_on1, rrr_on2, rrr_on3, driver, text, text2, business, icon_on, collector, stop, sound, textur1, get_money, autosave;
 float set_X, set_Y, set_Z, lance, Ped2X, Ped2Y, Ped2Z, Ped2R, Sonny, anim, animP1, animP2, animP3, animP4, alfa, move1, move2, set_page, set_cam, fon_black;
 int money_ped, income, load_mashin, help;
@@ -93,8 +93,8 @@ void typography(void)
 			}
 			DRAW_CHECKPOINT( -629.403, 255.797, 5.95213, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -629.403, 255.797, 5.95213, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -629.403, 255.797, 5.95213, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(count_ico);
@@ -400,8 +400,8 @@ void typography(void)
 					WAIT( 0 );
 					DRAW_CHECKPOINT( 924.402, 455.03, 5.42028, 1.5, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 924.402, 455.03, 5.42028, &PlayR);
-					if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 924.402, 455.03, 5.42028, &heading);
+					if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 					{
 						SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
 						REMOVE_BLIP(count_ico);
@@ -866,8 +866,8 @@ void typography(void)
 						//чекпойнт
 						DRAW_CHECKPOINT( -253.866, -711.997, 25.0507, 0.8, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -253.866, -711.997, 25.0507, &PlayR);
-						if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -253.866, -711.997, 25.0507, &heading);
+						if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 							REMOVE_BLIP(count_ico);
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );//замараживаем
@@ -951,8 +951,8 @@ void typography(void)
 						WAIT( 0 );
 						DRAW_CHECKPOINT( -625.551, 246.349, 5.08937, 1.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -625.551, 246.349, 5.08937, &PlayR);
-						if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -625.551, 246.349, 5.08937, &heading);
+						if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 							skip = 2;
 							break;
@@ -1121,8 +1121,8 @@ void typography(void)
 			}
 			DRAW_CHECKPOINT( -629.403, 255.797, 5.95213, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -629.403, 255.797, 5.95213, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -629.403, 255.797, 5.95213, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(count_ico);
@@ -1838,8 +1838,8 @@ void typography(void)
 						WAIT(0);
 						DRAW_CHECKPOINT( -625.551, 246.349, 5.08937, 1.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -625.551, 246.349, 5.08937, &PlayR);
-						if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -625.551, 246.349, 5.08937, &heading);
+						if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 						{
 							DO_SCREEN_FADE_OUT( 500 );
 							while(true)
@@ -2078,8 +2078,8 @@ void typography(void)
 			}
 			DRAW_CHECKPOINT( -629.403, 255.797, 5.95213, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -629.403, 255.797, 5.95213, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -629.403, 255.797, 5.95213, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(count_ico);
@@ -2957,8 +2957,8 @@ void typography(void)
 			}
 			DRAW_CHECKPOINT( 54.6656, -43.6248, 19.2045, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 54.6656, -43.6248, 19.2045, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (get_money == 2))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 54.6656, -43.6248, 19.2045, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())) && (get_money == 2))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(count_ico);
@@ -3613,8 +3613,8 @@ void typography(void)
 
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 					GET_CHAR_COORDINATES(ped1,  &Ped2X, &Ped2Y, &Ped2Z);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Ped2X, Ped2Y, Ped2Z, &PlayR);
-					if ((( PlayR < 15.0) && (lance == 1)) || ((IS_BULLET_IN_AREA(Ped2X, Ped2Y, Ped2Z, 2.5, 1)) && (lance == 1)))
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Ped2X, Ped2Y, Ped2Z, &heading);
+					if ((( heading < 15.0) && (lance == 1)) || ((IS_BULLET_IN_AREA(Ped2X, Ped2Y, Ped2Z, 2.5, 1)) && (lance == 1)))
 					{
 						SET_CHAR_RELATIONSHIP_GROUP(ped1, 17);
 						SET_SENSE_RANGE(ped1, 0.05);
@@ -3639,7 +3639,7 @@ void typography(void)
 							lance = 3;
 						}
 					}
-					else if ((( PlayR < 15.0) && (lance == 3)) || ((IS_BULLET_IN_AREA(Ped2X, Ped2Y, Ped2Z, 2.5, 1)) && (lance == 3)))
+					else if ((( heading < 15.0) && (lance == 3)) || ((IS_BULLET_IN_AREA(Ped2X, Ped2Y, Ped2Z, 2.5, 1)) && (lance == 3)))
 					{
 						SET_CHAR_RELATIONSHIP_GROUP(ped1, 17);
 						SET_SENSE_RANGE(ped1, 0.05);
@@ -3662,7 +3662,7 @@ void typography(void)
 							lance = 5;
 						}
 					}
-					else if ((( PlayR < 15.0) && (lance == 5)) || ((IS_BULLET_IN_AREA(Ped2X, Ped2Y, Ped2Z, 2.5, 1)) && (lance == 5)))
+					else if ((( heading < 15.0) && (lance == 5)) || ((IS_BULLET_IN_AREA(Ped2X, Ped2Y, Ped2Z, 2.5, 1)) && (lance == 5)))
 					{
 						SET_CHAR_RELATIONSHIP_GROUP(ped1, 17);
 						SET_SENSE_RANGE(ped1, 0.05);
@@ -3685,7 +3685,7 @@ void typography(void)
 							lance = 7;
 						}
 					}
-					else if ((( PlayR < 8.0) && (lance == 7)) || ((IS_BULLET_IN_AREA(Ped2X, Ped2Y, Ped2Z, 2.5, 1)) && (lance == 7)))
+					else if ((( heading < 8.0) && (lance == 7)) || ((IS_BULLET_IN_AREA(Ped2X, Ped2Y, Ped2Z, 2.5, 1)) && (lance == 7)))
 					{
 						SET_CHAR_RELATIONSHIP_GROUP(ped1, 17);
 						SET_SENSE_RANGE(ped1, 0.05);

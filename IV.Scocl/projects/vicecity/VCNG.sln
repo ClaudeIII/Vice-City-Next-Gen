@@ -49,8 +49,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rcplne", "rcplne.vcxproj", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rcheli", "rcheli.vcxproj", "{338C60F8-1CFE-4A02-B81F-44B01AEDBC6A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "puzzle", "puzzle.vcxproj", "{9F791057-5F37-4395-93D5-05A23AE20FB7}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PROTECT", "PROTECT.vcxproj", "{B1E1AB16-2D59-404F-9955-5772178E2312}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PRON", "PRON.vcxproj", "{3B4FAE50-3C7F-422D-B80F-B4B7FC47AA64}"
@@ -115,6 +113,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ambulance", "ambulance.vcxp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ambstreams", "ambstreams.vcxproj", "{2888E14B-B3BF-4A68-B7FD-F80DF2995C54}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vc_jump", "vc_jump.vcxproj", "{6FC2CDBA-A398-47FD-A75F-978D5DC7B9D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		sco|Win32 = sco|Win32
@@ -166,8 +166,6 @@ Global
 		{AAB8AFB0-9148-4258-9AB7-4720D0162674}.sco|Win32.Build.0 = sco|Win32
 		{338C60F8-1CFE-4A02-B81F-44B01AEDBC6A}.sco|Win32.ActiveCfg = sco|Win32
 		{338C60F8-1CFE-4A02-B81F-44B01AEDBC6A}.sco|Win32.Build.0 = sco|Win32
-		{9F791057-5F37-4395-93D5-05A23AE20FB7}.sco|Win32.ActiveCfg = sco|Win32
-		{9F791057-5F37-4395-93D5-05A23AE20FB7}.sco|Win32.Build.0 = sco|Win32
 		{B1E1AB16-2D59-404F-9955-5772178E2312}.sco|Win32.ActiveCfg = sco|Win32
 		{B1E1AB16-2D59-404F-9955-5772178E2312}.sco|Win32.Build.0 = sco|Win32
 		{3B4FAE50-3C7F-422D-B80F-B4B7FC47AA64}.sco|Win32.ActiveCfg = sco|Win32
@@ -232,6 +230,8 @@ Global
 		{123F9912-882D-4464-9C54-342C87FFCA31}.sco|Win32.Build.0 = sco|Win32
 		{2888E14B-B3BF-4A68-B7FD-F80DF2995C54}.sco|Win32.ActiveCfg = sco|Win32
 		{2888E14B-B3BF-4A68-B7FD-F80DF2995C54}.sco|Win32.Build.0 = sco|Win32
+		{6FC2CDBA-A398-47FD-A75F-978D5DC7B9D5}.sco|Win32.ActiveCfg = sco|Win32
+		{6FC2CDBA-A398-47FD-A75F-978D5DC7B9D5}.sco|Win32.Build.0 = sco|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

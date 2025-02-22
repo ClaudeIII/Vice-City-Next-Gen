@@ -6,7 +6,7 @@
 #include "globals.h"
 
 float swap, swap2, sebal, angle, spawn_car, spawnT, spawnL, spawnS1, spawnS2, spawnS3, spawnS4, spawnS5, spawnH, spawnF, spawnM, spawn_blood, spawn_inf, cop_on, run_on, arm_on, fire_on, heal_on;
-float PlayX, PlayY, PlayZ, PlayR, PedX, PedY, PedZ, PedR, in_taxi, in_voodoo;
+float PlayX, PlayY, PlayZ, heading, PedX, PedY, PedZ, PedR, in_taxi, in_voodoo;
 float x, y, set_money, siren, check_X, check_Y, check_Z, James, Pizza, Tools, Ammunition, add_check, trigger, open_D_door, open_D_door2, open_pron, open_star1, open_star2;
 
 void i_need_tools(void)
@@ -658,8 +658,8 @@ void ammu_nation(void)
 		{
 			DRAW_CHECKPOINT( check_X, check_Y, check_Z, 0.8, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, check_X, check_Y, check_Z, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, check_X, check_Y, check_Z, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				if (add_check == 0)
 				{
@@ -812,8 +812,8 @@ void create_shops(void)
 		{
 			DRAW_CHECKPOINT( check_X, check_Y, check_Z, 0.8, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, check_X, check_Y, check_Z, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, check_X, check_Y, check_Z, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				if (add_check == 0)
 				{

@@ -19,7 +19,7 @@ uint checkpoint;
 
 float textur, skip, start, poziteon, time_m, time_s, pley_rrr, zone;
 float Blip_x2, Blip_y2, Blip_z2;
-float PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, PlayR, play_cord;
+float PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, heading, play_cord;
 float Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, Ped1R, ped1_cord, ped1_lap;
 float Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, Ped2R, ped2_cord, ped2_lap;
 float Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, Ped3R, ped3_cord, ped3_lap;
@@ -327,8 +327,8 @@ void rc_baron(void)
 		// гонка
 		//DRAW_SPHERE(Blip_x, Blip_y, (Blip_z-4.5), 7.0);
 		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);
-		if ( PlayR < 8.5 )
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &heading);
+		if ( heading < 8.5 )
 		{
 			play_cord += 1;
 			Blip_x = Blip_x2; 
@@ -1125,55 +1125,55 @@ void rc_baron(void)
 		GET_CHAR_COORDINATES(ped3,  &Ped3X, &Ped3Y, &Ped3Z);//вписываем координаты соперника в переменную
 		GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);
 		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &heading);
 
 		if ((play_cord == ped1_cord) && (play_cord == ped2_cord) && (play_cord == ped3_cord))
 		{
-			if (PlayR < Ped1R) //1
+			if (heading < Ped1R) //1
 			{
-				if (PlayR < Ped2R) //1
+				if (heading < Ped2R) //1
 				{
-					if (PlayR < Ped3R) //1
+					if (heading < Ped3R) //1
 					{
 						poziteon = 1;
 					}
-					else if (PlayR > Ped3R)//0
+					else if (heading > Ped3R)//0
 					{
 						poziteon = 2;
 					}
 				}
-				else if (PlayR > Ped2R)//0
+				else if (heading > Ped2R)//0
 				{
-					if (PlayR < Ped3R) //1
+					if (heading < Ped3R) //1
 					{
 						poziteon = 2;
 					}
-					else if (PlayR > Ped3R)//0
+					else if (heading > Ped3R)//0
 					{
 						poziteon = 3;
 					}
 				}
 			}
-			else if (PlayR > Ped1R)//0
+			else if (heading > Ped1R)//0
 			{
-				if (PlayR < Ped2R) //1
+				if (heading < Ped2R) //1
 				{
-					if (PlayR < Ped3R) //1
+					if (heading < Ped3R) //1
 					{
 						poziteon = 2;
 					}
-					else if (PlayR > Ped3R)//0
+					else if (heading > Ped3R)//0
 					{
 						poziteon = 3;
 					}
 				}
-				else if (PlayR > Ped2R)//0
+				else if (heading > Ped2R)//0
 				{
-					if (PlayR < Ped3R) //1
+					if (heading < Ped3R) //1
 					{
 						poziteon = 3;
 					}
-					else if (PlayR > Ped3R)//0
+					else if (heading > Ped3R)//0
 					{
 						poziteon = 4;
 					}
@@ -1182,24 +1182,24 @@ void rc_baron(void)
 		}
 		else if ((play_cord == ped1_cord) && (play_cord == ped2_cord) && (play_cord > ped3_cord))
 		{
-			if (PlayR < Ped1R) //1
+			if (heading < Ped1R) //1
 			{
-				if (PlayR < Ped2R) //1
+				if (heading < Ped2R) //1
 				{
 					poziteon = 1;
 				}
-				else if (PlayR > Ped2R)//0
+				else if (heading > Ped2R)//0
 				{
 					poziteon = 2;
 				}
 			}
-			else if (PlayR > Ped1R) //0
+			else if (heading > Ped1R) //0
 			{
-				if (PlayR < Ped2R) //1
+				if (heading < Ped2R) //1
 				{
 					poziteon = 2;
 				}
-				else if (PlayR > Ped2R)//0
+				else if (heading > Ped2R)//0
 				{
 					poziteon = 3;
 				}
@@ -1207,24 +1207,24 @@ void rc_baron(void)
 		}
 		else if ((play_cord == ped1_cord) && (play_cord > ped2_cord) && (play_cord == ped3_cord))
 		{
-			if (PlayR < Ped1R) //1
+			if (heading < Ped1R) //1
 			{
-				if (PlayR < Ped3R) //1
+				if (heading < Ped3R) //1
 				{
 					poziteon = 1;
 				}
-				else if (PlayR > Ped3R)//0
+				else if (heading > Ped3R)//0
 				{
 					poziteon = 2;
 				}
 			}
-			else if (PlayR > Ped1R) //0
+			else if (heading > Ped1R) //0
 			{
-				if (PlayR < Ped3R) //1
+				if (heading < Ped3R) //1
 				{
 					poziteon = 2;
 				}
-				else if (PlayR > Ped3R)//0
+				else if (heading > Ped3R)//0
 				{
 					poziteon = 3;
 				}
@@ -1232,24 +1232,24 @@ void rc_baron(void)
 		}
 		else if ((play_cord > ped1_cord) && (play_cord == ped2_cord) && (play_cord == ped3_cord))
 		{
-			if (PlayR < Ped2R) //1
+			if (heading < Ped2R) //1
 			{
-				if (PlayR < Ped3R) //1
+				if (heading < Ped3R) //1
 				{
 					poziteon = 1;
 				}
-				else if (PlayR > Ped3R)//0
+				else if (heading > Ped3R)//0
 				{
 					poziteon = 2;
 				}
 			}
-			else if (PlayR > Ped2R) //0
+			else if (heading > Ped2R) //0
 			{
-				if (PlayR < Ped3R) //1
+				if (heading < Ped3R) //1
 				{
 					poziteon = 2;
 				}
-				else if (PlayR > Ped3R)//0
+				else if (heading > Ped3R)//0
 				{
 					poziteon = 3;
 				}
@@ -1257,33 +1257,33 @@ void rc_baron(void)
 		}
 		else if ((play_cord == ped1_cord) && (play_cord > ped2_cord) && (play_cord > ped3_cord))
 		{
-			if (PlayR < Ped1R) //1
+			if (heading < Ped1R) //1
 			{
 				poziteon = 1;
 			}
-			else if (PlayR > Ped1R) //0
+			else if (heading > Ped1R) //0
 			{
 				poziteon = 2;
 			}
 		}
 		else if ((play_cord > ped1_cord) && (play_cord == ped2_cord) && (play_cord > ped3_cord))
 		{
-			if (PlayR < Ped2R) //1
+			if (heading < Ped2R) //1
 			{
 				poziteon = 1;
 			}
-			else if (PlayR > Ped2R) //0
+			else if (heading > Ped2R) //0
 			{
 				poziteon = 2;
 			}
 		}
 		else if ((play_cord > ped1_cord) && (play_cord > ped2_cord) && (play_cord == ped3_cord))
 		{
-			if (PlayR < Ped3R) //1
+			if (heading < Ped3R) //1
 			{
 				poziteon = 1;
 			}
-			else if (PlayR > Ped3R) //0
+			else if (heading > Ped3R) //0
 			{
 				poziteon = 2;
 			}
@@ -1294,24 +1294,24 @@ void rc_baron(void)
 		}
 		else if ((play_cord == ped1_cord) && (play_cord == ped2_cord) && (play_cord < ped3_cord))
 		{
-			if (PlayR < Ped1R) //1
+			if (heading < Ped1R) //1
 			{
-				if (PlayR < Ped2R) //1
+				if (heading < Ped2R) //1
 				{
 					poziteon = 2;
 				}
-				else if (PlayR > Ped2R)//0
+				else if (heading > Ped2R)//0
 				{
 					poziteon = 3;
 				}
 			}
-			else if (PlayR > Ped1R) //0
+			else if (heading > Ped1R) //0
 			{
-				if (PlayR < Ped2R) //1
+				if (heading < Ped2R) //1
 				{
 					poziteon = 3;
 				}
-				else if (PlayR > Ped2R)//0
+				else if (heading > Ped2R)//0
 				{
 				poziteon = 4;
 				}
@@ -1319,24 +1319,24 @@ void rc_baron(void)
 		}
 		else if ((play_cord == ped1_cord) && (play_cord < ped2_cord) && (play_cord == ped3_cord))
 		{
-			if (PlayR < Ped1R) //1
+			if (heading < Ped1R) //1
 			{
-				if (PlayR < Ped3R) //1
+				if (heading < Ped3R) //1
 				{
 					poziteon = 2;
 				}
-				else if (PlayR > Ped3R)//0
+				else if (heading > Ped3R)//0
 				{
 					poziteon = 3;
 				}
 			}
-			else if (PlayR > Ped1R) //0
+			else if (heading > Ped1R) //0
 			{
-				if (PlayR < Ped3R) //1
+				if (heading < Ped3R) //1
 				{
 					poziteon = 3;
 				}
-				else if (PlayR > Ped3R)//0
+				else if (heading > Ped3R)//0
 				{
 					poziteon = 4;
 				}
@@ -1344,24 +1344,24 @@ void rc_baron(void)
 		}
 		else if ((play_cord < ped1_cord) && (play_cord == ped2_cord) && (play_cord == ped3_cord))
 		{
-			if (PlayR < Ped2R) //1
+			if (heading < Ped2R) //1
 			{
-				if (PlayR < Ped3R) //1
+				if (heading < Ped3R) //1
 				{
 					poziteon = 2;
 				}
-				else if (PlayR > Ped3R)//0
+				else if (heading > Ped3R)//0
 				{
 					poziteon = 3;
 				}
 			}
-			else if (PlayR > Ped2R) //0
+			else if (heading > Ped2R) //0
 			{
-				if (PlayR < Ped3R) //1
+				if (heading < Ped3R) //1
 				{
 					poziteon = 3;
 				}
-				else if (PlayR > Ped3R)//0
+				else if (heading > Ped3R)//0
 				{
 					poziteon = 4;
 				}
@@ -1369,33 +1369,33 @@ void rc_baron(void)
 		}
 		else if ((play_cord == ped1_cord) && (play_cord < ped2_cord) && (play_cord < ped3_cord))
 		{
-			if (PlayR < Ped1R) //1
+			if (heading < Ped1R) //1
 			{
 				poziteon = 3;
 			}
-			else if (PlayR > Ped1R) //0
+			else if (heading > Ped1R) //0
 			{
 				poziteon = 4;
 			}
 		}
 		else if ((play_cord < ped1_cord) && (play_cord == ped2_cord) && (play_cord < ped3_cord))
 		{
-			if (PlayR < Ped2R) //1
+			if (heading < Ped2R) //1
 			{
 				poziteon = 3;
 			}
-			else if (PlayR > Ped2R) //0
+			else if (heading > Ped2R) //0
 			{
 				poziteon = 4;
 			}
 		}
 		else if ((play_cord < ped1_cord) && (play_cord < ped2_cord) && (play_cord == ped3_cord))
 		{
-			if (PlayR < Ped3R) //1
+			if (heading < Ped3R) //1
 			{
 				poziteon = 3;
 			}
-			else if (PlayR > Ped3R) //0
+			else if (heading > Ped3R) //0
 			{
 				poziteon = 4;
 			}
@@ -1407,7 +1407,7 @@ void rc_baron(void)
 		//======
 		else if ((play_cord > ped1_cord) && (play_cord < ped2_cord) && (play_cord == ped3_cord))
 		{
-			if (PlayR < Ped3R) //1
+			if (heading < Ped3R) //1
 			{
 				poziteon = 2;
 			}
@@ -1418,7 +1418,7 @@ void rc_baron(void)
 		}
 		else if ((play_cord > ped1_cord) && (play_cord == ped2_cord) && (play_cord < ped3_cord))
 		{
-			if (PlayR < Ped2R) //1
+			if (heading < Ped2R) //1
 			{
 				poziteon = 2;
 			}
@@ -1430,7 +1430,7 @@ void rc_baron(void)
 
 		else if ((play_cord < ped1_cord) && (play_cord > ped2_cord) && (play_cord == ped3_cord))
 		{
-			if (PlayR < Ped3R) //1
+			if (heading < Ped3R) //1
 			{
 				poziteon = 2;
 			}
@@ -1441,7 +1441,7 @@ void rc_baron(void)
 		}
 		else if ((play_cord < ped1_cord) && (play_cord == ped2_cord) && (play_cord > ped3_cord))
 		{
-			if (PlayR < Ped2R) //1
+			if (heading < Ped2R) //1
 			{
 				poziteon = 2;
 			}

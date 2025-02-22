@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PedX, PedY, PedZ, PedR, PlayR, blip_on, time_m, time_s, sound, play, text1, text2, stalking, stalkerR, in_car, skip, textur, in_cord, volume, speed, shkala, shkalaON, autosave;
+float PlayX, PlayY, PlayZ, PedX, PedY, PedZ, PedR, heading, blip_on, time_m, time_s, sound, play, text1, text2, stalking, stalkerR, in_car, skip, textur, in_cord, volume, speed, shkala, shkalaON, autosave;
 float shkalaH1, shkalaH2, shkalaH3, shkalaHUD_y1, shkalaHUD_y2, shkalaHUD_y3, HUD_w, HUD_x, play_aud, play_Speech, super_ped;			
 
 void rockers(void)
@@ -42,8 +42,8 @@ void rockers(void)
 			}
 			DRAW_CHECKPOINT( -442.551, 1692.462, 5.088, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -442.551, 1692.462, 5.088, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -442.551, 1692.462, 5.088, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(rock_ico);
@@ -152,8 +152,8 @@ void rockers(void)
 					WAIT(0);
 					DRAW_CHECKPOINT( -85.34, 1662.781, 4.952, 1.5, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -85.34, 1662.781, 4.952, &PlayR);
-					if ( PlayR < 2.1)
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -85.34, 1662.781, 4.952, &heading);
+					if ( heading < 2.1)
 					{
 						if (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))
 						{
@@ -333,8 +333,8 @@ void rockers(void)
 						}
 						GET_CHAR_COORDINATES(ped2,  &PedX, &PedY, &PedZ);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-						if ( PlayR > 250.5)
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+						if ( heading > 250.5)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "RBM1_15", 5000, 1);//~r~You have lost the dealer, our cash and the drugs!
@@ -430,8 +430,8 @@ void rockers(void)
 						WAIT(0);
 						DRAW_CHECKPOINT( 738.624, 825.113, 10.174, 1.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 738.624, 825.113, 10.174, &PlayR);
-						if ( PlayR < 2.0)
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 738.624, 825.113, 10.174, &heading);
+						if ( heading < 2.0)
 						{
 							if (IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed()))
 							{
@@ -673,9 +673,9 @@ void rockers(void)
 
 						DRAW_CHECKPOINT( -438.107, 1696.831, 4.989, 1.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -438.107, 1696.831, 4.989, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -438.107, 1696.831, 4.989, &heading);
 						GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, -438.107, 1696.831, 4.989, &in_cord);
-						if (( PlayR < 2.2) && (in_cord < 2.5))
+						if (( heading < 2.2) && (in_cord < 2.5))
 						{
 							if (sound == 1)
 							{
@@ -841,8 +841,8 @@ void rockers(void)
 			}
 			DRAW_CHECKPOINT( -442.551, 1692.462, 5.088, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -442.551, 1692.462, 5.088, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -442.551, 1692.462, 5.088, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(rock_ico);
@@ -1073,8 +1073,8 @@ void rockers(void)
 					}
 
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -435.115, 1297.69, 4.81705, &PlayR);
-					if (( PlayR < 2.1) && (in_car == 1))
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -435.115, 1297.69, 4.81705, &heading);
+					if (( heading < 2.1) && (in_car == 1))
 					{
 						if  (IS_CHAR_IN_CAR(GetPlayerPed(), car1))
 						{
@@ -1340,8 +1340,8 @@ void rockers(void)
 								super_ped = 0;
 							}
 						}
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &PlayR);
-						if ( PlayR > 250.1)
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, PedX, PedY, PedZ, &heading);
+						if ( heading > 250.1)
 						{
 							CLEAR_PRINTS();
 							PRINT_STRING_IN_STRING("string", "RBM2_5", 5000, 1);//~r~You lost him, you idiot!
@@ -1478,8 +1478,8 @@ void rockers(void)
 			}
 			DRAW_CHECKPOINT( -442.551, 1692.462, 5.088, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -442.551, 1692.462, 5.088, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -442.551, 1692.462, 5.088, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(rock_ico);
@@ -2077,8 +2077,8 @@ void rockers(void)
 
 						DRAW_CHECKPOINT( -439.597, 1587.51, 4.77215, 2.0, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -439.597, 1587.51, 4.77215, &PlayR);
-						if (( PlayR < 2.1) && (IS_CHAR_IN_CAR(GetPlayerPed(), car1)))
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -439.597, 1587.51, 4.77215, &heading);
+						if (( heading < 2.1) && (IS_CHAR_IN_CAR(GetPlayerPed(), car1)))
 						{
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 

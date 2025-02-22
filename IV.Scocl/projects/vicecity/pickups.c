@@ -16,14 +16,7 @@ int add_weap1, add_weap2, add_weap3, add_weap4, add_weap5, add_weap6, add_weap7;
 void swap_skin(int skinID)
 {
 	DO_SCREEN_FADE_OUT( 500 );
-	while(true)
-	{
-		WAIT(0);
-		if (IS_SCREEN_FADED_OUT())
-		{
-			break;
-		}
-	}
+	while (!IS_SCREEN_FADED_OUT()) WAIT(0);
 	if (!IS_WANTED_LEVEL_GREATER(GetPlayerIndex(), 2))
 	{
 		ALTER_WANTED_LEVEL(GetPlayerIndex(), 0);
@@ -156,8 +149,8 @@ void pickups(void)
 		if ((G_PACKET == 1) && (add_weap1 == 0))
 		{
 			CREATE_PICKUP_ROTATE(ec_bpjacket, 2, 100, 658.081, -738.753, 13.2342, -11.166, 0.252, 64.538, &pack_weap_1);
-			CREATE_PICKUP_ROTATE(ec_bpjacket, 2, 100, 95.2247, -38.3479, 5.57377, -10.0, 0.0, 90.0, &pack_weap_2);// особняк
-			CREATE_PICKUP_ROTATE(ec_bpjacket, 2, 100, -393.338, 1895.59, 60.7043, -15.0, 0.0, 0.0, &pack_weap_3);// хюман конго
+			CREATE_PICKUP_ROTATE(ec_bpjacket, 2, 100, 95.2247, -38.3479, 5.57377, -10.0, 0.0, 90.0, &pack_weap_2);
+			CREATE_PICKUP_ROTATE(ec_bpjacket, 2, 100, -393.338, 1895.59, 60.7043, -15.0, 0.0, 0.0, &pack_weap_3);
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_2, "mansion_int");
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_1, "ocean_view_int");
 			add_weap1 = 1;
@@ -165,8 +158,8 @@ void pickups(void)
 		if ((G_PACKET == 2) && (add_weap2 == 0))
 		{
 			CREATE_PICKUP_ROTATE(w_eagle, 2, 6, 654.738, -738.542, 13.2924, -91.638, -0.147, 87.579, &pack_weap_4);
-			CREATE_PICKUP_ROTATE(w_eagle, 2, 6, 101.028, -35.0397, 5.60441, -84.565, -0.019, 4.981, &pack_weap_5);// особняк
-			CREATE_PICKUP_ROTATE(w_eagle, 2, 6, -394.505, 1895.02, 60.7353, -90.0, 0.0, 0.0, &pack_weap_6);// хюман конго
+			CREATE_PICKUP_ROTATE(w_eagle, 2, 6, 101.028, -35.0397, 5.60441, -84.565, -0.019, 4.981, &pack_weap_5);
+			CREATE_PICKUP_ROTATE(w_eagle, 2, 6, -394.505, 1895.02, 60.7353, -90.0, 0.0, 0.0, &pack_weap_6);
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_5, "mansion_int");
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_4, "ocean_view_int");
 			add_weap2 = 1;
@@ -174,8 +167,8 @@ void pickups(void)
 		if ((G_PACKET == 3) && (add_weap3 == 0))
 		{
 			CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, 654.881, -737.891, 13.3729, -2.117, 4.531, 64.916, &pack_weap_7);
-			CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, 102.313, -35.2893, 5.72876, 0.0, 0.0, 0.0, &pack_weap_8);// особняк
-			CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, -385.332, 1895.79, 60.8665, 0.0, 0.0, -40.0, &pack_weap_9);// хюман конго
+			CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, 102.313, -35.2893, 5.72876, 0.0, 0.0, 0.0, &pack_weap_8);
+			CREATE_PICKUP_ROTATE(w_chnsaw, 2, 1000, -385.332, 1895.79, 60.8665, 0.0, 0.0, -40.0, &pack_weap_9);
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_8, "mansion_int");
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_7, "ocean_view_int");
 			add_weap3 = 1;
@@ -183,8 +176,8 @@ void pickups(void)
 		if ((G_PACKET == 4) && (add_weap4 == 0))
 		{
 			CREATE_PICKUP_ROTATE(w_mp5, 2, 30, 654.413, -740.585, 13.2924, -91.638, -0.147, 87.579, &pack_weap_10);
-			CREATE_PICKUP_ROTATE(w_mp5, 2, 30, 99.0192, -35.2361, 5.6018, -85.0, -5.0, 40.0, &pack_weap_11);// особняк
-			CREATE_PICKUP_ROTATE(w_mp5, 2, 30, -392.622, 1894.95, 60.7353, -90.0, 0.0, 30.0, &pack_weap_12);// хюман конго
+			CREATE_PICKUP_ROTATE(w_mp5, 2, 30, 99.0192, -35.2361, 5.6018, -85.0, -5.0, 40.0, &pack_weap_11);
+			CREATE_PICKUP_ROTATE(w_mp5, 2, 30, -392.622, 1894.95, 60.7353, -90.0, 0.0, 30.0, &pack_weap_12);
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_11, "mansion_int");
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_10, "ocean_view_int");
 			add_weap4 = 1;
@@ -192,8 +185,8 @@ void pickups(void)
 		if ((G_PACKET == 5) && (add_weap5 == 0))
 		{
 			CREATE_PICKUP_ROTATE(w_psg1, 2, 20, 654.405, -739.743, 13.6601, 90.0, -65.0, 160.0, &pack_weap_13);
-			CREATE_PICKUP_ROTATE(w_psg1, 2, 20, 95.2833, -35.0347, 6.0449, 90.0, -105.0, 0.0, &pack_weap_14);// особняк
-			CREATE_PICKUP_ROTATE(w_psg1, 2, 20, -402.12, 1895.18, 60.7539, -90.0, 0.0, 90.0, &pack_weap_15);// хюман конго
+			CREATE_PICKUP_ROTATE(w_psg1, 2, 20, 95.2833, -35.0347, 6.0449, 90.0, -105.0, 0.0, &pack_weap_14);
+			CREATE_PICKUP_ROTATE(w_psg1, 2, 20, -402.12, 1895.18, 60.7539, -90.0, 0.0, 90.0, &pack_weap_15);
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_14, "mansion_int");
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_13, "ocean_view_int");
 			add_weap5 = 1;
@@ -201,8 +194,8 @@ void pickups(void)
 		if ((G_PACKET == 6) && (add_weap6 == 0))
 		{
 			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, 658.576, -738.166, 13.6815, 101.696, -64.536, 74.413, &pack_weap_16);
-			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, 95.2652, -36.4558, 6.02537, -90.0, -75.0, -180.0, &pack_weap_17);// особняк
-			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, -403.225, 1894.99, 61.1544, -90.0, -75.0, 90.0, &pack_weap_18);// хюман конго
+			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, 95.2652, -36.4558, 6.02537, -90.0, -75.0, -180.0, &pack_weap_17);
+			CREATE_PICKUP_ROTATE(w_e2_m249, 2, 100, -403.225, 1894.99, 61.1544, -90.0, -75.0, 90.0, &pack_weap_18);
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_17, "mansion_int");
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_16, "ocean_view_int");
 			add_weap6 = 1;
@@ -210,8 +203,8 @@ void pickups(void)
 		if ((G_PACKET == 7) && (add_weap7 == 0))
 		{
 			CREATE_PICKUP_ROTATE(w_rpg, 2, 8, 654.459, -739.168, 13.8412, -87.294, -112.761, -17.117, &pack_weap_19);
-			CREATE_PICKUP_ROTATE(w_rpg, 2, 8, 97.3453, -34.7902, 6.19572, -90.0, -75.0, 90.0, &pack_weap_20);// особняк
-			CREATE_PICKUP_ROTATE(w_rpg, 2, 8, -404.197, 1894.61, 60.7386, -80.0, 0.0, 0.0, &pack_weap_21);// хюман конго
+			CREATE_PICKUP_ROTATE(w_rpg, 2, 8, 97.3453, -34.7902, 6.19572, -90.0, -75.0, 90.0, &pack_weap_20);
+			CREATE_PICKUP_ROTATE(w_rpg, 2, 8, -404.197, 1894.61, 60.7386, -80.0, 0.0, 0.0, &pack_weap_21);
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_20, "mansion_int");
 			ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME(pack_weap_19, "ocean_view_int");
 			add_weap7 = 1;

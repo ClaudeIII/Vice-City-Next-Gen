@@ -4,7 +4,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
-float PlayX, PlayY, PlayZ, PlayR, help_1, set_txd, language, textur, alpha, set_in;
+float PlayX, PlayY, PlayZ, heading, help_1, set_txd, language, textur, alpha, set_in;
 
 void SetCut(uint time)
 {
@@ -522,8 +522,8 @@ void INTRO(void)
 
 		DRAW_CHECKPOINT( 671.029, -747.042, 4.934, 1.3, 246, 151, 255);
 		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 671.029, -747.042, 4.934, &PlayR);
-		if ( PlayR < 1.3 )
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 671.029, -747.042, 4.934, &heading);
+		if ( heading < 1.3 )
 		{
 			
 			REMOVE_BLIP(hotel);
@@ -611,8 +611,8 @@ void INTRO(void)
 		WAIT(0);
 		DRAW_CHECKPOINT( 642.789, -755.855, 5.974, 1.3, 246, 151, 255);
 		GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 642.789, -755.855, 5.974, &PlayR);
-		if ( PlayR < 1.8 )
+		GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, 642.789, -755.855, 5.974, &heading);
+		if ( heading < 1.8 )
 		{
 			REMOVE_BLIP(hotel);
 			SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );

@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, spisok, spisok_on, s_car_1, s_car_2, s_car_3, s_car_4, s_car_5, s_car_6, in_model, text, text2, cash, autosave;
+float PlayX, PlayY, PlayZ, heading, blip_on, spisok, spisok_on, s_car_1, s_car_2, s_car_3, s_car_4, s_car_5, s_car_6, in_model, text, text2, cash, autosave;
 float textur1;
 int income, load_mashin, help, time_income, temp;
 
@@ -314,7 +314,7 @@ void Sunshine(void)
 										}
 
 										DO_SCREEN_FADE_IN( 1500 );
-										TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве) 
+										TRIGGER_MISSION_COMPLETE_AUDIO(1);
 										SETTIMERA(0);
 										POINT_CAM_AT_COORD	( camera, -583.188, -334.591, 12.646);
 										SET_CAM_POS			( camera, -587.596, -389.758, 14.336); 	

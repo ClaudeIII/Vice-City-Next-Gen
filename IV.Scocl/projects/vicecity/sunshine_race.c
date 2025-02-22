@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, set_race;
+float PlayX, PlayY, PlayZ, heading, set_race;
 float textur, race_map, draw_map, help_wait, race_start, lap_all, add_money, best_time_m, best_time_s, spead_time, cam_x;
 float timer_m_1, timer_s_1, timer_m_2, timer_s_2, timer_m_3, timer_s_3;
 float timer_m_4, timer_s_4, timer_m_5, timer_s_5, timer_m_6, timer_s_6;
@@ -107,8 +107,8 @@ void race_launcher(void)
 		{
 			DRAW_CHECKPOINT( -534.695, -294.287, 0.738626, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -534.695, -294.287, 0.738626, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -534.695, -294.287, 0.738626, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				race_map = 1;
@@ -416,7 +416,7 @@ void race_launcher(void)
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					DESTROY_CAM( camera );
 					DESTROY_CAM( camera2 );
-					SET_WIDESCREEN_BORDERS( 0 ); //возвращаем инетрфейс
+					SET_WIDESCREEN_BORDERS( 0 );
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем
 					G_ONMISSION = 0;
 				}
@@ -533,7 +533,7 @@ void race_launcher(void)
 					ACTIVATE_SCRIPTED_CAMS( 0, 0 );
 					DESTROY_CAM( camera );
 					DESTROY_CAM( camera2 );
-					SET_WIDESCREEN_BORDERS( 0 ); //возвращаем инетрфейс;
+					SET_WIDESCREEN_BORDERS( 0 );;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 1, 1, 1 );// Размораживаем
 					start_race();
 				}

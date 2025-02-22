@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float temp, prodano, speed, klient, zon_on, textur, help_text, PlayX, PlayY, PlayZ, PlayX2, PlayY2, PlayZ2, PlayR, autosave;
+float temp, prodano, speed, klient, zon_on, textur, help_text, PlayX, PlayY, PlayZ, PlayX2, PlayY2, PlayZ2, heading, autosave;
 float x, x2, y, y2, PedX, PedY, PedZ, BortLX, BortLY, BortRX, BortRY, PedR1, PedR2, PedR3, skip, blip_on;
 int income, load_mashin, help;
 
@@ -203,13 +203,13 @@ void whoopee(void)
 												CHANGE_BLIP_SCALE(ice_ico, 0.77999990);
 
 												GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX2, &PlayY2, &PlayZ2);
-												GET_CHAR_HEADING(GetPlayerPed(), &PlayR);
+												GET_CHAR_HEADING(GetPlayerPed(), &heading);
 
-												BortLX = (x*COS(PlayR+35)+y*SIN(PlayR+35))+PlayX2; // x- координата r- угол поворота
-												BortLY = (y*SIN(PlayR+35)-x*COS(PlayR+35))+PlayY2; // y- координата r- угол поворота
+												BortLX = (x*COS(heading+35)+y*SIN(heading+35))+PlayX2; // x- координата r- угол поворота
+												BortLY = (y*SIN(heading+35)-x*COS(heading+35))+PlayY2; // y- координата r- угол поворота
 
-												BortRX = ((x2*COS(PlayR+45))+y2*SIN(PlayR+45))+PlayX2; // x- координата r- угол поворота
-												BortRY = (y2*SIN(PlayR+45)-(x2*COS(PlayR+45)))+PlayY2; // y- координата r- угол поворота
+												BortRX = ((x2*COS(heading+45))+y2*SIN(heading+45))+PlayX2; // x- координата r- угол поворота
+												BortRY = (y2*SIN(heading+45)-(x2*COS(heading+45)))+PlayY2; // y- координата r- угол поворота
 
 												GET_CHAR_COORDINATES(ped1, &PedX, &PedY, &PedZ);//вписываем координаты в переменную
 												GET_DISTANCE_BETWEEN_COORDS_3D( PedX, PedY, PedZ, BortLX, BortLY, PlayZ2, &PedR1);
@@ -284,11 +284,11 @@ void whoopee(void)
 														//поворачиваем на
 														if (PedR3 == 1)
 														{
-															SET_CHAR_HEADING(ped1, PlayR+90);
+															SET_CHAR_HEADING(ped1, heading+90);
 														}
 														else if (PedR3 == 2)
 														{
-															SET_CHAR_HEADING(ped1, PlayR-90);
+															SET_CHAR_HEADING(ped1, heading-90);
 														}
 														//проигрываем анимацию
 														TASK_PLAY_ANIM_NON_INTERRUPTABLE( ped1, "m_insertcard", "amb@atm", 1.0, 0, 0, 0, 0, -1 );

@@ -60,7 +60,7 @@ fxt,		fxt,		car,		FXT,		FXT,		VEH@VAN,	NULL,				1,	0,		0.255,	0.255,		0,	3,	1.5	
 habanero,	habanero,	car,		HABANERO,	HABANRO,	VEH@STD,	VEH@STD_LO1_LO1,	100,	999,		0.22,	0.22,		0,	2,	1.2	,1,	ext_requi
 hakumai, 	hakumai,	car,		HAKUMAI,	SUPER,		VEH@LOW,	VEH@LOW_LE2_RI2,		100,	999,		0.26,	0.26,		0.3,	2,	1.0	,1,	sports
 huntley,	huntley,	car,		HUNTLEY,	HUNT,		VEH@STD,	VEH@STD_LO1_LO1,	50,	999,		0.165,	0.165,		0,	2,	1.2	,0,	ext_requi
-infernus,	infernus,	car,		INFERNUS,	INFERNUS,	VEH@LOW,	VEH@LOW_INFERNUS,	20,	999,		0.26,	0.26,		0,	5,	1.0	,0,	sports
+infernus,	infernus,	car,		INFERNUS,	INFERNUS,	VEH@LOW,	NULL,			20,	999,		0.26,	0.26,		0,	5,	1.0	,0,	sports
 ingot,		ingot,		car,		INGOT,		INGOT,		VEH@STD,	VEH@STD_RI1,		100,	999,		0.215,	0.215		0.3,	1,	1.0	,1,	ext_gang+ext_all+ext_strong
 intruder, 	intruder, 	car, 		INTRUDER, 	BUCCNEER, 	VEH@LOW,	VEH@LOW_LE2_RI2,	100,	999,		0.24,	0.24, 	0,	2,	1.0	,0,	ext_gang
 landstalker,	landstalker,	car,		LANSTALK,	LANSTALK,	VEH@VAN,	VEH@VAN_RI3_LE3,	100,	999,		0.265,	0.265,		0,	4,	1.5	,0,	ext_gang+ext_all

@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, HealGB_1, HealGB_2, HealGB_3, HealGB_4, ragdool, speed, cop_on, textur, start, cam_on, set_cam, help, autosave;
+float PlayX, PlayY, PlayZ, heading, blip_on, skip, HealGB_1, HealGB_2, HealGB_3, HealGB_4, ragdool, speed, cop_on, textur, start, cam_on, set_cam, help, autosave;
 float PedR, add_gun1, add_gun2, add_gun3, add_gun4, touch1, touch2, touch3, touch4, Health, carH1, carH2, carH3, carHUD_w, carHUD_y1, carHUD_y2, carHUD_y3, carHUD_x;
 float PedX1, PedY1, PedZ1, PedR1, PedX2, PedY2, PedZ2, PedX3, PedY3, PedZ3, PedX4, PedY4, PedZ4, point, speech, audio_on;
 float create_car5, create_car6, create_car7, create_car8, press_moped, bonus1, bonus2, bonus3, bonus4, res_moped, del_blip1, del_blip2, del_blip3, del_blip4;
@@ -63,8 +63,8 @@ void phil(void)
 			}
 			DRAW_CHECKPOINT( -668.375, 876.086, 5.22, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -668.375, 876.086, 5.22, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -668.375, 876.086, 5.22, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(phil_ico);
@@ -868,8 +868,8 @@ void phil(void)
 			}
 			DRAW_CHECKPOINT( -668.375, 876.086, 5.22, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -668.375, 876.086, 5.22, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -668.375, 876.086, 5.22, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(phil_ico);
@@ -1282,9 +1282,9 @@ void phil(void)
 						DRAW_CHECKPOINT( -438.495, 63.1979, 4.9, 2.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PedX1, &PedY1, &PedZ1);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -438.495, 63.1979, 4.9, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -438.495, 63.1979, 4.9, &heading);
 						GET_DISTANCE_BETWEEN_COORDS_3D( PedX1, PedY1, PedZ1, -438.495, 63.1979, 4.9, &PedR1);
-						if (( PlayR < 2.5) && (PedR1 < 2.5))
+						if (( heading < 2.5) && (PedR1 < 2.5))
 						{
 							//Не в больницу...
 							NEW_SCRIPTED_CONVERSATION();
@@ -1307,9 +1307,9 @@ void phil(void)
 						DRAW_CHECKPOINT( -751.153, -128.764, 5.3, 2.5, 160, 116, 209);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PedX1, &PedY1, &PedZ1);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -751.153, -128.764, 5.3, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -751.153, -128.764, 5.3, &heading);
 						GET_DISTANCE_BETWEEN_COORDS_3D( PedX1, PedY1, PedZ1, -751.153, -128.764, 5.3, &PedR1);
-						if (( PlayR < 2.5) && (PedR1 < 2.5))
+						if (( heading < 2.5) && (PedR1 < 2.5))
 						{
 
 							SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1584,8 +1584,8 @@ void phil(void)
 		{
 			DRAW_CHECKPOINT( -672.895, 875.737, 5.58947, 0.8, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -672.895, 875.737, 5.58947, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -672.895, 875.737, 5.58947, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				Cam camera;
 				Cam camera2;
@@ -1818,8 +1818,8 @@ void phil(void)
 					WAIT(0);
 					DRAW_CHECKPOINT( -672.895, 875.737, 5.58947, 0.8, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -672.895, 875.737, 5.58947, &PlayR);
-					if ( PlayR > 2.5)
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -672.895, 875.737, 5.58947, &heading);
+					if ( heading > 2.5)
 					{
 						break;
 					}

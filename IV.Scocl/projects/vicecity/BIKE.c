@@ -4,7 +4,7 @@
 #include <types.h>
 #include <consts.h>
 #include "globals.h"
-float PlayX, PlayY, PlayZ, PlayR, blip_on, textur, text1, skip, start, Blip_x, Blip_y, Blip_z, Blip_x2, Blip_y2, Blip_z2, play_cord, speed, poziteon, ugol, time_m, time_s, sound, bike_in, wanted, autosave;
+float PlayX, PlayY, PlayZ, heading, blip_on, textur, text1, skip, start, Blip_x, Blip_y, Blip_z, Blip_x2, Blip_y2, Blip_z2, play_cord, speed, poziteon, ugol, time_m, time_s, sound, bike_in, wanted, autosave;
 float Ped1X, Ped1Y, Ped1Z, ped1B_x, ped1B_y, ped1B_z, Ped1R, SetSped1, ped1_cord, sped_wall1, sped_wall2, sped_wall3;
 float shkalaH1, shkalaH2, shkalaH3, shkalaHUD_y1, shkalaHUD_y2, shkalaHUD_y3, HUD_w, HUD_x, shkala;
 float Ped2X, Ped2Y, Ped2Z, ped2B_x, ped2B_y, ped2B_z, Ped2R, SetSped2, ped2_cord;
@@ -44,8 +44,8 @@ void bikers(void)
 			}
 			DRAW_CHECKPOINT( -164.663, 1185.16, 4.96332, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(bike_ico);
@@ -180,8 +180,8 @@ void bikers(void)
 					WAIT(0);
 					DRAW_CHECKPOINT( -158.485, 1200.02, 4.69314, 1.5, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -158.485, 1200.02, 4.69314, &PlayR);
-					if ( PlayR < 2.1)
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -158.485, 1200.02, 4.69314, &heading);
+					if ( heading < 2.1)
 					{
 						if ((IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_ZOMBIEB)) || (IS_CHAR_IN_MODEL(GetPlayerPed(), MODEL_BOBBER)))
 						{
@@ -409,8 +409,8 @@ void bikers(void)
 						// гонка
 						DRAW_SPHERE(Blip_x, Blip_y, (Blip_z-4.5), 7.0);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);
-						if ( PlayR < 8.5 )
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &heading);
+						if ( heading < 8.5 )
 						{
 							play_cord += 1;
 							Blip_x = Blip_x2; 
@@ -1106,55 +1106,55 @@ void bikers(void)
 						GET_CHAR_COORDINATES(ped3,  &Ped3X, &Ped3Y, &Ped3Z);//вписываем координаты соперника в переменную
 						GET_DISTANCE_BETWEEN_COORDS_3D( Ped3X, Ped3Y, Ped3Z, ped3B_x, ped3B_y, ped3B_z, &Ped3R);
 						GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &PlayR);
+						GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, Blip_x, Blip_y, Blip_z, &heading);
 
 						if ((play_cord == ped1_cord) && (play_cord == ped2_cord) && (play_cord == ped3_cord))
 						{
-							if (PlayR < Ped1R) //1
+							if (heading < Ped1R) //1
 							{
-								if (PlayR < Ped2R) //1
+								if (heading < Ped2R) //1
 								{
-									if (PlayR < Ped3R) //1
+									if (heading < Ped3R) //1
 									{
 										poziteon = 1;
 									}
-									else if (PlayR > Ped3R)//0
+									else if (heading > Ped3R)//0
 									{
 										poziteon = 2;
 									}
 								}
-								else if (PlayR > Ped2R)//0
+								else if (heading > Ped2R)//0
 								{
-									if (PlayR < Ped3R) //1
+									if (heading < Ped3R) //1
 									{
 										poziteon = 2;
 									}
-									else if (PlayR > Ped3R)//0
+									else if (heading > Ped3R)//0
 									{
 										poziteon = 3;
 									}
 								}
 							}
-							else if (PlayR > Ped1R)//0
+							else if (heading > Ped1R)//0
 							{
-								if (PlayR < Ped2R) //1
+								if (heading < Ped2R) //1
 								{
-									if (PlayR < Ped3R) //1
+									if (heading < Ped3R) //1
 									{
 										poziteon = 2;
 									}
-									else if (PlayR > Ped3R)//0
+									else if (heading > Ped3R)//0
 									{
 										poziteon = 3;
 									}
 								}
-								else if (PlayR > Ped2R)//0
+								else if (heading > Ped2R)//0
 								{
-									if (PlayR < Ped3R) //1
+									if (heading < Ped3R) //1
 									{
 										poziteon = 3;
 									}
-									else if (PlayR > Ped3R)//0
+									else if (heading > Ped3R)//0
 									{
 										poziteon = 4;
 									}
@@ -1163,24 +1163,24 @@ void bikers(void)
 						}
 						else if ((play_cord == ped1_cord) && (play_cord == ped2_cord) && (play_cord > ped3_cord))
 						{
-							if (PlayR < Ped1R) //1
+							if (heading < Ped1R) //1
 							{
-								if (PlayR < Ped2R) //1
+								if (heading < Ped2R) //1
 								{
 									poziteon = 1;
 								}
-								else if (PlayR > Ped2R)//0
+								else if (heading > Ped2R)//0
 								{
 									poziteon = 2;
 								}
 							}
-							else if (PlayR > Ped1R) //0
+							else if (heading > Ped1R) //0
 							{
-								if (PlayR < Ped2R) //1
+								if (heading < Ped2R) //1
 								{
 									poziteon = 2;
 								}
-								else if (PlayR > Ped2R)//0
+								else if (heading > Ped2R)//0
 								{
 									poziteon = 3;
 								}
@@ -1188,24 +1188,24 @@ void bikers(void)
 						}
 						else if ((play_cord == ped1_cord) && (play_cord > ped2_cord) && (play_cord == ped3_cord))
 						{
-							if (PlayR < Ped1R) //1
+							if (heading < Ped1R) //1
 							{
-								if (PlayR < Ped3R) //1
+								if (heading < Ped3R) //1
 								{
 									poziteon = 1;
 								}
-								else if (PlayR > Ped3R)//0
+								else if (heading > Ped3R)//0
 								{
 									poziteon = 2;
 								}
 							}
-							else if (PlayR > Ped1R) //0
+							else if (heading > Ped1R) //0
 							{
-								if (PlayR < Ped3R) //1
+								if (heading < Ped3R) //1
 								{
 									poziteon = 2;
 								}
-								else if (PlayR > Ped3R)//0
+								else if (heading > Ped3R)//0
 								{
 									poziteon = 3;
 								}
@@ -1213,24 +1213,24 @@ void bikers(void)
 						}
 						else if ((play_cord > ped1_cord) && (play_cord == ped2_cord) && (play_cord == ped3_cord))
 						{
-							if (PlayR < Ped2R) //1
+							if (heading < Ped2R) //1
 							{
-								if (PlayR < Ped3R) //1
+								if (heading < Ped3R) //1
 								{
 									poziteon = 1;
 								}
-								else if (PlayR > Ped3R)//0
+								else if (heading > Ped3R)//0
 								{
 									poziteon = 2;
 								}
 							}
-							else if (PlayR > Ped2R) //0
+							else if (heading > Ped2R) //0
 							{
-								if (PlayR < Ped3R) //1
+								if (heading < Ped3R) //1
 								{
 									poziteon = 2;
 								}
-								else if (PlayR > Ped3R)//0
+								else if (heading > Ped3R)//0
 								{
 									poziteon = 3;
 								}
@@ -1238,33 +1238,33 @@ void bikers(void)
 						}
 						else if ((play_cord == ped1_cord) && (play_cord > ped2_cord) && (play_cord > ped3_cord))
 						{
-							if (PlayR < Ped1R) //1
+							if (heading < Ped1R) //1
 							{
 								poziteon = 1;
 							}
-							else if (PlayR > Ped1R) //0
+							else if (heading > Ped1R) //0
 							{
 								poziteon = 2;
 							}
 						}
 						else if ((play_cord > ped1_cord) && (play_cord == ped2_cord) && (play_cord > ped3_cord))
 						{
-							if (PlayR < Ped2R) //1
+							if (heading < Ped2R) //1
 							{
 								poziteon = 1;
 							}
-							else if (PlayR > Ped2R) //0
+							else if (heading > Ped2R) //0
 							{
 								poziteon = 2;
 							}
 						}
 						else if ((play_cord > ped1_cord) && (play_cord > ped2_cord) && (play_cord == ped3_cord))
 						{
-							if (PlayR < Ped3R) //1
+							if (heading < Ped3R) //1
 							{
 								poziteon = 1;
 							}
-							else if (PlayR > Ped3R) //0
+							else if (heading > Ped3R) //0
 							{
 								poziteon = 2;
 							}
@@ -1275,24 +1275,24 @@ void bikers(void)
 						}
 						else if ((play_cord == ped1_cord) && (play_cord == ped2_cord) && (play_cord < ped3_cord))
 						{
-							if (PlayR < Ped1R) //1
+							if (heading < Ped1R) //1
 							{
-								if (PlayR < Ped2R) //1
+								if (heading < Ped2R) //1
 								{
 									poziteon = 2;
 								}
-								else if (PlayR > Ped2R)//0
+								else if (heading > Ped2R)//0
 								{
 									poziteon = 3;
 								}
 							}
-							else if (PlayR > Ped1R) //0
+							else if (heading > Ped1R) //0
 							{
-								if (PlayR < Ped2R) //1
+								if (heading < Ped2R) //1
 								{
 									poziteon = 3;
 								}
-								else if (PlayR > Ped2R)//0
+								else if (heading > Ped2R)//0
 								{
 								poziteon = 4;
 								}
@@ -1300,24 +1300,24 @@ void bikers(void)
 						}
 						else if ((play_cord == ped1_cord) && (play_cord < ped2_cord) && (play_cord == ped3_cord))
 						{
-							if (PlayR < Ped1R) //1
+							if (heading < Ped1R) //1
 							{
-								if (PlayR < Ped3R) //1
+								if (heading < Ped3R) //1
 								{
 									poziteon = 2;
 								}
-								else if (PlayR > Ped3R)//0
+								else if (heading > Ped3R)//0
 								{
 									poziteon = 3;
 								}
 							}
-							else if (PlayR > Ped1R) //0
+							else if (heading > Ped1R) //0
 							{
-								if (PlayR < Ped3R) //1
+								if (heading < Ped3R) //1
 								{
 									poziteon = 3;
 								}
-								else if (PlayR > Ped3R)//0
+								else if (heading > Ped3R)//0
 								{
 									poziteon = 4;
 								}
@@ -1325,24 +1325,24 @@ void bikers(void)
 						}
 						else if ((play_cord < ped1_cord) && (play_cord == ped2_cord) && (play_cord == ped3_cord))
 						{
-							if (PlayR < Ped2R) //1
+							if (heading < Ped2R) //1
 							{
-								if (PlayR < Ped3R) //1
+								if (heading < Ped3R) //1
 								{
 									poziteon = 2;
 								}
-								else if (PlayR > Ped3R)//0
+								else if (heading > Ped3R)//0
 								{
 									poziteon = 3;
 								}
 							}
-							else if (PlayR > Ped2R) //0
+							else if (heading > Ped2R) //0
 							{
-								if (PlayR < Ped3R) //1
+								if (heading < Ped3R) //1
 								{
 									poziteon = 3;
 								}
-								else if (PlayR > Ped3R)//0
+								else if (heading > Ped3R)//0
 								{
 									poziteon = 4;
 								}
@@ -1350,33 +1350,33 @@ void bikers(void)
 						}
 						else if ((play_cord == ped1_cord) && (play_cord < ped2_cord) && (play_cord < ped3_cord))
 						{
-							if (PlayR < Ped1R) //1
+							if (heading < Ped1R) //1
 							{
 								poziteon = 3;
 							}
-							else if (PlayR > Ped1R) //0
+							else if (heading > Ped1R) //0
 							{
 								poziteon = 4;
 							}
 						}
 						else if ((play_cord < ped1_cord) && (play_cord == ped2_cord) && (play_cord < ped3_cord))
 						{
-							if (PlayR < Ped2R) //1
+							if (heading < Ped2R) //1
 							{
 								poziteon = 3;
 							}
-							else if (PlayR > Ped2R) //0
+							else if (heading > Ped2R) //0
 							{
 								poziteon = 4;
 							}
 						}
 						else if ((play_cord < ped1_cord) && (play_cord < ped2_cord) && (play_cord == ped3_cord))
 						{
-							if (PlayR < Ped3R) //1
+							if (heading < Ped3R) //1
 							{
 								poziteon = 3;
 							}
-							else if (PlayR > Ped3R) //0
+							else if (heading > Ped3R) //0
 							{
 								poziteon = 4;
 							}
@@ -1388,7 +1388,7 @@ void bikers(void)
 						//======
 						else if ((play_cord > ped1_cord) && (play_cord < ped2_cord) && (play_cord == ped3_cord))
 						{
-							if (PlayR < Ped3R) //1
+							if (heading < Ped3R) //1
 							{
 								poziteon = 2;
 							}
@@ -1399,7 +1399,7 @@ void bikers(void)
 						}
 						else if ((play_cord > ped1_cord) && (play_cord == ped2_cord) && (play_cord < ped3_cord))
 						{
-							if (PlayR < Ped2R) //1
+							if (heading < Ped2R) //1
 							{
 								poziteon = 2;
 							}
@@ -1411,7 +1411,7 @@ void bikers(void)
 
 						else if ((play_cord < ped1_cord) && (play_cord > ped2_cord) && (play_cord == ped3_cord))
 						{
-							if (PlayR < Ped3R) //1
+							if (heading < Ped3R) //1
 							{
 								poziteon = 2;
 							}
@@ -1422,7 +1422,7 @@ void bikers(void)
 						}
 						else if ((play_cord < ped1_cord) && (play_cord == ped2_cord) && (play_cord > ped3_cord))
 						{
-							if (PlayR < Ped2R) //1
+							if (heading < Ped2R) //1
 							{
 								poziteon = 2;
 							}
@@ -1681,8 +1681,8 @@ void bikers(void)
 			}
 			DRAW_CHECKPOINT( -164.663, 1185.16, 4.96332, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(bike_ico);
@@ -2027,8 +2027,8 @@ void bikers(void)
 			}
 			DRAW_CHECKPOINT( -164.663, 1185.16, 4.96332, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -164.663, 1185.16, 4.96332, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(bike_ico);
@@ -2778,8 +2778,8 @@ void bikers(void)
 							}
 							GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
 							DRAW_CHECKPOINT( -170.075, 1187.86, 4.90098, 4.5, 160, 116, 209);
-							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -170.075, 1187.86, 4.90098, &PlayR);
-							if (PlayR < 5.5)
+							GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -170.075, 1187.86, 4.90098, &heading);
+							if (heading < 5.5)
 							{
 								SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 

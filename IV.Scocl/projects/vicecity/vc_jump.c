@@ -1,6 +1,5 @@
 /***********************************************************************
-					Fully stripped main script
-	This file is a part of scocl project by Alexander Blade (c) 2011 
+							script by 2col
 ***********************************************************************/
 
 #include <natives.h>
@@ -11,7 +10,6 @@
 #include "globals.h"
 
 #define MAX_STUNT_JUMPS 36
-
 #define STUNT_JUMP_NONE 0
 #define STUNT_JUMP_SUCCESS 1
 #define STUNT_JUMP_FAIL 2
@@ -26,7 +24,7 @@ typedef struct _STUNTJUMP
 	float camera_x;
 	float camera_y;
 	float camera_z;
-} STUNTJUMP, *PSTUNTJUMP;
+} STUNTJUMP, * PSTUNTJUMP;
 
 STUNTJUMP stunt_jump[MAX_STUNT_JUMPS];
 Car vehicle;
@@ -46,29 +44,11 @@ void add_stunt_jump(int id, float speed, float distance, float x, float y, float
 
 bool is_player_able_to_do_stunt_jump(void)
 {
-	if (
-		!IS_PLAYER_PLAYING(GetPlayerIndex()) ||
-		IS_CHAR_DEAD(GetPlayerPed()) ||
-		HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()) ||
-		!IS_CHAR_IN_ANY_CAR(GetPlayerPed()) ||
-		IS_CHAR_IN_ANY_BOAT(GetPlayerPed()) ||
-		IS_CHAR_IN_FLYING_VEHICLE(GetPlayerPed())
-	)
-	{
-		return false;
-	}
-
 	STORE_CAR_CHAR_IS_IN_NO_SAVE(GetPlayerPed(), &vehicle);
-
-	if (
-		IS_CAR_DEAD(vehicle) ||
-		IS_CAR_IN_WATER(vehicle)
-	)
-	{
+	if (!IS_PLAYER_PLAYING(GetPlayerIndex()) || IS_CHAR_DEAD(GetPlayerPed()) || HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()) || !IS_CHAR_IN_ANY_CAR(GetPlayerPed()) || IS_CHAR_IN_ANY_BOAT(GetPlayerPed()) || IS_CHAR_IN_FLYING_VEHICLE(GetPlayerPed()) || IS_CAR_DEAD(vehicle) || IS_CAR_IN_WATER(vehicle))
 		return false;
-	}
-
-	return true;
+	else
+		return true;
 }
 
 void display_stunt_jump_text(int reward)
@@ -79,14 +59,8 @@ void display_stunt_jump_text(int reward)
 	{
 		WAIT(0);
 
-		if (
-			TIMERA() > 5000 ||
-			IS_CHAR_DEAD(GetPlayerPed()) ||
-			HAS_CHAR_BEEN_ARRESTED(GetPlayerPed())
-		)
-		{
+		if (TIMERA() > 5000 || IS_CHAR_DEAD(GetPlayerPed()) || HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()))
 			break;
-		}
 
 		SET_TEXT_COLOUR(0, 180, 130, 255);
 		SET_TEXT_SCALE(0.5, 0.7);
@@ -122,7 +96,7 @@ void activate_stunt_jump(int id)
 
 	int old_result = stunt_jump_flag[id], new_result = STUNT_JUMP_NONE;
 
-	while (true) 
+	while (true)
 	{
 		WAIT(0);
 
@@ -137,13 +111,10 @@ void activate_stunt_jump(int id)
 		if (!IS_CAR_IN_AIR_PROPER(vehicle))
 		{
 			if (TIMERA() < 1000)
-			{
 				new_result = STUNT_JUMP_FAIL;
-			}
 			else
-			{
 				new_result = STUNT_JUMP_SUCCESS;
-			}
+
 			break;
 		}
 	}
@@ -160,9 +131,7 @@ void activate_stunt_jump(int id)
 		stunt_jump_flag[id] = new_result;
 
 		if (old_result == STUNT_JUMP_NONE)
-		{
 			INCREMENT_INT_STAT(STAT_STUNT_JUMPS_FOUND, 1);
-		}
 
 		if (new_result == STUNT_JUMP_SUCCESS)
 		{
@@ -185,13 +154,9 @@ void activate_stunt_jump(int id)
 	if (new_result != STUNT_JUMP_SUCCESS)
 	{
 		if (old_result != STUNT_JUMP_SUCCESS)
-		{
 			PRINT("JUMPING_T5", 2500, true); // Not good enough.
-		}
 		else
-		{
 			PRINT("JUMPING_T7", 2500, true); // Not good enough, but this stunt jump has been completed before.
-		}
 	}
 
 	if (new_result == STUNT_JUMP_SUCCESS)
@@ -199,30 +164,20 @@ void activate_stunt_jump(int id)
 		if (old_result != STUNT_JUMP_SUCCESS)
 		{
 			if (GET_INT_STAT(STAT_STUNT_JUMPS_COMPLETED) == MAX_STUNT_JUMPS)
-			{
 				PRINT_HELP("JUMPING_T8"); // ALL UNIQUE STUNTS COMPLETED!
-			}
 
 			PRINT("USJ", 2500, true); // Stunt jump completed.
 		}
 		else
-		{
 			PRINT("JUMPING_T6", 2500, true); // Stunt jump completed again.
-		}
 	}
 
 	if (GET_INT_STAT(STAT_STUNT_JUMPS_COMPLETED) == MAX_STUNT_JUMPS)
-	{
 		PRINT("USJ_ALL", 2500, true); // All stunt jumps completed.
-	}
 	else if (GET_INT_STAT(STAT_STUNT_JUMPS_COMPLETED) == MAX_STUNT_JUMPS - 1)
-	{
 		PRINT("JUMPING_T4", 2500, true); // Just one stunt jump left to do.
-	}
 	else
-	{
 		PRINT_WITH_NUMBER("JUMPING_T3", MAX_STUNT_JUMPS - GET_INT_STAT(STAT_STUNT_JUMPS_COMPLETED), 2500, true); // ~1~ stunt jumps left to do.
-	}
 
 	if (new_result == STUNT_JUMP_SUCCESS && old_result != STUNT_JUMP_SUCCESS)
 	{
@@ -240,39 +195,33 @@ void activate_stunt_jump(int id)
 			WAIT(500);
 
 			if (DID_SAVE_COMPLETE_SUCCESSFULLY())
-			{
 				G_SAVE_OCCURED = FALSE;
-			}
 		}
 	}
 }
 
 void check_for_stunt_jump(void)
 {
-	if (
-		!is_player_able_to_do_stunt_jump() ||
-		!IS_CAR_IN_AIR_PROPER(vehicle)
-	)
-	{
+	if (!is_player_able_to_do_stunt_jump() || !IS_CAR_IN_AIR_PROPER(vehicle))
 		return;
-	}
 
 	int i;
-	float x, y, z, distance, speed;
+	float distance, speed;
+	Vector3 playerpos;
 
-	GET_CHAR_COORDINATES(GetPlayerPed(), &x, &y, &z);
+	GET_CHAR_COORDINATES(GetPlayerPed(), &playerpos.x, &playerpos.y, &playerpos.z);
 
 	for (i = 0; i < MAX_STUNT_JUMPS; i++)
 	{
-		GET_DISTANCE_BETWEEN_COORDS_3D(x, y, z, stunt_jump[i].x, stunt_jump[i].y, stunt_jump[i].z, &distance);
+		GET_DISTANCE_BETWEEN_COORDS_3D(playerpos.x, playerpos.y, playerpos.z, stunt_jump[i].x, stunt_jump[i].y, stunt_jump[i].z, &distance);
 
 		if (distance < stunt_jump[i].distance)
 		{
 			GET_CHAR_SPEED(GetPlayerPed(), &speed);
 
 			if (speed > stunt_jump[i].speed)
-			{	
-				activate_stunt_jump(i);	
+			{
+				activate_stunt_jump(i);
 				break;
 			}
 		}
@@ -324,14 +273,11 @@ void main(void)
 	int i;
 
 	for (i = 0; i < MAX_STUNT_JUMPS; i++)
-	{
 		stunt_jump_flag[i] = STUNT_JUMP_NONE;
-	}
 
-	while (true) 
+	while (true)
 	{
 		WAIT(0);
-
 		check_for_stunt_jump();
 	}
 }

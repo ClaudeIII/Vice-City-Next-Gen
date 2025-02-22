@@ -5,7 +5,7 @@
 #include <consts.h>
 #include "globals.h"
 
-float PlayX, PlayY, PlayZ, PlayR, blip_on, skip, textur, time_m, time_s, sound, text, text2, volna_1, volna_2, autosave;
+float PlayX, PlayY, PlayZ, heading, blip_on, skip, textur, time_m, time_s, sound, text, text2, volna_1, volna_2, autosave;
 float attach_1, deton, PedX, PedY, PedZ, ico_1, ico_2, ico_3, ico_4, ico_5, ico_6, ico_7, ico_8, ico_9, ico_10, in_car, path_on, hel_set;
 
 void voodoo(void)
@@ -42,8 +42,8 @@ void voodoo(void)
 			}
 			DRAW_CHECKPOINT( -529.349, 677.904, 3.32976, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(haiti_ico);
@@ -557,8 +557,8 @@ void voodoo(void)
 						{
 							//DRAW_CHECKPOINT( -529.537, 675.639, 3.15269, 1.5, 160, 116, 209);
 							//GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-							//GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.537, 675.639, 3.15269, &PlayR);
-							//if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+							//GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.537, 675.639, 3.15269, &heading);
+							//if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 							//{
 								PRINT_STRING_IN_STRING("string", "HAM1_3", 5000, 1);//~g~Get this stuff back to the hideout!
 								skip = 2;
@@ -695,8 +695,8 @@ void voodoo(void)
 			}
 			DRAW_CHECKPOINT( -529.349, 677.904, 3.32976, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(haiti_ico);
@@ -1624,8 +1624,8 @@ void voodoo(void)
 			}
 			DRAW_CHECKPOINT( -529.349, 677.904, 3.32976, 1.5, 160, 116, 209);
 			GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &PlayR);
-			if (( PlayR < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
+			GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -529.349, 677.904, 3.32976, &heading);
+			if (( heading < 1.5) && (!IS_CHAR_SITTING_IN_ANY_CAR(GetPlayerPed())))
 			{
 				G_ONMISSION = 1;
 				REMOVE_BLIP(haiti_ico);
@@ -1952,8 +1952,8 @@ void voodoo(void)
 					WAIT(0);
 					DRAW_CHECKPOINT( -462.814, 610.598, 9.89533, 1.5, 160, 116, 209);
 					GET_CHAR_COORDINATES(GetPlayerPed(),  &PlayX, &PlayY, &PlayZ);
-					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -462.814, 610.598, 9.89533, &PlayR);
-					if ( PlayR < 2.5 )
+					GET_DISTANCE_BETWEEN_COORDS_3D( PlayX, PlayY, PlayZ, -462.814, 610.598, 9.89533, &heading);
+					if ( heading < 2.5 )
 					{
 						CLEAR_PRINTS();
 						PRINT_STRING_IN_STRING("string", "HAM3_3", 5000, 1);//~g~I expect the Cubans to cheat so be on your guard.
