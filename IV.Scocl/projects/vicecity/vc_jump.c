@@ -44,8 +44,12 @@ void add_stunt_jump(int id, float speed, float distance, float x, float y, float
 
 bool is_player_able_to_do_stunt_jump(void)
 {
+	if (!IS_PLAYER_PLAYING(GetPlayerIndex()) || IS_CHAR_DEAD(GetPlayerPed()) || HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()) || !IS_CHAR_IN_ANY_CAR(GetPlayerPed()) || IS_CHAR_IN_ANY_BOAT(GetPlayerPed()) || IS_CHAR_IN_FLYING_VEHICLE(GetPlayerPed()))
+		return false;
+
 	STORE_CAR_CHAR_IS_IN_NO_SAVE(GetPlayerPed(), &vehicle);
-	if (!IS_PLAYER_PLAYING(GetPlayerIndex()) || IS_CHAR_DEAD(GetPlayerPed()) || HAS_CHAR_BEEN_ARRESTED(GetPlayerPed()) || !IS_CHAR_IN_ANY_CAR(GetPlayerPed()) || IS_CHAR_IN_ANY_BOAT(GetPlayerPed()) || IS_CHAR_IN_FLYING_VEHICLE(GetPlayerPed()) || IS_CAR_DEAD(vehicle) || IS_CAR_IN_WATER(vehicle))
+
+	if (IS_CAR_DEAD(vehicle) || IS_CAR_IN_WATER(vehicle))
 		return false;
 	else
 		return true;
@@ -67,14 +71,14 @@ void display_stunt_jump_text(int reward)
 		SET_TEXT_EDGE(1, 0, 0, 0, 255);
 		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
 		SET_TEXT_CENTRE(1);
-		DISPLAY_TEXT(0.5, 0.4, "JUMPING_T1");
+		DISPLAY_TEXT(0.5, 0.4, "JUMPING_T1"); // UNIQUE STUNT BONUS!
 
 		SET_TEXT_COLOUR(55, 95, 125, 255);
 		SET_TEXT_SCALE(0.45, 0.65);
 		SET_TEXT_EDGE(1, 0, 0, 0, 255);
 		SET_TEXT_DROPSHADOW(1, 0, 0, 0, 250);
 		SET_TEXT_CENTRE(1);
-		DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "JUMPING_T2", reward);
+		DISPLAY_TEXT_WITH_NUMBER(0.5, 0.45, "JUMPING_T2", reward); // REWARD $~1~
 	}
 }
 
@@ -185,7 +189,7 @@ void activate_stunt_jump(int id)
 
 		CLEAR_HELP();
 
-		if (G_ONMISSION == 0)
+		if (G_ONMISSION == 0 && !IS_AUTO_SAVE_IN_PROGRESS())
 		{
 			G_SAVE_SAVED = 16;
 			G_SAVE_OCCURED = TRUE;
@@ -269,11 +273,6 @@ void main(void)
 	add_stunt_jump(33, 19.0, 3.6, 877.5, 414.6, 10, 849.4033, 407.3275, 7.7649);
 	add_stunt_jump(34, 19.0, 3.6, 868.8542, 198.6788, 9.897701, 853.6179, 165.4967, 8.1343);
 	add_stunt_jump(35, 13.0, 3.6, 86.18201, 242.259, 6.926, 115.9934, 234.211, 9.3976);
-
-	int i;
-
-	for (i = 0; i < MAX_STUNT_JUMPS; i++)
-		stunt_jump_flag[i] = STUNT_JUMP_NONE;
 
 	while (true)
 	{
