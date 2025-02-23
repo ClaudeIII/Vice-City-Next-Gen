@@ -8,7 +8,7 @@
 #define MAX_PACKAGES 100
 
 Pickup package[MAX_PACKAGES];
-int packages_collected;
+int package_flag[MAX_PACKAGES], packages_collected;
 
 void add_package(int id, float x, float y, float z)
 {
@@ -43,12 +43,16 @@ void check_for_packages()
 
 	for (i = 0; i < MAX_PACKAGES; i++)
 	{
+		if (package_flag[i] == 1)
+		{
+			continue;
+		}
+
 		if (HAS_PICKUP_BEEN_COLLECTED(package[i]))
 		{
-			REMOVE_PICKUP(package[i]);
-
 			ADD_SCORE(GetPlayerIndex(), 100);
 
+			package_flag[i] = 1;
 			packages_collected += 1;
 
 			if (10 <= packages_collected <= 100 && packages_collected % 10 == 0)
