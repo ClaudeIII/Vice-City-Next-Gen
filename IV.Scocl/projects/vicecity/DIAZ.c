@@ -6623,7 +6623,8 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE(GetPlayerIndex(), +50000);
-					ENABLE_SAVE_HOUSE(8, TRUE);
+					REGISTER_SAVE_HOUSE(54.5077, -19.8106, 13.8069, 0, "VercettiMansion", 8);
+					ENABLE_SAVE_HOUSE(8, true);
 					REGISTER_MISSION_PASSED("ASS_1");
 					G_DIAZ = 9;
 					G_PROTECT = 1;

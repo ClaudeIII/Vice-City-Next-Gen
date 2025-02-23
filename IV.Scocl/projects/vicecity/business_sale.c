@@ -589,7 +589,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -70000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(9, TRUE);
+					REGISTER_SAVE_HOUSE(-645.084, 246.738, 6.27582, -5, "Printworks", 9);
+					ENABLE_SAVE_HOUSE(9, true);
 					CLEAR_HELP();
 					G_COUNT = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -707,7 +708,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -50000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(10, TRUE);
+					REGISTER_SAVE_HOUSE(-595.363, -318.285, 7.53234, -150, "SunshineAutos", 10);
+					ENABLE_SAVE_HOUSE(10, true);
 					CLEAR_HELP();
 					G_BUSINES_SA = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -838,7 +840,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -60000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(11, TRUE);
+					REGISTER_SAVE_HOUSE(349.932, 1461.77, 5.1074, -105, "InterglobalFilms", 11);
+					ENABLE_SAVE_HOUSE(11, true);
 					CLEAR_HELP();
 					G_PRON = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -955,7 +958,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -20000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(12, TRUE);
+					REGISTER_SAVE_HOUSE(-444.516, -45.5149, 5.47654, -80, "CherryPopperIcecreams", 12);
+					ENABLE_SAVE_HOUSE(12, true);
 					CLEAR_HELP();
 					G_ICECREAM = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1099,7 +1103,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -40000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(13, TRUE);
+					REGISTER_SAVE_HOUSE(-567.321, 720.751, 5.67434, 60, "KaufmanCabs", 13);
+					ENABLE_SAVE_HOUSE(13, true);
 					CLEAR_HELP();
 					G_CABS = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1238,7 +1243,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -120000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(14, TRUE);
+					REGISTER_SAVE_HOUSE(924.395, 454.833, 5.73708, -130, "MalibuClub", 14);
+					ENABLE_SAVE_HOUSE(14, true);
 					CLEAR_HELP();
 					G_CLUB = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1355,7 +1361,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -10000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(15, TRUE);
+					REGISTER_SAVE_HOUSE(-235.225, -949.423, 8.07865, -25, "TheBoatyard", 15);
+					ENABLE_SAVE_HOUSE(15, true);
 					CLEAR_HELP();
 					G_COKERUN = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1495,7 +1502,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -30000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(16, TRUE);
+					REGISTER_SAVE_HOUSE(529.641, -937.62, 4.65521, -150, "PolePositionClub", 16);
+					ENABLE_SAVE_HOUSE(16, true);
 					CLEAR_HELP();
 					G_STRIP = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1607,7 +1615,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -8000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(3, TRUE);
+					REGISTER_SAVE_HOUSE(861.53, 1139.81, 6.99313, 0, "ElSwankoCasa", 3);
+					ENABLE_SAVE_HOUSE(3, true);
 					CLEAR_HELP();
 					G_SWANKO = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1725,7 +1734,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -6000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(2, TRUE);
+					REGISTER_SAVE_HOUSE(737.991, 909.371, 7.45291, -85, "LinksViewApartment", 2);
+					ENABLE_SAVE_HOUSE(2, true);
 					CLEAR_HELP();
 					G_LINKS = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1841,7 +1851,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -14000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(7, TRUE);
+					REGISTER_SAVE_HOUSE(-401.593, 1839.58, 5.7949, -165, "HymanCondo", 7);
+					ENABLE_SAVE_HOUSE(7, true);
 					CLEAR_HELP();
 					G_CONDO = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -1964,7 +1975,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -7000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(5, TRUE);
+					REGISTER_SAVE_HOUSE(451.255, -967.217, 7.52892, -5, "OceanHeighsAprt", 5);
+					ENABLE_SAVE_HOUSE(5, true);
 					CLEAR_HELP();
 					G_HEIGHS = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -2080,7 +2092,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -3000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(4, TRUE);
+					REGISTER_SAVE_HOUSE(522.489, -272.164, 6.00446, -120, "1102WashingtonStreet", 4);
+					ENABLE_SAVE_HOUSE(4, true);
 					CLEAR_HELP();
 					G_WS_1102 = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -2188,7 +2201,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -2500 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(1, TRUE);
+					REGISTER_SAVE_HOUSE(963.529, 1805.22, 12.0903, 130, "3321VicePoint", 1);
+					ENABLE_SAVE_HOUSE(1, true);
 					CLEAR_HELP();
 					G_VP_3321 = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
@@ -2296,7 +2310,8 @@ void business(void)
 				{
 					G_ONMISSION = 1;
 					ADD_SCORE( GetPlayerIndex(), -1000 );// отнимаем у сумму
-					ENABLE_SAVE_HOUSE(6, TRUE);
+					REGISTER_SAVE_HOUSE(-127.19, 1236.19, 14.8111, 0, "SkumoleShack", 6);
+					ENABLE_SAVE_HOUSE(6, true);
 					CLEAR_HELP();
 					G_SHACK = 1;
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
