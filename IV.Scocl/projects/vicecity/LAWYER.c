@@ -18,7 +18,7 @@ void main(void)
 	while (true)
 	{
 		WAIT(0);
-		if (&autosave)
+		if (autosave)
 		{
 			autosave = 0;
 			G_SAVE_SAVED = 16;
