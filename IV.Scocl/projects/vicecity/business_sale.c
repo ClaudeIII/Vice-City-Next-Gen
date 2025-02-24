@@ -10,7 +10,7 @@ int help, help2, money_ped, cam_res;
 
 void business(void)
 {
-	Blip property1_ico, property2_ico, property3_ico, property4_ico, property5_ico, property6_ico, property7_ico, property8_ico;
+	Blip property_blip[15];
 	Blip ammun1_ico, ammun2_ico, ammun3_ico, tools1_ico, tools2_ico, tools3_ico, paint1_ico, paint2_ico, paint3_ico, paint4_ico;
 	cam_res = 0;
 	help = 0;
@@ -585,6 +585,7 @@ void business(void)
 					ENABLE_SAVE_HOUSE(9, true);
 					CLEAR_HELP();
 					G_COUNT = 1;
+					REMOVE_BLIP(property_blip[0]);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -704,6 +705,7 @@ void business(void)
 					ENABLE_SAVE_HOUSE(10, true);
 					CLEAR_HELP();
 					G_BUSINES_SA = 1;
+					REMOVE_BLIP(property_blip[1]);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 					DO_SCREEN_FADE_OUT( 500 );
@@ -836,6 +838,7 @@ void business(void)
 					ENABLE_SAVE_HOUSE(11, true);
 					CLEAR_HELP();
 					G_PRON = 1;
+					REMOVE_BLIP(property_blip[2]);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -954,6 +957,7 @@ void business(void)
 					ENABLE_SAVE_HOUSE(12, true);
 					CLEAR_HELP();
 					G_ICECREAM = 1;
+					REMOVE_BLIP(property_blip[3]);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 					DO_SCREEN_FADE_OUT( 500 );
@@ -1099,6 +1103,7 @@ void business(void)
 					ENABLE_SAVE_HOUSE(13, true);
 					CLEAR_HELP();
 					G_CABS = 1;
+					REMOVE_BLIP(property_blip[4]);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 					DO_SCREEN_FADE_OUT( 500 );
@@ -1239,6 +1244,7 @@ void business(void)
 					ENABLE_SAVE_HOUSE(14, true);
 					CLEAR_HELP();
 					G_CLUB = 1;
+					REMOVE_BLIP(property_blip[5]);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -1357,6 +1363,7 @@ void business(void)
 					ENABLE_SAVE_HOUSE(15, true);
 					CLEAR_HELP();
 					G_COKERUN = 1;
+					REMOVE_BLIP(property_blip[6]);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 					DO_SCREEN_FADE_OUT( 500 );
@@ -1498,6 +1505,7 @@ void business(void)
 					ENABLE_SAVE_HOUSE(16, true);
 					CLEAR_HELP();
 					G_STRIP = 1;
+					REMOVE_BLIP(property_blip[7]);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -1609,9 +1617,9 @@ void business(void)
 					ADD_SCORE( GetPlayerIndex(), -8000 );// отнимаем у сумму
 					REGISTER_SAVE_HOUSE(861.53, 1139.81, 6.99313, 0, "ElSwankoCasa", 3);
 					ENABLE_SAVE_HOUSE(3, true);
-					CHANGE_BLIP_SPRITE(property1_ico, BLIP_SAFEHOUSE);
 					CLEAR_HELP();
 					G_SWANKO = 1;
+					CHANGE_BLIP_SPRITE(property_blip[8], BLIP_SAFEHOUSE);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -1729,9 +1737,9 @@ void business(void)
 					ADD_SCORE( GetPlayerIndex(), -6000 );// отнимаем у сумму
 					REGISTER_SAVE_HOUSE(737.991, 909.371, 7.45291, -85, "LinksViewApartment", 2);
 					ENABLE_SAVE_HOUSE(2, true);
-					CHANGE_BLIP_SPRITE(property2_ico, BLIP_SAFEHOUSE);
 					CLEAR_HELP();
 					G_LINKS = 1;
+					CHANGE_BLIP_SPRITE(property_blip[9], BLIP_SAFEHOUSE);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -1847,9 +1855,9 @@ void business(void)
 					ADD_SCORE( GetPlayerIndex(), -14000 );// отнимаем у сумму
 					REGISTER_SAVE_HOUSE(-401.593, 1839.58, 5.7949, -165, "HymanCondo", 7);
 					ENABLE_SAVE_HOUSE(7, true);
-					CHANGE_BLIP_SPRITE(property3_ico, BLIP_SAFEHOUSE);
 					CLEAR_HELP();
 					G_CONDO = 1;
+					CHANGE_BLIP_SPRITE(property_blip[10], BLIP_SAFEHOUSE);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -1972,9 +1980,9 @@ void business(void)
 					ADD_SCORE( GetPlayerIndex(), -7000 );// отнимаем у сумму
 					REGISTER_SAVE_HOUSE(451.255, -967.217, 7.52892, -5, "OceanHeighsAprt", 5);
 					ENABLE_SAVE_HOUSE(5, true);
-					CHANGE_BLIP_SPRITE(property4_ico, BLIP_SAFEHOUSE);
 					CLEAR_HELP();
 					G_HEIGHS = 1;
+					CHANGE_BLIP_SPRITE(property_blip[11], BLIP_SAFEHOUSE);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -2090,9 +2098,9 @@ void business(void)
 					ADD_SCORE( GetPlayerIndex(), -3000 );// отнимаем у сумму
 					REGISTER_SAVE_HOUSE(522.489, -272.164, 6.00446, -120, "1102WashingtonStreet", 4);
 					ENABLE_SAVE_HOUSE(4, true);
-					CHANGE_BLIP_SPRITE(property5_ico, BLIP_SAFEHOUSE);
 					CLEAR_HELP();
 					G_WS_1102 = 1;
+					CHANGE_BLIP_SPRITE(property_blip[12], BLIP_SAFEHOUSE);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -2200,9 +2208,9 @@ void business(void)
 					ADD_SCORE( GetPlayerIndex(), -2500 );// отнимаем у сумму
 					REGISTER_SAVE_HOUSE(963.529, 1805.22, 12.0903, 130, "3321VicePoint", 1);
 					ENABLE_SAVE_HOUSE(1, true);
-					CHANGE_BLIP_SPRITE(property6_ico, BLIP_SAFEHOUSE);
 					CLEAR_HELP();
 					G_VP_3321 = 1;
+					CHANGE_BLIP_SPRITE(property_blip[13], BLIP_SAFEHOUSE);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -2310,9 +2318,9 @@ void business(void)
 					ADD_SCORE( GetPlayerIndex(), -1000 );// отнимаем у сумму
 					REGISTER_SAVE_HOUSE(-127.19, 1236.19, 14.8111, 0, "SkumoleShack", 6);
 					ENABLE_SAVE_HOUSE(6, true);
-					CHANGE_BLIP_SPRITE(property7_ico, BLIP_SAFEHOUSE);
 					CLEAR_HELP();
 					G_SHACK = 1;
+					CHANGE_BLIP_SPRITE(property_blip[14], BLIP_SAFEHOUSE);
 					SET_PLAYER_CONTROL_ADVANCED( GetPlayerIndex(), 0, 0, 0 );
 
 
@@ -2395,159 +2403,163 @@ void business(void)
 			}
 		}
 //=========================================================================================================================================
-//************************************************************* МЕТКИ НА КАРТЕ *************************************************************
-		// El Swanko Casa
 		if (G_ONMISSION == 0)
 		{
-			if (!DOES_BLIP_EXIST(property1_ico))
+			if (G_COUNT == 0 && !DOES_BLIP_EXIST(property_blip[0]))
 			{
-				ADD_BLIP_FOR_COORD(860.838, 1140.87, 6.71937, &property1_ico);
-				CHANGE_BLIP_SPRITE(property1_ico, (G_SWANKO == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
-				CHANGE_BLIP_SCALE(property1_ico, 1.1);
-				SET_BLIP_AS_SHORT_RANGE(property1_ico, 1);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property1_ico, "LG_16");
+				ADD_BLIP_FOR_COORD(-629.403, 255.797, 5.95213, &property_blip[0]);
+				CHANGE_BLIP_SPRITE(property_blip[0], BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[0], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[0], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[0], "LG_20");
 			}
-		}
-		else
-		{
-			if (DOES_BLIP_EXIST(property1_ico))
-			{
-				REMOVE_BLIP(property1_ico);
-			}
-		}
-		// Links View Apartment Buy
-		if (G_ONMISSION == 0)
-		{
-			if (!DOES_BLIP_EXIST(property2_ico))
-			{
-				ADD_BLIP_FOR_COORD(737.099, 909.333, 7.20204, &property2_ico);
-				CHANGE_BLIP_SPRITE(property2_ico, (G_LINKS == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
-				CHANGE_BLIP_SCALE(property2_ico, 1.1);
-				SET_BLIP_AS_SHORT_RANGE(property2_ico, 1);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property2_ico, "LG_16");
-			}
-		}
-		else
-		{
-			if (DOES_BLIP_EXIST(property2_ico))
-			{
-				REMOVE_BLIP(property2_ico);
-			}
-		}
-		// Hyman Condo Buy
-		if (G_ONMISSION == 0)
-		{
-			if (!DOES_BLIP_EXIST(property3_ico))
-			{
-				ADD_BLIP_FOR_COORD(-401.992, 1840.67, 5.63224, &property3_ico);
-				CHANGE_BLIP_SPRITE(property3_ico, (G_CONDO == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
-				CHANGE_BLIP_SCALE(property3_ico, 1.1);
-				SET_BLIP_AS_SHORT_RANGE(property3_ico, 1);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property3_ico, "LG_16");
-			}
-		}
-		else
-		{
-			if (DOES_BLIP_EXIST(property3_ico))
-			{
-				REMOVE_BLIP(property3_ico);
-			}
-		}
-		// Ocean Heighs Aprt. Buy
-		if (G_ONMISSION == 0)
-		{
-			if (!DOES_BLIP_EXIST(property4_ico))
-			{
-				ADD_BLIP_FOR_COORD(451.062, -968.568, 7.27016, &property4_ico);
-				CHANGE_BLIP_SPRITE(property4_ico, (G_HEIGHS == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
-				CHANGE_BLIP_SCALE(property4_ico, 1.1);
-				SET_BLIP_AS_SHORT_RANGE(property4_ico, 1);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property4_ico, "LG_16");
-			}
-		}
-		else
-		{
-			if (DOES_BLIP_EXIST(property4_ico))
-			{
-				REMOVE_BLIP(property4_ico);
-			}
-		}
-		// 1102 Washington Street Buy
-		if (G_ONMISSION == 0)
-		{
-			if (!DOES_BLIP_EXIST(property5_ico))
-			{
-				ADD_BLIP_FOR_COORD(520.688, -271.45, 5.74085, &property5_ico);
-				CHANGE_BLIP_SPRITE(property5_ico, (G_WS_1102 == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
-				CHANGE_BLIP_SCALE(property5_ico, 1.1);
-				SET_BLIP_AS_SHORT_RANGE(property5_ico, 1);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property5_ico, "LG_16");
-			}
-		}
-		else
-		{
-			if (DOES_BLIP_EXIST(property5_ico))
-			{
-				REMOVE_BLIP(property5_ico);
-			}
-		}
-		// Vice Point Buy
-		if (G_ONMISSION == 0)
-		{
-			if (!DOES_BLIP_EXIST(property6_ico))
-			{
-				ADD_BLIP_FOR_COORD(964.902, 1807.76, 12.1611, &property6_ico);
-				CHANGE_BLIP_SPRITE(property6_ico, (G_VP_3321 == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
-				CHANGE_BLIP_SCALE(property6_ico, 1.1);
-				SET_BLIP_AS_SHORT_RANGE(property6_ico, 1);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property6_ico, "LG_16");
-			}
-		}
-		else
-		{
-			if (DOES_BLIP_EXIST(property6_ico))
-			{
-				REMOVE_BLIP(property6_ico);
-			}
-		}
-		// Skumole Shack Buy
-		if (G_ONMISSION == 0)
-		{
-			if (!DOES_BLIP_EXIST(property7_ico))
-			{
-				ADD_BLIP_FOR_COORD(-127.205, 1235.3, 14.451, &property7_ico);
-				CHANGE_BLIP_SPRITE(property7_ico, (G_SHACK == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
-				CHANGE_BLIP_SCALE(property7_ico, 1.1);
-				SET_BLIP_AS_SHORT_RANGE(property7_ico, 1);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property7_ico, "LG_16");
-			}
-		}
-		else
-		{
-			if (DOES_BLIP_EXIST(property7_ico))
-			{
-				REMOVE_BLIP(property7_ico);
-			}
-		}
-		// Ocean View Hotel / auto save
-		if (G_ONMISSION == 0)
-		{
-			if (!DOES_BLIP_EXIST(property8_ico))
-			{
-				ADD_BLIP_FOR_COORD(661.2, -730.39, 15.59, &property8_ico);
-				CHANGE_BLIP_SPRITE(property8_ico, BLIP_SAFEHOUSE);
-				CHANGE_BLIP_SCALE(property8_ico, 1.1);
-				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property8_ico, "LG_16");
-			}
-		}
-		else
-		{
-			if (DOES_BLIP_EXIST(property8_ico))
-			{
-				REMOVE_BLIP(property8_ico);
-			}
-		}
 
+			if (G_BUSINES_SA == 0 && !DOES_BLIP_EXIST(property_blip[1]))
+			{
+				ADD_BLIP_FOR_COORD(-584.339, -331.17, 6.98854, &property_blip[1]);
+				CHANGE_BLIP_SPRITE(property_blip[1], BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[1], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[1], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[1], "LG_36");
+			}
+
+			if (G_PRON == 0 && !DOES_BLIP_EXIST(property_blip[2]))
+			{
+				ADD_BLIP_FOR_COORD(365.19, 1463.24, 4.84835, &property_blip[2]);
+				CHANGE_BLIP_SPRITE(property_blip[2], BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[2], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[2], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[2], "LG_12");
+			}
+
+			if (G_ICECREAM == 0 && !DOES_BLIP_EXIST(property_blip[3]))
+			{
+				ADD_BLIP_FOR_COORD(-443.132, -37.314, 5.065, &property_blip[3]);
+				CHANGE_BLIP_SPRITE(property_blip[3], BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[3], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[3], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[3], "LG_17");
+			}
+
+			if (G_CABS == 0 && !DOES_BLIP_EXIST(property_blip[4]))
+			{
+				ADD_BLIP_FOR_COORD(-569.498, 738.454, 5.354, &property_blip[4]);
+				CHANGE_BLIP_SPRITE(property_blip[4], BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[4], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[4], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[4], "LG_18");
+			}
+
+			if (G_CLUB == 0 && !DOES_BLIP_EXIST(property_blip[5]))
+			{
+				ADD_BLIP_FOR_COORD(896.966, 472.341, 5.394, &property_blip[5]);
+				CHANGE_BLIP_SPRITE(property_blip[5], BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[5], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[5], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[5], "LG_10");
+			}
+
+			if (G_COKERUN == 0 && !DOES_BLIP_EXIST(property_blip[6]))
+			{
+				ADD_BLIP_FOR_COORD(-224.504, -946.921, 7.458, &property_blip[6]);
+				CHANGE_BLIP_SPRITE(property_blip[6], BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[6], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[6], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[6], "LG_09");
+			}
+
+			if (G_STRIP == 0 && !DOES_BLIP_EXIST(property_blip[7]))
+			{
+				ADD_BLIP_FOR_COORD(526.212, -932.28, 4.34719, &property_blip[7]);
+				CHANGE_BLIP_SPRITE(property_blip[7], BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[7], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[7], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[7], "LG_37");
+			}
+		
+			if (!DOES_BLIP_EXIST(property_blip[8]))
+			{
+				ADD_BLIP_FOR_COORD(860.838, 1140.87, 6.71937, &property_blip[8]);
+				CHANGE_BLIP_SPRITE(property_blip[8], (G_SWANKO == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[8], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[8], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[8], "LG_16");
+			}
+
+			if (!DOES_BLIP_EXIST(property_blip[9]))
+			{
+				ADD_BLIP_FOR_COORD(737.099, 909.333, 7.20204, &property_blip[9]);
+				CHANGE_BLIP_SPRITE(property_blip[9], (G_LINKS == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[9], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[9], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[9], "LG_16");
+			}
+
+			if (!DOES_BLIP_EXIST(property_blip[10]))
+			{
+				ADD_BLIP_FOR_COORD(-401.992, 1840.67, 5.63224, &property_blip[10]);
+				CHANGE_BLIP_SPRITE(property_blip[10], (G_CONDO == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[10], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[10], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[10], "LG_16");
+			}
+
+			if (!DOES_BLIP_EXIST(property_blip[11]))
+			{
+				ADD_BLIP_FOR_COORD(451.062, -968.568, 7.27016, &property_blip[11]);
+				CHANGE_BLIP_SPRITE(property_blip[11], (G_HEIGHS == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[11], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[11], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[11], "LG_16");
+			}
+				
+			if (!DOES_BLIP_EXIST(property_blip[12]))
+			{
+				ADD_BLIP_FOR_COORD(520.688, -271.45, 5.74085, &property_blip[12]);
+				CHANGE_BLIP_SPRITE(property_blip[12], (G_WS_1102 == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[12], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[12], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[12], "LG_16");
+			}
+				
+			if (!DOES_BLIP_EXIST(property_blip[13]))
+			{
+				ADD_BLIP_FOR_COORD(964.902, 1807.76, 12.1611, &property_blip[13]);
+				CHANGE_BLIP_SPRITE(property_blip[13], (G_VP_3321 == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[13], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[13], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[13], "LG_16");
+			}
+
+			if (!DOES_BLIP_EXIST(property_blip[14]))
+			{
+				ADD_BLIP_FOR_COORD(-127.205, 1235.3, 14.451, &property_blip[14]);
+				CHANGE_BLIP_SPRITE(property_blip[14], (G_SHACK == 1) ? BLIP_SAFEHOUSE : BLIP_DARTS);
+				CHANGE_BLIP_SCALE(property_blip[14], 1.1);
+				SET_BLIP_AS_SHORT_RANGE(property_blip[14], 1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[14], "LG_16");
+			}
+
+			if (!DOES_BLIP_EXIST(property_blip[15]))
+			{
+				ADD_BLIP_FOR_COORD(661.2, -730.39, 15.59, &property_blip[15]);
+				CHANGE_BLIP_SPRITE(property_blip[15], BLIP_SAFEHOUSE);
+				CHANGE_BLIP_SCALE(property_blip[15], 1.1);
+				CHANGE_BLIP_NAME_FROM_TEXT_FILE(property_blip[15], "LG_16");
+			}
+		}
+		else
+		{
+			int i;
+
+			for (i = 0; i < 16; i++)
+			{
+				if (DOES_BLIP_EXIST(property_blip[i]))
+				{
+					REMOVE_BLIP(property_blip[i]);
+				}
+			}
+		}
 //==================================================================================================================================
 //************************************************************* ГАРАЖИ *************************************************************
 
