@@ -662,6 +662,8 @@ void boyarsky(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +500 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 500);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("TEX_1");
 					G_AVERY = 2;
 					autosave = 1;
@@ -2104,6 +2106,8 @@ void boyarsky(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("TEX_3");
 					G_AVERY = 3;
 					autosave = 1;
@@ -2668,6 +2672,8 @@ void boyarsky(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2500 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2500);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("TEX_2");
 					G_AVERY = 5;
 					autosave = 1;

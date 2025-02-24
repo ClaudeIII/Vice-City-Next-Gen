@@ -628,6 +628,8 @@ void boat_race(void)
 							}
 						}
 						ADD_SCORE( GetPlayerIndex(), +5000 );
+						INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 5000);
+						INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 						REGISTER_MISSION_PASSED("BOAT_N");
 						autosave = 1;
 					}

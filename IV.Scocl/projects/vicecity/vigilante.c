@@ -52,6 +52,8 @@ int game_timer, frame_counter, gosub_stuck_car, car_stuck_flag, stuck_timer_star
 int gosub_car_to_slow, random_int, max_passengers, game_time;
 int incopcar, temp_group, fon, textur, car;
 
+void next_criminal_to_kill(void);
+
 void setup_draw_text(void) {
 	SET_TEXT_COLOUR(95, 195, 247, 255);
 	SET_TEXT_SCALE(0.156, 0.267);
@@ -146,11 +148,6 @@ void copcar_failed(void) {
 
 void mission_copcar_passed(void) {
 	copcar_level++;
-
-	if (copcar_level > GET_INT_STAT(STAT_VIGILANTE_LEVELS_DONE))
-	{
-		INCREMENT_INT_STAT(STAT_VIGILANTE_LEVELS_DONE, 1);
-	}
 
 	if ((IS_CHAR_IN_ANY_POLICE_VEHICLE(GetPlayerPed())) || (IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("annihilator"))) || (IS_CHAR_IN_MODEL(GetPlayerPed(), GET_HASH_KEY("fbi")))) {
 		STORE_CAR_CHAR_IS_IN_NO_SAVE(GetPlayerPed(), &players_cop_car);

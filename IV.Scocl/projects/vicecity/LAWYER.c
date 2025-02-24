@@ -681,6 +681,8 @@ void main(void)
 								break;
 						}
 						ADD_SCORE(GetPlayerIndex(), +100);
+						INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 100);
+						INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 						REGISTER_MISSION_PASSED("LAW_1");
 						G_LAWYER = 2;
 						autosave = 1;
@@ -1591,6 +1593,8 @@ void main(void)
 								break;
 						}
 						ADD_SCORE(GetPlayerIndex(), +200);
+						INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 200);
+						INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 						REGISTER_MISSION_PASSED("LAW_2");
 						G_LAWYER = 3;
 						G_MAIN_CALL = 1;
@@ -2504,6 +2508,8 @@ void main(void)
 								break;
 						}
 						ADD_SCORE(GetPlayerIndex(), +400);
+						INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 400);
+						INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 						REGISTER_MISSION_PASSED("LAW_3");
 						G_LAWYER = 4;
 						autosave = 1;
@@ -3425,6 +3431,8 @@ void main(void)
 								break;
 						}
 						ADD_SCORE(GetPlayerIndex(), +1000);
+						INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+						INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 						REGISTER_MISSION_PASSED("LAW_4");
 						G_LAWYER = 5;
 						G_AVERY = 1;

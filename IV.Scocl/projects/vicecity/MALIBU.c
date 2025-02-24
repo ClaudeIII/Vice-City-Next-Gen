@@ -924,6 +924,8 @@ void club(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("BANK_1");
 					G_CLUB = 3;
 					autosave = 1;
@@ -3209,6 +3211,8 @@ void club(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("BANK_2");
 					G_CLUB = 4;
 					autosave = 1;
@@ -4144,6 +4148,8 @@ void club(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +3000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 3000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("BANK_3");
 					G_CLUB = 5;
 					autosave = 1;
@@ -6794,9 +6800,6 @@ void club(void)
 				else if (skip == 2)
 				{
 					PRINT_HELP("CLOTH10"); //Bank Job outfit delivered to Malibu Club in Vice Point.
-					REGISTER_MISSION_PASSED("BANK_4");
-					G_CLUB = 6;
-					autosave = 1;
 					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
@@ -6822,6 +6825,11 @@ void club(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +add_cash );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, add_cash);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
+					REGISTER_MISSION_PASSED("BANK_4");
+					G_CLUB = 6;
+					autosave = 1;
 				}
 				blip_on = 0;
 				G_ONMISSION = 0;

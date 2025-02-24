@@ -673,6 +673,8 @@ void voodoo(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("HAT_1");
 					G_HAITI = 2;
 					autosave = 1;
@@ -1603,6 +1605,8 @@ void voodoo(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("HAT_2");
 					G_HAITI = 3;
 					autosave = 1;
@@ -2433,6 +2437,8 @@ void voodoo(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +5000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 5000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("HAT_3");
 					G_HAITI = 4;
 					autosave = 1;

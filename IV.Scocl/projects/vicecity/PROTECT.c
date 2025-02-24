@@ -1020,6 +1020,8 @@ void versetty(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("BUD_1");
 					G_PROTECT = 2;
 					G_SALE_NO = 1;
@@ -2215,6 +2217,8 @@ void versetty(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 4000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("BUD_2");
 					G_PROTECT = 3;
 					autosave = 1;
@@ -3369,6 +3373,8 @@ void versetty(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +10000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 10000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("BUD_3");
 					G_PROTECT = 4;
 					autosave = 1;

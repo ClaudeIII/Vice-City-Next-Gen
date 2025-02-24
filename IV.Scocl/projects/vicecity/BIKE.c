@@ -1659,6 +1659,8 @@ void bikers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("BIKE_1");
 					G_BIKE = 2;
 					autosave = 1;
@@ -2006,6 +2008,8 @@ void bikers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("BIKE_2");
 					G_BIKE = 3;
 					autosave = 1;
@@ -2959,6 +2963,8 @@ void bikers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 4000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("BIKE_3");
 					G_BIKE = 4;
 					autosave = 1;

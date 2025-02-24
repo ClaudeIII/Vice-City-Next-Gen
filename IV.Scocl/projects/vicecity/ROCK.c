@@ -819,6 +819,8 @@ void rockers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("ROCK_1");
 					G_ROCK = 2;
 					autosave = 1;
@@ -1458,6 +1460,8 @@ void rockers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 4000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("ROCK_2");
 					G_ROCK = 3;
 					autosave = 1;
@@ -2245,6 +2249,8 @@ void rockers(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +8000 );
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 8000);
 					REGISTER_MISSION_PASSED("ROCK_3");
 					G_ROCK = 5;
 					autosave = 1;

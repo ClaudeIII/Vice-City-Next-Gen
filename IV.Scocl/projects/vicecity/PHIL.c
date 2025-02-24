@@ -845,6 +845,8 @@ void phil(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("PHIL_1");
 					G_PHIL = 2;
 					autosave = 1;
@@ -1551,6 +1553,8 @@ void phil(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 4000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("PHIL_2");
 					G_PHIL = 4;
 					autosave = 1;

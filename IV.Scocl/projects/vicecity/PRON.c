@@ -988,6 +988,8 @@ void studio(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("PORN_1");
 					G_PRON = 2;
 					autosave = 1;
@@ -1644,6 +1646,8 @@ void studio(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("PORN_2");
 					G_PRON = 3;
 					autosave = 1;
@@ -2817,6 +2821,8 @@ void studio(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 4000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("PORN_3");
 					G_PRON = 4;
 					autosave = 1;
@@ -4093,9 +4099,6 @@ void studio(void)
 				}
 				else if (skip == 2)
 				{
-					REGISTER_MISSION_PASSED("PORN_4");
-					G_PRON = 5;
-					autosave = 1;
 					SETTIMERA(0);
 					TRIGGER_MISSION_COMPLETE_AUDIO(1);//произрываем музыку параметр "(1)" воспроизводит звук из "...\EFLC\pc\audio\Sfx\gps.rpf\GPS\MISSION_COMPLETE_1" (цыфра "6" = "SMC6" в том-же архиве)
 					while (true)
@@ -4120,7 +4123,12 @@ void studio(void)
 							break;
 						}
 					}
-					ADD_SCORE( GetPlayerIndex(), +8000 );
+					ADD_SCORE(GetPlayerIndex(), 8000);
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 8000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
+					REGISTER_MISSION_PASSED("PORN_4");
+					G_PRON = 5;
+					autosave = 1;
 				}
 				blip_on = 0;
 				G_ONMISSION = 0;

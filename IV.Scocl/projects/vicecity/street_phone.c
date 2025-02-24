@@ -354,6 +354,8 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +500 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 500);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("JOB_1");
 					G_ASSASSIN = 2;
 					autosave = 1;
@@ -911,6 +913,8 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("JOB_2");
 					G_ASSASSIN = 4;
 					autosave = 1;
@@ -1597,6 +1601,8 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 4000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("JOB_3");
 					G_ASSASSIN = 6;
 					autosave = 1;
@@ -2420,6 +2426,8 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +8000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 8000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("JOB_4");
 					G_ASSASSIN = 8;
 					autosave = 1;
@@ -3176,6 +3184,8 @@ void telephone(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +16000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 16000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("JOB_5");
 					G_ASSASSIN = 10;
 					autosave = 1;

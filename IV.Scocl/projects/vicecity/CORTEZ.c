@@ -583,6 +583,8 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +250 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 250);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("COL_1");
 					G_CORTEZ = 2;
 					autosave = 1;
@@ -1120,6 +1122,8 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +500 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 500);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("COL_2");
 					G_CORTEZ = 3;
 					autosave = 1;
@@ -2691,6 +2695,8 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("COL_3");
 					G_CORTEZ = 4;
 					autosave = 1;
@@ -4097,6 +4103,8 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("COL_4 ");
 					G_CORTEZ = 6;
 					autosave = 1;
@@ -5727,6 +5735,8 @@ void cortez(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +5000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 5000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("COL_5");
 					G_CORTEZ = 8;
 					autosave = 1;

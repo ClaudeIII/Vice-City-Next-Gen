@@ -1100,6 +1100,8 @@ void typography(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("CNT_1");
 					G_COUNT = 2;
 					autosave = 1;
@@ -2058,6 +2060,8 @@ void typography(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +5000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 5000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("CNT_2");
 					G_COUNT = 3;
 					autosave = 1;
@@ -2916,6 +2920,8 @@ void typography(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +30000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 30000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("CAP_1");
 					G_COUNT = 5;
 					autosave = 1;
@@ -4491,6 +4497,8 @@ void typography(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +30000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 30000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("FIN_1");
 					G_COUNT = 7;
 					autosave = 1;

@@ -879,6 +879,8 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE(GetPlayerIndex(), +1000);
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("COK_1");
 					G_DIAZ = 2;
 					autosave = 1;
@@ -2349,6 +2351,8 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE(GetPlayerIndex(), +2000);
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("COK_2");
 					G_DIAZ = 3;
 					autosave = 1;
@@ -3238,6 +3242,8 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE(GetPlayerIndex(), +4000);
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 4000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("COK_3");
 					G_DIAZ = 4;
 					autosave = 1;
@@ -4520,6 +4526,8 @@ void baron_diaz(void)
 						}
 					}
 					ADD_SCORE(GetPlayerIndex(), +10000);
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 10000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("COK_4");
 					G_DIAZ = 5;
 					autosave = 1;
@@ -5439,6 +5447,7 @@ void baron_diaz(void)
 							break;
 						}
 					}
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("KENT_1");
 					G_DIAZ = 8;
 					autosave = 1;
@@ -6622,9 +6631,11 @@ void baron_diaz(void)
 							break;
 						}
 					}
-					ADD_SCORE(GetPlayerIndex(), +50000);
 					REGISTER_SAVE_HOUSE(54.5077, -19.8106, 13.8069, 0, "VercettiMansion", 8);
 					ENABLE_SAVE_HOUSE(8, true);
+					ADD_SCORE(GetPlayerIndex(), +50000);
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 50000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("ASS_1");
 					G_DIAZ = 9;
 					G_PROTECT = 1;

@@ -1087,6 +1087,8 @@ void umberto(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +1000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 1000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("CUB_1");
 					G_CUBAN = 2;
 					autosave = 1;
@@ -2692,6 +2694,8 @@ void umberto(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +2000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 2000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("CUB_2");
 					G_CUBAN = 3;
 					autosave = 1;
@@ -3595,6 +3599,8 @@ void umberto(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +4000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 4000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("CUB_3");
 					G_CUBAN = 4;
 					autosave = 1;
@@ -5042,6 +5048,8 @@ void umberto(void)
 						}
 					}
 					ADD_SCORE( GetPlayerIndex(), +10000 );
+					INCREMENT_FLOAT_STAT(STAT_MADE_FROM_MISSIONS, 10000);
+					INCREMENT_INT_STAT(STAT_MISSIONS_PASSED, 1);
 					REGISTER_MISSION_PASSED("CUB_4");
 					G_CUBAN = 6;
 					autosave = 1;
